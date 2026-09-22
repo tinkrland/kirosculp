@@ -1,293 +1,265 @@
 # what sculptura is
 
-sculptura is a way for a person with a jewelry idea to design it, offer it for sale, and have it manufactured without needing to learn traditional cad software, buy precious metal, keep inventory, or run a workshop.
+## the problem
 
-it is mainly built for independent jewelry creators. a creator may already know exactly what they want a piece to look like, but not know how to turn that idea into a precise three-dimensional model that can actually be cast. sculptura helps them describe the piece, shape it through a guided design process, check whether it can be manufactured, and publish it as a product.
+many people have a clear sense of what they like before they think of themselves as creators. they save jewelry references, collect images on pinterest, notice unusual forms, combine details from different pieces, and imagine something they cannot find in a shop.
 
-when someone buys the piece, sculptura sends the approved design to a suitable manufacturing partner. that partner produces the jewelry in metal, finishes it, and ships it to the customer. the creator does not have to manufacture or ship each order themselves.
+for most of them, the idea of becoming a jewelry designer never seriously occurs. the path appears to begin with expensive professional cad software, a steep technical learning curve, knowledge of casting and precious metals, prototype costs, supplier relationships, inventory risk, photography, selling, shipping, and customer support. even imagining the role can feel out of scope.
 
-sculptura is not trying to replace the creator's taste. the creator makes the design decisions. the software helps turn those decisions into exact geometry and handles the practical work needed to sell and produce the result.
+that means a large amount of creative taste never becomes creative output. the barrier is not necessarily a lack of ideas. it is the cost and complexity between an idea and a finished, sellable piece.
+
+sculptura exists to patch that gap.
+
+it gives a person a path from visual intent to a controlled jewelry design, then connects that design to validation, offering, made-to-order manufacturing, and delivery. the creator does not need to become a conventional cad operator, buy precious metal, fund inventory, own a workshop, or personally fulfill every order before they can discover whether people want their work.
+
+sculptura is not trying to replace taste or authorship. the creator decides what the piece should be. the system makes those decisions expressible, reproducible, manufacturable, and operable.
+
+---
+
+## what the system connects
+
+sculptura joins work that is normally spread across unrelated tools and specialist businesses:
+
+1. turning an idea and visual references into explicit design parameters
+2. constructing deterministic jewelry geometry from those parameters
+3. checking whether the result can be printed, cast, finished, and used safely
+4. freezing the approved result into a versioned production record
+5. presenting that release through listings and creator storefronts
+6. calculating a price from manufacturing, payment, platform, and creator values
+7. accepting ordinary purchases or structured commission requests
+8. selecting an eligible regional manufacturing route
+9. sending the approved production package to a casting partner
+10. tracking production, delivery, payout, refunds, and exceptions
+
+these stages belong to separate system domains so a storefront cannot silently change geometry, a design assistant cannot invent prices, and a manufacturer integration cannot become the source of truth for a creator's project.
 
 ---
 
 ## who uses it
 
-there are three main groups of people involved.
-
 ### creators
 
-creators use the design studio. they describe an idea, adjust it, choose dimensions and materials, review the three-dimensional result, and decide when it is ready.
+creators operate the design studio. they bring the idea, references, judgment, and final decisions. they adjust proportions and details, review the three-dimensional result, respond to manufacturing checks, and decide when a design is ready to release.
 
-creators can then offer approved designs through a sculptura storefront, a white-label storefront using their own identity, or connected sales channels such as shopify. they can set prices, see estimated earnings, follow orders, and receive payouts without handling the physical manufacturing.
+an approved design can be offered through the shared sculptura marketplace, a sculptura creator storefront, a white-label storefront, or a connected channel such as shopify. sculptura remains the source of truth for the production release and fulfillment state even when another channel produced the sale.
 
-only creators use the design agent and geometry tools. sculptura does not give a buyer an automatic jewelry generator and let them bypass the person whose skill and judgment make the piece coherent.
+creating a creator account does not automatically place someone on the homepage. discovery begins with published work and can later use explicit eligibility, relevance, quality, curation, and performance rules.
 
 ### buyers
 
-buyers browse finished designs, choose the available metal and size, and place an order. an ordinary purchase does not require an account.
+buyers browse released designs, choose an available material and size, and place an order. an ordinary print-on-demand purchase does not require a buyer account.
 
-behind the checkout, sculptura checks whether the chosen design, material, destination, manufacturer, price, and delivery route are still valid. the customer is charged from a price calculated by the system, not a number sent from their browser.
+checkout must re-establish the current production route and trusted price on the server. it cannot trust manufacturing costs, creator earnings, validation claims, or totals supplied by the browser.
 
 ### commissioners
 
-a commissioner is a buyer asking a creator to make something specifically for them.
+commissioners are buyers who ask a creator to develop something specifically for them. they provide references, measurements, preferences, a budget, and a brief. the creator interprets that material and uses the studio to make the design.
 
-commissioners do not operate the design agent directly. they give a creator references, measurements, preferences, a budget, and a written brief. the creator interprets that material and uses the studio to develop the piece.
+commissioners require accounts. a commission is not a guest form submission. it needs a persistent creator relationship, conversation history, revisions, approvals, payment protection, cancellation rules, delivery of the agreed result, and a dispute path.
 
-commission requests require an account because they involve an ongoing conversation, payment protection, revisions, approval, cancellation rules, and possible disputes. sculptura will not enable commissions until those parts work together. a commission button without the payment and acceptance rules behind it would create more problems than it solves.
+buyers and commissioners do not operate the studio assistant or geometry engine directly. the creator remains responsible for interpreting the brief and authoring the piece.
 
 ---
 
-## how a design is made
+## making cad approachable without generating mystery geometry
 
-rather than asking a creator to draw every surface manually in professional cad software, sculptura lets them work through understandable design choices.
+creators may work directly with the studio's structured controls. those controls describe meaningful jewelry choices such as profile, dimensions, thickness, repetition, surface treatment, stone-setting preparation, hardware, material intent, and size behavior.
 
-for example, a creator designing a ring might describe:
+for people who do not want to confront the full learning curve and expense of conventional jewelry cad software, the studio also includes **tessa**.
 
-- the overall profile and proportions
-- the shape of the band
-- the ring size
-- how thick or narrow different areas should be
-- whether the surface is plain, twisted, ribbed, engraved, or patterned
-- where details repeat and how frequently
-- which areas need to remain smooth
-- which metals the finished design should support
+### tessa
 
-references and ordinary language help the design agent suggest a set of parameters. the creator can accept, reject, or adjust those suggestions.
+tessa is a vision-model assistant. she can look at visual references, understand the creator's description, compare relationships in the imagery, and help translate that intent into the studio's allowed parameters.
 
-the final geometry is not drawn by a language model guessing where points should go. sculptura uses a deterministic jewelry-design engine called paracraft. the approved parameters are converted into readable openscad instructions, and those instructions produce the actual three-dimensional mesh.
+tessa does not draw the final piece. she does not generate a mesh, emit arbitrary vertices, or create a production file. she cannot bypass the project schema or manufacturing rules.
 
-this matters because the same parameters and the same engine version should always produce the same result. the design can be inspected, reproduced, and corrected. it is not an unexplained shape that changes every time it is generated.
+her role is closer to a constrained handshake. tessa understands the vision and proposes how to tune approved knobs. those parameter changes pass to **paracraft**, the studio's deterministic geometry engine.
+
+### paracraft
+
+paracraft is the only component that constructs production geometry. it converts the accepted project parameters into readable openscad instructions and compiles the resulting mesh.
+
+the same supported parameters, engine version, and build inputs must produce the same geometry. that makes the result inspectable, reproducible, versionable, and testable. there is no model-generated production geometry to hallucinate. if tessa misunderstands an intention, the error remains a visible parameter proposal that the creator can reject or correct before paracraft builds anything.
 
 ---
 
 ## checking whether the piece can be made
 
-looking good on a screen does not mean a piece can survive printing, casting, finishing, and normal use.
+looking good in a viewport does not prove that a design can survive pattern production, burnout, casting, finishing, shipping, and ordinary wear.
 
-before a design can be offered for sale, sculptura checks practical constraints such as:
+before release, the studio validates constraints such as:
 
 - minimum wall thickness
-- minimum feature and engraving size
-- unsupported or fragile areas
+- minimum detail and engraving size
+- unsupported, fragile, or disconnected regions
 - trapped spaces and impossible cavities
-- overall dimensions
-- estimated metal volume and mass
-- material-specific casting limits
-- the requirements of available manufacturing processes
+- overall dimensions and build envelope
+- estimated volume, metal mass, and center-of-mass concerns
+- tolerances between connected or moving parts
+- material-specific casting constraints
+- requirements imposed by eligible manufacturing processes
 
-these rules have to come from dated, reviewable manufacturing sources. sculptura should not guess that a 0.6 millimeter wall is safe because it sounds plausible. silver, gold, brass, and bronze can have different limits, and the shape of a feature matters as much as its nominal thickness.
+these checks require dated and reviewable manufacturing evidence. a rule cannot become trusted because a value sounds plausible or appears in an undated interface constant.
 
-a design that fails a check can still be saved and revised. it simply cannot be published as ready for production.
-
----
-
-## the approved design record
-
-when a design passes its checks, sculptura creates a versioned design release.
-
-this release is the exact production record for that version of the piece. it includes the design parameters, engine version, manufacturing files, renders, supported materials and sizes, validation result, and estimated mass.
-
-it does not contain a permanent retail price because manufacturing and delivery costs can change by region and over time.
-
-releases are not silently changed. if a creator edits the design later, sculptura creates a new version. an existing order still points to the exact version the customer bought. this prevents a later studio edit from changing the geometry behind a paid order.
+a failing design can remain a studio project and be revised. it cannot be represented to the platform as production-ready.
 
 ---
 
-## publishing and discoverability
+## the design release
 
-passing the manufacturing checks does not automatically make a creator or design prominent.
+when a design passes its required checks, the studio creates an immutable, versioned design release.
 
-creating a creator account also does not automatically place someone on the homepage. discoverability comes from published listings and may later depend on quality, relevance, curation, sales history, or other explicit rules.
+that release is the interface between the creative system and the offering system. it records the exact project and engine versions, parameter snapshot, generated files, hashes, renders, supported material and size combinations, validation evidence, and estimated physical properties for one approved version.
 
-a creator can decide where an approved design appears:
+it does not contain a permanent retail price. manufacturing, shipping, payment, tax, and risk costs vary by route and time.
 
-- the shared sculptura marketplace
-- their own sculptura storefront
-- a white-label storefront
-- connected external sales channels
-
-sculptura remains responsible for the exact design release and production state even when the customer found the product through another channel.
+editing a studio project after release creates a new release version. existing listings and orders continue to point to the version they actually used. a later creative edit can never silently replace the geometry behind a paid order.
 
 ---
 
-## pricing
+## publishing and storefronts
 
-creators can approach pricing in either direction.
+platform listings refer to design releases. the platform adds offering information such as title, description, merchandising images, collection placement, discoverability state, available release variants, creator pricing intent, and channel configuration.
 
-### set the amount the creator wants to earn
+creators can manage storefront identity, content, social links, collections, newsletter options, promotional codes, waitlists, materials they intend to offer, commission availability, and other selling preferences. each control still needs a clear source of truth and an explicit distinction between a working backend feature and a local demonstration state.
 
-if the creator says, “i want to earn $40 from each sale,” sculptura calculates the retail price needed to cover manufacturing, payment costs, platform fees, and the creator's $40 earnings.
+publishing should reject a release that is missing, revoked, incompatible with the selected offering, or no longer backed by an eligible manufacturing path.
 
-### set the retail price
+---
 
-if the creator says, “i want this to sell for $120,” sculptura subtracts the current manufacturing and transaction costs and shows what the creator would earn.
+## pricing in either direction
 
-these are two views of the same calculation, not two unrelated pricing systems.
+creators can approach pricing from either side.
 
-in simplified form:
+### fix creator earnings
+
+if a creator wants to earn a specific amount per sale, sculptura calculates the retail price required to cover the current manufacturing quote, payment costs, platform fee, delivery-related amounts, and that earning target.
+
+### fix retail price
+
+if a creator wants a specific retail price, sculptura subtracts the trusted current costs and shows the resulting creator earnings.
+
+these are two views of one pricing model:
 
 ```text
 retail price = manufacturing cost + payment cost + platform fee + creator earnings
 ```
 
-real orders may also involve shipping, insurance, tax presentation, currency conversion, refunds, or a temporary risk reserve. sculptura records the exact values used for each purchase so a later price change does not rewrite the history of an earlier order.
+shipping, insurance, taxes, currency treatment, refunds, and risk reserves may also affect what is charged or settled. every order needs an immutable financial snapshot so later quote or pricing changes do not rewrite history.
 
-because manufacturing costs depend on the piece, material, destination, and partner, a rough estimate should always be labeled as an estimate. checkout should use a current production quote whenever the manufacturing connection allows it.
+client-calculated numbers are previews. authoritative pricing and checkout values must be calculated from a trusted release, current route, current quote, and server-owned rules.
+
+---
+
+## ordinary purchases and commissions
+
+ordinary listings are intended for passive print-on-demand sales. a guest can buy a released design without opening an account. the platform still records enough contact and delivery information to fulfill the purchase and lets a later authenticated account claim eligible guest orders safely.
+
+commissions are creator-enabled and relationship-based. switching commissions on makes the creator open to requests, but the request path must require buyer authentication. the commission lifecycle also needs brief intake, conversation, terms, milestones or escrow, revisions, acceptance, cancellation, fulfillment, payout, and disputes before it can be considered complete.
 
 ---
 
 ## what happens after a purchase
 
-once payment reaches the required state, sculptura finds an eligible way to manufacture the order.
+once payment reaches the required state, operations finds an eligible manufacturing route.
 
-it first removes any partner that cannot make the selected material, cannot meet the design constraints, cannot serve the destination, has not completed the required account setup, or is temporarily unavailable.
+it removes any partner that cannot make the selected material, cannot satisfy the release constraints, cannot serve the destination, lacks the required hallmarking or documentation path, has not completed operational onboarding, or is unavailable.
 
-it then compares the remaining routes using factors such as:
+remaining routes can be compared using:
 
-- the complete manufacturing cost
+- complete manufacturing cost
+- manufacturing and delivery time
 - distance from the customer
-- shipping time and price
 - duties, customs, vat, and tariff exposure
-- the partner's recent reliability
-- finishing options
+- finishing capability
+- reliability and recent performance
 - insurance and claim limits
-- likely delivery and return problems
+- likely return and delivery complications
 
-“nearest” does not always mean best, and the lowest part price can become expensive after shipping and import costs. sculptura is meant to choose the most sensible complete route, not simply the first manufacturer in a list.
-
----
-
-## how the jewelry is physically produced
-
-sculptura focuses on metal jewelry.
-
-for a typical cast piece, the manufacturing partner receives the exact approved model and production instructions. the partner produces a castable resin or wax pattern, surrounds it with investment material, removes the pattern through burnout, and casts metal into the remaining space. the piece is then cleaned, finished, and shipped.
-
-not every company that offers three-dimensional printing can do this. printing a plastic prototype or a steel industrial part is not the same as producing a cast silver or gold ring. sculptura therefore records each manufacturer's actual processes, materials, limits, ordering method, regions, and evidence separately.
-
-manufacturer records do not become eligible for automatic orders merely because a marketing page mentions jewelry. the required process and material support must be confirmed and approved.
-
-sculptura can work with large services and smaller regional casting houses. a partner does not need a sculptura portal. sculptura connects outward through the partner's available interface. that may be an application programming interface for automatic upload, quotes, orders, and tracking, or a controlled manual process when a specialist casting house has no public interface.
+nearest is not always best. the lowest quoted part can become the most expensive complete route after shipping, customs, failure risk, and rework. routing selects the best approved complete path, not merely the first partner in a list.
 
 ---
 
-## materials and stones
+## how the jewelry is produced
 
-launch scope is metal-only jewelry.
+launch scope is made-to-order metal jewelry.
 
-sculptura does not supply gemstones, manage a stone inventory, or promise stone-setting services at launch. a later version may allow a creator to design an empty bezel or prepared setting for a buyer's own stone, but that requires separate tolerances, measurements, liability rules, shipping procedures, and manufacturer support.
+for a typical cast piece, the selected partner receives the exact approved model and production instructions. the partner produces a castable resin or wax pattern, invests it, removes the pattern through burnout, casts the selected metal into the cavity, cleans and finishes the piece, and ships it with the required records.
 
-supported metals are based on approved manufacturing capability, not a wish list. a metal becomes available only when sculptura has an eligible process, sourced design constraints, a usable quote path, and a manufacturer able to fulfill the route.
+not every three-dimensional printing business can perform this workflow. plastic prototyping and direct industrial metal printing do not prove precious-metal jewelry casting capability. every manufacturer record therefore needs evidence for its processes, materials, limits, ordering method, service regions, finishing, hallmarking path, and commercial readiness.
 
----
-
-## hallmarking and precious-metal rules
-
-precious-metal jewelry can require testing, fineness marks, responsibility marks, assay-office involvement, or destination-specific consumer information.
-
-sculptura's manufacturing research includes the convention on the control and marking of articles of precious metals, often called the vienna convention, and the common control mark. the purpose is to establish which target countries participate in or recognize the relevant marking system and how that affects cross-border manufacturing.
-
-sculptura cannot assume that one mark makes a piece legal everywhere. the exact requirements can depend on the country, alloy, fineness, article type, weight, manufacturing location, assay office, importer, and destination. those findings become part of route eligibility so sculptura does not send an order through a route that cannot produce the required marks or records.
+partners do not need a sculptura-facing portal. sculptura connects outward through an approved adapter. that may use a public application programming interface, a private commercial integration, or a controlled manual process for a specialist regional casting house.
 
 ---
 
-## shipping rollout
+## materials, stones, and hallmarking
 
-creator signup and customer delivery are separate questions.
+launch scope is metal-only jewelry with no supplied stones.
 
-### creator signup
+a later release may support an empty bezel or prepared setting for a buyer's own stone. that requires separate measurement tolerances, liability, intake, shipping, setting, and manufacturer rules.
 
-sculptura intends to allow creators to sign up wherever its connected payout provider supports the required type of account, subject to provider rules, sanctions restrictions, age requirements, and local law.
+precious-metal products can require fineness testing, assay-office involvement, responsibility marks, a common control mark, importer records, and destination-specific consumer information. route eligibility therefore includes hallmarking and precious-metal compliance. no single mark or country grouping is assumed to solve every route.
 
-full identity verification is not intended to be required just to explore the studio or prepare designs. the planned payout threshold is $20 or €20. before earnings are released at that threshold, the creator must complete the required identity and payout verification.
+---
 
-stripe connect is the intended first payout provider. paypal may become a second option, and providers such as razorpay may be researched for regions where they improve access.
+## rollout and geography
 
-this timing is a product intention, not a way around provider requirements. a payment provider or legal rule may require information earlier, and sculptura must follow that requirement.
+creator signup availability, payout-provider coverage, customer delivery, customs, hallmarking, tax, carrier service, insurance, and returns are separate questions.
 
-### first shipping cohort
+market lists and rollout status change as routes are researched and approved, so they do not belong in this project explanation. the maintained source of truth is under [`operations/country-rollout`](operations/country-rollout/README.md), with locale and cross-border concerns under [`operations/shipping`](operations/shipping/README.md).
 
-sculptura's intended first group of delivery countries is:
-
-- united states
-- canada
-- united kingdom
-- australia
-- germany
-- france
-- italy
-- netherlands
-- spain
-- belgium
-- austria
-- switzerland
-- sweden
-- denmark
-- ireland
-- new zealand
-
-canada, australia, switzerland, sweden, and denmark are marked as higher-purchasing-power priority markets in product planning.
-
-
-japan, south korea, singapore, the united arab emirates, and norway are possible later additions after more research and suitable regional distributed casting zones are established. norway is also marked as higher-purchasing-power priority, but it remains outside the eu and needs its own import and route treatment. israel is a possible Middle East v3 candidate and also requires its own approved route before support.
-
-being named in the first cohort does not automatically turn checkout on. each country still needs an approved manufacturing route, hallmarking review, customs and tax handling, carrier service, insurance, returns process, and customer terms. support is enabled country by country when those pieces are ready.
+shipping remains deny-by-default. appearing in a planning cohort does not make a destination live until the complete route is approved.
 
 ---
 
 ## payments, payouts, and protection
 
-ordinary purchases can use guest checkout. the buyer pays sculptura through the supported payment flow, and sculptura records the manufacturing cost, platform fee, creator earnings, and any delivery-related amounts used for that order.
+creator exploration and design work should not require payout verification merely to begin. identity and connected-account requirements are enforced when the relevant provider and payout state require them.
 
-creator earnings are not simply sent out the instant a card is charged. the payout policy must account for manufacturing acceptance, cancellation, refunds, chargebacks, delivery, and the applicable claim window.
+creator earnings are not released simply because a card authorization occurred. settlement must account for payment capture, manufacturing acceptance, cancellation, refund exposure, chargebacks, delivery, and the applicable claim window.
 
-shipping, insurance, refunds, and claims are part of the product rather than loose links to carrier pages. buyers and creators should be able to see what happened, what is waiting, and who is responsible for the next action.
-
-all financial corrections should be recorded as adjustments. sculptura should not erase the original transaction and pretend it never happened.
+shipping, insurance, refunds, and claims are first-class operational records. corrections are append-only adjustments rather than edits that erase the original transaction.
 
 ---
 
-## the operational controls
+## the operational control tower
 
-sculptura needs a private control area for the people running the service.
+private admin tools supervise the real platform, manufacturing, and operations services. they do not maintain separate copies of business rules.
 
-this is where the team can:
+operators need to be able to:
 
-- review design and listing exceptions
-- approve or suspend manufacturing partners
-- see whether partner connections are healthy
-- inspect why a manufacturing route was selected
-- intervene in a failed order
-- manage country rollout and operational policy
-- review payout, delivery, refund, and claim problems
-- see an audit history of important changes
+- review design-release and listing exceptions
+- approve, suspend, and inspect manufacturing partners
+- see connection and capability health
+- inspect why a route was selected
+- intervene in failed purchases, production, delivery, refund, and payout states
+- manage rollout and operational policy
+- review audit history for consequential changes
 
-these controls should operate the real pricing, manufacturing, and delivery systems. they should not contain separate copies of those rules that slowly become inconsistent.
+admin access must use authenticated, role-based authorization enforced by the backend. a universal password in client code is not authentication.
 
 ---
 
 ## a complete example
 
-imagine a creator has an idea for a wide silver ring with a repeating folded-ribbon surface.
+imagine someone has collected references for a wide silver ring with a folded-ribbon surface but has never thought of themselves as a jewelry designer.
 
-1. the creator explains the shape and supplies visual references.
-2. the design agent helps convert the idea into understandable parameters.
-3. the creator adjusts the band width, fold depth, repetition count, ring size, and smooth interior.
-4. paracraft generates the exact openscad model and compiles the mesh.
-5. sculptura checks wall thickness, fragile details, overall dimensions, volume, estimated mass, and silver-casting constraints.
-6. the creator revises one area that is too thin.
+1. they open a creator project and provide the references and description.
+2. tessa identifies likely design relationships and proposes supported parameters.
+3. the creator accepts some suggestions and changes the band width, fold depth, repetition count, ring size, and smooth interior.
+4. paracraft generates the exact openscad model and mesh from the accepted parameters.
+5. studio validation checks wall thickness, fragile details, dimensions, volume, estimated mass, and the applicable casting constraints.
+6. the creator revises an area that is too thin.
 7. the design passes and becomes design release version 1.
-8. the creator publishes a listing and chooses whether to set desired earnings or a fixed retail price.
-9. a buyer in canada selects their size and purchases the ring without creating an account.
-10. sculptura confirms that canada is currently enabled, obtains a valid silver-production route and price, and records the exact checkout snapshot.
-11. the order is sent to an eligible regional casting partner.
-12. the partner produces the castable pattern, casts and finishes the silver ring, and ships it with tracking and the required documentation.
-13. the buyer follows delivery through sculptura.
-14. the creator sees the sale and eventual payout in their console.
-15. if the creator later changes the fold pattern, that becomes version 2. the canadian order still points to version 1.
+8. the creator publishes a listing and fixes either desired earnings or retail price.
+9. a guest buyer selects a supported size and metal and proceeds to checkout.
+10. operations confirms the destination and route, obtains a valid manufacturing price, computes the trusted total, captures payment, and records the exact release, route, and financial snapshot.
+11. the manufacturing adapter submits the approved package to an eligible casting partner.
+12. the partner produces the pattern, casts and finishes the ring, and ships it with tracking and required documentation.
+13. the buyer follows delivery, and the creator sees the sale and eventual payout in their console.
+14. if the creator later changes the fold pattern, that becomes version 2. the earlier order still points to version 1.
 
-that is the basic promise: help a creator turn an idea into a controlled, reproducible piece of metal jewelry, let people buy it, and handle the difficult work between a finished design and a delivered object.
+that is the basic promise: let more people recognize themselves as creators, give their ideas a controlled path into metal, and handle the difficult work between a finished design and a delivered object.
 
 ---
 
@@ -295,12 +267,13 @@ that is the basic promise: help a creator turn an idea into a controlled, reprod
 
 sculptura is not:
 
-- a prompt box that produces an unexplained mesh
+- a prompt box that emits an unexplained mesh
+- a system where a vision model generates production geometry
 - a marketplace that expects creators to manufacture every order themselves
 - a general-purpose three-dimensional printing service
 - a gemstone marketplace
 - a replacement for a creator's judgment
-- a claim that every country, metal, or manufacturer is supported from day one
-- a commission feature released before payment and dispute rules exist
+- a claim that every route, metal, or manufacturer works from day one
+- a commission form released without authentication, payment protection, and dispute rules
 
-it is a focused system for creator-led, manufacturable, made-to-order metal jewelry.
+it is creator-led infrastructure for designing, offering, manufacturing, and delivering made-to-order metal jewelry.

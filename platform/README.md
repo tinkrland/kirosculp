@@ -25,3 +25,7 @@ no listing may point to an unvalidated studio project. it must point to a specif
 ## commissions
 
 creator commission preferences may exist now, but requesting/accepting work remains muted until escrow and the whole lifecycle are designed together. see `shells/commissions-muted/`.
+
+## current implementation
+
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

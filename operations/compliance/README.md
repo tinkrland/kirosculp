@@ -4,3 +4,23 @@ identity and payout requirements, sanctions/export checks, consumer protections,
 
 
 creator onboarding geography follows current payout-provider availability, while shipping geography follows the separate destination allowlist. payout kyc is intended at the $20/€20 release threshold, but sanctions, provider, transaction-monitoring, or legal rules may require earlier verification.
+
+## audited implementation reference
+
+**status: research only**
+
+### existing source evidence
+
+- No compliance service exists in the source applications.
+- `manufacturing/research/topics/vienna-convention-ccm.md` and rollout records in this foundation hold research inputs.
+
+### what exists now
+
+- Source UIs do not enforce hallmarking, restricted-route, sanctions, consumer-information, or evidence-expiry rules.
+
+### required changes
+
+- Turn approved findings into versioned route predicates and required production documentation.
+- Keep legal review and evidence dates explicit.
+
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

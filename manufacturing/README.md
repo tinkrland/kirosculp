@@ -21,3 +21,7 @@ manufacturing turns an eligible paid order and exact design release into a norma
 seven candidates were checked with tavily discovery, firecrawl extraction, and an openai evidence pass. every record remains `drafted`, not `accepted`. only accepted records may enter automatic routing.
 
 unknown is `null`, not guessed as `false`. general investment-casting marketing does not prove the required printed-pattern-to-precious-metal jewelry process.
+
+## current implementation
+
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

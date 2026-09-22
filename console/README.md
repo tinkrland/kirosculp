@@ -12,3 +12,7 @@ console is the creator and buyer operational surface. it makes the business unde
 ## rule
 
 console reads and commands operations. financial ledgers, purchase state, shipment state, insurance decisions, and country support remain owned by `operations/`.
+
+## current implementation
+
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

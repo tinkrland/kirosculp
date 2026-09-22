@@ -69,3 +69,22 @@ see:
 9. monitor delivery, defect, claim, and landed-cost accuracy
 
 country support can be paused without deleting its historical approval record.
+
+## audited implementation reference
+
+**status: foundation data only**
+
+### existing source evidence
+
+- No source application consumes `shipping-markets.json` or enforces its route gates.
+
+### what exists now
+
+- The foundation contains market planning data and schemas. Application checkout does not use them.
+
+### required changes
+
+- Expose approved availability through a trusted server service.
+- Deny unsupported destinations before payment and re-check before manufacturing submission.
+
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

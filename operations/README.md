@@ -22,3 +22,7 @@ country eligibility
 - `country-rollout/`: deny-by-default phased market availability
 
 operations may deny checkout even when a listing exists. manufacturing may also deny it when no eligible production route exists. both checks are required.
+
+## current implementation
+
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

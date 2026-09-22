@@ -16,3 +16,21 @@ quote → authorized payment → paid order → manufacturing reserved
 ```
 
 exact payout timing, refund allocation, chargeback liability, and insurance recovery remain policy decisions. they must be explicit before live money moves.
+
+## audited implementation reference
+
+**status: missing**
+
+### existing source evidence
+
+- Price, manufacturing cost, and creator earnings columns exist on order rows, but no ledger or reconciliation engine exists.
+
+### what exists now
+
+- Stored totals are snapshots without balanced entries or payout-state accounting.
+
+### required changes
+
+- Implement double-entry or equivalently auditable ledger records for charges, fees, production costs, reserves, earnings, refunds, chargebacks, and payouts.
+
+see the [complete source audit](../../../docs/current-state-audit.md) for cross-domain findings and build order.

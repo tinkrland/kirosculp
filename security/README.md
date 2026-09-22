@@ -1,62 +1,107 @@
 ---
-title: security fixes
-summary: the two concrete vulnerabilities found in sculptura.dev, read line by line, with the exact fix for each.
+title: security remediation
+summary: verified authentication, authorization, privacy, and database-policy findings from the complete sculptura.dev source audit.
 ---
 
-# security fixes
+# security remediation
 
-these are the two real, verified issues — not general advice. both were confirmed by reading the actual files and the actual supabase migrations, not inferred.
+## status
 
-## 1. hardcoded admin password, shipped in the client bundle
+**critical remediation is required before production use.**
 
-**file:** `sculptura.dev/src/components/admin/AdminLayout.jsx`
+this page describes the supplied source snapshots. a migration or proposed patch in this foundation is not proof that a live database has been repaired.
+
+## verified findings
+
+### client-side universal admin password
+
+`sculptura.dev/src/components/admin/AdminLayout.jsx` contains:
 
 ```js
 const ADMIN_PASSWORD = "Password";
 ```
 
-this string ships inside the client javascript bundle. anyone who opens devtools or views the bundled `dist/assets/*.js` can read it directly — it's not a secret on the server, it's plaintext in code the browser downloads. the gate is `sessionStorage`-based with no server-side check at all: unlock the ui once, and every `/admin/*` page and every supabase call the admin pages make runs with whatever permissions the anon key already has, password or not.
+the value is shipped in browser JavaScript. successful comparison only writes `sculptura_admin_unlocked=1` to session storage. this is a visual gate, not authentication or authorization.
 
-the fix doesn't require inventing anything new. migration `20260429121931` already built exactly the infrastructure needed and it's sitting unused:
+**required fix:** remove the password gate. require a Supabase session, verify the user's admin role through a backend-enforced role check, and let RLS or a privileged server operation reject every unauthorized admin read and write.
 
-- `public.user_roles` table (`user_id`, `role` — `admin` or `member`)
-- `public.has_role(_user_id, _role)` — a `security definer` function existing policies already call
+### public market-account records expose private columns
 
-**the fix:** replace the password gate with a real auth check.
-1. admin pages require a logged-in supabase session (reuse the same `Auth.jsx` sign-in already built for buyers/creators).
-2. `AdminLayout` checks `has_role(auth.uid(), 'admin')` (via a supabase rpc call) instead of comparing a typed string to a hardcoded constant.
-3. every admin-only table policy (`artifacts admin manage`, `market_accounts` admin update, `manufacturers`, `platform_settings`) already gates on `has_role(..., 'admin')` — so once the ui requires a real session, the backend enforcement is already correct. the password gate was ui-only theater on top of policies that were already checking the right thing.
-4. granting the first admin is a one-time manual insert into `user_roles` for your own account — not a ui flow, on purpose, so admin grants aren't self-service.
+an original migration applies public select access to `market_accounts`, whose rows include storefront fields alongside `access_key_hash`, payout details, account email, and other private configuration.
 
-see `migrations/0001_admin_roles_and_market_account_privacy.sql` for the policy-side half of this (the table policies are already right; this fix is almost entirely a frontend change plus one manual role grant).
+**required fix:** expose only approved storefront fields through a public-safe view or dedicated public table. keep authentication, payout, account, and internal configuration in private tables. no public query should be able to select an access-key hash or payout destination.
 
-## 2. `market_accounts` select policy exposes payout details and the access-key hash to anyone
+### legacy open market-account updates
 
-**file:** `sculptura.dev/supabase/migrations/20260429121931_..._9c9604ec.sql`
+an original policy allows broad update access to `market_accounts`. a later edge function verifies an access key for controlled updates, but cumulative policy state must be verified and the open policy removed.
 
-```sql
--- public read so anyone can browse store profiles. sensitive fields like
--- payout_details and access_key_hash are still exposed by select; in a
--- production system these would be moved to a private side-table. for the
--- demo we keep the legacy schema intact and rely on the hash being a
--- one-way digest of the key (not the key itself).
-create policy "market_accounts public read"
-  on public.market_accounts for select
-  using (true);
-```
+**required fix:** permit owner changes only through a narrowly validated authenticated or server-side path. status, role, payout, access, review, and policy fields require separate authorization.
 
-the comment already correctly diagnoses the problem — this note is what confirmed it needs fixing now, not later. `using (true)` means every column on every row is readable by anyone, including:
-- `payout_details` (bank/paypal/wise/crypto destination — a creator's actual payout info)
-- `access_key_hash` (a sha-256 digest, so not directly usable to log in, but still not something that belongs in a public response — hashes of low-entropy or reused keys are crackable, and there's no reason to expose it at all)
+### anonymous and publicly readable commission requests
 
-storefronts genuinely do need public reads (`handle`, `display_name`, `bio`, `avatar_url`, socials, store customization, commission terms) — that part of the policy comment is right. the fix is to stop reading the whole row publicly and instead expose a **public-safe view** with only the columns a storefront actually needs, while the real table stays locked down to the owner (verified via the existing access-key-hash flow, server-side, through `store-update`) and to admins.
+`commission_requests` was introduced with anonymous insert and public read policies. that conflicts with the product rule that commissioners must have buyer accounts, and it exposes private briefs and contact data.
 
-**the fix:** see `migrations/0001_admin_roles_and_market_account_privacy.sql` — it:
-1. drops the `market_accounts public read` blanket policy
-2. creates `public.market_accounts_public` (a view exposing only storefront-safe columns)
-3. adds a narrow `market_accounts owner or admin read` policy on the base table for authenticated flows that legitimately need the full row (the store-update edge function already uses the service-role client, so it's unaffected)
-4. leaves every other existing policy (insert, admin manage) untouched — this is additive, not a rewrite
+**required fix:** require `auth.uid()` for request creation, store `commissioner_user_id`, permit the commissioner, assigned creator, and authorized operators to read the request, and remove every public-read or anonymous-write policy.
 
-## what this fix intentionally does not touch
+### guest-order policy and private order access
 
-it does not change the market-account access-key model itself (a hashed key instead of full supabase auth for creators). that's a legitimate lightweight-auth pattern for a pilot, and store-update already re-verifies the key server-side on every write. the two fixes above are specifically the "plaintext password" and "overly permissive rls" issues that were flagged — not a request to redesign creator auth.
+guest checkout is a valid product requirement, but open table insertion is not the right implementation. the `place-order` edge function also creates rows without charging a payment method.
+
+**required fix:** allow guests to call a rate-limited, idempotent server purchase operation. keep direct order-table insert unavailable to anonymous clients. private reads require authenticated ownership, a securely scoped guest-order access mechanism, assigned creator access where appropriate, or an admin role. email equality alone must not grant order access.
+
+### open admin idea notebook
+
+the `admin_ideas` migration permits open read, insert, update, and delete.
+
+**required fix:** restrict every operation to authenticated admins. if public idea submission is ever wanted, use a separate intake endpoint and table with rate limiting and moderation.
+
+### permissive storage and collection policies
+
+several migrations contain `using (true)` or `with check (true)` policies. some are intentional public-read surfaces, while others are too broad or operate on tables containing private fields.
+
+**required fix:** review cumulative policy state table by table. public reads must use public-safe projections and explicit publication state. writes require ownership, role checks, object-path checks, allowed-field validation, and abuse controls.
+
+### service-role edge functions trust too many client fields
+
+`publish-artifact` verifies a creator access key and forces `pending_review`, but accepts client-provided manufacturing costs, creator earnings, prices, model URLs, and other production claims before inserting with the service role.
+
+`store-update` uses a field allowlist, but the allowed set still includes payout details and sensitive operational fields.
+
+**required fix:** service-role functions must validate both caller authority and field provenance. production geometry, validation, manufacturing cost, pricing, payout configuration, and release identity come from their owning trusted services, not creator browser payloads.
+
+### no abuse, audit, or idempotency layer
+
+public forms and mutations do not show a complete rate-limit, bot-defense, idempotency, privileged-action audit, or replay-protection design.
+
+**required fix:** add server-enforced limits, request identifiers, idempotency keys, append-only admin audit events, security telemetry, and regression tests for every sensitive policy.
+
+## remediation artifacts in this foundation
+
+`migrations/0001_admin_roles_and_market_account_privacy.sql` is an early draft that addresses public market-account reads and documents admin-role setup. it is incomplete. it does not repair commission requests, guest-order insertion, admin ideas, every permissive policy, service-role provenance, or the client admin component.
+
+before deployment, replace it with a cumulative migration tested against the complete migration history. tests must cover anonymous, authenticated buyer, commissioner, creator, admin, and service-role behavior for every table and storage bucket.
+
+## required order of work
+
+1. remove the hardcoded admin gate and establish authenticated admin roles
+2. protect market-account private fields and payout information
+3. close anonymous commission access
+4. move guest purchases behind an idempotent server operation
+5. close open admin-idea access
+6. verify cumulative RLS and storage policies
+7. reduce service-role input trust and split sensitive data by domain
+8. add rate limits, audit events, idempotency, and automated authorization tests
+
+## acceptance conditions
+
+security remediation is complete only when:
+
+- no password or privileged secret is embedded in client code
+- unauthorized clients cannot read or mutate private rows or fields
+- commission creation requires an authenticated commissioner
+- guest checkout works without public order-table writes
+- every admin operation is authenticated, role-authorized, and audited
+- privileged edge functions derive sensitive values from trusted services
+- policy tests prove the intended access matrix against the cumulative schema
+
+see the [complete source audit](../docs/current-state-audit.md) for the cross-domain build order.

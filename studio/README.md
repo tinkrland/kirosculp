@@ -33,3 +33,7 @@ flowchart LR
 ```
 
 same parameters in must produce byte-identical geometry out. inference may suggest a candidate parameter set, but inference never generates geometry and never decides whether something is castable.
+
+## current implementation
+
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

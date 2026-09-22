@@ -11,3 +11,7 @@ admin is the control tower. it sees across domains and provides controlled inter
 - `audit/`: append-only evidence of changes and interventions
 
 manufacturer capability truth and route scoring live in `manufacturing/`. purchases, payouts, shipping, insurance, and country eligibility live in `operations/`. admin edits policy and invokes their control interfaces.
+
+## current implementation
+
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.
