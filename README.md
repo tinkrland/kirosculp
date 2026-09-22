@@ -179,7 +179,7 @@ creator signup and shipping have separate geography.
 
 creator signup is intended wherever the connected-payout provider supports the required account type, subject to provider and legal restrictions. full kyc is deferred by product intent until payout eligibility at $20 or €20, but provider requirements may trigger it earlier.
 
-first shipping cohort: united states, canada, united kingdom, australia, germany, france, italy, netherlands, spain, belgium, austria, and switzerland. canada, australia, and switzerland carry a product-planning high-ppp priority flag. japan and south korea remain on research hold.
+first shipping cohort: united states, canada, united kingdom, australia, germany, france, italy, netherlands, spain, belgium, austria, switzerland, sweden, denmark, ireland, and new zealand. canada, australia, switzerland, sweden, and denmark carry a product-planning high-ppp priority flag. ireland and new zealand carry an internal freebie-candidate tag, not a customer-facing promise. japan, south korea, singapore, the united arab emirates, and non-eu norway remain on research hold until suitable regional distributed casting zones and operating routes are established; norway is also high-ppp priority.
 
 shipping stays deny-by-default until each country's manufacturing route, hallmarking, customs, tax, carrier, insurance, returns, and consumer requirements are approved. see [`operations/country-rollout`](operations/country-rollout/README.md).
 

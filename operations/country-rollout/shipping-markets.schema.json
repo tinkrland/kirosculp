@@ -3,23 +3,56 @@
   "title": "sculptura shipping market rollout",
   "type": "object",
   "additionalProperties": false,
-  "required": ["policy", "schema_version", "phases", "markets"],
+  "required": [
+    "policy",
+    "schema_version",
+    "phases",
+    "markets"
+  ],
   "properties": {
-    "policy": { "const": "deny_by_default" },
-    "schema_version": { "type": "integer", "minimum": 1 },
+    "policy": {
+      "const": "deny_by_default"
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
     "phases": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "name", "status", "live_checkout", "description"],
+        "required": [
+          "id",
+          "name",
+          "status",
+          "live_checkout",
+          "description"
+        ],
         "properties": {
-          "id": { "type": "string", "pattern": "^phase_[0-9]+$" },
-          "name": { "type": "string" },
-          "status": { "type": "string", "enum": ["planned", "active", "complete", "paused"] },
-          "live_checkout": { "type": "boolean" },
-          "description": { "type": "string" }
+          "id": {
+            "type": "string",
+            "pattern": "^phase_[0-9]+$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "active",
+              "complete",
+              "paused"
+            ]
+          },
+          "live_checkout": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
         }
       }
     },
@@ -28,50 +61,180 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["country_code", "country_name", "phase_id", "status", "high_ppp_priority", "capabilities", "approved_routes", "constraints", "evidence"],
+        "required": [
+          "country_code",
+          "country_name",
+          "phase_id",
+          "status",
+          "high_ppp_priority",
+          "capabilities",
+          "approved_routes",
+          "constraints",
+          "evidence",
+          "freebie_candidate",
+          "regional_casting_zone_required"
+        ],
         "properties": {
-          "country_code": { "type": "string", "pattern": "^[A-Z]{2}$", "description": "ISO 3166-1 alpha-2" },
-          "country_name": { "type": "string", "minLength": 1 },
-          "phase_id": { "type": "string", "pattern": "^phase_[1-9][0-9]*$" },
-          "status": { "type": "string", "enum": ["research", "planned", "pilot", "live", "paused"] },
-          "high_ppp_priority": { "type": "boolean", "description": "business-priority marker supplied by product planning, not a computed economic statistic" },
+          "country_code": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO 3166-1 alpha-2"
+          },
+          "country_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "phase_id": {
+            "type": "string",
+            "pattern": "^phase_[1-9][0-9]*$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "research",
+              "planned",
+              "pilot",
+              "live",
+              "paused"
+            ]
+          },
+          "high_ppp_priority": {
+            "type": "boolean",
+            "description": "business-priority marker supplied by product planning, not a computed economic statistic"
+          },
           "capabilities": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["buyer_checkout", "delivery", "returns", "insured_shipping"],
+            "required": [
+              "buyer_checkout",
+              "delivery",
+              "returns",
+              "insured_shipping"
+            ],
             "properties": {
-              "buyer_checkout": { "type": "boolean" },
-              "delivery": { "type": "boolean" },
-              "returns": { "type": "boolean" },
-              "insured_shipping": { "type": "boolean" }
+              "buyer_checkout": {
+                "type": "boolean"
+              },
+              "delivery": {
+                "type": "boolean"
+              },
+              "returns": {
+                "type": "boolean"
+              },
+              "insured_shipping": {
+                "type": "boolean"
+              }
             }
           },
-          "approved_routes": { "type": "array", "items": { "type": "string" } },
-          "constraints": { "type": "array", "items": { "type": "string" } },
+          "approved_routes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "evidence": {
             "type": "array",
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["name", "url", "checked_at"],
+              "required": [
+                "name",
+                "url",
+                "checked_at"
+              ],
               "properties": {
-                "name": { "type": "string" },
-                "url": { "type": "string", "format": "uri" },
-                "checked_at": { "type": "string", "format": "date" }
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "checked_at": {
+                  "type": "string",
+                  "format": "date"
+                }
               }
             }
           },
-          "approved_by": { "type": "string", "minLength": 1 },
-          "approved_at": { "type": "string", "format": "date-time" }
+          "approved_by": {
+            "type": "string",
+            "minLength": 1
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "freebie_candidate": {
+            "type": "boolean",
+            "description": "internal rollout-planning tag only; it does not promise free shipping, fees, products, or service"
+          },
+          "regional_casting_zone_required": {
+            "type": "boolean",
+            "description": "market should remain research-only until a suitable distributed regional casting route is established"
+          }
         },
         "allOf": [
           {
-            "if": { "properties": { "status": { "enum": ["pilot", "live"] } }, "required": ["status"] },
-            "then": { "required": ["approved_by", "approved_at"], "properties": { "evidence": { "minItems": 1 }, "approved_routes": { "minItems": 1 } } }
+            "if": {
+              "properties": {
+                "status": {
+                  "enum": [
+                    "pilot",
+                    "live"
+                  ]
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "required": [
+                "approved_by",
+                "approved_at"
+              ],
+              "properties": {
+                "evidence": {
+                  "minItems": 1
+                },
+                "approved_routes": {
+                  "minItems": 1
+                }
+              }
+            }
           },
           {
-            "if": { "properties": { "status": { "const": "live" } }, "required": ["status"] },
-            "then": { "properties": { "capabilities": { "properties": { "buyer_checkout": { "const": true }, "delivery": { "const": true } } } } }
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "live"
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "properties": {
+                "capabilities": {
+                  "properties": {
+                    "buyer_checkout": {
+                      "const": true
+                    },
+                    "delivery": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
           }
         ]
       }

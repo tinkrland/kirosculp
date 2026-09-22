@@ -222,10 +222,16 @@ sculptura's intended first group of delivery countries is:
 - belgium
 - austria
 - switzerland
+- sweden
+- denmark
+- ireland
+- new zealand
 
-canada, australia, and switzerland are marked as higher-purchasing-power priority markets in product planning.
+canada, australia, switzerland, sweden, and denmark are marked as higher-purchasing-power priority markets in product planning.
 
-japan and south korea are possible later additions after more research.
+ireland and new zealand carry an internal “freebie candidate” planning tag. that does not promise customers free products, shipping, fees, or immediate availability. it only marks them as intended low-friction additions if the operational checks support that conclusion.
+
+japan, south korea, singapore, the united arab emirates, and norway are possible later additions after more research and suitable regional distributed casting zones are established. norway is also marked as higher-purchasing-power priority, but it remains outside the eu and needs its own import and route treatment.
 
 being named in the first cohort does not automatically turn checkout on. each country still needs an approved manufacturing route, hallmarking review, customs and tax handling, carrier service, insurance, returns process, and customer terms. support is enabled country by country when those pieces are ready.
 

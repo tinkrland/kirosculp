@@ -133,7 +133,7 @@ source note so the finding is reproducible, per research.md's source format.
 
 for each candidate, write both:
 
-- `jewelry/manufacturing/<candidate-id>.md` -- free-form note in the
+- `research/candidates/<candidate-id>.md` -- free-form note in the
   research.md format (finding / conditions and caveats / sources / how this
   enters the engine)
 - an entry appended to `reference/manufacturer-capabilities.json`, matching
@@ -155,3 +155,67 @@ and a source -- so nobody re-researches it in six months.
 - `reference/manufacturer-capabilities.json` validates against the schema
 - at least one candidate is marked `accepted` with a real, working quote
   obtained (via api or browserbase) for a representative jewelry part
+
+---
+
+## 6. routing evidence required for every useful candidate
+
+a company-level “ships worldwide” statement is not enough. routing happens from a specific production facility to a specific buyer destination. research each facility separately where possible.
+
+### facility and route location
+
+- production-facility country and city, not only headquarters
+- whether casting, finishing, hallmarking, and dispatch occur at the same facility
+- countries the facility actually dispatches to
+- carrier and precious-metal insurance limits by route
+- incoterms, importer-of-record handling, and customs documentation
+- whether the company routes work to subcontractors or undisclosed facilities
+
+### exact technical capability
+
+- process and pattern type
+- exact alloy, color, and fineness
+- dimension, wall, detail, tolerance, and mass constraints
+- supported finishes with measurable descriptions
+- plating options and thickness where relevant
+- engraving preservation and hand-finishing availability
+- file, units, metadata, and orientation requirements
+
+### hallmarking and precious-metal compliance
+
+- assay-office relationships
+- responsibility or sponsor marks
+- fineness marks supported
+- common control mark capability by verified route
+- convention status must come from official convention or assay-office evidence
+- destination-specific exemptions or additional marks
+- where testing and marking physically occur
+
+never record `vienna_convention_registered: true` on a caster as a shortcut. the convention operates through contracting states, authorized assay offices, accepted marks, and route-specific requirements.
+
+### capacity and service
+
+- next available production date by process/material
+- quoted production lead time
+- rush-service conditions
+- minimum order or batching requirements
+- status-update method
+- cancellation point after which production cannot be stopped
+
+`max_weekly_capacity` and `current_active_orders` are not useful without a common work unit. prefer promised lead time or available production slots for the exact process and material.
+
+### quality evidence
+
+- inspection steps
+- documented finishing standard
+- defect and remake terms
+- observed defect, remake, and on-time rates once sculptura has orders
+- completed-order count behind each rate
+- whether quality evidence applies to the exact facility and process
+
+avoid unsupported labels such as standard, premium, or master artisan. creators choose a finish specification; routing matches that specification to sourced capability and measured performance.
+
+### route acceptance
+
+an accepted manufacturer record does not automatically approve every origin-destination pair. each live route also needs country-rollout approval covering customs, tax, hallmarking, shipping, insurance, returns, and consumer handling.
+

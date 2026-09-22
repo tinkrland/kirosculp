@@ -84,6 +84,10 @@ for (const market of marketsData.markets) {
     console.error(`${market.country_code}: unknown rollout phase ${market.phase_id}`);
     process.exit(1);
   }
+  if (market.phase_id === "phase_2" && !market.regional_casting_zone_required) {
+    console.error(`${market.country_code}: regional casting research market must retain its route dependency`);
+    process.exit(1);
+  }
   if (market.status === "live" && (!market.capabilities.buyer_checkout || !market.capabilities.delivery)) {
     console.error(`${market.country_code}: live market must enable buyer checkout and delivery`);
     process.exit(1);

@@ -39,19 +39,395 @@
     }
   ],
   "markets": [
-    { "country_code": "US", "country_name": "United States", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "CA", "country_name": "Canada", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": true, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "GB", "country_name": "United Kingdom", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "AU", "country_name": "Australia", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": true, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "DE", "country_name": "Germany", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "FR", "country_name": "France", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "IT", "country_name": "Italy", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "NL", "country_name": "Netherlands", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "ES", "country_name": "Spain", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "BE", "country_name": "Belgium", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "AT", "country_name": "Austria", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "CH", "country_name": "Switzerland", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": true, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
-    { "country_code": "JP", "country_name": "Japan", "phase_id": "phase_2", "status": "research", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": ["additional market, carrier, hallmarking, customs, and returns research required"], "evidence": [] },
-    { "country_code": "KR", "country_name": "South Korea", "phase_id": "phase_2", "status": "research", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": ["additional market, carrier, hallmarking, customs, and returns research required"], "evidence": [] }
+    {
+      "country_code": "US",
+      "country_name": "United States",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "CA",
+      "country_name": "Canada",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "GB",
+      "country_name": "United Kingdom",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "AU",
+      "country_name": "Australia",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "DE",
+      "country_name": "Germany",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "FR",
+      "country_name": "France",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "IT",
+      "country_name": "Italy",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "NL",
+      "country_name": "Netherlands",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "ES",
+      "country_name": "Spain",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "BE",
+      "country_name": "Belgium",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "AT",
+      "country_name": "Austria",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "CH",
+      "country_name": "Switzerland",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false
+    },
+    {
+      "country_code": "SE",
+      "country_name": "Sweden",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": true,
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": []
+    },
+    {
+      "country_code": "DK",
+      "country_name": "Denmark",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": true,
+      "freebie_candidate": false,
+      "regional_casting_zone_required": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": []
+    },
+    {
+      "country_code": "IE",
+      "country_name": "Ireland",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "freebie_candidate": true,
+      "regional_casting_zone_required": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": []
+    },
+    {
+      "country_code": "NZ",
+      "country_name": "New Zealand",
+      "phase_id": "phase_1",
+      "status": "planned",
+      "high_ppp_priority": false,
+      "freebie_candidate": true,
+      "regional_casting_zone_required": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [],
+      "evidence": []
+    },
+    {
+      "country_code": "JP",
+      "country_name": "Japan",
+      "phase_id": "phase_2",
+      "status": "research",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [
+        "regional distributed casting zone plus market, carrier, hallmarking, customs, tax, insurance, and returns research required",
+        "additional market, carrier, hallmarking, customs, and returns research required"
+      ],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": true
+    },
+    {
+      "country_code": "KR",
+      "country_name": "South Korea",
+      "phase_id": "phase_2",
+      "status": "research",
+      "high_ppp_priority": false,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [
+        "regional distributed casting zone plus market, carrier, hallmarking, customs, tax, insurance, and returns research required",
+        "additional market, carrier, hallmarking, customs, and returns research required"
+      ],
+      "evidence": [],
+      "freebie_candidate": false,
+      "regional_casting_zone_required": true
+    },
+    {
+      "country_code": "SG",
+      "country_name": "Singapore",
+      "phase_id": "phase_2",
+      "status": "research",
+      "high_ppp_priority": false,
+      "freebie_candidate": false,
+      "regional_casting_zone_required": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [
+        "regional distributed casting zone plus market, carrier, hallmarking, customs, tax, insurance, and returns research required"
+      ],
+      "evidence": []
+    },
+    {
+      "country_code": "AE",
+      "country_name": "United Arab Emirates",
+      "phase_id": "phase_2",
+      "status": "research",
+      "high_ppp_priority": false,
+      "freebie_candidate": false,
+      "regional_casting_zone_required": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [
+        "regional distributed casting zone plus market, carrier, hallmarking, customs, tax, insurance, and returns research required"
+      ],
+      "evidence": []
+    },
+    {
+      "country_code": "NO",
+      "country_name": "Norway",
+      "phase_id": "phase_2",
+      "status": "research",
+      "high_ppp_priority": true,
+      "freebie_candidate": false,
+      "regional_casting_zone_required": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [
+        "non-EU destination; regional distributed casting zone plus market, carrier, hallmarking, customs, tax, insurance, and returns research required"
+      ],
+      "evidence": []
+    }
   ]
 }
