@@ -3,30 +3,36 @@
 ```mermaid
 sequenceDiagram
     actor Creator
+    actor Buyer
     participant Studio
     participant Platform
-    participant Console
+    participant Operations
+    participant Manufacturing
     participant Admin
-    participant Manufacturer
-    actor Buyer
+    participant Console
+    participant Partner as Casting partner
 
-    Creator->>Studio: describe and refine the piece
-    Studio->>Studio: generate geometry and validate castability
+    Creator->>Studio: describe and refine piece
+    Studio->>Studio: generate geometry and validate
     Studio-->>Platform: immutable design release
-    Creator->>Platform: publish release as listing
-    Platform->>Console: request regional prices
-    Console-->>Platform: retail and earnings snapshots
-    Buyer->>Platform: purchase metal + size
-    Platform->>Console: authorize payment from trusted server price
-    Console-->>Admin: paid production order
-    Admin->>Admin: filter and score eligible regional routes
-    Admin->>Manufacturer: submit design release asset + production spec
-    Manufacturer-->>Admin: status + tracking
-    Admin-->>Console: shipping and delivery events
-    Console-->>Creator: release creator payout per policy
-    Console-->>Buyer: tracking, protection, refund/claim state
+    Creator->>Platform: publish release
+    Platform->>Operations: request destination eligibility and price
+    Operations->>Manufacturing: request eligible route and quote
+    Manufacturing-->>Operations: normalized route quote
+    Operations-->>Platform: trusted retail and earnings snapshot
+    Buyer->>Platform: purchase metal, size, and destination
+    Platform->>Operations: create purchase from trusted snapshot
+    Operations->>Manufacturing: release eligible paid production order
+    Manufacturing->>Partner: upload exact release asset and production spec
+    Partner-->>Manufacturing: production, shipment, and tracking events
+    Manufacturing-->>Operations: normalized fulfillment events
+    Operations-->>Console: payout, delivery, claim, and refund state
+    Console-->>Creator: earnings and order view
+    Console-->>Buyer: receipt, tracking, and support view
+    Admin-->>Operations: approved policy or manual intervention
+    Admin-->>Manufacturing: partner activation or route intervention
 ```
 
 ## commissions later
 
-commissioning adds a second pre-release conversation, but it does not change the core boundary. the commissioner gives references and requirements to a creator. the creator uses studio. studio still emits the release. escrow and acceptance belong to console/platform, not studio.
+commissioning adds an authenticated brief and an escrow lifecycle before release, but keeps the same ownership. the commissioner gives requirements to a creator. the creator uses studio. studio emits the release. platform owns the conversation surface; operations owns escrow, acceptance, cancellation, and dispute state.

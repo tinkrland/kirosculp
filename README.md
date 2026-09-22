@@ -1,98 +1,85 @@
 # sculptura
 
-> a way to turn the piece of jewelry someone can already see in their head into something manufacturable, sellable, and real.
+> ai-assisted jewelry cadding, offering, production, and delivery without making creators become cad operators, manufacturers, or logistics teams.
 
-## what is this
+## the shape of the system
 
-sculptura is ai-assisted cadding for people who already have the taste and the idea. the creator talks through what they mean, the studio turns that into deterministic parametric geometry, and the rest of the system gets it validated, listed, sold, routed, cast, and shipped.
+sculptura has four product surfaces and two execution domains.
 
-buyers do not use the design agent. creators do. a buyer can purchase a finished listing without an account; the later commission flow lets a logged-in buyer bring references and a messy brief to a creator, who uses the studio to do the actual design work.
+### product surfaces
 
-metal only. no supplied stones. an empty bezel for a buyer's own stone may happen later, but it is not part of the launch surface.
+- **studio** is where creators turn intent into validated geometry
+- **platform** is where designs become discoverable and buyable
+- **console** is where creators and buyers see money, orders, delivery, and support
+- **admin** is the control tower for review, policy, routing, and intervention
 
----
+### execution domains
 
-## why four sides
+- **manufacturing** knows what can be made, by whom, from which materials, under which constraints
+- **operations** owns purchase, payout, pricing, settlement, refunds, insurance, shipping, legal, compliance, and country availability
 
-because geometry, storefronts, money, and operations are different jobs, and putting them in one cheerful folder is how everything eventually learns too much about everything else.
+console is not the financial engine. it is a product surface over operations. admin does not contain manufacturing. it configures and supervises it.
 
 ```mermaid
 flowchart LR
-    creator[creator with an idea] --> studio
+    creator[creator] --> studio
 
     subgraph studio[studio]
       direction TB
-      intent[conversation + references]
-      model[canonical design model]
+      agent[design agent]
+      project[canonical project model]
       geometry[openscad + mesh]
       validation[castability validation]
-      intent --> model --> geometry --> validation
+      agent --> project --> geometry --> validation
     end
 
     validation -->|immutable design release| platform
 
     subgraph platform[platform]
       direction TB
-      listing[listing + storefront]
-      discovery[discovery + white-label channels]
-      checkout[cart + checkout]
-      listing --> discovery --> checkout
+      creators[creator offering tools]
+      discovery[discoverability]
+      buyers[buyer experience]
+      checkout[checkout]
+      creators --> discovery --> buyers --> checkout
     end
 
-    checkout -->|priced order| console
+    checkout -->|purchase request| operations
 
-    subgraph console[console]
+    subgraph operations[operations]
       direction TB
-      pricing[two-way pricing]
-      money[payments + creator payouts]
-      protection[shipping + insurance + refunds]
-      pricing --> money --> protection
+      financial[purchase + pricing + payout]
+      delivery[shipping + insurance]
+      rules[legal + compliance + country rollout]
+      financial --> delivery
+      rules --> financial
+      rules --> delivery
     end
 
-    console -->|paid production order| routing
+    operations -->|eligible paid order| manufacturing
 
-    subgraph admin[admin]
+    subgraph manufacturing[manufacturing]
       direction TB
-      review[release review]
-      partners[manufacturer connections]
-      routing[regional routing]
-      policy[platform policy + overrides]
-      review --> policy
-      partners --> routing
-      policy --> routing
+      materials[materials supported]
+      partner[manufacturer layer]
+      route[regional routing]
+      materials --> route
+      partner --> route
     end
 
-    routing --> manufacturer[casting partner]
-    manufacturer --> customer[customer]
+    route --> maker[casting partner]
+    maker --> customer[customer]
 
-    admin -. operates .-> studio
-    admin -. operates .-> platform
-    admin -. operates .-> console
+    operations --> console[console]
+    console --> creator
+    console --> customer
+
+    admin[admin] -. policy + intervention .-> platform
+    admin -. policy + intervention .-> operations
+    admin -. partner control .-> manufacturing
 ```
 
-### studio
-
-the creative side. it owns the agent conversation, project model, geometry generation, openscad source, mesh compilation, mass estimation, and manufacturing validation. its output is a versioned **design release**. it knows nothing about carts, payouts, coupons, or orders.
-
-### platform
-
-the offering side. it owns listings, shops, discovery, white-label storefronts, connected sales channels, carts, checkout, buyer accounts, and the future commission intake. it can only list a design release that passed studio validation. it never generates or validates geometry.
-
-### console
-
-the practical money-and-delivery side creators need after they publish. it owns manufacturing cost snapshots, the two-way pricing model, platform fees, creator earnings, payouts, coupons, shipping, insurance, refunds, and settlement records. the platform displays its numbers; it does not recalculate them.
-
-### admin
-
-the control tower. it owns review queues, manufacturer adapters, regional routing rules, platform settings, operational overrides, and audit trails. manufacturers plug into sculptura through adapters and apis. they do not need their own sculptura-facing portal.
-
----
-
-## the seam that keeps this sane
-
-studio and platform communicate through one object: the [design release](contracts/design-release.md).
-
-it is versioned and immutable. changing a design creates a new release instead of mutating the geometry behind an order that already exists. the platform stores a release id, not a live pointer into a creator's current studio session.
+## creator-to-customer flow
 
 ```text
 idea
@@ -101,51 +88,110 @@ studio project
   ↓
 validated design release
   ↓
-listing
+platform listing
   ↓
-priced order
+country eligibility + trusted price
+  ↓
+purchase and settlement record
   ↓
 regional manufacturing route
   ↓
-cast + finish + ship
+cast, finish, insure, and ship
 ```
 
----
+buyers do not operate the design agent. creators do. ordinary listings support guest checkout. commissions later require buyer authentication, a creator conversation, escrow, acceptance rules, and dispute handling before they can become real.
 
 ## repository map
 
 ```text
-systems/
-  studio/       geometry, validation, design-release production
-  platform/     listings, storefronts, discovery, checkout
-  console/      pricing, payouts, shipping, insurance, settlement
-  admin/        review, manufacturer connections, routing, policy
+studio/
+  creators/
+  design-agent/
+  project-model/
+  geometry/
+  validation/
+  releases/
+  virtual-studio/
+
+platform/
+  creators/
+  buyers/
+  discoverability/
+  storefronts/
+  commissions/
+  checkout/
+
+console/
+  creators/
+  buyers/
+  support/
+  reporting/
+
+admin/
+  review/
+  manufacturer-control/
+  routing-control/
+  platform-policy/
+  audit/
+
+manufacturing/
+  materials-supported/
+  routing/
+  manufacturer-layer/
+  quotes/
+  quality/
+  reference/
+  research/
+  schemas/
+  tasks/
+
+operations/
+  financial/
+    purchase/
+    payout/
+    pricing/
+    settlement/
+    refunds/
+  insurance/
+  shipping/
+  legal/
+  compliance/
+  country-rollout/
 
 contracts/
   design-release.md
   design-release.schema.json
-
-docs/
-  architecture/
-  behind-the-scenes/
-    manufacturing/
-      tasks/        research briefs and open checks
-      schemas/      cited manufacturer capability contract
-      adapters/     adapter prototypes, not production credentials
-      reference/    structured, source-bound findings
-      research/     one evidence note per candidate
-    payments/
-
-security/       concrete security findings and their fixes
-migrations/     reviewed database changes, never auto-applied
 ```
+
+## boundaries that do not bend
+
+- only studio generates and validates geometry
+- only platform manages listings, discovery, storefronts, carts, and buyer-facing checkout
+- only operations computes prices, moves money, manages delivery protection, and decides whether a destination is currently supported
+- only manufacturing owns material capability truth, manufacturer adapters, quotes, and route eligibility
+- console presents operational state but does not become the source of truth for it
+- admin changes policy and handles exceptions but does not duplicate domain logic
+- platform and manufacturing communicate through versioned contracts, never shared mutable studio state
+
+## country rollout
+
+country support is deny-by-default. a country is not available merely because a carrier can print a label or a manufacturer says it ships worldwide.
+
+rollout happens in phases:
+
+1. sandbox with no live delivery
+2. one explicitly approved launch market
+3. a small customs-compatible region served by confirmed partners
+4. selected additional country pairs after landed-cost, tax, returns, insurance, and carrier checks
+5. broader coverage only after operational evidence supports it
+
+exact countries stay out of the allowlist until they are deliberately approved. see [`operations/country-rollout`](operations/country-rollout/README.md).
 
 ## current line in the sand
 
-we are consolidating the foundation, not pretending the engine or escrow already exists.
-
-- the studio shell is being separated from commerce before deeper engine work
-- commissions stay visible but muted until login, conversation state, payment hold, acceptance, disputes, and release rules exist together
-- manufacturer candidates stay `drafted` until a human checks the cited evidence; only `accepted` records may enter automatic routing
-- live payouts come after incorporation and use stripe connect unless later evidence changes the decision
-- placeholder manufacturing prices and tolerances never become production facts just because they already exist in code
+- metal-only jewelry at launch, with no supplied stones
+- immutable design releases between studio and platform
+- two-way pricing: fix creator earnings or fix retail price
+- manufacturer research stays `drafted` until checked and accepted
+- commissions remain muted until the whole escrow lifecycle exists
+- no unsupported country silently reaches checkout

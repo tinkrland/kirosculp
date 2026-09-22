@@ -5,8 +5,8 @@ import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
 const root = process.cwd();
-const schemaPath = path.join(root, "docs/behind-the-scenes/manufacturing/schemas/manufacturer-capabilities.schema.json");
-const dataPath = path.join(root, "docs/behind-the-scenes/manufacturing/reference/manufacturer-capabilities.json");
+const schemaPath = path.join(root, "manufacturing/schemas/manufacturer-capabilities.schema.json");
+const dataPath = path.join(root, "manufacturing/reference/manufacturer-capabilities.json");
 const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
 const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
 
@@ -52,4 +52,27 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`validated ${data.manufacturers.length} manufacturer records`);
+const marketsSchemaPath = path.join(root, "operations/country-rollout/markets.schema.json");
+const marketsDataPath = path.join(root, "operations/country-rollout/markets.json");
+const marketsSchema = JSON.parse(fs.readFileSync(marketsSchemaPath, "utf8"));
+const marketsData = JSON.parse(fs.readFileSync(marketsDataPath, "utf8"));
+const validateMarkets = ajv.compile(marketsSchema);
+if (!validateMarkets(marketsData)) {
+  console.error("country rollout schema failed");
+  console.error(validateMarkets.errors);
+  process.exit(1);
+}
+
+const phaseIds = new Set(marketsData.phases.map((phase) => phase.id));
+for (const market of marketsData.markets) {
+  if (!phaseIds.has(market.phase_id)) {
+    console.error(`${market.country_code}: unknown rollout phase ${market.phase_id}`);
+    process.exit(1);
+  }
+  if (market.status === "live" && (!market.capabilities.buyer_checkout || !market.capabilities.delivery)) {
+    console.error(`${market.country_code}: live market must enable buyer checkout and delivery`);
+    process.exit(1);
+  }
+}
+
+console.log(`validated ${data.manufacturers.length} manufacturer records and ${marketsData.markets.length} enabled markets`);

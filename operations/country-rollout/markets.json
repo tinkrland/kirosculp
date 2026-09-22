@@ -1,0 +1,42 @@
+{
+  "policy": "deny_by_default",
+  "schema_version": 1,
+  "phases": [
+    {
+      "id": "phase_0",
+      "name": "sandbox",
+      "status": "active",
+      "live_checkout": false,
+      "description": "test quotes, routing, payments, webhooks, and failures without production delivery"
+    },
+    {
+      "id": "phase_1",
+      "name": "single_launch_market",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "one explicitly approved buyer-delivery market"
+    },
+    {
+      "id": "phase_2",
+      "name": "compatible_region",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "a small set of individually approved countries with compatible operations"
+    },
+    {
+      "id": "phase_3",
+      "name": "selected_country_pairs",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "route-specific expansion based on evidence"
+    },
+    {
+      "id": "phase_4",
+      "name": "broader_availability",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "broader support after earlier phases meet reliability thresholds"
+    }
+  ],
+  "markets": []
+}

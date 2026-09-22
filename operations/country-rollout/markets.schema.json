@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "sculptura country rollout",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy", "schema_version", "phases", "markets"],
+  "properties": {
+    "policy": { "const": "deny_by_default" },
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "status", "live_checkout", "description"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^phase_[0-9]+$" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["planned", "active", "complete", "paused"] },
+          "live_checkout": { "type": "boolean" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "markets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["country_code", "phase_id", "status", "capabilities", "approved_routes", "constraints", "evidence", "approved_by", "approved_at"],
+        "properties": {
+          "country_code": { "type": "string", "pattern": "^[A-Z]{2}$", "description": "ISO 3166-1 alpha-2" },
+          "phase_id": { "type": "string", "pattern": "^phase_[1-9][0-9]*$" },
+          "status": { "type": "string", "enum": ["research", "pilot", "live", "paused"] },
+          "capabilities": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["buyer_checkout", "creator_onboarding", "manufacturing_origin", "delivery", "returns", "insured_shipping"],
+            "properties": {
+              "buyer_checkout": { "type": "boolean" },
+              "creator_onboarding": { "type": "boolean" },
+              "manufacturing_origin": { "type": "boolean" },
+              "delivery": { "type": "boolean" },
+              "returns": { "type": "boolean" },
+              "insured_shipping": { "type": "boolean" }
+            }
+          },
+          "approved_routes": { "type": "array", "items": { "type": "string" } },
+          "constraints": { "type": "array", "items": { "type": "string" } },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "url", "checked_at"],
+              "properties": {
+                "name": { "type": "string" },
+                "url": { "type": "string", "format": "uri" },
+                "checked_at": { "type": "string", "format": "date" }
+              }
+            }
+          },
+          "approved_by": { "type": "string", "minLength": 1 },
+          "approved_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}
