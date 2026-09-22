@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "signup_scope": "provider_supported_jurisdictions",
+  "upfront_full_kyc_intended": false,
+  "provider_requirements_override_product_timing": true,
+  "payout_gate": {
+    "kyc_required_before_release": true,
+    "trigger": "threshold_reached_or_earlier_provider_requirement",
+    "minimums": {
+      "USD": 20,
+      "EUR": 20
+    }
+  },
+  "providers": [
+    {
+      "id": "stripe_connect",
+      "role": "primary",
+      "status": "planned"
+    },
+    {
+      "id": "paypal",
+      "role": "secondary_candidate",
+      "status": "research"
+    },
+    {
+      "id": "razorpay",
+      "role": "regional_candidate",
+      "status": "future_research"
+    }
+  ]
+}

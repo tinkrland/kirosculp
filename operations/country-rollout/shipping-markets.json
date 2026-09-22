@@ -1,0 +1,57 @@
+{
+  "policy": "deny_by_default",
+  "schema_version": 1,
+  "phases": [
+    {
+      "id": "phase_0",
+      "name": "sandbox",
+      "status": "active",
+      "live_checkout": false,
+      "description": "test quotes, routing, payments, webhooks, and failures without production delivery"
+    },
+    {
+      "id": "phase_1",
+      "name": "first_shipping_cohort",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "the first intended delivery cohort, activated country by country after route and compliance checks"
+    },
+    {
+      "id": "phase_2",
+      "name": "researched_expansion",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "candidate countries requiring additional manufacturing, hallmarking, carrier, customs, and consumer research"
+    },
+    {
+      "id": "phase_3",
+      "name": "selected_country_pairs",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "route-specific expansion based on operational evidence"
+    },
+    {
+      "id": "phase_4",
+      "name": "broader_availability",
+      "status": "planned",
+      "live_checkout": true,
+      "description": "broader support after earlier phases meet reliability thresholds"
+    }
+  ],
+  "markets": [
+    { "country_code": "US", "country_name": "United States", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "CA", "country_name": "Canada", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": true, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "GB", "country_name": "United Kingdom", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "AU", "country_name": "Australia", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": true, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "DE", "country_name": "Germany", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "FR", "country_name": "France", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "IT", "country_name": "Italy", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "NL", "country_name": "Netherlands", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "ES", "country_name": "Spain", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "BE", "country_name": "Belgium", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "AT", "country_name": "Austria", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "CH", "country_name": "Switzerland", "phase_id": "phase_1", "status": "planned", "high_ppp_priority": true, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": [], "evidence": [] },
+    { "country_code": "JP", "country_name": "Japan", "phase_id": "phase_2", "status": "research", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": ["additional market, carrier, hallmarking, customs, and returns research required"], "evidence": [] },
+    { "country_code": "KR", "country_name": "South Korea", "phase_id": "phase_2", "status": "research", "high_ppp_priority": false, "capabilities": { "buyer_checkout": false, "delivery": false, "returns": false, "insured_shipping": false }, "approved_routes": [], "constraints": ["additional market, carrier, hallmarking, customs, and returns research required"], "evidence": [] }
+  ]
+}

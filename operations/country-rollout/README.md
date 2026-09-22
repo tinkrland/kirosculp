@@ -1,55 +1,57 @@
 # country rollout
 
-country support is an operational capability, not a marketing setting.
+creator signup geography and physical delivery geography are separate.
 
-## default
+## creator signup
 
-**deny by default.** no live checkout or delivery is available for a destination unless it has an explicit entry in `markets.json` and every required capability is enabled.
+intended scope: creators may sign up wherever the selected connected-payout provider supports the required account type, subject to legal and provider restrictions. full kyc is not intentionally required at signup. it is required before payout release at the configured threshold, or earlier when a provider or legal requirement says so.
 
-an entry is still not enough by itself. checkout also needs an eligible manufacturing route, a current quote, serviceable shipping, required insurance, and the applicable compliance checks.
+see:
 
-## phases
+- [`creator-onboarding.md`](creator-onboarding.md)
+- [`creator-payout-policy.json`](creator-payout-policy.json)
 
-### phase 0: sandbox
+## shipping
 
-no live money and no production delivery. validate releases, quotes, routing, webhooks, and failure handling.
+shipping is deny-by-default. a destination does not become live because a carrier advertises worldwide delivery or a manufacturer says it ships internationally.
 
-### phase 1: one launch market
+### first intended cohort
 
-one deliberately approved country with one or more confirmed manufacturers, carriers, return handling, insurance rules, payout support, and reviewed buyer terms. do not call this global beta.
+- united states
+- canada (high-ppp priority)
+- united kingdom
+- australia (high-ppp priority)
+- germany
+- france
+- italy
+- netherlands
+- spain
+- belgium
+- austria
+- switzerland (high-ppp priority)
 
-### phase 2: a small compatible region
+### research hold
 
-add a small set of countries sharing practical carrier, customs, currency, tax, and consumer-protection handling. every country is still approved individually.
+- japan
+- south korea
 
-### phase 3: selected country pairs
+these are product targets, not live promises. entries begin as `planned` or `research` with delivery capabilities disabled. moving a country to `pilot` or `live` requires cited route, customs, tax, consumer, hallmarking, carrier, insurance, and returns evidence plus a named approval.
 
-expand route by route. a country can be supported as a buyer destination without being supported for creator onboarding or manufacturing origin.
+see:
 
-### phase 4: broader availability
+- [`shipping-markets.json`](shipping-markets.json)
+- [`shipping-markets.schema.json`](shipping-markets.schema.json)
 
-only after delivery success, claim rates, returns, landed-cost accuracy, payout operations, and partner reliability are evidenced in earlier phases.
+## shipping activation sequence
 
-## capabilities are separate
+1. confirm at least one eligible regional manufacturing route
+2. verify material and hallmarking requirements for the article and destination
+3. verify landed-cost, vat/duty, customs-document, and importer handling
+4. verify tracked and insured carrier service plus value limits
+5. establish returns, loss, damage, remake, and refund handling
+6. review destination consumer requirements and buyer terms
+7. approve the route and evidence
+8. enable only the capabilities actually supported
+9. monitor delivery, defect, claim, and landed-cost accuracy
 
-"country supported" is too vague to be useful. each market records these independently:
-
-- buyer checkout
-- creator onboarding and payout
-- manufacturing origin
-- delivery
-- returns
-- insured shipping
-
-this prevents enabling checkout somewhere merely because one carrier happens to deliver there.
-
-## moving a market forward
-
-1. collect route, tax, customs, consumer, shipping, insurance, return, and payout evidence
-2. assign the market to a rollout phase
-3. obtain named approval and date it
-4. enable only the capabilities that were actually approved
-5. monitor operational evidence
-6. pause individual capabilities without deleting historical approval data when conditions change
-
-`markets.json` intentionally starts with no countries enabled. choosing the launch country is a business and legal decision, not something this repository should guess.
+country support can be paused without deleting its historical approval record.

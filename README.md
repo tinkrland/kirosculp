@@ -175,17 +175,13 @@ contracts/
 
 ## country rollout
 
-country support is deny-by-default. a country is not available merely because a carrier can print a label or a manufacturer says it ships worldwide.
+creator signup and shipping have separate geography.
 
-rollout happens in phases:
+creator signup is intended wherever the connected-payout provider supports the required account type, subject to provider and legal restrictions. full kyc is deferred by product intent until payout eligibility at $20 or €20, but provider requirements may trigger it earlier.
 
-1. sandbox with no live delivery
-2. one explicitly approved launch market
-3. a small customs-compatible region served by confirmed partners
-4. selected additional country pairs after landed-cost, tax, returns, insurance, and carrier checks
-5. broader coverage only after operational evidence supports it
+first shipping cohort: united states, canada, united kingdom, australia, germany, france, italy, netherlands, spain, belgium, austria, and switzerland. canada, australia, and switzerland carry a product-planning high-ppp priority flag. japan and south korea remain on research hold.
 
-exact countries stay out of the allowlist until they are deliberately approved. see [`operations/country-rollout`](operations/country-rollout/README.md).
+shipping stays deny-by-default until each country's manufacturing route, hallmarking, customs, tax, carrier, insurance, returns, and consumer requirements are approved. see [`operations/country-rollout`](operations/country-rollout/README.md).
 
 ## current line in the sand
 

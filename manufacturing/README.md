@@ -15,7 +15,8 @@ manufacturing turns an eligible paid order and exact design release into a norma
 - `tasks/`: research briefs and open checks
 - `schemas/`: evidence-bound capability contract
 - `reference/`: structured candidate dataset
-- `research/candidates/`: human-readable evidence notes
+- `research/candidates/`: human-readable partner evidence notes
+- `research/topics/`: cross-partner research such as the Vienna Convention and Common Control Mark
 
 seven candidates were checked with tavily discovery, firecrawl extraction, and an openai evidence pass. every record remains `drafted`, not `accepted`. only accepted records may enter automatic routing.
 

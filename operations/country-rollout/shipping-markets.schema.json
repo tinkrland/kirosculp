@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "sculptura country rollout",
+  "title": "sculptura shipping market rollout",
   "type": "object",
   "additionalProperties": false,
   "required": ["policy", "schema_version", "phases", "markets"],
@@ -28,19 +28,19 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["country_code", "phase_id", "status", "capabilities", "approved_routes", "constraints", "evidence", "approved_by", "approved_at"],
+        "required": ["country_code", "country_name", "phase_id", "status", "high_ppp_priority", "capabilities", "approved_routes", "constraints", "evidence"],
         "properties": {
           "country_code": { "type": "string", "pattern": "^[A-Z]{2}$", "description": "ISO 3166-1 alpha-2" },
+          "country_name": { "type": "string", "minLength": 1 },
           "phase_id": { "type": "string", "pattern": "^phase_[1-9][0-9]*$" },
-          "status": { "type": "string", "enum": ["research", "pilot", "live", "paused"] },
+          "status": { "type": "string", "enum": ["research", "planned", "pilot", "live", "paused"] },
+          "high_ppp_priority": { "type": "boolean", "description": "business-priority marker supplied by product planning, not a computed economic statistic" },
           "capabilities": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["buyer_checkout", "creator_onboarding", "manufacturing_origin", "delivery", "returns", "insured_shipping"],
+            "required": ["buyer_checkout", "delivery", "returns", "insured_shipping"],
             "properties": {
               "buyer_checkout": { "type": "boolean" },
-              "creator_onboarding": { "type": "boolean" },
-              "manufacturing_origin": { "type": "boolean" },
               "delivery": { "type": "boolean" },
               "returns": { "type": "boolean" },
               "insured_shipping": { "type": "boolean" }
@@ -50,7 +50,6 @@
           "constraints": { "type": "array", "items": { "type": "string" } },
           "evidence": {
             "type": "array",
-            "minItems": 1,
             "items": {
               "type": "object",
               "additionalProperties": false,
@@ -64,7 +63,17 @@
           },
           "approved_by": { "type": "string", "minLength": 1 },
           "approved_at": { "type": "string", "format": "date-time" }
-        }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "enum": ["pilot", "live"] } }, "required": ["status"] },
+            "then": { "required": ["approved_by", "approved_at"], "properties": { "evidence": { "minItems": 1 }, "approved_routes": { "minItems": 1 } } }
+          },
+          {
+            "if": { "properties": { "status": { "const": "live" } }, "required": ["status"] },
+            "then": { "properties": { "capabilities": { "properties": { "buyer_checkout": { "const": true }, "delivery": { "const": true } } } } }
+          }
+        ]
       }
     }
   }

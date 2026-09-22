@@ -52,19 +52,34 @@ if (failures.length) {
   process.exit(1);
 }
 
-const marketsSchemaPath = path.join(root, "operations/country-rollout/markets.schema.json");
-const marketsDataPath = path.join(root, "operations/country-rollout/markets.json");
+const marketsSchemaPath = path.join(root, "operations/country-rollout/shipping-markets.schema.json");
+const marketsDataPath = path.join(root, "operations/country-rollout/shipping-markets.json");
 const marketsSchema = JSON.parse(fs.readFileSync(marketsSchemaPath, "utf8"));
 const marketsData = JSON.parse(fs.readFileSync(marketsDataPath, "utf8"));
 const validateMarkets = ajv.compile(marketsSchema);
 if (!validateMarkets(marketsData)) {
-  console.error("country rollout schema failed");
+  console.error("shipping market rollout schema failed");
   console.error(validateMarkets.errors);
   process.exit(1);
 }
 
+const payoutSchema = JSON.parse(fs.readFileSync(path.join(root, "operations/country-rollout/creator-payout-policy.schema.json"), "utf8"));
+const payoutData = JSON.parse(fs.readFileSync(path.join(root, "operations/country-rollout/creator-payout-policy.json"), "utf8"));
+const validatePayout = ajv.compile(payoutSchema);
+if (!validatePayout(payoutData)) {
+  console.error("creator payout policy schema failed");
+  console.error(validatePayout.errors);
+  process.exit(1);
+}
+
 const phaseIds = new Set(marketsData.phases.map((phase) => phase.id));
+const countryCodes = new Set();
 for (const market of marketsData.markets) {
+  if (countryCodes.has(market.country_code)) {
+    console.error(`${market.country_code}: duplicate shipping market`);
+    process.exit(1);
+  }
+  countryCodes.add(market.country_code);
   if (!phaseIds.has(market.phase_id)) {
     console.error(`${market.country_code}: unknown rollout phase ${market.phase_id}`);
     process.exit(1);
@@ -75,4 +90,4 @@ for (const market of marketsData.markets) {
   }
 }
 
-console.log(`validated ${data.manufacturers.length} manufacturer records and ${marketsData.markets.length} enabled markets`);
+console.log(`validated ${data.manufacturers.length} manufacturer records and ${marketsData.markets.length} shipping market records`);
