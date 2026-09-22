@@ -6,11 +6,15 @@ sculptura has four product surfaces and two execution domains. folders are owner
 
 ### studio
 
-creator-only design work. owns the agent, canonical project model, deterministic geometry, castability validation, product renders, and design-release production.
+creator-only design work. owns creator projects, Tessa's constrained intent-to-parameter relay, the canonical project model, ParaCraft's deterministic OpenSCAD compilation, physical design rules, browser WebGL rendering of compiled models, manufacturability validation, product renders, and design-release production.
+
+Tessa is not a geometry subsystem. ParaCraft is the only geometric truth. the WebGL renderer displays ParaCraft output and may not become a separate production geometry source.
 
 ### platform
 
-public and creator-facing offering work. owns listings, storefronts, discoverability, buyer experience, carts, checkout presentation, and future commission intake.
+public and creator-facing offering work. owns listings, storefronts, discoverability, buyer experience, carts, checkout presentation, and commission relationships.
+
+ordinary listings are the default offering path. a creator may later toggle commissions on or off independently. creator signup never opens commissions automatically.
 
 ### console
 
@@ -34,25 +38,34 @@ owns purchases, pricing, creator payouts, settlement, refunds, shipping, insuran
 
 | caller | may depend on | may not do |
 |---|---|---|
-| studio | contracts | read carts, compute retail, select manufacturer |
-| platform | contracts, operations interfaces | generate geometry, write payouts, call partner apis |
-| console | operations read/command interfaces | become a second ledger or shipping database |
-| admin | domain control interfaces and audit reads | copy pricing, routing, or validation logic into ui code |
-| operations | contracts, manufacturing quote/route interfaces | alter geometry or manufacture directly |
-| manufacturing | design-release production assets, accepted capability records | manage listings, charge buyers, pay creators |
+| Tessa | Studio project schema and approved parameter vocabulary | generate OpenSCAD, meshes, validation, prices, or production files |
+| ParaCraft | accepted Studio parameters and versioned physical rules | manage listings, prices, orders, or manufacturer routing |
+| WebGL renderer | compiled ParaCraft model and render metadata | create an independent production model |
+| Studio | contracts | read carts, compute retail, select manufacturer |
+| Platform | contracts, Operations interfaces | generate geometry, write payouts, call partner APIs |
+| Console | Operations read/command interfaces | become a second ledger or shipping database |
+| Admin | domain control interfaces and audit reads | copy pricing, routing, or validation logic into UI code |
+| Operations | contracts, Manufacturing quote/route interfaces | alter geometry or manufacture directly |
+| Manufacturing | design-release production assets, accepted capability records | manage listings, charge buyers, pay creators |
 
 ## canonical objects
 
-- studio project: mutable creative work, studio-only
-- design release: immutable versioned handoff from studio
-- listing: platform offer pointing at one design release
+- Studio project: mutable creative work, Studio-only
+- Tessa proposal: versioned, constrained parameter operations awaiting creator judgment
+- ParaCraft build: deterministic OpenSCAD source, compiled geometry, physical-rule result, and hashes
+- design release: immutable versioned handoff from Studio
+- listing: Platform offer pointing at one design release
 - manufacturing quote: partner- and route-specific, time-bounded
-- price snapshot: operations result attached to listing or purchase
+- price snapshot: Operations result attached to listing or purchase
 - purchase: immutable commercial intent plus state transitions
-- production order: manufacturing request tied to paid purchase and exact release
+- production order: Manufacturing request tied to paid purchase and exact release
 - settlement: append-only allocation of costs, fees, refunds, and creator earnings
 - market capability: country-level operational allowlist entry
 
+## material boundary
+
+sculptura is permanently metal-only. it does not supply or fulfill stones. a possible future empty bezel or prepared setting for a buyer-provided stone remains an explicitly provisional schema extension rather than a current capability or promised roadmap item.
+
 ## country support
 
-availability is computed, not implied. platform asks operations whether the buyer destination is supported. operations checks the explicit country allowlist and required capabilities, then manufacturing confirms an eligible route. either side may deny checkout; neither may broaden support by assumption.
+availability is computed, not implied. Platform asks Operations whether the buyer destination is supported. Operations checks the explicit country allowlist and required capabilities, then Manufacturing confirms an eligible route. either side may deny checkout; neither may broaden support by assumption.

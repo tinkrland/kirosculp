@@ -49,6 +49,8 @@ creating a creator account does not automatically place someone on the homepage.
 
 buyers browse released designs, choose an available material and size, and place an order. an ordinary print-on-demand purchase does not require a buyer account.
 
+if a buyer realizes they want to author a new piece rather than purchase an existing release, sculptura moves them into creator onboarding. they become the creator of a private project and use the Studio under that identity. this is how a passive buyer becomes an active co-designer without giving anonymous checkout direct access to Tessa or ParaCraft.
+
 checkout must re-establish the current production route and trusted price on the server. it cannot trust manufacturing costs, creator earnings, validation claims, or totals supplied by the browser.
 
 ### commissioners
@@ -63,23 +65,23 @@ buyers and commissioners do not operate the studio assistant or geometry engine 
 
 ## making cad approachable without generating mystery geometry
 
-creators may work directly with the studio's structured controls. those controls describe meaningful jewelry choices such as profile, dimensions, thickness, repetition, surface treatment, stone-setting preparation, hardware, material intent, and size behavior.
+creators may work directly with the studio's structured controls. those controls describe meaningful jewelry choices such as profile, dimensions, thickness, repetition, surface treatment, hardware, material intent, and size behavior.
 
 for people who do not want to confront the full learning curve and expense of conventional jewelry cad software, the studio also includes **tessa**.
 
 ### tessa
 
-tessa is a vision-model assistant. she can look at visual references, understand the creator's description, compare relationships in the imagery, and help translate that intent into the studio's allowed parameters.
+tessa is a vision-model assistant, but her architectural role is an intuitive middle layer and operator. she can look at visual references, understand the creator's description, compare relationships in the imagery, and translate that intent into proposed values for the studio's predefined controls.
 
-tessa does not draw the final piece. she does not generate a mesh, emit arbitrary vertices, or create a production file. she cannot bypass the project schema or manufacturing rules.
-
-her role is closer to a constrained handshake. tessa understands the vision and proposes how to tune approved knobs. those parameter changes pass to **paracraft**, the studio's deterministic geometry engine.
+tessa runs the middle leg of a relay. the creator supplies taste and intent. tessa passes constrained numeric parameters forward. she does not draw the piece, generate OpenSCAD, create a mesh, emit vertices, decide castability, or create a production file. she cannot invent a new control or bypass the project schema.
 
 ### paracraft
 
-paracraft is the only component that constructs production geometry. it converts the accepted project parameters into readable openscad instructions and compiles the resulting mesh.
+paracraft is the deterministic compiler framework and the only component that constructs production geometry. OpenSCAD is the engine under its hood. paracraft converts accepted parameters into rigid mathematical code, compiles the model, and owns the physical safety lines, including wall thickness, shrinkage allowances, clearances, minimum features, and process-specific constraints.
 
-the same supported parameters, engine version, and build inputs must produce the same geometry. that makes the result inspectable, reproducible, versionable, and testable. there is no model-generated production geometry to hallucinate. if tessa misunderstands an intention, the error remains a visible parameter proposal that the creator can reject or correct before paracraft builds anything.
+creators see the compiled OpenSCAD model in the browser through a WebGL rendering engine. this interactive rendering is a view of the deterministic build, not a second geometry source.
+
+the same supported parameters, compiler version, rule-set version, and build inputs must produce the same geometry. that makes the result inspectable, reproducible, versionable, and testable. there is no model-generated production geometry to hallucinate. if tessa misunderstands an intention, the mistake remains a visible parameter proposal that the creator can reject or correct before paracraft compiles anything.
 
 ---
 
@@ -194,9 +196,9 @@ partners do not need a sculptura-facing portal. sculptura connects outward throu
 
 ## materials, stones, and hallmarking
 
-launch scope is metal-only jewelry with no supplied stones.
+metal-only jewelry is a permanent product boundary. sculptura does not supply, sell, source, inventory, grade, insure, or fulfill gemstones.
 
-a later release may support an empty bezel or prepared setting for a buyer's own stone. that requires separate measurement tolerances, liability, intake, shipping, setting, and manufacturer rules.
+whether a later release may support an empty bezel or prepared setting for a buyer-provided future stone is deliberately left open. that is a sand-drawn product line, not a promise. supporting it would require separate measurement tolerances, liability, intake, shipping, setting, and manufacturer rules, while sculptura itself would remain metal-only.
 
 precious-metal products can require fineness testing, assay-office involvement, responsibility marks, a common control mark, importer records, and destination-specific consumer information. route eligibility therefore includes hallmarking and precious-metal compliance. no single mark or country grouping is assumed to solve every route.
 
@@ -247,7 +249,7 @@ imagine someone has collected references for a wide silver ring with a folded-ri
 1. they open a creator project and provide the references and description.
 2. tessa identifies likely design relationships and proposes supported parameters.
 3. the creator accepts some suggestions and changes the band width, fold depth, repetition count, ring size, and smooth interior.
-4. paracraft generates the exact openscad model and mesh from the accepted parameters.
+4. paracraft compiles the exact OpenSCAD model, applies the physical rule set, and exposes the result through the browser WebGL renderer.
 5. studio validation checks wall thickness, fragile details, dimensions, volume, estimated mass, and the applicable casting constraints.
 6. the creator revises an area that is too thin.
 7. the design passes and becomes design release version 1.
@@ -271,7 +273,7 @@ sculptura is not:
 - a system where a vision model generates production geometry
 - a marketplace that expects creators to manufacture every order themselves
 - a general-purpose three-dimensional printing service
-- a gemstone marketplace
+- a gemstone supplier, seller, grader, or inventory holder
 - a replacement for a creator's judgment
 - a claim that every route, metal, or manufacturer works from day one
 - a commission form released without authentication, payment protection, and dispute rules

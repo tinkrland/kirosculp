@@ -25,9 +25,11 @@ the creator remains the author. sculptura removes technical and operational barr
 
 creators can work directly with the studio controls, but they do not have to master conventional cad software first.
 
-**tessa** is the studio's vision-model assistant. tessa looks at references, listens to the creator's description, and helps identify the dimensions, profiles, repetitions, relationships, and other parameters that express the creator's intent.
+**tessa** is the studio's intuitive middle layer and operator for **paracraft**. she looks at references, listens to the creator's description, and translates natural human language into proposed values for predefined dimensions, profiles, repetitions, relationships, and other allowed controls.
 
-tessa does not generate geometry, meshes, or production files. her output is a constrained handoff to **paracraft**, the deterministic geometry engine. in practical terms, tessa understands the vision and tunes approved knobs; paracraft constructs the result. the production path therefore contains no model-invented geometry. every accepted change is inspectable, bounded, reproducible, and subject to manufacturing validation.
+tessa does not generate geometry, meshes, OpenSCAD, or production files. she runs the middle leg of a relay: creator intent enters, constrained numeric parameters leave, and paracraft takes the baton. paracraft is the deterministic compiler framework, built on OpenSCAD, that constructs the model and enforces the unyielding physical rules such as wall thickness, shrinkage, clearances, and process limits. tessa can turn approved knobs; she cannot invent new ones or cross a safety line.
+
+creators see the resulting OpenSCAD model in the browser through the WebGL rendering layer. the rendered view is an interface to deterministic geometry, not a separate model guessed by the assistant.
 
 ## the shape of the system
 
@@ -53,9 +55,9 @@ flowchart LR
 
     subgraph studio[studio]
       direction TB
-      tessa[tessa: vision to parameters]
+      tessa[tessa: intent to allowed parameters]
       project[canonical project model]
-      paracraft[paracraft: deterministic geometry]
+      paracraft[paracraft: openscad compiler + physical rules]
       validation[castability validation]
       tessa --> project --> paracraft --> validation
     end
@@ -190,13 +192,26 @@ operations/
 contracts/
   design-release.md
   design-release.schema.json
+
+venture/
+  thesis/
+  product/
+  architecture/
+  moat/
+  economics/
+  go-to-market/
+  risks/
 ```
+
+## venture thesis
+
+[`venture/`](venture/README.md) explains the problem, five participant perspectives, asset-light operating model, digital-glue architecture, defensibility, creator flywheel, and the claims that still need proof. it keeps investor language separate from implementation truth while grounding both in the same system boundaries.
 
 ## boundaries that do not bend
 
 - only studio generates and validates geometry
 - tessa may interpret intent and propose constrained parameters, but never generates production geometry
-- only paracraft turns approved parameters into geometry
+- only paracraft turns approved parameters into OpenSCAD geometry and enforces physical design rules
 - only platform manages listings, discovery, storefronts, carts, and buyer-facing checkout
 - only operations computes trusted prices, moves money, manages delivery protection, and decides whether a route is available
 - only manufacturing owns material capability truth, manufacturer adapters, quotes, and route eligibility
@@ -210,7 +225,8 @@ market availability, creator onboarding, shipping clusters, hallmarking, customs
 
 ## current line in the sand
 
-- metal-only jewelry at launch, with no supplied stones
+- metal-only jewelry is permanent scope, with no supplied stones
+- empty bezels or prepared settings for a buyer-provided future stone are intentionally undecided, not promised architecture
 - immutable design releases between studio and platform
 - two-way pricing: fix creator earnings or fix retail price
 - manufacturer evidence remains drafted until checked and accepted

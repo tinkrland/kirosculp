@@ -4,7 +4,9 @@
 sequenceDiagram
     actor Creator
     actor Buyer
-    participant Studio
+    participant Tessa
+    participant ParaCraft
+    participant WebGL
     participant Platform
     participant Operations
     participant Manufacturing
@@ -12,10 +14,16 @@ sequenceDiagram
     participant Console
     participant Partner as Casting partner
 
-    Creator->>Studio: describe and refine piece
-    Studio->>Studio: generate geometry and validate
-    Studio-->>Platform: immutable design release
-    Creator->>Platform: publish release
+    Creator->>Tessa: intent, language, and references
+    Tessa-->>Creator: bounded parameter proposal
+    Creator->>ParaCraft: accept or adjust parameters
+    ParaCraft->>ParaCraft: compile OpenSCAD and enforce physical rules
+    ParaCraft-->>WebGL: deterministic compiled model
+    WebGL-->>Creator: interactive browser render
+    Creator->>ParaCraft: approve release candidate
+    ParaCraft->>ParaCraft: validate and create immutable release
+    ParaCraft-->>Platform: immutable design release
+    Creator->>Platform: publish ordinary listing
     Platform->>Operations: request destination eligibility and price
     Operations->>Manufacturing: request eligible route and quote
     Manufacturing-->>Operations: normalized route quote
@@ -33,6 +41,18 @@ sequenceDiagram
     Admin-->>Manufacturing: partner activation or route intervention
 ```
 
-## commissions later
+## optional commission progression
 
-commissioning adds an authenticated brief and an escrow lifecycle before release, but keeps the same ownership. the commissioner gives requirements to a creator. the creator uses studio. studio emits the release. platform owns the conversation surface; operations owns escrow, acceptance, cancellation, and dispute state.
+commissioning is not the entry point and is never enabled by creator signup.
+
+1. a person becomes a creator
+2. the creator develops private Studio projects
+3. passing work becomes design releases
+4. the creator publishes ordinary made-to-order listings
+5. the creator may later toggle commissions on
+6. authenticated commissioners submit briefs to that creator
+7. the creator remains the only person operating Tessa and ParaCraft
+8. the commission uses the same release, pricing, payment-protection, manufacturing, and fulfillment boundaries
+9. the creator may pause new commissions without removing ordinary listings
+
+Platform owns the authenticated conversation surface. Operations owns escrow or milestone protection, acceptance, cancellation, and dispute state. Studio still emits the exact release.

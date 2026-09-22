@@ -51,8 +51,9 @@ passing a front-end build does not prove that checkout, commissions, admin autho
 ### studio limitations
 
 - there is no Tessa implementation
-- there is no ParaCraft service or package boundary
+- the product contract identifies ParaCraft as a deterministic OpenSCAD compiler framework and WebGL as the in-browser model renderer, but the audited snapshot has no explicit ParaCraft service or package boundary
 - OpenSCAD generation is ring-focused rather than a canonical compiler for every supported project type
+- the source contains a WebGL/Three.js viewport, but the audited code does not yet prove that every displayed model comes from the same OpenSCAD compile used for validation and production
 - geometry state is an unversioned browser object, not a schema-validated project aggregate
 - no immutable design release is created
 - no trusted manufacturability service runs before publishing

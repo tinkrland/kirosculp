@@ -14,6 +14,10 @@ const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
 const validate = ajv.compile(schema);
 
+const designReleaseSchemaPath = path.join(root, "contracts/design-release.schema.json");
+const designReleaseSchema = JSON.parse(fs.readFileSync(designReleaseSchemaPath, "utf8"));
+ajv.compile(designReleaseSchema);
+
 if (!validate(data)) {
   console.error("manufacturer capability schema failed");
   console.error(validate.errors);
@@ -94,4 +98,4 @@ for (const market of marketsData.markets) {
   }
 }
 
-console.log(`validated ${data.manufacturers.length} manufacturer records and ${marketsData.markets.length} shipping market records`);
+console.log(`validated the design-release schema, ${data.manufacturers.length} manufacturer records, and ${marketsData.markets.length} shipping market records`);

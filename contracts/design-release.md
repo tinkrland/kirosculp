@@ -15,7 +15,7 @@ a creator can keep editing after a piece is listed. an order must still point to
 - stable design id and unique release id
 - monotonically increasing version
 - creator id and creation time
-- engine version and deterministic parameter hash
+- ParaCraft version, OpenSCAD compiler version, physical-rule-set version, and deterministic parameter hash
 - canonical parameters
 - openscad, mesh, and render assets
 - offered metals and sizes
@@ -28,6 +28,8 @@ prices do not belong in this object. they are regional and time-sensitive. conso
 
 platform may create a listing only when `castability.passed` is `true`. platform does not rerun or override studio validation. an exceptional override belongs to admin, must be logged, and still does not change the original release record.
 
-## future stone preparation
+## metal and stone boundary
 
-launch is metal-only. the schema permits a `bring_your_own_stone` block, but currently constrains `supported` to `false` and `bezel_spec` to `null`. a future schema version can add an empty-bezel contract without pretending stone sourcing or setting exists today.
+metal-only is permanent scope. sculptura does not source, sell, grade, inventory, insure, or fulfill stones.
+
+the current schema constrains `bring_your_own_stone.supported` to `false` and `bezel_spec` to `null`. whether a later schema may describe an empty bezel or prepared setting for a buyer-provided future stone is intentionally undecided. that remains a provisional extension, not a product promise, and it would not change sculptura's metal-only responsibility.
