@@ -39,13 +39,14 @@ the working hypothesis is that multiple target markets participate in or recogni
 | switzerland | first cohort, high-ppp priority | research | research | research |
 | sweden | first cohort, high-ppp priority | research | research | research |
 | denmark | first cohort, high-ppp priority | research | research | research |
-| ireland | first cohort, internal freebie candidate | research | research | research |
-| new zealand | first cohort, internal freebie candidate | research | research | research |
+| ireland | first cohort | research | research | research |
+| new zealand | first cohort | research | research | research |
 | japan | regional casting research hold | research | research | research |
 | south korea | regional casting research hold | research | research | research |
 | singapore | regional casting research hold | research | research | research |
 | united arab emirates | regional casting research hold | research | research | research |
 | norway | regional casting research hold, high-ppp priority, non-EU | research | research | research |
+| israel | possible v3 candidate | research | research | research |
 
 ## citation rule
 

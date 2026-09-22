@@ -31,10 +31,9 @@ shipping is deny-by-default. a destination does not become live because a carrie
 - switzerland (high-ppp priority)
 - sweden (high-ppp priority)
 - denmark (high-ppp priority)
-- ireland (internal freebie candidate)
-- new zealand (internal freebie candidate)
+- ireland
+- new zealand
 
-`freebie candidate` is an internal rollout-planning tag. it does not promise a free product, free shipping, waived fees, or automatic launch readiness.
 
 ### regional casting research hold
 
@@ -43,6 +42,10 @@ shipping is deny-by-default. a destination does not become live because a carrie
 - singapore
 - united arab emirates
 - norway (high-ppp priority and outside the eu)
+
+### possible v3 candidate
+
+- israel (Middle East cluster; Convention contracting state, but still requires a separately approved route)
 
 these markets become more practical when sculptura has suitable distributed casting zones near them. until then, they remain research-only and require route, hallmarking, carrier, customs, tax, insurance, returns, and consumer review.
 

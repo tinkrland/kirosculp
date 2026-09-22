@@ -54,7 +54,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -72,7 +71,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -90,7 +88,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -108,7 +105,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -126,7 +122,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -144,7 +139,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -162,7 +156,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -180,7 +173,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -198,7 +190,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -216,7 +207,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -234,7 +224,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -252,7 +241,6 @@
       "approved_routes": [],
       "constraints": [],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": false
     },
     {
@@ -261,7 +249,6 @@
       "phase_id": "phase_1",
       "status": "planned",
       "high_ppp_priority": true,
-      "freebie_candidate": false,
       "regional_casting_zone_required": false,
       "capabilities": {
         "buyer_checkout": false,
@@ -279,7 +266,6 @@
       "phase_id": "phase_1",
       "status": "planned",
       "high_ppp_priority": true,
-      "freebie_candidate": false,
       "regional_casting_zone_required": false,
       "capabilities": {
         "buyer_checkout": false,
@@ -297,7 +283,6 @@
       "phase_id": "phase_1",
       "status": "planned",
       "high_ppp_priority": false,
-      "freebie_candidate": true,
       "regional_casting_zone_required": false,
       "capabilities": {
         "buyer_checkout": false,
@@ -315,7 +300,6 @@
       "phase_id": "phase_1",
       "status": "planned",
       "high_ppp_priority": false,
-      "freebie_candidate": true,
       "regional_casting_zone_required": false,
       "capabilities": {
         "buyer_checkout": false,
@@ -345,7 +329,6 @@
         "additional market, carrier, hallmarking, customs, and returns research required"
       ],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": true
     },
     {
@@ -366,7 +349,6 @@
         "additional market, carrier, hallmarking, customs, and returns research required"
       ],
       "evidence": [],
-      "freebie_candidate": false,
       "regional_casting_zone_required": true
     },
     {
@@ -375,7 +357,6 @@
       "phase_id": "phase_2",
       "status": "research",
       "high_ppp_priority": false,
-      "freebie_candidate": false,
       "regional_casting_zone_required": true,
       "capabilities": {
         "buyer_checkout": false,
@@ -395,7 +376,6 @@
       "phase_id": "phase_2",
       "status": "research",
       "high_ppp_priority": false,
-      "freebie_candidate": false,
       "regional_casting_zone_required": true,
       "capabilities": {
         "buyer_checkout": false,
@@ -415,7 +395,6 @@
       "phase_id": "phase_2",
       "status": "research",
       "high_ppp_priority": true,
-      "freebie_candidate": false,
       "regional_casting_zone_required": true,
       "capabilities": {
         "buyer_checkout": false,
@@ -426,6 +405,25 @@
       "approved_routes": [],
       "constraints": [
         "non-EU destination; regional distributed casting zone plus market, carrier, hallmarking, customs, tax, insurance, and returns research required"
+      ],
+      "evidence": []
+    },
+    {
+      "country_code": "IL",
+      "country_name": "Israel",
+      "phase_id": "phase_3",
+      "status": "research",
+      "high_ppp_priority": false,
+      "regional_casting_zone_required": true,
+      "capabilities": {
+        "buyer_checkout": false,
+        "delivery": false,
+        "returns": false,
+        "insured_shipping": false
+      },
+      "approved_routes": [],
+      "constraints": [
+        "possible v3 Middle East candidate; regional casting, security, carrier, customs, tax, hallmarking, insurance, returns, and consumer research required"
       ],
       "evidence": []
     }

@@ -71,7 +71,6 @@
           "approved_routes",
           "constraints",
           "evidence",
-          "freebie_candidate",
           "regional_casting_zone_required"
         ],
         "properties": {
@@ -170,10 +169,6 @@
           "approved_at": {
             "type": "string",
             "format": "date-time"
-          },
-          "freebie_candidate": {
-            "type": "boolean",
-            "description": "internal rollout-planning tag only; it does not promise free shipping, fees, products, or service"
           },
           "regional_casting_zone_required": {
             "type": "boolean",
