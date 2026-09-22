@@ -1,0 +1,437 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "manufacturer-capabilities",
+  "description": "one entry per candidate manufacturing partner. this is the file the validator and the admin routing config import directly. per research.md section 2: a rule or field without a source fails schema validation at build time. this schema encodes that as a hard requirement, not a convention.",
+  "type": "object",
+  "required": [
+    "manufacturers"
+  ],
+  "properties": {
+    "manufacturers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/manufacturer"
+      }
+    }
+  },
+  "definitions": {
+    "source": {
+      "type": "object",
+      "required": [
+        "ref",
+        "name",
+        "url",
+        "date_retrieved",
+        "excerpt_basis"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "e.g. 'sculpteo api docs', 'shapeways developer portal', 'call with cooksongold sales, 2026-09-11'"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "date_retrieved": {
+          "type": "string",
+          "format": "date"
+        },
+        "excerpt_basis": {
+          "type": "string",
+          "description": "what specifically was taken from this source, in your own words. not a quote."
+        },
+        "ref": {
+          "type": "string",
+          "pattern": "^s[0-9]+$"
+        }
+      }
+    },
+    "manufacturer": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "website",
+        "status",
+        "process_fit",
+        "api",
+        "file_requirements",
+        "sources",
+        "review_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "slug, e.g. 'sculpteo', 'shapeways', 'cooksongold'"
+        },
+        "name": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        },
+        "parent_company": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "e.g. '3d prod group', 'manuevo bv' -- ownership matters for continuity risk"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "operational",
+            "operational_recently_restructured",
+            "uncertain",
+            "defunct"
+          ],
+          "description": "flag continuity risk explicitly. do not assume a company that had an api five years ago still does."
+        },
+        "regions_served": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "process_fit": {
+          "type": "object",
+          "description": "track a's process is castable-resin print -> lost wax casting in precious metal. this section exists to prevent assuming a general am bureau supports it.",
+          "required": [
+            "supports_precious_metal_lost_wax_casting",
+            "processes_offered"
+          ],
+          "properties": {
+            "supports_precious_metal_lost_wax_casting": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "the single most important field in this file. verify, do not infer from 'they do jewelry-adjacent 3d printing'."
+            },
+            "processes_offered": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "process",
+                  "materials",
+                  "source_ref"
+                ],
+                "properties": {
+                  "process": {
+                    "type": "string",
+                    "description": "e.g. 'castable resin sla/dlp', 'lost wax casting', 'binder jet metal', 'direct metal sls'"
+                  },
+                  "materials": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "min_wall_thickness_mm": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "min_feature_size_mm": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "max_part_size_mm": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "x": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "y": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "z": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "typical_tolerance_mm": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "source_ref": {
+                    "type": "string",
+                    "description": "index into sources array below"
+                  }
+                }
+              }
+            },
+            "stone_setting_service": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "byo_stone_supported": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "will they set a stone we shipped them, per research.md 3.2 byo-stone tolerances"
+            }
+          }
+        },
+        "api": {
+          "type": "object",
+          "required": [
+            "has_public_api",
+            "self_serve"
+          ],
+          "properties": {
+            "has_public_api": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "self_serve": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "can an order actually be placed without a manual sales conversation first? sculpteo's invoice-payment order endpoint required contacting them first as of 2026 research -- verify current state."
+            },
+            "docs_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri"
+            },
+            "base_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "auth_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "oauth2",
+                "api_key",
+                "none",
+                "unknown"
+              ]
+            },
+            "endpoints": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "upload": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "quote": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "status": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "materials_catalog": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "webhook_support": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "webhook_notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "client_libraries": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "file_requirements": {
+          "type": "object",
+          "properties": {
+            "accepted_formats": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "max_file_size_mb": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "required_metadata": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "units_expected": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "pricing": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "quote_method": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "instant_api",
+                "manual_quote",
+                "hybrid",
+                "unknown",
+                null
+              ]
+            },
+            "currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "minimum_order": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typical_turnaround_days": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "onboarding": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "requires_manual_setup": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "steps": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "contact": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/source"
+          }
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "drafted",
+            "cited",
+            "accepted"
+          ],
+          "description": "matches the research/index.md status convention. only 'accepted' entries should be read by the admin routing config."
+        }
+      }
+    }
+  }
+}

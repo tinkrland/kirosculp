@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/design-release.schema.json",
+  "title": "design release",
+  "description": "immutable versioned handoff from studio to platform",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["release_id", "design_id", "version", "creator_id", "created_at", "engine", "type", "parameters", "assets", "metals_offered", "sizing", "castability", "mass_estimate_g"],
+  "properties": {
+    "release_id": { "type": "string", "format": "uuid" },
+    "design_id": { "type": "string", "format": "uuid" },
+    "version": { "type": "integer", "minimum": 1 },
+    "creator_id": { "type": "string", "format": "uuid" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "parameter_hash"],
+      "properties": {
+        "name": { "type": "string", "const": "paracraft-jewelry" },
+        "version": { "type": "string", "minLength": 1 },
+        "parameter_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "type": { "type": "string", "enum": ["ring", "earring", "bracelet", "brooch", "pendant", "other"] },
+    "parameters": { "type": "object" },
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["openscad_source_uri", "mesh_uri", "render_uris"],
+      "properties": {
+        "openscad_source_uri": { "type": "string", "format": "uri-reference" },
+        "mesh_uri": { "type": "string", "format": "uri-reference" },
+        "render_uris": { "type": "array", "items": { "type": "string", "format": "uri-reference" } }
+      }
+    },
+    "metals_offered": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "enum": ["silver_925", "brass", "bronze", "gold_14k_yellow", "gold_14k_white", "gold_14k_rose", "gold_18k_yellow", "gold_18k_white", "gold_18k_rose"] }
+    },
+    "sizing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["size_type", "sizes_offered"],
+      "properties": {
+        "size_type": { "type": "string", "enum": ["unisize", "us_ring_size", "s_m_l", "custom"] },
+        "sizes_offered": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "castability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "checked_at", "ruleset_version", "issues"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "checked_at": { "type": "string", "format": "date-time" },
+        "ruleset_version": { "type": "string", "minLength": 1 },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "severity", "message"],
+            "properties": {
+              "code": { "type": "string" },
+              "severity": { "type": "string", "enum": ["warning", "error"] },
+              "message": { "type": "string" },
+              "geometry_ref": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "mass_estimate_g": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "number", "exclusiveMinimum": 0 }
+    },
+    "bring_your_own_stone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported", "bezel_spec"],
+      "properties": {
+        "supported": { "const": false },
+        "bezel_spec": { "type": "null" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "castability": { "properties": { "passed": { "const": true } } } } },
+      "then": { "properties": { "castability": { "properties": { "issues": { "not": { "contains": { "properties": { "severity": { "const": "error" } }, "required": ["severity"] } } } } } }
+    }
+  ]
+}

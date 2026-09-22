@@ -1,0 +1,735 @@
+{
+  "manufacturers": [
+    {
+      "id": "sculpteo",
+      "name": "Sculpteo",
+      "website": "https://www.sculpteo.com/en/",
+      "parent_company": null,
+      "status": "operational",
+      "regions_served": [],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": true,
+        "processes_offered": [
+          {
+            "process": "lost wax casting",
+            "materials": [
+              "bronze",
+              "brass",
+              "silver"
+            ],
+            "min_wall_thickness_mm": null,
+            "min_feature_size_mm": null,
+            "max_part_size_mm": null,
+            "typical_tolerance_mm": null,
+            "source_ref": "s1"
+          }
+        ],
+        "stone_setting_service": null,
+        "byo_stone_supported": null
+      },
+      "api": {
+        "has_public_api": true,
+        "self_serve": false,
+        "docs_url": "https://www.sculpteo.com/en/developer/webapi/",
+        "base_url": "https://www.sculpteo.com/en/api/",
+        "auth_type": "api_key",
+        "endpoints": {
+          "upload": "https://www.sculpteo.com/en/developer/webapi/upload/",
+          "quote": "https://www.sculpteo.com/en/developer/webapi/order/price/",
+          "order": "https://www.sculpteo.com/en/api/store/3D/order/",
+          "status": "https://www.sculpteo.com/shop/tracking/reference/<reference>",
+          "materials_catalog": "https://www.sculpteo.com/en/developer/webapi/query/materials/"
+        },
+        "webhook_support": true,
+        "webhook_notes": "Supports notification_url parameter for order status change notifications via POST",
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [
+          "40+ file formats supported (exact list not specified)"
+        ],
+        "max_file_size_mb": null,
+        "required_metadata": [],
+        "units_expected": null
+      },
+      "pricing": {
+        "quote_method": "instant_api",
+        "currency": null,
+        "minimum_order": "no minimum order quantity",
+        "typical_turnaround_days": null,
+        "notes": "Instant API quoting is documented. Production API ordering requires Sculpteo to manually enable invoice payment on the account, so onboarding is not fully self-serve."
+      },
+      "onboarding": {
+        "requires_manual_setup": true,
+        "steps": [
+          "Create free account on Sculpteo website",
+          "Upload 3D files",
+          "Select material, technology, and post-processing options",
+          "Place order online or via API",
+          "Contact Sculpteo for invoice payment API access and custom packing slip setup"
+        ],
+        "contact": "https://www.sculpteo.com/en/contact/"
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "Metal 3D Printing Service \u2013 Strong & Precise Metal Parts",
+          "url": "https://www.sculpteo.com/en/services/metal-3d-printing-service",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Sculpteo offers lost wax casting (investment casting) using wax models created by 3D printing, available in bronze, brass, and silver, for jewelry and artistic creations, combining 3D printing with lost wax casting to produce custom rings, bracelets, and pendants."
+        },
+        {
+          "ref": "s2",
+          "name": "Sculpteo API \u2013 Automate Your 3D Printing Workflow",
+          "url": "https://www.sculpteo.com/en/services/api-services",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Sculpteo provides a public API with features for file upload, configuration, instant quoting, ordering, and order tracking, designed for integration with ERP, CRM, and other platforms, with authentication and secure HTTPS connections."
+        },
+        {
+          "ref": "s3",
+          "name": "Ordering designs via API - Sculpteo",
+          "url": "https://www.sculpteo.com/en/developer/webapi/order/order",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "The order API endpoint allows placing 3D printing orders with shipment details, supports invoice payment after manual account setup, and provides order status tracking URLs."
+        },
+        {
+          "ref": "s4",
+          "name": "WebAPI documentation - Sculpteo",
+          "url": "https://www.sculpteo.com/en/developer/webapi",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Sculpteo API documentation details endpoints for uploading designs, querying materials, managing orders, and creating parametric designs."
+        }
+      ],
+      "review_status": "drafted"
+    },
+    {
+      "id": "shapeways",
+      "name": "Shapeways",
+      "website": "https://www.shapeways.com",
+      "parent_company": null,
+      "status": "operational",
+      "regions_served": [],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": true,
+        "processes_offered": [
+          {
+            "process": "lost wax casting",
+            "materials": [
+              "Gold (14K, 18K, yellow, white, rose)",
+              "Platinum (95% Platinum, 5% Ruthenium)",
+              "Silver (Sterling Silver 92.5%)",
+              "Tin Brass (copper alloy with zinc and tin)",
+              "Tin Bronze (copper-tin alloy)",
+              "Copper"
+            ],
+            "min_wall_thickness_mm": null,
+            "min_feature_size_mm": null,
+            "max_part_size_mm": {
+              "x": 89,
+              "y": 89,
+              "z": 100
+            },
+            "typical_tolerance_mm": null,
+            "source_ref": "s1"
+          }
+        ],
+        "stone_setting_service": null,
+        "byo_stone_supported": null
+      },
+      "api": {
+        "has_public_api": true,
+        "self_serve": null,
+        "docs_url": "https://developers.shapeways.com",
+        "base_url": null,
+        "auth_type": "unknown",
+        "endpoints": {
+          "upload": null,
+          "quote": null,
+          "order": null,
+          "status": null,
+          "materials_catalog": null
+        },
+        "webhook_support": null,
+        "webhook_notes": null,
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [],
+        "max_file_size_mb": null,
+        "required_metadata": [],
+        "units_expected": null
+      },
+      "pricing": {
+        "quote_method": "manual_quote",
+        "currency": null,
+        "minimum_order": null,
+        "typical_turnaround_days": null,
+        "notes": "Quotes are provided via a quote system; no instant API quote evidence found."
+      },
+      "onboarding": {
+        "requires_manual_setup": null,
+        "steps": [],
+        "contact": null
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "3D Print Lost Wax Casting - Shapeways",
+          "url": "https://www.shapeways.com/3d-print-material-technology/lost-wax-casting",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Shapeways offers lost wax casting using 3D printed wax patterns for precious metals including Gold, Platinum, Silver, Tin Brass, Tin Bronze, and Copper with specified bounding box sizes; the process includes 3D printing wax patterns, investment casting, and post-processing such as polishing and plating."
+        },
+        {
+          "ref": "s2",
+          "name": "3D Print Lost Wax Casting - Shapeways",
+          "url": "https://shapeways.com/3d-print-material-technology/wax-casting",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Confirms the use of 3D printed wax patterns for lost wax casting with precious metals and details on materials and bounding box sizes."
+        },
+        {
+          "ref": "s5",
+          "name": "3D Print Lost Wax Casting - Material for 3D Printing Molds - Shapeways",
+          "url": "https://www.shapeways.com/blog/3d-print-lost-wax-casting-materials-molds",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Describes 3D printing of molds and wax patterns for lost wax casting, emphasizing the use of 3D printing to create wax patterns for investment casting of precious metals."
+        },
+        {
+          "ref": "s7",
+          "name": "Shapeways provides API for developers",
+          "url": "https://3druck.com/en/suppliers-distributors/shapeways-provides-api-for-developers-589336",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Shapeways offers a public API for developers with documentation at developers.shapeways.com."
+        }
+      ],
+      "review_status": "drafted"
+    },
+    {
+      "id": "i-materialise",
+      "name": "i.materialise",
+      "website": "https://www.materialise.com",
+      "parent_company": "Materialise",
+      "status": "operational",
+      "regions_served": [],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": true,
+        "processes_offered": [
+          {
+            "process": "lost-wax casting",
+            "materials": [
+              "gold",
+              "silver",
+              "bronze",
+              "brass",
+              "copper"
+            ],
+            "min_wall_thickness_mm": 0.6,
+            "min_feature_size_mm": 0.35,
+            "max_part_size_mm": {
+              "x": 88,
+              "y": 88,
+              "z": 125
+            },
+            "typical_tolerance_mm": 0.35,
+            "source_ref": "s2"
+          }
+        ],
+        "stone_setting_service": null,
+        "byo_stone_supported": null
+      },
+      "api": {
+        "has_public_api": null,
+        "self_serve": null,
+        "docs_url": null,
+        "base_url": null,
+        "auth_type": "unknown",
+        "endpoints": {
+          "upload": null,
+          "quote": null,
+          "order": null,
+          "status": null,
+          "materials_catalog": null
+        },
+        "webhook_support": null,
+        "webhook_notes": null,
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [
+          "STL",
+          "3DS",
+          "3DM",
+          "OBJ",
+          "WRL",
+          "MATPART",
+          "STP",
+          "SKP",
+          "SLDPRT",
+          "STEP",
+          "CATPART",
+          "IGES",
+          "MODEL",
+          "MXP",
+          "MGX"
+        ],
+        "max_file_size_mb": null,
+        "required_metadata": [
+          "one model per part"
+        ],
+        "units_expected": null
+      },
+      "pricing": {
+        "quote_method": "unknown",
+        "currency": null,
+        "minimum_order": null,
+        "typical_turnaround_days": null,
+        "notes": "Standard accuracy \u00b15% with a lower limit of \u00b10.15 mm or \u00b10.35 mm depending on material."
+      },
+      "onboarding": {
+        "requires_manual_setup": null,
+        "steps": [],
+        "contact": "Talk to our team via https://www.materialise.com/en/industrial/3d-printing-technologies/lost-wax-casting"
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "Design Guidelines for Gold | Lost-Wax Casting",
+          "url": "https://www.materialise.com/en/academy/industrial/design-am/gold",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Technical specifications for gold lost-wax casting including minimum wall thickness 0.8 mm, minimum detail size 0.35 mm, max part size 88x88x125 mm."
+        },
+        {
+          "ref": "s2",
+          "name": "Lost-Wax Casting (LWC) Manufacturing Services",
+          "url": "https://www.materialise.com/en/industrial/3d-printing-technologies/lost-wax-casting",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Materialise offers lost-wax casting services in precious metals including gold and silver, with max build dimensions 88x88x125 mm, minimum wall thickness 0.6-0.8 mm, and standard accuracy \u00b15% with lower limit \u00b10.15 or \u00b10.35 mm."
+        }
+      ],
+      "review_status": "drafted"
+    },
+    {
+      "id": "cooksongold",
+      "name": "Cooksongold",
+      "website": "https://www.cooksongold.com/",
+      "parent_company": "Heimerle + Meule Group",
+      "status": "operational",
+      "regions_served": [
+        "United Kingdom",
+        "Europe",
+        "Over 70 countries worldwide"
+      ],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": true,
+        "processes_offered": [
+          {
+            "process": "investment casting (lost wax casting) from 3D printed wax patterns",
+            "materials": [
+              "9ct Yellow Gold",
+              "9ct Red Gold",
+              "9ct White Gold",
+              "18ct Yellow Gold",
+              "18ct White Gold",
+              "18ct Red Gold",
+              "Sterling Silver",
+              "100% recycled gold",
+              "100% recycled silver"
+            ],
+            "min_wall_thickness_mm": 0.5,
+            "min_feature_size_mm": 0.3,
+            "max_part_size_mm": {
+              "x": 30,
+              "y": 50,
+              "z": 70
+            },
+            "typical_tolerance_mm": null,
+            "source_ref": "s1"
+          }
+        ],
+        "stone_setting_service": null,
+        "byo_stone_supported": null
+      },
+      "api": {
+        "has_public_api": null,
+        "self_serve": null,
+        "docs_url": null,
+        "base_url": null,
+        "auth_type": "unknown",
+        "endpoints": {
+          "upload": null,
+          "quote": null,
+          "order": null,
+          "status": null,
+          "materials_catalog": null
+        },
+        "webhook_support": null,
+        "webhook_notes": null,
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [
+          "STL",
+          "3DS",
+          "3DM",
+          "OBJ",
+          "WRL",
+          "MATPART",
+          "STP",
+          "SKP",
+          "SLDPRT",
+          "STEP",
+          "CATPART",
+          "IGES",
+          "MODEL",
+          "MXP",
+          "MGX"
+        ],
+        "max_file_size_mb": 50,
+        "required_metadata": [
+          "watertight/closed model",
+          "correct normals",
+          "manifold geometry",
+          "single shell per file",
+          "boolean unioned parts"
+        ],
+        "units_expected": "millimeters"
+      },
+      "pricing": {
+        "quote_method": "manual_quote",
+        "currency": "GBP",
+        "minimum_order": null,
+        "typical_turnaround_days": 10,
+        "notes": "Lead time varies between 10-13 working days depending on polishing preference."
+      },
+      "onboarding": {
+        "requires_manual_setup": null,
+        "steps": [],
+        "contact": "info@cooksongold.com"
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "Precious Metal Casting Design Guidelines",
+          "url": "https://www.cooksongold.com/precious-metal-casting/design-guidelines",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Confirms use of 3D printed wax patterns for lost wax casting in precious metals including gold and silver, minimum wall thickness advice (0.5-0.8mm), maximum part size (30x50x70mm), file requirements (watertight, manifold, no sprues), and polishing/finishing details."
+        },
+        {
+          "ref": "s2",
+          "name": "Precious Metal Casting | Cooksongold",
+          "url": "https://cooksongold.com/precious-metal-casting",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Describes the process: CAD design uploaded, 3D printed wax model, tree casting method, investment casting with precious metals including recycled gold and silver, polishing and hallmarking services, and typical turnaround of 10 working days."
+        },
+        {
+          "ref": "s5",
+          "name": "About Us - Cooksongold Additive Manufacturing",
+          "url": "https://www.cooksongold-am.com/about-us",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Establishes Cooksongold as part of Heimerle + Meule Group, a major European precious metals processor with operations in multiple countries."
+        },
+        {
+          "ref": "s4",
+          "name": "Customisation Services | Personalise Your Designs at Cooksongold",
+          "url": "https://www.cooksongold.com/customisation",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Confirms customisation services including precious metal casting from uploaded or library designs, use of 100% recycled gold and silver, and online ordering portals."
+        }
+      ],
+      "review_status": "drafted"
+    },
+    {
+      "id": "stuller",
+      "name": "Stuller",
+      "website": "https://www.stuller.com",
+      "parent_company": null,
+      "status": "operational",
+      "regions_served": [],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": true,
+        "processes_offered": [
+          {
+            "process": "investment/lost-wax casting",
+            "materials": [
+              "precious metals"
+            ],
+            "min_wall_thickness_mm": 0.5,
+            "min_feature_size_mm": 0.15,
+            "max_part_size_mm": null,
+            "typical_tolerance_mm": null,
+            "source_ref": "s2"
+          }
+        ],
+        "stone_setting_service": true,
+        "byo_stone_supported": true
+      },
+      "api": {
+        "has_public_api": true,
+        "self_serve": null,
+        "docs_url": "https://www.stuller.com/services/e-commerce-business/api-documentation",
+        "base_url": "https://api.stuller.com",
+        "auth_type": "unknown",
+        "endpoints": {
+          "upload": null,
+          "quote": null,
+          "order": "/order",
+          "status": "/order/status",
+          "materials_catalog": "/product"
+        },
+        "webhook_support": null,
+        "webhook_notes": null,
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [
+          "3dm",
+          "STL"
+        ],
+        "max_file_size_mb": null,
+        "required_metadata": [
+          "all stones must remain in the file or provide all stone sizes"
+        ],
+        "units_expected": null
+      },
+      "pricing": {
+        "quote_method": "manual_quote",
+        "currency": "USD",
+        "minimum_order": null,
+        "typical_turnaround_days": null,
+        "notes": "Public APIs cover products, orders, invoices, and status, but the reviewed sources do not establish that custom casting file upload and quoting are exposed through those APIs."
+      },
+      "onboarding": {
+        "requires_manual_setup": null,
+        "steps": [],
+        "contact": null
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "STULLER PRODUCTION STANDARDS Preferred File Types",
+          "url": "http://stuller.scene7.com/is/content/Stuller/DAS/09b4e2e2-e12e-45f8-a2ed-a4f80104aa9f.pdf",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Specifies minimum wall thicknesses (0.5mm), minimum feature sizes (0.15mm pilot holes), file formats accepted (3dm, STL), and stone setting design guidelines."
+        },
+        {
+          "ref": "s2",
+          "name": "Casting | Stuller",
+          "url": "https://www.stuller.com/video/watch/53943",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Describes lost-wax casting process using wax patterns, investment plaster, burnout, and casting in precious metals."
+        },
+        {
+          "ref": "s3",
+          "name": "API Documentation and Examples - Stuller's API Service | Stuller",
+          "url": "https://www.stuller.com/services/e-commerce-business/api-documentation",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Documents REST API endpoints for product data, orders, and status; supports order transmission and status checking."
+        },
+        {
+          "ref": "s4",
+          "name": "Stuller Web API Help Page",
+          "url": "https://api.stuller.com/help",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Confirms Product, Gem, Order, and Invoice APIs with real-time pricing and customization capabilities."
+        }
+      ],
+      "review_status": "drafted"
+    },
+    {
+      "id": "rio-grande",
+      "name": "Rio Grande",
+      "website": "https://www.riogrande.com",
+      "parent_company": null,
+      "status": "operational",
+      "regions_served": [],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": null,
+        "processes_offered": [
+          {
+            "process": "investment casting",
+            "materials": [],
+            "min_wall_thickness_mm": null,
+            "min_feature_size_mm": null,
+            "max_part_size_mm": null,
+            "typical_tolerance_mm": null,
+            "source_ref": "s1"
+          }
+        ],
+        "stone_setting_service": null,
+        "byo_stone_supported": null
+      },
+      "api": {
+        "has_public_api": null,
+        "self_serve": null,
+        "docs_url": null,
+        "base_url": null,
+        "auth_type": "unknown",
+        "endpoints": {
+          "upload": null,
+          "quote": null,
+          "order": null,
+          "status": null,
+          "materials_catalog": null
+        },
+        "webhook_support": null,
+        "webhook_notes": null,
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [],
+        "max_file_size_mb": null,
+        "required_metadata": [],
+        "units_expected": null
+      },
+      "pricing": {
+        "quote_method": "manual_quote",
+        "currency": null,
+        "minimum_order": "$5,000 per order",
+        "typical_turnaround_days": null,
+        "notes": "Low minimum order value for customization services; no direct evidence of instant quoting or pricing details."
+      },
+      "onboarding": {
+        "requires_manual_setup": true,
+        "steps": [
+          "Submit design or concept with files, images, or specifications",
+          "Review quote and timeline"
+        ],
+        "contact": null
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "Jewelry Mold & Model Making Supplies | RTV, Wax & Casting",
+          "url": "https://www.riogrande.com/category/tools-and-equipment/mold--model-making",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Rio Grande offers wax and casting materials for jewelry mold and model making, indicating support for investment casting supplies."
+        },
+        {
+          "ref": "s3",
+          "name": "Customization Services",
+          "url": "https://www.riogrande.com/services/customization",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Rio Grande provides customization services with file submission and quoting, with a minimum order of $5,000."
+        }
+      ],
+      "review_status": "drafted"
+    },
+    {
+      "id": "xometry",
+      "name": "Xometry",
+      "website": "https://www.xometry.com",
+      "parent_company": null,
+      "status": "operational",
+      "regions_served": [],
+      "process_fit": {
+        "supports_precious_metal_lost_wax_casting": null,
+        "processes_offered": [
+          {
+            "process": "investment casting (general service/process evidence only)",
+            "materials": [],
+            "min_wall_thickness_mm": null,
+            "min_feature_size_mm": null,
+            "max_part_size_mm": null,
+            "typical_tolerance_mm": null,
+            "source_ref": "s1"
+          }
+        ],
+        "stone_setting_service": null,
+        "byo_stone_supported": null
+      },
+      "api": {
+        "has_public_api": true,
+        "self_serve": null,
+        "docs_url": "https://www.xometry.com/how-xometry-works/request-a-quote",
+        "base_url": null,
+        "auth_type": "unknown",
+        "endpoints": {
+          "upload": null,
+          "quote": null,
+          "order": null,
+          "status": null,
+          "materials_catalog": null
+        },
+        "webhook_support": null,
+        "webhook_notes": null,
+        "client_libraries": []
+      },
+      "file_requirements": {
+        "accepted_formats": [
+          "CAD",
+          "STL",
+          "3DS",
+          "3DM",
+          "OBJ",
+          "WRL",
+          "MATPART",
+          "STP",
+          "SKP",
+          "SLDPRT",
+          "STEP",
+          "CATPART",
+          "IGES",
+          "MODEL",
+          "MXP",
+          "MGX"
+        ],
+        "max_file_size_mb": null,
+        "required_metadata": [
+          "manufacturing details such as processes, materials, and quantities",
+          "certification, restrictions (e.g. ITAR), and inspection requirements",
+          "shipping address and delivery schedule",
+          "contact information for technical and sales questions"
+        ],
+        "units_expected": "unknown"
+      },
+      "pricing": {
+        "quote_method": "hybrid",
+        "currency": "USD",
+        "minimum_order": null,
+        "typical_turnaround_days": 2,
+        "notes": "Xometry documents investment casting and online CAD quoting generally. The reviewed sources do not prove a precious-metal jewelry casting route or a public API for that route."
+      },
+      "onboarding": {
+        "requires_manual_setup": true,
+        "steps": [
+          "Create an account on Xometry platform",
+          "Upload CAD and related files",
+          "Provide project details including materials, quantities, certifications",
+          "Submit quote request",
+          "Receive quote and place order"
+        ],
+        "contact": "hello@xometry.com"
+      },
+      "sources": [
+        {
+          "ref": "s1",
+          "name": "Investment Casting: Definition, How It Works, Advantages, and Examples | Xometry",
+          "url": "https://www.xometry.com/resources/casting/investment-casting",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Xometry describes investment casting (lost wax) as a precision casting process used in jewelry and other industries, detailing the process steps and materials used."
+        },
+        {
+          "ref": "s2",
+          "name": "Request A Quote With Xometry | Custom Manufacturing Services",
+          "url": "https://xometry.com/how-xometry-works/request-a-quote",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Xometry offers both instant and manual quote requests via a secure platform, supporting upload of CAD and project files for complex manufacturing projects."
+        },
+        {
+          "ref": "s4",
+          "name": "Xometry | Manufacturing On-Demand for Production Orders",
+          "url": "https://xometry.com/xometry-enterprise/production-quotes",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Xometry supports bulk upload and manual quoting for production orders, with a quoting team reviewing complex projects."
+        },
+        {
+          "ref": "s5",
+          "name": "Get Started With Xometry | Custom Manufacturing on Demand",
+          "url": "https://www.xometry.com/get-started",
+          "date_retrieved": "2026-09-22",
+          "excerpt_basis": "Xometry's process includes uploading CAD files, instant quoting, order review, production by vetted partners, and shipping."
+        }
+      ],
+      "review_status": "drafted"
+    }
+  ]
+}

@@ -1,72 +1,151 @@
-# sculptura-foundation
+# sculptura
 
-> the boundary contract between the studio, the platform, the console, and the admin control tower — written before any more engine code, so the four systems stop leaking into each other.
+> a way to turn the piece of jewelry someone can already see in their head into something manufacturable, sellable, and real.
 
-## why this exists
+## what is this
 
-right now there are two live repos (`sculptura` and `sculptura.dev`) plus a third referenced but not yet built (`paracraft-jewelry`, ported from keeberia's cad engine). they grew fast, shell by shell, in the normal way things grow when you're figuring out the product as you build it. that's fine. that's how this stuff always starts.
+sculptura is ai-assisted cadding for people who already have the taste and the idea. the creator talks through what they mean, the studio turns that into deterministic parametric geometry, and the rest of the system gets it validated, listed, sold, routed, cast, and shipped.
 
-but a few things happened as a side effect of that speed:
+buyers do not use the design agent. creators do. a buyer can purchase a finished listing without an account; the later commission flow lets a logged-in buyer bring references and a messy brief to a creator, who uses the studio to do the actual design work.
 
-- financial logic (payouts, margins, wallet balances) is scattered across the same files as storefront customization.
-- the admin control tower assumes a single shared password instead of the role system that's already sitting right there in the database (`user_roles`, `has_role()` — it's built, just not wired to admin).
-- a market account's payout details and access-key hash are readable by anyone who queries the table, because the read policy is `using (true)`.
-- commissions have a full intake form and a database table, but no escrow, no payment hold, and no login gate — despite the plan requiring both before it ships for real.
+metal only. no supplied stones. an empty bezel for a buyer's own stone may happen later, but it is not part of the launch surface.
 
-none of this is a crisis. it's just what happens before someone draws the lines. this repo draws the lines.
+---
 
-## the four systems
+## why four sides
 
-sculptura is not one app pretending to be simple. it is four systems that happen to share a brand and, in places, share data:
+because geometry, storefronts, money, and operations are different jobs, and putting them in one cheerful folder is how everything eventually learns too much about everything else.
 
-```text
-studio      — turns intent into a manufacturable design
-             (paracraft-jewelry engine, agent conversation, castability validation)
-             creators only. buyers and commissioners never touch it directly.
+```mermaid
+flowchart LR
+    creator[creator with an idea] --> studio
 
-platform    — turns a design into something buyable
-             (listings, storefronts, discovery, cart, checkout, commission intake)
-             buyers need no account. commissioners will, once escrow exists.
+    subgraph studio[studio]
+      direction TB
+      intent[conversation + references]
+      model[canonical design model]
+      geometry[openscad + mesh]
+      validation[castability validation]
+      intent --> model --> geometry --> validation
+    end
 
-console     — turns a sale into money that actually lands somewhere
-             (pricing math, payouts, margins, wallet balances, coupons, shipping)
-             this is the part that has to be right, not just working.
+    validation -->|immutable design release| platform
 
-admin       — the control tower that operates all three
-             (manufacturer connections, order routing, review queue, platform settings)
-             sees everything. changes routing and defaults. does not do the studio's job.
+    subgraph platform[platform]
+      direction TB
+      listing[listing + storefront]
+      discovery[discovery + white-label channels]
+      checkout[cart + checkout]
+      listing --> discovery --> checkout
+    end
+
+    checkout -->|priced order| console
+
+    subgraph console[console]
+      direction TB
+      pricing[two-way pricing]
+      money[payments + creator payouts]
+      protection[shipping + insurance + refunds]
+      pricing --> money --> protection
+    end
+
+    console -->|paid production order| routing
+
+    subgraph admin[admin]
+      direction TB
+      review[release review]
+      partners[manufacturer connections]
+      routing[regional routing]
+      policy[platform policy + overrides]
+      review --> policy
+      partners --> routing
+      policy --> routing
+    end
+
+    routing --> manufacturer[casting partner]
+    manufacturer --> customer[customer]
+
+    admin -. operates .-> studio
+    admin -. operates .-> platform
+    admin -. operates .-> console
 ```
 
-the rule that matters most: **studio only produces designs. platform only sells them. console only moves money. admin only operates the machine.** none of the four should contain another's job, even a small piece of it, even temporarily.
+### studio
 
-## the interface between studio and platform: the design release
+the creative side. it owns the agent conversation, project model, geometry generation, openscad source, mesh compilation, mass estimation, and manufacturing validation. its output is a versioned **design release**. it knows nothing about carts, payouts, coupons, or orders.
 
-a studio design and a platform listing are not the same object, and treating them as one is most of why the boundary blurs. the interface between them is a **design release** — a versioned, immutable snapshot the studio hands to the platform once a design passes validation.
+### platform
 
-see [`docs/design-release.md`](docs/design-release.md) for the full shape. short version: the platform never reads studio internals (parameters, scad source, engine version). it only ever reads a design release, and it can only list a design release that has `castability.passed = true`.
+the offering side. it owns listings, shops, discovery, white-label storefronts, connected sales channels, carts, checkout, buyer accounts, and the future commission intake. it can only list a design release that passed studio validation. it never generates or validates geometry.
 
-## what's in this repo
+### console
+
+the practical money-and-delivery side creators need after they publish. it owns manufacturing cost snapshots, the two-way pricing model, platform fees, creator earnings, payouts, coupons, shipping, insurance, refunds, and settlement records. the platform displays its numbers; it does not recalculate them.
+
+### admin
+
+the control tower. it owns review queues, manufacturer adapters, regional routing rules, platform settings, operational overrides, and audit trails. manufacturers plug into sculptura through adapters and apis. they do not need their own sculptura-facing portal.
+
+---
+
+## the seam that keeps this sane
+
+studio and platform communicate through one object: the [design release](contracts/design-release.md).
+
+it is versioned and immutable. changing a design creates a new release instead of mutating the geometry behind an order that already exists. the platform stores a release id, not a live pointer into a creator's current studio session.
 
 ```text
+idea
+  ↓
+studio project
+  ↓
+validated design release
+  ↓
+listing
+  ↓
+priced order
+  ↓
+regional manufacturing route
+  ↓
+cast + finish + ship
+```
+
+---
+
+## repository map
+
+```text
+systems/
+  studio/       geometry, validation, design-release production
+  platform/     listings, storefronts, discovery, checkout
+  console/      pricing, payouts, shipping, insurance, settlement
+  admin/        review, manufacturer connections, routing, policy
+
+contracts/
+  design-release.md
+  design-release.schema.json
+
 docs/
-  architecture.md       full boundary map — every file in both existing repos,
-                         sorted into studio / platform / console / admin, plus
-                         what's genuinely shared and what's just leftover.
-  design-release.md      the versioned object between studio and platform.
-  security-fixes.md      the two real vulnerabilities found in sculptura.dev,
-                          with the exact fix for each.
-  payouts.md              paddle vs stripe, and why the answer is stripe connect.
-shells/
-  commissions-muted/     the disabled commissions tab — visible, honest about
-                          what's coming, wired to nothing yet.
-migrations/
-  0001_admin_roles_and_market_account_privacy.sql
-                          fixes the two flagged issues. not applied automatically —
-                          review it, then run it against the sculptura.dev project.
+  architecture/
+  behind-the-scenes/
+    manufacturing/
+      tasks/        research briefs and open checks
+      schemas/      cited manufacturer capability contract
+      adapters/     adapter prototypes, not production credentials
+      reference/    structured, source-bound findings
+      research/     one evidence note per candidate
+    payments/
+
+security/       concrete security findings and their fixes
+migrations/     reviewed database changes, never auto-applied
 ```
 
-## what this repo is not
+## current line in the sand
 
-it's not the engine. paracraft-jewelry isn't built here. no geometry, no openscad generation, no castability validator. that work is real and it's next, but it needs the primitive vocabulary and research spine from `sculptura.dev/AGENTS.md` and `research.md` done properly first, in that repo, not bolted on here.
+we are consolidating the foundation, not pretending the engine or escrow already exists.
 
-it's also not a rewrite. every existing page in `sculptura` and `sculptura.dev` stays where it is. this repo says which existing files belong to which system, fixes two concrete security holes, and adds one honest placeholder for commissions. that's the whole scope, on purpose.
+- the studio shell is being separated from commerce before deeper engine work
+- commissions stay visible but muted until login, conversation state, payment hold, acceptance, disputes, and release rules exist together
+- manufacturer candidates stay `drafted` until a human checks the cited evidence; only `accepted` records may enter automatic routing
+- live payouts come after incorporation and use stripe connect unless later evidence changes the decision
+- placeholder manufacturing prices and tolerances never become production facts just because they already exist in code

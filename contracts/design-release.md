@@ -1,0 +1,33 @@
+# the design release
+
+studio and platform do not share mutable internal state. the studio does not know what a listing, coupon, or payout is. the platform does not know how an openscad parameter, wall-thickness rule, or engine worker operates.
+
+what crosses the boundary is a **design release**: a versioned, immutable snapshot produced after validation.
+
+## why immutable
+
+a creator can keep editing after a piece is listed. an order must still point to the exact geometry the customer bought, even while the studio project moves on to version seven. edits therefore create a new release; they never mutate an existing one. updating a listing to a newer release is a deliberate platform action.
+
+## contract
+
+[`design-release.schema.json`](design-release.schema.json) is authoritative. at minimum, every release identifies:
+
+- stable design id and unique release id
+- monotonically increasing version
+- creator id and creation time
+- engine version and deterministic parameter hash
+- canonical parameters
+- openscad, mesh, and render assets
+- offered metals and sizes
+- versioned castability result
+- mass estimate by offered metal
+
+prices do not belong in this object. they are regional and time-sensitive. console combines the release's mass estimate with a current manufacturing quote, platform fees, payment costs, shipping policy, and the creator's pricing mode.
+
+## publication invariant
+
+platform may create a listing only when `castability.passed` is `true`. platform does not rerun or override studio validation. an exceptional override belongs to admin, must be logged, and still does not change the original release record.
+
+## future stone preparation
+
+launch is metal-only. the schema permits a `bring_your_own_stone` block, but currently constrains `supported` to `false` and `bezel_spec` to `null`. a future schema version can add an empty-bezel contract without pretending stone sourcing or setting exists today.
