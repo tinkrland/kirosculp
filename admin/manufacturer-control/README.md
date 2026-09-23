@@ -1,22 +1,22 @@
-# Admin: manufacturer control
+# admin: manufacturer control
 
-Partner activation, credential references, adapter health, capability review state, and operational suspension. Secrets never live in manufacturer reference data.
+partner activation, credential references, adapter health, capability review state, and operational suspension. secrets never live in manufacturer reference data.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: shell**
+**status: shell**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura.dev/src/pages/admin/AdminManufacturers.jsx`
-- Manufacturer migration
+- manufacturer migration
 
-### What exists now
+### what exists now
 
-- Operators can edit manufacturer metadata and a default flag. No adapter health, credential test, capability approval, or production connection exists.
+- operators can edit manufacturer metadata and a default flag. no adapter health, credential test, capability approval, or production connection exists.
 
-### Required changes
+### required changes
 
-- Connect controls to manufacturer onboarding, evidence review, secret references, adapter tests, health, suspension, and versioned capabilities.
+- connect controls to manufacturer onboarding, evidence review, secret references, adapter tests, health, suspension, and versioned capabilities.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

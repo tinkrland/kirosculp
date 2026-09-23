@@ -1,4 +1,4 @@
-# End-to-end flow
+# end-to-end flow
 
 ```mermaid
 sequenceDiagram
@@ -44,18 +44,18 @@ sequenceDiagram
     Admin-->>Manufacturing: partner activation or route intervention
 ```
 
-## Optional commission progression
+## optional commission progression
 
-Commissioning is not the entry point and is never enabled by creator signup.
+commissioning is not the entry point and is never enabled by creator signup.
 
-1. A person becomes a creator
-2. The creator develops private Studio projects
-3. Passing work becomes design releases
-4. The creator publishes ordinary made-to-order listings
-5. The creator may later toggle commissions on
-6. Authenticated commissioners submit briefs to that creator
-7. The creator remains the only person operating Tessa and ParaCraft
-8. The commission uses the same release, pricing, payment-protection, manufacturing, and fulfillment boundaries
-9. The creator may pause new commissions without removing ordinary listings
+1. a person becomes a creator
+2. the creator develops private studio projects
+3. passing work becomes design releases
+4. the creator publishes ordinary made-to-order listings
+5. the creator may later toggle commissions on
+6. authenticated commissioners submit briefs to that creator
+7. the creator remains the only person operating tessa and paracraft
+8. the commission uses the same release, pricing, payment-protection, manufacturing, and fulfillment boundaries
+9. the creator may pause new commissions without removing ordinary listings
 
-Platform owns the authenticated conversation surface. Operations owns payment or milestone protection (not automatically legal escrow), acceptance, cancellation, and dispute state. Studio still emits the exact release.
+platform owns the authenticated conversation surface. operations owns payment or milestone protection (not automatically legal escrow), acceptance, cancellation, and dispute state. studio still emits the exact release.

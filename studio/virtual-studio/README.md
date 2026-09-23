@@ -1,12 +1,12 @@
-# Studio: virtual studio
+# studio: virtual studio
 
-A deterministic 3D scene with a parameterized hand, jewelry attachment points, camera, lighting, and environment. Product renders come from saved scene state, not image generation.
+a deterministic 3d scene with a parameterized hand, jewelry attachment points, camera, lighting, and environment. product renders come from saved scene state, not image generation.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: partial**
+**status: partial**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura/src/pages/studio/BuildPage.jsx`
 - `TemplatesPage.jsx`
@@ -17,14 +17,14 @@ A deterministic 3D scene with a parameterized hand, jewelry attachment points, c
 - `CodePage.jsx`
 - `sculptura/src/pages/CanvasDesigner.jsx`
 
-### What exists now
+### what exists now
 
-- The routed studio surface and much of the intended interaction language exist. Several pages are alternative or earlier paths rather than one coherent project lifecycle.
+- the routed studio surface and much of the intended interaction language exist. several pages are alternative or earlier paths rather than one coherent project lifecycle.
 
-### Required changes
+### required changes
 
-- Consolidate the routes around one project model and ParaCraft build.
-- Keep educational previews distinct from production validation.
-- Connect every page to revision and release state rather than copied local state.
+- consolidate the routes around one project model and paracraft build.
+- keep educational previews distinct from production validation.
+- connect every page to revision and release state rather than copied local state.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

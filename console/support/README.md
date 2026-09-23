@@ -1,22 +1,22 @@
-# Console: support
+# console: support
 
-Case presentation and communication for order, delivery, payment, and claim problems. Support actions call the owning operations workflow instead of directly rewriting financial or shipping state.
+case presentation and communication for order, delivery, payment, and claim problems. support actions call the owning operations workflow instead of directly rewriting financial or shipping state.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: missing**
+**status: missing**
 
-### Existing source evidence
+### existing source evidence
 
-- No ticket, conversation, case, service-level, claim, or support-assignment implementation was found.
+- no ticket, conversation, case, service-level, claim, or support-assignment implementation was found.
 
-### What exists now
+### what exists now
 
-- The product has messages and explanatory pages, but no support system.
+- the product has messages and explanatory pages, but no support system.
 
-### Required changes
+### required changes
 
-- Create support cases linked to buyer, creator, order, production, delivery, refund, and commission records.
-- Add ownership, priority, timelines, evidence, escalation, and audit history.
+- create support cases linked to buyer, creator, order, production, delivery, refund, and commission records.
+- add ownership, priority, timelines, evidence, escalation, and audit history.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

@@ -1,25 +1,25 @@
-# Console: buyers
+# console: buyers
 
-Buyer views over operations: receipts, tracking, delivery state, insurance or claim progress, refunds, and commission payment state when commissions exist.
+buyer views over operations: receipts, tracking, delivery state, insurance or claim progress, refunds, and commission payment state when commissions exist.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: partial**
+**status: partial**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura.dev/src/pages/BuyerDashboard.jsx`
 - `sculptura.dev/src/pages/SharedList.jsx`
 - `sculptura.dev/src/lib/followStore.js`
 - `sculptura.dev/src/lib/wishlistStore.js`
 
-### What exists now
+### what exists now
 
-- Order history, follows, lists, wishlists, and recommendations are represented, but persistence and identity differ by feature.
+- order history, follows, lists, wishlists, and recommendations are represented, but persistence and identity differ by feature.
 
-### Required changes
+### required changes
 
-- Unify buyer identity and privacy rules.
-- Add delivery, cancellation, refund, claim, commission, and support views backed by operational records.
+- unify buyer identity and privacy rules.
+- add delivery, cancellation, refund, claim, commission, and support views backed by operational records.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

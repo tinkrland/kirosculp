@@ -3,17 +3,17 @@ title: security remediation
 summary: verified authentication, authorization, privacy, and database-policy findings from the complete sculptura.dev source audit.
 ---
 
-# Security remediation
+# security remediation
 
-## Status
+## status
 
-**Critical remediation is required before production use.**
+**critical remediation is required before production use.**
 
-This page describes the supplied source snapshots. A migration or proposed patch in this foundation is not proof that a live database has been repaired.
+this page describes the supplied source snapshots. a migration or proposed patch in this foundation is not proof that a live database has been repaired.
 
-## Verified findings
+## verified findings
 
-### Client-side universal admin password
+### client-side universal admin password
 
 `sculptura.dev/src/components/admin/AdminLayout.jsx` contains:
 
@@ -21,87 +21,87 @@ This page describes the supplied source snapshots. A migration or proposed patch
 const ADMIN_PASSWORD = "Password";
 ```
 
-The value is shipped in browser JavaScript. Successful comparison only writes `sculptura_admin_unlocked=1` to session storage. This is a visual gate, not authentication or authorization.
+the value is shipped in browser javascript. successful comparison only writes `sculptura_admin_unlocked=1` to session storage. this is a visual gate, not authentication or authorization.
 
-**Required fix:** remove the password gate. Require a Supabase session, verify the user's admin role through a backend-enforced role check, and let RLS or a privileged server operation reject every unauthorized admin read and write.
+**required fix:** remove the password gate. require a supabase session, verify the user's admin role through a backend-enforced role check, and let rls or a privileged server operation reject every unauthorized admin read and write.
 
-### Public market-account records expose private columns
+### public market-account records expose private columns
 
-An original migration applies public select access to `market_accounts`, whose rows include storefront fields alongside `access_key_hash`, payout details, account email, and other private configuration.
+an original migration applies public select access to `market_accounts`, whose rows include storefront fields alongside `access_key_hash`, payout details, account email, and other private configuration.
 
-**Required fix:** expose only approved storefront fields through a public-safe view or dedicated public table. Keep authentication, payout, account, and internal configuration in private tables. No public query should be able to select an access-key hash or payout destination.
+**required fix:** expose only approved storefront fields through a public-safe view or dedicated public table. keep authentication, payout, account, and internal configuration in private tables. no public query should be able to select an access-key hash or payout destination.
 
-### Legacy open market-account updates
+### legacy open market-account updates
 
-An original policy allows broad update access to `market_accounts`. A later edge function verifies an access key for controlled updates, but cumulative policy state must be verified and the open policy removed.
+an original policy allows broad update access to `market_accounts`. a later edge function verifies an access key for controlled updates, but cumulative policy state must be verified and the open policy removed.
 
-**Required fix:** permit owner changes only through a narrowly validated authenticated or server-side path. Status, role, payout, access, review, and policy fields require separate authorization.
+**required fix:** permit owner changes only through a narrowly validated authenticated or server-side path. status, role, payout, access, review, and policy fields require separate authorization.
 
-### Anonymous and publicly readable commission requests
+### anonymous and publicly readable commission requests
 
-`commission_requests` was introduced with anonymous insert and public read policies. That conflicts with the product rule that commissioners must have buyer accounts, and it exposes private briefs and contact data.
+`commission_requests` was introduced with anonymous insert and public read policies. that conflicts with the product rule that commissioners must have buyer accounts, and it exposes private briefs and contact data.
 
-**Required fix:** require `auth.uid()` for request creation, store `commissioner_user_id`, permit the commissioner, assigned creator, and authorized operators to read the request, and remove every public-read or anonymous-write policy.
+**required fix:** require `auth.uid()` for request creation, store `commissioner_user_id`, permit the commissioner, assigned creator, and authorized operators to read the request, and remove every public-read or anonymous-write policy.
 
-### Guest-order policy and private order access
+### guest-order policy and private order access
 
-Guest checkout is a valid product requirement, but open table insertion is not the right implementation. The `place-order` edge function also creates rows without charging a payment method.
+guest checkout is a valid product requirement, but open table insertion is not the right implementation. the `place-order` edge function also creates rows without charging a payment method.
 
-**Required fix:** allow guests to call a rate-limited, idempotent server purchase operation. Keep direct order-table insert unavailable to anonymous clients. Private reads require authenticated ownership, a securely scoped guest-order access mechanism, assigned creator access where appropriate, or an admin role. Email equality alone must not grant order access.
+**required fix:** allow guests to call a rate-limited, idempotent server purchase operation. keep direct order-table insert unavailable to anonymous clients. private reads require authenticated ownership, a securely scoped guest-order access mechanism, assigned creator access where appropriate, or an admin role. email equality alone must not grant order access.
 
-### Open admin idea notebook
+### open admin idea notebook
 
-The `admin_ideas` migration permits open read, insert, update, and delete.
+the `admin_ideas` migration permits open read, insert, update, and delete.
 
-**Required fix:** restrict every operation to authenticated admins. If public idea submission is ever wanted, use a separate intake endpoint and table with rate limiting and moderation.
+**required fix:** restrict every operation to authenticated admins. if public idea submission is ever wanted, use a separate intake endpoint and table with rate limiting and moderation.
 
-### Permissive storage and collection policies
+### permissive storage and collection policies
 
-Several migrations contain `using (true)` or `with check (true)` policies. Some are intentional public-read surfaces, while others are too broad or operate on tables containing private fields.
+several migrations contain `using (true)` or `with check (true)` policies. some are intentional public-read surfaces, while others are too broad or operate on tables containing private fields.
 
-**Required fix:** review cumulative policy state table by table. Public reads must use public-safe projections and explicit publication state. Writes require ownership, role checks, object-path checks, allowed-field validation, and abuse controls.
+**required fix:** review cumulative policy state table by table. public reads must use public-safe projections and explicit publication state. writes require ownership, role checks, object-path checks, allowed-field validation, and abuse controls.
 
-### Service-role edge functions trust too many client fields
+### service-role edge functions trust too many client fields
 
-`publish-artifact` verifies a creator access key and forces `pending_review`, but accepts client-provided manufacturing costs, creator earnings, prices, model URLs, and other production claims before inserting with the service role.
+`publish-artifact` verifies a creator access key and forces `pending_review`, but accepts client-provided manufacturing costs, creator earnings, prices, model urls, and other production claims before inserting with the service role.
 
 `store-update` uses a field allowlist, but the allowed set still includes payout details and sensitive operational fields.
 
-**Required fix:** service-role functions must validate both caller authority and field provenance. Production geometry, validation, manufacturing cost, pricing, payout configuration, and release identity come from their owning trusted services, not creator browser payloads.
+**required fix:** service-role functions must validate both caller authority and field provenance. production geometry, validation, manufacturing cost, pricing, payout configuration, and release identity come from their owning trusted services, not creator browser payloads.
 
-### No abuse, audit, or idempotency layer
+### no abuse, audit, or idempotency layer
 
-Public forms and mutations do not show a complete rate-limit, bot-defense, idempotency, privileged-action audit, or replay-protection design.
+public forms and mutations do not show a complete rate-limit, bot-defense, idempotency, privileged-action audit, or replay-protection design.
 
-**Required fix:** add server-enforced limits, request identifiers, idempotency keys, append-only admin audit events, security telemetry, and regression tests for every sensitive policy.
+**required fix:** add server-enforced limits, request identifiers, idempotency keys, append-only admin audit events, security telemetry, and regression tests for every sensitive policy.
 
-## Remediation artifacts in this foundation
+## remediation artifacts in this foundation
 
-`migrations/0001_admin_roles_and_market_account_privacy.sql` is an early draft that addresses public market-account reads and documents admin-role setup. It is incomplete. It does not repair commission requests, guest-order insertion, admin ideas, every permissive policy, service-role provenance, or the client admin component.
+`migrations/0001_admin_roles_and_market_account_privacy.sql` is an early draft that addresses public market-account reads and documents admin-role setup. it is incomplete. it does not repair commission requests, guest-order insertion, admin ideas, every permissive policy, service-role provenance, or the client admin component.
 
-Before deployment, replace it with a cumulative migration tested against the complete migration history. Tests must cover anonymous, authenticated buyer, commissioner, creator, admin, and service-role behavior for every table and storage bucket.
+before deployment, replace it with a cumulative migration tested against the complete migration history. tests must cover anonymous, authenticated buyer, commissioner, creator, admin, and service-role behavior for every table and storage bucket.
 
-## Required order of work
+## required order of work
 
-1. Remove the hardcoded admin gate and establish authenticated admin roles
-2. Protect market-account private fields and payout information
-3. Close anonymous commission access
-4. Move guest purchases behind an idempotent server operation
-5. Close open admin-idea access
-6. Verify cumulative RLS and storage policies
-7. Reduce service-role input trust and split sensitive data by domain
-8. Add rate limits, audit events, idempotency, and automated authorization tests
+1. remove the hardcoded admin gate and establish authenticated admin roles
+2. protect market-account private fields and payout information
+3. close anonymous commission access
+4. move guest purchases behind an idempotent server operation
+5. close open admin-idea access
+6. verify cumulative rls and storage policies
+7. reduce service-role input trust and split sensitive data by domain
+8. add rate limits, audit events, idempotency, and automated authorization tests
 
-## Acceptance conditions
+## acceptance conditions
 
-Security remediation is complete only when:
+security remediation is complete only when:
 
-- No password or privileged secret is embedded in client code
-- Unauthorized clients cannot read or mutate private rows or fields
-- Commission creation requires an authenticated commissioner
-- Guest checkout works without public order-table writes
-- Every admin operation is authenticated, role-authorized, and audited
-- Privileged edge functions derive sensitive values from trusted services
-- Policy tests prove the intended access matrix against the cumulative schema
+- no password or privileged secret is embedded in client code
+- unauthorized clients cannot read or mutate private rows or fields
+- commission creation requires an authenticated commissioner
+- guest checkout works without public order-table writes
+- every admin operation is authenticated, role-authorized, and audited
+- privileged edge functions derive sensitive values from trusted services
+- policy tests prove the intended access matrix against the cumulative schema
 
-See the [complete source audit](../docs/current-state-audit.md) for the cross-domain build order.
+see the [complete source audit](../docs/current-state-audit.md) for the cross-domain build order.

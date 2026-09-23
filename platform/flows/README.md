@@ -1,23 +1,23 @@
-# Flows
+# flows
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: partial**
+**status: partial**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura.dev/src/pages/PublishArtifact.jsx`
 - `sculptura.dev/src/pages/Checkout.jsx`
 - `sculptura.dev/supabase/functions/publish-artifact/index.ts`
 - `sculptura.dev/supabase/functions/place-order/index.ts`
 
-### What exists now
+### what exists now
 
-- The current flow publishes an artifact-shaped payload and later creates order rows. It does not pass through a design release, current quote, payment state, or manufacturing reservation.
+- the current flow publishes an artifact-shaped payload and later creates order rows. it does not pass through a design release, current quote, payment state, or manufacturing reservation.
 
-### Required changes
+### required changes
 
-- Replace the flow with release to listing to quote to payment to production-order transitions.
-- Define failure, retry, cancellation, and compensation behavior for each transition.
+- replace the flow with release to listing to quote to payment to production-order transitions.
+- define failure, retry, cancellation, and compensation behavior for each transition.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

@@ -1,8 +1,8 @@
-# Admin
+# admin
 
-Admin is the control tower. It sees across domains and provides controlled intervention without absorbing their logic.
+admin is the control tower. it sees across domains and provides controlled intervention without absorbing their logic.
 
-## Contains
+## contains
 
 - `review/`: release, listing, and exception queues
 - `manufacturer-control/`: partner activation, credential references, and adapter health
@@ -10,8 +10,8 @@ Admin is the control tower. It sees across domains and provides controlled inter
 - `platform-policy/`: fees, rollout, feature, and operational policy controls
 - `audit/`: append-only evidence of changes and interventions
 
-Manufacturer capability truth and route scoring live in `manufacturing/`. Purchases, payouts, shipping, insurance, and country eligibility live in `operations/`. Admin edits policy and invokes their control interfaces.
+manufacturer capability truth and route scoring live in `manufacturing/`. purchases, payouts, shipping, insurance, and country eligibility live in `operations/`. admin edits policy and invokes their control interfaces.
 
-## Current implementation
+## current implementation
 
-See the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

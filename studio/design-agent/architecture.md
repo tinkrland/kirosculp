@@ -1,31 +1,31 @@
-# Tessa: Parameter Protocol and Tooling
+# tessa: parameter protocol and tooling
 
-Tessa proposes changes to a creator-owned project. It does not construct geometry, run authoritative physical checks, modify payment records, or approve a release. The proposed components below are design choices to validate, not installed services.
+tessa proposes changes to a creator-owned project. it does not construct geometry, run authoritative physical checks, modify payment records, or approve a release. the proposed components below are design choices to validate, not installed services.
 
-## Typed Parameter State
+## typed parameter state
 
-Use a versioned canonical parameter document owned by the Studio backend. Pydantic is a sensible Python validation layer if the service is Python-based: define strict enums, bounds, units, supported fields, migrations, and cross-field invariants. Publish a language-neutral JSON Schema for the browser and other services, and serialize canonically before hashing. Protocol Buffers are an optional transport format if cross-language service contracts or binary efficiency justify them; they do not replace domain validation. Pick one canonical wire representation and version it rather than maintaining two conflicting sources of truth.
+use a versioned canonical parameter document owned by the studio backend. pydantic is a sensible python validation layer if the service is python-based: define strict enums, bounds, units, supported fields, migrations, and cross-field invariants. publish a language-neutral json schema for the browser and other services, and serialize canonically before hashing. protocol buffers are an optional transport format if cross-language service contracts or binary efficiency justify them; they do not replace domain validation. pick one canonical wire representation and version it rather than maintaining two conflicting sources of truth.
 
-A Tessa response is a typed **proposal**, not a full replacement state. Include project revision, allowed parameter paths, typed operations and values, model/prompt version, and a correlation ID. Reject unknown paths, unsafe values, stale revisions, and unexpected tool output before creator review. Record the accepted proposal as a new project revision. Never treat an LLM response as a validated project model.
+a tessa response is a typed **proposal**, not a full replacement state. include project revision, allowed parameter paths, typed operations and values, model/prompt version, and a correlation id. reject unknown paths, unsafe values, stale revisions, and unexpected tool output before creator review. record the accepted proposal as a new project revision. never treat an llm response as a validated project model.
 
-## Prompt and Tuning Lineage
+## prompt and tuning lineage
 
-Keep small prompt templates, schemas, and tool definitions in Git with semantic versions and regression tests. DVC can version larger evaluation datasets, curated reference sets, model/tuning artifacts, and reproducible experiments, with remote storage configured separately. Record prompt Git SHA, DVC dataset/model revision, model/provider version, tool schema version, and resulting proposal ID so a later design can be audited. DVC does not itself provide prompt safety or replace the application release/version model.
+keep small prompt templates, schemas, and tool definitions in git with semantic versions and regression tests. dvc can version larger evaluation datasets, curated reference sets, model/tuning artifacts, and reproducible experiments, with remote storage configured separately. record prompt git sha, dvc dataset/model revision, model/provider version, tool schema version, and resulting proposal id so a later design can be audited. dvc does not itself provide prompt safety or replace the application release/version model.
 
-## Bounded Tool Calling
+## bounded tool calling
 
-Start with narrow tools such as `read_project_revision`, `list_allowed_parameters`, `propose_parameter_patch`, and `request_preview`. Every tool enforces creator/project identity, allowlisted parameters, quotas, and typed input/output; `propose_parameter_patch` writes only a proposal. Only a creator-approved request can cause ParaCraft compilation. There is no payment, listing, release-authoring, or unrestricted shell tool for Tessa.
+start with narrow tools such as `read_project_revision`, `list_allowed_parameters`, `propose_parameter_patch`, and `request_preview`. every tool enforces creator/project identity, allowlisted parameters, quotas, and typed input/output; `propose_parameter_patch` writes only a proposal. only a creator-approved request can cause paracraft compilation. there is no payment, listing, release-authoring, or unrestricted shell tool for tessa.
 
-LiteLLM is a candidate model gateway for routing across OpenAI, Gemini, or Featherless-compatible endpoints. LangChain is a candidate orchestration layer for tool calls, but is not a substitute for the gateway or the domain validators. Choose either or both only after a narrow latency, observability, and schema-conformance spike; a direct SDK loop may be simpler initially. Model-generated calls are always untrusted inputs.
+litellm is a candidate model gateway for routing across openai, gemini, or featherless-compatible endpoints. langchain is a candidate orchestration layer for tool calls, but is not a substitute for the gateway or the domain validators. choose either or both only after a narrow latency, observability, and schema-conformance spike; a direct sdk loop may be simpler initially. model-generated calls are always untrusted inputs.
 
-## Redis Cache
+## redis cache
 
-Redis may cache frequently read **versioned** parameter vocabulary, prompt/tool configuration snapshots, and preview metadata. Cache keys must include schema/rules/prompt versions and tenant or project scope as appropriate, with short TTL and invalidation on config publication. The authoritative project revisions, prompt releases, validation reports, and design releases persist outside Redis. A stale or missing cache must never authorize a release or alter the compiler rules.
+redis may cache frequently read **versioned** parameter vocabulary, prompt/tool configuration snapshots, and preview metadata. cache keys must include schema/rules/prompt versions and tenant or project scope as appropriate, with short ttl and invalidation on config publication. the authoritative project revisions, prompt releases, validation reports, and design releases persist outside redis. a stale or missing cache must never authorize a release or alter the compiler rules.
 
-## Acceptance Tests
+## acceptance tests
 
-- A stale project revision, unknown parameter, wrong unit, or out-of-range proposal is rejected.
-- The same accepted canonical state and engine/rules versions yield the same content hash.
+- a stale project revision, unknown parameter, wrong unit, or out-of-range proposal is rejected.
+- the same accepted canonical state and engine/rules versions yield the same content hash.
 - Prompt/model/DVC changes cannot silently alter an already issued release.
-- Cache eviction, failure, and cross-tenant keys cannot change authorization or validation.
-- Tool calls cannot bypass creator approval or access checkout or manufacturing APIs.
+- cache eviction, failure, and cross-tenant keys cannot change authorization or validation.
+- tool calls cannot bypass creator approval or access checkout or manufacturing apis.

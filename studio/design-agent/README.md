@@ -1,8 +1,8 @@
-# Studio: Tessa
+# studio: tessa
 
-Tessa is the intuitive middle layer between a creator and ParaCraft. She is an operator and translator, not a geometry generator.
+tessa is the intuitive middle layer between a creator and paracraft. she is an operator and translator, not a geometry generator.
 
-## Relay contract
+## relay contract
 
 ```text
 creator taste, language, and visual references
@@ -18,44 +18,44 @@ paracraft compiles OpenSCAD and enforces physical rules
 WebGL renders the deterministic model in the browser
 ```
 
-Tessa may:
+tessa may:
 
-- Inspect creator-provided references
-- Identify visual relationships and likely design intent
-- Map words such as organic, molten, narrow, folded, brushed, or smooth to approved controls
-- Propose bounded numeric values and parameter operations
-- Explain what a control changes
-- Compare the rendered result with the creator's stated intention
+- inspect creator-provided references
+- identify visual relationships and likely design intent
+- map words such as organic, molten, narrow, folded, brushed, or smooth to approved controls
+- propose bounded numeric values and parameter operations
+- explain what a control changes
+- compare the rendered result with the creator's stated intention
 
-Tessa may not:
+tessa may not:
 
-- Generate OpenSCAD, meshes, vertices, STL files, or production geometry
-- Add controls that do not exist in the project schema
-- Bypass creator approval
-- Declare a design castable
-- Weaken wall, clearance, shrinkage, feature, or process limits
-- Compute retail prices or choose manufacturers
+- generate openscad, meshes, vertices, stl files, or production geometry
+- add controls that do not exist in the project schema
+- bypass creator approval
+- declare a design castable
+- weaken wall, clearance, shrinkage, feature, or process limits
+- compute retail prices or choose manufacturers
 
-ParaCraft owns the rigid mathematical code and physical safety lines. Tessa only turns predefined knobs.
+paracraft owns the rigid mathematical code and physical safety lines. tessa only turns predefined knobs.
 
-See the [Tessa parameter protocol and tooling plan](architecture.md) for Pydantic/optional Protocol Buffers, Git and DVC lineage, bounded agent tools, and Redis configuration caching. None of these replaces creator approval or server-side ParaCraft validation.
+see the [tessa parameter protocol and tooling plan](architecture.md) for Pydantic/optional protocol buffers, git and dvc lineage, bounded agent tools, and redis configuration caching. none of these replaces creator approval or server-side paracraft validation.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: missing**
+**status: missing**
 
-### Existing source evidence
+### existing source evidence
 
-- No Tessa implementation was found in either source repository
-- `sculptura/src/pages/studio/BuildPage.jsx` exposes many of the structured controls Tessa will eventually be allowed to propose
-- The source does not yet include visual-reference ingestion, a proposal schema, creator approval history, or a parameter-operation boundary
+- no tessa implementation was found in either source repository
+- `sculptura/src/pages/studio/BuildPage.jsx` exposes many of the structured controls tessa will eventually be allowed to propose
+- the source does not yet include visual-reference ingestion, a proposal schema, creator approval history, or a parameter-operation boundary
 
-### Required changes
+### required changes
 
-- Define a versioned Tessa proposal schema with an allowlist of parameter paths and operations
-- Constrain every numeric proposal to project and compiler bounds
-- Record the input references, model version, proposal, creator decision, and resulting project revision
-- Send only accepted parameters to ParaCraft
-- Test that malformed or adversarial instructions cannot cross the compiler boundary
+- define a versioned tessa proposal schema with an allowlist of parameter paths and operations
+- constrain every numeric proposal to project and compiler bounds
+- record the input references, model version, proposal, creator decision, and resulting project revision
+- send only accepted parameters to paracraft
+- test that malformed or adversarial instructions cannot cross the compiler boundary
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

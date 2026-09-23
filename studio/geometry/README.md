@@ -1,24 +1,24 @@
-# Studio: ParaCraft geometry
+# studio: paracraft geometry
 
-ParaCraft is the deterministic compiler framework. It uses OpenSCAD under the hood to convert the canonical project parameters into rigid mathematical geometry and applies the physical rules required for manufacturable metal jewelry.
+paracraft is the deterministic compiler framework. it uses openscad under the hood to convert the canonical project parameters into rigid mathematical geometry and applies the physical rules required for manufacturable metal jewelry.
 
-## Compiler responsibilities
+## compiler responsibilities
 
-- Accept only schema-valid, bounded project parameters
-- Generate readable, versioned OpenSCAD
-- Compile a watertight model and production mesh
-- Enforce wall thickness, shrinkage allowances, clearances, minimum features, and process constraints
-- Produce stable geometry and file hashes from stable inputs
-- Expose the compiled model to the creator-facing WebGL renderer
-- Provide the exact geometry used by validation, mass estimation, release creation, and production
+- accept only schema-valid, bounded project parameters
+- generate readable, versioned openscad
+- compile a watertight model and production mesh
+- enforce wall thickness, shrinkage allowances, clearances, minimum features, and process constraints
+- produce stable geometry and file hashes from stable inputs
+- expose the compiled model to the creator-facing webgl renderer
+- provide the exact geometry used by validation, mass estimation, release creation, and production
 
-WebGL is the interactive browser rendering layer. It displays the compiled OpenSCAD result. It must not become a second independent geometry implementation.
+webgl is the interactive browser rendering layer. it displays the compiled openscad result. it must not become a second independent geometry implementation.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: partial, with an important convergence gap**
+**status: partial, with an important convergence gap**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura/src/components/canvas/JewelryViewport.jsx`
 - `sculptura/src/components/canvas/RingViewport.jsx`
@@ -29,19 +29,19 @@ WebGL is the interactive browser rendering layer. It displays the compiled OpenS
 - `sculptura/src/lib/svgToShape.js`
 - `sculptura/src/lib/stlExport.js`
 
-### What exists now
+### what exists now
 
-- A WebGL/Three.js browser viewport renders interactive jewelry models for several jewelry types
-- The source includes procedural preview geometry, multi-piece behavior, and client-side clay deformation
-- OpenSCAD generation exists mainly for the ring path, and STL export serializes scene geometry
-- The audited snapshot does not yet prove that the WebGL model, sculpted model, OpenSCAD output, exported STL, validation input, and production file all derive from one canonical ParaCraft compile
+- a WebGL/Three.js browser viewport renders interactive jewelry models for several jewelry types
+- the source includes procedural preview geometry, multi-piece behavior, and client-side clay deformation
+- openscad generation exists mainly for the ring path, and stl export serializes scene geometry
+- the audited snapshot does not yet prove that the webgl model, sculpted model, openscad output, exported stl, validation input, and production file all derive from one canonical paracraft compile
 
-### Required changes
+### required changes
 
-- Extract and version ParaCraft as the sole OpenSCAD compiler and physical-rule framework
-- Make the WebGL viewport consume ParaCraft's compiled output rather than recreate production geometry independently
-- Make OpenSCAD, browser render, STL, mass properties, validation, and release hashes derive from one build result
-- Define deterministic handling for any sculpting operation or remove it from the production path
-- Remove manufacturing submission from the geometry UI
+- extract and version paracraft as the sole openscad compiler and physical-rule framework
+- make the webgl viewport consume paracraft's compiled output rather than recreate production geometry independently
+- make openscad, browser render, stl, mass properties, validation, and release hashes derive from one build result
+- define deterministic handling for any sculpting operation or remove it from the production path
+- remove manufacturing submission from the geometry ui
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

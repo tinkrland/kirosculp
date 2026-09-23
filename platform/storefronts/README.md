@@ -1,12 +1,12 @@
-# Platform: storefronts
+# platform: storefronts
 
-Sculptura-hosted and white-label storefront presentation, including collections, profile content, brand settings, and connected sales channels. Sculptura remains the source of truth for design releases and fulfillment state.
+sculptura-hosted and white-label storefront presentation, including collections, profile content, brand settings, and connected sales channels. sculptura remains the source of truth for design releases and fulfillment state.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: partial**
+**status: partial**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura.dev/src/pages/ShopProfile.jsx`
 - `ShopArtifactBySlug.jsx`
@@ -14,14 +14,14 @@ Sculptura-hosted and white-label storefront presentation, including collections,
 - `sculptura.dev/src/components/market/mystore/*`
 - `sculptura.dev/src/components/market/sections/CollectionsSection.jsx`
 
-### What exists now
+### what exists now
 
-- Public shops, product routes, collections, appearance, content, social links, newsletters, promo-code display, waitlists, and tips have UI or partial persistence.
+- public shops, product routes, collections, appearance, content, social links, newsletters, promo-code display, waitlists, and tips have ui or partial persistence.
 
-### Required changes
+### required changes
 
-- Separate public fields from private account configuration.
-- Add channel and white-label contracts.
-- Validate promo, newsletter, waitlist, and tip behaviors server-side before treating them as operational features.
+- separate public fields from private account configuration.
+- add channel and white-label contracts.
+- validate promo, newsletter, waitlist, and tip behaviors server-side before treating them as operational features.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

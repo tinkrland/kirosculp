@@ -1,22 +1,22 @@
-# Admin: audit
+# admin: audit
 
-Append-only evidence of policy changes, manual interventions, routing decisions, financial adjustments, and security-sensitive actions.
+append-only evidence of policy changes, manual interventions, routing decisions, financial adjustments, and security-sensitive actions.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: missing**
+**status: missing**
 
-### Existing source evidence
+### existing source evidence
 
-- No append-only operator audit-event system was found.
+- no append-only operator audit-event system was found.
 
-### What exists now
+### what exists now
 
-- Database timestamps and page state are not an audit trail.
+- database timestamps and page state are not an audit trail.
 
-### Required changes
+### required changes
 
-- Record authenticated actor, action, target, before/after references, reason, request correlation, timestamp, and result for every privileged change.
-- Make audit events append-only and independently queryable.
+- record authenticated actor, action, target, before/after references, reason, request correlation, timestamp, and result for every privileged change.
+- make audit events append-only and independently queryable.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

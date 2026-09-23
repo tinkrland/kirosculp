@@ -1,26 +1,26 @@
-# Compliance
+# compliance
 
-Identity and payout requirements, sanctions/export checks, consumer protections, tax evidence, privacy obligations, product restrictions, and records retention. Rollout gates consume approved compliance decisions; they do not infer them.
+identity and payout requirements, sanctions/export checks, consumer protections, tax evidence, privacy obligations, product restrictions, and records retention. rollout gates consume approved compliance decisions; they do not infer them.
 
 
-Creator onboarding geography follows current payout-provider availability, while shipping geography follows the separate destination allowlist. Payout KYC is intended at the $20/€20 release threshold, but sanctions, provider, transaction-monitoring, or legal rules may require earlier verification.
+creator onboarding geography follows current payout-provider availability, while shipping geography follows the separate destination allowlist. payout kyc is intended at the $20/€20 release threshold, but sanctions, provider, transaction-monitoring, or legal rules may require earlier verification.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: research only**
+**status: research only**
 
-### Existing source evidence
+### existing source evidence
 
-- No compliance service exists in the source applications.
+- no compliance service exists in the source applications.
 - `manufacturing/research/topics/vienna-convention-ccm.md` and rollout records in this foundation hold research inputs.
 
-### What exists now
+### what exists now
 
-- Source UIs do not enforce hallmarking, restricted-route, sanctions, consumer-information, or evidence-expiry rules.
+- source uis do not enforce hallmarking, restricted-route, sanctions, consumer-information, or evidence-expiry rules.
 
-### Required changes
+### required changes
 
-- Turn approved findings into versioned route predicates and required production documentation.
-- Keep legal review and evidence dates explicit.
+- turn approved findings into versioned route predicates and required production documentation.
+- keep legal review and evidence dates explicit.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

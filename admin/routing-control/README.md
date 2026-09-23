@@ -1,23 +1,23 @@
-# Admin: routing control
+# admin: routing control
 
-Routing policy, weighting, route inspection, manual reassignment, and incident intervention. The actual eligibility and scoring logic belongs to manufacturing/routing.
+routing policy, weighting, route inspection, manual reassignment, and incident intervention. the actual eligibility and scoring logic belongs to manufacturing/routing.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: shell**
+**status: shell**
 
-### Existing source evidence
+### existing source evidence
 
 - `sculptura.dev/src/pages/admin/AdminRouting.jsx`
-- Platform settings and manufacturer tables
+- platform settings and manufacturer tables
 
-### What exists now
+### what exists now
 
-- The UI stores routing mode and default-manufacturer configuration. There is no route eligibility, ranking, quote comparison, reservation, or explanation engine behind it.
+- the ui stores routing mode and default-manufacturer configuration. there is no route eligibility, ranking, quote comparison, reservation, or explanation engine behind it.
 
-### Required changes
+### required changes
 
-- Build routing in Manufacturing and Operations, then let Admin change versioned policy and inspect decisions.
-- Never place route logic directly in the page.
+- build routing in manufacturing and operations, then let admin change versioned policy and inspect decisions.
+- never place route logic directly in the page.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

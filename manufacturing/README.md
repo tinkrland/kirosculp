@@ -1,8 +1,8 @@
-# Manufacturing
+# manufacturing
 
-Manufacturing turns an eligible paid order and exact design release into a normalized partner production order.
+manufacturing turns an eligible paid order and exact design release into a normalized partner production order.
 
-## Product code boundaries
+## product code boundaries
 
 - `materials-supported/`: accepted alloy/process allowlist
 - `manufacturer-layer/`: normalized upload, quote, order, and status adapters
@@ -10,18 +10,18 @@ Manufacturing turns an eligible paid order and exact design release into a norma
 - `quotes/`: time-bounded partner quote snapshots
 - `quality/`: defect, remake, reliability, and capability-suspension evidence
 
-## Research and reference
+## research and reference
 
 - `tasks/`: research briefs and open checks
 - `schemas/`: evidence-bound capability contract
 - `reference/`: structured candidate dataset
 - `research/candidates/`: human-readable partner evidence notes
-- `research/topics/`: cross-partner research such as the Vienna Convention and Common Control Mark
+- `research/topics/`: cross-partner research such as the vienna convention and common control mark
 
-Seven candidates were checked with Tavily discovery, Firecrawl extraction, and an OpenAI evidence pass. Every record remains `drafted`, not `accepted`. Only accepted records may enter automatic routing.
+seven candidates were checked with tavily discovery, firecrawl extraction, and an openai evidence pass. every record remains `drafted`, not `accepted`. only accepted records may enter automatic routing.
 
-Unknown is `null`, not guessed as `false`. General investment-casting marketing does not prove the required printed-pattern-to-precious-metal jewelry process.
+unknown is `null`, not guessed as `false`. general investment-casting marketing does not prove the required printed-pattern-to-precious-metal jewelry process.
 
-## Current implementation
+## current implementation
 
-See the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

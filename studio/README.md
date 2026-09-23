@@ -1,27 +1,27 @@
-# Studio
+# studio
 
-Studio is for creators. It turns intent into deterministic, manufacturable metal geometry.
+studio is for creators. it turns intent into deterministic, manufacturable metal geometry.
 
-## Owns
+## owns
 
-- Creator projects, references, parameters, presets, and revisions
-- Tessa's constrained intent-to-parameter relay
-- ParaCraft, the deterministic compiler framework built on OpenSCAD
-- Creator-facing in-browser WebGL rendering of the compiled model
-- Physical design rules such as wall thickness, shrinkage, clearances, minimum features, and process limits
-- Deterministic mesh and production-file compilation
-- Castability validation and mass estimates
-- Versioned design-release creation
+- creator projects, references, parameters, presets, and revisions
+- tessa's constrained intent-to-parameter relay
+- paracraft, the deterministic compiler framework built on openscad
+- creator-facing in-browser webgl rendering of the compiled model
+- physical design rules such as wall thickness, shrinkage, clearances, minimum features, and process limits
+- deterministic mesh and production-file compilation
+- castability validation and mass estimates
+- versioned design-release creation
 
-## Does not own
+## does not own
 
-- Listings or storefronts
-- Retail pricing, platform fees, or payouts
-- Orders, shipping, insurance, or refunds
-- Manufacturer selection
-- Stones, gemstone inventory, grading, sourcing, or setting fulfillment
+- listings or storefronts
+- retail pricing, platform fees, or payouts
+- orders, shipping, insurance, or refunds
+- manufacturer selection
+- stones, gemstone inventory, grading, sourcing, or setting fulfillment
 
-## Flow
+## flow
 
 ```mermaid
 flowchart LR
@@ -39,10 +39,10 @@ flowchart LR
   revise --> model
 ```
 
-Tessa runs the middle leg of the relay. She translates human intent into constrained parameter proposals. ParaCraft takes the accepted parameters, compiles the OpenSCAD model, and enforces the physical boundaries. The WebGL layer renders an interactive preview in the browser. The Studio server independently compiles the same approved revision and is the only authority that may validate and issue a release.
+tessa runs the middle leg of the relay. she translates human intent into constrained parameter proposals. paracraft takes the accepted parameters, compiles the openscad model, and enforces the physical boundaries. the webgl layer renders an interactive preview in the browser. the studio server independently compiles the same approved revision and is the only authority that may validate and issue a release.
 
-Same parameters, compiler version, and rule-set version in must produce the same geometry out. Inference never generates geometry and never decides whether something is castable.
+same parameters, compiler version, and rule-set version in must produce the same geometry out. inference never generates geometry and never decides whether something is castable.
 
-## Current implementation
+## current implementation
 
-See the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.
+see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.

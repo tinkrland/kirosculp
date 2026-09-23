@@ -1,27 +1,27 @@
-# Shipping
+# shipping
 
-Serviceability, labels, tracking, delivery events, returns, customs documents, address rules, and delivery exceptions. A carrier advertising worldwide coverage does not make every destination supported.
+serviceability, labels, tracking, delivery events, returns, customs documents, address rules, and delivery exceptions. a carrier advertising worldwide coverage does not make every destination supported.
 
 
-See [`locale.md`](locale.md) for the country clusters, EU and non-EU distinctions, CCM groupings, and route-specific rollout concerns.
+see [`locale.md`](locale.md) for the country clusters, eu and non-eu distinctions, ccm groupings, and route-specific rollout concerns.
 
-## Audited implementation reference
+## audited implementation reference
 
-**Status: partial address and tracking fields**
+**status: partial address and tracking fields**
 
-### Existing source evidence
+### existing source evidence
 
-- Checkout collects a shipping address.
-- Order records include shipping address and tracking number.
-- No carrier, rate, label, customs, or delivery-event integration was found.
+- checkout collects a shipping address.
+- order records include shipping address and tracking number.
+- no carrier, rate, label, customs, or delivery-event integration was found.
 
-### What exists now
+### what exists now
 
-- Address collection and a tracking field do not form a shipping system.
+- address collection and a tracking field do not form a shipping system.
 
-### Required changes
+### required changes
 
-- Add address validation, rates, service selection, labels, customs data, tracking events, exceptions, returns, claims, and landed-cost handling.
-- Use the maintained locale clusters and route rules in this folder.
+- add address validation, rates, service selection, labels, customs data, tracking events, exceptions, returns, claims, and landed-cost handling.
+- use the maintained locale clusters and route rules in this folder.
 
-See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
