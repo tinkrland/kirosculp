@@ -13,6 +13,7 @@ this is the proposed product and configuration taxonomy, not a live catalog. it 
 | [piercings](piercings/README.md) | body-jewelry boundary | research hold; no offer or safety claim |
 | [metals](metals/README.md) | alloy, color, finish, finding compatibility | candidates only; partner verification needed |
 | [configure](configure/README.md) | bounded customization and symbolic bases | product specification, not a live configurator |
+| [nativity](nativity/README.md) | native sales channels beyond our storefront | candidates only; none connected |
 
 ## the hard boundary
 

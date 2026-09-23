@@ -11,6 +11,15 @@ this leg prototypes the money flow locally before any real payment provider is i
 5. **reversals and reconciliation:** refund and chargeback flows that produce compensating journal entries, and a reconciliation check that balances against the mock provider.
 6. **payout gating:** creator earnings released only after the applicable delivery/claim window, with kyc deferred until the $20/€20 payout threshold per the existing product decision.
 
+## banking consideration (still deciding)
+
+the business banking layer under the commerce prototype has two candidates, and nothing is decided yet:
+
+- **mercury.com + waveapps.com:** mercury as the business banking account, wave for accounting. plaid would sync both with the spree commerce setup's money records.
+- **getholdings.com:** one connected account combining banking, invoicing, and books, positioned as runnable by an ai assistant; also reachable through plaid.
+
+either way, plaid is the sync bridge into the local spree prototype, and the supabase journal remains the authoritative ledger regardless of which banking provider is chosen. mercury also now ships its own built-in accounting (mercury books), which is a third shape of the same question and gets evaluated alongside the two candidates. selection criteria: plaid coverage, multi-entity friendliness, payout rail compatibility with the eventual stripe connect flow, fee structure at low volume, and how cleanly transaction data maps onto the ledger's allocation buckets.
+
 stripe is the intended production provider, but only after this local prototype proves the state machine and the legal/payment model.
 
 ## waiting on

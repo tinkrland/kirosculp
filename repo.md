@@ -23,6 +23,7 @@ studio/
   virtual-studio/
 
 offerings/
+  nativity/
   rings/
   earrings/
   bracelets/
