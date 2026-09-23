@@ -1,0 +1,7 @@
+# metals and finishes
+
+keep alloy, color, surface finish, body material, and separately sourced findings distinct. "gold" is not a quoteable specification; gold purity, color and approved casting process matter. "oxidized silver" is a treatment of silver, not a separate base metal. brushed, satin, polished, matte and hammered describe finishes, which may require different partner work and affect relief legibility.
+
+current [design-release metal ids](../../contracts/design-release.schema.json) include `silver_925`, `brass`, `bronze`, and selected 14k and 18k yellow, white and rose gold variants. they are **schema candidates**, not active availability or a verified supplier catalog. `copper`, `steel` and `titanium` appear in old interface suggestions, while resin and ceramics appear in platform settings; none are automatically released as offers, and nonmetals violate the permanent metal-only boundary. a body and an earring post may need separate approved materials and documented attachment.
+
+for each combination, require exact alloy/composition where relevant, declared fineness, partner material/process evidence, shrinkage and finishing behavior, hallmarking or marking route, destination rules, and a current quote. [manufacturing](../../manufacturing/materials-supported/README.md) is capability truth; [operations](../../operations/country-rollout/README.md) decides whether a route can actually ship. no gemstone material is offered. never generate market availability from this list alone.

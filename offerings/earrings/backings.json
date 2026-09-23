@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "status": "research",
+  "notice": "candidate type compatibility only; buyer-selectable options require verified matching components, validated design release and partner approval",
+  "findings": [
+    {"id": "butterfly", "attachment": "friction_post", "families": ["stud", "climber", "crawler"], "requires": ["compatible_post", "matched_catch", "partner_assembly"]},
+    {"id": "disc_back", "attachment": "friction_post", "families": ["stud", "climber", "crawler"], "requires": ["compatible_post", "matched_catch", "partner_assembly"]},
+    {"id": "screw_back", "attachment": "threaded_post", "families": ["stud"], "requires": ["matched_threaded_post_and_back", "partner_assembly"]},
+    {"id": "locking_back", "attachment": "matched_locking_post", "families": ["stud"], "requires": ["matched_locking_set", "partner_assembly"]},
+    {"id": "hinged_click", "attachment": "integrated_hoop", "families": ["hoop"], "requires": ["hinge_and_latch_test", "partner_assembly"]},
+    {"id": "latch", "attachment": "integrated_hoop", "families": ["hoop"], "requires": ["matched_latch", "partner_assembly"]},
+    {"id": "continuous", "attachment": "integrated_hoop", "families": ["hoop"], "requires": ["wire_closure_test", "partner_assembly"]},
+    {"id": "french_wire", "attachment": "hanging_loop", "families": ["drop"], "requires": ["matched_loop", "retention_test"]},
+    {"id": "lever_back", "attachment": "hanging_loop", "families": ["drop"], "requires": ["matched_loop", "hinge_and_latch_test", "partner_assembly"]},
+    {"id": "clip_on", "attachment": "engineered_clip", "families": ["stud", "drop"], "requires": ["dedicated_nonpierced_geometry", "retention_test", "partner_assembly"]},
+    {"id": "none", "attachment": "integrated_form", "families": ["cuff", "wrap", "threader"], "requires": ["category_specific_fit_and_retention_test"]}
+  ]
+}

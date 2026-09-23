@@ -1,6 +1,6 @@
 # platform
 
-platform is the offering surface. it turns an accepted design release into something people can discover and buy.
+platform is the offering surface. it turns an accepted design release into something people can discover and buy. the shared [offerings taxonomy](../offerings/README.md) describes product families and candidate configuration options, but the platform alone owns the purchasable listing.
 
 ## owns
 

@@ -2,7 +2,7 @@
 
 > a path from a jewelry idea to a manufacturable, sellable, made-to-order piece, without requiring a workshop, inventory, or years of cad training.
 
-the [one-shot explanation](explain.md) describes the product. [the deeper guide](explain/index.md) separates the creator, studio, platform, manufacturing, and operations details. [the file-by-file tracker](audit/index.md) records what exists, what is partial, and what requires rebuilding in the supplied source snapshots.
+the [one-shot explanation](explain.md) describes the product. [offerings](offerings/README.md) maps jewelry families, metal choices, earring findings and bounded personalization without treating them as live catalog entries. [the deeper guide](explain/index.md) separates the creator, studio, platform, manufacturing, and operations details. [the file-by-file tracker](audit/index.md) records what exists, what is partial, and what requires rebuilding in the supplied source snapshots.
 
 ## the problem
 
@@ -146,6 +146,17 @@ studio/
   releases/
   virtual-studio/
 
+offerings/
+  rings/
+  earrings/
+  bracelets/
+  pendants/
+  chains/
+  necklaces/
+  piercings/
+  metals/
+  configure/
+
 platform/
   creators/
   buyers/
@@ -210,6 +221,8 @@ venture/
 [`venture/`](venture/README.md) explains the problem, five participant perspectives, asset-light operating model, digital-glue architecture, defensibility, creator flywheel, and the claims that still need proof. it keeps investor language separate from implementation truth while grounding both in the same system boundaries.
 
 ## boundaries that do not bend
+
+- offerings describes product types and compatible options, not a separate geometry or commerce service
 
 - only studio generates and validates geometry
 - tessa may interpret intent and propose constrained parameters, but never generates production geometry

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "status": "research",
+  "notice": "candidate creator-authored bases only; none are approved listings or validated geometry",
+  "ring_bases": [
+    {
+      "id": "letter_band",
+      "motif": "integrated letters",
+      "allowed_personalization": ["initial", "paired_initials", "inner_inscription"],
+      "relief_modes": ["recessed", "raised"],
+      "studio_checks": ["glyph_support", "minimum_features", "remaining_wall", "size_variants"]
+    },
+    {
+      "id": "signet",
+      "motif": "face plaque",
+      "allowed_personalization": ["initial", "monogram", "inner_inscription"],
+      "relief_modes": ["recessed", "raised"],
+      "studio_checks": ["face_clearance", "minimum_features", "remaining_wall", "size_variants"]
+    },
+    {
+      "id": "affinity_connected",
+      "motif": "meeting or linked metal bands",
+      "allowed_personalization": ["paired_initials", "inner_inscription"],
+      "relief_modes": ["recessed", "raised"],
+      "studio_checks": ["connected_sections", "minimum_features", "remaining_wall", "size_variants"]
+    },
+    {
+      "id": "promise",
+      "motif": "creator-defined band and promise symbol",
+      "allowed_personalization": ["initial", "date", "inner_inscription"],
+      "relief_modes": ["recessed", "raised"],
+      "studio_checks": ["base_geometry_defined", "remaining_wall", "size_variants"]
+    },
+    {
+      "id": "double_heart",
+      "motif": "paired hearts in metal",
+      "allowed_personalization": ["paired_initials", "inner_inscription"],
+      "relief_modes": ["recessed", "raised"],
+      "studio_checks": ["heart_bridge", "minimum_features", "remaining_wall", "size_variants"]
+    },
+    {
+      "id": "claddagh",
+      "motif": "traditional hands, heart and crown",
+      "allowed_personalization": ["inner_inscription"],
+      "relief_modes": ["recessed"],
+      "studio_checks": ["motif_legibility", "joined_elements", "minimum_features", "size_variants"]
+    },
+    {
+      "id": "linked_loop",
+      "motif": "joined loops and bounded plaque",
+      "allowed_personalization": ["paired_initials", "inner_inscription"],
+      "relief_modes": ["recessed", "raised"],
+      "studio_checks": ["joined_elements", "minimum_features", "size_variants"]
+    }
+  ]
+}

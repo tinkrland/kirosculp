@@ -2,6 +2,8 @@
 
 `validate-data-contracts.mjs` currently validates manufacturer capability records and shipping-market records against their schemas and cross-record rules.
 
+`validate-offerings.mjs` checks the draft ring-base and earring-finding inventories without implying they are live offerings.
+
 `normalize-prose.py` enforces lowercase markdown prose with no emojis or em dashes while preserving code, urls, file paths, and link destinations. `npm run validate` checks this rule alongside the data schemas. `build-source-audit.py` reads each supplied source file and refreshes [`audit/source-files.tsv`](../audit/source-files.tsv) when the source snapshots are available.
 
 ## missing validation
