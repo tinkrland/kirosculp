@@ -34,3 +34,7 @@ exact payout timing, refund allocation, chargeback liability, and insurance reco
 - Implement double-entry or equivalently auditable ledger records for charges, fees, production costs, reserves, earnings, refunds, chargebacks, and payouts.
 
 see the [complete source audit](../../../docs/current-state-audit.md) for cross-domain findings and build order.
+
+## prototype reference
+
+The [mock finance flow](../mock-finance-flow.md) proposes a balanced Supabase ledger and explicitly distinguishes simulated allocations from provider transfers and regulated escrow. Fleetbase Ledger is a later [single-source-of-truth evaluation](../../../docs/architecture/data-and-analytics.md), not a second live ledger.

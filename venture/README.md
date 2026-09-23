@@ -49,6 +49,7 @@ this is not a plan to reinvent jewelry CAD, payment networks, casting, shipping,
 - [`architecture/digital-glue.md`](architecture/digital-glue.md): what is reused, what sculptura owns, and how the rails connect
 - [`moat/defensibility.md`](moat/defensibility.md): compounding technical, data, operational, and distribution advantages
 - [`economics/asset-light-model.md`](economics/asset-light-model.md): inventory profile, unit economics, working capital, and payment rails
+- [`../operations/financial/mock-finance-flow.md`](../operations/financial/mock-finance-flow.md): Spree and mock payments prototype, distinct from live finance
 - [`go-to-market/creator-flywheel.md`](go-to-market/creator-flywheel.md): latent creators, ordinary listings, commissions, and channel expansion
 - [`risks/proof-plan.md`](risks/proof-plan.md): claims that must be demonstrated before they are used as investor facts
 
