@@ -1,25 +1,25 @@
-# legal
+# Legal
 
-terms, creator and buyer agreements, intellectual-property process, commission terms, prohibited use, dispute policy, and jurisdiction-specific obligations. this folder records product requirements and counsel-reviewed decisions, not invented legal conclusions.
+Terms, creator and buyer agreements, intellectual-property process, commission terms, prohibited use, dispute policy, and jurisdiction-specific obligations. This folder records product requirements and counsel-reviewed decisions, not invented legal conclusions.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: partial content only**
+**Status: partial content only**
 
-### existing source evidence
+### Existing source evidence
 
 - `sculptura.dev/src/components/commissions/CommissionTermsEditor.jsx`
-- store FAQ and content fields
-- static informational pages
+- Store FAQ and content fields
+- Static informational pages
 
-### what exists now
+### What exists now
 
 - Creators can edit commission wording, but there is no versioned acceptance record or jurisdiction-aware terms system.
 
-### required changes
+### Required changes
 
 - Version platform, purchase, privacy, creator, commission, and manufacturing terms.
 - Record the exact accepted version and evidence.
 - Keep legal review distinct from editable storefront copy.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

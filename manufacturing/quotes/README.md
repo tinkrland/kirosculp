@@ -1,22 +1,22 @@
-# manufacturing quotes
+# Manufacturing quotes
 
-normalized, time-bounded quote snapshots tied to design release, alloy, finish, quantity, destination, partner, currency, and expiry. a local estimate is labeled as an estimate and never silently replaces a production quote.
+Normalized, time-bounded quote snapshots tied to design release, alloy, finish, quantity, destination, partner, currency, and expiry. A local estimate is labeled as an estimate and never silently replaces a production quote.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: missing**
+**Status: missing**
 
-### existing source evidence
+### Existing source evidence
 
 - Static manufacturing-cost maps appear on artifact records and creator forms. No provider quote integration was found.
 
-### what exists now
+### What exists now
 
 - Checkout and publishing treat stored costs as if they were usable quotes.
 
-### required changes
+### Required changes
 
 - Create normalized quote requests and responses tied to release hash, variant, destination, partner, currency, expiry, shipping, and assumptions.
 - Never accept manufacturing cost from listing clients.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

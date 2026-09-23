@@ -1,22 +1,22 @@
-# admin: platform policy
+# Admin: platform policy
 
-global settings and controlled overrides for publication, fees, payout timing, returns, claims, rollout phases, and feature availability.
+Global settings and controlled overrides for publication, fees, payout timing, returns, claims, rollout phases, and feature availability.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: shell**
+**Status: shell**
 
-### existing source evidence
+### Existing source evidence
 
 - `sculptura.dev/src/pages/admin/AdminSettings.jsx`
-- platform settings migration
+- Platform settings migration
 
-### what exists now
+### What exists now
 
 - Generic platform settings can be edited, but policy schemas, validation, effective dates, approval, rollback, and audit are absent.
 
-### required changes
+### Required changes
 
 - Define typed policy objects with role checks, change reasons, effective windows, versioning, validation, and rollback.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

@@ -1,22 +1,22 @@
-# manufacturing routing
+# Manufacturing routing
 
-filters partners by accepted capability, alloy, process, dimensions, destination, adapter health, and onboarding state. eligible routes are scored by landed cost, customs exposure, turnaround, reliability, shipping, and claim risk. nearest and cheapest are inputs, not automatic winners.
+Filters partners by accepted capability, alloy, process, dimensions, destination, adapter health, and onboarding state. Eligible routes are scored by landed cost, customs exposure, turnaround, reliability, shipping, and claim risk. Nearest and cheapest are inputs, not automatic winners.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: missing engine**
+**Status: missing engine**
 
-### existing source evidence
+### Existing source evidence
 
 - `sculptura.dev/src/pages/admin/AdminRouting.jsx` is configuration UI only.
 - `manufacturing/routing/regional-routing.md` in this foundation describes the intended decision model.
 
-### what exists now
+### What exists now
 
 - There is no executable filter, rank, reserve, or explain path.
 
-### required changes
+### Required changes
 
 - Implement deny-by-default eligibility, route scoring, quote comparison, reservation, reason codes, policy versions, and fallback behavior.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

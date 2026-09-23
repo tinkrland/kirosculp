@@ -1,11 +1,11 @@
-# manufacturing schemas
+# Manufacturing schemas
 
-schemas define the shape of normalized manufacturing evidence and approved capability data.
+Schemas define the shape of normalized manufacturing evidence and approved capability data.
 
-## current state
+## Current state
 
-`manufacturer-capabilities.schema.json` validates the researched capability records in this foundation. no corresponding schema validation was found in the application source, and the `sculptura.dev` manufacturer table does not represent the full evidence model.
+`manufacturer-capabilities.schema.json` validates the researched capability records in this foundation. No corresponding schema validation was found in the application source, and the `sculptura.dev` manufacturer table does not represent the full evidence model.
 
-## required work
+## Required work
 
-separate schemas for researched claims, approved capability versions, adapter configuration, quotes, production orders, partner status events, and quality outcomes. add producer and consumer contract tests before any source application may rely on these records.
+Separate schemas for researched claims, approved capability versions, adapter configuration, quotes, production orders, partner status events, and quality outcomes. Add producer and consumer contract tests before any source application may rely on these records.

@@ -1,6 +1,6 @@
-# research and development toolchain (proposed)
+# Research and development toolchain (proposed)
 
-**status:** available resources and a proposed workflow, not proof of installed integrations.
+**Status:** available resources and a proposed workflow, not proof of installed integrations.
 
 - **OpenAI and Gemini keys:** inference for coding/research tasks when their approved budgets allow; do not embed keys in documentation or frontend builds.
 - **Featherless.ai:** OpenAI-compatible inference endpoint for supported open models. Its docs describe tool/function calling for supported models. The application or local research harness still has to implement the tool loop, validate model-generated arguments, call Tavily/Firecrawl/Browserbase explicitly, and return results to the model. A key does not automatically give a model direct access to those services. Model support, tool-calling behavior, rate limits, and pricing require a per-model check.

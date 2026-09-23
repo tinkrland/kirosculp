@@ -1,53 +1,53 @@
-# sculptura
+# Sculptura
 
-> a path from a jewelry idea to a manufacturable, sellable, made-to-order piece, without requiring a workshop, inventory, or years of cad training.
+> A path from a jewelry idea to a manufacturable, sellable, made-to-order piece, without requiring a workshop, inventory, or years of CAD training.
 
-## the problem
+## The problem
 
-many people already have strong creative instincts. they save references, build pinterest boards, notice forms and details, and can describe the piece they wish existed. what often never occurs to them is that they could become the creator.
+Many people already have strong creative instincts. They save references, build Pinterest boards, notice forms and details, and can describe the piece they wish existed. What often never occurs to them is that they could become the creator.
 
-traditional jewelry design makes that leap feel out of scope. the person is expected to learn difficult and expensive cad software, understand manufacturing constraints, source metal and specialist suppliers, fund prototypes, hold inventory, arrange photography and sales, and solve fulfillment before the first piece has even found a buyer.
+Traditional jewelry design makes that leap feel out of scope. The person is expected to learn difficult and expensive CAD software, understand manufacturing constraints, source metal and specialist suppliers, fund prototypes, hold inventory, arrange photography and sales, and solve fulfillment before the first piece has even found a buyer.
 
-that filters out people with taste and ideas long before their work can become real. sculptura exists to patch that gap.
+That filters out people with taste and ideas long before their work can become real. Sculptura exists to patch that gap.
 
-## what sculptura changes
+## What Sculptura changes
 
-sculptura connects four stages that are normally fragmented:
+Sculptura connects four stages that are normally fragmented:
 
-1. shape an idea into precise, editable jewelry parameters
-2. turn those parameters into deterministic geometry and validate whether it can be made
-3. publish the approved design as an offer without requiring inventory
-4. route each paid order to an eligible manufacturing partner for casting, finishing, and delivery
+1. Shape an idea into precise, editable jewelry parameters
+2. Turn those parameters into deterministic geometry and validate whether it can be made
+3. Publish the approved design as an offer without requiring inventory
+4. Route each paid order to an eligible manufacturing partner for casting, finishing, and delivery
 
-the creator remains the author. sculptura removes technical and operational barriers around that authorship.
+The creator remains the author. Sculptura removes technical and operational barriers around that authorship.
 
-## how creative assistance works
+## How creative assistance works
 
-creators can work directly with the studio controls, but they do not have to master conventional cad software first.
+Creators can work directly with the studio controls, but they do not have to master conventional CAD software first.
 
-**tessa** is the studio's intuitive middle layer and operator for **paracraft**. she looks at references, listens to the creator's description, and translates natural human language into proposed values for predefined dimensions, profiles, repetitions, relationships, and other allowed controls.
+**Tessa** is the studio's intuitive middle layer and operator for **ParaCraft**. She looks at references, listens to the creator's description, and translates natural human language into proposed values for predefined dimensions, profiles, repetitions, relationships, and other allowed controls.
 
-tessa does not generate geometry, meshes, OpenSCAD, or production files. she runs the middle leg of a relay: creator intent enters, constrained numeric parameters leave, and paracraft takes the baton. paracraft is the deterministic compiler framework, built on OpenSCAD, that constructs the model and enforces the unyielding physical rules such as wall thickness, shrinkage, clearances, and process limits. tessa can turn approved knobs; she cannot invent new ones or cross a safety line.
+Tessa does not generate geometry, meshes, OpenSCAD, or production files. She runs the middle leg of a relay: creator intent enters, constrained numeric parameters leave, and ParaCraft takes the baton. ParaCraft is the deterministic compiler framework, built on OpenSCAD, that constructs the model and enforces the unyielding physical rules such as wall thickness, shrinkage, clearances, and process limits. Tessa can turn approved knobs; she cannot invent new ones or cross a safety line.
 
-creators see the resulting OpenSCAD model in the browser through the WebGL rendering layer. the rendered view is an interface to deterministic geometry, not a separate model guessed by the assistant.
+Creators see the resulting OpenSCAD model in the browser through the WebGL rendering layer. The rendered view is an interface to deterministic geometry, not a separate model guessed by the assistant.
 
-## the shape of the system
+## The shape of the system
 
-sculptura has four product surfaces and two execution domains.
+Sculptura has four product surfaces and two execution domains.
 
-### product surfaces
+### Product surfaces
 
-- **studio** is where creators shape intent, operate paracraft, validate geometry, and issue design releases
-- **platform** is where released designs become listings, storefront products, commissions, and purchases
-- **console** is where creators and buyers see orders, money, delivery, support, and account state
-- **admin** is the control tower for review, policy, routing, partner control, and intervention
+- **Studio** is where creators shape intent, operate ParaCraft, validate geometry, and issue design releases
+- **Platform** is where released designs become listings, storefront products, commissions, and purchases
+- **Console** is where creators and buyers see orders, money, delivery, support, and account state
+- **Admin** is the control tower for review, policy, routing, partner control, and intervention
 
-### execution domains
+### Execution domains
 
-- **manufacturing** knows what can be made, by whom, from which materials, under which constraints
-- **operations** owns purchase, payout, pricing, settlement, refunds, insurance, shipping, legal, compliance, and market availability
+- **Manufacturing** knows what can be made, by whom, from which materials, under which constraints
+- **Operations** owns purchase, payout, pricing, settlement, refunds, insurance, shipping, legal, compliance, and market availability
 
-console is not the financial engine. it is a product surface over operations. admin does not contain manufacturing. it configures and supervises it.
+Console is not the financial engine. It is a product surface over operations. Admin does not contain manufacturing. It configures and supervises it.
 
 ```mermaid
 flowchart LR
@@ -108,7 +108,7 @@ flowchart LR
     admin -. partner control .-> manufacturing
 ```
 
-## creator-to-customer flow
+## Creator-to-customer flow
 
 ```text
 idea and references
@@ -130,9 +130,9 @@ regional manufacturing route
 cast, finish, insure, and ship
 ```
 
-buyers do not operate tessa or paracraft. creators do. ordinary listings support guest checkout. commissioners require accounts because a commission involves a creator relationship, conversation history, revisions, approval, payment protection, cancellation, and disputes.
+Buyers do not operate Tessa or paracraft. Creators do. Ordinary listings support guest checkout. Commissioners require accounts because a commission involves a creator relationship, conversation history, revisions, approval, payment protection, cancellation, and disputes.
 
-## repository map
+## Repository map
 
 ```text
 studio/
@@ -203,37 +203,37 @@ venture/
   risks/
 ```
 
-## venture thesis
+## Venture thesis
 
-[`venture/`](venture/README.md) explains the problem, five participant perspectives, asset-light operating model, digital-glue architecture, defensibility, creator flywheel, and the claims that still need proof. it keeps investor language separate from implementation truth while grounding both in the same system boundaries.
+[`venture/`](venture/README.md) explains the problem, five participant perspectives, asset-light operating model, digital-glue architecture, defensibility, creator flywheel, and the claims that still need proof. It keeps investor language separate from implementation truth while grounding both in the same system boundaries.
 
-## boundaries that do not bend
+## Boundaries that do not bend
 
-- only studio generates and validates geometry
-- tessa may interpret intent and propose constrained parameters, but never generates production geometry
-- only paracraft turns approved parameters into OpenSCAD geometry and enforces physical design rules
-- only platform manages listings, discovery, storefronts, carts, and buyer-facing checkout
-- only operations computes trusted prices, moves money, manages delivery protection, and decides whether a route is available
-- only manufacturing owns material capability truth, manufacturer adapters, quotes, and route eligibility
-- console presents operational state but does not become its source of truth
-- admin changes policy and handles exceptions but does not duplicate domain logic
-- studio and platform communicate through immutable, versioned design releases rather than shared mutable project state
+- Only studio generates and validates geometry
+- Tessa may interpret intent and propose constrained parameters, but never generates production geometry
+- Only ParaCraft turns approved parameters into OpenSCAD geometry and enforces physical design rules
+- Only platform manages listings, discovery, storefronts, carts, and buyer-facing checkout
+- Only operations computes trusted prices, moves money, manages delivery protection, and decides whether a route is available
+- Only manufacturing owns material capability truth, manufacturer adapters, quotes, and route eligibility
+- Console presents operational state but does not become its source of truth
+- Admin changes policy and handles exceptions but does not duplicate domain logic
+- Studio and platform communicate through immutable, versioned design releases rather than shared mutable project state
 
-## rollout detail
+## Rollout detail
 
-market availability, creator onboarding, shipping clusters, hallmarking, customs, and route activation are operational concerns. they live under [`operations/country-rollout`](operations/country-rollout/README.md) and [`operations/shipping`](operations/shipping/README.md), not in this introduction.
+Market availability, creator onboarding, shipping clusters, hallmarking, customs, and route activation are operational concerns. They live under [`operations/country-rollout`](operations/country-rollout/README.md) and [`operations/shipping`](operations/shipping/README.md), not in this introduction.
 
-## current line in the sand
+## Current line in the sand
 
-- metal-only jewelry is permanent scope, with no supplied stones
-- empty bezels or prepared settings for a buyer-provided future stone are intentionally undecided, not promised architecture
-- immutable design releases between studio and platform
-- two-way pricing: fix creator earnings or fix retail price
-- manufacturer evidence remains drafted until checked and accepted
-- commissions remain muted until authentication, conversation, escrow, approval, cancellation, and disputes work together
-- no unsupported route silently reaches checkout
-- no client-provided price, manufacturing cost, earnings value, or validation claim is trusted
+- Metal-only jewelry is permanent scope, with no supplied stones
+- Empty bezels or prepared settings for a buyer-provided future stone are intentionally undecided, not promised architecture
+- Immutable design releases between studio and platform
+- Two-way pricing: fix creator earnings or fix retail price
+- Manufacturer evidence remains drafted until checked and accepted
+- Commissions remain muted until authentication, conversation, escrow, approval, cancellation, and disputes work together
+- No unsupported route silently reaches checkout
+- No client-provided price, manufacturing cost, earnings value, or validation claim is trusted
 
-## implementation audit
+## Implementation audit
 
 [`docs/current-state-audit.md`](docs/current-state-audit.md) maps both existing source repositories to this target architecture and distinguishes what already exists from what must move, be rewritten, or be built.

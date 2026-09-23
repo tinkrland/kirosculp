@@ -1,107 +1,107 @@
-# regional manufacturing routing
+# Regional manufacturing routing
 
-routing is not “pick the closest caster.” it is a sequence of hard eligibility checks followed by a scored choice among the routes that remain.
+Routing is not “pick the closest caster.” it is a sequence of hard eligibility checks followed by a scored choice among the routes that remain.
 
-## order intake
+## Order intake
 
-shopify, a sculptura storefront, or another channel may submit the sale, but channel metadata is not manufacturing truth.
+Shopify, a Sculptura storefront, or another channel may submit the sale, but channel metadata is not manufacturing truth.
 
-before routing:
+Before routing:
 
-- verify the channel signature and account
-- process the event idempotently
-- resolve the channel item to sculptura's listing and immutable design release
-- fetch alloy, size, finish, and production assets from trusted sculptura data
-- confirm the destination is enabled for checkout and delivery
-- confirm payment has reached the state required by operations policy
+- Verify the channel signature and account
+- Process the event idempotently
+- Resolve the channel item to Sculptura's listing and immutable design release
+- Fetch alloy, size, finish, and production assets from trusted Sculptura data
+- Confirm the destination is enabled for checkout and delivery
+- Confirm payment has reached the state required by operations policy
 
-## tier 1: market and regulatory eligibility
+## Tier 1: market and regulatory eligibility
 
-calculate the exact origin-to-destination route. do not treat geographic labels as proof of legal or tax treatment.
+Calculate the exact origin-to-destination route. Do not treat geographic labels as proof of legal or tax treatment.
 
-check:
+Check:
 
-- origin and destination customs territories
-- vat, sales-tax, duty, and import handling
-- importer-of-record and incoterm requirements
-- precious-metal hallmarking and fineness rules
-- common control mark eligibility where verified
-- authorized assay-office and responsibility-mark arrangements
-- sanctions and export restrictions
-- carrier restrictions for precious metals
-- insurance and declared-value limits
-- required customs and production documents
-- returns and failed-delivery handling
+- Origin and destination customs territories
+- VAT, sales-tax, duty, and import handling
+- Importer-of-record and incoterm requirements
+- Precious-metal hallmarking and fineness rules
+- Common control mark eligibility where verified
+- Authorized assay-office and responsibility-mark arrangements
+- Sanctions and export restrictions
+- Carrier restrictions for precious metals
+- Insurance and declared-value limits
+- Required customs and production documents
+- Returns and failed-delivery handling
 
-oss is a vat-reporting mechanism, not a reason to label a route customs-free. schengen is not a goods or customs zone. canada and the united states remain distinct customs destinations. switzerland, the united kingdom, norway, and other non-eu destinations require their own approved route treatment.
+OSS is a vat-reporting mechanism, not a reason to label a route customs-free. Schengen is not a goods or customs zone. Canada and the united states remain distinct customs destinations. Switzerland, the united kingdom, norway, and other non-eu destinations require their own approved route treatment.
 
-an order may cross a customs border when the route is approved and produces a better complete outcome. local-first is a preference, not a rule that overrides capability, quality, cost, or compliance.
+An order may cross a customs border when the route is approved and produces a better complete outcome. Local-first is a preference, not a rule that overrides capability, quality, cost, or compliance.
 
-## tier 2: technical manufacturing eligibility
+## Tier 2: technical manufacturing eligibility
 
-filter by:
+Filter by:
 
-- accepted manufacturer and facility record
-- exact alloy and fineness, not only a broad name such as “18k gold”
-- required casting process
-- wall, feature, tolerance, dimension, and mass limits
-- accepted file and unit requirements
-- geometry-specific production constraints
-- required finish and post-processing
-- hallmarking path
-- healthy adapter, credentials, and onboarding state
+- Accepted manufacturer and facility record
+- Exact alloy and fineness, not only a broad name such as “18k gold”
+- Required casting process
+- Wall, feature, tolerance, dimension, and mass limits
+- Accepted file and unit requirements
+- Geometry-specific production constraints
+- Required finish and post-processing
+- Hallmarking path
+- Healthy adapter, credentials, and onboarding state
 
-## tier 3: finish, quality, capacity, and service
+## Tier 3: finish, quality, capacity, and service
 
-creator requirements should be measurable production specifications rather than subjective labels such as standard, premium, or master artisan.
+Creator requirements should be measurable production specifications rather than subjective labels such as standard, premium, or master artisan.
 
-examples include:
+Examples include:
 
-- polish or surface-finish specification
-- plating metal and thickness
-- hand-finishing requirement
-- engraving-preservation requirement
-- inspection level
-- visible-layer tolerance
-- packaging requirement
-- maximum promised production time
+- Polish or surface-finish specification
+- Plating metal and thickness
+- Hand-finishing requirement
+- Engraving-preservation requirement
+- Inspection level
+- Visible-layer tolerance
+- Packaging requirement
+- Maximum promised production time
 
-facility qualification should use sourced capability plus observed evidence such as defect rate, remake rate, on-time rate, completed-order count, and recent suspensions.
+Facility qualification should use sourced capability plus observed evidence such as defect rate, remake rate, on-time rate, completed-order count, and recent suspensions.
 
-capacity should be represented by process/material availability, next available date, and quoted lead time. active order count alone is not meaningful because orders consume very different amounts of work.
+Capacity should be represented by process/material availability, next available date, and quoted lead time. Active order count alone is not meaningful because orders consume very different amounts of work.
 
-## tier 4: quote and route scoring
+## Tier 4: quote and route scoring
 
-only eligible routes are scored. inputs include:
+Only eligible routes are scored. Inputs include:
 
-- quoted manufacturing cost
-- shipping and insurance cost
-- estimated vat, duty, tariff, and customs cost
-- expected delivery time
-- manufacturer reliability
-- quote confidence and expiry
-- currency exposure
-- claim and remake risk
-- physical distance
+- Quoted manufacturing cost
+- Shipping and insurance cost
+- Estimated VAT, duty, tariff, and customs cost
+- Expected delivery time
+- Manufacturer reliability
+- Quote confidence and expiry
+- Currency exposure
+- Claim and remake risk
+- Physical distance
 
-proximity is evaluated last. the selected route is the best expected compliant and landed outcome, not automatically the nearest facility or cheapest part quote.
+Proximity is evaluated last. The selected route is the best expected compliant and landed outcome, not automatically the nearest facility or cheapest part quote.
 
-## decision record
+## Decision record
 
-every selection stores:
+Every selection stores:
 
-- design-release version
-- destination and chosen facility
-- regulatory and manufacturing ruleset versions
-- alternatives rejected and hard-filter reasons
-- scored candidates and scoring inputs
-- quote and currency snapshot
-- expected taxes, duties, shipping, and insurance
-- hallmarking route
-- whether a human overrode the result, who did it, and why
+- Design-release version
+- Destination and chosen facility
+- Regulatory and manufacturing ruleset versions
+- Alternatives rejected and hard-filter reasons
+- Scored candidates and scoring inputs
+- Quote and currency snapshot
+- Expected taxes, duties, shipping, and insurance
+- Hallmarking route
+- Whether a human overrode the result, who did it, and why
 
-this record is immutable. later rule or price changes do not rewrite why an earlier order was routed as it was.
+This record is immutable. Later rule or price changes do not rewrite why an earlier order was routed as it was.
 
-## no eligible route
+## No eligible route
 
-if no route passes every hard requirement, do not silently weaken a constraint. place the order into a reviewable exception state, preserve the payment according to operations policy, and explain the blocking requirement to staff and the customer where appropriate.
+If no route passes every hard requirement, do not silently weaken a constraint. Place the order into a reviewable exception state, preserve the payment according to operations policy, and explain the blocking requirement to staff and the customer where appropriate.

@@ -1,62 +1,62 @@
-# asset-light economics
+# Asset-light economics
 
-## the low-asset operating model
+## The low-asset operating model
 
-sculptura does not hire a distributed bench-jeweler workforce, buy casting machinery, or hold physical gold, silver, brass, or bronze inventory.
+Sculptura does not hire a distributed bench-jeweler workforce, buy casting machinery, or hold physical gold, silver, brass, or bronze inventory.
 
-approved manufacturing partners absorb the physical capital requirements:
+Approved manufacturing partners absorb the physical capital requirements:
 
-- printers and castable pattern processes
-- investment, burnout, and casting equipment
-- precious-metal procurement
-- specialist production labor
-- finishing equipment
-- local packing and dispatch
+- Printers and castable pattern processes
+- Investment, burnout, and casting equipment
+- Precious-metal procurement
+- Specialist production labor
+- Finishing equipment
+- Local packing and dispatch
 
-sculptura's inventory is digital: projects, design releases, listings, rules, capability records, and operational state. the marginal storage and compilation cost of another released design is low compared with holding another physical jewelry SKU.
+Sculptura's inventory is digital: projects, design releases, listings, rules, capability records, and operational state. The marginal storage and compilation cost of another released design is low compared with holding another physical jewelry SKU.
 
-## what zero inventory does and does not mean
+## What zero inventory does and does not mean
 
-zero physical inventory removes metal-price exposure on unsold stock, warehouse carrying costs, dead sizes, and forecast risk. it does not remove:
+Zero physical inventory removes metal-price exposure on unsold stock, warehouse carrying costs, dead sizes, and forecast risk. It does not remove:
 
-- cloud and model-inference costs
-- failed-production and remake exposure
-- payment fees and chargebacks
-- refunds and consumer-law obligations
-- customer-support costs
-- temporary working-capital gaps
-- insurance and claims
-- reserves required by payment providers
-- integration and compliance maintenance
+- Cloud and model-inference costs
+- Failed-production and remake exposure
+- Payment fees and chargebacks
+- Refunds and consumer-law obligations
+- Customer-support costs
+- Temporary working-capital gaps
+- Insurance and claims
+- Reserves required by payment providers
+- Integration and compliance maintenance
 
-an asset-light company can still have cash-flow and liability risk. those risks must be priced and reserved rather than hidden behind payment-provider language.
+An asset-light company can still have cash-flow and liability risk. Those risks must be priced and reserved rather than hidden behind payment-provider language.
 
-## revenue structure
+## Revenue structure
 
-possible revenue components include:
+Possible revenue components include:
 
-- a platform take rate on each completed sale
-- payment or operational fees presented transparently where permitted
-- creator subscription tiers for advanced Studio, channels, analytics, or capacity
-- commission-service fees when the protected lifecycle exists
-- enterprise or white-label infrastructure fees
+- A platform take rate on each completed sale
+- Payment or operational fees presented transparently where permitted
+- Creator subscription tiers for advanced Studio, channels, analytics, or capacity
+- Commission-service fees when the protected lifecycle exists
+- Enterprise or white-label infrastructure fees
 
-manufacturing cost, tax, delivery, insurance, refunds, and creator earnings are not platform revenue merely because funds pass through the system.
+Manufacturing cost, tax, delivery, insurance, refunds, and creator earnings are not platform revenue merely because funds pass through the system.
 
-## why average order value matters
+## Why average order value matters
 
-made-to-order metal jewelry can support higher order values than commodity print-on-demand categories such as stickers or basic apparel. this creates room to pay for:
+Made-to-order metal jewelry can support higher order values than commodity print-on-demand categories such as stickers or basic apparel. This creates room to pay for:
 
-- more rigorous design validation
-- insured fulfillment
-- human support for exceptions
-- partner-quality controls
-- creator earnings
-- payment and compliance overhead
+- More rigorous design validation
+- Insured fulfillment
+- Human support for exceptions
+- Partner-quality controls
+- Creator earnings
+- Payment and compliance overhead
 
-high order value also increases dispute, fraud, remake, and trust stakes. it is an advantage only if failure rates remain controlled.
+High order value also increases dispute, fraud, remake, and trust stakes. It is an advantage only if failure rates remain controlled.
 
-## simplified unit economics
+## Simplified unit economics
 
 ```text
 customer charge
@@ -70,28 +70,28 @@ customer charge
 = sculptura gross contribution
 ```
 
-creator pricing remains two-way:
+Creator pricing remains two-way:
 
-- fix desired creator earnings and calculate the required retail price
-- fix retail price and calculate the resulting creator earnings
+- Fix desired creator earnings and calculate the required retail price
+- Fix retail price and calculate the resulting creator earnings
 
-both modes must use the same trusted route and cost snapshot.
+Both modes must use the same trusted route and cost snapshot.
 
-## payment architecture
+## Payment architecture
 
-Stripe Connect is the intended first creator-payout rail. the exact charge and transfer model must be selected based on merchant-of-record responsibilities, refunds, disputes, connected-account geography, reserves, and control requirements.
+Stripe Connect is the intended first creator-payout rail. The exact charge and transfer model must be selected based on merchant-of-record responsibilities, refunds, disputes, connected-account geography, reserves, and control requirements.
 
-single-use virtual cards for exact factory costs are a possible factory-payment mechanism when provider availability and caster acceptance make them sensible. they are not required for the core thesis. direct API payment, invoice settlement, prefunding, or another controlled commercial-payment method may be better for a given partner.
+Single-use virtual cards for exact factory costs are a possible factory-payment mechanism when provider availability and caster acceptance make them sensible. They are not required for the core thesis. Direct API payment, invoice settlement, prefunding, or another controlled commercial-payment method may be better for a given partner.
 
-## capital efficiency thesis
+## Capital efficiency thesis
 
-sculptura can scale design supply and transaction volume without buying metal inventory or factories. capital instead funds:
+Sculptura can scale design supply and transaction volume without buying metal inventory or factories. Capital instead funds:
 
-- product and compiler development
-- manufacturing and compliance integrations
-- trust, safety, and support
-- partner onboarding and quality systems
-- creator acquisition
-- reserves and working capital appropriate to payment and fulfillment risk
+- Product and compiler development
+- Manufacturing and compliance integrations
+- Trust, safety, and support
+- Partner onboarding and quality systems
+- Creator acquisition
+- Reserves and working capital appropriate to payment and fulfillment risk
 
-this is low-asset, not no-cost.
+This is low-asset, not no-cost.

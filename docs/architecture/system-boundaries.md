@@ -1,42 +1,42 @@
-# system boundaries
+# System boundaries
 
-sculptura has four product surfaces and two execution domains. folders are ownership boundaries, not merely navigation.
+Sculptura has four product surfaces and two execution domains. Folders are ownership boundaries, not merely navigation.
 
-## product surfaces
+## Product surfaces
 
-### studio
+### Studio
 
-creator-only design work. owns creator projects, Tessa's constrained intent-to-parameter relay, the canonical project model, ParaCraft's deterministic OpenSCAD compilation, physical design rules, browser WebGL rendering of compiled models, manufacturability validation, product renders, and design-release production.
+Creator-only design work. Owns creator projects, Tessa's constrained intent-to-parameter relay, the canonical project model, ParaCraft's deterministic OpenSCAD compilation, physical design rules, browser WebGL rendering of compiled models, manufacturability validation, product renders, and design-release production.
 
-Tessa is not a geometry subsystem. ParaCraft is the only geometric truth. the WebGL renderer displays ParaCraft output and may not become a separate production geometry source.
+Tessa is not a geometry subsystem. ParaCraft is the only geometric truth. The WebGL renderer displays a ParaCraft preview and may not become a separate production geometry source. The Studio server independently compiles and validates the approved revision in an isolated worker before issuing a release.
 
-### platform
+### Platform
 
-public and creator-facing offering work. owns listings, storefronts, discoverability, buyer experience, carts, checkout presentation, and commission relationships.
+Public and creator-facing offering work. Owns listings, storefronts, discoverability, buyer experience, carts, checkout presentation, and commission relationships.
 
-ordinary listings are the default offering path. a creator may later toggle commissions on or off independently. creator signup never opens commissions automatically.
+Ordinary listings are the default offering path. A creator may later toggle commissions on or off independently. Creator signup never opens commissions automatically.
 
-### console
+### Console
 
-creator and buyer operational views. shows earnings, payouts, orders, tracking, claims, refunds, support, and reporting. it reads operational records and submits commands through operations interfaces; it does not own those records.
+Creator and buyer operational views. Shows earnings, payouts, orders, tracking, claims, refunds, support, and reporting. It reads operational records and submits commands through operations interfaces; it does not own those records.
 
-### admin
+### Admin
 
-staff control tower. owns review queues, policy editing, partner activation controls, manual intervention, and audit views. it calls domain control interfaces rather than reimplementing domain rules.
+Staff control tower. Owns review queues, policy editing, partner activation controls, manual intervention, and audit views. It calls domain control interfaces rather than reimplementing domain rules.
 
-## execution domains
+## Execution domains
 
-### manufacturing
+### Manufacturing
 
-owns supported material/process combinations, manufacturer capability truth, partner adapters, production quotes, manufacturing route eligibility, and quality history.
+Owns supported material/process combinations, manufacturer capability truth, partner adapters, production quotes, manufacturing route eligibility, and quality history.
 
-### operations
+### Operations
 
-owns purchases, pricing, creator payouts, settlement, refunds, shipping, insurance, legal/compliance requirements, and country rollout gates.
+Owns purchases, pricing, creator payouts, settlement, refunds, shipping, insurance, legal/compliance requirements, and country rollout gates.
 
-## dependency rules
+## Dependency rules
 
-| caller | may depend on | may not do |
+| Caller | may depend on | may not do |
 |---|---|---|
 | Tessa | Studio project schema and approved parameter vocabulary | generate OpenSCAD, meshes, validation, prices, or production files |
 | ParaCraft | accepted Studio parameters and versioned physical rules | manage listings, prices, orders, or manufacturer routing |
@@ -48,24 +48,24 @@ owns purchases, pricing, creator payouts, settlement, refunds, shipping, insuran
 | Operations | contracts, Manufacturing quote/route interfaces | alter geometry or manufacture directly |
 | Manufacturing | design-release production assets, accepted capability records | manage listings, charge buyers, pay creators |
 
-## canonical objects
+## Canonical objects
 
 - Studio project: mutable creative work, Studio-only
 - Tessa proposal: versioned, constrained parameter operations awaiting creator judgment
 - ParaCraft build: deterministic OpenSCAD source, compiled geometry, physical-rule result, and hashes
-- design release: immutable versioned handoff from Studio
-- listing: Platform offer pointing at one design release
-- manufacturing quote: partner- and route-specific, time-bounded
-- price snapshot: Operations result attached to listing or purchase
-- purchase: immutable commercial intent plus state transitions
-- production order: Manufacturing request tied to paid purchase and exact release
-- settlement: append-only allocation of costs, fees, refunds, and creator earnings
-- market capability: country-level operational allowlist entry
+- Design release: immutable versioned handoff from Studio
+- Listing: Platform offer pointing at one design release
+- Manufacturing quote: partner- and route-specific, time-bounded
+- Price snapshot: Operations result attached to listing or purchase
+- Purchase: immutable commercial intent plus state transitions
+- Production order: Manufacturing request tied to paid purchase and exact release
+- Settlement: append-only allocation of costs, fees, refunds, and creator earnings
+- Market capability: country-level operational allowlist entry
 
-## material boundary
+## Material boundary
 
-sculptura is permanently metal-only. it does not supply or fulfill stones. a possible future empty bezel or prepared setting for a buyer-provided stone remains an explicitly provisional schema extension rather than a current capability or promised roadmap item.
+Sculptura is permanently metal-only. It does not supply or fulfill stones. A possible future empty bezel or prepared setting for a buyer-provided stone remains an explicitly provisional schema extension rather than a current capability or promised roadmap item.
 
-## country support
+## Country support
 
-availability is computed, not implied. Platform asks Operations whether the buyer destination is supported. Operations checks the explicit country allowlist and required capabilities, then Manufacturing confirms an eligible route. either side may deny checkout; neither may broaden support by assumption.
+Availability is computed, not implied. Platform asks Operations whether the buyer destination is supported. Operations checks the explicit country allowlist and required capabilities, then Manufacturing confirms an eligible route. Either side may deny checkout; neither may broaden support by assumption.

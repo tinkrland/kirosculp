@@ -1,21 +1,21 @@
-# insurance
+# Insurance
 
-coverage eligibility, declared value, carrier/manufacturer exclusions, claim windows, evidence, decisions, and recovery. insurance support is country-, carrier-, route-, and value-dependent.
+Coverage eligibility, declared value, carrier/manufacturer exclusions, claim windows, evidence, decisions, and recovery. Insurance support is country-, carrier-, route-, and value-dependent.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: missing**
+**Status: missing**
 
-### existing source evidence
+### Existing source evidence
 
 - No policy, coverage, declared value, premium, exclusion, claim, or recovery records were found.
 
-### what exists now
+### What exists now
 
 - Insurance is mentioned only as intended behavior.
 
-### required changes
+### Required changes
 
 - Model route-specific coverage, declared value, evidence, claim windows, filing, decision, reimbursement, and exclusions.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

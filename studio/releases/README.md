@@ -1,24 +1,26 @@
-# studio: releases
+# Studio: releases
 
-creates immutable, versioned design releases after validation. see the root `contracts/` folder for the interface consumed by platform.
+Creates immutable, versioned design releases after validation. See the root `contracts/` folder for the interface consumed by platform.
 
-## audited implementation reference
+Only a [server-side validated, creator-approved](../validation/server-release-gate.md) immutable project revision can produce a release. The Platform consumes its exact asset hashes; no local preview can authorize a transaction.
 
-**status: missing**
+## Audited implementation reference
 
-### existing source evidence
+**Status: missing**
+
+### Existing source evidence
 
 - `sculptura/src/pages/PublishArtifact.jsx` and `sculptura.dev/src/pages/PublishArtifact.jsx` create artifact or listing records, not immutable design releases.
 - `contracts/design-release.schema.json` defines the target boundary in this foundation.
 
-### what exists now
+### What exists now
 
 - No source table, service, or file bundle represents an immutable studio release.
 
-### required changes
+### Required changes
 
 - Implement release creation only after trusted validation.
 - Store engine version, project snapshot, output hashes, renders, files, supported variants, mass properties, and validation evidence.
 - Make listings reference a release ID and version.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

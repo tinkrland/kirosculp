@@ -1,27 +1,27 @@
-# payout
+# Payout
 
-connected creator identity, payout destination, eligibility, schedule, holds, reversals, and reconciliation. stripe connect is the current intended execution layer; the domain contract stays provider-neutral.
+Connected creator identity, payout destination, eligibility, schedule, holds, reversals, and reconciliation. Stripe Connect is the intended eventual production execution layer, after a pre-Stripe Spree + mock-provider finance prototype. The domain contract stays provider-neutral.
 
-see `stripe-vs-paddle.md` for the provider decision.
+See `stripe-vs-paddle.md` for the provider decision.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: shell**
+**Status: shell**
 
-### existing source evidence
+### Existing source evidence
 
 - `sculptura.dev/src/components/market/settings/SettingsPayout.jsx`
-- payout fields on market accounts
+- Payout fields on market accounts
 - `sculptura.dev/src/components/dashboard/WalletSection.jsx`
 
-### what exists now
+### What exists now
 
 - Creators can enter payout preferences and see wallet-like UI, but no connected account, balance ledger, verification, payout schedule, reserve, or transfer exists.
 
-### required changes
+### Required changes
 
 - Use a payout provider such as Stripe Connect through protected server flows.
 - Store provider identifiers rather than raw payout details.
 - Add verification gates, ledger balances, holds, transfers, failures, and reconciliation.
 
-see the [complete source audit](../../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../../docs/current-state-audit.md) for cross-domain findings and build order.

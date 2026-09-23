@@ -1,28 +1,28 @@
-# creator onboarding and payout geography
+# Creator onboarding and payout geography
 
-creator signup geography and buyer shipping geography are separate policies.
+Creator signup geography and buyer shipping geography are separate policies.
 
-## intended signup policy
+## Intended signup policy
 
-allow a creator to create an account from any jurisdiction where the selected connected-payout provider supports the required account type, subject to sanctions, prohibited-business, age, and legal restrictions.
+Allow a creator to create an account from any jurisdiction where the selected connected-payout provider supports the required account type, subject to sanctions, prohibited-business, age, and legal restrictions.
 
-signup itself does not intentionally require full kyc. creators can build a profile, work in studio, and prepare listings before completing payout onboarding.
+Signup itself does not intentionally require full kyc. Creators can build a profile, work in studio, and prepare listings before completing payout onboarding.
 
-## payout gate
+## Payout gate
 
-identity and payout verification must be complete before money is released. the initial product threshold is:
+Identity and payout verification must be complete before money is released. The initial product threshold is:
 
-- usd balance: **$20**
-- eur balance: **€20**
+- Usd balance: **$20**
+- Eur balance: **€20**
 
-reaching the threshold should prompt provider-hosted payout onboarding if it is incomplete. a creator may also complete it earlier voluntarily.
+Reaching the threshold should prompt provider-hosted payout onboarding if it is incomplete. A creator may also complete it earlier voluntarily.
 
-this is product intent, not a promise that every provider permits deferred verification. stripe, paypal, a regulator, sanctions screening, transaction monitoring, or a connected-account configuration may require information earlier. provider requirements win, and the product must surface that honestly instead of bypassing it.
+This is product intent, not a promise that every provider permits deferred verification. Stripe, paypal, a regulator, sanctions screening, transaction monitoring, or a connected-account configuration may require information earlier. Provider requirements win, and the product must surface that honestly instead of bypassing it.
 
-## provider direction
+## Provider direction
 
-- stripe connect: primary intended connected-account and payout layer
-- paypal: candidate secondary payout/account-sync option
-- razorpay and regional providers: later research where they improve local creator access
+- Stripe connect: primary intended connected-account and payout layer
+- Paypal: candidate secondary payout/account-sync option
+- Razorpay and regional providers: later research where they improve local creator access
 
-provider support must be queried from current provider capability data. do not freeze a copied country list in application code and call it permanent.
+Provider support must be queried from current provider capability data. Do not freeze a copied country list in application code and call it permanent.

@@ -1,12 +1,12 @@
-# platform: buyers
+# Platform: buyers
 
-buyer-facing browsing, product detail, wishlists, carts, guest checkout, and authenticated account history. ordinary purchases do not require an account. commissions will.
+Buyer-facing browsing, product detail, wishlists, carts, guest checkout, and authenticated account history. Ordinary purchases do not require an account. Commissions will.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: partial**
+**Status: partial**
 
-### existing source evidence
+### Existing source evidence
 
 - `sculptura.dev/src/pages/BuyerDashboard.jsx`
 - `sculptura.dev/src/components/follow/FollowButton.jsx`
@@ -15,14 +15,14 @@ buyer-facing browsing, product detail, wishlists, carts, guest checkout, and aut
 - `sculptura.dev/src/lib/wishlistStore.js`
 - `sculptura.dev/src/pages/SharedList.jsx`
 
-### what exists now
+### What exists now
 
 - Authenticated order history and database-backed follows/lists exist. Wishlists remain local-storage-only, and demo users use local fallbacks.
 
-### required changes
+### Required changes
 
 - Define buyer ownership and privacy for every list.
 - Support safe claiming of guest orders.
 - Replace mixed demo/live behavior with explicit environments.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.

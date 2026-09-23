@@ -1,21 +1,21 @@
-# manufacturing quality
+# Manufacturing quality
 
-defect reports, remake rules, partner reliability, inspection evidence, and capability suspension. quality history feeds routing but does not rewrite original order or quote records.
+Defect reports, remake rules, partner reliability, inspection evidence, and capability suspension. Quality history feeds routing but does not rewrite original order or quote records.
 
-## audited implementation reference
+## Audited implementation reference
 
-**status: missing**
+**Status: missing**
 
-### existing source evidence
+### Existing source evidence
 
 - No inspection, defect, remake, acceptance, or quality-evidence system was found.
 
-### what exists now
+### What exists now
 
 - Admin review concerns listing approval, not physical production quality.
 
-### required changes
+### Required changes
 
 - Define preflight, partner acceptance, inspection evidence, defect classification, remake, refund coordination, and partner-quality metrics.
 
-see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
+See the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
