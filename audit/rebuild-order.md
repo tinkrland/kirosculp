@@ -1,6 +1,6 @@
 # ordered rebuild with evidence gates
 
-this is not a promise that any step is implemented. each step needs a source change, tests, and a verified status update in this tracker.
+this is not a promise that any step is implemented. each step needs a source change, tests, and a verified status update in this tracker. the per-leg detail, dependencies, and waiting states live in [buildplan](../buildplan/README.md).
 
 1. **contain security:** remove client admin password, correct row-level policies cumulatively, lock down private market accounts and commission requests, and prove cross-role denial. do not deploy finance functions against permissive policies.
 2. **establish the studio source of truth:** version and serialize a canonical project state; implement tessa's bounded proposal/approval protocol; consolidate paracraft's geometry construction and rule versions. align browser preview with a reproducible server build.
