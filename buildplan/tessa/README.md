@@ -16,6 +16,10 @@ tessa is the vision-model middle layer: she reads a creator's references and des
 - the canonical project model and control schema from the [paracraft leg](../paracraft/README.md): proposals need their exact target.
 - the studio ui's proposal-diff surface from the [studio leg](../studio/README.md).
 
+## dependency direction
+
+tessa depends on paracraft's parameter envelope, never the reverse. every tessa-side integration point reads paracraft's published schema; nothing in paracraft may import, reference, or know about tessa. this keeps the compiler independently extractable and open-sourceable, and keeps tessa swappable.
+
 ## boundaries
 
 tessa is exclusively for creators; buyers and commissioners never operate her. she does not decide castability (paracraft's rules do), and she does not touch listings, prices, or orders. if she misunderstands a reference, the worst case is a visible, editable parameter proposal, never a phantom geometry. on external dataset generation for her evaluation corpus, see the note in [paracraft's benchmarks](../paracraft/benchmarks.md).

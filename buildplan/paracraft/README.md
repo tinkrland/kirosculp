@@ -21,6 +21,10 @@ the convergence strategy, in order:
 4. land the first rule set (one alloy, one pattern process) with dated sources, even if narrow.
 5. grow coverage metal by metal, benchmarking at each addition, never copying a number without a source.
 
+## decoupling rule
+
+tessa may depend on paracraft: her proposals target paracraft's parameter envelope. the reverse is forbidden. paracraft builds, runs, validates, and is benchmarked with zero tessa imports or references, and it accepts only typed parameter state, never agent output structures. keep it that way so paracraft can be extracted and open-sourced on its own if we ever choose to, and so tessa can be swapped, retrained, or replaced without touching the compiler.
+
 ## boundaries
 
 paracraft does not quote prices, choose partners, or decide route eligibility: those belong to [operations](../../operations/README.md) and [manufacturing](../../manufacturing/README.md). tessa hands paracraft constrained parameters; paracraft never receives freeform intent. a rule value without a dated source is `drafted`, never active.
