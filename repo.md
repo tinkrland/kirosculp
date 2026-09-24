@@ -20,8 +20,14 @@ studio/
   geometry/
   validation/
   releases/
-  virtual-studio/
   studiogram/
+    why/
+    how-it-works/
+    hand/
+    jewelry/
+    scene-system/
+    capture/
+    behind-the-scenes/
 
 offerings/
   nativity/
@@ -56,7 +62,10 @@ admin/
   platform-policy/
   audit/
 
+marketing/
 manufacturing/
+wearables/
+
   processes/
   materials-supported/
   routing/

@@ -2,7 +2,7 @@
 
 photograph jewelry before it has been made. studiogram is sculptura's planned virtual product studio, built around the same compiled 3d artifact that would be sent for manufacturing.
 
-recovered from sculptura.dev, where the concept was explained across the studiogram overview page, five guide pages, and the site footer (`src/pages/Studiogram.jsx`, `src/features/studiogram/`, `.lovable/plan/studiogram-content-pages-2026-09-12.md`). that build was explicitly explanatory: content pages labeled upcoming, no studio engine, no data model.
+recovered from sculptura.dev, where the concept was explained across the studiogram overview page and five linked guides (`src/pages/Studiogram.jsx`, `src/features/studiogram/studiogramContent.js`, `.lovable/plan/studiogram-content-pages-2026-09-12.md`). that build was explicitly explanatory: content pages labeled upcoming, no studio engine, no data model. the folder structure below mirrors those guides.
 
 ## principles
 
@@ -13,30 +13,27 @@ recovered from sculptura.dev, where the concept was explained across the studiog
 
 studiogram is a deterministic 3d scene system, not image generation. every photograph is the rendered result of explicit geometry and saved scene state.
 
-## why it exists
-
-made-to-order jewelry is ready to validate and list before a physical sample exists. traditional product photography comes after manufacturing, which makes every new listing depend on an upfront sample, a model, a camera, and a physical shoot. studiogram removes that dependency: the design already has defined geometry, dimensions, materials, and manufacturing constraints, so the exact object can be presented without arranging a casting first.
-
-the artifact is never redrawn for the photograph. the studio consumes the same compiled mesh used by the viewer, and attachment information travels with the canonical design record, so photography never becomes a second, drifting copy of the jewelry.
-
 ## the journey
 
 1. **prepare the subject.** choose a saved hand or shape a new one, then add one or more compiled artifacts. every piece attaches to a named location and stays an independent object in the scene.
 2. **direct the scene.** pose the hand, orbit a real camera, shape light and backdrop. each control changes one part of the scene while preserving every other choice.
 3. **capture the set.** save a frame, adjust the scene, save another. the image set can be reviewed, ordered, and exported as png files for a product carousel.
 
-## the parts of the scene
+## guides
 
-- **hand.** one parameterized base hand rather than a library of people. presentation and build are separate controls; finer controls shape width, finger length, thickness, and palm proportions. surface details stay separate: skin tone, body hair, and nail appearance affect the surface rather than replacing the hand; tattoos are placed on the skin and move naturally with poses. complete shape and surface choices save together as a reusable hand configuration.
-- **jewelry.** the real compiled artifact enters the scene, placed at a named location such as a finger, wrist, or earlobe. attached jewelry follows the hand's pose rather than staying frozen in space. several pieces can share a scene, stacks can be reordered, and pieces from more than one creator can be combined while each artifact remains its own object.
-- **scene.** pose controls move the hand's rig; the camera orbits an already composed scene; lighting and backdrop are independent from the camera, with presets as starting points and the same values available for manual adjustment.
-- **capture.** each capture records the current hand, jewelry, pose, camera, lighting, and backdrop. a typical session produces three or four complementary shots: different angles, closer details, a new pose, with the product consistent throughout. export is a png image set with carousel-ready ordering; attribution, captions, and posting remain with the creator.
+- [why/](why/README.md): why studiogram exists, closing the photography gap between a finished digital design and the first physical casting
+- [how-it-works/](how-it-works/README.md): the complete flow from compiled jewelry design to an ordered set of product images through one reproducible scene
+- [hand/](hand/README.md): choose and shape a hand, one configurable base model with independent build, proportion, and surface controls
+- [jewelry/](jewelry/README.md): add and arrange jewelry, placing the real compiled artifact at named attachment locations without flattening it into an image
+- [scene-system/](scene-system/README.md): the scene machinery: parameterized hand, attachment points, camera, lighting, environment, and saved scene state
+- [capture/](capture/README.md): capture several views from the same scene, review their order, and export a clean image set for a product carousel
+- [behind-the-scenes/](behind-the-scenes/README.md): how one saved scene keeps the real artifact, hand rig, camera, lighting, and output connected
+
+similar and reference services are listed in [references.md](references.md).
 
 ## relation to the studio leg
 
-studiogram is the photography face of the [virtual studio](../virtual-studio/README.md): the virtual studio is the deterministic 3d scene system (parameterized hand, attachment points, camera, lighting, environment), and studiogram is the creator-facing capture flow built on top of it. it sits in the studio domain because it consumes the design release and never becomes a source of geometry.
-
-similar and reference services are listed in [references.md](references.md).
+studiogram is the virtual product studio itself: the scene system lives in [scene-system/](scene-system/README.md) and the capture flow wraps it. it sits in the studio domain because it consumes the design release and never becomes a source of geometry. the marketing-facing re-explanation lives in [marketing/](../../marketing/README.md).
 
 ## status
 
