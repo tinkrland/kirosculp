@@ -56,6 +56,7 @@ admin/
   audit/
 
 manufacturing/
+  processes/
   materials-supported/
   routing/
   manufacturer-layer/

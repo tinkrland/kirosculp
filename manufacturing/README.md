@@ -12,6 +12,7 @@ manufacturing turns an eligible paid order and exact design release into a norma
 
 ## research and reference
 
+- `processes/`: how metal actually becomes jewelry: lost-wax investment casting, the resin-pattern variant, sand casting, and the defect catalog, distilled from the recovered casting research
 - `tasks/`: research briefs and open checks
 - `schemas/`: evidence-bound capability contract
 - `reference/`: structured candidate dataset
