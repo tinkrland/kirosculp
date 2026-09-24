@@ -12,6 +12,7 @@ studio is for creators. it turns intent into deterministic, manufacturable metal
 - deterministic mesh and production-file compilation
 - castability validation and mass estimates
 - versioned design-release creation
+- studiogram, the planned [virtual product photography studio](studiogram/README.md): the compiled artifact on a parameterized hand, captured as reproducible scene state
 
 ## does not own
 
@@ -46,5 +47,3 @@ same parameters, compiler version, and rule-set version in must produce the same
 ## current implementation
 
 see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.
-
-- `studiogram/`: the planned virtual product photography studio: the compiled artifact on a parameterized hand, captured as reproducible scene state
