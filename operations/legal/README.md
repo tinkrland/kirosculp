@@ -2,6 +2,8 @@
 
 terms, creator and buyer agreements, intellectual-property process, commission terms, prohibited use, dispute policy, and jurisdiction-specific obligations. this folder records product requirements and counsel-reviewed decisions, not invented legal conclusions.
 
+the creator intellectual-property research lives in [creator-ip/](creator-ip/README.md): the ownership stack from bases and parameter states to compiled meshes and capture assets, and the open questions around authorship, commissions, licenses, and enforcement.
+
 ## audited implementation reference
 
 **status: partial content only**

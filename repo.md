@@ -96,6 +96,7 @@ operations/
   insurance/
   shipping/
   legal/
+    creator-ip/
   compliance/
   country-rollout/
 
