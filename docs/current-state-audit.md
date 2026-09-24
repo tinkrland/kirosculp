@@ -45,7 +45,7 @@ passing a front-end build does not prove that checkout, commissions, admin autho
 - `src/lib/svgToShape.js` supports svg-derived pendant shapes
 - `src/lib/stlExport.js` exports scene geometry to stl
 - `src/components/canvas/CodePanel.jsx` creates downloadable openscad for the ring path
-- `src/pages/studio/MaterialsPage.jsx`, `PrintPage.jsx`, `StylesPage.jsx`, `TemplatesPage.jsx`, `PresetsPage.jsx`, and `CodePage.jsx` form the current virtual-studio navigation
+- `src/pages/studio/MaterialsPage.jsx`, `PrintPage.jsx`, `StylesPage.jsx`, `TemplatesPage.jsx`, `PresetsPage.jsx`, and `CodePage.jsx` form the current studio navigation, absorbed into studiogram as the [scene-system](../studio/studiogram/scene-system/README.md) surface
 - `src/lib/studioStore.js` persists the active design in local storage
 
 ### studio limitations
