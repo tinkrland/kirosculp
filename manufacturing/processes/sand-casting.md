@@ -18,4 +18,13 @@ a reusable pattern (traditionally made of wood, metal, or resin) is pressed into
 - regional partners whose general casting marketing includes sand processes alongside jewelry investment casting
 - historical or educational comparisons when evaluating what a partner actually offers
 
-in every case the capability question is the same one the [manufacturer evidence rules](../README.md) already ask: does the partner demonstrate the printed-pattern-to-precious-metal jewelry process specifically? sand casting capability does not prove it, and v1 routing scope excludes it.
+## recovered intent: the same printed pattern can go to sand
+
+the sculptura.dev source repo planned a sand-cast fallback from the same 3d printed castable pattern used for investment casting. two statements were recovered:
+
+- from the about page: for larger sculptural pieces, sand casting from the same 3d printed pattern. lower cost on big pours, slightly less detail.
+- from the admin production plan: for pieces over roughly 250 g of metal, where investment casting becomes expensive, the pattern is pressed into bonded sand, removed, and metal is poured in. the pattern is invested in plaster or sand depending on piece size.
+
+the economics behind that fallback: investment casting flasks and burnout cycles scale poorly with metal mass, so big sculptural pours get much cheaper in bonded sand, at an accepted detail loss that matters little for sculptural work. the pattern side does not change: castable resin printed by the same studio pipeline feeds either mold family.
+
+routing still treats sand casting as out of scope for v1 fine jewelry. what changes is that it is a recorded fallback candidate for large-piece routing later, not merely a family to recognize. any partner claiming it still faces the same [manufacturer evidence rules](../README.md): sand casting capability does not prove the printed-pattern-to-precious-metal jewelry process.

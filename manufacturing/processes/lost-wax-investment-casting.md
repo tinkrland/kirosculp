@@ -57,6 +57,20 @@ magnetic pin tumbling with [0.3-0.5 mm stainless pins](https://www.ganoksin.com/
 - **assay and fineness:** gold by cupellation ([iso 11426](https://www.progold.com/standards)), silver volumetrically (iso 11427), platinum gravimetrically (iso 11210), with fineness bounds under iso 9202. these underpin the fineness claims the platform is allowed to repeat.
 - **shrinkage compensation:** the investment casting institute's cumulative rule, [s total = s pattern + s metal minus investment expansion](https://knowledge.welongcasting.com/what-is-precision-casting-and-how-does-it-work): pattern 0.5-1.0%, metal 1.5-2.5% by alloy, investment expansion offsets 0.8-1.2%.
 
+## why investment casting over direct metal printing
+
+also recovered from the sculptura.dev production plan. direct metal printing (dmls, metal sla) exists, but loses at wearable-scale, indie-volume production:
+
+| factor | lost wax | direct metal printing |
+|---|---|---|
+| surface quality | excellent after polish | grainy, needs heavy post-processing |
+| metal options | almost any alloy | limited, mostly steel and titanium, few precious |
+| unit cost at low volume | low | very high |
+| detail at jewelry scale | excellent | good but costly |
+| precious metals (au, ag) | trivial | rare and expensive |
+
+direct metal printing earns its keep on industrial parts. for jewelry pieces, investment casting wins on price, finish, and metal selection, which is why every routed order goes through the burnout-and-pour pipeline above.
+
 ## negative findings carried over
 
 - **no universal shrinkage scalar exists.** it varies by alloy and flask volume; paracraft must use material-specific lookups, not one global factor.

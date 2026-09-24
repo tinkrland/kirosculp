@@ -21,6 +21,7 @@ studio/
   validation/
   releases/
   virtual-studio/
+  studiogram/
 
 offerings/
   nativity/
