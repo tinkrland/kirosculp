@@ -104,6 +104,17 @@ contracts/
   design-release.md
   design-release.schema.json
 
+research/
+  sources/
+  evidence/
+  contradictions/
+  ontology/
+  synthesis/
+  profiles/
+  reports/
+  repository-map.md
+  research-gaps.md
+
 audit/
   index.md
   studio.md
@@ -156,6 +167,7 @@ scripts/
 | [`operations/`](operations/README.md) | money and delivery: purchase, pricing, payout, settlement, shipping, rollout |
 | [`marketing/`](marketing/README.md) | outward-facing re-explanations for the content shell: brand, positioning, social, studiogram |
 | [`contracts/`](contracts/README.md) | the versioned interfaces between domains, starting with the design release |
+| [`research/`](research/README.md) | the evidence corpus: sources, atomic evidence, contradictions, ontology, and the first versioned manufacturing profile for paracraft's rules |
 | [`audit/`](audit/index.md) | per-file source status and the evidence-gated rebuild order |
 | [`what-exists/`](what-exists/README.md) | the two supplied source repos, brought in whole, so every audit citation links to a real file instead of pointing elsewhere |
 | [`explain/`](explain/index.md) | the detailed product explanation split by domain |

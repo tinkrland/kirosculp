@@ -1,0 +1,143 @@
+{
+  "profile_id": "profile-001",
+  "name": "Lost-Wax Casting — Sterling Silver — General",
+  "version": "0.1.0",
+  "created": "2026-09-24",
+  "scope": {
+    "process": "lost-wax casting from printed wax/resin",
+    "material": "sterling_silver",
+    "manufacturer": "general",
+    "machine": "unknown",
+    "orientation": "unknown",
+    "finishing": "unknown"
+  },
+  "constraints": [
+    {
+      "constraint_id": "ctr-wall-001",
+      "property": "minimum_wall_thickness",
+      "operator": ">=",
+      "value": 0.8,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-wall-001", "evid-wall-003", "evid-wall-004", "evid-wall-006", "evid-wall-007"]
+    },
+    {
+      "constraint_id": "ctr-wall-002",
+      "property": "minimum_wall_thickness_ring_band",
+      "operator": ">=",
+      "value": 1.0,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-wall-001", "evid-wall-002"]
+    },
+    {
+      "constraint_id": "ctr-wall-003",
+      "property": "minimum_wall_thickness_small_elements",
+      "operator": ">=",
+      "value": 0.5,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-wall-006", "evid-prong-003"]
+    },
+    {
+      "constraint_id": "ctr-feat-001",
+      "property": "minimum_feature_size",
+      "operator": ">=",
+      "value": 0.35,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-feat-001", "evid-feat-002"]
+    },
+    {
+      "constraint_id": "ctr-engrave-001",
+      "property": "engraving_raised",
+      "operator": ">=",
+      "value": {"min_thickness": 0.30, "max_height": 0.60, "min_spacing": 0.30},
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-feat-003", "evid-feat-004"]
+    },
+    {
+      "constraint_id": "ctr-engrave-002",
+      "property": "engraving_recessed",
+      "operator": ">=",
+      "value": {"min_width": 0.30, "max_depth": 0.50, "min_spacing": 0.30, "max_depth_to_width": 2.0},
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-feat-003", "evid-feat-004", "evid-engrave-001", "evid-engrave-002"]
+    },
+    {
+      "constraint_id": "ctr-hole-001",
+      "property": "minimum_hole_diameter",
+      "operator": ">=",
+      "value": 0.5,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-hole-001", "evid-hole-002"]
+    },
+    {
+      "constraint_id": "ctr-clear-001",
+      "property": "minimum_clearance",
+      "operator": ">=",
+      "value": 0.3,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-clear-001"]
+    },
+    {
+      "constraint_id": "ctr-nested-001",
+      "property": "nested_components",
+      "operator": "==",
+      "value": 0,
+      "unit": "count",
+      "severity": "error",
+      "evidence": ["evid-nested-001", "evid-hollow-002"]
+    },
+    {
+      "constraint_id": "ctr-mesh-001",
+      "property": "mesh_manifoldness",
+      "operator": "==",
+      "value": true,
+      "unit": "boolean",
+      "severity": "error",
+      "evidence": ["evid-tol-003"]
+    },
+    {
+      "constraint_id": "ctr-edge-001",
+      "property": "edge_sharpness",
+      "operator": ">=",
+      "value": 0.30,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": ["evid-edge-001"]
+    }
+  ],
+  "parameters": {
+    "casting_shrinkage": {"value": 1.8, "unit": "percent", "evidence": ["evid-shrink-001", "evid-shrink-002"]},
+    "dimensional_tolerance": {"value": "±5%", "lower_limit": "±0.35 mm", "evidence": ["evid-tol-001"]},
+    "finishing_erosion": {
+      "polished": {"value": 0.05, "unit": "mm", "evidence": ["evid-polish-001"]},
+      "sandblasted": {"value": 0.10, "unit": "mm", "evidence": ["evid-polish-001"]},
+      "brushed": {"value": 0.10, "unit": "mm", "evidence": ["evid-polish-001"]},
+      "hand_polished": {"value": 0.15, "unit": "mm", "evidence": ["evid-polish-001"]},
+      "production": {"value": 0.20, "unit": "mm", "evidence": ["evid-shank-001"]}
+    }
+  },
+  "capabilities": {
+    "hollow_support": "manufacturer_specific",
+    "hollow_notes": "Materialise: yes with 2+ holes > 1.5mm. Cooksongold: no.",
+    "interlocking_parts": false,
+    "earring_posts": false,
+    "notes": "Earring posts must be soldered on after casting."
+  },
+  "unsupported": [
+    "nested_objects",
+    "hinged_parts",
+    "interlocking_parts",
+    "articulated_parts"
+  ],
+  "source_lineage": [
+    "src-0001", "src-0002", "src-0003", "src-0004", "src-0005", "src-0006",
+    "src-0007", "src-0010", "src-0011", "src-0012"
+  ]
+}

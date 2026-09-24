@@ -1,0 +1,107 @@
+{
+  "version": "0.1.0",
+  "produced": "2026-09-24",
+  "terms": {
+    "wall_thickness": {
+      "canonical_term": "wall_thickness",
+      "aliases": ["wall", "minimum_wall", "minimum_wall_thickness", "metal_thickness", "wall_thickness_minimum"],
+      "definition": "Local distance between opposing surfaces of a solid mesh, measured at the thinnest point",
+      "related_terms": ["minimum_wall_thickness_hollow", "maximum_solid_thickness"],
+      "not_equivalent_to": ["minimum_feature_size", "minimum_clearance"],
+      "notes": "Different manufacturers use 'wall', 'metal thickness', or 'wall thickness' interchangeably. Materialise distinguishes by finish type (gloss vs high gloss). Stuller distinguishes structural/external walls from small elements (claws/bezels)."
+    },
+    "minimum_feature_size": {
+      "canonical_term": "minimum_feature_size",
+      "aliases": ["feature_width", "detail_size", "raised_detail", "minimum_detail"],
+      "definition": "Minimum dimension (width or height) of a raised geometric feature attached to a solid surface",
+      "related_terms": ["engraving_parameters", "minimum_prong_diameter", "filigree_wire_diameter"],
+      "not_equivalent_to": ["wall_thickness"],
+      "notes": "Materialise defines this as diameter × height. eCadCam defines width × height. Formlabs defines filigree wire diameter. These are related but not identical — diameter implies circular cross-section, width implies rectangular."
+    },
+    "engraving_parameters": {
+      "canonical_term": "engraving_parameters",
+      "aliases": ["engraving_depth", "recessed_text", "raised_text", "lettering", "debossed", "embossed"],
+      "definition": "Parameters for engraved (recessed) or embossed (raised) details: depth/height, width, spacing, draft angle, aspect ratio",
+      "related_terms": ["minimum_feature_size"],
+      "not_equivalent_to": ["minimum_clearance"],
+      "sub_terms": {
+        "raised_text": "Embossed details — min thickness, max height, min spacing",
+        "recessed_text": "Engraved details — min width, max depth, min spacing, draft angle",
+        "draft_angle": "Taper on engraving walls — Hoover & Strong specifies 7°, Cooksongold recommends negative draft (taper)"
+      },
+      "notes": "Cooksongold and Stuller use identical values (0.3/0.6/0.3). Materialise uses aspect ratio (1:1). Hoover & Strong uses draft angle (7°). These are complementary, not contradictory."
+    },
+    "minimum_hole_diameter": {
+      "canonical_term": "minimum_hole_diameter",
+      "aliases": ["hole_size", "opening_size", "pilot_hole", "minimum_opening"],
+      "definition": "Minimum diameter of through-holes or openings in the geometry",
+      "related_terms": ["hollow_evacuation"],
+      "not_equivalent_to": ["minimum_clearance"],
+      "notes": "Cooksongold uses 'holes' (0.5 mm). Stuller uses 'openings' (0.4 mm). Both cite investment relocation as root cause. Pilot holes are a sub-type — conical/spherical guide for post-cast drilling."
+    },
+    "minimum_clearance": {
+      "canonical_term": "minimum_clearance",
+      "aliases": ["gap", "spacing_between_parts", "part_clearance"],
+      "definition": "Minimum distance between separate disconnected mesh components",
+      "related_terms": ["stone_clearance"],
+      "not_equivalent_to": ["minimum_wall_thickness", "minimum_hole_diameter"],
+      "notes": "Materialise uses 'clearance' for gaps between parts (0.3 mm). Forge Labs uses 'clearance' for moving parts (0.5 mm, DMLS). These are different concepts — casting clearance (prevent fusion) vs assembly clearance (allow movement)."
+    },
+    "casting_shrinkage": {
+      "canonical_term": "casting_shrinkage",
+      "aliases": ["shrinkage", "shrinkage_compensation", "shrinkage_rate"],
+      "definition": "Linear percentage reduction in size during metal solidification",
+      "related_terms": ["dimensional_tolerance"],
+      "not_equivalent_to": ["finishing_erosion"],
+      "notes": "eCadCam: 1.5-2% (silver/gold). JewelCAD: 1.8-2.1% (sterling silver). Jeweller's Toolkit: 1-3% (including polishing). Non-uniform — geometry-dependent. Applied as scale factor before pattern generation."
+    },
+    "finishing_erosion": {
+      "canonical_term": "finishing_erosion",
+      "aliases": ["polishing_erosion", "material_removal", "production_erosion", "polishing_allowance"],
+      "definition": "Amount of material removed from surface during finishing operations",
+      "related_terms": ["polishing_accessibility"],
+      "not_equivalent_to": ["casting_shrinkage"],
+      "notes": "Materialise: 0.05-0.15 mm by finish type. Stuller: up to 0.2 mm production. Cooksongold: ~0.1 mm. These are per-process, not cumulative. Stuller's higher value may include filing + polishing."
+    },
+    "hollow_evacuation": {
+      "canonical_term": "hollow_evacuation",
+      "aliases": ["drain_holes", "evacuation_holes", "escape_holes", "resin_removal"],
+      "definition": "Requirements for holes connecting internal cavities to exterior for uncured resin/wax removal",
+      "related_terms": ["hollow_cavities", "hollow_support"],
+      "not_equivalent_to": ["minimum_hole_diameter"],
+      "notes": "Materialise: 2+ holes, > 1.5 mm. Formlabs: drain holes required, 0.7 mm shell. These are different processes — Materialise casts from printed wax, Formlabs prints castable resin. The evacuation is for the printed pattern, not the cast metal."
+    },
+    "nested_components": {
+      "canonical_term": "nested_components",
+      "aliases": ["interlocking_parts", "hinged_parts", "articulated_parts"],
+      "definition": "Disconnected mesh components where one is enclosed within another's bounding volume",
+      "related_terms": ["hollow_parts"],
+      "not_equivalent_to": ["minimum_clearance"],
+      "notes": "Materialise: nested/hinged/interlocking not supported. Cooksongold: interlocking/multiple not supported. This is a lost-wax casting limitation — DMLS may support some of these."
+    },
+    "mesh_manifoldness": {
+      "canonical_term": "mesh_manifoldness",
+      "aliases": ["watertight", "manifold", "naked_edges", "non_manifold_edges", "closed_mesh"],
+      "definition": "Whether the mesh is watertight, manifold, with consistent surface normals",
+      "related_terms": [],
+      "not_equivalent_to": [],
+      "notes": "Universal requirement across all manufacturers. Cooksongold: 'watertight, no naked or non-manifold edges'. Non-manifold meshes cause printing failures."
+    },
+    "prong_parameters": {
+      "canonical_term": "prong_parameters",
+      "aliases": ["prong_diameter", "prong_setting", "claw"],
+      "definition": "Dimensions of prongs for stone settings: diameter, seat depth, taper, overlap",
+      "related_terms": ["minimum_feature_size", "setting_wall_thickness"],
+      "not_equivalent_to": ["minimum_wall_thickness"],
+      "notes": "Stuller: pinpoint prong 0.45 mm, seat max 25% of prong. eCadCam: 0.9-1.1 mm for center stones. Materialise: rods/prongs in mesh 0.8 mm. These are different contexts — pinpoint vs center stone vs mesh structure."
+    },
+    "surface_finish": {
+      "canonical_term": "surface_finish",
+      "aliases": ["roughness", "Ra", "surface_quality", "as_cast_finish"],
+      "definition": "Surface roughness of the as-manufactured part, before post-processing",
+      "related_terms": ["finishing_erosion", "polishing_accessibility"],
+      "not_equivalent_to": [],
+      "notes": "DMLS: 200-400 Ra (shot peened). Lost-wax: not quantified in current sources. Jewelry requires significant post-processing from DMLS as-printed state."
+    }
+  }
+}

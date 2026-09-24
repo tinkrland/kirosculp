@@ -1,0 +1,212 @@
+{
+  "version": "0.1.0",
+  "produced": "2026-09-24",
+  "scope": "First vertical slice: Ring + Lost-Wax Investment Casting + Sterling Silver",
+  "ontology": {
+    "geometry": {
+      "_description": "Properties measurable or derivable from the procedural geometry / mesh",
+      "concepts": {
+        "minimum_wall_thickness": {
+          "canonical_term": "minimum_wall_thickness",
+          "aliases": ["wall_thickness", "wall", "minimum_wall", "metal_thickness"],
+          "definition": "Minimum local distance between opposing surfaces of the mesh, measured at the thinnest point",
+          "related_terms": ["maximum_solid_thickness", "minimum_wall_thickness_hollow"],
+          "not_equivalent_to": ["minimum_feature_size", "minimum_clearance"],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["ray_casting", "sphere_inscription_MIS", "distance_field"],
+          "preferred_method": "sphere_inscription_MIS",
+          "rationale": "Sphere method gives consistent results for non-parallel surfaces (curved ring walls). Ray method is ambiguous for non-parallel surfaces. Source: src-0012 (Inui et al. 2016)"
+        },
+        "minimum_feature_size": {
+          "canonical_term": "minimum_feature_size",
+          "aliases": ["feature_width", "detail_size", "raised_detail"],
+          "definition": "Minimum dimension (width/height) of a raised geometric feature attached to a solid surface",
+          "related_terms": ["engraving_parameters", "minimum_prong_diameter"],
+          "not_equivalent_to": ["minimum_wall_thickness"],
+          "measurement": "partially_measurable",
+          "measurement_methods": ["local_thickness", "feature_segmentation"],
+          "notes": "Requires semantic classification of which mesh regions are 'features' vs 'structural walls'"
+        },
+        "engraving_parameters": {
+          "canonical_term": "engraving_parameters",
+          "aliases": ["engraving_depth", "recessed_text", "raised_text", "lettering"],
+          "definition": "Parameters for engraved or embossed details: depth/height, width, spacing, draft angle, aspect ratio",
+          "related_terms": ["minimum_feature_size"],
+          "not_equivalent_to": ["minimum_clearance"],
+          "measurement": "partially_measurable",
+          "measurement_methods": ["recess_depth_analysis", "surface_normal_ray_casting"],
+          "sub_parameters": ["depth", "width", "spacing", "draft_angle", "aspect_ratio"]
+        },
+        "minimum_hole_diameter": {
+          "canonical_term": "minimum_hole_diameter",
+          "aliases": ["hole_size", "opening_size", "pilot_hole"],
+          "definition": "Minimum diameter of through-holes or openings in the geometry",
+          "related_terms": ["hollow_evacuation"],
+          "not_equivalent_to": ["minimum_clearance"],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["cross_section_analysis", "cylindrical_feature_detection"]
+        },
+        "minimum_clearance": {
+          "canonical_term": "minimum_clearance",
+          "aliases": ["gap", "spacing_between_parts"],
+          "definition": "Minimum distance between separate disconnected mesh components",
+          "related_terms": ["stone_clearance"],
+          "not_equivalent_to": ["minimum_wall_thickness"],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["pairwise_distance", "distance_field_between_components"]
+        },
+        "bounding_box": {
+          "canonical_term": "bounding_box",
+          "aliases": ["part_dimensions", "max_size", "build_envelope"],
+          "definition": "Axis-aligned bounding box of the mesh, compared against manufacturer build envelope",
+          "related_terms": [],
+          "not_equivalent_to": [],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["vertex_extents"]
+        },
+        "nested_components": {
+          "canonical_term": "nested_components",
+          "aliases": ["interlocking_parts", "hinged_parts"],
+          "definition": "Disconnected mesh components where one is enclosed within another's bounding volume",
+          "related_terms": ["hollow_parts"],
+          "not_equivalent_to": ["minimum_clearance"],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["connected_component_analysis", "containment_check"]
+        },
+        "hollow_cavities": {
+          "canonical_term": "hollow_cavities",
+          "aliases": ["internal_voids", "enclosed_cavities"],
+          "definition": "Enclosed void regions within the mesh with no path to exterior",
+          "related_terms": ["hollow_evacuation", "hollow_parts"],
+          "not_equivalent_to": ["nested_components"],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["connected_component_analysis_of_complement", "cavity_detection"]
+        },
+        "edge_sharpness": {
+          "canonical_term": "edge_sharpness",
+          "aliases": ["sharp_edges", "edge_radius", "fillet_radius"],
+          "definition": "Presence of sharp external edges below minimum radius threshold",
+          "related_terms": [],
+          "not_equivalent_to": [],
+          "measurement": "partially_measurable",
+          "measurement_methods": ["dihedral_angle_analysis", "curvature_analysis"]
+        },
+        "mesh_manifoldness": {
+          "canonical_term": "mesh_manifoldness",
+          "aliases": ["watertight", "manifold", "naked_edges", "non_manifold_edges"],
+          "definition": "Whether the mesh is watertight, manifold, with consistent normals",
+          "related_terms": [],
+          "not_equivalent_to": [],
+          "measurement": "directly_measurable",
+          "measurement_methods": ["edge_manifoldness_check", "normal_consistency_check"]
+        }
+      }
+    },
+    "manufacturing": {
+      "_description": "Properties of the physical process, not derivable from geometry alone",
+      "concepts": {
+        "casting_shrinkage": {
+          "canonical_term": "casting_shrinkage",
+          "aliases": ["shrinkage", "shrinkage_compensation"],
+          "definition": "Linear percentage reduction in size during metal solidification. Applied as scale factor before pattern generation.",
+          "related_terms": ["dimensional_tolerance"],
+          "not_equivalent_to": ["finishing_erosion"],
+          "measurement": "profile_parameter",
+          "notes": "Not measurable from geometry. Stored in manufacturing profile. Applied as uniform scale factor."
+        },
+        "dimensional_tolerance": {
+          "canonical_term": "dimensional_tolerance",
+          "aliases": ["accuracy", "CT_grade", "ISO_8062"],
+          "definition": "Allowable deviation in final cast dimensions from nominal. Expressed as ±value or CT grade.",
+          "related_terms": ["casting_shrinkage"],
+          "not_equivalent_to": ["finishing_erosion"],
+          "measurement": "profile_parameter"
+        },
+        "finishing_erosion": {
+          "canonical_term": "finishing_erosion",
+          "aliases": ["polishing_erosion", "material_removal", "production_erosion"],
+          "definition": "Amount of material removed from surface during finishing operations (polishing, tumbling, sandblasting).",
+          "related_terms": ["polishing_accessibility"],
+          "not_equivalent_to": ["casting_shrinkage"],
+          "measurement": "profile_parameter",
+          "notes": "Varies by finishing type. Used to predict post-finishing dimensions: final = designed - erosion."
+        },
+        "polishing_accessibility": {
+          "canonical_term": "polishing_accessibility",
+          "aliases": ["polishing_access", "surface_accessibility"],
+          "definition": "Whether a surface region can be reached by polishing tools. Heuristic, not deterministic.",
+          "related_terms": ["finishing_erosion"],
+          "not_equivalent_to": [],
+          "measurement": "heuristic",
+          "notes": "Depends on tool size, approach angle, geometry complexity. Must be labeled as heuristic in validation output."
+        },
+        "hollow_support": {
+          "canonical_term": "hollow_support",
+          "aliases": ["hollow_casting"],
+          "definition": "Whether the manufacturer supports hollow pieces (with evacuation holes). Manufacturer-specific capability.",
+          "related_terms": ["hollow_cavities", "hollow_evacuation"],
+          "not_equivalent_to": [],
+          "measurement": "profile_parameter",
+          "notes": "Materialise: YES (with 2+ holes > 1.5mm). Cooksongold: NO. Must be stored as manufacturer capability flag."
+        },
+        "hollow_evacuation": {
+          "canonical_term": "hollow_evacuation",
+          "aliases": ["drain_holes", "evacuation_holes", "escape_holes"],
+          "definition": "Requirements for holes connecting internal cavities to exterior for wax/resin removal",
+          "related_terms": ["hollow_cavities", "hollow_support"],
+          "not_equivalent_to": [],
+          "measurement": "partially_measurable",
+          "measurement_methods": ["cavity_connectivity_analysis", "hole_diameter_measurement"],
+          "notes": "Can detect cavities and holes from geometry, but whether they're sufficient depends on manufacturer requirements."
+        },
+        "max_solid_thickness": {
+          "canonical_term": "max_solid_thickness",
+          "aliases": ["thick_section", "review_thickness"],
+          "definition": "Thickness above which solid sections should be reviewed for shelling (causes shrinkage voids, burnout issues)",
+          "related_terms": ["minimum_wall_thickness"],
+          "not_equivalent_to": [],
+          "measurement": "partially_measurable",
+          "measurement_methods": ["local_thickness", "ray_casting"],
+          "notes": "Threshold is a recommendation, not a hard limit. Root cause: uneven cooling, shrinkage voids, ash residue."
+        }
+      }
+    },
+    "constraints": {
+      "_description": "Formal constraints with scoped thresholds, derived from evidence",
+      "constraint_taxonomy": {
+        "hard_error": {
+          "_description": "Geometry is outside an actual manufacturer capability or process requirement",
+          "constraints": [
+            "nested_components (lost-wax casting: not supported)",
+            "hollow_cavities without evacuation (if manufacturer requires evacuation)",
+            "bounding_box exceeds manufacturer build envelope",
+            "mesh not watertight/manifold"
+          ]
+        },
+        "warning": {
+          "_description": "Manufacturer recommends a design practice, or there is meaningful uncertainty",
+          "constraints": [
+            "minimum_wall_thickness below profile threshold",
+            "minimum_feature_size below profile threshold",
+            "minimum_hole_diameter below profile threshold",
+            "minimum_clearance below profile threshold",
+            "engraving_parameters outside recommended range",
+            "max_solid_thickness above review threshold",
+            "edge_sharpness below minimum radius",
+            "prong_parameters below minimum dimensions",
+            "stone_clearance below minimum"
+          ]
+        },
+        "informational": {
+          "_description": "System surfaces relevant manufacturing information but cannot conclude geometry is invalid",
+          "constraints": [
+            "polishing_accessibility: cavities and internal structures cannot be polished",
+            "finishing_erosion: features may be affected by finishing",
+            "casting_shrinkage: profile parameter for pattern generation",
+            "dimensional_tolerance: expected accuracy range"
+          ]
+        }
+      }
+    }
+  }
+}
