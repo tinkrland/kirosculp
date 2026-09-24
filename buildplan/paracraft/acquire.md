@@ -6,6 +6,8 @@ the robust dataset we need (per-alloy, per-process castability limits for jewelr
 
 - **casting bureaus** (sculpteo, shapeways, and jewelry-specific casting houses like cooksongold or stuller): their real per-alloy rules, and whether they do castable-resin or castable-wax pattern casting in precious metal at all. the earlier [manufacturer research](../../manufacturing/tasks/materials-and-manufacturers-first-steps.md) already flagged that the prototype's sculpteo assumptions are unsourced and that self-serve ordering needs a written answer, not an assumption.
 - **regional casting partners** (the smaller shops sculptura eventually routes to): they are the ones whose actual process limits become paracraft's rules. they are also the least likely to publish anything.
+- **gildform** (casting-on-demand service): their model requirements page rate-limited our scrape twice, so their rules move here as questions rather than harvested citations.
+- **morris and watson and cooksongold**, despite publishing partial guidelines (see the [rule digest](rule-digest.md)): their pages confirm the shape of the answers but leave the decisive numbers unpublished: shrinkage factor applied, dimensional tolerance, sprue dimensions, per-alloy section minimums, and burnout setpoints.
 - **resin and wax manufacturers** (formlabs and competitors): which geometry limits are properties of the pattern material versus the alloy, and their recommended investment and burnout schedules per material.
 - **alloy suppliers**: certified composition, density, casting temperature range, and shrinkage behavior per alloy grade.
 - **cad/cam jewelry services**: what tolerance they actually hold on ring sizes and repeat orders, since tolerance claims drive sizing rules.

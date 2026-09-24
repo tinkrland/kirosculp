@@ -6,11 +6,13 @@ paracraft is the deterministic compiler framework built on openscad. it turns an
 
 there is no robust, readymade dataset of "jewelry geometry that is castable in metal x under process y". the evidence is scattered across resin and wax manufacturers, casting bureaus, alloy suppliers, and foundry practice, and the numbers genuinely differ per metal and per pattern material: a wall that casts fine in a formlabs castable wax pattern may fail in a standard resin pattern, and silver, gold, and bronze each carry different shrinkage and tolerance behavior. so this leg is comparative research, not lookup.
 
+every candidate piece passes two gates, in order: first printability (can the castable resin or wax pattern even be printed and handled), then castability (will the pattern survive burnout and cast cleanly into metal). the first harvest of published rules (2026-09-23) is consolidated in [rule-digest.md](rule-digest.md).
+
 the convergence strategy, in order:
 
-1. **fetch from all sides** using [resources.md](resources.md): published design rules from sculpteo, formlabs, alloy references, and openscad model collections.
+1. **fetch from all sides** using [resources.md](resources.md): published design rules from sculpteo, formlabs, casting houses, and openscad documentation. the first harvest (2026-09-23) is consolidated in [rule-digest.md](rule-digest.md).
 2. **acquire what is not published** using [acquire.md](acquire.md): custom questions to partners and suppliers whose real per-alloy limits never appear online.
-3. **consolidate** into versioned rule sets, one per (alloy, pattern process) pair, each value carrying its source and date.
+3. **consolidate** into versioned rule sets, one per (alloy, pattern process) pair, each value carrying its source and date, resolving the conflicts recorded in the digest rather than averaging them away.
 4. **benchmark** using [benchmarks.md](benchmarks.md): a deterministic harness that compiles a fixed set of parametric test pieces and checks them against each rule set, so a rule change is measurable, not vibes.
 
 ## steps

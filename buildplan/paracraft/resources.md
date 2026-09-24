@@ -4,6 +4,18 @@ these are published sources worth mining for geometry rules, process limits, and
 
 ## pattern material and process documentation
 
+harvested on 2026-09-23 (machine-extracted tables in the [rule digest](rule-digest.md)):
+
+- [morris and watson: cad design guidelines for casting](https://morrisandwatson.com/casting/cad-design-guidelines): a working casting house's published cad rules: 0.125 mm minimum edge/corner radii, holes wider than 0.20 mm with depth no more than the opening, 0.20 mm minimum gaps between non-touching components, watertight models. notably publishes no numeric wall thickness.
+- [cooksongold: design tips for precious metal casting](https://www.cooksongold.com/blog/learn/top-design-tips-for-our-precious-metal-casting-service): 0.8 mm external walls, 0.5 mm small elements (claws, bezels), 0.3 mm/0.6 mm raised-text rules, 30 x 50 x 70 mm processing envelope, no hollow or interlocking pieces, roughly 0.1 mm removed by polishing, and they apply shrinkage scaling themselves.
+- [sculpteo: sterling silver casting page](https://www.sculpteo.com/en/materials/metal-casting-material/silver-material/): 0.8 mm minimum walls (1 mm unsupported or stemmed), 0.4 mm minimum detail, 0.3 mm minimum clearances for wax drain, 2.4 x 2.4 x 0.8 mm minimum object, 125 x 125 x 100 mm maximum, up to 2% raw / 3% polished shrinkage, no hollowing, no interlocking, no assembly.
+- [hi3dp: sla design guidelines](https://hi3dp.com/blog/design-guidelines-for-sla-printed-parts): generic sla reference (not casting-specific): 25-50 µm layers, 0.8 mm minimum walls, 0.5-1 mm features, 1-2% post-cure shrinkage, orientation and drain-hole practice.
+- [openscad manual: stl import and export](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/STL_Import_and_Export): import formats, manifold requirements, $fn/$fa/$fs behavior, and the failure modes of unclean meshes. notes the export side is not covered there.
+- [openscad manual: customizer](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Customizer): parameterization constraints relevant to the control schema: supported value types, the expression prohibition, and drop-down/slider annotations.
+- [openscad downloads and versions](https://openscad.org/downloads.html): stable 2021.01 artifacts with sha256/sha512 checksums, gpg signatures, and official docker images (2021.01 on debian buster) for the pinned build worker.
+
+earlier entries:
+
 - [formlabs: introduction to casting for 3d printed jewelry patterns](https://formlabs.com/white-papers/introduction-to-casting-for-3d-printed-jewelry-patterns/): the strongest single document found so far. concrete guidance includes shelling parts thicker than 3 mm, drain holes for hollow interiors, and 0.7 mm minimum walls for hollow shells printed in castable wax resin. covers the full workflow: pattern printing, post-cure (noting under 1% post-cure shrinkage), sprue tree assembly, burnout, and casting equipment.
 - [formlabs: using castable wax 40 resin](https://formlabs.com/support/Using-Castable-Wax-40-Resin/): prints at 25 and 50 micron layer heights, targeted at heavy signet and class rings, pendants and medallions, and custom bridal. compatible with leading gypsum investments and clean burnout across a wide range of workflows. the safety and technical data sheets linked from that page carry the material-level specifics.
 - [formlabs: true cast resin](https://formlabs.com/blog/announcing-true-cast-resin/) and the [castable resin lineup](https://formlabs.com/products/materials/): multiple castable materials with different geometry limits (one resin documented for intricate casting up to about 5 mm thick). a good example of why rules must be bound to the specific pattern material, not to "resin" generically.
