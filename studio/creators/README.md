@@ -39,11 +39,11 @@ buyers and commissioners do not receive direct studio access in those roles. a b
 
 ### existing source evidence
 
-- `sculptura/src/pages/studio/BuildPage.jsx`
-- `sculptura/src/components/studio/StudioNav.jsx`
-- `sculptura/src/lib/studioStore.js`
-- `sculptura/src/pages/PublishArtifact.jsx`
-- `sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`
+- [`sculptura/src/pages/studio/BuildPage.jsx`](../../what-exists/base44/src/pages/studio/BuildPage.jsx)
+- [`sculptura/src/components/studio/StudioNav.jsx`](../../what-exists/base44/src/components/studio/StudioNav.jsx)
+- [`sculptura/src/lib/studioStore.js`](../../what-exists/base44/src/lib/studioStore.js)
+- [`sculptura/src/pages/PublishArtifact.jsx`](../../what-exists/base44/src/pages/PublishArtifact.jsx)
+- [`sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`](../../what-exists/lovable/src/components/market/settings/SettingsCommissions.jsx)
 
 ### what exists now
 

@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* tiempos light serif - used for display headings and key labels */
+@font-face {
+  font-family: 'Tiempos';
+  src: url('https://raw.githubusercontent.com/kqrla/assets/main/fonts/tiempos-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* morphosa bag - wordmark only. self-hosted from /public/fonts so the
+   wordmark renders instantly without a github round-trip. */
+@font-face {
+  font-family: 'Morphosa';
+  src: url('/fonts/morphosa-bag.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Bricolage Grotesque', 'Inter', sans-serif;
+    --font-hand: 'Caveat', cursive;
+    --font-serif: 'Tiempos', 'Georgia', serif;
+    --font-mono: 'DM Mono', 'Courier New', monospace;
+    --font-wordmark: 'Morphosa', 'Georgia', serif;
+
+    /* spring meadows palette */
+    --herald: #A36361;
+    --olive: #888958;
+    --horizon: #558E9B;
+    --dusty-lavender: #A386A9;
+    --terracotta: #C96349;
+    --spanish-green: #84A48B;
+    --neptune: #7BB2BA;
+    --rose: #E89B85;
+    --atomic-tangerine: #F79E70;
+    --sweet-mint: #AECBB8;
+    --dewpoint: #C1D8DF;
+    --fairytale: #F8D0D0;
+    --buttercup: #E1CA7A;
+    --pancake: #F0D58F;
+    --wisteria: #C8B3CA;
+    --tumbleweed: #D2A996;
+
+    --background: 38 28% 94%;
+    --foreground: 28 18% 12%;
+    --card: 38 22% 99%;
+    --card-foreground: 28 18% 12%;
+    --popover: 38 22% 99%;
+    --popover-foreground: 28 18% 12%;
+    --primary: 195 28% 47%;
+    --primary-foreground: 38 28% 97%;
+    --secondary: 38 20% 89%;
+    --secondary-foreground: 28 15% 22%;
+    --muted: 38 16% 90%;
+    --muted-foreground: 28 10% 42%;
+    --accent: 140 20% 44%;
+    --accent-foreground: 38 28% 97%;
+    --destructive: 12 48% 52%;
+    --destructive-foreground: 38 28% 97%;
+    --border: 32 18% 80%;
+    --input: 32 18% 80%;
+    --ring: 195 28% 47%;
+    --chart-1: 25 60% 65%;
+    --chart-2: 140 18% 48%;
+    --chart-3: 210 25% 55%;
+    --chart-4: 340 20% 60%;
+    --chart-5: 270 15% 55%;
+    --radius: 1.25rem;
+
+    --sidebar-background: 35 25% 94%;
+    --sidebar-foreground: 30 10% 25%;
+    --sidebar-primary: 210 25% 55%;
+    --sidebar-primary-foreground: 35 30% 96%;
+    --sidebar-accent: 35 20% 89%;
+    --sidebar-accent-foreground: 30 10% 25%;
+    --sidebar-border: 30 15% 85%;
+    --sidebar-ring: 210 25% 55%;
+  }
+
+  .dark {
+    --background: 224 16% 10%;
+    --foreground: 38 18% 90%;
+    --card: 224 14% 14%;
+    --card-foreground: 38 18% 90%;
+    --popover: 224 14% 14%;
+    --popover-foreground: 38 18% 90%;
+    --primary: 195 35% 58%;
+    --primary-foreground: 224 16% 10%;
+    --secondary: 224 12% 19%;
+    --secondary-foreground: 38 18% 85%;
+    --muted: 224 12% 18%;
+    --muted-foreground: 38 10% 58%;
+    --accent: 140 22% 48%;
+    --accent-foreground: 38 18% 90%;
+    --destructive: 12 48% 52%;
+    --destructive-foreground: 38 18% 90%;
+    --border: 224 10% 22%;
+    --input: 224 10% 22%;
+    --ring: 195 35% 58%;
+    --chart-1: 25 60% 62%;
+    --chart-2: 140 22% 48%;
+    --chart-3: 195 35% 58%;
+    --chart-4: 340 22% 60%;
+    --chart-5: 270 18% 58%;
+    --sidebar-background: 224 16% 8%;
+    --sidebar-foreground: 38 18% 90%;
+    --sidebar-primary: 195 35% 58%;
+    --sidebar-primary-foreground: 224 16% 10%;
+    --sidebar-accent: 224 12% 16%;
+    --sidebar-accent-foreground: 38 18% 85%;
+    --sidebar-border: 224 10% 20%;
+    --sidebar-ring: 195 35% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Grain texture overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* subtle grid background - used on dashboard main area to match editorial layout feel */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Sketch border style */
+.sketch-border {
+  border: 1.5px solid hsl(30 15% 78%);
+  border-radius: 1.25rem;
+}

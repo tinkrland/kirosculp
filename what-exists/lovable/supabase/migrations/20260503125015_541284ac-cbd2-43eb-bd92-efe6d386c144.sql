@@ -1,0 +1,1 @@
+ALTER TABLE public.market_accounts ADD COLUMN IF NOT EXISTS payout_legal_name text;

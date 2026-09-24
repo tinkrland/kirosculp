@@ -8,12 +8,12 @@ buyer-facing browsing, product detail, wishlists, carts, guest checkout, and aut
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/BuyerDashboard.jsx`
-- `sculptura.dev/src/components/follow/FollowButton.jsx`
-- `sculptura.dev/src/components/follow/FollowsAndLists.jsx`
-- `sculptura.dev/src/lib/followStore.js`
-- `sculptura.dev/src/lib/wishlistStore.js`
-- `sculptura.dev/src/pages/SharedList.jsx`
+- [`sculptura.dev/src/pages/BuyerDashboard.jsx`](../../what-exists/lovable/src/pages/BuyerDashboard.jsx)
+- [`sculptura.dev/src/components/follow/FollowButton.jsx`](../../what-exists/lovable/src/components/follow/FollowButton.jsx)
+- [`sculptura.dev/src/components/follow/FollowsAndLists.jsx`](../../what-exists/lovable/src/components/follow/FollowsAndLists.jsx)
+- [`sculptura.dev/src/lib/followStore.js`](../../what-exists/lovable/src/lib/followStore.js)
+- [`sculptura.dev/src/lib/wishlistStore.js`](../../what-exists/lovable/src/lib/wishlistStore.js)
+- [`sculptura.dev/src/pages/SharedList.jsx`](../../what-exists/lovable/src/pages/SharedList.jsx)
 
 ### what exists now
 

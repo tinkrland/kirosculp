@@ -8,9 +8,9 @@ checkout accepts buyer selections and destination, asks operations for country e
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/Checkout.jsx`
-- `sculptura.dev/src/lib/cartStore.js`
-- `sculptura.dev/supabase/functions/place-order/index.ts`
+- [`sculptura.dev/src/pages/Checkout.jsx`](../../what-exists/lovable/src/pages/Checkout.jsx)
+- [`sculptura.dev/src/lib/cartStore.js`](../../what-exists/lovable/src/lib/cartStore.js)
+- [`sculptura.dev/supabase/functions/place-order/index.ts`](../../what-exists/lovable/supabase/functions/place-order/index.ts)
 - orders migrations
 
 ### what exists now

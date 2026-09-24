@@ -10,8 +10,8 @@ the [server-side release gate](server-release-gate.md) proposes an isolated head
 
 ### existing source evidence
 
-- `sculptura/src/components/canvas/PrintPanel.jsx` shows print specifications and warnings.
-- `sculptura/src/pages/studio/MaterialsPage.jsx` and `sculptura/src/lib/sculpteoMaterials.js` expose material information.
+- [`sculptura/src/components/canvas/PrintPanel.jsx`](../../what-exists/base44/src/components/canvas/PrintPanel.jsx) shows print specifications and warnings.
+- [`sculptura/src/pages/studio/MaterialsPage.jsx`](../../what-exists/base44/src/pages/studio/MaterialsPage.jsx) and [`sculptura/src/lib/sculpteoMaterials.js`](../../what-exists/base44/src/lib/sculpteoMaterials.js) expose material information.
 
 ### what exists now
 

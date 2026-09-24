@@ -8,7 +8,7 @@ partner activation, credential references, adapter health, capability review sta
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/admin/AdminManufacturers.jsx`
+- [`sculptura.dev/src/pages/admin/AdminManufacturers.jsx`](../../what-exists/lovable/src/pages/admin/AdminManufacturers.jsx)
 - manufacturer migration
 
 ### what exists now

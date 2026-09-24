@@ -8,11 +8,11 @@ sculptura-hosted and white-label storefront presentation, including collections,
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/ShopProfile.jsx`
-- `ShopArtifactBySlug.jsx`
-- `sculptura.dev/src/components/shop/*`
-- `sculptura.dev/src/components/market/mystore/*`
-- `sculptura.dev/src/components/market/sections/CollectionsSection.jsx`
+- [`sculptura.dev/src/pages/ShopProfile.jsx`](../../what-exists/lovable/src/pages/ShopProfile.jsx)
+- [`ShopArtifactBySlug.jsx`](../../what-exists/lovable/src/pages/ShopArtifactBySlug.jsx)
+- [`sculptura.dev/src/components/shop/*`](../../what-exists/lovable/src/components/shop)
+- [`sculptura.dev/src/components/market/mystore/*`](../../what-exists/lovable/src/components/market/mystore)
+- [`sculptura.dev/src/components/market/sections/CollectionsSection.jsx`](../../what-exists/lovable/src/components/market/sections/CollectionsSection.jsx)
 
 ### what exists now
 

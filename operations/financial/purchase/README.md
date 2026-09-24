@@ -8,8 +8,8 @@ payment authorization, capture, order creation, taxes and duties inputs, and ide
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/Checkout.jsx`
-- `sculptura.dev/supabase/functions/place-order/index.ts`
+- [`sculptura.dev/src/pages/Checkout.jsx`](../../../what-exists/lovable/src/pages/Checkout.jsx)
+- [`sculptura.dev/supabase/functions/place-order/index.ts`](../../../what-exists/lovable/supabase/functions/place-order/index.ts)
 - orders table
 
 ### what exists now

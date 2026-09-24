@@ -1,0 +1,82 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "description": "ID of the artifact ordered"
+    },
+    "artifact_name": {
+      "type": "string",
+      "description": "Snapshot of artifact name at time of order"
+    },
+    "artifact_image_url": {
+      "type": "string",
+      "description": "Snapshot of artifact image URL"
+    },
+    "creator_handle": {
+      "type": "string",
+      "description": "Handle of the creator"
+    },
+    "customer_email": {
+      "type": "string",
+      "description": "Email of the customer who placed the order"
+    },
+    "customer_name": {
+      "type": "string",
+      "description": "Name of the customer"
+    },
+    "material": {
+      "type": "string",
+      "description": "Selected material"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price paid by customer"
+    },
+    "manufacturing_cost": {
+      "type": "number",
+      "description": "Manufacturing cost for this order"
+    },
+    "creator_earnings": {
+      "type": "number",
+      "description": "Creator earnings for this order"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "placed",
+        "in_production",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ],
+      "default": "placed",
+      "description": "Current fulfillment status"
+    },
+    "shipping_address": {
+      "type": "string",
+      "description": "Shipping address"
+    },
+    "tracking_number": {
+      "type": "string",
+      "description": "Shipping tracking number (filled by admin)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Internal notes from admin"
+    },
+    "payout_released": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether creator payout has been released"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "artifact_name",
+    "creator_handle",
+    "material",
+    "price"
+  ]
+}

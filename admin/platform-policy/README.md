@@ -8,7 +8,7 @@ global settings and controlled overrides for publication, fees, payout timing, r
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/admin/AdminSettings.jsx`
+- [`sculptura.dev/src/pages/admin/AdminSettings.jsx`](../../what-exists/lovable/src/pages/admin/AdminSettings.jsx)
 - platform settings migration
 
 ### what exists now

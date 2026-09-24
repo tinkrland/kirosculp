@@ -1,0 +1,219 @@
+{
+  "name": "MarketAccount",
+  "type": "object",
+  "properties": {
+    "handle": {
+      "type": "string",
+      "description": "unique public-facing username"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "banner_url": {
+      "type": "string",
+      "description": "store banner image URL"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "store logo image URL"
+    },
+    "email": {
+      "type": "string"
+    },
+    "access_key_hash": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_review",
+        "active",
+        "rejected"
+      ],
+      "default": "draft"
+    },
+    "review_notes": {
+      "type": "string"
+    },
+    "store_heading": {
+      "type": "string",
+      "description": "Custom tagline / heading shown on store page"
+    },
+    "store_subheading": {
+      "type": "string"
+    },
+    "accent_color": {
+      "type": "string",
+      "description": "Hex color for store accent e.g. #84A48B"
+    },
+    "accent_color_secondary": {
+      "type": "string"
+    },
+    "store_icon": {
+      "type": "string",
+      "description": "emoji or icon name for store identity"
+    },
+    "social_instagram": {
+      "type": "string"
+    },
+    "social_twitter": {
+      "type": "string"
+    },
+    "social_tiktok": {
+      "type": "string"
+    },
+    "social_youtube": {
+      "type": "string"
+    },
+    "social_website": {
+      "type": "string"
+    },
+    "social_discord": {
+      "type": "string"
+    },
+    "social_patreon": {
+      "type": "string"
+    },
+    "tip_jar_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "tip_jar_label": {
+      "type": "string",
+      "description": "e.g. 'buy me a coffee'"
+    },
+    "tip_jar_url": {
+      "type": "string",
+      "description": "external tip URL (ko-fi, buymeacoffee etc)"
+    },
+    "waitlist_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "show waitlist banner on store page"
+    },
+    "waitlist_message": {
+      "type": "string",
+      "description": "message shown when waitlist is active"
+    },
+    "coupons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "discount_pct": {
+            "type": "number"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "expires": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "list of discount coupon codes"
+    },
+    "order_message": {
+      "type": "string",
+      "description": "Thank-you message shown after checkout"
+    },
+    "faq_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string"
+          },
+          "a": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Per-store FAQ items shown on the store page"
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "commission_open": {
+      "type": "boolean",
+      "default": false
+    },
+    "hourly_rate": {
+      "type": "number"
+    },
+    "turnaround_time": {
+      "type": "string"
+    },
+    "rush_available": {
+      "type": "boolean",
+      "default": false
+    },
+    "pricing_margin_pct": {
+      "type": "number",
+      "description": "creator markup % added on top of manufacturing cost",
+      "default": 30
+    },
+    "pricing_currency": {
+      "type": "string",
+      "default": "USD",
+      "description": "e.g. USD, EUR, GBP"
+    },
+    "payout_method": {
+      "type": "string",
+      "enum": [
+        "bank_transfer",
+        "paypal",
+        "wise",
+        "crypto"
+      ],
+      "description": "preferred payout method"
+    },
+    "payout_details": {
+      "type": "string",
+      "description": "payout account details (encrypted / masked)"
+    },
+    "total_revenue": {
+      "type": "number",
+      "default": 0
+    },
+    "total_orders": {
+      "type": "number",
+      "default": 0
+    },
+    "insights_time_spent": {
+      "type": "number",
+      "default": 0,
+      "description": "User-input: total hours spent on designs (private)"
+    },
+    "insights_tool_costs": {
+      "type": "number",
+      "default": 0,
+      "description": "User-input: software/tool costs in USD (private)"
+    }
+  },
+  "required": [
+    "handle",
+    "access_key_hash",
+    "email"
+  ]
+}

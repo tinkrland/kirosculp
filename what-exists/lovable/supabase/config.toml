@@ -1,0 +1,10 @@
+project_id = "iskqsictkqbgirzuvylv"
+
+[functions.place-order]
+verify_jwt = false
+
+[functions.store-update]
+verify_jwt = false
+
+[functions.publish-artifact]
+verify_jwt = false

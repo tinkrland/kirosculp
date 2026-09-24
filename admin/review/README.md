@@ -8,8 +8,8 @@ queues and evidence for listing, release, and exception review. an override is e
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/AdminReview.jsx`
-- `sculptura/src/pages/AdminReview.jsx`
+- [`sculptura.dev/src/pages/AdminReview.jsx`](../../what-exists/lovable/src/pages/AdminReview.jsx)
+- [`sculptura/src/pages/AdminReview.jsx`](../../what-exists/base44/src/pages/AdminReview.jsx)
 - artifact status and review fields in the database
 
 ### what exists now

@@ -10,7 +10,7 @@ only a [server-side validated, creator-approved](../validation/server-release-ga
 
 ### existing source evidence
 
-- `sculptura/src/pages/PublishArtifact.jsx` and `sculptura.dev/src/pages/PublishArtifact.jsx` create artifact or listing records, not immutable design releases.
+- [`sculptura/src/pages/PublishArtifact.jsx`](../../what-exists/base44/src/pages/PublishArtifact.jsx) and [`sculptura.dev/src/pages/PublishArtifact.jsx`](../../what-exists/lovable/src/pages/PublishArtifact.jsx) create artifact or listing records, not immutable design releases.
 - `contracts/design-release.schema.json` defines the target boundary in this foundation.
 
 ### what exists now

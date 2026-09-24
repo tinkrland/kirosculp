@@ -20,14 +20,14 @@ webgl is the interactive browser rendering layer. it displays the compiled opens
 
 ### existing source evidence
 
-- `sculptura/src/components/canvas/JewelryViewport.jsx`
-- `sculptura/src/components/canvas/RingViewport.jsx`
-- `sculptura/src/components/canvas/CodePanel.jsx`
-- `sculptura/src/lib/jewelryDefaults.js`
-- `sculptura/src/lib/jewelryTemplates.js`
-- `sculptura/src/lib/multiPieceJewelry.js`
-- `sculptura/src/lib/svgToShape.js`
-- `sculptura/src/lib/stlExport.js`
+- [`sculptura/src/components/canvas/JewelryViewport.jsx`](../../what-exists/base44/src/components/canvas/JewelryViewport.jsx)
+- [`sculptura/src/components/canvas/RingViewport.jsx`](../../what-exists/base44/src/components/canvas/RingViewport.jsx)
+- [`sculptura/src/components/canvas/CodePanel.jsx`](../../what-exists/base44/src/components/canvas/CodePanel.jsx)
+- [`sculptura/src/lib/jewelryDefaults.js`](../../what-exists/base44/src/lib/jewelryDefaults.js)
+- [`sculptura/src/lib/jewelryTemplates.js`](../../what-exists/base44/src/lib/jewelryTemplates.js)
+- [`sculptura/src/lib/multiPieceJewelry.js`](../../what-exists/base44/src/lib/multiPieceJewelry.js)
+- [`sculptura/src/lib/svgToShape.js`](../../what-exists/base44/src/lib/svgToShape.js)
+- [`sculptura/src/lib/stlExport.js`](../../what-exists/base44/src/lib/stlExport.js)
 
 ### what exists now
 

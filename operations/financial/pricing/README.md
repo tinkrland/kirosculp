@@ -8,7 +8,7 @@ one reversible equation supports both creator choices: lock net earnings and sol
 
 ### existing source evidence
 
-- `sculptura/src/lib/pricing.js` and identical `sculptura.dev/src/lib/pricing.js`
+- [`sculptura/src/lib/pricing.js`](../../../what-exists/base44/src/lib/pricing.js) and identical [`sculptura.dev/src/lib/pricing.js`](../../../what-exists/lovable/src/lib/pricing.js)
 - `SettingsPricing.jsx`
 - publish forms
 - `place-order` edge function

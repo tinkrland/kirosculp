@@ -47,7 +47,7 @@ see the [tessa parameter protocol and tooling plan](architecture.md) for Pydanti
 ### existing source evidence
 
 - no tessa implementation was found in either source repository
-- `sculptura/src/pages/studio/BuildPage.jsx` exposes many of the structured controls tessa will eventually be allowed to propose
+- [`sculptura/src/pages/studio/BuildPage.jsx`](../../what-exists/base44/src/pages/studio/BuildPage.jsx) exposes many of the structured controls tessa will eventually be allowed to propose
 - the source does not yet include visual-reference ingestion, a proposal schema, creator approval history, or a parameter-operation boundary
 
 ### required changes

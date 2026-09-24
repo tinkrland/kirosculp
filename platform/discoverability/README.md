@@ -8,11 +8,11 @@ discovery is earned by published listings and explicit eligibility or curation r
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/Home.jsx`
-- `Explore.jsx`
-- `CollectionPage.jsx`
-- `sculptura.dev/src/components/home/FeaturedArtifacts.jsx`
-- `sculptura.dev/src/components/explore/StoreGrid.jsx`
+- [`sculptura.dev/src/pages/Home.jsx`](../../what-exists/lovable/src/pages/Home.jsx)
+- [`Explore.jsx`](../../what-exists/lovable/src/pages/Explore.jsx)
+- [`CollectionPage.jsx`](../../what-exists/lovable/src/pages/CollectionPage.jsx)
+- [`sculptura.dev/src/components/home/FeaturedArtifacts.jsx`](../../what-exists/lovable/src/components/home/FeaturedArtifacts.jsx)
+- [`sculptura.dev/src/components/explore/StoreGrid.jsx`](../../what-exists/lovable/src/components/explore/StoreGrid.jsx)
 - follow and list components
 
 ### what exists now

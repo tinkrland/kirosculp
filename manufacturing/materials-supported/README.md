@@ -8,8 +8,8 @@ an allowlist derived from accepted manufacturer capabilities, not a generic list
 
 ### existing source evidence
 
-- `sculptura/src/lib/sculpteoMaterials.js`
-- `sculptura/src/pages/studio/MaterialsPage.jsx`
+- [`sculptura/src/lib/sculpteoMaterials.js`](../../what-exists/base44/src/lib/sculpteoMaterials.js)
+- [`sculptura/src/pages/studio/MaterialsPage.jsx`](../../what-exists/base44/src/pages/studio/MaterialsPage.jsx)
 - artifact material fields in both repositories
 - `manufacturing/reference/manufacturer-capabilities.json` in this foundation
 

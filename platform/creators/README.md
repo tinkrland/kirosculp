@@ -33,13 +33,13 @@ ordinary listings are the default offering path. after a creator has a store and
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/market/CreateAccount.jsx`
-- `sculptura.dev/src/pages/market/AccessAccount.jsx`
-- `sculptura.dev/src/pages/market/MarketDashboard.jsx`
-- `sculptura.dev/src/pages/market/StoreSettings.jsx`
-- `sculptura.dev/src/pages/market/MyStore.jsx`
-- `sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`
-- `sculptura.dev/src/lib/db.js`
+- [`sculptura.dev/src/pages/market/CreateAccount.jsx`](../../what-exists/lovable/src/pages/market/CreateAccount.jsx)
+- [`sculptura.dev/src/pages/market/AccessAccount.jsx`](../../what-exists/lovable/src/pages/market/AccessAccount.jsx)
+- [`sculptura.dev/src/pages/market/MarketDashboard.jsx`](../../what-exists/lovable/src/pages/market/MarketDashboard.jsx)
+- [`sculptura.dev/src/pages/market/StoreSettings.jsx`](../../what-exists/lovable/src/pages/market/StoreSettings.jsx)
+- [`sculptura.dev/src/pages/market/MyStore.jsx`](../../what-exists/lovable/src/pages/market/MyStore.jsx)
+- [`sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`](../../what-exists/lovable/src/components/market/settings/SettingsCommissions.jsx)
+- [`sculptura.dev/src/lib/db.js`](../../what-exists/lovable/src/lib/db.js)
 
 ### what exists now
 

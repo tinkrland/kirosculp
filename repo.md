@@ -62,9 +62,18 @@ admin/
   platform-policy/
   audit/
 
+what-exists/
+  base44/
+  lovable/
+
 marketing/
+  brand/
+  positioning/
+  social-media/
+  studiogram/
+    wearables/
+
 manufacturing/
-wearables/
 
   processes/
   materials-supported/
@@ -144,8 +153,10 @@ scripts/
 | [`admin/`](admin/README.md) | operator controls: review, policy, routing, partner management |
 | [`manufacturing/`](manufacturing/README.md) | capability truth: materials, partners, quotes, routing, quality |
 | [`operations/`](operations/README.md) | money and delivery: purchase, pricing, payout, settlement, shipping, rollout |
+| [`marketing/`](marketing/README.md) | outward-facing re-explanations for the content shell: brand, positioning, social, studiogram |
 | [`contracts/`](contracts/README.md) | the versioned interfaces between domains, starting with the design release |
 | [`audit/`](audit/index.md) | per-file source status and the evidence-gated rebuild order |
+| [`what-exists/`](what-exists/README.md) | the two supplied source repos, brought in whole, so every audit citation links to a real file instead of pointing elsewhere |
 | [`explain/`](explain/index.md) | the detailed product explanation split by domain |
 | [`docs/`](docs/README.md) | the long-form source assessment and target architecture |
 | [`venture/`](venture/README.md) | investor-facing thesis, kept separate from implementation truth |

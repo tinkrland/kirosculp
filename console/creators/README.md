@@ -8,14 +8,14 @@ creator views over operations: earnings, payout status, order progress, delivery
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/market/MarketDashboard.jsx`
-- `sculptura.dev/src/components/market/sections/OverviewSection.jsx`
-- `ArtifactsSection.jsx`
-- `OrdersSection.jsx`
-- `AnalyticsSection.jsx`
-- `FinanceSection.jsx`
-- `InsightsSection.jsx`
-- `sculptura.dev/src/components/dashboard/WalletSection.jsx`
+- [`sculptura.dev/src/pages/market/MarketDashboard.jsx`](../../what-exists/lovable/src/pages/market/MarketDashboard.jsx)
+- [`sculptura.dev/src/components/market/sections/OverviewSection.jsx`](../../what-exists/lovable/src/components/market/sections/OverviewSection.jsx)
+- [`ArtifactsSection.jsx`](../../what-exists/lovable/src/components/market/sections/ArtifactsSection.jsx)
+- [`OrdersSection.jsx`](../../what-exists/lovable/src/components/market/sections/OrdersSection.jsx)
+- [`AnalyticsSection.jsx`](../../what-exists/lovable/src/components/market/sections/AnalyticsSection.jsx)
+- [`FinanceSection.jsx`](../../what-exists/lovable/src/components/market/sections/FinanceSection.jsx)
+- [`InsightsSection.jsx`](../../what-exists/lovable/src/components/market/sections/InsightsSection.jsx)
+- [`sculptura.dev/src/components/dashboard/WalletSection.jsx`](../../what-exists/lovable/src/components/dashboard/WalletSection.jsx)
 
 ### what exists now
 
