@@ -2,7 +2,7 @@
 
 this folder tracks what needs building, step by step, side by side. think of sculptura as a relay race: each leg (paracraft, tessa, the release gate, the platform, the money flow) is a runner with its own track, and the batons are the versioned contracts between them. a leg can only be tackled when it holds the baton: a leg waiting on a handoff stays in its waiting state instead of guessing its neighbor's job.
 
-the [ordered rebuild](../audit/rebuild-order.md) remains the evidence-gated sequence. this folder holds the per-leg detail: what each leg contains, what it is waiting on, and what it hands over.
+the [ordered rebuild](../audit/rebuild-order.md) remains the evidence-gated sequence. this folder holds the per-leg detail: what each leg contains, what it is waiting on, and what it hands over. the overall scope-out, including the separation of the content shell, the platform, and the docs boundary, lives in [scoping.md](scoping.md).
 
 ## the legs
 
@@ -22,6 +22,11 @@ the [ordered rebuild](../audit/rebuild-order.md) remains the evidence-gated sequ
 3. **the batons are versioned.** the [design release](../contracts/design-release.md) is the studio-to-platform baton. a release-bound order is the platform-to-operations baton. an eligible paid order is the operations-to-manufacturing baton. when a contract changes, every leg that holds it re-checks its work against the new version.
 4. **a waiting state is not a failure.** legs blocked on research answers (like paracraft's partner questions) park openly with the blocking question recorded, rather than inventing plausible numbers.
 5. **every handoff needs evidence.** a leg marks its step done only when the receiving leg can consume the output: schema-valid, hashed, and tested. the [audit](../audit/index.md) is the truth ledger for what exists; this folder is the plan for what comes next.
+
+## parallel tracks outside the relay
+
+- **the content shell:** the public explanatory website, a static artifact built from [marketing/](../marketing/README.md) once that content settles. it explains the product and never runs it; see [scoping.md](scoping.md).
+- **retelldb:** public documentation will move to retelldb, an independent project with its own spec, not designed here; see [scoping.md](scoping.md).
 
 ## what is being tackled now
 

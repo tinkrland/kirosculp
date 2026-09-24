@@ -11,6 +11,10 @@ this leg reworks the offering app so every listing and order binds to a design r
 5. **commerce code separation:** move the storefront, cart, and marketplace code that currently lives inside the studio snapshot over to the platform side, then remove the studio's commerce dependencies.
 6. **commission surfaces stay muted** until the authenticated, escrowed lifecycle exists; the existing muted shell stays.
 
+## build depth
+
+this leg is engineered properly, not as a shallow mvp: full creator and buyer flows, release-bound everything, and no demo-mode shortcuts. the full depth definition is in [scoping.md](../scoping.md), the proper-not-shallow scope for all platform surfaces.
+
 ## waiting on
 
 the first design releases from the [studio leg](../studio/README.md), and the security containment before buyer-facing flows build on the current database.
