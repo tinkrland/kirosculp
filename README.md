@@ -1,4 +1,5 @@
 # sculptura
+<img width="1426" height="340" alt="1000302485" src="https://github.com/user-attachments/assets/f7280067-e9b3-4611-86b9-5050120d3985" />
 
 > a path from a jewelry idea to a manufacturable, sellable, made-to-order piece, without requiring a workshop, inventory, or years of cad training.
 
