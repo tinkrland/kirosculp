@@ -1,0 +1,149 @@
+```json
+{
+  "ontology": {
+    "geometry": {
+      "minimum_wall_thickness": {
+        "canonical_term": "minimum_wall_thickness",
+        "aliases": [],
+        "definition": "The minimum thickness required for walls in a casting process to ensure structural integrity.",
+        "related_terms": ["maximum_solid_thickness", "hollow_parts"],
+        "not_equivalent_to": ["minimum_feature_size"],
+        "measurement": "directly measurable from mesh"
+      },
+      "minimum_feature_size": {
+        "canonical_term": "minimum_feature_size",
+        "aliases": [],
+        "definition": "The smallest size of a feature that can be reliably produced in a casting process.",
+        "related_terms": ["engraving_parameters"],
+        "not_equivalent_to": ["minimum_wall_thickness"],
+        "measurement": "directly measurable from mesh"
+      },
+      "engraving_parameters": {
+        "canonical_term": "engraving_parameters",
+        "aliases": [],
+        "definition": "Specifications for engraving features, including draft angle, depth, and width.",
+        "related_terms": ["minimum_feature_size"],
+        "not_equivalent_to": ["minimum_clearance"],
+        "measurement": "profile parameters"
+      },
+      "minimum_clearance": {
+        "canonical_term": "minimum_clearance",
+        "aliases": [],
+        "definition": "The minimum gap required between parts to prevent fusion during casting.",
+        "related_terms": ["stone_clearance"],
+        "not_equivalent_to": ["minimum_wall_thickness"],
+        "measurement": "directly measurable from mesh"
+      },
+      "maximum_solid_thickness": {
+        "canonical_term": "maximum_solid_thickness",
+        "aliases": [],
+        "definition": "The maximum thickness of solid sections before shelling is recommended to prevent defects.",
+        "related_terms": ["minimum_wall_thickness"],
+        "not_equivalent_to": ["hollow_parts"],
+        "measurement": "heuristics"
+      },
+      "hollow_parts": {
+        "canonical_term": "hollow_parts",
+        "aliases": [],
+        "definition": "Parts designed with hollow sections to reduce material usage and weight.",
+        "related_terms": ["maximum_solid_thickness"],
+        "not_equivalent_to": ["nested_parts"],
+        "measurement": "heuristics"
+      },
+      "edge_radius": {
+        "canonical_term": "edge_radius",
+        "aliases": [],
+        "definition": "The minimum radius or thickness required for edges to prevent sharpness.",
+        "related_terms": [],
+        "not_equivalent_to": ["minimum_feature_size"],
+        "measurement": "profile parameters"
+      }
+    },
+    "manufacturing": {
+      "casting_shrinkage": {
+        "canonical_term": "casting_shrinkage",
+        "aliases": [],
+        "definition": "The percentage reduction in size that occurs during the cooling of cast metal.",
+        "related_terms": ["dimensional_tolerance"],
+        "not_equivalent_to": ["finishing_erosion"],
+        "measurement": "heuristics"
+      },
+      "dimensional_tolerance": {
+        "canonical_term": "dimensional_tolerance",
+        "aliases": [],
+        "definition": "The allowable deviation in dimensions from the specified measurements.",
+        "related_terms": ["casting_shrinkage"],
+        "not_equivalent_to": ["maximum_solid_thickness"],
+        "measurement": "profile parameters"
+      },
+      "finishing_erosion": {
+        "canonical_term": "finishing_erosion",
+        "aliases": [],
+        "definition": "The amount of material removed during the finishing process.",
+        "related_terms": ["polishing_accessibility"],
+        "not_equivalent_to": ["casting_shrinkage"],
+        "measurement": "heuristics"
+      },
+      "polishing_accessibility": {
+        "canonical_term": "polishing_accessibility",
+        "aliases": [],
+        "definition": "The ability to polish certain areas of a part, affected by geometry and complexity.",
+        "related_terms": ["finishing_erosion"],
+        "not_equivalent_to": ["minimum_clearance"],
+        "measurement": "heuristics"
+      },
+      "nested_parts": {
+        "canonical_term": "nested_parts",
+        "aliases": [],
+        "definition": "Parts designed to fit within each other or interlock, not supported in lost-wax casting.",
+        "related_terms": ["hollow_parts"],
+        "not_equivalent_to": ["minimum_clearance"],
+        "measurement": "heuristics"
+      }
+    },
+    "constraints": {
+      "minimum_prong_diameter": {
+        "canonical_term": "minimum_prong_diameter",
+        "aliases": [],
+        "definition": "The minimum diameter required for prongs to ensure they are structurally sound.",
+        "related_terms": ["prong_parameters"],
+        "not_equivalent_to": ["minimum_feature_size"],
+        "measurement": "profile parameters"
+      },
+      "prong_parameters": {
+        "canonical_term": "prong_parameters",
+        "aliases": [],
+        "definition": "Specifications for prong dimensions, including seat depth and diameter.",
+        "related_terms": ["minimum_prong_diameter"],
+        "not_equivalent_to": ["minimum_clearance"],
+        "measurement": "profile parameters"
+      },
+      "stone_clearance": {
+        "canonical_term": "stone_clearance",
+        "aliases": [],
+        "definition": "The minimum clearance required between a stone and surrounding metal to ensure proper setting.",
+        "related_terms": ["minimum_clearance"],
+        "not_equivalent_to": ["minimum_wall_thickness"],
+        "measurement": "profile parameters"
+      }
+    }
+  },
+  "constraint_taxonomy": {
+    "hard_error": [
+      "minimum_wall_thickness",
+      "minimum_feature_size",
+      "minimum_prong_diameter"
+    ],
+    "warning": [
+      "maximum_solid_thickness",
+      "casting_shrinkage",
+      "dimensional_tolerance"
+    ],
+    "informational": [
+      "finishing_erosion",
+      "polishing_accessibility",
+      "nested_parts"
+    ]
+  }
+}
+```

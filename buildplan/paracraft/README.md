@@ -6,7 +6,7 @@ paracraft is the deterministic compiler framework built on openscad. it turns an
 
 there is no robust, readymade dataset of "jewelry geometry that is castable in metal x under process y". the evidence is scattered across resin and wax manufacturers, casting bureaus, alloy suppliers, and foundry practice, and the numbers genuinely differ per metal and per pattern material: a wall that casts fine in a formlabs castable wax pattern may fail in a standard resin pattern, and silver, gold, and bronze each carry different shrinkage and tolerance behavior. so this leg is comparative research, not lookup.
 
-every candidate piece passes two gates, in order: first printability (can the castable resin or wax pattern even be printed and handled), then castability (will the pattern survive burnout and cast cleanly into metal). the first harvest of published rules (2026-09-23) is consolidated in [rule-digest.md](rule-digest.md).
+every candidate piece passes two gates, in order: first printability (can the castable resin or wax pattern even be printed and handled), then castability (will the pattern survive burnout and cast cleanly into metal). the first harvest of published rules (2026-09-23) is consolidated in [rule-digest.md](rule-digest.md). a second, structured research cycle (2026-09-24) went further: its evidence corpus, contradiction records, ontology, and first versioned profile live in [../../research/](../../research/README.md), and the constraint and profile formats there are the candidate format for paracraft's rule JSON.
 
 the convergence strategy, in order:
 

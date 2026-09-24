@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "validate": "node scripts/validate-data-contracts.mjs && node scripts/validate-offerings.mjs && python3 scripts/normalize-prose.py --check",
+    "validate": "node scripts/validate-data-contracts.mjs && node scripts/validate-offerings.mjs && python3 scripts/validate-jsonl.py && python3 scripts/normalize-prose.py --check",
     "audit:refresh": "python3 scripts/build-source-audit.py"
   },
   "devDependencies": {
