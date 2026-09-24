@@ -2,8 +2,6 @@
 
 > a path from a jewelry idea to a manufacturable, sellable, made-to-order piece, without requiring a workshop, inventory, or years of cad training.
 
-this readme explains the product. for the repository structure see [`repo.md`](repo.md), for the one-shot story see [`explain.md`](explain.md), for what is being built next see [`buildplan/`](buildplan/README.md), and for what actually exists in source see [`audit/`](audit/index.md).
-
 ## the problem
 
 many people already have strong creative instincts. they save references, build pinterest boards, notice forms and details, and can describe the piece they wish existed. what often never occurs to them is that they could become the creator.
@@ -23,13 +21,21 @@ sculptura connects four stages that are normally fragmented:
 
 the creator remains the author. sculptura removes technical and operational barriers around that authorship.
 
+## the deterministic engine: paracraft
+
+paracraft is sculptura's deterministic geometry engine, a compiler framework built on openscad. it consumes an accepted, typed parameter state (dimensions, profiles, repetitions, relationships) and constructs the exact same geometry every time: same parameters in, same mesh out, on any machine, for any user, on any day. there is no randomness, no interpretation, and no model guessing a shape.
+
+paracraft also owns the physical safety lines. before a design can be released, it checks the geometry against versioned manufacturing rule sets: wall thickness, minimum features, clearances, shrinkage allowances, and process limits, per material and per casting process. a rule value exists only with a dated source, and a failed check cannot be waved through.
+
+because paracraft consumes only typed parameter state and never agent output, it stands on its own: it can be extracted, tested, benchmarked, and potentially open-sourced independently of everything else in sculptura.
+
 ## how creative assistance works
 
 creators can work directly with the studio controls, but they do not have to master conventional cad software first.
 
 **tessa** is the studio's intuitive middle layer and operator for **paracraft**. she looks at references, listens to the creator's description, and translates natural human language into proposed values for predefined dimensions, profiles, repetitions, relationships, and other allowed controls.
 
-tessa does not generate geometry, meshes, openscad, or production files. she runs the middle leg of a relay: creator intent enters, constrained numeric parameters leave, and paracraft takes the baton. paracraft is the deterministic compiler framework, built on openscad, that constructs the model and enforces the unyielding physical rules such as wall thickness, shrinkage, clearances, and process limits. tessa can turn approved knobs; she cannot invent new ones or cross a safety line.
+tessa does not generate geometry, meshes, openscad, or production files. she runs the middle leg of a relay: creator intent enters, constrained numeric parameters leave, and paracraft takes the baton. tessa can turn approved knobs; she cannot invent new ones or cross a safety line.
 
 creators see the resulting openscad model in the browser through the webgl rendering layer. the rendered view is an interface to deterministic geometry, not a separate model guessed by the assistant.
 
@@ -112,24 +118,16 @@ flowchart LR
 
 ## creator-to-customer flow
 
-```text
-idea and references
-  ↓
-studio project with explicit parameters
-  ↓
-paracraft geometry and manufacturing validation
-  ↓
-versioned design release
-  ↓
-platform listing
-  ↓
-route eligibility and trusted price
-  ↓
-purchase and settlement record
-  ↓
-regional manufacturing route
-  ↓
-cast, finish, insure, and ship
+```mermaid
+flowchart TD
+    idea[idea and references] --> project[studio project with explicit parameters]
+    project --> geometry[paracraft geometry and manufacturing validation]
+    geometry --> release[versioned design release]
+    release --> listing[platform listing]
+    listing --> route[route eligibility and trusted price]
+    route --> purchase[purchase and settlement record]
+    purchase --> manufacturing[regional manufacturing route]
+    manufacturing --> shipped[cast, finish, insure, and ship]
 ```
 
 buyers do not operate tessa or paracraft. creators do. ordinary listings support guest checkout. commissioners require accounts because a commission involves a creator relationship, conversation history, revisions, approval, payment protection, cancellation, and disputes.
@@ -147,13 +145,25 @@ buyers do not operate tessa or paracraft. creators do. ordinary listings support
 - admin changes policy and handles exceptions but does not duplicate domain logic
 - studio and platform communicate through immutable, versioned design releases rather than shared mutable project state
 
-## current line in the sand
+## current lines drawn
 
-- metal-only jewelry is permanent scope, with no supplied stones
-- empty bezels or prepared settings for a buyer-provided future stone are intentionally undecided, not promised architecture
+### set in stone
+
+- metal-only jewelry is permanent scope, and sculptura never supplies stones
 - immutable design releases between studio and platform
 - two-way pricing: fix creator earnings or fix retail price
-- manufacturer evidence remains drafted until checked and accepted
-- commissions remain muted until authentication, conversation, escrow, approval, cancellation, and disputes work together
-- no unsupported route silently reaches checkout
 - no client-provided price, manufacturing cost, earnings value, or validation claim is trusted
+- no unsupported route silently reaches checkout
+- manufacturer evidence remains drafted until checked and accepted
+
+### line drawn in sand
+
+- v1 will not accommodate empty cavities for a "bring your own stone later" flow: no empty bezel areas prepared for a future stone, and no consideration of whether a certain stone would work with a given metal. this may be revisited after v1, but it is not a commitment
+- commissions remain muted until authentication, conversation, escrow, approval, cancellation, and disputes work together
+
+## navigate
+
+- [`repo.md`](repo.md): how this repository is organized
+- [`explain.md`](explain.md): the one-shot product story, with detailed guides in [`explain/`](explain/index.md)
+- [`buildplan/`](buildplan/README.md): what is being built next, leg by leg
+- [`audit/`](audit/index.md): what actually exists in the supplied source snapshots
