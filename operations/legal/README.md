@@ -8,7 +8,7 @@ terms, creator and buyer agreements, intellectual-property process, commission t
 
 ### existing source evidence
 
-- `sculptura.dev/src/components/commissions/CommissionTermsEditor.jsx`
+- [`sculptura.dev/src/components/commissions/CommissionTermsEditor.jsx`](../../what-exists/lovable/src/components/commissions/CommissionTermsEditor.jsx)
 - store faq and content fields
 - static informational pages
 

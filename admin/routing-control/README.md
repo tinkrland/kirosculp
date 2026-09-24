@@ -8,7 +8,7 @@ routing policy, weighting, route inspection, manual reassignment, and incident i
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/admin/AdminRouting.jsx`
+- [`sculptura.dev/src/pages/admin/AdminRouting.jsx`](../../what-exists/lovable/src/pages/admin/AdminRouting.jsx)
 - platform settings and manufacturer tables
 
 ### what exists now

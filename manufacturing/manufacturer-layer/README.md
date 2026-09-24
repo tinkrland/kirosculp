@@ -8,8 +8,8 @@ one normalized adapter interface per partner for upload, quote, order, and statu
 
 ### existing source evidence
 
-- `sculptura/src/components/canvas/PrintPanel.jsx` posts toward sculpteo from the client.
-- `sculptura.dev/src/pages/admin/AdminManufacturers.jsx` stores manufacturer metadata.
+- [`sculptura/src/components/canvas/PrintPanel.jsx`](../../what-exists/base44/src/components/canvas/PrintPanel.jsx) posts toward sculpteo from the client.
+- [`sculptura.dev/src/pages/admin/AdminManufacturers.jsx`](../../what-exists/lovable/src/pages/admin/AdminManufacturers.jsx) stores manufacturer metadata.
 - `manufacturing/manufacturer-layer/manufacturer-adapter.js` in this foundation defines an adapter shape.
 
 ### what exists now

@@ -10,9 +10,9 @@ the [tessa protocol plan](../design-agent/architecture.md) proposes a typed, ver
 
 ### existing source evidence
 
-- `sculptura/src/lib/studioStore.js`
-- `sculptura/src/lib/jewelryDefaults.js`
-- `sculptura/src/pages/studio/BuildPage.jsx`
+- [`sculptura/src/lib/studioStore.js`](../../what-exists/base44/src/lib/studioStore.js)
+- [`sculptura/src/lib/jewelryDefaults.js`](../../what-exists/base44/src/lib/jewelryDefaults.js)
+- [`sculptura/src/pages/studio/BuildPage.jsx`](../../what-exists/base44/src/pages/studio/BuildPage.jsx)
 
 ### what exists now
 

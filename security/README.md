@@ -15,7 +15,7 @@ this page describes the supplied source snapshots. a migration or proposed patch
 
 ### client-side universal admin password
 
-`sculptura.dev/src/components/admin/AdminLayout.jsx` contains:
+[`sculptura.dev/src/components/admin/AdminLayout.jsx`](../what-exists/lovable/src/components/admin/AdminLayout.jsx) contains:
 
 ```js
 const ADMIN_PASSWORD = "Password";

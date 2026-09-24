@@ -6,10 +6,10 @@
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/PublishArtifact.jsx`
-- `sculptura.dev/src/pages/Checkout.jsx`
-- `sculptura.dev/supabase/functions/publish-artifact/index.ts`
-- `sculptura.dev/supabase/functions/place-order/index.ts`
+- [`sculptura.dev/src/pages/PublishArtifact.jsx`](../../what-exists/lovable/src/pages/PublishArtifact.jsx)
+- [`sculptura.dev/src/pages/Checkout.jsx`](../../what-exists/lovable/src/pages/Checkout.jsx)
+- [`sculptura.dev/supabase/functions/publish-artifact/index.ts`](../../what-exists/lovable/supabase/functions/publish-artifact/index.ts)
+- [`sculptura.dev/supabase/functions/place-order/index.ts`](../../what-exists/lovable/supabase/functions/place-order/index.ts)
 
 ### what exists now
 

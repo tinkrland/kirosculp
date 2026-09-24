@@ -40,14 +40,14 @@ lighting and backdrop are independent from the camera. presets provide a startin
 
 ### existing source evidence
 
-- `sculptura/src/pages/studio/BuildPage.jsx`
-- `TemplatesPage.jsx`
-- `StylesPage.jsx`
-- `PresetsPage.jsx`
-- `MaterialsPage.jsx`
-- `PrintPage.jsx`
-- `CodePage.jsx`
-- `sculptura/src/pages/CanvasDesigner.jsx`
+- [`sculptura/src/pages/studio/BuildPage.jsx`](../../../what-exists/base44/src/pages/studio/BuildPage.jsx)
+- [`TemplatesPage.jsx`](../../../what-exists/base44/src/pages/studio/TemplatesPage.jsx)
+- [`StylesPage.jsx`](../../../what-exists/base44/src/pages/studio/StylesPage.jsx)
+- [`PresetsPage.jsx`](../../../what-exists/base44/src/pages/studio/PresetsPage.jsx)
+- [`MaterialsPage.jsx`](../../../what-exists/base44/src/pages/studio/MaterialsPage.jsx)
+- [`PrintPage.jsx`](../../../what-exists/base44/src/pages/studio/PrintPage.jsx)
+- [`CodePage.jsx`](../../../what-exists/base44/src/pages/studio/CodePage.jsx)
+- [`sculptura/src/pages/CanvasDesigner.jsx`](../../../what-exists/base44/src/pages/CanvasDesigner.jsx)
 
 ### what exists now
 

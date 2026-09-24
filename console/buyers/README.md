@@ -8,10 +8,10 @@ buyer views over operations: receipts, tracking, delivery state, insurance or cl
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/BuyerDashboard.jsx`
-- `sculptura.dev/src/pages/SharedList.jsx`
-- `sculptura.dev/src/lib/followStore.js`
-- `sculptura.dev/src/lib/wishlistStore.js`
+- [`sculptura.dev/src/pages/BuyerDashboard.jsx`](../../what-exists/lovable/src/pages/BuyerDashboard.jsx)
+- [`sculptura.dev/src/pages/SharedList.jsx`](../../what-exists/lovable/src/pages/SharedList.jsx)
+- [`sculptura.dev/src/lib/followStore.js`](../../what-exists/lovable/src/lib/followStore.js)
+- [`sculptura.dev/src/lib/wishlistStore.js`](../../what-exists/lovable/src/lib/wishlistStore.js)
 
 ### what exists now
 

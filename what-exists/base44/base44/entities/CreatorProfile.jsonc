@@ -1,0 +1,60 @@
+{
+  "name": "CreatorProfile",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Linked auth user email"
+    },
+    "username": {
+      "type": "string",
+      "description": "Unique username / subdomain handle"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Public display name"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Short bio"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "Profile image URL"
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Materials the creator works with"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Software/tools used"
+    },
+    "commission_open": {
+      "type": "boolean",
+      "default": false
+    },
+    "hourly_rate": {
+      "type": "number",
+      "description": "Hourly rate in USD"
+    },
+    "turnaround_time": {
+      "type": "string",
+      "description": "e.g. 2-3 weeks"
+    },
+    "rush_available": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "username",
+    "user_email"
+  ]
+}

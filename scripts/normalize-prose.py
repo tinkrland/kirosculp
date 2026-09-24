@@ -56,7 +56,7 @@ def main() -> None:
     args = parser.parse_args()
     changed = []
     for file in sorted(ROOT.rglob("*.md")):
-        if any(x in file.relative_to(ROOT).parts for x in ("node_modules", ".git")):
+        if any(x in file.relative_to(ROOT).parts for x in ("node_modules", ".git", "what-exists")):
             continue
         old = file.read_text()
         new = rewrite(old)

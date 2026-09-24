@@ -10,9 +10,9 @@ see `stripe-vs-paddle.md` for the provider decision.
 
 ### existing source evidence
 
-- `sculptura.dev/src/components/market/settings/SettingsPayout.jsx`
+- [`sculptura.dev/src/components/market/settings/SettingsPayout.jsx`](../../../what-exists/lovable/src/components/market/settings/SettingsPayout.jsx)
 - payout fields on market accounts
-- `sculptura.dev/src/components/dashboard/WalletSection.jsx`
+- [`sculptura.dev/src/components/dashboard/WalletSection.jsx`](../../../what-exists/lovable/src/components/dashboard/WalletSection.jsx)
 
 ### what exists now
 

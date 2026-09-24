@@ -1,0 +1,116 @@
+{
+  "name": "Artifact",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Artifact name (e.g. signet_01)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short poetic description"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "3D render or object image URL"
+    },
+    "model_url": {
+      "type": "string",
+      "description": "3D model file URL (.glb or .stl)"
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available materials (silver, brass, gold)"
+    },
+    "prices": {
+      "type": "object",
+      "description": "Final price per material",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "manufacturing_costs": {
+      "type": "object",
+      "description": "Manufacturing cost per material \u2014 set by admin",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "creator_earnings": {
+      "type": "object",
+      "description": "Creator earnings per material",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "region": {
+      "type": "string",
+      "enum": [
+        "europe",
+        "north_america",
+        "asia",
+        "global"
+      ],
+      "description": "Primary audience region"
+    },
+    "specs": {
+      "type": "string",
+      "description": "Small spec text (e.g. 12mm, polished)"
+    },
+    "creator_handle": {
+      "type": "string",
+      "description": "Creator username handle"
+    },
+    "creator_name": {
+      "type": "string",
+      "description": "Creator display name"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_review",
+        "published",
+        "rejected",
+        "archived"
+      ],
+      "default": "pending_review",
+      "description": "Lifecycle status \u2014 pending_review after creator submits, published after admin approves"
+    },
+    "made_to_order": {
+      "type": "boolean",
+      "default": true
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "jewelry",
+        "sculpture",
+        "functional",
+        "wearable",
+        "decorative",
+        "experimental"
+      ]
+    },
+    "admin_reviewed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether admin has reviewed this artifact"
+    },
+    "review_notes": {
+      "type": "string",
+      "description": "Admin notes \u2014 shown to creator on rejection"
+    }
+  },
+  "required": [
+    "name",
+    "creator_handle"
+  ]
+}

@@ -6,12 +6,12 @@
 
 relevant existing files are:
 
-- `sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`
-- `sculptura.dev/src/pages/CommissionPage.jsx`
-- `sculptura.dev/src/components/commissions/CommissionRequestForm.jsx`
-- `sculptura.dev/src/components/commissions/CommissionTermsEditor.jsx`
-- `sculptura.dev/src/components/market/sections/CommissionRequestsSection.jsx`
-- `sculptura.dev/supabase/migrations/20260502200217_38ecd397-62c4-47c7-a19e-4917a8d5d17e.sql`
+- [`sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`](../../../what-exists/lovable/src/components/market/settings/SettingsCommissions.jsx)
+- [`sculptura.dev/src/pages/CommissionPage.jsx`](../../../what-exists/lovable/src/pages/CommissionPage.jsx)
+- [`sculptura.dev/src/components/commissions/CommissionRequestForm.jsx`](../../../what-exists/lovable/src/components/commissions/CommissionRequestForm.jsx)
+- [`sculptura.dev/src/components/commissions/CommissionTermsEditor.jsx`](../../../what-exists/lovable/src/components/commissions/CommissionTermsEditor.jsx)
+- [`sculptura.dev/src/components/market/sections/CommissionRequestsSection.jsx`](../../../what-exists/lovable/src/components/market/sections/CommissionRequestsSection.jsx)
+- [`sculptura.dev/supabase/migrations/20260502200217_38ecd397-62c4-47c7-a19e-4917a8d5d17e.sql`](../../../what-exists/lovable/supabase/migrations/20260502200217_38ecd397-62c4-47c7-a19e-4917a8d5d17e.sql)
 
 ## why it stays muted
 

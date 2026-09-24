@@ -8,10 +8,10 @@ future buyer-to-creator intake. the buyer supplies references, preferences, budg
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/CommissionPage.jsx`
-- `sculptura.dev/src/components/commissions/CommissionRequestForm.jsx`
-- `CommissionTermsEditor.jsx`
-- `sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`
+- [`sculptura.dev/src/pages/CommissionPage.jsx`](../../what-exists/lovable/src/pages/CommissionPage.jsx)
+- [`sculptura.dev/src/components/commissions/CommissionRequestForm.jsx`](../../what-exists/lovable/src/components/commissions/CommissionRequestForm.jsx)
+- [`CommissionTermsEditor.jsx`](../../what-exists/lovable/src/components/commissions/CommissionTermsEditor.jsx)
+- [`sculptura.dev/src/components/market/settings/SettingsCommissions.jsx`](../../what-exists/lovable/src/components/market/settings/SettingsCommissions.jsx)
 - commission request migration
 
 ### what exists now

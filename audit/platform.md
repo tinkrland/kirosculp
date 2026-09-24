@@ -9,7 +9,7 @@
 ## partial and rebuild work
 
 - `supabase/functions/publish-artifact/index.ts` verifies a creator access key and forces review, but accepts browser-provided manufacturing costs, earnings, and prices. publishing must consume a validated studio release instead.
-- `src/pages/Checkout.jsx`, the cart components, and `supabase/functions/place-order/index.ts` can assemble and insert an order, including a guest order. they cannot authorize/capture payment, reserve a manufacturing route, produce a route-aware trusted price, or settle creator earnings. the old `placed` row is not a paid order.
+- [`src/pages/Checkout.jsx`](../what-exists/base44/src/pages/Checkout.jsx), the cart components, and `supabase/functions/place-order/index.ts` can assemble and insert an order, including a guest order. they cannot authorize/capture payment, reserve a manufacturing route, produce a route-aware trusted price, or settle creator earnings. the old `placed` row is not a paid order.
 - commissions currently allow an anonymous request path and have no complete conversation, terms, protected funds, acceptance, cancellation, and dispute state. keep them muted until the whole authenticated lifecycle is enforceable.
 - signup and market access still depend on a generated creator key and browser session state rather than a complete identity, recovery, revocation, and role model. creator signup does not imply commission activation or marketplace discoverability.
 - admin pages and manufacturer settings are control surfaces, not connected production routing or secure operator permission enforcement.

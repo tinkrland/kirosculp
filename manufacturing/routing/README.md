@@ -8,7 +8,7 @@ filters partners by accepted capability, alloy, process, dimensions, destination
 
 ### existing source evidence
 
-- `sculptura.dev/src/pages/admin/AdminRouting.jsx` is configuration ui only.
+- [`sculptura.dev/src/pages/admin/AdminRouting.jsx`](../../what-exists/lovable/src/pages/admin/AdminRouting.jsx) is configuration ui only.
 - `manufacturing/routing/regional-routing.md` in this foundation describes the intended decision model.
 
 ### what exists now

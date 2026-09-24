@@ -8,9 +8,9 @@ read models and exports for creators and buyers. reports must reconcile to immut
 
 ### existing source evidence
 
-- `sculptura.dev/src/components/market/sections/AnalyticsSection.jsx`
-- `InsightsSection.jsx`
-- `sculptura.dev/src/pages/admin/AdminOverview.jsx`
+- [`sculptura.dev/src/components/market/sections/AnalyticsSection.jsx`](../../what-exists/lovable/src/components/market/sections/AnalyticsSection.jsx)
+- [`InsightsSection.jsx`](../../what-exists/lovable/src/components/market/sections/InsightsSection.jsx)
+- [`sculptura.dev/src/pages/admin/AdminOverview.jsx`](../../what-exists/lovable/src/pages/admin/AdminOverview.jsx)
 
 ### what exists now
 

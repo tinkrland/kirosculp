@@ -55,10 +55,10 @@ company can be a real, functioning 3d printing service with zero path to a cast 
 
 the base44 prototype has two independent, disagreeing ways of pricing the same ring:
 
-- `src/lib/pricing.js`: a flat table keyed by `material × region`
+- [`src/lib/pricing.js`](../../what-exists/base44/src/lib/pricing.js): a flat table keyed by `material × region`
   (e.g. Silver/north_america = $48), explicitly commented `// mock values`. no size
   dependency at all: a size-4 band and a size-13 cuff cost the same.
-- `src/lib/sculpteoMaterials.js`: `estimatePriceUSD()`, volume-based:
+- [`src/lib/sculpteoMaterials.js`](../../what-exists/base44/src/lib/sculpteoMaterials.js): `estimatePriceUSD()`, volume-based:
   `volumeMM3 * pricePerMm3`, with a $25 floor (or $3 for the prototype-plastic material).
 
 these will give different quotes for the same piece, and neither is a real vendor quote.
@@ -71,7 +71,7 @@ both are local estimates. before building more on top of either:
 - if you keep a local estimator for instant feedback before upload, it should be **one**
   function, volume-based (the sculpteoMaterials.js approach is closer to physically real),
   not two competing tables
-- either way, the region-based flat table in `pricing.js` should probably be deleted
+- either way, the region-based flat table in [`pricing.js`](../../what-exists/base44/src/lib/pricing.js) should probably be deleted
   outright rather than reconciled: it doesn't model anything real about how these vendors
   actually price
 
@@ -123,7 +123,7 @@ architecting the onboarding flow around an assumption either way.
 
 ## 5. casting tolerances need to be per-alloy, not one flat number
 
-`sculpteoMaterials.js` uses a single `minThicknessMm` per material entry, which is a
+[`sculpteoMaterials.js`](../../what-exists/base44/src/lib/sculpteoMaterials.js) uses a single `minThicknessMm` per material entry, which is a
 reasonable start, but real lost-wax casting tolerance also depends on:
 
 - **geometry**, not just material: a thin flat wall and a thin spike of the same
@@ -144,7 +144,7 @@ manufacturing partner's own spec sheet, never guessed by a model to "seem reason
 
 ## 6. decide who picks the manufacturer, before the schema locks in
 
-`pricing.js`'s region table implies a **platform-routes-automatically** model (buyer's
+[`pricing.js`](../../what-exists/base44/src/lib/pricing.js)'s region table implies a **platform-routes-automatically** model (buyer's
 region picks a cost bucket). that's a different product decision from **creator picks
 their preferred manufacturer per design**, which is closer to what `manufacturer-
 Capabilities.json`'s per-manufacturer capability data implies. this decision changes:
@@ -170,6 +170,6 @@ written on top of an assumption.
    the shape of the adapter work either way
 3. once you know which partner(s) are real candidates, verify their actual material
    catalog and tolerances against them directly (section 3), replacing the placeholder
-   numbers in `sculpteoMaterials.js`
+   numbers in [`sculpteoMaterials.js`](../../what-exists/base44/src/lib/sculpteoMaterials.js)
 4. only then reconcile pricing (section 2) and make the routing decision (section 6),
    both depend on knowing which real partners and real numbers you're working with
