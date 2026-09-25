@@ -16,6 +16,7 @@ the [server-side release gate](server-release-gate.md) proposes an isolated head
 ### what exists now
 
 - the sources contain ui guidance, not a trusted geometry-analysis and manufacturability service. no validation report gates publishing.
+- the deterministic measurement side now exists as a seed: [paracraft/](../../paracraft/README.md) implements the five ready measurements (manifoldness, nested components, clearance, wall thickness, bounding box) and the profile validator with release-gate semantics. the headless openscad worker above is still proposed, not deployed.
 
 ### required changes
 

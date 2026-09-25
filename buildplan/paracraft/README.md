@@ -19,7 +19,7 @@ the convergence strategy, in order:
 
 1. settle the parameter envelope per jewelry family with [offerings/](../../offerings/README.md): the allowed controls paracraft must compile, per family.
 2. consolidate openscad sources: one trusted template per family, generated from validated parameters only, no browser-supplied openscad.
-3. pin tooling: a specific openscad version, container image, and mesh-analysis library, recorded in the build provenance.
+3. pin tooling: a specific openscad version, container image, and mesh-analysis library, recorded in the build provenance. the measurement side is no longer hypothetical: the five ready measurements and the profile validator are implemented and tested in [../../paracraft/](../../paracraft/README.md).
 4. land the first rule set (one alloy, one pattern process) with dated sources, even if narrow.
 5. grow coverage metal by metal, benchmarking at each addition, never copying a number without a source.
 
