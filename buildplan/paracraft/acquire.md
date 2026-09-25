@@ -14,6 +14,8 @@ the robust dataset we need (per-alloy, per-process castability limits for jewelr
 
 ## the custom questions
 
+[the partner-facing phrasing for these questions, including the paste-ready intro, lives in [partner-brief.md](partner-brief.md). use it per partner rather than sending this internal list.]
+
 questions are grouped so one email covers one partner, and each is written to extract a number or an explicit "we do not support that", not a brochure.
 
 ### for casting partners
