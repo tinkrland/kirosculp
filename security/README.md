@@ -77,9 +77,14 @@ public forms and mutations do not show a complete rate-limit, bot-defense, idemp
 
 ## remediation artifacts in this foundation
 
-`migrations/0001_admin_roles_and_market_account_privacy.sql` is an early draft that addresses public market-account reads and documents admin-role setup. it is incomplete. it does not repair commission requests, guest-order insertion, admin ideas, every permissive policy, service-role provenance, or the client admin component.
+- [`migrations/0001_admin_roles_and_market_account_privacy.sql`](../migrations/0001_admin_roles_and_market_account_privacy.sql): market-account privacy and admin-role setup (item 2 of the order of work)
+- [`migrations/0002_commission_requests_identity.sql`](../migrations/0002_commission_requests_identity.sql): anonymous commission access closed (item 3)
+- [`migrations/0004_orders_purchase_path.sql`](../migrations/0004_orders_purchase_path.sql): guest-order table writes and email-equality reads removed (item 4, client side; the idempotent purchase operation itself belongs to the platform leg)
+- [`migrations/0003_admin_ideas_lockdown.sql`](../migrations/0003_admin_ideas_lockdown.sql): open admin-idea access closed (item 5)
+- [`policy-inventory.md`](policy-inventory.md): the cumulative policy state, every policy with a verdict (item 6, review complete; storage corrections deferred to the platform rebuild with reasons recorded)
+- [`denial-test-matrix.md`](denial-test-matrix.md): the cross-role acceptance matrix (item 6, drafted; no cell is verified until runs are recorded)
 
-before deployment, replace it with a cumulative migration tested against the complete migration history. tests must cover anonymous, authenticated buyer, commissioner, creator, admin, and service-role behavior for every table and storage bucket.
+still open: the client admin password component removal (item 1, platform leg owns the app code; 0003 makes the removal safe server-side), service-role input provenance (item 7), and the abuse, audit, and idempotency layer (item 8). a migration here is not proof that a live database has been repaired.
 
 ## required order of work
 
