@@ -25,6 +25,7 @@ produced by a dedicated research-agent cycle in the [`tinkrland/sculptura-resear
 - [`synthesis/`](synthesis/): constraint taxonomy (the constraint format spec), evidence matrix, geometry-to-manufacturing measurement mapping, wall-thickness synthesis
 - [`profiles/profile-001-lost-wax-silver-general.json`](profiles/profile-001-lost-wax-silver-general.json): the first versioned manufacturing profile, ring + lost-wax + sterling silver, every value carrying evidence lineage
 - [`repository-map.md`](repository-map.md), [`research-gaps.md`](research-gaps.md), [`reports/`](reports/): the recon, the 23-concept gap matrix, and the cycle's synthesis and adversarial reviews
+- [`imported/`](imported/README.md): dated research cycles ported from external workspaces as source documents; values enter the corpus only via evidence records
 
 ## status: research input, not production truth
 
