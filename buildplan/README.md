@@ -8,7 +8,7 @@ the [ordered rebuild](../audit/rebuild-order.md) remains the evidence-gated sequ
 
 | leg | owns | hands over (baton) | current step | waiting on |
 |---|---|---|---|---|
-| [security](security/README.md) | locking down the existing snapshot's auth and row policies | a database that later legs may safely build on | remove the client admin password and correct permissive policies | nothing; this leg starts first |
+| [security](security/README.md) | locking down the existing snapshot's auth and row policies | a database that later legs may safely build on | run the denial matrix against the applied corrective migrations (0001-0004 drafted) | nothing; this leg starts first |
 | [paracraft](paracraft/README.md) | deterministic geometry compilation and per-metal physical rules | validated meshes and rule verdicts | converge the rule research: [resources](paracraft/resources.md), [acquisitions](paracraft/acquire.md), [benchmarks](paracraft/benchmarks.md) | partner answers to the acquisition questions |
 | [tessa](tessa/README.md) | intent-to-parameter proposals within the allowed control set | typed parameter proposals the creator accepts or rejects | define the typed proposal protocol and its evaluation set | the canonical project model and control schema from paracraft's parameter envelope |
 | [studio](studio/README.md) | the server release gate: headless builds, mesh analysis, immutable releases | the design release itself | containerize the pinned headless openscad worker | paracraft's consolidated rule versions |

@@ -71,6 +71,12 @@ what-exists/
   base44/
   lovable/
 
+migrations/
+  0001_admin_roles_and_market_account_privacy.sql
+  0002_commission_requests_identity.sql
+  0003_admin_ideas_lockdown.sql
+  0004_orders_purchase_path.sql
+
 marketing/
   brand/
   positioning/
@@ -126,6 +132,11 @@ research/
   repository-map.md
   research-gaps.md
 
+security/
+  README.md
+  policy-inventory.md
+  denial-test-matrix.md
+
 audit/
   index.md
   studio.md
@@ -177,9 +188,11 @@ scripts/
 | [`admin/`](admin/README.md) | operator controls: review, policy, routing, partner management |
 | [`manufacturing/`](manufacturing/README.md) | capability truth: materials, partners, quotes, routing, quality |
 | [`operations/`](operations/README.md) | money and delivery: purchase, pricing, payout, settlement, shipping, rollout |
+| [`migrations/`](migrations/README.md) | corrective and target-state sql: the security leg's proposed policy repairs, unapplied until deployed |
 | [`marketing/`](marketing/README.md) | outward-facing re-explanations for the content shell: brand, positioning, social, studiogram |
 | [`contracts/`](contracts/README.md) | the versioned interfaces between domains, starting with the design release |
 | [`research/`](research/README.md) | the evidence corpus: sources, atomic evidence, contradictions, ontology, the first versioned manufacturing profile for paracraft's rules, and imported external research cycles |
+| [`security/`](security/README.md) | the security remediation findings, the full policy inventory with verdicts, and the denial test matrix |
 | [`audit/`](audit/index.md) | per-file source status and the evidence-gated rebuild order |
 | [`what-exists/`](what-exists/README.md) | the two supplied source repos, brought in whole, so every audit citation links to a real file instead of pointing elsewhere |
 | [`explain/`](explain/index.md) | the detailed product explanation split by domain |
