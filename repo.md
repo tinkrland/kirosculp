@@ -41,6 +41,11 @@ offerings/
   metals/
   configure/
 
+paracraft/
+  measure/
+  validate/
+  test/
+
 platform/
   creators/
   buyers/
@@ -159,6 +164,7 @@ scripts/
 |---|---|
 | [`buildplan/`](buildplan/README.md) | what gets built next, leg by leg, and what each leg is waiting on |
 | [`studio/`](studio/README.md) | the creative engine: project model, tessa, paracraft, validation, releases |
+| [`paracraft/`](paracraft/README.md) | the deterministic engine: the five ready measurements and the profile validator, decoupled from tessa |
 | [`offerings/`](offerings/README.md) | the product taxonomy: jewelry families, metals, findings, bounded personalization |
 | [`platform/`](platform/README.md) | the offering system: listings, storefronts, checkout, commissions |
 | [`console/`](console/README.md) | the creator and buyer view over orders, money, and support |
