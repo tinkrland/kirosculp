@@ -15,7 +15,13 @@ const URL_ = process.env.SUPABASE_URL;
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!URL_ || !KEY) { console.error('set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY'); process.exit(2); }
 
-const gateway = makeGateway({ provider: 'localstripe', baseUrl: process.env.STRIPE_URL });
+// gateway provider is configurable: GATEWAY=sandbox runs the pure in-memory
+// simulation (no external service); GATEWAY=localstripe (the default) needs
+// STRIPE_URL pointing at a running localstripe server.
+const gateway = makeGateway({
+  provider: process.env.GATEWAY || 'localstripe',
+  baseUrl: process.env.STRIPE_URL,
+});
 const svc = makeOrderService({ supabaseUrl: URL_, serviceKey: KEY, gateway });
 
 const results = [];
