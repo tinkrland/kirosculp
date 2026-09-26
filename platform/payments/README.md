@@ -120,11 +120,50 @@ refunded through the gateway with reversal entries, terminal hold
 re-release rejected, all four groups balanced. sim rows removed afterward
 via the management api; ledger at zero.
 
+## spree order sync
+
+spree is the storefront front: it owns the cart, checkout, and the
+charge (the check payment method simulates gateway capture in the
+prototype). when a spree order completes, `spree-order-sync.js` mirrors
+it into this ledger: an orders row, an escrow hold (gateway
+'spree-check', gateway_ref = the spree payment number), the balanced
+capture entries, hold flipped to held. it never captures anything; it
+only records what spree already did.
+
+idempotency is the spree order number (`client_request_key =
+spree:{number}`); a replay returns the existing order and writes
+nothing. splits are not invented here: spree knows the retail total,
+the trusted pricing service decides the split for the release path.
+
+run it against a live spree (local or sandbox-proxied):
+
+    SPREE_URL=http://localhost:3000 \
+    SPREE_API_KEY=pk_... SPREE_TOKEN=<cart token> SPREE_ORDER=ord_xxx \
+    [SPREE_PROXY_AUTH='Bearer <token>'  # if behind the blaxel port proxy] \
+    SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=<service_role_jwt> \
+    node spree-order-sync.js
+
+the verified guest checkout sequence the sync consumes: create cart,
+add item, patch email + shipping_address, create proposed shipments,
+select a delivery rate on the fulfillment, add the payment (payment
+method prefix id), complete. spree api v3 prefix ids: cart, ord, var,
+pm, ful (shipment), dr (rate).
+
+### recorded run 3, 2026-09-26, spree order mirrored live
+
+guest checkout completed on the spree prototype (order R513075727,
+$110: $100 prototype ring + $10 flat shipping, check payment
+completed). the sync mirrored it: order row placed, escrow hold held
+at 11000 cents with gateway_ref pm8z97wn, capture group balanced
+(buyer_source debit 11000 / platform_escrow credit 11000). replay
+returned the existing order with no new rows. no sim rows were
+removed; this is a real mirrored storefront order.
+
 ## next
 
-- spree instantiation on a real host (rails runtime; this sandbox has no
-  ruby). when it ships, spree checkout records into this ledger through
-  the same adapter boundary; it never becomes the ledger.
+- the spree prototype now runs (blaxel sandbox, see platform/spree-prototype);
+  replaying completed orders on a schedule (poll or webhook) and the
+  delivery release for a spree-sourced order are the open pieces
 - authenticated-role matrix cells once the platform rebuild owns a test
   harness with real users
 - webhook and idempotency design before any stripe involvement
