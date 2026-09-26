@@ -25,6 +25,13 @@ create policy "orders authenticated self insert"
 -- 2. visibility: owner, addressed creator, admin. no email equality.
 drop policy if exists "orders read own or by email" on public.orders;
 
+-- the 2026-09-26 backup exposed a second fully public orders read policy
+-- ("orders read by creator handle", using (true)) that the committed
+-- migration history did not surface. its legitimate purpose (creators
+-- reading orders addressed to them) is covered by the creator clause in
+-- the policy below. it must not survive this migration.
+drop policy if exists "orders read by creator handle" on public.orders;
+
 create policy "orders owner read" on public.orders
   for select to authenticated
   using (

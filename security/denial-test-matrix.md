@@ -48,3 +48,48 @@ each cell maps to one assertion in a supabase test harness (or one manual psql s
 4. market_accounts private columns
 
 results are recorded here as dated entries when runs happen; until then, **no cell is verified**.
+
+## recorded runs
+
+### 2026-09-26, live against foundation project clmcmckaydkbkxuhfiyf
+
+context: the fresh sculptura project was seeded clean from the full lovable
+migration history plus 0001 through 0005, applied in order over the supabase
+management api. both holes discovered in the 2026-09-26 live-data backup were
+closed before seeding: the second public orders read ("orders read by
+creator handle", using (true)) and the anonymous market-account insert.
+
+method: real anonymous requests over postgrest (anon key, no session),
+plus service-role probes for the allow cells. the first run failed in a
+telling way: every probe returned "permission denied for table" rather than
+an rls deny. replaying migrations through the management api ran them as
+the postgres role, whose default acl on this project withholds
+select/insert/update/delete from anon and authenticated entirely, so the
+grant layer blocked everything before rls could act. that run verified
+nothing about the policies. migration 0006 restores the intended model
+(grant decides whether a role may touch the table; rls decides which rows)
+and was applied before the second run.
+
+second run, after 0006:
+
+| probe | expected | observed | verdict |
+|---|---|---|---|
+| anon select orders | [] | [] | pass |
+| anon insert market_accounts | rls deny | 42501 row-level security | pass |
+| anon select market_accounts | [] | [] | pass |
+| anon select admin_ideas | [] | [] | pass |
+| anon select commission_requests | [] | [] | pass |
+| anon select profiles | [] | [] | pass |
+| anon select creator_profiles, seeded row | row visible | row visible | pass (positive control) |
+| anon select orders, seeded secret order | [] | [] | pass |
+| anon select market_accounts_public | [] | [] | pass (view, empty) |
+
+the positive control matters: it proves rls is selectively filtering, not
+blanket-denying. the seeded order carried a customer email, shipping
+address, and price that were fully exposed under the original live policy
+set; anonymous read returned [] both before and after the row existed.
+test rows were deleted after the run.
+
+not yet verified: authenticated-role cells (buyer/creator/admin rows)
+require seeded auth users and jwt sessions; deferred until the platform
+rebuild owns a proper test harness. guest-role cells above are verified.
