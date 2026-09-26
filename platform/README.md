@@ -24,7 +24,7 @@ no listing may point to an unvalidated studio project. it must point to a specif
 
 ## commissions
 
-creator commission preferences may exist now, but requesting/accepting work remains muted until escrow and the whole lifecycle are designed together. see `shells/commissions-muted/`.
+creator commission preferences may exist now, but requesting/accepting work remains muted until the whole lifecycle is enforceable together. the escrow and ledger primitive now exists and is verified live ([payments](payments/README.md)); intake stays muted until messaging, acceptance, revisions, and disputes ship against it. see `shells/commissions-muted/`.
 
 ## current implementation
 
