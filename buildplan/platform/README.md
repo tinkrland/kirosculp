@@ -36,6 +36,14 @@ same-lane stacking is capped at one), and etsy-style multi-store
 checkout: one payment, per-creator itemized orders:
 [promotions.md](promotions.md).
 
+## creator services
+
+unscheduled direction: modular creator-side toggles (whitelabel
+storefront/email, dns management, whitelabel shipping, printed cards),
+wallet-funded to avoid double transaction fees, and bonfire-style
+resin-pattern samples printed locally:
+[creator-services.md](creator-services.md).
+
 ## build depth
 
 this leg is engineered properly, not as a shallow mvp: full creator and buyer flows, release-bound everything, and no demo-mode shortcuts. the full depth definition is in [scoping.md](../scoping.md), the proper-not-shallow scope for all platform surfaces.
