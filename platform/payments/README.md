@@ -170,3 +170,25 @@ removed; this is a real mirrored storefront order.
 - failure-path hardening in purchase(): a capture that fails after the
   order insert currently needs compensating writes; the real service
   should run purchase as a single database transaction
+
+## future: gift cards and the creator wallet (direction only)
+
+not scheduled; recorded so the model stays coherent when they build.
+
+- **gift cards are ledger liability accounts, not a vendor product.**
+  purchase captures funds like any order and posts an append-only
+  entry to a gift card liability account in the supabase ledger
+  (formance remains the double-entry engine candidate if adopted).
+  redemption is a payment method that draws that account down through
+  normal order pricing, so creator net, platform fee, and escrow
+  splits are unchanged. refunds post back to the account, never to a
+  card. no third-party gift card saas in the prototype.
+- **spree prototype path:** spree's native store credit stands in for
+  gift cards (code issuance, checkout redemption) until the ledger
+  version replaces it.
+- **the creator wallet is a ledger view, not a separate system:** held
+  (escrow) -> available -> paid out, all append-only entries over the
+  same accounts. wallet-as-spendable-store-credit is a later decision.
+- open questions when scheduled: cross-currency redemption, expiry
+  rules per jurisdiction, and payout-provider constraints on
+  stored-value balances.
