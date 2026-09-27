@@ -53,7 +53,19 @@ the order-purchase simulation then runs with:
     SUPABASE_SERVICE_ROLE_KEY=<service_role_jwt> \
     node ../payments/simulate-order-purchase.js
 
+## physical fulfillment and escrow payment seeds
+
+the default spree seeds ship digital delivery only. after `db:seed`,
+run the idempotent physical-fulfillment wiring (shipping category,
+us zone, flat-rate standard shipping method, check payment method that
+simulates gateway capture for the escrow prototype):
+
+    bin/rails runner db/scripts/seed_physical_fulfillment.rb
+
+verified idempotent on the live sandbox (re-run writes nothing new).
+
 ## notes
+
 
 - admin console: /admin (spree@example.com / spree123 in the sandbox build;
   change credentials on any real rebuild)
