@@ -41,3 +41,9 @@ terminology and pattern claims only, not product approval:
 |---|---|---|
 | [astro ak: the seven metals, alchemy and the planets](https://www.astroak.com/en/blog/the-seven-metals-alchemy-and-the-planets), [wikipedia: planetary symbols](https://en.wikipedia.org/wiki/Planetary_symbols) | the classical planetary metal correspondences (gold/sun, silver/moon, copper/venus, iron/mars, tin/jupiter, lead/saturn, mercury/mercury) | historical/symbolic tradition, not efficacy claims; non-castable metals stay informational |
 | element metal-affinity pairings in the vocabulary | sculptura merchandising hints, explicitly flagged `hint_is_ours` | our own suggestion, not a classical claim; opt-in labeling by customers and creators |
+
+### promotions sprawl (2026-09-27)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [spri.ng (teespring) creator resources: promotions](https://www.spri.ng/creator-resources/promotions) | creator-level promo codes exist on creator commerce platforms and cannot be stacked there | single-platform practice; our lane rule goes further by defining the funding side rather than blanket-forbidding stacking |
