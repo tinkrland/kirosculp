@@ -76,6 +76,29 @@ or weld at the partner), while detachable findings (friction catches)
 need none. finding sourcing is part of route quoting, not an
 afterthought in fulfillment.
 
+## buyer-side finding options at checkout
+
+the creator's chosen finding is the default, but the buyer can swap at
+checkout to catalog alternatives the creator has enabled, including
+the **generic rubber/silicone backer**: commodity hardware, no
+ornament, fits standard post gauges. rules:
+
+- the opt-out only appears when the interface actually matches: rubber
+  backers fit standard posts (20g/18g, some 16g); a piece whose
+  interface takes a threaded or locking catch, a leverback, or a
+  thread-through offers no rubber option. placement-aware, like the
+  rest of the interface model.
+- the choice is disclosed on the line item ("backs: titanium /
+  rubber"), so the buyer knows what arrives.
+- **non-metal hardware is an explicit, bounded exception to metal-only:**
+  the metal-only boundary governs the piece and its materials. the
+  findings catalog is functional hardware supply, and rubber/silicone
+  backers are allowed there, disclosed as hardware, never counted as
+  piece material and never modeled in release geometry.
+- price treatment is parked with the pricing leg; default recorded: a
+  backer swap does not change list price, it is a supply choice, not a
+  discount.
+
 ## boundaries
 
 - findings are hardware, not geometry: the studio never generates
