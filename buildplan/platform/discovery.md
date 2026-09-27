@@ -46,12 +46,18 @@ tab switches preserve the intent; they never re-run resolution.
   a shop's lookbooks. they appear on the creator page (overview strip
   and a collections view), can be tagged within the vocabulary, and
   are marketing objects: they reference listings, never raw releases.
-- **lists** are buyer-owned, private by default (shareable), like
-  spotify playlists: a buyer categorizes pieces from any creators into
-  named lists ("gift ideas", "wedding inspo", "stack goals"). lists are
-  user-scoped persistence, so they require login, the same rule as
-  commissions. a list is an organization tool, not a storefront
-  surface, and never alters pricing or availability.
+- **lists** are non-creator objects, like etsy lists: any logged-in
+  user (creator or buyer, but never a marketing object) curates pieces
+  from any creators into named, ordered lists ("gift ideas", "stack
+  goals", "moody gold"), with **public or private visibility**. public
+  lists are shareable and viewable by anyone with the link; private
+  ones are personal. lists are user-scoped, so login is required, the
+  same rule as commissions. v1 keeps them out of the search tabs;
+  surfacing them (e.g. "featured in lists" on a product page) is a
+  later call.
+- **wishlists** are separate from lists: the flat save-for-later tool,
+  always private, never curated or shared. a wishlist is a personal
+  purchase-intent tracker, not an expression of taste; a list is.
 
 ## drops: scheduled release with a preclock
 
