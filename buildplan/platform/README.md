@@ -11,6 +11,14 @@ this leg reworks the offering app so every listing and order binds to a design r
 5. **commerce code separation:** move the storefront, cart, and marketplace code that currently lives inside the studio snapshot over to the platform side, then remove the studio's commerce dependencies.
 6. **commission surfaces stay muted** until the authenticated, escrowed lifecycle exists; the existing muted shell stays.
 
+## creator surfaces
+
+the creator has three surfaces (public creator page, creator console,
+white-label storefront), each with one job and explicit never-does
+boundaries: [creator-surfaces.md](creator-surfaces.md). the public
+creator page's tab set (overview, catalog, commissions, about, links)
+is defined there too.
+
 ## build depth
 
 this leg is engineered properly, not as a shallow mvp: full creator and buyer flows, release-bound everything, and no demo-mode shortcuts. the full depth definition is in [scoping.md](../scoping.md), the proper-not-shallow scope for all platform surfaces.
