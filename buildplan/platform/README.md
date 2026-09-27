@@ -28,6 +28,14 @@ public) and lists (buyer-owned, private) are separate objects, and
 scheduled drops run a server-enforced preclock:
 [discovery.md](discovery.md).
 
+## promotions
+
+creator coupons and platform promos with the lane rule (a discount
+only eats the funding party's money, so the two stack freely while
+same-lane stacking is capped at one), and etsy-style multi-store
+checkout: one payment, per-creator itemized orders:
+[promotions.md](promotions.md).
+
 ## build depth
 
 this leg is engineered properly, not as a shallow mvp: full creator and buyer flows, release-bound everything, and no demo-mode shortcuts. the full depth definition is in [scoping.md](../scoping.md), the proper-not-shallow scope for all platform surfaces.
