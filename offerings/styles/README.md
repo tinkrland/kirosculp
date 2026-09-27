@@ -28,11 +28,22 @@ home:
    `garland`, `knot`, `serpent`, `chevron`, `fan`, `star`, `rope_twist`.
    plus descriptor axes: organic vs geometric, ornate vs clean, dainty
    vs chunky, antique vs modern.
-3. **style layer** — the named styles: georgian, victorian, art
-   nouveau, edwardian, art deco, egyptian revival, retro,
-   mid-century modernist, brutalist, organic modern, everyday fine
-   (the retail category for what gets mislabeled minimalist),
-   celestial, gothic, biker.
+3. **style layer** — the named visual styles: georgian, victorian,
+   art nouveau, edwardian, art deco, egyptian revival, retro,
+   mid-century modernist, brutalist, organic modern, celestial,
+   gothic, biker. (everyday fine was removed here: it is a
+   merchandising context, not a visual language. it lives in the
+   wear-context layer below.)
+4. **wear-context layer** — merchandising categories orthogonal to
+   style: everyday wear (regular wear, uni, work), stacks (a styling
+   group of stackable pieces and curated stack sets), special
+   occasion (statement/formal), ceremony and commitment (links the
+   symbolic bases in [configure](../configure/README.md)). a piece
+   can be any style *and* any context: an art deco stacker or a
+   gothic special-occasion piece. see
+   [wear-context-vocabulary.jsonl](wear-context-vocabulary.jsonl).
+   stackability in particular is a geometric fact validated by
+   paracraft, never a self-declared tag.
 
 edges carry weights:
 
@@ -65,10 +76,14 @@ follow. deterministic, explainable, and the same graph powers
 
 ## artifacts
 
-- [style-vocabulary.jsonl](style-vocabulary.jsonl): the versioned seed.
-  one record per style: era bounds, concept features with weights,
-  canonical customer phrases, confusables (`confusable_with`), and
-  status (`drafted` until sprawl evidence is consolidated).
+- [style-vocabulary.jsonl](style-vocabulary.jsonl): the versioned
+  style seed. one record per style: era bounds, concept features with
+  weights, canonical customer phrases, confusables (`confusable_with`),
+  and status (`drafted` until sprawl evidence is consolidated).
+- [wear-context-vocabulary.jsonl](wear-context-vocabulary.jsonl): the
+  merchandising contexts (everyday wear, stacks, special occasion,
+  ceremony) as a separate layer, so a context never masquerades as a
+  style.
 - [research/sources.md](../research/sources.md): sprawl sources and
   their boundaries, per the offerings evidence convention.
 
