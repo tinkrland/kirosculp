@@ -19,6 +19,15 @@ boundaries: [creator-surfaces.md](creator-surfaces.md). the public
 creator page's tab set (overview, catalog, commissions, about, links)
 is defined there too.
 
+## discovery
+
+one query box, resolved once, rendered across tabs (pieces, creators,
+collections); supabase fts for exact matches, falkordb vocabulary
+traversal for latent concept matching. collections (creator-owned,
+public) and lists (buyer-owned, private) are separate objects, and
+scheduled drops run a server-enforced preclock:
+[discovery.md](discovery.md).
+
 ## build depth
 
 this leg is engineered properly, not as a shallow mvp: full creator and buyer flows, release-bound everything, and no demo-mode shortcuts. the full depth definition is in [scoping.md](../scoping.md), the proper-not-shallow scope for all platform surfaces.
