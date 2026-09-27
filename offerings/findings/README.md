@@ -20,6 +20,29 @@ why platform-supplied, structurally:
   ship with a surgical steel or titanium catch), so the finding is a
   separate line item, never an assumption that "same material" holds.
 
+## the custom override
+
+creators **can** opt out of the catalog for fancy custom findings: a
+bespoke clasp, an ornate back, a signature leverback. the trade is
+structural: a custom finding is creator geometry, so it enters the
+release and falls under everything catalog hardware avoids:
+
+- paracraft validates it against the same safety-relevant interface
+  spec (post gauge, retention, contact surface) that catalog findings
+  publish; "custom" is not an exemption from the spec, only from the
+  catalog.
+- material and finishing rules apply (contact alloy, nickel release,
+  no blanket hypoallergenic), with partner process evidence.
+- assembly evidence is mandatory: a custom finding almost always
+  attaches, and a bespoke catch must survive wear.
+- the platform keeps no supply guarantee: no vendor fallback if a
+  partner can't assemble it, and listing publication gates on the
+  same approved-path rule, so a custom finding is slower to publish
+  and the creator carries the delay.
+
+in practice the catalog is the fast lane and custom is the craft lane;
+most pieces stay on catalog hardware.
+
 ## the interface is a validated geometric fact
 
 each finding family publishes an **interface spec**: post gauge and
