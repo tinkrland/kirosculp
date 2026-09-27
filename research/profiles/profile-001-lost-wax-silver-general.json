@@ -1,7 +1,7 @@
 {
   "profile_id": "profile-001",
-  "name": "Lost-Wax Casting — Sterling Silver — General",
-  "version": "0.1.0",
+  "name": "Lost-Wax Casting \u2014 Sterling Silver \u2014 General",
+  "version": "0.2.0",
   "created": "2026-09-24",
   "scope": {
     "process": "lost-wax casting from printed wax/resin",
@@ -19,7 +19,13 @@
       "value": 0.8,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-wall-001", "evid-wall-003", "evid-wall-004", "evid-wall-006", "evid-wall-007"]
+      "evidence": [
+        "evid-wall-001",
+        "evid-wall-003",
+        "evid-wall-004",
+        "evid-wall-006",
+        "evid-wall-007"
+      ]
     },
     {
       "constraint_id": "ctr-wall-002",
@@ -28,7 +34,10 @@
       "value": 1.0,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-wall-001", "evid-wall-002"]
+      "evidence": [
+        "evid-wall-001",
+        "evid-wall-002"
+      ]
     },
     {
       "constraint_id": "ctr-wall-003",
@@ -37,7 +46,10 @@
       "value": 0.5,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-wall-006", "evid-prong-003"]
+      "evidence": [
+        "evid-wall-006",
+        "evid-prong-003"
+      ]
     },
     {
       "constraint_id": "ctr-feat-001",
@@ -46,25 +58,45 @@
       "value": 0.35,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-feat-001", "evid-feat-002"]
+      "evidence": [
+        "evid-feat-001",
+        "evid-feat-002"
+      ]
     },
     {
       "constraint_id": "ctr-engrave-001",
       "property": "engraving_raised",
       "operator": ">=",
-      "value": {"min_thickness": 0.30, "max_height": 0.60, "min_spacing": 0.30},
+      "value": {
+        "min_thickness": 0.3,
+        "max_height": 0.6,
+        "min_spacing": 0.3
+      },
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-feat-003", "evid-feat-004"]
+      "evidence": [
+        "evid-feat-003",
+        "evid-feat-004"
+      ]
     },
     {
       "constraint_id": "ctr-engrave-002",
       "property": "engraving_recessed",
       "operator": ">=",
-      "value": {"min_width": 0.30, "max_depth": 0.50, "min_spacing": 0.30, "max_depth_to_width": 2.0},
+      "value": {
+        "min_width": 0.3,
+        "max_depth": 0.5,
+        "min_spacing": 0.3,
+        "max_depth_to_width": 2.0
+      },
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-feat-003", "evid-feat-004", "evid-engrave-001", "evid-engrave-002"]
+      "evidence": [
+        "evid-feat-003",
+        "evid-feat-004",
+        "evid-engrave-001",
+        "evid-engrave-002"
+      ]
     },
     {
       "constraint_id": "ctr-hole-001",
@@ -73,7 +105,10 @@
       "value": 0.5,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-hole-001", "evid-hole-002"]
+      "evidence": [
+        "evid-hole-001",
+        "evid-hole-002"
+      ]
     },
     {
       "constraint_id": "ctr-clear-001",
@@ -82,7 +117,9 @@
       "value": 0.3,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-clear-001"]
+      "evidence": [
+        "evid-clear-001"
+      ]
     },
     {
       "constraint_id": "ctr-nested-001",
@@ -91,7 +128,10 @@
       "value": 0,
       "unit": "count",
       "severity": "error",
-      "evidence": ["evid-nested-001", "evid-hollow-002"]
+      "evidence": [
+        "evid-nested-001",
+        "evid-hollow-002"
+      ]
     },
     {
       "constraint_id": "ctr-mesh-001",
@@ -100,27 +140,127 @@
       "value": true,
       "unit": "boolean",
       "severity": "error",
-      "evidence": ["evid-tol-003"]
+      "evidence": [
+        "evid-tol-003"
+      ]
     },
     {
       "constraint_id": "ctr-edge-001",
       "property": "edge_sharpness",
       "operator": ">=",
-      "value": 0.30,
+      "value": 0.3,
       "unit": "mm",
       "severity": "warning",
-      "evidence": ["evid-edge-001"]
+      "evidence": [
+        "evid-edge-001"
+      ]
+    },
+    {
+      "constraint_id": "ctr-hollow-001",
+      "property": "hollow_parts",
+      "operator": "==",
+      "value": false,
+      "unit": "boolean",
+      "severity": "error",
+      "evidence": [
+        "evid-hollow-002",
+        "evid-hollow-001",
+        "evid-hollow-003"
+      ],
+      "notes": "conservative interim: solid-only (contradiction-004 resolved in principle, shop policy unpublished; cooksongold refuses hollow, materialise needs 2+ evacuation holes > 1.5 mm, a single 3.5 mm hole was insufficient in a real hollow bangle). a partner profile that confirms hollow support replaces this with its hole count and diameter rule."
+    },
+    {
+      "constraint_id": "ctr-thick-001",
+      "property": "unsupported_section_thickness",
+      "operator": "<=",
+      "value": 4.0,
+      "unit": "mm",
+      "severity": "warning",
+      "evidence": [
+        "evid-thick-001",
+        "evid-thick-002",
+        "evid-shell-001"
+      ],
+      "notes": "sections thicker than 4 mm flagged for shelling review (uneven cooling, shrinkage voids). since shelling is blocked by ctr-hollow-001, the interim answer for a flagged design is redesign, not shell."
     }
   ],
   "parameters": {
-    "casting_shrinkage": {"value": 1.8, "unit": "percent", "evidence": ["evid-shrink-001", "evid-shrink-002"]},
-    "dimensional_tolerance": {"value": "±5%", "lower_limit": "±0.35 mm", "evidence": ["evid-tol-001"]},
+    "casting_shrinkage": {
+      "status": "drafted",
+      "applied_by_model": 0.0,
+      "applied_by_model_unit": "percent",
+      "published_documented": {
+        "min": 1.5,
+        "max": 2.1,
+        "evidence": [
+          "evid-shrink-001",
+          "evid-shrink-002"
+        ]
+      },
+      "published_empirical": {
+        "min": 0.5,
+        "max": 1.4,
+        "evidence": [
+          "evid-shrink-004"
+        ]
+      },
+      "caster_hearsay": {
+        "value": "5-7 percent",
+        "evidence": [
+          "evid-shrink-005"
+        ]
+      },
+      "note": "conflict unresolved (contradictions-002, 010). interim: no model-side scaling; a shop that compensates itself (src-0010) must get nominal geometry. never pre-scale before a partner states their compensation policy."
+    },
+    "dimensional_tolerance": {
+      "value": "\u00b15%",
+      "lower_limit": "\u00b10.35 mm",
+      "evidence": [
+        "evid-tol-001"
+      ]
+    },
     "finishing_erosion": {
-      "polished": {"value": 0.05, "unit": "mm", "evidence": ["evid-polish-001"]},
-      "sandblasted": {"value": 0.10, "unit": "mm", "evidence": ["evid-polish-001"]},
-      "brushed": {"value": 0.10, "unit": "mm", "evidence": ["evid-polish-001"]},
-      "hand_polished": {"value": 0.15, "unit": "mm", "evidence": ["evid-polish-001"]},
-      "production": {"value": 0.20, "unit": "mm", "evidence": ["evid-shank-001"]}
+      "polished": {
+        "value": 0.05,
+        "unit": "mm",
+        "evidence": [
+          "evid-polish-001"
+        ]
+      },
+      "sandblasted": {
+        "value": 0.1,
+        "unit": "mm",
+        "evidence": [
+          "evid-polish-001"
+        ]
+      },
+      "brushed": {
+        "value": 0.1,
+        "unit": "mm",
+        "evidence": [
+          "evid-polish-001"
+        ]
+      },
+      "hand_polished": {
+        "value": 0.15,
+        "unit": "mm",
+        "evidence": [
+          "evid-polish-001"
+        ]
+      },
+      "production": {
+        "value": 0.2,
+        "unit": "mm",
+        "evidence": [
+          "evid-shank-001"
+        ]
+      }
+    },
+    "sprue_placement": {
+      "status": "drafted",
+      "applied_by": "partner",
+      "printed_sprues_allowed": false,
+      "note": "no sprue geometry in models. partners place sprues; minimum sprue diameter relative to section thickness is unpublished by every source in the digest (rule-digest.md). preform supports must not be used as sprues."
     }
   },
   "capabilities": {
@@ -137,7 +277,15 @@
     "articulated_parts"
   ],
   "source_lineage": [
-    "src-0001", "src-0002", "src-0003", "src-0004", "src-0005", "src-0006",
-    "src-0007", "src-0010", "src-0011", "src-0012"
+    "src-0001",
+    "src-0002",
+    "src-0003",
+    "src-0004",
+    "src-0005",
+    "src-0006",
+    "src-0007",
+    "src-0010",
+    "src-0011",
+    "src-0012"
   ]
 }
