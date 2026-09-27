@@ -12,6 +12,7 @@ this is the proposed product and configuration taxonomy, not a live catalog. it 
 | [necklaces](necklaces/README.md) | composition of pendant and chain | composition plan, not a distinct geometry engine |
 | [piercings](piercings/README.md) | body-jewelry boundary | research hold; no offer or safety claim |
 | [metals](metals/README.md) | alloy, color, finish, finding compatibility | candidates only; partner verification needed |
+| [findings](findings/README.md) | platform-supplied hardware (catches, clasps, bails) and interface gating | supply model specced; catalog unverified |
 | [configure](configure/README.md) | bounded customization and symbolic bases | product specification, not a live configurator |
 | [nativity](nativity/README.md) | native sales channels beyond our storefront | candidates only; none connected |
 | [styles](styles/README.md) | design-style vocabulary, phrase-to-style latent mapping | v0.1 seed drafted; falkordb model proposed, not deployed |
