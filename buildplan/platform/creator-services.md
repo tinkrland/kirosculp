@@ -15,6 +15,17 @@ later; the unit is the toggle.
   drop notifications) sent under the creator's brand. requires
   verified domain: dkim/spf records on a domain the creator controls,
   or a domain managed through us (next toggle).
+- **creator-domain mail routing** — extends dns management: mx records
+  route support@ / hello@ at the creator's domain into sculptura ops.
+  buyers email what looks like (and is) the creator's front door;
+  order-status and manufacturing questions are answered by sculptura
+  ops under the creator's brand, no sculptura chrome, and the creator
+  never frenzies about manufacturing. triage sends only the threads
+  that genuinely need them (custom/design/commission questions) to
+  the creator's real inbox, as a digest or per thread. boundary: ops
+  replies speak as the brand's support identity, never impersonate
+  the creator personally; anything signed as the creator is authored
+  by the creator.
 - **dns management** — lovable-style: the creator's domain is hosted or
   bought through us, and records for storefront + email are
   auto-wired. boundaries: the creator always owns the domain name
@@ -26,14 +37,21 @@ later; the unit is the toggle.
   means partners stocking creator-specific materials, with minimums
   and per-creator logistics. only viable with volume or a packaging
   collation step.
-- **printed card / thank you note** — the cheaper alternative to
-  whitelabel shipping. open question recorded honestly: casting
-  partners will not print arbitrary cards. candidate mechanisms, none
-  chosen: (a) bulk pre-printed cards stocked at the partner for
-  insertion, (b) a collation hub that opens, inserts, reseals
-  (expensive per parcel), (c) a printed card mailed separately from a
-  card service near the buyer (cheap but arrives separately, partially
-  defeating the point). unresolved until partner conversations.
+- **personal thank-you sticker (thermal, printed live)** — the
+  cheaper alternative to whitelabel shipping, and it resolves the
+  "partners will not print arbitrary cards" problem. the mechanism:
+  the creator turns their handwriting into a custom font (glyph
+  capture upload, font build stored in their brand profile), and
+  writes a base html-like template with placeholders ({buyer_name},
+  {order_reference}, optional free line). at fulfillment time the
+  platform renders the template server-side per order, and the
+  sticker prints live on a thermal label printer at the partner's
+  dispatch station. it looks personal (their handwriting, the buyer's
+  name), but it is deterministic rendering, and the partner stocks only
+  commodity sticker rolls, never per-creator materials. the frenzy is
+  zero: creator sets it once; every order gets it. partners need
+  commodity hardware and the integration, which is the remaining
+  deployment question, not a logistics one.
 
 ## paying with the wallet
 
