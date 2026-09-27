@@ -38,6 +38,9 @@ tabs, in order:
 - **links / contact:** socials, external storefronts, contact email,
   and a booking shortcut synced from the same connected calendar when
   commissions are on.
+  the terms rendered here are structured data from the console, per
+  [commissions.md](commissions.md): pricing model, scope, rights, and
+  availability, never a link-out to an external site.
 
 it never does: studio work, geometry editing, listings management,
 payouts, or anything that requires creator authentication. it is a
