@@ -18,6 +18,8 @@ tabs, in order:
 - **overview:** curated featured pieces, short intro line, optionally
   one collection strip. sells the catalog without being the catalog;
   "view all" deep-links into catalog with a filter pre-applied.
+- collections surface here and as their own view: creator-owned public
+  groups of pieces per [discovery.md](discovery.md).
 - **catalog:** the full grid, filterable by family, metal, price, and
   stock state. the only tab that reads directly from live listings.
   card previews come from the design release render, never raw
