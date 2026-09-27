@@ -12,7 +12,7 @@ the convergence strategy, in order:
 
 1. **fetch from all sides** using [resources.md](resources.md): published design rules from sculpteo, formlabs, casting houses, and openscad documentation. the first harvest (2026-09-23) is consolidated in [rule-digest.md](rule-digest.md).
 2. **acquire what is not published** using [acquire.md](acquire.md): custom questions to partners and suppliers whose real per-alloy limits never appear online. the paste-ready partner phrasing lives in [partner-brief.md](partner-brief.md).
-3. **consolidate** into versioned rule sets, one per (alloy, pattern process) pair, each value carrying its source and date, resolving the conflicts recorded in the digest rather than averaging them away.
+3. **consolidate** into versioned rule sets, one per (alloy, pattern process) pair, each value carrying its source and date, resolving the conflicts recorded in the digest rather than averaging them away. the live resolution ledger for those conflicts, with the conservative interim rule each one carries until a partner answers, is [conflict-register.md](conflict-register.md).
 4. **benchmark** using [benchmarks.md](benchmarks.md): a deterministic harness that compiles a fixed set of parametric test pieces and checks them against each rule set, so a rule change is measurable, not vibes.
 
 ## steps
