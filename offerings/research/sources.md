@@ -34,3 +34,10 @@ terminology and pattern claims only, not product approval:
 | [mozeris fine antiques: art deco jewellery](https://www.mozerisfineantiques.com/blogs/guide-to-art-deco-jewellery), [filigree jewelers era guide](https://filigreejewelers.com/blogs/articles/what-defines-art-deco-jewelry), [beladora art deco bracelets guide](https://www.beladora.com/blogs/blog/the-definitive-guide-to-art-deco-bracelets) | art deco motifs: sunburst, chevron, zigzag, platinum-and-diamond idiom, strong color contrast | dealer guides; corroborate the lang university account of the era |
 | lang university art deco page (above) | cubist reading of deco geometry; egyptian revival motifs (lotus, pyramid, eye of horus, scarab) after tutankhamun 1922; calibre settings; islamic and persian motif borrowings | dealer education content; islamic/persian motif families held out of v0.1.1 with the culturally loaded names |
 | retail coverage of the everyday-fine category (mejuri-adjacent coverage in vogue, the good trade) | retailers name the category "everyday fine jewelry"; "minimalist" is a descriptor, not a style name | brand-adjacent editorial, not neutral taxonomy; rename recorded in vocabulary lineage |
+
+### symbol vocabulary v0.1.0 (2026-09-27)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [astro ak: the seven metals, alchemy and the planets](https://www.astroak.com/en/blog/the-seven-metals-alchemy-and-the-planets), [wikipedia: planetary symbols](https://en.wikipedia.org/wiki/Planetary_symbols) | the classical planetary metal correspondences (gold/sun, silver/moon, copper/venus, iron/mars, tin/jupiter, lead/saturn, mercury/mercury) | historical/symbolic tradition, not efficacy claims; non-castable metals stay informational |
+| element metal-affinity pairings in the vocabulary | sculptura merchandising hints, explicitly flagged `hint_is_ours` | our own suggestion, not a classical claim; opt-in labeling by customers and creators |

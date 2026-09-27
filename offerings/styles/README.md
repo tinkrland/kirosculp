@@ -44,6 +44,16 @@ home:
    [wear-context-vocabulary.jsonl](wear-context-vocabulary.jsonl).
    stackability in particular is a geometric fact validated by
    paracraft, never a self-declared tag.
+5. **symbol layer** — opt-in symbolic merchandising, orthogonal to
+   style and context: classical planetary metal correspondences
+   (gold/sun, silver/moon, copper/venus, iron/mars, tin/jupiter,
+   lead/saturn), the four elements, and tropical western zodiac signs.
+   metal-only makes this ours: the birthstone axis competitors use is
+   closed off, but "a substantial warm gold band for an earth sign"
+   is fully native. see
+   [symbol-vocabulary.jsonl](symbol-vocabulary.jsonl). only metals in
+   the alloy list carry active correspondence edges; the rest are
+   informational language, never listing claims.
 
 edges carry weights:
 
@@ -84,6 +94,10 @@ follow. deterministic, explainable, and the same graph powers
   merchandising contexts (everyday wear, stacks, special occasion,
   ceremony) as a separate layer, so a context never masquerades as a
   style.
+- [symbol-vocabulary.jsonl](symbol-vocabulary.jsonl): opt-in symbolic
+  merchandising: planetary metals, elements, tropical zodiac. records
+  carry `castable` and `hint_is_ours` so classical claims never blur
+  into sculptura's suggestions.
 - [research/sources.md](../research/sources.md): sprawl sources and
   their boundaries, per the offerings evidence convention.
 
@@ -97,3 +111,10 @@ follow. deterministic, explainable, and the same graph powers
 - culturally loaded names (e.g. "bohemian", "tribal") are held out of
   v0.1 deliberately; they need the same care the nativity/cultural
   motifs got in [configure](../configure/README.md).
+- the symbol layer is merchandising that customers and creators opt
+  into. the platform never endorses or claims efficacy: a piece carries
+  a symbol because someone chose it, not because it works.
+- symbol systems beyond tropical western astrology (jyotisha, chinese
+  zodiac, celtic tree systems) are held out pending the same
+  cultural-care review; borrowing them shallowly would repeat the
+  mistake the held names avoid.
