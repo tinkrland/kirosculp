@@ -44,6 +44,14 @@ wallet-funded to avoid double transaction fees, and bonfire-style
 resin-pattern samples printed locally:
 [creator-services.md](creator-services.md).
 
+## commissions
+
+in-platform only, vgen-style: structured terms (flat/hourly/milestone)
+set in the creator console instead of a carrd page, escrowed funds with
+staged milestone releases, and a platform-mediated dispute state
+machine over the retained record:
+[commissions.md](commissions.md).
+
 ## build depth
 
 this leg is engineered properly, not as a shallow mvp: full creator and buyer flows, release-bound everything, and no demo-mode shortcuts. the full depth definition is in [scoping.md](../scoping.md), the proper-not-shallow scope for all platform surfaces.
