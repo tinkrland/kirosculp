@@ -26,3 +26,11 @@ terminology and pattern claims only, not product approval:
 | [lang antiques university: art deco jewelry](https://www.langantiques.com/university/learn-with-lang/art-deco-jewelry) | art deco geometry, angularity, industrial-era context | dealer education content |
 | [velvetmatter: brutalist jewelry design style](https://velvetmatter.art/design_styles/brutalist-jewelry) | brutalist raw/heavy/industrial descriptors | art-design blog, single-source for those descriptors until corroborated |
 | tavily search results on customer jewelry language | descriptor axes actually used by shoppers: dainty, chunky, ornate, minimalist/maximalist, statement | search snippets, not behavioral data; treat phrase weights as drafted |
+
+### style vocabulary v0.1.1 refinement (2026-09-27)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [mozeris fine antiques: art deco jewellery](https://www.mozerisfineantiques.com/blogs/guide-to-art-deco-jewellery), [filigree jewelers era guide](https://filigreejewelers.com/blogs/articles/what-defines-art-deco-jewelry), [beladora art deco bracelets guide](https://www.beladora.com/blogs/blog/the-definitive-guide-to-art-deco-bracelets) | art deco motifs: sunburst, chevron, zigzag, platinum-and-diamond idiom, strong color contrast | dealer guides; corroborate the lang university account of the era |
+| lang university art deco page (above) | cubist reading of deco geometry; egyptian revival motifs (lotus, pyramid, eye of horus, scarab) after tutankhamun 1922; calibre settings; islamic and persian motif borrowings | dealer education content; islamic/persian motif families held out of v0.1.1 with the culturally loaded names |
+| retail coverage of the everyday-fine category (mejuri-adjacent coverage in vogue, the good trade) | retailers name the category "everyday fine jewelry"; "minimalist" is a descriptor, not a style name | brand-adjacent editorial, not neutral taxonomy; rename recorded in vocabulary lineage |

@@ -29,8 +29,10 @@ home:
    plus descriptor axes: organic vs geometric, ornate vs clean, dainty
    vs chunky, antique vs modern.
 3. **style layer** — the named styles: georgian, victorian, art
-   nouveau, edwardian, art deco, retro, mid-century modernist,
-   brutalist, organic modern, minimalist, celestial, gothic, biker.
+   nouveau, edwardian, art deco, egyptian revival, retro,
+   mid-century modernist, brutalist, organic modern, everyday fine
+   (the retail category for what gets mislabeled minimalist),
+   celestial, gothic, biker.
 
 edges carry weights:
 
