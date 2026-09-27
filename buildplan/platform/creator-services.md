@@ -28,9 +28,28 @@ later; the unit is the toggle.
   by the creator.
 - **dns management** — lovable-style: the creator's domain is hosted or
   bought through us, and records for storefront + email are
-  auto-wired. boundaries: the creator always owns the domain name
-  itself; renewal liability, transfer locks, and whois privacy are
-  real operational costs we take on only if this ships.
+  auto-wired. registrar candidates are the developer-forward trio
+  with usable apis (porkbun's documented api, name.com's, spaceship);
+  commitment is a later decision, and staying registrar-agnostic
+  (creator holds the domain elsewhere, we only need record access)
+  remains the fallback. boundaries: the creator always owns the
+  domain name itself; renewal liability, transfer locks, and whois
+  privacy are real operational costs we take on only if this ships.
+- **free-subdomain creators (no custom domain)** — we own the parent
+  zone, so we control subdomain records directly: no registrar is
+  involved at all. a subdomain creator gets storefront + brand send-as
+  + routed support (support@ handles manufacturing, triaged digest to
+  their real inbox) with zero setup, identical in behavior to the
+  custom-domain tiers, just at creator.sculptura-domain instead of
+  their own name. what we deliberately do **not** do is provision
+  actual mailboxes via a third party's free tier (e.g. zoho's five
+  free inboxes): a free-tier dependency cannot be api-provisioned per
+  subdomain at scale, its terms and limits are a shaky platform
+  foundation, and it contradicts the routing model, which already
+  means creators never need an inbox on their storefront domain. a
+  real mailbox product (imap inboxes for creators) is a separate,
+  unscheduled decision with spam/abuse and support liabilities of its
+  own.
 - **whitelabel shipping** — creator-branded packaging on partner
   shipments instead of sculptura's. growth-gated and the hardest one:
   orders ship directly from casting partners, so branded packaging

@@ -47,3 +47,10 @@ terminology and pattern claims only, not product approval:
 | source | what it actually supports | boundary |
 |---|---|---|
 | [spri.ng (teespring) creator resources: promotions](https://www.spri.ng/creator-resources/promotions) | creator-level promo codes exist on creator commerce platforms and cannot be stacked there | single-platform practice; our lane rule goes further by defining the funding side rather than blanket-forbidding stacking |
+
+### registrar and subdomain email note (2026-09-27)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [porkbun api documentation](https://porkbun.com/api/json/v3/documentation), [porkbun api knowledge base](https://kb.porkbun.com/article/307-getting-started-with-the-porkbun-api) | a documented api exists for domain registration and dns management | api surface verified for porkbun; name.com and spaceship api depth not independently verified yet |
+| zoho mail free tier (five free inboxes per custom domain) | free inbox provisioning exists as a category | not a platform dependency: free tiers are not api-provisionable per subdomain at scale, and the routing model removes the need for creator mailboxes on storefront domains |
