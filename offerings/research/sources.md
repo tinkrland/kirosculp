@@ -14,3 +14,15 @@ research used the connected tavily search and firecrawl page reader. the sources
 ## research gaps before enabling checkout
 
 get a real manufacturer or findings supplier to specify supported alloys, post gauges, matched back/closure part numbers, attachment method, available finish and tested retention. obtain dated metal/process rules for each archetype and each size, including engraving/emboss thickness and artifact proof. verify regional metal-contact, hallmarking and consumer requirements. map each published choice to a validated release and current route. nothing in this folder completes those gates.
+
+## style vocabulary sprawl (2026-09-27)
+
+sources used for the [style vocabulary](../styles/README.md), all supporting
+terminology and pattern claims only, not product approval:
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [antique jewellery company: a journey through the eras](https://www.antiquejewellerycompany.com/a-journey-through-the-eras) | era bounds and defining motifs for georgian, victorian, art nouveau, edwardian, art deco, retro; e.g. victorian hearts/hands/knots/serpents, art nouveau curved lines and nature motifs, edwardian bows/garlands/ribbons/lace | dealer prose, not a neutral taxonomy; era dates are conventions |
+| [lang antiques university: art deco jewelry](https://www.langantiques.com/university/learn-with-lang/art-deco-jewelry) | art deco geometry, angularity, industrial-era context | dealer education content |
+| [velvetmatter: brutalist jewelry design style](https://velvetmatter.art/design_styles/brutalist-jewelry) | brutalist raw/heavy/industrial descriptors | art-design blog, single-source for those descriptors until corroborated |
+| tavily search results on customer jewelry language | descriptor axes actually used by shoppers: dainty, chunky, ornate, minimalist/maximalist, statement | search snippets, not behavioral data; treat phrase weights as drafted |

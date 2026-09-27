@@ -14,6 +14,7 @@ this is the proposed product and configuration taxonomy, not a live catalog. it 
 | [metals](metals/README.md) | alloy, color, finish, finding compatibility | candidates only; partner verification needed |
 | [configure](configure/README.md) | bounded customization and symbolic bases | product specification, not a live configurator |
 | [nativity](nativity/README.md) | native sales channels beyond our storefront | candidates only; none connected |
+| [styles](styles/README.md) | design-style vocabulary, phrase-to-style latent mapping | v0.1 seed drafted; falkordb model proposed, not deployed |
 
 ## the hard boundary
 
