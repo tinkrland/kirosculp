@@ -54,3 +54,12 @@ terminology and pattern claims only, not product approval:
 |---|---|---|
 | [porkbun api documentation](https://porkbun.com/api/json/v3/documentation), [porkbun api knowledge base](https://kb.porkbun.com/article/307-getting-started-with-the-porkbun-api) | a documented api exists for domain registration and dns management | api surface verified for porkbun; name.com and spaceship api depth not independently verified yet |
 | zoho mail free tier (five free inboxes per custom domain) | free inbox provisioning exists as a category | not a platform dependency: free tiers are not api-provisionable per subdomain at scale, and the routing model removes the need for creator mailboxes on storefront domains |
+
+### style vocabulary v0.3.0 evidence pass (2026-09-28)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [estatediamondjewelry: history of 7 jewelry eras](https://www.estatediamondjewelry.com/eras-of-antique-jewelry), [solitaire jewelers antique guide](https://www.solitairejewelers.com/pages/antique-jewelry-guide.html), [lillianes: art deco or edwardian](https://lillianesjewelry.com/art-deco-or-edwardian-how-to-spot-your-jewelry) | era signatures: georgian hand metalwork, victorian softer gold with serpent/heart/knot, edwardian platinum delicacy, nouveau freeform asymmetry | dealer-era guides; corroborate existing records, add modest features |
+| [lindseyscoggins: moon and star jewelry history](https://lindseyscoggins.com/blogs/the-rough/moon-and-star-jewelry-a-history), [linknecklaces: celestial stories](https://linknecklaces.com/blogs/backstage/celestial-stories), [enroute: what is celestial jewelry](https://www.enroutejewelry.com/blogs/index/what-is-celestial-jewelry-a-guide-to) | celestial motifs: moon/star/sun, crescents, constellation dot patterns; personal-symbolism meaning | dedicated guides; symbolism cross-links the symbol layer, never an efficacy claim |
+| [american gem society: quick guide to gothic jewelry](https://www.americangemsociety.org/quick-guide-to-gothic-jewelry), [bikerringshop: what is gothic style jewelry](https://www.bikerringshop.com/blogs/jewelry/what-is-gothic-style-jewelry) | gothic motifs: crosses, daggers, skulls, chains, oxidized silver idiom; biker adjacency | ags is an industry body; bikerringshop is a specialist shop guide |
+| 1stdibs/pinterest listing corpora (mid-century, brutalist, organic modern) | corroborate abstract/geometric, raw stark, and natural-modern readings | marketplace listings, not guides; kept as corroboration only, dedicated sources still needed |
