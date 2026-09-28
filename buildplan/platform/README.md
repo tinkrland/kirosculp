@@ -26,7 +26,8 @@ collections); supabase fts for exact matches, falkordb vocabulary
 traversal for latent concept matching. collections (creator-owned,
 public) and lists (buyer-owned, private) are separate objects, and
 scheduled drops run a server-enforced preclock:
-[discovery.md](discovery.md).
+[discovery.md](discovery.md) with the store alternatives in
+[discovery/search-store-alternatives.md](discovery/search-store-alternatives.md).
 
 ## promotions
 
