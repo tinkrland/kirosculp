@@ -86,3 +86,16 @@ terminology and pattern claims only, not product approval:
 | [adorabysimona: 2026 wedding fashion trends](https://www.adorabysimona.com/blogs/bridal-styling-guides/2026-wedding-fashion-trends-the-jewelry-accessories-defining-next-year-brides) | structured/sculptural gowns pair with geometric metal earrings, arcs/bars, sculptural smooth metal cuffs, high-shine metallics | bridal styling guide by a bridal shop; trend language evidence, not taxonomy |
 | [dickinson jewelers: 2026 bridal jewelry trends](https://www.dickinsonjewelers.com/blog/wedding/2026-bridal-jewelry-trends-what-brides-are-actually-wearing-this-year) | statement/sculptural earrings, chain layering in bridal, deliberate asymmetry, mixed metals accepted, 12-hour comfort, "close enough" custom pitch | retailer blog (gabriel & co dealer); sells custom design, so custom framing is self-interested |
 | [gabriel & co: jewelry trends 2026](https://www.gabrielny.com/blog/jewelry-trends-2026/) | single sculptural hero pieces, chunky chains evolving to curved/inflated/hollow links, two-tone metals, brushed/satin over mirror finishes; visual check of spike bypass ring, wave stackable, geometric and hollow-tube link chains (browserbase) | brand trend blog with product placement; examples are their catalog, visual confirmation via browserbase session 2026-09-28 |
+
+### dainty minimal stacking trends (2026-09-28)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [isabellacelini: stackable jewelry trend 2026](https://isabellacelini.com/blogs/news/stackable-jewelry-trend-2026) | explicit layering formulas (necklace lengths, 3-5 bracelet stacks with one focal, thin multi-band rings), same-metal-tone polish, texture mixing over oversized pendants | gold-filled jewelry shop styling guide; sells the aesthetic it describes |
+| [michael agnello jewelers: 2026 fine jewelry trends](https://www.michaelagnellojewelers.com/blog/2026-fine-jewelry-trends) | bold-yet-wearable direction, unique silhouettes, mixed metals in everyday-scale fine jewelry | retailer trend page built around designer brands it stocks |
+
+### manufacturing partner discovery (2026-09-28)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [voxelmatters directory: 3d printing companies](https://www.voxelmatters.directory/companies/) | a maintained industry directory with directly relevant categories for us: jewelry 3d printer manufacturer, precious metal powders, metal 3d printing service, finishing service provider, 3d print shop/service networks | directory of the additive manufacturing industry, not jewelry-specific; category filtering is js-driven and resisted automated scraping, so per-category company extraction is an unfinished manual pass. verdict: bookmark as a partner-discovery resource, not yet mined |

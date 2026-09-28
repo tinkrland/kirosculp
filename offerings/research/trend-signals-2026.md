@@ -71,3 +71,42 @@ metal-only, made-to-order scope? sources logged in
 trend articles are retailer and styling-guide content, not neutral
 taxonomy; they are evidence of language buyers meet in 2026, not of
 durability. no style record weight was changed by this pass.
+
+## dainty minimal stacking (2026-09-28 pass)
+
+everyday (non-bridal) stacking coverage, same read-for-scope question.
+
+what the coverage says:
+
+- **layering formulas are explicit and shoppable.** necklaces: one
+  short chain/choker + one medium + one longer pendant, each with room
+  to stand out. bracelets: 3 to 5 pieces, one focal, smooth mixed with
+  textured, one metal tone. rings: multiple thin bands spread across
+  fingers instead of one statement ring. (isabellacelini styling guide)
+- **same-metal-tone stacks read as polished**; mixed textures (beads,
+  thin chains, minimalist charms) do the work oversized pendants used
+  to. (isabellacelini)
+- **modularity is the buying story**: pieces meant to build, stack, and
+  evolve over time rather than complete a look in one purchase.
+  (stacking trend coverage across sources)
+- **"bold yet wearable"** carries into fine jewelry generally: unique
+  silhouettes and mixed metals in comfortable, everyday-scale pieces.
+  (michael agnello jewelers trend page)
+
+what this feeds:
+
+- **the stack set is a real merchandising unit.** the wear-context
+  vocabulary already allows a creator to publish a curated stack set
+  referencing release ids; the 2026 styling formulas say shoppers want
+  exactly that (a starter stack as one decision). the formula itself
+  (short/medium/long; 3-5 with one focal) can become guided
+  merchandising copy, not new vocabulary.
+- **the house line genre is confirmed again**: thin bands, initial
+  charms, small tags, textured-but-tiny pieces are precisely the
+  everyjewels-adjacent dainty stackable basics. metal-tone consistency
+  per stack also argues for publishing each template in all supported
+  metals rather than one.
+- **paracraft facts stay the gate**: stackability remains band width
+  and height profile validated geometry, never a self-declared tag;
+  "thin band" needs a minimum-wall rule from the studio envelope, not
+  a marketing word.
