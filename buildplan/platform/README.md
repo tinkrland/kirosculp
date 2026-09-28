@@ -64,3 +64,5 @@ the first design releases from the [studio leg](../studio/README.md), and the se
 ## hands over
 
 release-bound purchase requests to [operations](../operations/README.md).
+
+- house-published templated catalog (no creator split): [native-line.md](native-line.md)
