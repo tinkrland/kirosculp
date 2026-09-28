@@ -14,7 +14,7 @@ redbubble, teepublic, zazzle, teespring, spreadshirt, threadless
 bonfire.com, printify, printful, gelato
 
 ## commissions
-vgen, booth.pm, skeb
+vgen, booth.pm, skeb, custommade.com (deposit-then-final-payment on approval and shipment, close to our escrow model)
 
 ## kofi-style support / monetization
 ko-fi, throne, patreon, buymeacoffee, whop
