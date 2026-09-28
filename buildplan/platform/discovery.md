@@ -17,12 +17,32 @@ renders from the same resolved intent against a different node type.
   "swirly" resolves to whiplash_curve + scrollwork, that resolves to art
   nouveau with a score, and the buyer never needs to know the word.
 
+the latent layer is really two tracks, both in falkordb (which supports
+knn vector similarity over vector node properties, cosine/euclidean, as
+a native hybrid with graph and keyword):
+
+- **track 1, the curated graph (deterministic):** the style vocabulary
+  is the graph itself. phrases, concepts, styles, confusable edges, and
+  feature weights (the 0.0-1.0 scores in style-vocabulary.jsonl) become
+  nodes and weighted edges. every traversal is explainable: which
+  phrases matched, which concepts, which styles, with what scores.
+  the v0.3.0 evidence pass directly hardens this track: richer
+  features and phrases per style mean better resolution, and
+  confusable edges handle near-misses (gothic vs biker vs brutalist).
+- **track 2, vector similarity (the fuzzy side):** embedding vectors
+  stored as node properties, for similarity that the curated vocabulary
+  cannot name yet: never-seen phrases (vocabulary-build-time phrase
+  embeddings as fuzzy fallback), listing text/image embeddings for
+  "feels like this" similarity, and semantic neighbors the graph
+  misses. knn over vector indexes, merged into the same intent with
+  lower confidence than track 1 hits.
+
 the resolved object is a **search intent**: style scores, contexts,
-symbols, families, and sort/filter params. it is deterministic and
-explainable (we can always answer "why did this piece show up for that
-search": which phrases matched, which concepts, which styles). never an
-llm call at query time. offline phrase embeddings are an optional fuzzy
-fallback for never-seen phrases only, computed at vocabulary build time.
+symbols, families, and sort/filter params, with track 1 hits ranked
+above track 2 fuzzy hits, both below exact layer hits. it is
+deterministic and explainable where the graph speaks, and
+similarity-scored where only vectors do. never an llm call at query
+time; embeddings are computed at build time.
 
 ## one intent, three tabs
 
