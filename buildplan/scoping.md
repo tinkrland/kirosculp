@@ -54,6 +54,7 @@ the first build was shallow: demo mode, a hardcoded admin password, plaintext cr
 - trusted pricing server-side: two-way pricing (fixed creator earnings or fixed retail) computed from manufacturing cost and platform fees
 - escrow/payment-holding for the commission flow
 - the ledger lives in supabase, prototyped with spree + localstripe/fetchsandbox before stripe, per the finance sequencing already decided
+- the production platform is typescript/node, supabase-first: spree is the prototype sandbox for checkout mechanics only, never the platform stack, because spree owns its database and the supabase ledger stays authoritative. the studio's headless openscad validation remains its own service behind contracts
 - refunds, payouts, and evidence trails as first-class records
 
 ### manufacturing, really
