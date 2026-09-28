@@ -44,6 +44,11 @@ deterministic and explainable where the graph speaks, and
 similarity-scored where only vectors do. never an llm call at query
 time; embeddings are computed at build time.
 
+alternatives to falkordb for this model (postgres-only is the real
+challenger) are assessed in
+[discovery/search-store-alternatives.md](discovery/search-store-alternatives.md);
+decision deferred to the prototype leg.
+
 ## one intent, three tabs
 
 - **pieces:** listings whose style/context/symbol edges match the
