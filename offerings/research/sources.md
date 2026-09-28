@@ -69,3 +69,12 @@ terminology and pattern claims only, not product approval:
 | source | what it actually supports | boundary |
 |---|---|---|
 | [falkordb docs: vector indexing](https://docs.falkordb.com/cypher/indexing/vector-index), [falkordb: hybrid search in ai](https://www.falkordb.com/blog/what-is-hybrid-search-in-ai) | knn vector similarity on vector node properties (cosine/euclidean), hybrid with graph and keyword query | docs corroborate the two-track latent model in one store; query-time behavior to be verified in the supabase+falkordb prototype leg |
+
+### style vocabulary v0.3.1: weak-style evidence pass (2026-09-28)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [lang antiques university: retro era jewelry](https://www.langantiques.com/university/retro-era-jewelry), [robinsons jewelers: rise and fall of retro](https://robinsonsjewelers.com/blogs/news/the-rise-and-fall-of-quot-retro), [antique jewellery company: guide to retro](https://www.antiquejewellerycompany.com/a-guide-to-retro-jewellery) | retro era (1940s-50s): gold bows, scrolls, florals, three-dimensional goldwork, fabric motifs, movement/realism | dealer education + two dealer guides; corroborated |
+| [lang antiques university: brutalist jewelry](https://www.langantiques.com/university/brutalist-jewelry), [antiquesage: vintage avant-garde](https://www.antiquesage.com/vintage-avant-garde-brutalist-modernist-jewe) | 1960s-70s brutalist: raw textures, chunky forms, architecture-inspired, rough finishes | dealer education + specialist dealer; corroborated |
+| [element79: mid-century modern jewelry guide](https://www.element79jewelry.com/blogs/element-79s-jewelry-blog/a-guide-), [skyjems: scandinavian modern jewellery](https://skyjems.ca/pages/encyclopedia-scandinavian-modern-jewellery), [jensensilver + bard graduate center georg jensen scholarship](https://www.jensensilver.com/braving-the-modern-georg-jensen-jewelry-192) | mid-century/scandinavian modernist: sculptural abstract forms, organic + geometric, jensen/skonvirke lineage linking to art nouveau | dealer education + academic center; corroborated |
+| same scandinavian/jensen scholarship | organic modern reading: sculptural organic forms, nature-plus-modern | shares sources with mid-century; confusable edge stands |
