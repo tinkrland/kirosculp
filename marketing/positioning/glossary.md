@@ -102,6 +102,23 @@ ferro (iron) + form: industrial metalwork energy.
   iron; "ferro" is evocation, not metallurgy. never use it on a
   materials page where it could read as an alloy claim.
 
+## primordial
+
+the real word for the oldest story metal has: it was here before
+everything made.
+
+- **use:** "primordial jewelry" where the copy goes mythic: metal as
+  the original material, formed in stars, found in the earth, cast the
+  way it always has been. gold is literally born in neutron-star
+  collisions; that is a true sentence a marketing page may use.
+- **why it works:** it shares apyros's native-metal, unsmelted-purity
+  territory but goes further back: not just "unfired" but
+  pre-everything. it turns the absence of stones into deep time.
+- **where:** campaign and editorial copy, launch storytelling, the
+  pieces where apyros is too quiet and elemental too plain.
+- **honesty note:** a common word; evocative, never ownable. like
+  elemental, use it as description, not a claimed trademark.
+
 ## usage rules
 
 - never lead with what we don't do. the scope statement (metal-only,
