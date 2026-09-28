@@ -42,7 +42,7 @@ and not an endorsement; nothing here is committed to the roadmap.
 - society6
 - spoonflower
 - contrado
-- arcade.ai (ai-designed, made-on-demand products; closest architectural cousin to what we are building, watch closely)
+- arcade.ai (ai-designed, made-on-demand jewelry; product-concept cousin only, see mapping)
 
 ## checkout / digital sales tooling
 - gumroad (source available)
@@ -57,9 +57,16 @@ and not an endorsement; nothing here is committed to the roadmap.
   [commissions.md](commissions.md) (terms surfaces, escrow, dispute, fee structures).
 - fourthwall, spreadshop, teemill: creator storefront + white-label
   comparables for [creator-services.md](creator-services.md).
-- arcade.ai: ai-designed, manufactured-on-demand products; the nearest
-  live model to the studio-to-platform pipeline, worth a dedicated
-  research pass.
+- arcade.ai: nearest *product-concept* cousin (ai-designed jewelry,
+  made on demand), but architecturally different in the way that
+  matters: arcade generates an image, then an artisan interprets that
+  image and hand-makes the piece. there is no deterministic geometry,
+  no parametric model, no server-side manufacturability validation, and
+  no immutable design release; manufacturability judgment lives in the
+  artisan, not the system. sculptura is the inverse: parametric
+  openscad geometry, validated before sale, exact reproducible releases.
+  worth a dedicated research pass for their routing and artisan-network
+  mechanics, not their pipeline.
 - gumroad (source available): a checkout codebase we can read freely
   when prototyping the payments leg.
 - the pod set (printify, printful, gelato): routing/orchestration
