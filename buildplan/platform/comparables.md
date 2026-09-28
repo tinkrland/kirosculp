@@ -20,7 +20,7 @@ vgen, booth.pm, skeb
 ko-fi, throne, patreon, buymeacoffee, whop
 
 ## art storefronts
-inprnt, society6, spoonflower, displate
+inprnt, society6, spoonflower, contrado, displate
 
 ## checkout / digital sales
 gumroad (source available), artistree, unvale, kirke, anzu
