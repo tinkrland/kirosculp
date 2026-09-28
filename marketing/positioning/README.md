@@ -19,3 +19,7 @@ creators are not limited to sculptura's marketplace. they can white-label their 
 ## voice rules
 
 lowercase throughout, no emojis, no em dashes. proper nouns may be lowercase too. keep exact case only where it would break something: code, urls, external names.
+
+## glossary
+
+naming what we make instead of what we don't: [glossary.md](glossary.md).
