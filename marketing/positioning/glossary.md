@@ -56,6 +56,52 @@ but metal and form.
 - **watch:** "elemental" is a common adjective; it cannot be owned.
   use it as description, never as a claimed trademark.
 
+## monomet
+
+mono, single + metal: one material, fully.
+
+- **use:** "monomet jewelry" where the point is single-material
+  integrity: no plating over base, no filled cores, no mixed
+  construction, one honest alloy through the whole piece.
+- **why it works:** it makes the constraint sound like a design
+  discipline, the way "mono" reads in monochrome or mono-material
+  architecture: a choice, not a shortage. it also quietly carries the
+  solid-metal claim (solimet's territory) in a more designerly voice.
+- **where:** design-forward copy, collection names, anything quoting
+  the studio's "one material, no surprises" validation story.
+
+## metastruct
+
+meta + structure: the design *is* the structure. surface and support
+are the same thing.
+
+- **use:** "metastruct jewelry" for the engineering-flavored telling:
+  pieces where the form carries itself, no stones to dress, no filler,
+  geometry as ornament.
+- **why it works:** it reframes the absence of stones as the whole
+  aesthetic thesis: with nothing to set, structure becomes the
+  decoration. that is literally our lane (sculptural, architectural,
+  brutalist vocabularies), and it names it.
+- **where:** the studio's technical storytelling, creator-facing copy
+  about what paracraft geometry means, "design-forward" collection
+  framing. strongest where we speak to makers, not brides.
+
+## ferroform
+
+ferro (iron) + form: industrial metalwork energy.
+
+- **use:** "ferroform jewelry" as an *aesthetic* descriptor: raw
+  strength, industrial form language, architectural mass.
+- **why it works:** it borrows the visual weight of ironwork without
+  claiming we cast iron. reads bold, structural, unapologetic; pairs
+  naturally with the brutalist and industrial nodes in the style
+  vocabulary.
+- **where:** trend/lookbook copy where the industrial aesthetic is the
+  subject. not a category term.
+- **honesty note:** we cast silver, brass, bronze, and gold, never
+  iron; "ferro" is evocation, not metallurgy. never use it on a
+  materials page where it could read as an alloy claim.
+
 ## usage rules
 
 - never lead with what we don't do. the scope statement (metal-only,
