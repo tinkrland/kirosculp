@@ -150,10 +150,11 @@ buyers do not operate tessa or paracraft. creators do. ordinary listings support
 
 ### set in stone
 
-- metal-only jewelry is permanent scope, and sculptura never supplies stones
+- solimet jewelry is permanent scope: solid metal through and
+  through, and sculptura never supplies stones
   (public-facing language for this scope lives in the
   [positioning glossary](marketing/positioning/glossary.md): apyros,
-  solimet, elemental)
+  solimet, elemental, and the rest of the coined set)
 - immutable design releases between studio and platform
 - two-way pricing: fix creator earnings or fix retail price
 - no client-provided price, manufacturing cost, earnings value, or validation claim is trusted
