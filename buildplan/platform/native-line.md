@@ -25,14 +25,23 @@ identical two-way pricing math. no shortcut in the pipeline, only a
 different party at the creator end.
 
 the reason it should be sculptura and not left to organic creator
-supply: cold-start discovery. a marketplace with zero listings has
-nothing to search, browse, or recommend against, and dainty stackable
-basics are exactly the kind of piece a new buyer expects to find
-immediately. a small first-party seed catalog gives day-one inventory
-in the highest-intent, lowest-friction genre (see
+supply: these are the first few pieces the platform actually sells at
+launch. a marketplace with zero listings has nothing to search, browse,
+or recommend against, and dainty stackable basics are exactly the kind
+of piece a new buyer expects to find immediately. the house line
+covers the basics from day one (see
 [stacks](../../offerings/styles/wear-context-vocabulary.jsonl) and the
-["everyday fine jewelry"](../../offerings/styles/README.md) rename)
-without waiting on creator onboarding.
+["everyday fine jewelry"](../../offerings/styles/README.md) rename):
+a small launch catalog of template pieces, in the genre, that already
+sells while creator supply is still ramping.
+
+the production model is the platform's own make-on-demand routing:
+every house order flows through the same release-bound purchase path
+as any creator listing, routed to a casting partner on demand. no
+inventory, no warehousing, no upfront stock risk; the house line is
+print-on-demand in exactly the sense the pod comparables
+([printify, printful, gelato](comparables.md)) industrialized, but in
+metal instead of merch.
 
 ## the economics: no split because there is no counterparty
 
@@ -45,13 +54,13 @@ in [operations](../operations/README.md) still runs unchanged: same
 manufacturing quote, same platform fee logic, same server-side price.
 only the payee is different.
 
-this must stay a **narrow seed set, not a moat**: the house line exists
-to solve cold-start discovery, not to compete with creators in their
-own template niche or crowd out a creator publishing an equally dainty
-initial charm. it should be small, clearly the same product genre
-across a handful of templates (initial, number/date tag, one or two
-simple motifs), and never expand opportunistically into a creator's
-established territory.
+scope boundary: the house line is the launch set that covers the
+basics, not an evergreen house brand. it stays a handful of templates
+(initial, number/date tag, one or two simple motifs), it never gets
+discovery privileges over creator listings, and it does not expand
+opportunistically into a creator's established territory: once creator
+supply covers a genre, the house version has no ranking or visibility
+edge there.
 
 ## what it needs before it can exist
 
