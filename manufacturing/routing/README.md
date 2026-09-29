@@ -2,6 +2,8 @@
 
 filters partners by accepted capability, alloy, process, dimensions, destination, adapter health, and onboarding state. eligible routes are scored by landed cost, customs exposure, turnaround, reliability, shipping, and claim risk. nearest and cheapest are inputs, not automatic winners.
 
+values-based routing is part of the same model: partner provenance profiles (recycled content, refiner chain, site country, certifications, evidence or nothing) plus creator-set listing constraints (recycled only, made-in-country, chain-of-custody) that become honest search facets because routing enforces them. see [provenance-metadata.md](provenance-metadata.md).
+
 ## audited implementation reference
 
 **status: missing engine**
