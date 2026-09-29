@@ -214,3 +214,7 @@ scripts/
 - a status claim needs evidence. use [`audit/`](audit/index.md) for what exists and [`buildplan/`](buildplan/README.md) for what is planned. never let a plan document silently become a claim of live functionality.
 - market availability, creator onboarding, shipping clusters, hallmarking, customs, and route activation are operational concerns tracked under [`operations/country-rollout`](operations/country-rollout/README.md) and [`operations/shipping`](operations/shipping/README.md).
 - [`venture/`](venture/README.md) keeps investor language separate from implementation truth while grounding both in the same system boundaries.
+
+## agent instructions
+
+kiro.dev working materials (steering, skills) live on the `agent-instructions` orphan branch, not in the main tree.
