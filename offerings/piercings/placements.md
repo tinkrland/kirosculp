@@ -163,6 +163,14 @@ flat:
   them, only that they should not enter research quietly alongside
   the rest.
 
+## scope decision (owner, 2026-09-29)
+
+bands 2 and 3 are **set off indefinitely**: no research spend, no
+vocabulary work, no paracraft constraint development for any of them.
+they stay in this map as recorded knowledge only. band 1 (all ear
+placements plus mainstream facial) remains the only active future-scope
+candidate set, still under the research hold.
+
 ## sources (this pass)
 
 - owner-supplied reference table, 2026-09-29 (unusual ear, facial, and
