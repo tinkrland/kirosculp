@@ -1,5 +1,5 @@
 ---
-included: always
+inclusion: always
 ---
 
 # writing and repo conventions

@@ -31,5 +31,5 @@ turn a buildplan leg readme into a kiro spec before writing any code.
 ## boundaries
 
 - never invent product decisions to fill gaps; list them as open questions.
-- the leg readme is the authority; if it conflicts with code, the doc wins
-  and the conflict gets recorded, not silently resolved.
+- the leg readme states intended behavior; tests and code establish current
+  behavior. record contradictions for review before choosing a policy.
