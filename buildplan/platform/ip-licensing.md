@@ -81,6 +81,27 @@ metadata so a stray stl always names its source release.
   commissions surface ([commissions.md](commissions.md)); nothing
   here replaces it, the release grant is just what stands behind it.
 
+## how the console shows it
+
+the creator console renders the license state so it is never a mystery:
+
+- **release detail carries a license badge:** personal-use or full
+  commercial grant, with one plain-language sentence each ("this
+  design's exports are for your own use"; "you own this design's
+  commercial rights, chain of title on record").
+- **the conversion path is shown, never a switch:** the badge explains
+  what converts a release (produce it through any sculptura-routed
+  order, or buy the commercial license) and links to the first step.
+  the creator never edits license state; the platform grants it and
+  the ledger records it.
+- **exports state their license:** stl downloads on a personal-use
+  release show a reminder of the non-commercial terms and carry the
+  release-id metadata; a granted release exports clean with its chain
+  of title.
+- **chain-of-title view:** per release, the ledger entries that define
+  its license history, so a creator selling their brand or proving
+  ownership to a third party has a linkable record.
+
 ## boundaries
 
 - the license layer lives on the platform side; the studio stays
