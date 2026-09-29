@@ -16,6 +16,8 @@ keep small prompt templates, schemas, and tool definitions in git with semantic 
 
 start with narrow tools such as `read_project_revision`, `list_allowed_parameters`, `propose_parameter_patch`, and `request_preview`. every tool enforces creator/project identity, allowlisted parameters, quotas, and typed input/output; `propose_parameter_patch` writes only a proposal. only a creator-approved request can cause paracraft compilation. there is no payment, listing, release-authoring, or unrestricted shell tool for tessa.
 
+byok (creators plugging their own key/model into tessa inference) is specified in [byok.md](byok.md): the litellm gateway is the provider surface, a capability probe at key setup is the qualification floor, and the typed proposal envelope stays the safety boundary regardless of model quality.
+
 litellm is a candidate model gateway for routing across openai, gemini, or featherless-compatible endpoints. langchain is a candidate orchestration layer for tool calls, but is not a substitute for the gateway or the domain validators. choose either or both only after a narrow latency, observability, and schema-conformance spike; a direct sdk loop may be simpler initially. model-generated calls are always untrusted inputs.
 
 ## redis cache
