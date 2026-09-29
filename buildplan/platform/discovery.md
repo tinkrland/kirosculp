@@ -47,7 +47,10 @@ time; embeddings are computed at build time.
 alternatives to falkordb for this model (postgres-only is the real
 challenger) are assessed in
 [discovery/search-store-alternatives.md](discovery/search-store-alternatives.md);
-decision deferred to the prototype leg.
+decision deferred to the prototype leg. the filter layer that composes
+with the resolved intent (facet taxonomy, sources, and the four
+similarity entry points) is specified in
+[discovery/search-facets.md](search-facets.md).
 
 ## one intent, three tabs
 
