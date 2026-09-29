@@ -76,7 +76,7 @@ recommend:
 
 | provider | lane | notes |
 |---|---|---|
-| openai | flagship multimodal (gpt-5 generation and successors) + mini lane | the default recommendation lane; reasoning variants fall under the reasoning handling above |
+| openai | flagship multimodal (gpt-5 generation and successors) + mini lane; gpt-4.1 as the still-servable legacy lane | the default recommendation lane; reasoning variants fall under the reasoning handling above. gpt-4.5-preview was removed from the api july 2025 and the gpt-4o endpoint shut february 2026, so pre-4.1 ids are not servable and fail at connection, not the probe |
 | anthropic | claude sonnet + haoku lanes | tool-calling native; vision capable |
 | google | gemini pro + flash lanes | flash is the budget lane |
 | deepseek | deepseek-chat lane + deepseek-reasoner lane | chat is the recommendation; reasoner runs under the reasoning rules |
