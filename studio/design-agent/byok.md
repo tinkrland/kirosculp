@@ -65,6 +65,36 @@ experience; the envelope keeps geometry safe either way. we publish a
 **tested-against** list (models we regression-test tessa prompts on)
 as a recommendation; it is never a gate.
 
+## wrong model, right key (the reasoning-api case)
+
+a key can be perfectly valid and still be the wrong *kind* of model: a
+reasoning-only endpoint with no vision, a model with no native tool
+calling, a provider plan that only serves a text-only variant. this is
+exactly what the probe battery is for, and why it probes capabilities
+instead of checking credentials: the key connects, the model answers,
+and it still fails check 1 (vision) or check 3 (tools) with a message
+naming the model id and the failed check ("this endpoint serves
+X, which has no vision input; tessa is vision-first").
+
+reasoning models are not banned; they pass or fail on what they can
+do. but they get explicit handling when they do pass:
+
+- **final-answer extraction:** reasoning traces are stripped at parse
+  time; only the final structured proposal enters the envelope. a
+  model whose reasoning leaks into the proposal output fails the
+  structure check.
+- **reasoning tokens are their bill:** interleaved thinking burns the
+  creator's key faster per turn, which is their call, but the console
+  shows an estimated per-turn cost at setup so it is an informed one.
+- **latency tier:** a passing model whose probe turns take long enough
+  to wreck the conversational flow gets a warning at setup ("this
+  model averages Xs per turn"), not a rejection; the floor is
+  capability, and slow-but-capable is the creator's tradeoff.
+- **parameter quirks:** some reasoning models reject common sampling
+  parameters or system prompts; the probe uses the minimal parameter
+  set that the gateway normalizes, and a model that cannot run under
+  the gateway's normalized call shape fails the tool check honestly.
+
 ## the wrong key, at runtime
 
 - **setup:** the probe battery above is the wrong-key answer at entry:
