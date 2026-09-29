@@ -99,3 +99,11 @@ terminology and pattern claims only, not product approval:
 | source | what it actually supports | boundary |
 |---|---|---|
 | [voxelmatters directory: 3d printing companies](https://www.voxelmatters.directory/companies/) | a maintained industry directory with directly relevant categories for us: jewelry 3d printer manufacturer, precious metal powders, metal 3d printing service, finishing service provider, 3d print shop/service networks | directory of the additive manufacturing industry, not jewelry-specific; category filtering is js-driven and resisted automated scraping, so per-category company extraction is an unfinished manual pass. verdict: bookmark as a partner-discovery resource, not yet mined |
+
+### channel integration tooling (2026-09-29)
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [openship docs: order routing](https://docs.openship.org/docs/openship/ecommerce) | openship is a real open-source order-routing oms (shops as sources, channels as fulfillment destinations, links, item matches); repo ships shopify and openfront adapters; docs state credential handling and non-durable callback paths require hardening before production orders | project documentation of an early-stage oss project; adapter coverage is thin, so wix/amazon/weebly/bigcartel/bigcommerce support is not present out of the box |
+| [openlinker search pass](https://api.tavily.com) | no product named openlinker surfaced; likely confabulated from openship's link terminology | absence of evidence pass only; flag stands unless a real project is produced |
+| [headless commerce comparisons (vendure, contracollective, pkgpulse)](https://vendure.io/blog/best-headless-commerce-platforms) | medusa v2 and saleor are real, self-hostable headless commerce engines (node vs python, permissive licenses, storefront sdks) | vendor-comparison content; confirms category (commerce engines, not channel connectors), not fitness for our stack |
