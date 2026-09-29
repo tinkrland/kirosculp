@@ -47,12 +47,31 @@ production orders. so: borrow the shop-to-channel routing model as the
 pattern for our channel middleware; do not deploy it as-is expecting
 wix/amazon/weebly/bigcommerce/bigcartel coverage for free.
 
-### openlinker: does not appear to exist
+### openlinker: real, alpha, and poland-focused today
 
-no product of this name surfaced in research; it is likely an ai
-confabulation (openship's "links connect shops to channels" terminology
-is a probable origin). treat as nonexistent unless a real project with
-that name is produced.
+correction (2026-09-29): an earlier pass failed to surface it and
+wrongly called it confabulated. openlinker
+([openlinker.io](https://openlinker.io/en/)) is a real open-source
+(apache 2.0, v0.12.0 alpha) self-hosted e-commerce integration
+platform: typescript/nestjs/react/postgresql/redis/docker, with
+order flows (source to destination, buyer auto-provisioned,
+cursor-based resumable ingestion), bidirectional inventory sync,
+and a listing wizard with ai-drafted descriptions. its architecture
+is port/adapter shaped (ordersource, offermanager, invoicingport,
+fiscalizationport), which is the same model our adapter tier needs.
+
+the honest limit: its live integrations today are poland-market
+(Allegro, ERLI, KSeF fiscalization, polish invoicing suites) with
+prestaShop/woocommerce destinations; none of shopify, wix, amazon,
+weebly, bigcartel, or bigcommerce are live. so it is the second
+reference implementation alongside openship: study the port/adapter
+pattern and the resumable ingestion design; do not expect it to cover
+our long tail out of the box, and it is alpha software.
+
+openship and openlinker together actually strengthen the adapter-tier
+verdict: the pattern is proven twice in open source, which means the
+thin-adapter-over-one-contract design is the industry shape, and our
+differentiation is the release-bound purchase request behind it.
 
 ### medusa v2 / saleor (and vendure, the same family): real, wrong category
 
