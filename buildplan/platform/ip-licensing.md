@@ -52,6 +52,20 @@ the grant is an append-only ledger event referencing the release id,
 so the chain of title is provable. exported artifacts carry release-id
 metadata so a stray stl always names its source release.
 
+## the point is notice, not prevention
+
+the license model does not stop anyone from taking a design and
+running; nothing does. what it does is remove the ambiguity: the
+license state is visible at every touchpoint (console badge, export
+reminder, file metadata, terms of record), so nobody who self-
+manufactures a personal-licensed design can honestly believe they
+owned commercial rights. a breach is *knowing*, never accidental.
+that matters twice: it removes the "i thought this was mine" defense
+before it exists, and it cleanly separates the honest creator (who
+converts through the platform path and gets clean title) from the one
+who knowingly opts out of the license they can see. prevention was
+never the job; unambiguous notice is.
+
 ## the stick and its honest limits
 
 - enforcement is detection-limited: we cannot scan sculpteo's order
