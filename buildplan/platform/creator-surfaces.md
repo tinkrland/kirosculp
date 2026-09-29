@@ -32,7 +32,10 @@ tabs, in order:
   examples with "sign in to start yours". completed commission work may
   show as a small gallery, only when the creator publishes it with
   buyer permission or anonymized, and distinct from catalog items for
-  sale.
+  sale. it also renders the carrd-parity set from
+  [commissions.md](commissions.md): the platform-written how-it-works,
+  live queue state, creator faq, and completed-commission reviews, so
+  a creator never needs an external page to answer basic questions.
 - **about:** bio, philosophy, process shots. converts a browser into a
   buyer who trusts one creator.
 - **links / contact:** socials, external storefronts, contact email,
