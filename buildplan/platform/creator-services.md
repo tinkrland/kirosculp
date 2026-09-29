@@ -89,7 +89,15 @@ print only**, intercepted before casting. this is the sharp one:
 - no casting partner is involved, so no partner routing, no metal
   costs: the pattern is printed at whatever capable resin hub is
   nearest the creator, making it cheaper and faster than any metal
-  order could be.
+  order could be. fulfillment is deliberately not a sculpteo flow:
+  sculpteo stays a *casting-partner* candidate, and the sample path
+  sources general resin printing services (the nearest capable
+  print shop or service network, candidate discovery via the
+  [voxelmatters directory](../../manufacturing/research/candidates/README.md)
+  print-shop and sla/dlp service categories). sample hubs are their
+  own candidate type, separate from precious-metal casting partners,
+  with their own capability checks (castable-resin materials,
+  resolution, finishing) and none of the metal compliance weight.
 - the sample is the exact pattern geometry a partner would cast from
   the validated release, so it is a true preview, not an
   approximation. it is labeled a resin pattern, never finished

@@ -4,6 +4,12 @@ one file records each researched candidate. assessments must distinguish preciou
 
 two files here ([apex-jewelry-casting.md](apex-jewelry-casting.md), [design-build-cast.md](design-build-cast.md)) were ported on 2026-09-25 from the research branch of the pre-consolidation `kqrla/sculptura.dev` workspace (cycle dated 2026-09-11); their citations and retrieval dates travel with them.
 
+sample resin hubs are a separate candidate type from casting
+partners: general resin print shops and service networks (sourced from
+the directory above) that print castable-resin patterns for creator
+samples; they are checked for materials, resolution, and turnaround,
+and carry none of the precious-metal compliance weight.
+
 none of these files activates a partner. approval requires reviewed capability data, commercial onboarding, credential and adapter setup, a usable quote and order path, service-region confirmation, quality expectations, and operational ownership.
 
 ## discovery resources
