@@ -102,6 +102,12 @@ the creator console renders the license state so it is never a mystery:
   its license history, so a creator selling their brand or proving
   ownership to a third party has a linkable record.
 
+## the leak map
+
+the licensing model says what people may do; the leak map says what
+they could do anyway, with protections ranked against the real
+vectors: [ip-leak-map.md](ip-leak-map.md).
+
 ## boundaries
 
 - the license layer lives on the platform side; the studio stays
