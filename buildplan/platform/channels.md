@@ -102,6 +102,18 @@ verdict: no. a vendure/medusa channel *adapter* is not a thing to adopt
 either; if a creator sells on a medusa-based store, it arrives through
 a generic api/webhook adapter like any other long-tail channel.
 
+## tier 0: the api is always there
+
+underneath both tiers sits the plain, documented platform api: any
+storefront, platform, or tool we never anticipated can integrate
+directly, because the adapters themselves are thin wrappers over the
+same contract (orders as release-bound purchase requests, product
+sync, webhooks). the api is not a fallback for when we feel generous;
+it is the base layer, published and versioned, and it is what makes
+the adapter tier cheap: an adapter is only auth plus glue. a creator's
+custom-built site, an agency, or a platform we have never heard of
+uses the same door.
+
 ## boundaries
 
 - every channel, native or adapter, funnels into the same
