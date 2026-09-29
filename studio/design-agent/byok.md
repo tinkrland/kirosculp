@@ -65,6 +65,28 @@ experience; the envelope keeps geometry safe either way. we publish a
 **tested-against** list (models we regression-test tessa prompts on)
 as a recommendation; it is never a gate.
 
+### the tested-against list (the big ones)
+
+lanes, not pinned versions: model ids churn faster than docs, so this
+table names the lane each provider's usable models live in, and exact
+model ids live in the regression config (`studio regression fixtures`),
+refreshed at each regression run. seeded 2026-09-29; the probe remains
+the only gate, this list is what we *test* and therefore can honestly
+recommend:
+
+| provider | lane | notes |
+|---|---|---|
+| openai | flagship multimodal (gpt-5 generation and successors) + mini lane | the default recommendation lane; reasoning variants fall under the reasoning handling above |
+| anthropic | claude sonnet + haoku lanes | tool-calling native; vision capable |
+| google | gemini pro + flash lanes | flash is the budget lane |
+| deepseek | deepseek-chat lane + deepseek-reasoner lane | chat is the recommendation; reasoner runs under the reasoning rules |
+| mistral | flagship lane + pixtral (vision) lane | text-only mistral models fail the vision probe |
+| open models (ollama/vllm) | qwen-vl family, llama vision family | the self-hosted lane; small variants will fail the probe, which is fine and honest |
+
+anything not in the table is not disallowed; it is simply untested, and
+the probe still decides. the console shows "tested" next to lane
+members at key setup, purely informational.
+
 ## wrong model, right key (the reasoning-api case)
 
 a key can be perfectly valid and still be the wrong *kind* of model: a
