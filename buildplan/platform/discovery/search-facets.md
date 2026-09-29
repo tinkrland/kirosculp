@@ -113,6 +113,40 @@ size), which is exactly the property the search store must provide
 pgvector pre-filtering vs falkordb hybrid query is part of the same
 deciding experiment).
 
+## creator free tags: the redbubble layer
+
+facets are closed-vocabulary by rule, and that stands: it is what
+keeps filters deterministic and counts honest. but redbubble's
+model shows what a closed vocabulary alone loses: sellers add dozens
+of freeform tags per listing ("gift for mom", "y2k", "coquette",
+"unisex"), and buyers find pieces through phrases no curated taxonomy
+would ever anticipate. that layer is worth having, additively:
+
+- **what it is:** a bounded list of creator-authored free-text tags
+  per listing (redbubble allows up to ~50; sculptura's cap is a
+  console-configured constant, not specified here). tags are plain
+  words or short phrases, not chosen from a vocabulary.
+- **what it feeds:** the exact/fts layer (a tag is indexed text,
+  matched like any other listing text) and, at index time, phrase
+  embeddings for the track 2 vector layer, since an unanticipated tag
+  is exactly the fuzzy-fallback case track 2 exists for. a popular
+  free tag that keeps clustering near an existing style node is a
+  live signal for the next vocabulary expansion pass (the v0.3.0-style
+  research cycle already used for style corroboration).
+- **what it never becomes:** a filter facet. free tags are not
+  clickable filter chips and never gate a facet count; that would
+  reopen the free-text-facet problem the closed vocabulary exists to
+  avoid (inconsistent spelling, spam, unenforceable counts). they are
+  search-matchable text and similarity fodder, nothing structural.
+- **moderation:** free tags are the one part of a listing that is not
+  vocabulary-bounded, so they are the one part that needs spam/abuse
+  filtering (banned terms, length caps, no competitor-brand terms) at
+  publish time.
+
+the layer is deliberately small in scope: it improves recall for
+phrases the vocabulary hasn't caught up to yet, and it is a feeder
+for vocabulary growth, not a parallel taxonomy.
+
 ## boundaries
 
 - facets are deterministic and closed-vocabulary; facet counts are
