@@ -5,7 +5,9 @@ the scoping decision: the platform owns channel connections, and every
 order from anywhere returns as a release-bound purchase request. this
 page decides the tiers and the tooling verdicts (researched
 2026-09-29, sources logged in
-[research sources](../../offerings/research/sources.md)).
+[research sources](../../offerings/research/sources.md); tier
+assignment settled with the owner 2026-09-29: mainstream carts are
+native, openship/openlinker-style adapters are for the long tail).
 
 ## tier 1: native integrations (build first)
 
@@ -15,16 +17,31 @@ where the buyer volume and the apis are both real:
   api, product/webhook support)
 - **etsy** (first: the marketplace most sculptura-native creators will
   already sell on; sync listings, orders return release-bound)
+- **woocommerce** (native per the owner's call: the open-source cart
+  a large slice of creator sites run on, and the engine behind several
+  storefront builders)
+- **squarespace** (native per the owner's call: real commerce api,
+  strong design-community overlap with sculptura creators)
 - **pinterest products, instagram/meta commerce, tiktok shop**
   (scheduled candidates per the standing plan)
-- **amazon** (promote from long-tail to native-priority research:
-  sp-api is real and the volume justifies a proper adapter rather than
-  an afterthought)
+- **amazon** (native-priority research: sp-api is real and the volume
+  justifies a proper adapter rather than an afterthought)
+
+## the facade rule: trace the engine, not the skin
+
+storefront builders that run a natively-supported cart behind the
+scenes need no adapter of their own: showkit sites run shopify or
+woocommerce under the hood (owner-stated), so they are covered by the
+native integrations already. the general rule: before writing any
+adapter, ask what commerce engine the storefront actually processes
+orders on. if it is one of ours natively, it inherits; only
+platforms with their own order pipeline get an adapter.
 
 ## tier 2: adapter tier (the long tail, thin adapters)
 
-woocommerce, squarespace, webflow, wix studio, bigcommerce, weebly,
-bigcartel. the architecture for these is one internal contract
+webflow, wix studio, bigcommerce, weebly, bigcartel, and anything the
+facade rule does not already cover. the architecture for these is one
+internal contract
 (orders arrive as release-bound purchase requests; the platform owns
 pricing, escrow, fulfillment behind every one) plus one thin adapter
 per channel. each adapter costs real work (auth, product sync, webhook
