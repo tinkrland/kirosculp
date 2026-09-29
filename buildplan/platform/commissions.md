@@ -36,6 +36,37 @@ the public creator page's commissions tab renders these terms
 (structured, comparable, no link-outs), which is what replaces the
 carrd.co site: the platform is the terms surface.
 
+### carrd-parity: what the tab must carry so no external page is needed
+
+a creator reaches for carrd when the platform page cannot answer a
+buyer's questions. so the commissions tab carries everything a carrd
+would, as structured data plus bounded freeform:
+
+- **how commissions work (platform-rendered, once):** the escrow
+  flow, what a brief is, milestones, what protection means. written
+  by the platform, identical for every creator; no creator should
+  have to explain our own rails.
+- **the structured terms:** pricing model, scope, rights (including
+  the buyout option and the personal-use default from
+  [ip-licensing.md](ip-licensing.md)), availability and live queue
+  state. legally binding, canonical, always rendered.
+- **commission gallery:** completed work, published with buyer
+  permission or anonymized ([creator-surfaces.md](creator-surfaces.md)).
+- **faq:** creator-authored questions and answers, bounded freeform;
+  supplements but never overrides the structured terms. if a faq
+  answer contradicts the terms of record, the terms win and the
+  contradiction is surfaced to the creator in the console.
+- **commission reviews:** buyer-written, tied to completed
+  commissions only, never to canceled ones; disputes stay private to
+  the dispute flow.
+- **process story:** turnaround reality, how the creator works,
+  reference-photo etiquette; freeform, displayed after the terms.
+
+the rule that keeps it clean: anything legally binding is structured
+data; freeform sections may add warmth but may not add obligations.
+a carrd is needed only when the platform refuses to say what it
+already knows.
+
 ## the flow
 
 1. buyer (logged in, per the standing rule) submits a brief:
