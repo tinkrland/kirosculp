@@ -31,8 +31,9 @@ where the buyer volume and the apis are both real:
 
 storefront builders that run a natively-supported cart behind the
 scenes need no adapter of their own: showkit sites run shopify or
-woocommerce under the hood (owner-stated), so they are covered by the
-native integrations already. the general rule: before writing any
+woocommerce under the hood (owner-stated), and framer is in the same
+boat (owner-stated: same underlying-cart situation), so both are
+covered by the native integrations already. the general rule: before writing any
 adapter, ask what commerce engine the storefront actually processes
 orders on. if it is one of ours natively, it inherits; only
 platforms with their own order pipeline get an adapter.
