@@ -51,6 +51,9 @@ marketing surface only.
 
 ## 2. creator console (authenticated working area)
 
+account admission follows the [human-creator and invitation policy](../../platform/creator-access.md). ai assistance is allowed; autonomous creator identities and free-allowance farming are not.
+
+
 where the creator actually works: studio access and tessa, releases,
 listings management, commissions inbox, scheduling connections,
 payouts. fully separate from the public page: same person, no shared
