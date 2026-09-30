@@ -4,6 +4,11 @@ creator identity, project ownership, presets, and saved creative assets. a perso
 
 buyers and commissioners do not receive direct studio access in those roles. a buyer who wants to author a design crosses into the creator flow and owns a creator project.
 
+creator accounts require an accountable human operator. ai tools may assist,
+but autonomous signup and account farming for free inference are prohibited.
+see [creator access and invitation policy](../../platform/creator-access.md);
+invite-only signup is not assumed.
+
 ## creator flow
 
 1. **become a creator**
