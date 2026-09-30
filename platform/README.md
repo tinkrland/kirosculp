@@ -23,8 +23,8 @@ platform is the offering surface. it turns an accepted design release into somet
 [human creator admission](creator-access.md) is invitation-based. the
 [creator-integrity problem](creator-integrity/problem.md) and
 [solution](creator-integrity/solution.md) distinguish autonomous account farming
-from tessa's normal built-in role. storefront publication requires a phone
-number on file and verified email; stripe/persona handle payout verification.
+from tessa's normal built-in role. storefront publication requires a verified phone
+number and allowed verified email; stripe/persona handle payout verification.
 
 [umami is primary telemetry](storefronts/analytics.md), including default
 creator-facing analytics. optional creator-owned google analytics supplements it.

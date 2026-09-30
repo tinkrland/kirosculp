@@ -19,7 +19,7 @@ physical validity, not accountable authorship or responsible account operation.
 - distinguish human-operated sales automation from an autonomous creator identity.
 - creator admission is not payout kyc. sculptura does not collect or verify
   government-id documents itself; provider-handled payout verification is separate.
-- storefront publication requires a phone number on file and verified email.
+- storefront publication requires a verified phone number and allowed verified email.
   those are contact requirements, not proof of personhood or legal identity.
 
 see [the solution](solution.md) and [creator access](../creator-access.md).

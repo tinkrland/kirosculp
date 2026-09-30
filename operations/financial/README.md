@@ -10,6 +10,14 @@ one coherent ledger and state model for:
 
 current settings never rewrite historical orders. every purchase stores the exact design release, quote, fee, earnings, currency, and policy versions used at checkout.
 
+## withdrawal and merchant research
+
+[the payout and merchant model](payout-and-merchant-model.md) distinguishes
+accrued wallet earnings from withdrawable provider funds, individual creators
+from incorporated entities, and payment processing from merchant responsibility.
+paddle is unsuitable for physical jewelry checkout; stripe connect remains the
+intended production provider, subject to the existing prototype sequencing.
+
 ## prototype plan
 
 [`mock-finance-flow.md`](mock-finance-flow.md) specifies the spree checkout spike, local stripe-compatible payment mock, supabase ledger buckets, state transitions, reconciliation, and failure tests. it is a design, not an installed or production-ready integration.
