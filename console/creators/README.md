@@ -2,6 +2,14 @@
 
 creator views over operations: earnings, payout status, order progress, delivery exceptions, refunds, and support. the records remain owned by operations.
 
+## private dashboard preferences
+
+[language, regional variants, currency, units and tone](dashboard-preferences.md)
+are independent private preferences. v1 is english-only with regional
+subtoggles; v2 adds french, german, portuguese and spanish. a creator's
+dashboard language is independent of their public storefront language.
+this specifies localization requirements, not an implemented feature.
+
 ## audited implementation reference
 
 **status: partial**
