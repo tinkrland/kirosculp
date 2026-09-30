@@ -6,7 +6,7 @@ creator-facing offering tools publish accepted design releases, manage listings 
 
 creator profiles are human-operated, with tessa built into the studio.
 [invitation-based admission](../creator-access.md) is separate from storefront
-publication, which requires a phone number on file and verified email.
+publication, which requires a verified phone number and allowed verified email.
 identity verification at payout is handled through stripe/persona, not a
 sculptura-operated government-id collection flow.
 

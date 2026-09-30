@@ -90,7 +90,7 @@ is introduced. payout minimums, delivery/claim windows and provider-required
 verification remain distinct gates. this integration is not implemented by
 the existing ledger simulations.
 
-storefront publication separately requires a phone number on file and verified
+storefront publication separately requires a verified phone number and allowed verified
 email. see [creator integrity](../creator-integrity/solution.md).
 
 ## simulation
@@ -182,6 +182,14 @@ removed; this is a real mirrored storefront order.
 - failure-path hardening in purchase(): a capture that fails after the
   order insert currently needs compensating writes; the real service
   should run purchase as a single database transaction
+
+## withdrawal eligibility and merchant responsibility
+
+see [the payout/merchant research](../../operations/financial/payout-and-merchant-model.md).
+a creator wallet can show accrued earnings before withdrawal verification,
+but provider-required account capabilities and holding limits must still be
+respected. bank/wire and paypal destinations are candidates, not automatically
+supported by stripe connect. no buyer bnpl or installments are offered.
 
 ## future: gift cards and the creator wallet (direction only)
 

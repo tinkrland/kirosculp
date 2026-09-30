@@ -4,8 +4,8 @@ sculptura-hosted and white-label storefront presentation, including collections,
 
 ## publication and analytics policy
 
-publishing a hosted or white-label storefront requires a private phone number
-on file and verified email. this is separate from invitation-based creator
+publishing a hosted or white-label storefront requires a private verified phone number
+and allowed verified email. this is separate from invitation-based creator
 admission and provider-handled payout kyc; see
 [creator integrity](../creator-integrity/solution.md).
 

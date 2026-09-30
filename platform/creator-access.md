@@ -14,20 +14,21 @@ automatically grants publication, discovery or commission availability.
 | gate | requirement |
 |---|---|
 | creator admission | accountable human operator, invitation-based access |
-| storefront publication | phone number on file and verified email |
+| storefront publication | verified phone number and allowed verified email |
 | design release | creator approval and authoritative studio validation |
 | discovery and commissions | their separate eligibility and opt-in rules |
 | payout | provider-handled identity verification through stripe/persona, plus applicable payout conditions |
 
 sculptura does not handle government-id verification itself. no upfront kyc
 is imposed by this creator-admission policy; payout kyc is not removed.
-phone-on-file does not currently imply an sms verification requirement.
+voip numbers are allowed with an explicit voip toggle and successful verification.
 
 ## creator-facing explanation
 
 > creator profiles are for people. tessa is your built-in design tool, not an
 > autonomous account operator. creator access is by invitation. to publish
-> your storefront, add a phone number and verify your email. identity checks
+> your storefront, verify your phone number and email. declare voip numbers
+> using the voip toggle. identity checks
 > for payout are handled through our payout/verification providers, not by
 > sculptura collecting government-id documents at signup.
 

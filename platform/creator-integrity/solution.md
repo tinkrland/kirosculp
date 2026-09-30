@@ -17,16 +17,26 @@ operates the profile, not whether their work uses ai. tessa is built in.
 
 before publishing a storefront, require both:
 
-- a phone number on file in private account configuration.
-- an email address whose ownership has been verified.
+- a verified phone number stored in private account configuration.
+- an allowed email address whose ownership has been verified.
 
 enforce this server-side on every storefront publication path, including
 hosted and white-label activation. a browser flag cannot satisfy the gate.
 these contacts must not leak through public creator/storefront projections.
 
-phone ownership verification is not a settled requirement: the current rule
-is a phone number on file, not an invented sms or government-id requirement.
-contact-change handling and rechecking an already published store need design.
+voip numbers are allowed, but the creator must explicitly enable the voip
+number toggle. declaring voip does not waive verification. validate number
+format and use line-type intelligence as a check, not the declaration alone;
+unknown or mismatched classifications need a correction/review route.
+support a verification channel the number can receive. changing the number
+requires verification of the replacement before it satisfies the publication gate.
+
+email policy excludes disposable/temporary addresses, cloaked/masked addresses,
+plus-address aliases and forwarding-only relays without a dedicated inbox.
+ordinary proton mail inboxes are not the same as proton/simplelogin masking.
+verification links establish access, not whether an address owns its own inbox.
+see [contact verification research and limits](contact-verification.md).
+contact-change handling for an already published store still needs design.
 
 ## payout: provider-handled kyc
 
@@ -82,9 +92,12 @@ projects, geometry and validation. payout providers own identity verification.
 
 - redemption races, expired/revoked invites and recipient mismatch are tested.
 - changing keys or redeeming another invite cannot reset a free allocation.
-- storefront publication fails without a phone on file or verified email.
+- storefront publication fails without verified phone and allowed verified email.
+- declared voip numbers are allowed only after successful verification.
+- explicit plus aliases and identified disposable/masked relay addresses are rejected.
+- uncertain email classification is not misreported as proof of a dedicated inbox.
 - neither contact field appears in public account/storefront projections.
-- missing provider-required verification blocks payout, not creator admission.
+- missing provider-required verification blocks withdrawal; required timing may precede the first withdrawal.
 - a pending/failed provider status cannot be overridden by a browser payload.
 - human use of tessa is allowed; false-positive cases have a review path.
 - skipped or deferred controls are not reported as implemented.

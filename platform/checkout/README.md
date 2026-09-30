@@ -2,6 +2,14 @@
 
 checkout accepts buyer selections and destination, asks operations for country eligibility and a trusted price, and creates the purchase through a server-side path. browser-supplied prices are never authoritative.
 
+## buyer payment policy
+
+no buy-now-pay-later services, including afterpay or klarna, and no buyer
+payment installments are offered in the current release or near-future plan.
+configure the allowed method list on the server and at the provider; hiding
+buttons alone is not enforcement. this does not change commission escrow or
+creator payout scheduling, which are separate financial concerns.
+
 ## audited implementation reference
 
 **status: partial**
