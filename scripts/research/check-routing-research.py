@@ -37,6 +37,13 @@ def main():
             assert profile['office_appointment_scope_and_current_service_not_verified'] is True
             assert set(profile['fineness_per_thousand_reported']) == {'gold', 'silver', 'platinum', 'palladium'}
     by_code = {c['country_code']: c for c in countries}
+    priority = set(matrix['research_priority']['country_codes'])
+    assert priority == expected - {'AU', 'NZ', 'JP', 'KR', 'SG', 'AE', 'IL'}
+    assert sum(c['eu_member'] for c in countries if c['country_code'] in priority) == 10
+    assert sum(c['convention_member'] for c in countries if c['country_code'] in priority) == 9
+    assert by_code['CA']['regional_overlays'][0]['province_code'] == 'QC'
+    assert by_code['CA']['regional_overlays'][0]['review'] == 'unapproved research'
+    assert set(by_code['CA']['regional_overlays'][0]['source_ids']) <= source_ids
     assert by_code['NO']['eea_non_eu'] and not by_code['NO']['eu_member']
     assert by_code['CH']['efta_member'] and not by_code['CH']['eea_non_eu']
     assert not by_code['GB']['eu_member']

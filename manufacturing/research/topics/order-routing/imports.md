@@ -113,3 +113,11 @@ traveler allowance does not set the threshold for commercial parcels.
 
 all examples remain unapproved until [the evidence contract](route-evidence-contract.md)
 is satisfied. see [hallmarking](hallmarking.md) and [the overview](README.md).
+
+## regional follow-up
+
+[the priority pass](europe-north-america.md) adds the european commission's
+reported us-industrial tariff implementation from 1 july 2026, the separately
+sourced us postal rule, canadian courier-commerce conditions and
+[quebec's provincial overlay](quebec.md). these findings refine this baseline;
+no blanket no-duty or no-tax assumption should survive them.

@@ -68,3 +68,6 @@ use official convention, national assay-office, customs, or government sources f
 ## engine and routing use
 
 accepted findings become a versioned hallmarking-capability record consumed by manufacturing routing. a route is ineligible when it cannot produce the marks or evidence required for the destination and article.
+
+[the regional priority pass](order-routing/europe-north-america.md) adds current
+national law, separate trade frameworks and [quebec](order-routing/quebec.md).

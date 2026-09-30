@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "dataset_version": "2026-09-30.1",
+  "dataset_version": "2026-09-30.2",
   "observed_on": "2026-09-30",
   "purpose": "research evidence only; not an approved route ruleset",
   "country_count": 22,
@@ -17,9 +17,11 @@
       "efta_member": false,
       "evidence_source_ids": [
         "us-ecfr-guides",
-        "us-de-minimis"
+        "us-de-minimis",
+        "priority-us-stamping-code",
+        "priority-us-postal-final"
       ],
-      "research_note": "ftc marketing guides do not replace the federal stamping act, state law or customs classification; non-postal de minimis suspension and postal rules need separate handling",
+      "research_note": "federal stamping code supplements ftc guides; postal and non-postal de minimis suspension rules are now sourced but require mode/date-specific application and actual tariff verification",
       "hallmarking_review": "unapproved research",
       "import_review": "unapproved research",
       "checkout_enabled": false,
@@ -28,7 +30,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "CA",
@@ -44,7 +47,14 @@
         "ca-marking-act",
         "ca-marking-regulations",
         "ca-marking",
-        "ca-imports"
+        "ca-imports",
+        "priority-ca-courier-remission",
+        "priority-ca-cusma-overview",
+        "priority-ca-origin-marking",
+        "priority-qc-import-tax-firecrawl",
+        "priority-qc-product-language",
+        "priority-qc-online-contracts",
+        "priority-qc-qst-suppliers-firecrawl"
       ],
       "research_note": "quality marking is conditional, not a blanket compulsory assay requirement; section 4(4) has foreign-mark exceptions to the trademark requirement",
       "hallmarking_review": "unapproved research",
@@ -55,6 +65,25 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
+      ],
+      "research_priority_batch": "europe and north america first",
+      "regional_overlays": [
+        {
+          "province_code": "QC",
+          "review": "unapproved research",
+          "source_ids": [
+            "priority-qc-import-tax-firecrawl",
+            "priority-qc-product-language",
+            "priority-qc-online-contracts",
+            "priority-qc-qst-suppliers-firecrawl"
+          ],
+          "fields_required": [
+            "applicable tax collection role",
+            "french product and accompanying information",
+            "contracting merchant identity and disclosure",
+            "applicable consumer terms"
+          ]
+        }
       ]
     },
     {
@@ -71,9 +100,12 @@
         "uk-hallmarking",
         "uk-import-vat",
         "gb-ni-parcels",
-        "profile-united-kingdom-direct"
+        "profile-united-kingdom-direct",
+        "priority-gb-current-act",
+        "priority-uk-brexit-hallmarks",
+        "priority-uk-us-deal"
       ],
-      "research_note": "separate great britain and northern ireland; capture applicable customs process, not a single uk country flag",
+      "research_note": "gb ended equivalent eu hallmark recognition obligations on 2021-01-01; ni treatment differs; independently verify customs and mark eligibility",
       "hallmarking_review": "unapproved research",
       "import_review": "unapproved research",
       "checkout_enabled": false,
@@ -129,7 +161,8 @@
           "sheffield assay office"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "AU",
@@ -154,7 +187,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "outside current priority pass"
     },
     {
       "country_code": "DE",
@@ -170,7 +204,8 @@
         "de-fineness",
         "eu-free-circulation",
         "eu-vat-territory",
-        "eu-three-euro-guidance"
+        "eu-three-euro-guidance",
+        "priority-eu-us-implementation"
       ],
       "research_note": "jewelry under section 5 must not inherit section 2 rules for other gold/silver articles",
       "hallmarking_review": "unapproved research",
@@ -181,7 +216,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "FR",
@@ -198,7 +234,9 @@
         "fr-guarantee",
         "eu-free-circulation",
         "eu-vat-territory",
-        "eu-three-euro-guidance"
+        "eu-three-euro-guidance",
+        "priority-fr-introduction",
+        "priority-eu-us-implementation"
       ],
       "research_note": "non-membership does not erase recognized foreign-mark paths; imported commercial jewelry differs from traveler exemptions",
       "hallmarking_review": "unapproved research",
@@ -209,7 +247,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "IT",
@@ -226,7 +265,8 @@
         "eu-free-circulation",
         "eu-vat-territory",
         "eu-three-euro-guidance",
-        "profile-italy-direct"
+        "profile-italy-direct",
+        "priority-eu-us-implementation"
       ],
       "research_note": "voluntary independent control does not make fineness and identification stamps optional",
       "hallmarking_review": "unapproved research",
@@ -280,7 +320,8 @@
           "alessandria-asti chamber of commerce assay office / all marks"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "NL",
@@ -297,7 +338,9 @@
         "eu-free-circulation",
         "eu-vat-territory",
         "eu-three-euro-guidance",
-        "profile-netherlands-direct"
+        "profile-netherlands-direct",
+        "priority-nl-law",
+        "priority-eu-us-implementation"
       ],
       "research_note": "2019 convention profile has outdated legislative-transition language; compare current government assaying guidance",
       "hallmarking_review": "unapproved research",
@@ -343,7 +386,8 @@
           "edelmetaal waarborg nederland"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "ES",
@@ -359,7 +403,9 @@
         "es-law",
         "eu-free-circulation",
         "eu-vat-territory",
-        "eu-three-euro-guidance"
+        "eu-three-euro-guidance",
+        "priority-es-current-act",
+        "priority-eu-us-implementation"
       ],
       "research_note": "resolve exact small-item mark substitutions, import recognition and accredited assay path from consolidated law",
       "hallmarking_review": "unapproved research",
@@ -370,7 +416,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "BE",
@@ -386,7 +433,8 @@
         "be-marking-faq",
         "eu-free-circulation",
         "eu-vat-territory",
-        "eu-three-euro-guidance"
+        "eu-three-euro-guidance",
+        "priority-eu-us-implementation"
       ],
       "research_note": "royal mint faq establishes fineness and signature marking; state-control mark and compulsory independent assay are not the same as those two marks",
       "hallmarking_review": "unapproved research",
@@ -397,7 +445,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "AT",
@@ -414,7 +463,8 @@
         "eu-free-circulation",
         "eu-vat-territory",
         "eu-three-euro-guidance",
-        "profile-austria-direct"
+        "profile-austria-direct",
+        "priority-eu-us-implementation"
       ],
       "research_note": "prefer the consolidated national act to the 2019 convention profile; translate exemption boundaries before coding predicates",
       "hallmarking_review": "unapproved research",
@@ -460,7 +510,8 @@
           "federal office of metrology and surveying"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "CH",
@@ -476,7 +527,9 @@
         "ch-control",
         "ch-responsibility",
         "ch-industrial-tariffs",
-        "profile-switzerland-direct"
+        "profile-switzerland-direct",
+        "priority-ch-recognition",
+        "priority-ch-control-guidelines"
       ],
       "research_note": "jewelry and watch cases have different control regimes; zero industrial tariffs do not remove vat or customs declarations",
       "hallmarking_review": "unapproved research",
@@ -535,7 +588,8 @@
           "zurich"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "SE",
@@ -552,7 +606,10 @@
         "eu-free-circulation",
         "eu-vat-territory",
         "eu-three-euro-guidance",
-        "profile-sweden-direct"
+        "profile-sweden-direct",
+        "priority-se-law",
+        "priority-se-order",
+        "priority-eu-us-implementation"
       ],
       "research_note": "mixed control regime needs current national source for article-specific duties and exemption boundaries",
       "hallmarking_review": "unapproved research",
@@ -615,7 +672,8 @@
           "rise research institutes of sweden, assay office"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "DK",
@@ -632,7 +690,9 @@
         "eu-free-circulation",
         "eu-vat-territory",
         "eu-three-euro-guidance",
-        "profile-denmark-direct"
+        "profile-denmark-direct",
+        "priority-dk-order",
+        "priority-eu-us-implementation"
       ],
       "research_note": "registration plus inspection obligations coexist with voluntary control marking; confirm current authority and implementing rules",
       "hallmarking_review": "unapproved research",
@@ -694,7 +754,8 @@
           "aedelmetalkontrollen / force technology"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "IE",
@@ -711,9 +772,12 @@
         "eu-free-circulation",
         "eu-vat-territory",
         "eu-three-euro-guidance",
-        "profile-ireland-direct"
+        "profile-ireland-direct",
+        "priority-ie-commencement-order",
+        "priority-ie-assay-law",
+        "priority-eu-us-implementation"
       ],
-      "research_note": "2019 profile has a pending palladium commencement notice; check actual commencement before treating it as current",
+      "research_note": "historical convention profile palladium commencement notice is superseded by s.i. 439/2019, commencing the amendment on 2019-09-30; verify actual article/assay path before approval",
       "hallmarking_review": "unapproved research",
       "import_review": "unapproved research",
       "checkout_enabled": false,
@@ -769,7 +833,8 @@
           "assay office, company of goldsmiths of dublin"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "NZ",
@@ -794,7 +859,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "outside current priority pass"
     },
     {
       "country_code": "JP",
@@ -819,7 +885,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "outside current priority pass"
     },
     {
       "country_code": "KR",
@@ -844,7 +911,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "outside current priority pass"
     },
     {
       "country_code": "SG",
@@ -869,7 +937,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "outside current priority pass"
     },
     {
       "country_code": "AE",
@@ -894,7 +963,8 @@
         "current importer/sponsor and assay arrangements",
         "origin-to-destination tariff classification, origin proof and tax treatment",
         "carrier, insured-value, returns and operational approval"
-      ]
+      ],
+      "research_priority_batch": "outside current priority pass"
     },
     {
       "country_code": "NO",
@@ -910,7 +980,8 @@
         "no-control-direct",
         "no-imports",
         "eea-exclusions",
-        "profile-norway-direct"
+        "profile-norway-direct",
+        "priority-no-current"
       ],
       "research_note": "eea membership is not eu customs membership; non-ccm responsibility-mark registration/notification must be distinguished from ccm treaty treatment",
       "hallmarking_review": "unapproved research",
@@ -960,7 +1031,8 @@
           "justervesenet"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "europe and north america first"
     },
     {
       "country_code": "IL",
@@ -1030,7 +1102,37 @@
           "standards institution of israel, precious metals section"
         ],
         "office_appointment_scope_and_current_service_not_verified": true
-      }
+      },
+      "research_priority_batch": "outside current priority pass"
     }
-  ]
+  ],
+  "research_priority": {
+    "country_codes": [
+      "AT",
+      "BE",
+      "CA",
+      "CH",
+      "DE",
+      "DK",
+      "ES",
+      "FR",
+      "GB",
+      "IE",
+      "IT",
+      "NL",
+      "NO",
+      "SE",
+      "US"
+    ],
+    "european_market_count": 13,
+    "north_american_market_count": 2,
+    "us_origin_corridors": true,
+    "context_groups": [
+      "EU",
+      "EEA",
+      "EFTA",
+      "CEFTA"
+    ],
+    "context_groups_do_not_expand_shipping_allowlist": true
+  }
 }

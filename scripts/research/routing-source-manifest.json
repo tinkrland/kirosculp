@@ -919,5 +919,755 @@
     "kind": "direct",
     "id": "us-jewelry-guides",
     "value": "https://www.ftc.gov/news-events/topics/tools-consumers/jewelry-guides"
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-ie-commencement",
+    "value": "hallmarking amendment 2019 commencement order palladium",
+    "domains": [
+      "irishstatutebook.ie",
+      "assay.ie"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-se-marking",
+    "value": "ädelmetall 1 gram finhaltsstämpel namnstämpel kontrollstämpel",
+    "domains": [
+      "swedac.se",
+      "riksdagen.se"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-dk-marking",
+    "value": "ædelmetal navnestempel undtagelser 1 gram 3 gram",
+    "domains": [
+      "retsinformation.dk",
+      "sik.dk",
+      "danishbusinessauthority.dk"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-nl-current",
+    "value": "waarborgwet 2019 buitenlandse keurtekens vrijstellingen",
+    "domains": [
+      "wetten.overheid.nl",
+      "rdi.nl",
+      "business.gov.nl"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-gb-law",
+    "value": "Hallmarking Act 1973 exemptions approved foreign hallmark",
+    "domains": [
+      "legislation.gov.uk",
+      "gov.uk"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-fr-recognition",
+    "value": "ouvrages métaux précieux union européenne poinçons équivalents",
+    "domains": [
+      "douane.gouv.fr",
+      "legifrance.gouv.fr"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-it-imports",
+    "value": "metalli preziosi importazione marchi esteri 251 1999",
+    "domains": [
+      "normattiva.it",
+      "mimit.gov.it",
+      "camcom.it"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-es-imports",
+    "value": "197 1988 metales preciosos importados comunidad europea contrastes",
+    "domains": [
+      "boe.es"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-us-stamping",
+    "value": "gold silver stamping 15 USC 291 297 trademark",
+    "domains": [
+      "uscode.house.gov",
+      "govinfo.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-na-usmca",
+    "value": "jewellery origin 7113 CUSMA origin",
+    "domains": [
+      "cbsa-asfc.gc.ca",
+      "cbp.gov",
+      "ustr.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-ca-courier",
+    "value": "CUSMA courier 40 150 United States Mexico origin",
+    "domains": [
+      "cbsa-asfc.gc.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-us-postal",
+    "value": "2026 de minimis international postal network suspension",
+    "domains": [
+      "federalregister.gov",
+      "cbp.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-ch-recognition",
+    "value": "precious metal control common control mark foreign responsibility mark",
+    "domains": [
+      "bazg.admin.ch"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-search-no-stamping",
+    "value": "edelmetall ansvarsstempel EØS konvensjonsstempel",
+    "domains": [
+      "justervesenet.no",
+      "lovdata.no"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-focused-ie-order",
+    "value": "\"Hallmarking\" \"Commencement\" \"2019\"",
+    "domains": [
+      "irishstatutebook.ie"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-focused-se-act",
+    "value": "\"1999:779\"",
+    "domains": [
+      "riksdagen.se",
+      "swedac.se"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-focused-dk-stamps",
+    "value": "\"navnestempler\"",
+    "domains": [
+      "retsinformation.dk",
+      "danishbusinessauthority.dk"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-focused-nl-act",
+    "value": "\"Waarborgwet 2019\"",
+    "domains": [
+      "wetten.overheid.nl",
+      "rdi.nl"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-focused-us-postal-rule",
+    "value": "\"postal\" \"de minimis\" \"2026\"",
+    "domains": [
+      "federalregister.gov",
+      "cbp.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-focused-na-origin-ch71",
+    "value": "\"7113\" \"CUSMA\"",
+    "domains": [
+      "cbsa-asfc.gc.ca",
+      "laws-lois.justice.gc.ca",
+      "ustr.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ie-assay-law",
+    "value": "https://www.assay.ie/hallmarking/legislation"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-se-enforcement",
+    "value": "https://www.swedac.se/nyheter/forsaljningsforbud-mot-kejsar-ab"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-fr-introduction",
+    "value": "https://www.douane.gouv.fr/demarche/introduire-des-metaux-precieux-en-france-provenance-ue-suisse-turquie-et-etat-membre-de"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-us-stamping-code",
+    "value": "https://uscode.house.gov/view.xhtml?path=%2Fprelim%40title15%2Fchapter8&edition=prelim"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ca-cusma-overview",
+    "value": "https://www.cbsa-asfc.gc.ca/services/cusma-aceum/overview-survol-eng.html"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ca-courier-remission",
+    "value": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d8/d8-2-16-eng.html"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ca-origin-marking",
+    "value": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-3-1-eng.html"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ch-recognition",
+    "value": "https://www.bazg.admin.ch/en/precious-metal-control-international-conventions-legal-foundations"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ch-control-guidelines",
+    "value": "https://www.bazg.admin.ch/dam/en/sd-web/NvJ4Yw4Nubhk/r-243-guideline-precious-metal-control-en.pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-no-current",
+    "value": "https://www.justervesenet.no/tilsyn/edelmetall"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-gb-current-act",
+    "value": "https://www.legislation.gov.uk/ukpga/1973/43"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-es-current-act",
+    "value": "https://www.boe.es/buscar/act.php?id=BOE-A-1988-6186"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-ie-commencement-order",
+    "value": "https://www.irishstatutebook.ie/eli/2019/si/439/made/en/print"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-dk-order",
+    "value": "https://www.retsinformation.dk/eli/lta/2020/934/pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-nl-law",
+    "value": "https://wetten.overheid.nl/BWBR0042284/"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-se-law",
+    "value": "https://www.riksdagen.se/sv/Dokument-Lagar/Lagar/Svenskforfattningssamling/Lag-1999779-om-handel-med-a_sfs-1999-779"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-se-order",
+    "value": "https://www.riksdagen.se/sv/Dokument-Lagar/Lagar/Svenskforfattningssamling/Forordning-1999780-om-hande_sfs-1999-780"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-us-postal-final",
+    "value": "https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry"
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-cefta-members",
+    "value": "CEFTA parties members agreement",
+    "domains": [
+      "cefta.int"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-cefta-origin",
+    "value": "rules origin United States third country cumulation",
+    "domains": [
+      "cefta.int"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-eu-us-origin",
+    "value": "United States preferential agreement rules origin Access2Markets jewellery",
+    "domains": [
+      "trade.ec.europa.eu",
+      "taxation-customs.ec.europa.eu"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-uk-foreign-hallmarks",
+    "value": "hallmarking EU equivalent marks Brexit",
+    "domains": [
+      "gov.uk",
+      "legislation.gov.uk"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-uk-us-origin",
+    "value": "United States rules origin imports trade agreement tariff",
+    "domains": [
+      "gov.uk"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-qc-gst-qst",
+    "value": "non resident vendors tangible property Quebec GST QST online",
+    "domains": [
+      "revenuquebec.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-qc-language",
+    "value": "June 1 2025 products trademarks French inscriptions",
+    "domains": [
+      "quebec.ca",
+      "oqlf.gouv.qc.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-qc-consumer",
+    "value": "distance contracts merchant outside Quebec warranty",
+    "domains": [
+      "opc.gouv.qc.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-qc-import-tax",
+    "value": "goods imported Quebec outside Canada QST GST",
+    "domains": [
+      "revenuquebec.ca",
+      "cbsa-asfc.gc.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-overlay-search-cefta-eu-us",
+    "value": "CEFTA cumulation EU PEM originating United States",
+    "domains": [
+      "cefta.int",
+      "taxation-customs.ec.europa.eu"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-final-search-cefta-current",
+    "value": "parties",
+    "domains": [
+      "cefta.int"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-final-search-eu-us-current",
+    "value": "United States tariffs 2026 industrial products",
+    "domains": [
+      "policy.trade.ec.europa.eu",
+      "consilium.europa.eu",
+      "eur-lex.europa.eu"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-final-search-qc-online",
+    "value": "achats internet commerçant obligations",
+    "domains": [
+      "opc.gouv.qc.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-final-search-qc-supplier",
+    "value": "suppliers outside Québec tangible property",
+    "domains": [
+      "revenuquebec.ca"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "priority-final-search-uk-us-current",
+    "value": "US Economic Prosperity Deal import tariffs",
+    "domains": [
+      "gov.uk"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "direct",
+    "id": "priority-uk-brexit-hallmarks",
+    "value": "https://www.gov.uk/guidance/hallmarking-requirements-and-the-eu"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-qc-product-language",
+    "value": "https://www.oqlf.gouv.qc.ca/francisation/entreprises/marque-commerce-produits.html"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-qc-import-tax",
+    "value": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/imports/imports-of-property/"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-cefta-origin-protocol",
+    "value": "https://cefta.int/wp-content/uploads/2016/05/Annex-4-protocol-of-origin-FINAL.pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-cefta-agreement",
+    "value": "https://cefta.int/wp-content/uploads/2016/05/ANN1CEFTA-2006-Final-Text.pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-cefta-current",
+    "value": "https://cefta.int/"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-eu-us-implementation",
+    "value": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/united-states_en"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-qc-online-contracts",
+    "value": "https://www.opc.gouv.qc.ca/enligne"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-qc-qst-suppliers",
+    "value": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/suppliers-outside-quebec/"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-qc-qst-collection",
+    "value": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/suppliers-outside-quebec/collecting-the-qst/"
+  },
+  {
+    "kind": "direct",
+    "id": "priority-uk-us-deal",
+    "value": "https://www.gov.uk/government/publications/us-uk-economic-prosperity-deal-epd/general-terms-for-the-united-states-of-america-and-the-united-kingdom-of-great-britain-and-northern-ireland-economic-prosperity-deal-web-accessible-v"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "priority-qc-import-tax-firecrawl",
+    "value": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/imports/imports-of-property"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "priority-qc-qst-suppliers-firecrawl",
+    "value": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/suppliers-outside-quebec"
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-search-rb-tax",
+    "value": "artist tax withholding W-8BEN ITIN",
+    "domains": [
+      "help.redbubble.com",
+      "redbubble.com"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-search-rb-royalty",
+    "value": "foreign artists US tax royalties withholding",
+    "domains": [
+      "help.redbubble.com"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-search-irs-itin",
+    "value": "W-8BEN royalties foreign TIN ITIN treaty benefits",
+    "domains": [
+      "irs.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-rb-forms",
+    "value": "\"tax\" \"forms\"",
+    "domains": [
+      "help.redbubble.com"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-rb-income",
+    "value": "\"income tax\"",
+    "domains": [
+      "help.redbubble.com",
+      "redbubble.com"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-rb-w8",
+    "value": "\"W-8BEN\" \"Redbubble\"",
+    "domains": [],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-rb-foreign",
+    "value": "\"withholding\" \"Redbubble\"",
+    "domains": [],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-rb-terms",
+    "value": "\"artist\" \"tax\" \"agreement\"",
+    "domains": [
+      "redbubble.com"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-irs-ftin",
+    "value": "\"foreign tax identifying number\" \"treaty\"",
+    "domains": [
+      "irs.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "withholding-focused-irs-source",
+    "value": "\"royalties\" \"source\"",
+    "domains": [
+      "irs.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-rb-1099",
+    "value": "https://help.redbubble.com/hc/en-us/articles/360000846383-Where-is-my-1099"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-rb-payment",
+    "value": "https://help.redbubble.com/hc/en-us/articles/202270799-How-is-my-payment-calculated"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-rb-agreement",
+    "value": "https://www.redbubble.com/agreement"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-rb-disclosures",
+    "value": "https://help.redbubble.com/hc/en-us/articles/53691709096852-Will-my-artist-details-be-made-public"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-irs-w8-instructions",
+    "value": "https://www.irs.gov/instructions/iw8ben"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-irs-fdap",
+    "value": "https://www.irs.gov/individuals/international-taxpayers/fixed-determinable-annual-periodical-fdap-income"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-irs-source",
+    "value": "https://www.irs.gov/individuals/international-taxpayers/nonresident-aliens-source-of-income"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "withholding-rb-1099-firecrawl",
+    "value": "https://help.redbubble.com/hc/en-us/articles/360000846383-Where-is-my-1099"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "withholding-rb-payment-firecrawl",
+    "value": "https://help.redbubble.com/hc/en-us/articles/202270799-How-is-my-payment-calculated"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "withholding-rb-agreement-firecrawl",
+    "value": "https://www.redbubble.com/agreement"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "withholding-rb-disclosures-firecrawl",
+    "value": "https://help.redbubble.com/hc/en-us/articles/53691709096852-Will-my-artist-details-be-made-public"
+  },
+  {
+    "kind": "tavily",
+    "id": "tax-claim-search-irs-inventory",
+    "value": "nonresident inventory produced purchased source income",
+    "domains": [
+      "irs.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "tax-claim-search-irs-backup",
+    "value": "foreign person backup withholding W-8BEN",
+    "domains": [
+      "irs.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "tax-claim-search-irs-source-inventory-law",
+    "value": "865 inventory 863 production source",
+    "domains": [
+      "uscode.house.gov",
+      "ecfr.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "tax-claim-search-irs-digital",
+    "value": "digital content copyright royalties source foreign",
+    "domains": [
+      "irs.gov",
+      "ecfr.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "tax-claim-search-ofac-programs",
+    "value": "sanctions programs country information",
+    "domains": [
+      "ofac.treasury.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "tax-claim-search-eaeu-observers",
+    "value": "observer states Iran Moldova Cuba Uzbekistan",
+    "domains": [
+      "eaeunion.org",
+      "eec.eaeunion.org"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-irs-inventory-table",
+    "value": "https://www.irs.gov/individuals/international-taxpayers/nonresident-aliens-sourcing-of-income"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-ofac-country-scope",
+    "value": "https://ofac.treasury.gov/sanctions-programs-and-country-information/where-is-ofacs-country-list-what-countries-do-i-need-to-worry-about-in-terms-of-us-sanctions"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-ofac-programs",
+    "value": "https://ofac.treasury.gov/sanctions-programs-and-country-information"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-produced-inventory-code",
+    "value": "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title26-section863&num=0&edition=prelim"
+  },
+  {
+    "kind": "direct",
+    "id": "withholding-purchased-inventory-code",
+    "value": "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title26-section865&num=0&edition=prelim"
+  },
+  {
+    "kind": "tavily",
+    "id": "artist-scope-eaeu-current-observers",
+    "value": "государства наблюдатели ЕАЭС Иран",
+    "domains": [
+      "eec.eaeunion.org"
+    ],
+    "limit": 3
+  },
+  {
+    "kind": "tavily",
+    "id": "artist-scope-eaeu-iran-observer",
+    "value": "Iran observer December 2024",
+    "domains": [
+      "eec.eaeunion.org"
+    ],
+    "limit": 3
+  },
+  {
+    "kind": "tavily",
+    "id": "artist-scope-eaeu-current-members",
+    "value": "member states Armenia Belarus Kazakhstan Kyrgyz Russia",
+    "domains": [
+      "eec.eaeunion.org"
+    ],
+    "limit": 3
   }
 ]
