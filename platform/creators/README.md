@@ -14,6 +14,16 @@ see [creator integrity](../creator-integrity/solution.md) and
 [storefront analytics](../storefronts/analytics.md): umami is the default;
 creator-owned google analytics is an optional supplement.
 
+## private workspace, independent public presentation
+
+[creator dashboard preferences](../../console/creators/dashboard-preferences.md)
+are private: language/variant, currency, units and tone are independent.
+a creator can work in african french while keeping an english storefront.
+these settings do not select public creator geography or support languages.
+
+[future creator-made storefront flexibility](../storefronts/creative-flexibility.md)
+is a later v3/v5 direction, distinct from private dashboard localization.
+
 ## progression
 
 ```text

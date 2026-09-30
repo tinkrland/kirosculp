@@ -14,6 +14,18 @@ creators may optionally connect their own google analytics configuration for
 their storefront, without replacing platform telemetry or injecting arbitrary
 scripts into protected surfaces. these requirements are specified, not implemented.
 
+## public language and later creative flexibility
+
+storefront language and content are independent of the creator's
+[private dashboard preferences](../../console/creators/dashboard-preferences.md).
+a french dashboard does not require a french storefront or expose the
+creator's regional dashboard selector to customers.
+
+[creator-made storefront flexibility](creative-flexibility.md) is a later
+v3/v5 direction, using showkit-for-shopify flexibility as a reference rather
+than integrating showkit itself. editor architecture and exact capabilities
+remain to be specified.
+
 ## audited implementation reference
 
 **status: partial**
