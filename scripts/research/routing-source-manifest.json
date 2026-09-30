@@ -1,0 +1,923 @@
+[
+  {
+    "kind": "direct",
+    "id": "ae-customs-filtered-1",
+    "value": "https://www.dubaicustoms.gov.ae/en/OpenData/Publications/Customer_Guide_Booklet_EN.pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "ae-customs-filtered-2",
+    "value": "https://www.dubaicustoms.gov.ae/en/mobile/Pages/ClearanceOfPersonalEffects.aspx"
+  },
+  {
+    "kind": "direct",
+    "id": "ae-federal-law",
+    "value": "https://uaelegislation.gov.ae/en/legislations/1055"
+  },
+  {
+    "kind": "direct",
+    "id": "ae-law-direct",
+    "value": "https://uaelegislation.gov.ae/en/legislations/1055/download"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "ae-law-firecrawl",
+    "value": "https://uaelegislation.gov.ae/en/legislations/1055"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "ae-law",
+    "value": "https://uaelegislation.gov.ae/en/legislations/1055/download"
+  },
+  {
+    "kind": "alexandria",
+    "id": "alexandria-discovery",
+    "value": "official precious metals hallmarking laws customs import VAT European Union EEA EFTA",
+    "limit": 3
+  },
+  {
+    "kind": "alexandria",
+    "id": "alexandria-eurlex",
+    "value": "European Union legislation EUR-Lex regulations legal search",
+    "limit": 2
+  },
+  {
+    "kind": "direct",
+    "id": "at-full-law",
+    "value": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20001211"
+  },
+  {
+    "kind": "direct",
+    "id": "at-law",
+    "value": "https://ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20001211&FassungVom=2026-09-24&Artikel=&Paragraf=4&Anlage=&Uebergangsrecht="
+  },
+  {
+    "kind": "firecrawl",
+    "id": "au-consumer-firecrawl",
+    "value": "https://www.accc.gov.au/media-release/full-federal-court-confirms-false-or-misleading-representations-by-zamels"
+  },
+  {
+    "kind": "direct",
+    "id": "au-consumer",
+    "value": "https://www.accc.gov.au/media-release/full-federal-court-confirms-false-or-misleading-representations-by-zamels"
+  },
+  {
+    "kind": "direct",
+    "id": "au-imports",
+    "value": "https://www.abf.gov.au/importing-exporting-and-manufacturing/importing/how-to-import/types-of-imports/importing-precious-metals-coins-jewellery-currency"
+  },
+  {
+    "kind": "direct",
+    "id": "be-marking-faq-alt",
+    "value": "https://finances.belgium.be/sites/default/files/FAQ%20POIN%C3%87ONNAGES%20D%E2%80%99OUVRAGES%20EN%20METAUX%20PRECIEUX..pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "be-marking-faq",
+    "value": "https://finances.belgium.be/sites/default/files/thesaurie/KMB/2024.01%20FAQ%20POIN%C3%87ONNAGES%20D%27OUVRAGES%20EN%20METAUX%20PRECIEUX%20%282%29.pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "be-mint",
+    "value": "https://finances.belgium.be/fr/faq-monnaie-royale-de-belgique"
+  },
+  {
+    "kind": "direct",
+    "id": "ca-imports",
+    "value": "https://www.cbsa-asfc.gc.ca/import/postal-postale/dtytx-drttx-eng.html"
+  },
+  {
+    "kind": "direct",
+    "id": "ca-marking-act",
+    "value": "https://laws-lois.justice.gc.ca/eng/acts/P-19/FullText.html"
+  },
+  {
+    "kind": "direct",
+    "id": "ca-marking-regulations",
+    "value": "https://laws-lois.justice.gc.ca/eng/regulations/C.R.C.,_c._1303/FullText.html"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "ca-marking",
+    "value": "https://competition-bureau.canada.ca/en/labelling/guide-precious-metals-marking-act-and-regulations"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "ch-control",
+    "value": "https://www.bazg.admin.ch/en/precious-metal-control"
+  },
+  {
+    "kind": "direct",
+    "id": "ch-customs-filtered-1",
+    "value": "https://www.bazg.admin.ch/en/buying-watches-jewellery-and-precious-metals-abroad"
+  },
+  {
+    "kind": "direct",
+    "id": "ch-customs-filtered-2",
+    "value": "https://www.bazg.admin.ch/en/courier-by-post-online-shopping-mail-order-importation-companies"
+  },
+  {
+    "kind": "direct",
+    "id": "ch-industrial-tariffs",
+    "value": "https://www.seco.admin.ch/en/industrial-tariffs-abolition"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "ch-responsibility",
+    "value": "https://www.bazg.admin.ch/en/responsibility-mark-precious-metal-control"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "convention-documents",
+    "value": "https://hallmarkingconvention.org/en/documents"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "convention-faq",
+    "value": "https://hallmarkingconvention.org/en/faq"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "convention-members",
+    "value": "https://hallmarkingconvention.org/en/members"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "convention-working",
+    "value": "https://hallmarkingconvention.org/en/about-how-is-the-convention-working"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "de-fineness",
+    "value": "https://www.gesetze-im-internet.de/feingehg/BJNR001200884.html"
+  },
+  {
+    "kind": "direct",
+    "id": "dk-regulations-direct",
+    "value": "https://www.sik.dk/erhverv/produkter/aedelmetal/overblik-over-reglerne-paa-aedelmetalomraadet"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "dk-regulations",
+    "value": "https://www.sik.dk/erhverv/produkter/aedelmetal/overblik-over-reglerne-paa-aedelmetalomraadet"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "eea-exclusions",
+    "value": "https://www.eeas.europa.eu/norway/european-union-and-norway_en"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "efta-origin",
+    "value": "https://www.efta.int/trade-relations/horizontal-work/customs-and-origin"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "es-law",
+    "value": "https://www.boe.es/buscar/act.php?id=BOE-A-1988-6186"
+  },
+  {
+    "kind": "direct",
+    "id": "eu-free-circulation",
+    "value": "https://taxation-customs.ec.europa.eu/customs-4/customs-procedures-import-and-export/what-importation/free-circulation_en"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "eu-low-value-firecrawl",
+    "value": "https://www.consilium.europa.eu/en/press/press-releases/2025/12/12/customs-council-agrees-to-levy-customs-duty-on-small-parcels-as-of-1-july-2026"
+  },
+  {
+    "kind": "direct",
+    "id": "eu-low-value",
+    "value": "https://www.consilium.europa.eu/en/press/press-releases/2025/12/12/customs-council-agrees-to-levy-customs-duty-on-small-parcels-as-of-1-july-2026/"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "eu-preferential-origin",
+    "value": "https://taxation-customs.ec.europa.eu/customs/rules-origin-goods/preferential-rules-origin/arrangements-list_en"
+  },
+  {
+    "kind": "direct",
+    "id": "eu-regulation-2026-382",
+    "value": "https://eur-lex.europa.eu/eli/reg/2026/382/oj/eng"
+  },
+  {
+    "kind": "direct",
+    "id": "eu-three-euro-guidance",
+    "value": "https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs+Guidance+on+EUR+3+customs+duty.pdf"
+  },
+  {
+    "kind": "direct",
+    "id": "eu-vat-territory",
+    "value": "https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "fr-guarantee",
+    "value": "https://www.douane.gouv.fr/fiche/garantie-des-metaux-precieux-travers-lhistoire-de-1260-nos-jours"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "fr-imports",
+    "value": "https://www.douane.gouv.fr/demarche/importer-des-metaux-precieux-provenance-hors-ue-suisse-turquie-et-etat-membre-de-lespace"
+  },
+  {
+    "kind": "direct",
+    "id": "gb-ni-parcels",
+    "value": "https://www.gov.uk/government/publications/communications-resources-to-help-you-move-goods-from-great-britain-to-northern-ireland/fact-sheet-business-to-business-parcel-movements-under-the-windsor-framework"
+  },
+  {
+    "kind": "direct",
+    "id": "ie-regulations-direct",
+    "value": "https://www.irishstatutebook.ie/eli/2001/si/579/made/en/print"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "ie-regulations",
+    "value": "https://www.irishstatutebook.ie/eli/2001/si/579/made/en/print"
+  },
+  {
+    "kind": "direct",
+    "id": "il-assay-direct",
+    "value": "https://www.sii.org.il/en/lobby-pages/importers/laboratory-tests/jewls-and-metals"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "il-assay",
+    "value": "https://www.sii.org.il/en/lobby-pages/importers/laboratory-tests/jewls-and-metals"
+  },
+  {
+    "kind": "direct",
+    "id": "il-customs-filtered-1",
+    "value": "https://apps.economy.gov.il/Apps/PersonalImport/Product/Index/109"
+  },
+  {
+    "kind": "direct",
+    "id": "il-customs-filtered-2",
+    "value": "https://apps.economy.gov.il/Apps/PersonalImport/Product/Index/606"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "it-metrology",
+    "value": "https://www.mimit.gov.it/it/mercato-e-consumatori/normativa-tecnica/metrologia/metalli-preziosi"
+  },
+  {
+    "kind": "direct",
+    "id": "jp-certification-direct",
+    "value": "https://www.mint.go.jp/eng/operations-eng/eng_operations_certification-01.html"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "jp-certification",
+    "value": "https://www.mint.go.jp/eng/operations-eng/eng_operations_certification-01.html"
+  },
+  {
+    "kind": "direct",
+    "id": "jp-imports",
+    "value": "https://www.customs.go.jp/english/summary/tariff.htm"
+  },
+  {
+    "kind": "direct",
+    "id": "kr-customs-filtered-1",
+    "value": "https://www.customs.go.kr/english/cm/cntnts/cntntsView.do?mi=10804&cntntsId=5505"
+  },
+  {
+    "kind": "direct",
+    "id": "kr-customs-filtered-2",
+    "value": "https://www.customs.go.kr/english/cm/cntnts/cntntsView.do?mi=8070&cntntsId=2744"
+  },
+  {
+    "kind": "direct",
+    "id": "kr-online-guide-alt",
+    "value": "https://www.customs.go.kr/common/nttFileDownload.do?fileKey=d86a4a6f718ce29d69fec93b87974443"
+  },
+  {
+    "kind": "direct",
+    "id": "kr-online-guide",
+    "value": "https://www.customs.go.kr/common/nttFileDownload.do?fileKey=c0bca64e2f39090d2dcbebb819626238"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "nl-assay",
+    "value": "https://business.gov.nl/regulations/assaying-gold-objects/"
+  },
+  {
+    "kind": "direct",
+    "id": "no-control-direct",
+    "value": "https://www.justervesenet.no/en/surveillance/precious-metals/"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "no-control",
+    "value": "https://www.justervesenet.no/en/surveillance/precious-metals/"
+  },
+  {
+    "kind": "direct",
+    "id": "no-imports",
+    "value": "https://www.toll.no/en/online-shopping/the-voec-scheme"
+  },
+  {
+    "kind": "direct",
+    "id": "nz-imports",
+    "value": "https://www.customs.govt.nz/sending-and-receiving/duty-and-gst/duty-and-allowances"
+  },
+  {
+    "kind": "direct",
+    "id": "nz-supplier-gst",
+    "value": "https://www.ird.govt.nz/gst/gst-for-overseas-businesses/gst-on-low-value-imported-goods/when-to-charge-gst-on-low-value-imported-goods"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-austria-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/austria"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-austria",
+    "value": "https://hallmarkingconvention.org/en/country-profile/austria"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-denmark-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/denmark"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-denmark",
+    "value": "https://hallmarkingconvention.org/en/country-profile/denmark"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-ireland-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/ireland"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-ireland",
+    "value": "https://hallmarkingconvention.org/en/country-profile/ireland"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-israel-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/israel"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-israel",
+    "value": "https://hallmarkingconvention.org/en/country-profile/israel"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-italy-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/italy"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-italy",
+    "value": "https://hallmarkingconvention.org/en/country-profile/italy"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-netherlands-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/netherlands"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-netherlands",
+    "value": "https://hallmarkingconvention.org/en/country-profile/netherlands"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-norway-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/norway"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-norway",
+    "value": "https://hallmarkingconvention.org/en/country-profile/norway"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-sweden-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/sweden"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-sweden",
+    "value": "https://hallmarkingconvention.org/en/country-profile/sweden"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-switzerland-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/switzerland"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-switzerland",
+    "value": "https://hallmarkingconvention.org/en/country-profile/switzerland"
+  },
+  {
+    "kind": "direct",
+    "id": "profile-united-kingdom-direct",
+    "value": "https://hallmarkingconvention.org/en/country-profile/united-kingdom"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "profile-united-kingdom",
+    "value": "https://hallmarkingconvention.org/en/country-profile/united-kingdom"
+  },
+  {
+    "kind": "direct",
+    "id": "se-control",
+    "value": "https://www.swedac.se/services/precious-metal?lang=en"
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ae-customs-filtered",
+    "value": "customs duty imports",
+    "domains": [
+      "u.ae",
+      "dubaicustoms.gov.ae"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ae-customs",
+    "value": "site.u.ae customs duty 5 per cent VAT imported jewellery",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ae-law-filtered",
+    "value": "precious metals hallmark imported jewellery",
+    "domains": [
+      "uaelegislation.gov.ae",
+      "moiat.gov.ae"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ae",
+    "value": "site.moiat.gov.ae precious metals gemstones hallmark conformity imported jewellery",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-at-filtered",
+    "value": "punzierung edelmetall",
+    "domains": [
+      "bmf.gv.at",
+      "ris.bka.gv.at"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-at-official",
+    "value": "Punzierung Österreich BMF Punzierungskontrolle Gold Silber Platin 1 30 Gramm",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-at",
+    "value": "site.bev.gv.at punzierung gold silber platin einfuhr gewichtsgrenzen",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-au-customs",
+    "value": "site.abf.gov.au importing goods jewellery import GST 1000",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-au-filtered",
+    "value": "jewellery gold misleading",
+    "domains": [
+      "accc.gov.au"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-au-official",
+    "value": "Australia jewellery gold hallmark purity Australian Consumer Law ACCC jewellery claims",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-au",
+    "value": "site.accc.gov.au jewellery gold silver purity marking hallmark imported jewellery",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-be-filtered",
+    "value": "poinçon métaux précieux",
+    "domains": [
+      "economie.fgov.be",
+      "finances.belgium.be"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-be-marking-filtered",
+    "value": "poinçonnage ouvrages métaux précieux fabricant importateur",
+    "domains": [
+      "finances.belgium.be"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-be-official",
+    "value": "Belgique metaux precieux poincon legislation SPF Economie or argent",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-be",
+    "value": "site.economie.fgov.be metaux precieux poincon or argent bijoux importation",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ca-customs",
+    "value": "site.cbsa-asfc.gc.ca importing commercial goods jewellery GST duty country origin",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ca",
+    "value": "site.competition-bureau.canada.ca precious metals marking jewellery imported gold silver trademark",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ch-customs-filtered",
+    "value": "industrial tariffs VAT imports jewellery",
+    "domains": [
+      "bazg.admin.ch"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ch-customs",
+    "value": "site.bazg.admin.ch online shopping import VAT 8.1 jewellery customs industrial tariffs abolished",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ch-industrial-filtered",
+    "value": "abolition industrial tariffs 2024",
+    "domains": [
+      "seco.admin.ch",
+      "bazg.admin.ch"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ch",
+    "value": "site.bazg.admin.ch precious metal control jewellery import fineness responsibility mark",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-de",
+    "value": "site.gesetze-im-internet.de Feingehalt Gold Silber Waren Schmuck FeingehG",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-dk-official",
+    "value": "Denmark precious metals name stamp FORCE Sikkerhedsstyrelsen Ædelmetalkontrol",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-dk",
+    "value": "site.sik.dk precious metals gold silver platinum hallmark name mark imported",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-eea-efta",
+    "value": "site.efta.int EEA not customs union Norway Iceland Liechtenstein Switzerland customs",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-es",
+    "value": "site.boe.es metales preciosos importacion objetos ley 17 1985 real decreto 197 1988 contraste",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-eu-customs-union",
+    "value": "site.taxation-customs.ec.europa.eu customs union goods free circulation customs territory",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-eu-lowvalue-filtered",
+    "value": "3 euro customs small parcels July 2026",
+    "domains": [
+      "consilium.europa.eu",
+      "taxation-customs.ec.europa.eu"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-eu-operative-law",
+    "value": "2026 customs small parcels 3 EUR 150 Regulation Council 2026",
+    "domains": [
+      "eur-lex.europa.eu",
+      "consilium.europa.eu",
+      "taxation-customs.ec.europa.eu"
+    ],
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-eu-vat-customs",
+    "value": "site.consilium.europa.eu 2026 customs duty 3 euro small parcels 1 July 150",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-fr-official",
+    "value": "garantie metaux precieux site:douane.gouv.fr 3 grammes 30 importation",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-fr",
+    "value": "site.douane.gouv.fr garantie metaux precieux importation ouvrages or argent platine poincon 3 30 grammes",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-gb-ni",
+    "value": "site.gov.uk goods Northern Ireland customs EU Windsor Framework parcel business consumers",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-gb",
+    "value": "site.gov.uk imported jewellery hallmarking exemption gold silver platinum palladium northern ireland customs",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-ie",
+    "value": "site.irishstatutebook.ie hallmarking act 1981 imported articles precious metal",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-il-customs-filtered",
+    "value": "תכשיטים יבוא אישי",
+    "domains": [
+      "gov.il"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-il-customs",
+    "value": "site.gov.il personal import jewellery VAT gold imports customs tax",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-il",
+    "value": "site.sii.org.il gold jewellery hallmark import standard 299 precious metals",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-it",
+    "value": "site.mimit.gov.it metalli preziosi importazione marchi titolo identificazione decreto legislativo 251 1999",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-jp-customs",
+    "value": "site.customs.go.jp jewellery import consumption tax 10000 200000",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-jp",
+    "value": "site.mint.go.jp hallmark gold silver platinum purity jewellery voluntary certification",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-kr-customs-filtered",
+    "value": "overseas purchases duty exemption",
+    "domains": [
+      "customs.go.kr"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-kr-customs",
+    "value": "site.customs.go.kr overseas direct purchase jewellery import duties tax 150 200",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-kr-filtered",
+    "value": "귀금속 가공제품 표시",
+    "domains": [
+      "standard.go.kr",
+      "kats.go.kr"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-kr-official",
+    "value": "Korea gold silver jewellery fineness marking KS D 9537 government",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-kr-online-filtered",
+    "value": "직구 150 달러 목록통관",
+    "domains": [
+      "customs.go.kr"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-kr",
+    "value": "site.customs.go.kr gold silver jewelry import marking hallmark purity",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-nl",
+    "value": "site.business.gov.nl hallmark precious metal objects gold silver platinum imported 1 8 0.5 grams",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-no-customs",
+    "value": "site.toll.no online shopping jewellery VOEC VAT 3000",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-no",
+    "value": "site.justervesenet.no edelmetall gull sølv platina import ansvarsstempel",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-nz-customs",
+    "value": "site.customs.govt.nz online shopping jewellery GST 1000",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-nz-filtered",
+    "value": "jewellery gold quality",
+    "domains": [
+      "consumerprotection.govt.nz",
+      "comcom.govt.nz"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-nz-gst-filtered",
+    "value": "low value imported goods overseas supplier GST",
+    "domains": [
+      "ird.govt.nz"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-nz-official",
+    "value": "New Zealand jewellery gold silver quality marking hallmark official consumer",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-nz",
+    "value": "site.consumerprotection.govt.nz jewellery gold purity hallmark OR site.customs.govt.nz jewellery import GST",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-se-filtered",
+    "value": "precious metals",
+    "domains": [
+      "swedac.se"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-se-official",
+    "value": "Swedac precious metals name mark gold platinum 1 gram official",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-se",
+    "value": "site.swedac.se precious metals gold platinum silver hallmark import 1 gram",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-sg-customs",
+    "value": "site.customs.gov.sg non dutiable goods jewellery import GST 9 percent",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-sg",
+    "value": "site.customs.gov.sg investment precious metals jewellery GST import gold silver",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-us-customs",
+    "value": "site.cbp.gov jewelry import commercial de minimis suspension 2026 duties",
+    "limit": 5
+  },
+  {
+    "kind": "tavily",
+    "id": "search-us-guides-filtered",
+    "value": "jewelry guides gold silver platinum",
+    "domains": [
+      "ftc.gov",
+      "ecfr.gov",
+      "govinfo.gov"
+    ],
+    "limit": 4
+  },
+  {
+    "kind": "tavily",
+    "id": "search-us",
+    "value": "site.ftc.gov jewelry gold silver platinum marking guides imported jewelry precious metals",
+    "limit": 5
+  },
+  {
+    "kind": "direct",
+    "id": "sg-imports",
+    "value": "https://www.customs.gov.sg/doing-business/valuation-duties-and-fees/goods-and-services-tax-gst"
+  },
+  {
+    "kind": "direct",
+    "id": "sg-investment",
+    "value": "https://www.customs.gov.sg/doing-business/import-operations/import-procedures/importing-investment-precious-metals"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "uk-hallmarking",
+    "value": "https://www.gov.uk/guidance/hallmarking-in-the-uk-consumer-protection"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "uk-import-vat",
+    "value": "https://www.gov.uk/guidance/vat-and-overseas-goods-sold-directly-to-customers-in-the-uk"
+  },
+  {
+    "kind": "direct",
+    "id": "us-cfr-2026",
+    "value": "https://www.govinfo.gov/content/pkg/CFR-2026-title16-vol1/html/CFR-2026-title16-vol1-part23.htm"
+  },
+  {
+    "kind": "direct",
+    "id": "us-de-minimis",
+    "value": "https://www.federalregister.gov/documents/2026/06/24/2026-12670/indefinite-suspension-of-the-de-minimis-exemption-for-merchandise-arriving-through-all-modes-other"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "us-ecfr-guides",
+    "value": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-23"
+  },
+  {
+    "kind": "firecrawl",
+    "id": "us-ftc",
+    "value": "https://www.ftc.gov/legal-library/browse/rules/jewelry-precious-metals-pewter-industries-guides"
+  },
+  {
+    "kind": "direct",
+    "id": "us-jewelry-guides",
+    "value": "https://www.ftc.gov/news-events/topics/tools-consumers/jewelry-guides"
+  }
+]
