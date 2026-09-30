@@ -16,6 +16,13 @@ direct metal printing exists, but for wearable pieces at indie volumes, investme
 
 creators are not limited to sculptura's marketplace. they can white-label their storefront or connect channels such as shopify, and orders route to the most suitable regional casting partner based on geography, capabilities, cost, and import exposure. the platform handles the behind-the-scenes manufacturing end to end: printing a castable pattern, casting, finishing, and shipping, with no cad skills, materials, inventory, or forge required.
 
+## creator positioning
+
+[pro-artist and free-market positioning](creator/README.md): creator-authored
+commission rates, no ai pricing adviser, and intentional geographic ambiguity
+to prevent labor arbitrage. includes the distinction between private time
+valuation and public rates, and a clearly tentative regional-rate direction.
+
 ## voice rules
 
 lowercase throughout, no emojis, no em dashes. proper nouns may be lowercase too. keep exact case only where it would break something: code, urls, external names.
