@@ -17,6 +17,13 @@ to domestic eligibility. it does not remove a customs border, import vat or
 carrier fees. eu membership can support movement of goods in free circulation;
 it does not create a uniform jewelry hallmarking law.
 
+## regional priority
+
+[the europe/north america follow-up](europe-north-america.md) prioritises 13 planned
+european markets and the us/canada. it adds eu/eea/efta/cefta distinctions,
+us-origin corridors, post-brexit mark recognition and [quebec](quebec.md).
+other markets remain in the baseline but are outside this priority pass.
+
 ## findings and records
 
 - [hallmarking and all 22 country cases](hallmarking.md): membership, domestic
@@ -29,6 +36,13 @@ it does not create a uniform jewelry hallmarking law.
   every checkout flag remains false and every axis remains unapproved.
 - [source index](sources.json): urls,
   retrieval outcomes and full-text hashes. source age is not reset by retrieval.
+
+## artist-payment research is a separate layer
+
+[artist income and sanctions](artist-income-and-sanctions.md) checks redbubble's
+seller/facilitator structure, irs source/withholding rules, foreign-tin options
+and tentative artist-scope proposals. it does not classify every artist payout
+as foreign-source or implement geographic exclusions.
 
 ## source hierarchy and limits
 

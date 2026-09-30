@@ -41,7 +41,7 @@ articles need their own destination-recognition and sponsor treatment.
 | switzerland | yes | jewelry control and watch-case control differ; ordinary article fineness/responsibility duties coexist with recognized foreign/ccm paths | `ch-control`, `ch-responsibility`, `profile-switzerland-direct` |
 | sweden | yes | convention profile reports mixed control; validate current national compulsory marks and article thresholds | `se-control`, `profile-sweden-direct` |
 | denmark | yes | compulsory registration/inspection can coexist with voluntary control marking; confirm current implementing authority/rules | `dk-regulations-direct`, `profile-denmark-direct` |
-| ireland | yes | profile reports compulsory control and no weight exemption; its palladium commencement notice is visibly historical and must not become a current rule | `ie-regulations-direct`, `profile-ireland-direct` |
+| ireland | yes | 2019 amendment commenced on 30 september 2019; use the commencement order and current assay-office guidance, not the old pending notice | `priority-ie-commencement-order`, `priority-ie-assay-law`, `profile-ireland-direct` |
 | new zealand | no | no sufficiently specific primary hallmarking determination obtained in this pass; customs/gst evidence does not answer this axis | national marking review remains open |
 | japan | no | mint offers fineness certification and lists offices; retrieved application scope is domestic corporations, not universal clearance for imported jewelry | `jp-certification-direct` |
 | south korea | no | retrieved customs guides do not establish jewelry fineness/marking law; keep that review open | national marking review remains open |
@@ -105,3 +105,7 @@ and evidence arrangements before promoting a route.
 
 see [imports](imports.md), [route evidence](route-evidence-contract.md), and
 [the research overview](README.md).
+
+[the regional follow-up](europe-north-america.md) adds the post-brexit gb/ni
+recognition distinction and national law evidence. [quebec](quebec.md) adds
+provincial obligations without inventing a provincial hallmarking regime.
