@@ -110,3 +110,9 @@ security remediation is complete only when:
 - policy tests prove the intended access matrix against the cumulative schema
 
 see the [complete source audit](../docs/current-state-audit.md) for the cross-domain build order.
+
+## aml and financial-abuse considerations
+
+[the aml subfolder](aml/README.md) separates plausible abuse scenarios from
+proposed legal, admission, transaction, payout and supplier controls. it is
+documentation, not an implemented or legally approved aml program.

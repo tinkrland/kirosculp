@@ -17,3 +17,10 @@ nothing. this leg runs first.
 ## hands over
 
 a database the [platform](../platform/README.md) and [operations](../operations/README.md) legs can safely build on.
+
+## financial-abuse workstream
+
+[the aml threat model](../../security/aml/README.md) is a separate planning
+workstream with [unexecuted acceptance cases](../../security/aml/considerations/review-audit-and-tests.md).
+its legal applicability, operating ownership and provider funds-flow approval
+remain open; authentication/rls remediation alone does not complete it.

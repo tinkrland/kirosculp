@@ -212,3 +212,10 @@ not scheduled; recorded so the model stays coherent when they build.
 - open questions when scheduled: cross-currency redemption, expiry
   rules per jurisdiction, and payout-provider constraints on
   stored-value balances.
+
+## aml threat model and proposed financial controls
+
+[security/aml](../../security/aml/README.md) records self-dealing, stolen-payment,
+proxy-beneficiary, sanctions-rerouting, provenance and milestone risks. the
+existing simulations do not verify these proposed controls or implement
+production stripe/payoneer payout screening.
