@@ -2,6 +2,18 @@
 
 creator-facing offering tools publish accepted design releases, manage listings and collections, configure storefront presentation, choose channels, and optionally open commissions. this layer never opens or edits geometry.
 
+## admission, publication and payout
+
+creator profiles are human-operated, with tessa built into the studio.
+[invitation-based admission](../creator-access.md) is separate from storefront
+publication, which requires a phone number on file and verified email.
+identity verification at payout is handled through stripe/persona, not a
+sculptura-operated government-id collection flow.
+
+see [creator integrity](../creator-integrity/solution.md) and
+[storefront analytics](../storefronts/analytics.md): umami is the default;
+creator-owned google analytics is an optional supplement.
+
 ## progression
 
 ```text

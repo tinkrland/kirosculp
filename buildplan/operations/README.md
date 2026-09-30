@@ -9,7 +9,7 @@ this leg prototypes the money flow locally before any real payment provider is i
 3. **ledger allocations:** supabase as the authoritative record: order, processing costs, creator earnings, reserve, refund liability as append-only journal entries with balanced postings. formance ledger is a later evaluation, never a second source of truth.
 4. **lifecycle states:** paid, in production, delivered, refunded, disputed: each state a recorded event with money implications, idempotent transitions.
 5. **reversals and reconciliation:** refund and chargeback flows that produce compensating journal entries, and a reconciliation check that balances against the mock provider.
-6. **payout gating:** creator earnings released only after the applicable delivery/claim window, with kyc deferred until the $20/€20 payout threshold per the existing product decision.
+6. **payout gating:** creator earnings released only after the applicable delivery/claim window, with identity verification handled through stripe/persona when the creator takes a payout, not by sculptura collecting identity documents. the existing $20/€20 payout minimum remains a separate condition. provider/legal requirements may force earlier verification; creator admission and storefront publication do not impose upfront kyc. see [the gate separation](../../platform/creator-integrity/solution.md).
 
 ## banking consideration (still deciding)
 
