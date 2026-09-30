@@ -18,6 +18,17 @@ platform is the offering surface. it turns an accepted design release into somet
 - creator payout math
 - manufacturer api calls or regional routing
 
+## creator access and telemetry
+
+[human creator admission](creator-access.md) is invitation-based. the
+[creator-integrity problem](creator-integrity/problem.md) and
+[solution](creator-integrity/solution.md) distinguish autonomous account farming
+from tessa's normal built-in role. storefront publication requires a phone
+number on file and verified email; stripe/persona handle payout verification.
+
+[umami is primary telemetry](storefronts/analytics.md), including default
+creator-facing analytics. optional creator-owned google analytics supplements it.
+
 ## publication gate
 
 no listing may point to an unvalidated studio project. it must point to a specific immutable design release with `castability.passed = true`.

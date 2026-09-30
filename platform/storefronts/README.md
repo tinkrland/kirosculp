@@ -2,6 +2,18 @@
 
 sculptura-hosted and white-label storefront presentation, including collections, profile content, brand settings, and connected sales channels. sculptura remains the source of truth for design releases and fulfillment state.
 
+## publication and analytics policy
+
+publishing a hosted or white-label storefront requires a private phone number
+on file and verified email. this is separate from invitation-based creator
+admission and provider-handled payout kyc; see
+[creator integrity](../creator-integrity/solution.md).
+
+[umami is the primary telemetry and default creator analytics](analytics.md).
+creators may optionally connect their own google analytics configuration for
+their storefront, without replacing platform telemetry or injecting arbitrary
+scripts into protected surfaces. these requirements are specified, not implemented.
+
 ## audited implementation reference
 
 **status: partial**

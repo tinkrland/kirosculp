@@ -2,6 +2,17 @@
 
 read models and exports for creators and buyers. reports must reconcile to immutable settlement and fulfillment events rather than recomputing history from current settings.
 
+## creator telemetry policy
+
+umami is the primary product telemetry and default creator-facing traffic and
+engagement analytics. creators may supplement it with their own google analytics
+configuration for their storefront. reporting remains scoped to the owning creator.
+
+see [the storefront analytics contract](../../platform/storefronts/analytics.md).
+traffic telemetry is not the financial ledger, payout verification or security
+audit trail. integration and scoped reporting are requirements, not implemented
+capabilities of the current reporting shell.
+
 ## audited implementation reference
 
 **status: shell**

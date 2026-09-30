@@ -81,6 +81,18 @@ ledger reversal, order cancelled). no client role can write any of this;
 `gateway_ref` (payment intent id) is unique so webhook replays cannot
 open a second hold.
 
+## provider-handled payout verification
+
+creator identity verification for payout is handled through stripe/persona;
+sculptura integrates trusted eligibility/status rather than collecting and
+reviewing government-id documents itself. no upfront creator-admission kyc
+is introduced. payout minimums, delivery/claim windows and provider-required
+verification remain distinct gates. this integration is not implemented by
+the existing ledger simulations.
+
+storefront publication separately requires a phone number on file and verified
+email. see [creator integrity](../creator-integrity/solution.md).
+
 ## simulation
 
 `simulate-escrow-lifecycle.js` runs the whole commission escrow flow
