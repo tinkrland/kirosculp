@@ -1,0 +1,1036 @@
+{
+  "schema_version": "0.1.0",
+  "dataset_version": "2026-09-30.1",
+  "observed_on": "2026-09-30",
+  "purpose": "research evidence only; not an approved route ruleset",
+  "country_count": 22,
+  "countries": [
+    {
+      "country_code": "US",
+      "country": "united states",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "us-ecfr-guides",
+        "us-de-minimis"
+      ],
+      "research_note": "ftc marketing guides do not replace the federal stamping act, state law or customs classification; non-postal de minimis suspension and postal rules need separate handling",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "CA",
+      "country": "canada",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "ca-marking-act",
+        "ca-marking-regulations",
+        "ca-marking",
+        "ca-imports"
+      ],
+      "research_note": "quality marking is conditional, not a blanket compulsory assay requirement; section 4(4) has foreign-mark exceptions to the trademark requirement",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "GB",
+      "country": "united kingdom",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "uk: great britain and northern ireland require different treatment",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "uk-hallmarking",
+        "uk-import-vat",
+        "gb-ni-parcels",
+        "profile-united-kingdom-direct"
+      ],
+      "research_note": "separate great britain and northern ireland; capture applicable customs process, not a single uk country flag",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-united-kingdom-direct",
+        "profile_updated_on_reported": "26-03-2021",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "compulsory",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "950",
+            "900",
+            "850"
+          ],
+          "gold": [
+            "999",
+            "990",
+            "916",
+            "750",
+            "585",
+            "375"
+          ],
+          "palladium": [
+            "999",
+            "950",
+            "500"
+          ],
+          "silver": [
+            "999",
+            "958",
+            "925",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "0.5 g",
+          "gold": "1 g",
+          "palladium": "1 g",
+          "silver": "7.78 g"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "birmingham assay office",
+          "edinburgh assay office",
+          "london assay office",
+          "sheffield assay office"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "AU",
+      "country": "australia",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "au-consumer-firecrawl",
+        "au-imports"
+      ],
+      "research_note": "national mandatory-hallmarking position not established by retrieved primary sources; consumer-law pricing case does not prove metal-marking rules",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "DE",
+      "country": "germany",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "de-fineness",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance"
+      ],
+      "research_note": "jewelry under section 5 must not inherit section 2 rules for other gold/silver articles",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "FR",
+      "country": "france",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "fr-imports",
+        "fr-guarantee",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance"
+      ],
+      "research_note": "non-membership does not erase recognized foreign-mark paths; imported commercial jewelry differs from traveler exemptions",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "IT",
+      "country": "italy",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "it-metrology",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance",
+        "profile-italy-direct"
+      ],
+      "research_note": "voluntary independent control does not make fineness and identification stamps optional",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-italy-direct",
+        "profile_updated_on_reported": "03-11-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "voluntary",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            ">950",
+            "950",
+            "900",
+            "850"
+          ],
+          "gold": [
+            ">750",
+            "750",
+            "585",
+            "375"
+          ],
+          "palladium": [
+            ">950",
+            "950",
+            "500"
+          ],
+          "silver": [
+            ">925",
+            "925",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "1g",
+          "gold": "1g",
+          "palladium": "1g",
+          "silver": "1g"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "made in vicenza precious metals assay laboratory",
+          "sagor",
+          "alessandria-asti chamber of commerce assay office / all marks"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "NL",
+      "country": "netherlands",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "nl-assay",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance",
+        "profile-netherlands-direct"
+      ],
+      "research_note": "2019 convention profile has outdated legislative-transition language; compare current government assaying guidance",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-netherlands-direct",
+        "profile_updated_on_reported": "09-09-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "compulsory for platinum, gold and silver; voluntary for palladium",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "950"
+          ],
+          "gold": [
+            "916",
+            "833",
+            "750",
+            "585"
+          ],
+          "palladium": [],
+          "silver": [
+            "925",
+            "835",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "0.5g",
+          "gold": "1g",
+          "palladium": "-",
+          "silver": "8g"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "waarborgholland",
+          "edelmetaal waarborg nederland"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "ES",
+      "country": "spain",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "es-law",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance"
+      ],
+      "research_note": "resolve exact small-item mark substitutions, import recognition and accredited assay path from consolidated law",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "BE",
+      "country": "belgium",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "be-marking-faq",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance"
+      ],
+      "research_note": "royal mint faq establishes fineness and signature marking; state-control mark and compulsory independent assay are not the same as those two marks",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "AT",
+      "country": "austria",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "at-full-law",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance",
+        "profile-austria-direct"
+      ],
+      "research_note": "prefer the consolidated national act to the 2019 convention profile; translate exemption boundaries before coding predicates",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-austria-direct",
+        "profile_updated_on_reported": "18-07-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "voluntary",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "950"
+          ],
+          "gold": [
+            "986",
+            "900",
+            "750",
+            "585"
+          ],
+          "palladium": [],
+          "silver": [
+            "925",
+            "900",
+            "835",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "2 g",
+          "gold": "2 g",
+          "palladium": "-",
+          "silver": "30 g"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "federal office of metrology and surveying"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "CH",
+      "country": "switzerland",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": true,
+      "evidence_source_ids": [
+        "ch-control",
+        "ch-responsibility",
+        "ch-industrial-tariffs",
+        "profile-switzerland-direct"
+      ],
+      "research_note": "jewelry and watch cases have different control regimes; zero industrial tariffs do not remove vat or customs declarations",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-switzerland-direct",
+        "profile_updated_on_reported": "14-08-2024",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "compulsory for watch-cases; voluntary for jewellery",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "950",
+            "900",
+            "850"
+          ],
+          "gold": [
+            "999",
+            "916",
+            "750",
+            "585",
+            "375"
+          ],
+          "palladium": [
+            "999",
+            "950",
+            "500"
+          ],
+          "silver": [
+            "999",
+            "925",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "No",
+          "gold": "No",
+          "palladium": "No",
+          "silver": "No"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "central office for precious metals control",
+          "biel/bienne",
+          "la chaux-de-fonds",
+          "chiasso",
+          "geneva",
+          "le noirmont",
+          "zurich"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "SE",
+      "country": "sweden",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "se-control",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance",
+        "profile-sweden-direct"
+      ],
+      "research_note": "mixed control regime needs current national source for article-specific duties and exemption boundaries",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-sweden-direct",
+        "profile_updated_on_reported": "31-10-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "mixed",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "990",
+            "950",
+            "900",
+            "850"
+          ],
+          "gold": [
+            "999",
+            "990",
+            "916",
+            "800",
+            "750",
+            "585",
+            "417",
+            "375"
+          ],
+          "palladium": [
+            "999",
+            "990",
+            "950",
+            "850",
+            "500"
+          ],
+          "silver": [
+            "999",
+            "990",
+            "958",
+            "925",
+            "835",
+            "830",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "1g",
+          "gold": "1g",
+          "palladium": "-",
+          "silver": "-"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "rise research institutes of sweden, assay office"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "DK",
+      "country": "denmark",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "dk-regulations-direct",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance",
+        "profile-denmark-direct"
+      ],
+      "research_note": "registration plus inspection obligations coexist with voluntary control marking; confirm current authority and implementing rules",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-denmark-direct",
+        "profile_updated_on_reported": "18-07-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "compulsory registration with inspections and voluntary control marking",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "990",
+            "950",
+            "850"
+          ],
+          "gold": [
+            "999",
+            "990",
+            "916",
+            "800",
+            "750",
+            "585",
+            "417",
+            "375"
+          ],
+          "palladium": [
+            "999",
+            "990",
+            "950",
+            "850",
+            "500"
+          ],
+          "silver": [
+            "999",
+            "990",
+            "958",
+            "925",
+            "835",
+            "830",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "< 1 g",
+          "gold": "< 1 g",
+          "palladium": "< 1 g",
+          "silver": "< 3 g"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "aedelmetalkontrollen / force technology"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "IE",
+      "country": "ireland",
+      "planned_rollout": "first cohort",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "eu customs territory, subject to territorial and goods-status exceptions",
+      "eu_member": true,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "ie-regulations-direct",
+        "eu-free-circulation",
+        "eu-vat-territory",
+        "eu-three-euro-guidance",
+        "profile-ireland-direct"
+      ],
+      "research_note": "2019 profile has a pending palladium commencement notice; check actual commencement before treating it as current",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-ireland-direct",
+        "profile_updated_on_reported": "18-07-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "compulsory",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "950",
+            "900",
+            "850",
+            "600"
+          ],
+          "gold": [
+            "999",
+            "990",
+            "916",
+            "833",
+            "750",
+            "585",
+            "417",
+            "375"
+          ],
+          "palladium": [
+            "999",
+            "950",
+            "500"
+          ],
+          "silver": [
+            "999",
+            "958",
+            "925",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "-",
+          "gold": "-",
+          "palladium": "-",
+          "silver": "-"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "assay office, company of goldsmiths of dublin"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "NZ",
+      "country": "new zealand",
+      "planned_rollout": "first cohort",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "nz-imports",
+        "nz-supplier-gst"
+      ],
+      "research_note": "border collection threshold is not exemption from registered overseas supplier gst; national hallmarking requirements remain unresolved",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "JP",
+      "country": "japan",
+      "planned_rollout": "research hold",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "jp-certification-direct",
+        "jp-imports"
+      ],
+      "research_note": "mint certification is not proof that imported jewelry has no other mandatory marking rules; the retrieved mint program limits applications to domestic corporations",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "KR",
+      "country": "south korea",
+      "planned_rollout": "research hold",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "kr-online-guide",
+        "kr-online-guide-alt"
+      ],
+      "research_note": "customs guides do not establish jewelry fineness/marking rules; confirm current version and personal-use conditions before using their thresholds",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "SG",
+      "country": "singapore",
+      "planned_rollout": "research hold",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "sg-imports",
+        "sg-investment"
+      ],
+      "research_note": "investment-metal gst exemption cannot be applied to ordinary jewelry; local marking rules remain unresolved",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "AE",
+      "country": "united arab emirates",
+      "planned_rollout": "research hold",
+      "convention_member": false,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "ae-law-firecrawl",
+        "ae-customs-filtered-1"
+      ],
+      "research_note": "recognized foreign hallmark means recognition under applicable executive rules, not automatic ccm recognition; verify implementing rules and emirate-specific import handling",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ]
+    },
+    {
+      "country_code": "NO",
+      "country": "norway",
+      "planned_rollout": "research hold",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": true,
+      "efta_member": true,
+      "evidence_source_ids": [
+        "no-control-direct",
+        "no-imports",
+        "eea-exclusions",
+        "profile-norway-direct"
+      ],
+      "research_note": "eea membership is not eu customs membership; non-ccm responsibility-mark registration/notification must be distinguished from ccm treaty treatment",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-norway-direct",
+        "profile_updated_on_reported": "09-09-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "voluntary",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "950",
+            "900",
+            "850"
+          ],
+          "gold": [
+            "999",
+            "916",
+            "750",
+            "585",
+            "375"
+          ],
+          "palladium": [],
+          "silver": [
+            "999",
+            "925",
+            "830",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "-",
+          "gold": "-",
+          "palladium": "-",
+          "silver": "-"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "justervesenet"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    },
+    {
+      "country_code": "IL",
+      "country": "israel",
+      "planned_rollout": "v3 candidate",
+      "convention_member": true,
+      "membership_source_id": "convention-members",
+      "customs_baseline": "separate non-eu destination",
+      "eu_member": false,
+      "eea_non_eu": false,
+      "efta_member": false,
+      "evidence_source_ids": [
+        "il-assay-direct",
+        "il-customs-filtered-1",
+        "il-customs-filtered-2",
+        "profile-israel-direct"
+      ],
+      "research_note": "profile weight-exemption cell says >= 2g and is ambiguous as an exemption rule; personal-import quantity pages do not establish the full tax or commercial-import regime",
+      "hallmarking_review": "unapproved research",
+      "import_review": "unapproved research",
+      "checkout_enabled": false,
+      "open_requirements": [
+        "current article-specific fineness, marks and exemptions",
+        "current importer/sponsor and assay arrangements",
+        "origin-to-destination tariff classification, origin proof and tax treatment",
+        "carrier, insured-value, returns and operational approval"
+      ],
+      "convention_profile": {
+        "source_id": "profile-israel-direct",
+        "profile_updated_on_reported": "05-09-2019",
+        "source_is_informational_not_legal": true,
+        "independent_control_system_reported": "mixed hallmarking only gold",
+        "fineness_per_thousand_reported": {
+          "platinum": [
+            "999",
+            "950",
+            "900",
+            "850"
+          ],
+          "gold": [
+            "999",
+            "916",
+            "875",
+            "750",
+            "585",
+            "375"
+          ],
+          "palladium": [],
+          "silver": [
+            "999",
+            "990",
+            "958",
+            "925",
+            "835",
+            "830",
+            "800"
+          ]
+        },
+        "weight_exemption_cells_raw": {
+          "platinum": "-",
+          "gold": "≥ 2g",
+          "palladium": "-",
+          "silver": "-"
+        },
+        "raw_weight_cells_are_not_executable_predicates": true,
+        "assay_office_directory_leads": [
+          "standards institution of israel, precious metals section"
+        ],
+        "office_appointment_scope_and_current_service_not_verified": true
+      }
+    }
+  ]
+}

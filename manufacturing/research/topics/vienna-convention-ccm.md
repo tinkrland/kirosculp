@@ -1,6 +1,19 @@
 # vienna convention and the common control mark
 
-status: open research task
+status: research pass recorded; route-specific approval remains open
+
+## dated findings
+
+[the 2026-09-30 order-routing research pack](order-routing/README.md) separates
+precious-metal eligibility from customs/import treatment across all 22 planned
+markets. its [country matrix](order-routing/countries.json) records ten planned
+convention-member destinations, source ids, profile fineness/weight cells and
+explicit unapproved axis states. it does not enable checkout.
+
+membership is now established from the convention directory. current national
+article rules, dated profile inconsistencies and actual facility-to-destination
+approval remain separate work. the table below preserves the original questions,
+not a claim that every field has been legally resolved.
 
 ## question
 

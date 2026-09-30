@@ -180,6 +180,14 @@ no cluster enables checkout by itself. each country needs:
 9. destination consumer terms and required disclosures
 10. a dated approval with the rule and evidence versions used
 
+## later research pass
+
+[the 2026-09-30 two-axis research pack](../../manufacturing/research/topics/order-routing/README.md)
+adds a 22-market evidence matrix, stale-profile qualifications, customs/vat
+territory distinctions and current low-value import changes. the earlier
+references below retain their original check date; retrieval today does not
+make an older source's rules current or approve a route.
+
 ## official reference points
 
 checked 2026-09-22:

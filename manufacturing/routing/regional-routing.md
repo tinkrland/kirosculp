@@ -37,6 +37,18 @@ oss is a vat-reporting mechanism, not a reason to label a route customs-free. sc
 
 an order may cross a customs border when the route is approved and produces a better complete outcome. local-first is a preference, not a rule that overrides capability, quality, cost, or compliance.
 
+## two independently approved regulatory axes
+
+[the dated research pack](../research/topics/order-routing/README.md) distinguishes
+finished-article fineness/mark/assay eligibility from physical-route customs and
+import treatment. country or convention membership never grants both approvals.
+
+store manufacturing origin, assay detours, dispatch, destination territory,
+customs territory, vat territory, origin proof and goods status independently.
+use the [route evidence contract](../research/topics/order-routing/route-evidence-contract.md)
+before promoting research into versioned route predicates. the country research
+matrix remains unapproved and cannot activate checkout.
+
 ## tier 2: technical manufacturing eligibility
 
 filter by:
