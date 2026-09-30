@@ -17,19 +17,36 @@ inference or compile quotas. permitted automation for an existing human-owned
 account, if offered, uses scoped authorization and the same quotas; it cannot
 create additional identities, mint invites or enlarge the free allowance.
 
+## creator admission: the vgen-style direction
+
+owner clarification: the invitation is a gate to creator access, not merely
+an anti-bot warning. ordinary buyer access stays separate. someone joins as
+a person and receives creator privileges through an artist invitation; that
+activation unlocks the studio under the configured allowance, not automatic
+publication, discovery or commissions.
+
+no upfront kyc or government-id collection is part of this admission flow.
+invitation issuance, who can invite and an application/review route for people
+without an invitation still need specification. a portfolio or social profile
+could support a lightweight review, but neither is an established mandatory
+requirement. this is community admission, not legal identity verification.
+
+vgen is the reference for the artist-access invitation pattern, not for its
+art-content rules: sculptura explicitly permits ai-assisted human creators.
+[source: vgen artist access](https://help.vgen.co/hc/en-us/articles/20572952850967-How-do-I-get-a-code-to-become-an-Artist-on-VGen).
+
 ## invite explanation: ready-to-use copy
 
-> this invitation is for you, the person making the work. ai tools can help
-> you design, but creator accounts must be operated by people. automated
-> signup, bot-run accounts and creating extra accounts to collect free studio
-> allowances are not allowed. an invitation gives you access to onboarding,
-> not automatic publication, marketplace placement or commission availability.
+> sculptura is a place for people making jewelry, with ai as a tool.
+> creator access is by invitation so we can grow a community of real creators,
+> not automated accounts. your invitation unlocks the studio and its included
+> allowance. no upfront identity-document check is required.
 
-## invitation mechanics, if invitations are used
+## invitation mechanics
 
-invitations are an onboarding control, not proof of personhood. universal
-invite-only signup, open registration and invite-issuer eligibility remain
-undecided; do not silently turn this policy into a closed marketplace.
+invitations gate creator privileges, not ordinary buyer registration, and
+are not proof of personhood. invite-issuer eligibility and alternative
+application/review mechanics remain undecided.
 
 - mint invitations server-side with opaque, high-entropy tokens; store token
   digests rather than plaintext tokens. support expiry and revocation.
