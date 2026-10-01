@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "private creator trust assessment",
+  "description": "admin-only internal state; never a creator-facing progression contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "creator_profile_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "level_key": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "review_state": {
+      "type": "string",
+      "enum": [
+        "none",
+        "context_requested",
+        "in_review"
+      ]
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "\\S"
+    },
+    "decision_reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "\\S"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "id"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "case",
+              "order",
+              "commission",
+              "provider_event",
+              "audit_event"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,199}$"
+          }
+        }
+      }
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "assessed_by": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "creator_profile_id",
+    "level_key",
+    "review_state",
+    "policy_version",
+    "decision_reason",
+    "evidence_refs",
+    "revision",
+    "assessed_by",
+    "created_at",
+    "updated_at"
+  ]
+}
