@@ -19,3 +19,7 @@ pglite postgres instance with the existing has_role helper and role fixtures.
 it checks admin versus creator/buyer/anonymous access, forbidden direct writes,
 append-only history, idempotency, revision conflicts and audit-failure rollback.
 fixtures do not prove live supabase/postgrest exposure or multi-session races.
+
+`npm run test:buyer-trust` applies 0009 and 0010 to a local database, checking
+buyer-side privacy and audited updates plus independence from creator trust.
+registered buyers are the identity scope; guest attribution is not inferred.

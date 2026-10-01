@@ -21,3 +21,7 @@ see the [complete source audit](../docs/current-state-audit.md) and the audited 
 [creator-trust/](creator-trust/README.md) defines the admin-only internal
 classification schema and audited mutation boundary. it is separate from
 public creator progression and does not automatically change payout rules.
+
+[buyer-trust/](buyer-trust/README.md) adds the separate registered-buyer
+classification schema with the same admin-only boundary. neither model
+implements relationship judgments or treats unusual purchases as automatic guilt.

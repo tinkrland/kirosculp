@@ -100,3 +100,9 @@ actual concurrent sessions and deployment schema exposure still require testing.
 
 see [admin audit](../audit/README.md), [private-risk considerations](../../security/aml/README.md)
 and [contracts](../../contracts/README.md).
+
+## buyer side
+
+[buyer trust](../buyer-trust/README.md) is a separate private classification
+keyed to registered buyer identity. one person can have both roles without
+automatically sharing assessments.
