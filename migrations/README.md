@@ -23,3 +23,13 @@ on 2026-09-26 over the supabase management api, and 0006 became necessary
 because that path runs as postgres rather than lovable's pipeline role.
 the original `sculptura.dev` lovable project remains untouched. apply new
 migrations in order.
+
+## private creator trust
+
+- `0008_order_purchase_idempotency.sql`: the order purchase replay key.
+- [0009_private_creator_trust.sql](0009_private_creator_trust.sql): admin-only
+  private confidence assessments, separate review state and atomic audit history.
+  migration written and tested locally; not applied to live supabase by this change.
+
+apply 0009 after 0008; keep sculptura_private out of postgrest exposed schemas.
+see [the schema contract and access requirements](../admin/creator-trust/README.md).

@@ -11,3 +11,11 @@
 application source has no equivalent contract suite for the studio project, tessa proposals, paracraft builds, design releases, listings, quotes, purchases, manufacturing orders, or operational events.
 
 extend validation as those contracts are introduced. ci should reject schema drift, unknown versions, invalid cross-references, unsupported market activation, and release records whose declared files or hashes do not agree.
+
+## private creator trust database tests
+
+`npm run test:creator-trust` executes the actual 0009 migration against a local
+pglite postgres instance with the existing has_role helper and role fixtures.
+it checks admin versus creator/buyer/anonymous access, forbidden direct writes,
+append-only history, idempotency, revision conflicts and audit-failure rollback.
+fixtures do not prove live supabase/postgrest exposure or multi-session races.

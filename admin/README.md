@@ -15,3 +15,9 @@ manufacturer capability truth and route scoring live in `manufacturing/`. purcha
 ## current implementation
 
 see the [complete source audit](../docs/current-state-audit.md) and the audited implementation reference in each subfolder.
+
+## private creator confidence
+
+[creator-trust/](creator-trust/README.md) defines the admin-only internal
+classification schema and audited mutation boundary. it is separate from
+public creator progression and does not automatically change payout rules.

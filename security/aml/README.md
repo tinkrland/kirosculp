@@ -39,3 +39,9 @@ integration or reporting workflow is activated by this documentation.
 see [legal scope](considerations/legal-scope.md),
 [review and tests](considerations/review-audit-and-tests.md), and the
 [parent security findings](../README.md).
+
+## private creator classifications
+
+[admin/creator-trust](../../admin/creator-trust/README.md) supplies a separate
+admin-only confidence schema. its level is not a finding of fraud or aml risk,
+not public progression, and not an automatic hold or compliance clearance.

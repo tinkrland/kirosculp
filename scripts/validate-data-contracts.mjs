@@ -99,3 +99,7 @@ for (const market of marketsData.markets) {
 }
 
 console.log(`validated the design-release schema, ${data.manufacturers.length} manufacturer records, and ${marketsData.markets.length} shipping market records`);
+
+const creatorTrustSchema = JSON.parse(fs.readFileSync(path.join(root, "contracts/creator-trust.schema.json"), "utf8"));
+ajv.compile(creatorTrustSchema);
+console.log("validated private creator trust snapshot contract");

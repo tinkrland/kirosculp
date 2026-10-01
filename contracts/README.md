@@ -22,3 +22,10 @@
 - reject listings and orders that cannot resolve a valid release.
 
 see the [complete source audit](../docs/current-state-audit.md) for cross-domain findings and build order.
+
+## private creator trust contract
+
+[creator-trust.schema.json](creator-trust.schema.json) defines internal
+assessment snapshots. [admin/creator-trust](../admin/creator-trust/README.md)
+documents sql access and mutation rules. never include this contract in creator
+progression or public profile responses.
