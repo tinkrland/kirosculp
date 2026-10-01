@@ -82,11 +82,19 @@ export async function buildTestDatabase() {
   try {
     await db.exec(`
       -- pglite doesn't have pgcrypto, so provide gen_random_bytes function
-      CREATE OR REPLACE FUNCTION gen_random_bytes(integer)
+      CREATE OR REPLACE FUNCTION gen_random_bytes(byte_length integer)
       RETURNS bytea
       LANGUAGE sql
       AS $$
-        SELECT decode(md5(random()::text || clock_timestamp()::text), 'hex');
+        SELECT decode(
+          substring(
+            md5(random()::text || clock_timestamp()::text || random()::text) ||
+            md5(random()::text || clock_timestamp()::text || random()::text),
+            1, 
+            byte_length * 2
+          ), 
+          'hex'
+        );
       $$;
       
       -- create auth schema for supabase auth tables
