@@ -208,6 +208,17 @@ export async function buildTestDatabase() {
       );
       
       ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+      
+      -- grant auth schema access to anon and authenticated roles
+      GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
+      GRANT EXECUTE ON FUNCTION auth.uid() TO anon, authenticated, service_role;
+      GRANT EXECUTE ON FUNCTION auth.jwt() TO anon, authenticated, service_role;
+      
+      -- grant public schema access
+      GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+      GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+      GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+      GRANT ALL ON ALL FUNCTIONS IN SCHEMA public TO anon, authenticated, service_role;
     `);
     console.log('supabase infrastructure ready ✓\n');
   } catch (error) {
