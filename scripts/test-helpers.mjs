@@ -12,6 +12,9 @@
  * execute a sql query with auth.uid() set to a specific user id.
  * simulates authenticated role access for rls policy testing.
  * 
+ * uses SET ROLE to switch to anon (guest) or authenticated role,
+ * then sets local request.jwt.claim.sub for auth.uid() to read.
+ * 
  * @param {Object} db - pglite database instance
  * @param {string|null} userId - user uuid for auth.uid(), or null for guest
  * @param {string} sql - sql query to execute
@@ -20,12 +23,14 @@
 export async function queryAsRole(db, userId, sql) {
   return await db.transaction(async (tx) => {
     if (userId) {
-      // set jwt claims that auth.uid() and auth.jwt() read from
-      await tx.exec(`SET LOCAL request.jwt.claims = '{"sub":"${userId}","email":"user${userId.slice(-1)}@test.local"}';`);
+      // switch to authenticated role and set auth.uid()
+      await tx.exec(`SET LOCAL ROLE authenticated;`);
+      await tx.exec(`SET LOCAL request.jwt.claims = '{"sub":"${userId}","role":"authenticated"}';`);
       await tx.exec(`SET LOCAL request.jwt.claim.sub = '${userId}';`);
     } else {
-      // guest: clear any existing auth context
-      await tx.exec(`SET LOCAL request.jwt.claims = '';`);
+      // guest: switch to anon role, clear auth context
+      await tx.exec(`SET LOCAL ROLE anon;`);
+      await tx.exec(`SET LOCAL request.jwt.claims = '{}';`);
       await tx.exec(`SET LOCAL request.jwt.claim.sub = '';`);
     }
     
@@ -36,6 +41,8 @@ export async function queryAsRole(db, userId, sql) {
 /**
  * execute a sql mutation (insert/update/delete) with auth.uid() context.
  * 
+ * uses SET ROLE to switch to anon or authenticated, then sets auth.uid().
+ * 
  * @param {Object} db - pglite database instance  
  * @param {string|null} userId - user uuid for auth.uid(), or null for guest
  * @param {string} sql - sql mutation to execute
@@ -44,10 +51,14 @@ export async function queryAsRole(db, userId, sql) {
 export async function mutateAsRole(db, userId, sql) {
   return await db.transaction(async (tx) => {
     if (userId) {
-      await tx.exec(`SET LOCAL request.jwt.claims = '{"sub":"${userId}","email":"user${userId.slice(-1)}@test.local"}';`);
+      // switch to authenticated role and set auth.uid()
+      await tx.exec(`SET LOCAL ROLE authenticated;`);
+      await tx.exec(`SET LOCAL request.jwt.claims = '{"sub":"${userId}","role":"authenticated"}';`);
       await tx.exec(`SET LOCAL request.jwt.claim.sub = '${userId}';`);
     } else {
-      await tx.exec(`SET LOCAL request.jwt.claims = '';`);
+      // guest: switch to anon role, clear auth context
+      await tx.exec(`SET LOCAL ROLE anon;`);
+      await tx.exec(`SET LOCAL request.jwt.claims = '{}';`);
       await tx.exec(`SET LOCAL request.jwt.claim.sub = '';`);
     }
     

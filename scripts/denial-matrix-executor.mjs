@@ -157,13 +157,13 @@ function getAdminIdeasTests() {
       'guest', 'insert', "INSERT INTO public.admin_ideas (title, description) VALUES ('Test', 'Test idea');", 'deny_grant', 'admin_ideas'),
     
     new TestCase('ai08', 'buyer cannot insert admin_ideas', 
-      'buyer_carol', 'insert', "INSERT INTO public.admin_ideas (title, description) VALUES ('Test', 'Test idea');", 'deny_rls', 'admin_ideas'),
+      'buyer_carol', 'insert', "INSERT INTO public.admin_ideas (title, content) VALUES ('Test', 'Test');", 'deny_rls', 'admin_ideas'),
     
     new TestCase('ai09', 'creator cannot insert admin_ideas', 
-      'creator_alice', 'insert', "INSERT INTO public.admin_ideas (title, description) VALUES ('Test', 'Test idea');", 'deny_rls', 'admin_ideas'),
+      'creator_alice', 'insert', "INSERT INTO public.admin_ideas (title, content) VALUES ('Test', 'Test');", 'deny_rls', 'admin_ideas'),
     
     new TestCase('ai10', 'admin can insert admin_ideas', 
-      'admin', 'insert', "INSERT INTO public.admin_ideas (title, description) VALUES ('Admin Test', 'Admin test idea');", 'allow', 'admin_ideas'),
+      'admin', 'insert', "INSERT INTO public.admin_ideas (title, content) VALUES ('Admin Test', 'Admin test idea');", 'allow', 'admin_ideas'),
     
     new TestCase('ai11', 'non-admin cannot update admin_ideas', 
       'creator_alice', 'update', "UPDATE public.admin_ideas SET title = 'Modified';", 'deny_rls', 'admin_ideas'),
