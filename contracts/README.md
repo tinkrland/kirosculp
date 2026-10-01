@@ -29,3 +29,7 @@ see the [complete source audit](../docs/current-state-audit.md) for cross-domain
 assessment snapshots. [admin/creator-trust](../admin/creator-trust/README.md)
 documents sql access and mutation rules. never include this contract in creator
 progression or public profile responses.
+
+[buyer-trust.schema.json](buyer-trust.schema.json) defines the analogous
+registered-buyer snapshot, documented in [admin/buyer-trust](../admin/buyer-trust/README.md).
+it is not public progression or relationship-status data.

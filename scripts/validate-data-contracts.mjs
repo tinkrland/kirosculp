@@ -103,3 +103,7 @@ console.log(`validated the design-release schema, ${data.manufacturers.length} m
 const creatorTrustSchema = JSON.parse(fs.readFileSync(path.join(root, "contracts/creator-trust.schema.json"), "utf8"));
 ajv.compile(creatorTrustSchema);
 console.log("validated private creator trust snapshot contract");
+
+const buyerTrustSchema = JSON.parse(fs.readFileSync(path.join(root, "contracts/buyer-trust.schema.json"), "utf8"));
+ajv.compile(buyerTrustSchema);
+console.log("validated private buyer trust snapshot contract");

@@ -7,7 +7,8 @@
     "validate": "node scripts/validate-data-contracts.mjs && node scripts/validate-offerings.mjs && node scripts/validate-research.mjs && python3 scripts/validate-jsonl.py && python3 scripts/normalize-prose.py --check",
     "audit:refresh": "python3 scripts/build-source-audit.py",
     "test": "node --test paracraft/test/",
-    "test:creator-trust": "node scripts/test-private-creator-trust.mjs"
+    "test:creator-trust": "node scripts/test-private-creator-trust.mjs",
+    "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
