@@ -338,7 +338,7 @@ the research converges from two passes, in order:
 | non-stopping declaration | a module or function declaration containing no `{` does not stop customizer; subsequent supported assignments remain displayed. |
 | legacy cutoff | an empty module such as `module __Customizer_Limit__ () {}` places a `{` in the file and hides following assignments from customizer. |
 | description syntax | a description uses a `//` comment on the line above an assignment. the description comment must align with the source file’s left column without spaces. |
-| drop-down annotation | a trailing `// [...]` annotation lists number or string choices, e.g. `Numbers=2; // [0–1, 2–3]` or `Strings="foo"; // [foo, bar, baz]`. |
+| drop-down annotation | a trailing `// [...]` annotation lists number or string choices, e.g. `Numbers=2; // [0, 1, 2, 3]` or `Strings="foo"; // [foo, bar, baz]`. |
 | labeled drop-down annotation | choices may use `value:label`, e.g. `Labeled_values=10; // [10:S, 20:M, 30:L]` or `Labeled_value="S"; // [S:Small, M:Medium, L:Large]`. |
 | slider annotation | sliders accept numbers only. `// [50]` specifies a maximum; `// [10:100]` specifies minimum and maximum. |
 | step-slider annotation | `// [0:5:100]` specifies minimum, step, and maximum; the example uses minimum `-10`, step `0.1`, and maximum `10`. |
