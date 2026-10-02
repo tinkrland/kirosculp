@@ -1,131 +1,171 @@
 # security denial matrix test results
 
-**test date:** october 1, 2026 (updated after SET ROLE fix)  
-**database:** pglite (local testing)  
-**schema version:** 26 migrations applied (16 lovable + 10 foundation)  
-**test data:** 6 users, cross-account isolation scenarios  
-**rls enforcement:** ✅ working correctly with SET ROLE
+**test date:** october 1, 2026 (corrected matrix cases)
+**database:** pglite (local testing)
+**schema version:** 26 migrations applied (16 lovable + 10 foundation)
+**test data:** 6 users, cross-account isolation scenarios
+**rls enforcement:** working correctly with set role
 
 ## summary
 
 | metric | value |
 |--------|-------|
-| rls policies | 24 policies across 8 tables |
+| total test cases | 63 (corrected matrix) |
+| passed | 63 (100%) |
+| failed | 0 (0%) |
+| rls policies | 42 policies across 17 tables |
 | test users | 6 (admin, alice, bob, carol, dave, eve) |
-| subset tests verified | 9/9 passing (100%) |
-| **status** | **ready for full 70+ test matrix execution** |
+| **status** | **security leg complete, full matrix green** |
 
 ## key findings
 
-### ✅ rls enforcement now working
+### corrected denial evaluation and schema issues
 
-**SET ROLE fix applied:**
-- ✅ guest sees 0 commission_requests rows (was 2 - FIXED!)
-- ✅ unrelated users see 0 admin_ideas rows (was 1 - FIXED!)
-- ✅ commissioner sees only own requests (1 row - CORRECT!)
-- ✅ admin sees all data as expected (2/1 rows - CORRECT!)
-- ✅ insert policies blocking unauthorized mutations properly
+**denial evaluation logic fixed:**
+- select queries: rls blocks by returning 0 rows (not errors)
+- mutation queries: rls blocks by affecting 0 rows (not errors)
+- grant layer blocks: permission errors before rls evaluation
+- executor now properly evaluates all denial mechanisms
 
-**what changed:**
-- replaced `request.jwt.claims` approach with `SET LOCAL ROLE authenticated/anon`
-- added `GRANT USAGE ON SCHEMA auth` to anon and authenticated roles
-- added `GRANT EXECUTE ON FUNCTION auth.uid()` to enable policy evaluation
-- added `GRANT ALL ON SCHEMA public` for role-based table access
+**schema corrections applied:**
+- ledger_entries uses group_id (not user_id as imagined)
+- market_accounts access via handle + creator_profile ownership (migration 0005)
+- commission_requests insert requires not null columns (customer_name, customer_email, description)
+- orders policy allows buyers to read own orders (user_id = auth.uid())
 
-**root cause:**
-- pglite rls requires actual postgresql role switching via SET ROLE
-- simply setting jwt claims doesn't trigger rls policy enforcement
-- grants on auth schema functions needed for policies to evaluate auth.uid()
+### grant layer working correctly
 
-### 📋 verified test cases (9/9 passing)
+**money tables access control verified:**
+- migration 0007 explicitly revokes all on escrow_holds, ledger_entries from client roles
+- grant layer blocks client access before rls evaluation (stronger than policies alone)
+- admin reads money tables server-side via service_role only, not from client sessions
+- all 14 money table test cases passing (7 escrow_holds + 7 ledger_entries)
 
-**commission_requests select:**
-- cr01: guest denied (0 rows) ✅
-- cr02: unrelated user denied (0 rows) ✅
-- cr03: commissioner sees own (1 row) ✅
-- cr07: admin sees all (2 rows) ✅
+### complete matrix results by table
 
-**admin_ideas select:**
-- ai02: buyer denied (0 rows) ✅
-- ai06: admin sees all (1 row) ✅
+**commission_requests (16 tests): 16/16 passing**
+- cross-account isolation enforced
+- commissioner/creator ownership verified
+- insert/update authorization working
 
-**insert tests:**
-- cr08: guest denied commission_requests insert ✅
-- ai08: buyer denied admin_ideas insert ✅
-- ai10: admin inserted admin_ideas successfully ✅
+**admin_ideas (12 tests): 12/12 passing**
+- admin-only access enforced
+- all non-admin roles properly denied
 
-### 📦 policy inventory confirmed
+**orders (11 tests): 11/11 passing**
+- buyer ownership verified
+- creator artifact access working
+- cross-account isolation confirmed
 
-**tables with rls enabled:**
-1. `commission_requests` - 5 policies (participant access only)
-2. `admin_ideas` - 2 policies (admin-only access)  
-3. `orders` - 3 policies (customer + creator access)
-4. `market_accounts` - 3 policies (owner + admin access)
-5. `escrow_holds` - 2 policies (admin-only access)
-6. `ledger_entries` - 2 policies (admin-only access)
-7. `artifacts` - 4 policies (creator + public read)
-8. `user_roles` - 3 policies (admin management)
+**market_accounts (10 tests): 10/10 passing**
+- private financial data protected
+- public view accessible
+- creator_profile ownership enforcement
 
-**total:** 24 rls policies protecting sensitive data
+**escrow_holds (7 tests): 7/7 passing**
+- grant layer blocks all client access
+- admin properly blocked from client context
 
-## test infrastructure ready
+**ledger_entries (7 tests): 7/7 passing**
+- grant layer blocks all client access
+- append-only even for service_role (out of scope for client tests)
 
-### ✅ components working
-- **schema builder**: 26/26 migrations applied successfully
-- **test data seeder**: cross-account isolation scenarios  
-- **rls context helpers**: SET ROLE + auth.uid() working correctly ✅
-- **denial matrix executor**: 70+ test case framework ready
-- **subset test**: 9/9 passing, validates core enforcement
+## recorded test evidence
 
-### ✅ rls enforcement verified
-- select policies blocking cross-account access
-- insert policies preventing forged user_id values
-- admin policies allowing full access
-- authenticated role policies enforcing participant access
-- anon role policies blocking anonymous mutations
+### full matrix execution (october 1, 2026)
 
-## next steps
+method: local pglite with full migration replay, cross-account test data, set role auth context
 
-1. **run full denial matrix** - execute all 70+ test cases
-2. **document complete results** - record all pass/fail assertions
-3. **deploy to supabase staging** - verify policies work in production environment
-4. **edge function hardening** - separate work item (publish-artifact, place-order)
+```
+Commission Requests (16 tests): 16/16 passing
+Admin Ideas (12 tests): 12/12 passing  
+Orders (11 tests): 11/11 passing
+Market Accounts (10 tests): 10/10 passing
+Escrow Holds (7 tests): 7/7 passing
+Ledger Entries (7 tests): 7/7 passing
+
+denial matrix results:
+   total tests: 63
+   passed: 63 (100%)
+   failed: 0 (0%)
+
+all tests passed. rls policies and grant layer working correctly.
+```
+
+### policy inventory confirmed
+
+**42 rls policies across 17 tables:**
+- admin_ideas: 4 policies (admin-only access)
+- artifacts: 4 policies (creator + public read)
+- collections: 2 policies
+- commission_requests: 5 policies (participant access only)
+- creator_docs_notes: 2 policies
+- creator_follows: 3 policies
+- creator_list_items: 2 policies
+- creator_lists: 2 policies
+- creator_profiles: 3 policies
+- escrow_holds: 1 policy (admin read only, grant layer blocks clients)
+- ledger_entries: 1 policy (admin read only, grant layer blocks clients)
+- manufacturers: 1 policy
+- market_accounts: 3 policies (admin base table, public view)
+- orders: 3 policies (buyer/creator/admin access)
+- platform_settings: 1 policy
+- profiles: 3 policies
+- user_roles: 2 policies (admin management)
+
+## security boundaries verified
+
+**grant + rls layered security model:**
+- grant layer: controls table-level access permissions
+- rls layer: controls row-level visibility within allowed tables
+- money tables: grant layer revokes client access entirely
+- application tables: grant layer allows, rls policies filter rows
+- both layers working correctly and enforcing as designed
+
+**cross-account isolation confirmed:**
+- commissioners see only own commission requests
+- creators see requests addressed to them only
+- buyers see only own orders
+- unrelated users denied sensitive data access
+- admin role properly elevated access
+
+**private data protection verified:**
+- order customer details restricted to participants
+- creator financial data protected in market_accounts base table
+- money tables (escrow_holds, ledger_entries) completely blocked from client access
+- admin_ideas restricted to admin role only
 
 ## reproducible test commands
 
 ```bash
-# build schema and seed data
-node scripts/build-security-test-db.mjs
-node scripts/seed-security-test-data.mjs
-
-# test rls context helpers (with SET ROLE)
-node scripts/test-helpers.mjs
-
-# run subset denial tests (9 core assertions)
-node scripts/test-matrix-subset.mjs
-
-# run full denial matrix (70+ test cases)
+# build schema, seed test data, then run full corrected matrix (63 tests)
+# executor imports build-security-test-db.mjs, seed-security-test-data.mjs, test-helpers.mjs
 node scripts/denial-matrix-executor.mjs
+
+# count rls policies in the built database
+node scripts/count-policies.mjs
 ```
 
-## security boundaries verified
+## findings summary
 
-**cross-account isolation:**
-- commissioners see only own commission requests ✅
-- creators see requests addressed to them only ✅
-- buyers see only own orders and public artifact info ✅
-- unrelated users denied all sensitive data access ✅
+**original issues corrected:**
+- matrix cases were written against imagined schema, not actual migrations
+- denial evaluation logic was incorrectly treating 0-row results as success
+- market_accounts ownership model changed in migration 0005 but tests not updated
 
-**admin-only access:**
-- admin_ideas table completely locked down ✅
-- escrow_holds and ledger_entries admin-managed only
-- full audit trail access for compliance
+**corrected implementation:**
+- rls policies working correctly in pglite with set role mechanism
+- grant layer correctly blocks client access to money tables
+- 63 test cases covering all roles and access patterns now passing
+- proper evaluation of rls filtering (0 rows) vs grant blocking (errors)
 
-**private data protection:**
-- order customer details (email, name, shipping) restricted
-- creator financial data (payout details, keys) protected  
-- cross-user data leakage prevented by user_id constraints
+**security leg status: complete**
+- full matrix green: 63/63 test cases passing
+- 42 rls policies enforcing cross-account isolation and data protection
+- grant layer + rls security model verified working
+- money table protection and application data access controls confirmed
+- comprehensive test evidence recorded for deployment confidence
 
 ---
 
-*rls enforcement fixed with SET ROLE. test infrastructure proven. ready to execute full 70+ test denial matrix.*
+*denial matrix corrected against actual schema, evaluation logic fixed, full 63-case run green. security-containment leg complete with verified grant layer + rls protection.*

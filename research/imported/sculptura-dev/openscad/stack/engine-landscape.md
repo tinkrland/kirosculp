@@ -36,7 +36,7 @@ sculptura relies on a dual-path compilation pipeline: in-browser rendering via `
 * **version**: `0.0.4` [source [6](https://www.npmjs.com/package/openscad-wasm)]
 * **date**: published `2022-07-18` (last cataloged `2025-07-18`) [source [6](https://www.npmjs.com/package/openscad-wasm)]
 * **what changed**: `openscad-wasm` is an emscripten webassembly port compiled from the `openscad/openscad-wasm` repository [source [7](https://github.com/openscad/openscad-wasm/releases)]. version `0.0.4` wraps openscad snapshot `2022.02.18` [source [7](https://github.com/openscad/openscad-wasm/releases)].
-* **why it matters for our two compile paths**: `openscad-wasm@0.0.4` is stagnant and unmaintained. because it predates the march 2023 manifold merge [source [4](https://github.com/openscad/openscad/issues/4825)], it relies entirely on the legacy cgal backend running in a 32-bit wasm heap limit (2gb–4gb). as a result:
+* **why it matters for our two compile paths**: `openscad-wasm@0.0.4` is stagnant and unmaintained. because it predates the march 2023 manifold merge [source [4](https://github.com/openscad/openscad/issues/4825)], it relies entirely on the legacy cgal backend running in a 32-bit wasm heap limit (2gb, 4gb). as a result:
   1. browser compilation of complex jewelry models is slow and memory-constrained.
   2. browser wasm output (cgal) and cli worker output (manifold) diverge structurally, making cross-path byte-level golden file validation impossible under `openscad-wasm@0.0.4`.
 * **source**: `https://www.npmjs.com/package/openscad-wasm` [6] & `https://github.com/openscad/openscad-wasm/releases` [7]

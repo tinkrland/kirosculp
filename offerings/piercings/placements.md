@@ -122,7 +122,7 @@ already appear in the studio-wide jewelry-style list below.
 | surface piercing | a bar under flat skin (collarbone, nape, chest, hips) | surface bar, two small visible ends |
 | dermal anchor | single point under the skin (cheekbone, collarbone, chest, lower back, hip) | one gem, disk, spike, or tiny charm on the skin |
 | hand or finger dermal | dermal on the hand or finger | small permanent-looking gemstone |
-| nipple | — | straight barbell, sometimes ornate ends or chains |
+| nipple |: | straight barbell, sometimes ornate ends or chains |
 | christina, fourchette, triangle, guiche | genital placements | curved barbells, rings; highly anatomy-dependent, specialist-only |
 
 ### studio-wide jewelry style vocabulary (from this pass)

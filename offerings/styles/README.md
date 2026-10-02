@@ -20,21 +20,21 @@ resolution is graph traversal, which is why falkordb (already the
 chosen graph side of the supabase + falkordb pairing) is the right
 home:
 
-1. **phrase layer** — words people actually type or say: "swirly",
+1. **phrase layer**: words people actually type or say: "swirly",
    "dainty", "chunky", "statement", "vintage-y", "gothic". mined from
    search behavior, marketplace category language, and sprawl evidence.
-2. **concept layer** — visual primitives that phrases express and
+2. **concept layer**: visual primitives that phrases express and
    styles feature: `whiplash_curve`, `floral`, `scrollwork`, `bow`,
    `garland`, `knot`, `serpent`, `chevron`, `fan`, `star`, `rope_twist`.
    plus descriptor axes: organic vs geometric, ornate vs clean, dainty
    vs chunky, antique vs modern.
-3. **style layer** — the named visual styles: georgian, victorian,
+3. **style layer**: the named visual styles: georgian, victorian,
    art nouveau, edwardian, art deco, egyptian revival, retro,
    mid-century modernist, brutalist, organic modern, celestial,
    gothic, biker. (everyday fine was removed here: it is a
    merchandising context, not a visual language. it lives in the
    wear-context layer below.)
-4. **wear-context layer** — merchandising categories orthogonal to
+4. **wear-context layer**: merchandising categories orthogonal to
    style: everyday wear (regular wear, uni, work), stacks (a styling
    group of stackable pieces and curated stack sets), special
    occasion (statement/formal), ceremony and commitment (links the
@@ -44,7 +44,7 @@ home:
    [wear-context-vocabulary.jsonl](wear-context-vocabulary.jsonl).
    stackability in particular is a geometric fact validated by
    paracraft, never a self-declared tag.
-5. **symbol layer** — opt-in symbolic merchandising, orthogonal to
+5. **symbol layer**: opt-in symbolic merchandising, orthogonal to
    style and context: classical planetary metal correspondences
    (gold/sun, silver/moon, copper/venus, iron/mars, tin/jupiter,
    lead/saturn), the four elements, and tropical western zodiac signs.
@@ -59,7 +59,7 @@ edges carry weights:
 
 - `(:phrase)-[:expresses {weight}]->(:concept)`
 - `(:style)-[:features {weight}]->(:concept)`
-- `(:style)-[:similar_to {score}]->(:style)` — precomputed at
+- `(:style)-[:similar_to {score}]->(:style)`: precomputed at
   vocabulary build time from concept overlap, never at query time.
 
 resolution of "swirls and flowers": `swirl` expresses `whiplash_curve`

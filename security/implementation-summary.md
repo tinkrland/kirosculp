@@ -1,25 +1,25 @@
-# Security Containment Implementation Summary
+# security containment implementation summary
 
-**Implementation Period:** October 1, 2026  
-**Branch:** kiro/security-containment  
-**Status:** Core infrastructure complete, ready for production verification  
+**implementation period:** october 1, 2026
+**branch:** kiro/security-containment
+**status:** core infrastructure complete, ready for production verification
 
-## Objective
+## objective
 
 implement sculptura's security-containment leg: prove cross-role denial through reproducible local testing with executable acceptance tests. establish verified security boundaries before building further product flows.
 
-## Implementation Approach
+## implementation approach
 
 followed spec-first methodology:
-1. ✅ comprehensive repository audit (README, migrations, edge functions, contracts)
-2. ✅ requirements traced to source evidence (12 requirements from 8+ source files)
-3. ✅ design document with pglite architecture and 70+ test cases
-4. ✅ dependency-ordered task breakdown (8 tasks)
-5. ✅ reproducible schema builder and test harness implementation
+1.  comprehensive repository audit (readme, migrations, edge functions, contracts)
+2.  requirements traced to source evidence (12 requirements from 8+ source files)
+3.  design document with pglite architecture and 70+ test cases
+4.  dependency-ordered task breakdown (8 tasks)
+5.  reproducible schema builder and test harness implementation
 
-## Deliverables
+## deliverables
 
-### 1. Schema Builder (`scripts/build-security-test-db.mjs`)
+### 1. schema builder (`scripts/build-security-test-db.mjs`)
 
 **26 migrations applied in correct dependency order:**
 - 16 lovable migrations (baseline schema)
@@ -34,7 +34,7 @@ followed spec-first methodology:
 
 **verification:** 19 tables in public schema, all rls policies applied
 
-### 2. Test Data Seeder (`scripts/seed-security-test-data.mjs`)
+### 2. test data seeder (`scripts/seed-security-test-data.mjs`)
 
 **6 test users with fixed uuids:**
 - admin (has admin role)
@@ -52,28 +52,28 @@ followed spec-first methodology:
 
 **deterministic:** fixed uuids ensure reproducible test results
 
-### 3. RLS Context Helpers (`scripts/test-helpers.mjs`)
+### 3. rls context helpers (`scripts/test-helpers.mjs`)
 
-**queryAsRole(db, userId, sql):**
+**queryasrole(db, userid, sql):**
 - executes select with auth.uid() set to specific user
 - simulates authenticated role access for rls policy testing
-- supports null userId for guest/anonymous access
+- supports null userid for guest/anonymous access
 
-**mutateAsRole(db, userId, sql):**
+**mutateasrole(db, userid, sql):**
 - executes insert/update/delete with auth.uid() context
 - tests mutation policies and with check constraints
 
-**verifyAuthContext(db, userId):**
+**verifyauthcontext(db, userid):**
 - confirms auth.uid() returns expected value
 - validates context setting mechanism
 
-**categorizeError(error):**
+**categorizeerror(error):**
 - distinguishes grant layer blocks from rls denials
 - helps diagnose policy vs permission issues
 
 **verified working:** auth.uid() context setting confirmed operational
 
-### 4. Denial Matrix Executor (`scripts/denial-matrix-executor.mjs`)
+### 4. denial matrix executor (`scripts/denial-matrix-executor.mjs`)
 
 **70+ test cases across 6 table groups:**
 
@@ -106,7 +106,7 @@ followed spec-first methodology:
 - actual result recording and pass/fail determination
 - detailed error categorization
 
-### 5. Simplified Denial Test (`scripts/test-denial-simple.mjs`)
+### 5. simplified denial test (`scripts/test-denial-simple.mjs`)
 
 smoke test verifying:
 - guest/unrelated user denied sensitive data access
@@ -116,7 +116,7 @@ smoke test verifying:
 
 used to identify pglite rls enforcement limitations
 
-### 6. Test Results Documentation (`security/denial-test-results.md`)
+### 6. test results documentation (`security/denial-test-results.md`)
 
 comprehensive findings:
 - 24 rls policies across 8 tables documented
@@ -125,9 +125,9 @@ comprehensive findings:
 - reproducible test commands provided
 - next steps for production verification outlined
 
-## Key Findings
+## key findings
 
-### ✅ Success Criteria Met
+###  success criteria met
 
 1. **reproducible schema build:** 26/26 migrations applied successfully
 2. **deterministic test data:** 6 users with cross-account scenarios seeded
@@ -136,7 +136,7 @@ comprehensive findings:
 5. **policy syntax verified:** all 24 rls policies applied without errors
 6. **executable tests:** full denial matrix ready to run
 
-### ⚠️ PGLite Limitations Identified
+###  pglite limitations identified
 
 **select policies not enforced:**
 - guest and unrelated users can read commission_requests
@@ -155,7 +155,7 @@ comprehensive findings:
 
 **recommendation:** retest entire denial matrix against real supabase instance
 
-### 🔒 Security Boundaries Designed
+###  security boundaries designed
 
 **cross-account isolation:**
 - commissioners: own requests only
@@ -180,7 +180,7 @@ comprehensive findings:
 - security definer functions for role checking
 - authenticated role required for mutations
 
-## Files Created/Modified
+## files Created/Modified
 
 **scripts:**
 - build-security-test-db.mjs (schema builder, 26 migrations)
@@ -195,13 +195,13 @@ comprehensive findings:
 
 **git commits:**
 - e706b5e: build reproducible schema with 26 migrations
-- 7ad0dfa: seed deterministic test data with cross-account scenarios  
+- 7ad0dfa: seed deterministic test data with cross-account scenarios
 - fa8eb2e: fix gen_random_bytes byte length argument handling
 - 444282c: implement rls context helpers and denial matrix testing framework
 
-## Next Steps
+## next steps
 
-### 1. Deploy to Supabase Staging
+### 1. deploy to supabase staging
 
 ```bash
 # apply foundation migrations to staging
@@ -211,7 +211,7 @@ supabase db push --include-migrations foundation/*
 supabase db remote sql --execute "SELECT tablename, rowsecurity FROM pg_tables WHERE schemaname = 'public';"
 ```
 
-### 2. Run Production Denial Matrix
+### 2. run production denial matrix
 
 ```bash
 # adapt test scripts for supabase connection
@@ -221,27 +221,27 @@ supabase db remote sql --execute "SELECT tablename, rowsecurity FROM pg_tables W
 node scripts/denial-matrix-executor.mjs --env=staging
 ```
 
-### 3. Address Policy Gaps
+### 3. address policy gaps
 
 - fix any failures discovered in real supabase environment
 - tighten policies if additional vulnerabilities found
 - document verified boundaries with actual test results
 
-### 4. Edge Function Hardening
+### 4. edge function hardening
 
 per buildplan/security/README.md:
 - publish-artifact: stop trusting client price, validate ownership
 - place-order: idempotency, server-side totaling, prevent double-charge
 - add field allowlists and input validation
 
-### 5. Production Deployment
+### 5. production deployment
 
 - review all changes with security lens
 - run denial matrix in production with real data isolation
 - enable monitoring for policy violations
 - document verified security boundaries
 
-## Unresolved Items
+## unresolved items
 
 **pglite rls limitations:**
 - select policy enforcement not working in pglite
@@ -258,15 +258,15 @@ per buildplan/security/README.md:
 - user_roles admin management tested minimally
 - collections, manufacturers not tested (lower priority)
 
-## Conclusion
+## conclusion
 
 security-containment implementation delivered:
-- ✅ reproducible local schema build (26 migrations)
-- ✅ deterministic cross-account test data (6 users)
-- ✅ working rls context helpers (auth.uid() verified)
-- ✅ comprehensive denial matrix framework (70+ tests)
-- ✅ policy syntax verified (24 policies applied)
-- ⚠️ pglite limitations identified (retest on supabase required)
+-  reproducible local schema build (26 migrations)
+-  deterministic cross-account test data (6 users)
+-  working rls context helpers (auth.uid() verified)
+-  comprehensive denial matrix framework (70+ tests)
+-  policy syntax verified (24 policies applied)
+-  pglite limitations identified (retest on supabase required)
 
 **ready for production verification.** all policies designed, test harness complete, security boundaries documented. next step: deploy to supabase staging and run full denial matrix to prove cross-role denial with real rls enforcement.
 

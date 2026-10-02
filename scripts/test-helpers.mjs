@@ -87,12 +87,20 @@ export function categorizeError(error) {
     return 'rls_deny';
   }
   
-  if (msg.includes('check constraint') || msg.includes('with check')) {
+  if (msg.includes('check constraint') || msg.includes('with check') || msg.includes('violates check constraint')) {
     return 'rls_with_check_deny';
   }
   
   if (msg.includes('violates not-null constraint') || msg.includes('violates unique constraint')) {
     return 'constraint_violation';
+  }
+  
+  if (msg.includes('new row violates row-level security policy')) {
+    return 'rls_with_check_deny';  
+  }
+  
+  if (msg.includes('insert or update on table') && msg.includes('violates row-level security policy')) {
+    return 'rls_with_check_deny';
   }
   
   return 'unknown_error';
