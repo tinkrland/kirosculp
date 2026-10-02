@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/purchase-request.schema.json",
+  "title": "purchase request",
+  "description": "release-bound checkout intake. the client sends variant selection and destination; operations prices, confirms, and fulfills. zero price fields from the client.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "buyer_id",
+    "release_id",
+    "listing_id",
+    "variant",
+    "quantity",
+    "destination",
+    "created_at"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "unique identifier for this purchase request. idempotency key for the order creation."
+    },
+    "buyer_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "authenticated buyer placing the order. guest checkout not supported in v1."
+    },
+    "release_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "the design release being purchased. must reference a valid, castability-passed release."
+    },
+    "listing_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "the listing this purchase originates from. used for creator attribution and pricing intent resolution."
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metal"],
+      "properties": {
+        "metal": {
+          "type": "string",
+          "enum": [
+            "silver_925",
+            "brass",
+            "bronze",
+            "gold_14k_yellow",
+            "gold_14k_white",
+            "gold_14k_rose",
+            "gold_18k_yellow",
+            "gold_18k_white",
+            "gold_18k_rose"
+          ],
+          "description": "metal choice. must be in the release's metals_offered array."
+        },
+        "size": {
+          "type": ["string", "null"],
+          "description": "size choice when required. must be in the release's sizing.sizes_offered array. null for unisize pieces."
+        },
+        "finish": {
+          "type": ["string", "null"],
+          "enum": ["polished", "brushed", "matte", "oxidized", null],
+          "description": "optional surface finish. future: validate against release.finishes_offered when design-release schema adds finish vocabulary. for now, manufacturer capability only."
+        }
+      },
+      "description": "variant selection. validated against the release's offered metals, sizes, and finishes."
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "quantity requested. capped at 10 per single purchase request; bulk orders use separate flow."
+    },
+    "destination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["country_code"],
+      "properties": {
+        "country_code": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2 country code. used for manufacturing region selection and shipping cost."
+        },
+        "region": {
+          "type": ["string", "null"],
+          "description": "optional region/state for regional pricing or fulfillment routing."
+        },
+        "postal_code": {
+          "type": ["string", "null"],
+          "description": "optional postal code for shipping cost estimation. full address collected after payment."
+        }
+      },
+      "description": "destination info for pricing and routing. full shipping address collected post-payment."
+    },
+    "promo_code": {
+      "type": ["string", "null"],
+      "maxLength": 50,
+      "description": "optional promo or coupon code. validated and applied server-side by operations."
+    },
+    "gift_message": {
+      "type": ["string", "null"],
+      "maxLength": 500,
+      "description": "optional gift message for printed card. subject to content review."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "timestamp when the purchase request was created."
+    }
+  }
+}

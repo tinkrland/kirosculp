@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/listing.schema.json",
+  "title": "listing",
+  "description": "a published design release offered for sale. binds to exactly one release version; no client-side pricing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "listing_id",
+    "release_id",
+    "creator_id",
+    "name",
+    "status",
+    "pricing_intent",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "listing_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "release_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "references design-release.release_id. the listing's geometry, metals, sizes, and castability come from this release only."
+    },
+    "creator_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "listing title, creator-provided. distinct from the design name if desired."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "maxLength": 2000,
+      "description": "optional listing description. markdown formatting allowed."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "paused", "archived", "locked_drop"],
+      "description": "locked_drop = scheduled publication with countdown preclock. unlock is server-enforced."
+    },
+    "scheduled_publish_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "required when status=locked_drop. the server unlocks to published at this timestamp."
+    },
+    "pricing_intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": ["creator_net_fixed", "retail_fixed"],
+          "description": "creator_net_fixed: creator sets net earnings, operations computes retail. retail_fixed: creator sets retail, operations validates margin."
+        },
+        "base_amount_cents": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "the base amount in cents (creator net or retail, per model). per-variant pricing can differ via variant_overrides."
+        },
+        "variant_overrides": {
+          "type": "object",
+          "description": "optional per-variant pricing. key = metal or size identifier from the release. if absent, base_amount_cents applies.",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "description": "pricing intent only. actual retail price and split are computed server-side by the trusted pricing service."
+    },
+    "collections": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "uniqueItems": true,
+      "description": "collection_ids this listing belongs to. collections are creator-owned public groups."
+    },
+    "style_tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "maxItems": 10,
+      "description": "style tags from the offerings vocabulary. used for discovery resolution. no freeform tags."
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "creator-controlled featured flag. featured listings appear first on the creator public page overview."
+    },
+    "made_to_order": {
+      "type": "boolean",
+      "default": true,
+      "description": "true = manufactured on demand. false = in-stock inventory (future, requires stock management)."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "timestamp when status first became published. null if never published."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "locked_drop"
+          }
+        }
+      },
+      "then": {
+        "required": ["scheduled_publish_at"]
+      }
+    }
+  ]
+}
