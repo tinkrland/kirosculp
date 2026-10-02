@@ -16,6 +16,33 @@ import {
   cartToPurchaseRequests,
 } from "@/lib/cartStore";
 
+// ISO 3166-1 alpha-2 country codes for checkout
+const COUNTRIES = [
+  { code: "US", name: "United States" },
+  { code: "CA", name: "Canada" },
+  { code: "GB", name: "United Kingdom" },
+  { code: "DE", name: "Germany" },
+  { code: "FR", name: "France" },
+  { code: "IT", name: "Italy" },
+  { code: "ES", name: "Spain" },
+  { code: "NL", name: "Netherlands" },
+  { code: "BE", name: "Belgium" },
+  { code: "AT", name: "Austria" },
+  { code: "CH", name: "Switzerland" },
+  { code: "SE", name: "Sweden" },
+  { code: "DK", name: "Denmark" },
+  { code: "NO", name: "Norway" },
+  { code: "FI", name: "Finland" },
+  { code: "PL", name: "Poland" },
+  { code: "CZ", name: "Czech Republic" },
+  { code: "IE", name: "Ireland" },
+  { code: "PT", name: "Portugal" },
+  { code: "AU", name: "Australia" },
+  { code: "NZ", name: "New Zealand" },
+  { code: "JP", name: "Japan" },
+  { code: "SG", name: "Singapore" },
+];
+
 const STEPS = ["your details", "shipping address", "review order"];
 
 const stepVariants = {
@@ -37,7 +64,7 @@ export default function Checkout() {
 
   const [details, setDetails] = useState({ name: "", email: "" });
   const [address, setAddress] = useState(
-    savedAddr || { line1: "", line2: "", city: "", country: "", postal: "" }
+    savedAddr || { line1: "", line2: "", city: "", country_code: "", postal: "" }
   );
   const [saveAddr, setSaveAddr] = useState(!!savedAddr);
   const [notes, setNotes] = useState("");
@@ -77,7 +104,7 @@ export default function Checkout() {
       }
     }
     if (step === 1) {
-      if (!address.line1.trim() || !address.city.trim() || !address.country.trim()) {
+      if (!address.line1.trim() || !address.city.trim() || !address.country_code) {
         toast.error("please fill in your shipping address");
         return;
       }
@@ -90,21 +117,25 @@ export default function Checkout() {
     setIsPlacing(true);
     
     try {
+      // Require authentication per purchase-request.schema.json (buyer_id required)
+      // In real implementation, check auth context and get buyer_id from session
+      const buyerId = sessionStorage.getItem('buyer_id');
+      if (!buyerId) {
+        toast.error("please sign in to complete your purchase");
+        navigate('/auth?redirect=/checkout');
+        return;
+      }
+
+      // Convert destination to schema-compliant format
+      // per contracts/purchase-request.schema.json: {country_code, region?, postal_code?}
       const destination = {
-        name: details.name,
-        email: details.email,
-        address: {
-          line1: address.line1,
-          line2: address.line2 || "",
-          city: address.city,
-          postal: address.postal,
-          country: address.country,
-        },
-        notes: notes || "",
+        country_code: address.country_code, // Already ISO 3166-1 alpha-2 from select
+        region: address.line2 || null,
+        postal_code: address.postal || null
       };
 
       // Convert cart to release-bound purchase requests
-      const purchaseRequests = cartToPurchaseRequests(cart, destination);
+      const purchaseRequests = cartToPurchaseRequests(cart, buyerId, destination);
 
       // Submit to operations for pricing and confirmation
       const response = await fetch('/api/checkout/submit', {
@@ -263,7 +294,9 @@ export default function Checkout() {
               {savedAddr && (
                 <div className="bg-secondary/40 rounded-xl border border-border/40 p-4 space-y-2">
                   <p className="text-[10px] tracking-widest text-muted-foreground/50 uppercase">saved address</p>
-                  <p className="text-sm text-muted-foreground tracking-wide">{savedAddr.line1}{savedAddr.line2 ? ", " + savedAddr.line2 : ""}, {savedAddr.city}, {savedAddr.postal}, {savedAddr.country}</p>
+                  <p className="text-sm text-muted-foreground tracking-wide">
+                    {savedAddr.line1}{savedAddr.line2 ? ", " + savedAddr.line2 : ""}, {savedAddr.city}, {savedAddr.postal}, {COUNTRIES.find(c => c.code === savedAddr.country_code)?.name || savedAddr.country_code}
+                  </p>
                   <button
                     onClick={() => setAddress(savedAddr)}
                     className="text-xs tracking-wider text-primary hover:underline"
@@ -294,7 +327,18 @@ export default function Checkout() {
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] tracking-widest text-muted-foreground/50 uppercase">country</Label>
-                  <Input placeholder="e.g. Germany" value={address.country} onChange={(e) => setAddress((p) => ({ ...p, country: e.target.value }))} className="rounded-xl bg-card border-border/60 text-sm" />
+                  <select
+                    value={address.country_code}
+                    onChange={(e) => setAddress((p) => ({ ...p, country_code: e.target.value }))}
+                    className="w-full rounded-xl bg-card border border-border/60 px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
+                  >
+                    <option value="">select country</option>
+                    {COUNTRIES.map((country) => (
+                      <option key={country.code} value={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input type="checkbox" checked={saveAddr} onChange={(e) => setSaveAddr(e.target.checked)} className="rounded" />

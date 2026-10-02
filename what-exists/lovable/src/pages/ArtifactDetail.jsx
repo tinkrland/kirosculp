@@ -6,15 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import MaterialTag from "../components/artifacts/MaterialTag";
 import ModelViewer from "../components/viewer/ModelViewer";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MessageCircle, Package, Clock, Box, ShoppingCart, Check } from "lucide-react";
+import { ArrowLeft, Clock, Box, Heart } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import SeoTags from "@/components/seo/SeoTags";
-import { useCurrency } from "@/lib/CurrencyContext";
+import { toggleWishlist, isWishlisted } from "@/lib/wishlistStore";
 
 export default function ArtifactDetail() {
-  const { format } = useCurrency();
   const id = window.location.pathname.split("/artifact/")[1];
   const navigate = useNavigate();
 
@@ -25,22 +24,16 @@ export default function ArtifactDetail() {
     enabled: !!id && !id.startsWith("demo-"),
   });
 
-  // Check demo data if id starts with "demo-"
-  const demoArtifact = null; // commerce demo data removed
-  const artifact = liveArtifact || demoArtifact;
+  const artifact = liveArtifact;
 
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [justAdded, setJustAdded] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   const offeredSizes = Array.isArray(artifact?.sizes) ? artifact.sizes : [];
   const requiresSize = offeredSizes.length > 0 && (artifact?.size_type && artifact.size_type !== "unisize");
   const currentMaterial = selectedMaterial || artifact?.materials?.[0];
   const currentSize = selectedSize || (requiresSize ? offeredSizes[0] : null);
-  const basePrice = artifact?.prices?.[currentMaterial];
-  const sizeSurcharge = currentSize ? Number((artifact?.size_surcharges || {})[currentSize] || 0) : 0;
-  const currentPrice = basePrice != null ? Number(basePrice) + sizeSurcharge : null;
 
   // gallery: combine optional image_urls[] with the legacy image_url cover
   const gallery = (() => {
@@ -50,19 +43,14 @@ export default function ArtifactDetail() {
   })();
   const [activeImage, setActiveImage] = useState(0);
 
-  const handleAddToCart = () => {
-    if (!artifact || !currentMaterial) return;
-    if (requiresSize && !currentSize) {
-      toast.error("pick a size first");
-      return;
-    }
-    addToCart(artifact, currentMaterial, currentSize);
-    setJustAdded(true);
-    toast.success(`${artifact.name} added to your queue`);
-    setTimeout(() => setJustAdded(false), 2000);
+  const handleWishlist = () => {
+    if (!artifact) return;
+    toggleWishlist(artifact.id);
+    setIsInWishlist(isWishlisted(artifact.id));
+    toast.success(isWishlisted(artifact.id) ? "added to wishlist" : "removed from wishlist");
   };
 
-  if (isLoading && !demoArtifact) {
+  if (isLoading) {
     return (
       <div className="px-6 py-10 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -232,18 +220,7 @@ export default function ArtifactDetail() {
               </div>
             )}
 
-            {/* Price */}
-            {currentPrice != null && (
-              <div className="bg-card rounded-[18px] border border-border/50 shadow-paper p-5 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm tracking-wide text-foreground">price</span>
-                  <span className="text-2xl font-light tracking-wide text-foreground">{format(currentPrice)}</span>
-                </div>
-                <p className="text-[11px] text-muted-foreground/50 tracking-wide">
-                  delivery fees calculated at checkout
-                </p>
-              </div>
-            )}
+            {/* Price - removed: commerce moved to platform leg */}
 
             {/* measurements (dimensions + weight in grams) */}
             {(artifact.dimensions || artifact.weight_grams) && (
@@ -282,42 +259,22 @@ export default function ArtifactDetail() {
               </div>
             )}
 
-            {/* CTAs */}
+            {/* studio-only action: wishlist */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button
-                onClick={handleAddToCart}
-                className="rounded-full px-8 py-6 text-sm tracking-wider bg-foreground text-background hover:bg-foreground/90 shadow-paper gap-2"
-              >
-                {justAdded ? (
-                  <>
-                    <Check className="w-4 h-4" />
-                    added to queue
-                  </>
-                ) : (
-                  <>
-                    <ShoppingCart className="w-4 h-4" />
-                    add to queue
-                  </>
-                )}
-              </Button>
-              <Button
+                onClick={handleWishlist}
                 variant="outline"
-                onClick={() => setCartOpen(true)}
                 className="rounded-full px-8 py-6 text-sm tracking-wider border-border/80 text-muted-foreground gap-2"
               >
-                <Package className="w-4 h-4" />
-                view queue
+                <Heart className={isInWishlist ? "w-4 h-4 fill-current" : "w-4 h-4"} />
+                {isInWishlist ? "wishlisted" : "add to wishlist"}
               </Button>
             </div>
           </motion.div>
         </div>
       </div>
 
-      <CartDrawer
-        open={cartOpen}
-        onClose={() => setCartOpen(false)}
-        onCheckout={() => navigate("/checkout")}
-      />
+      {/* CartDrawer removed: commerce moved to platform leg */}
     </div>
   );
 }

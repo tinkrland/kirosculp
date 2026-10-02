@@ -38,6 +38,7 @@ export class Order {
 }
 
 export const ORDER_STATUS = [
+  "pending_payment",
   "pending",
   "paid",
   "manufacturing",

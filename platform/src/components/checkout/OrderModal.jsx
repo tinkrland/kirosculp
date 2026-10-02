@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { X, Package, Check } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatMoney } from "@/lib/formatMoney";
 
 export default function OrderModal({ release, variant, size, onClose }) {
   const [step, setStep] = useState("form"); // "form" | "success"
@@ -38,8 +39,8 @@ export default function OrderModal({ release, variant, size, onClose }) {
       });
       
       if (response.ok) {
-        const { price } = await response.json();
-        setServerPrice(price);
+        const { price_cents } = await response.json();
+        setServerPrice(price_cents); // Store in cents
       }
     } catch (error) {
       console.error('Failed to fetch pricing:', error);
@@ -132,7 +133,7 @@ export default function OrderModal({ release, variant, size, onClose }) {
                     {loadingPrice ? (
                       <span className="text-muted-foreground/40">calculating...</span>
                     ) : serverPrice ? (
-                      `$${serverPrice}`
+                      formatMoney(serverPrice)
                     ) : (
                       <span className="text-muted-foreground/40">price tbd</span>
                     )}

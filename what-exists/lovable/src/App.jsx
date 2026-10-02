@@ -2,10 +2,8 @@
 //
 // route layout decisions:
 //   - "/auth" stands alone with no header chrome (sign-in surface)
-//   - "/admin" and the "/store/*" pages also stand alone because they
-//     are dedicated workspaces with their own sidebars
-//   - everything else lives under AppLayout which renders the sticky
-//     header + cart drawer
+//   - "/admin" standalone admin workspace with its own sidebar
+//   - everything else lives under AppLayout which renders the sticky header
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -78,7 +76,6 @@ const RoutedApp = () => {
       <Route element={<AppLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/artifact/:id" element={<ArtifactDetail />} />
-        <Route path="/publish" element={<PublishArtifact />} />
         <Route path="/publish" element={<PublishArtifact />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/size-guide" element={<SizeGuide />} />

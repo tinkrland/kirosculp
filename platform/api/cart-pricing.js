@@ -21,12 +21,12 @@
  * 
  * Response schema:
  * {
- *   total: number,  // total in dollars (operations computes)
+ *   total: number,  // total in cents (operations computes)
  *   itemPrices: Array<{
  *     releaseId: uuid,
  *     variant: string,
  *     size: string | null,
- *     price: number  // unit price in dollars
+ *     price: number  // unit price in cents
  *   }>
  * }
  */
@@ -80,7 +80,7 @@ export async function handleCartPricing(req) {
       releaseId: items[i].releaseId,
       variant: items[i].variant,
       size: items[i].size,
-      price: price.retail_dollars  // Server-computed unit price
+      price: price.retail_cents  // Server-computed unit price in cents
     }))
   });
 }

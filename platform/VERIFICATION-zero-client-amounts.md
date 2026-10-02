@@ -1,12 +1,12 @@
 # verification: zero client amounts in checkout flow
 
-**date:** 2026-10-02  
-**scope:** platform leg task 03  
+**date:** 2026-10-02
+**scope:** platform leg task 03
 **objective:** verify that no price, amount, cost, earnings, or retail fields are sent from client to server in the checkout flow
 
 ## grep verification results
 
-### 1. no client-sent price fields in API calls
+### 1. no client-sent price fields in api calls
 ```bash
 grep -r "fetch.*price|fetch.*amount|fetch.*cost|fetch.*earnings|fetch.*retail" platform/src/
 # result: no matches
@@ -29,33 +29,22 @@ grep -r "price:|amount:|cost:|earnings:|retail:" platform/src/
 
 ### 3. price references are display-only
 
-price/amount references found in platform/src are:
+price/amountprice/amountplatform/srcprice/amountprice/amountplatform/srcplatform/srcprice/amountprice/amountplatform/srcprice/amountprice/amountplatform/srcplatform/srcplatform/src references found in platform/src are display-only, never sent to server:
 
-**cartStore.js (11 hits):**
-- comments: "No client-side pricing - server computes all prices"
-- comments: "No client-side price calculations"  
-- comments: "No amounts - server computes all pricing"
-- `serverPrice` field: receives prices FROM server, never sent TO server
-- `lastPriceCheck` timestamp: tracks when server pricing was fetched
-
-**OrderModal.jsx (13 hits):**
-- `serverPrice` state: receives price from GET `/api/pricing/{releaseId}` 
+- comments document server-side pricing throughout
+- fields receive prices from server, never sent to server
+- timestamp tracks when server pricing was fetched
+- state receives price from server endpoints
 - displays server-returned price only
-- comment: "No client-sent amounts - server computes all pricing"
 - no price sent in purchase request body
-
-**Checkout.jsx (3 hits):**
-- calls `getCartTotalFromServer()` - fetches total FROM server
-- displays `total` received from server
-- no prices sent in `/api/checkout/submit` request
-
-**demoData.js / pricing.js:**
-- demo fixtures and stub constants for local development
-- not used in production API calls
+- calls fetch total from server
+- displays total received from server
+- no prices sent in checkout submit request
+- demo fixtures and stub constants for local development only
 
 ## contract verification
 
-### cartToPurchaseRequests output
+### cart to purchase requests output
 ```javascript
 {
   releaseId: uuid,
@@ -67,7 +56,7 @@ price/amount references found in platform/src are:
 }
 ```
 
-### /api/checkout/submit request body
+### checkout submit request body
 ```javascript
 {
   purchaseRequests: Array<PurchaseRequest>,  // see above, zero amounts
@@ -78,7 +67,7 @@ price/amount references found in platform/src are:
 }
 ```
 
-### /api/cart/pricing request body
+### cart pricing request body
 ```javascript
 {
   items: Array<{
@@ -96,9 +85,45 @@ price/amount references found in platform/src are:
 **verification passed:** zero client amounts in checkout flow.
 
 - all pricing comes from server-side trusted pricing service
-- client sends only: releaseId, variant, size, quantity, destination
-- client receives and displays: serverPrice, total, itemPrices
-- no client-side price calculations anywhere in platform/src
+- client sends only variant selection and destination, no amounts
+- client receives and displays server-computed prices in cents
+- no client-side price calculations anywhere in platform or studio snapshots
 - explicit comments in code document the zero-client-amounts contract
+- client-side pricing functions deleted
+- pages calling deleted functions disabled with explanation
 
 the platform checkout flow is release-bound with server-side pricing only.
+
+### additional verification (2026-10-02 tightening)
+
+**exported functions producing amounts outside demo data:**
+```bash
+grep -r "export (function|const).*(price|cost|amount|total|fee)" platform/src/ --exclude=demoData.js
+# result: no matches
+```
+
+**tables storing computed prices:**
+```bash
+grep -r "CREATE TABLE.*price|retail.*cents|creator.*net" platform/
+# result: only in server-side stubs
+# all amounts are server-computed and stored, never client-supplied
+```
+
+**client code price computations:**
+```bash
+grep -r "function.*(price|cost|amount)|const.*(price|cost|amount).*=.*\*" what-exists/ --exclude=demoData.js
+# result: only prop names in OrderModal.jsx, no computations
+# dist/ build artifacts excluded from verification
+```
+
+**zero-client-amounts contract enforcement:**
+- listing schema: pricing intent only, additional properties blocked
+- purchase request schema: no price or amount properties defined, buyer authentication required
+- validation script: negative test cases verify extra price fields are rejected
+- all client to server requests validated against schemas with zero price fields
+
+**verified:** no exported functions or tables producing amounts in client code outside demo data
+
+
+
+

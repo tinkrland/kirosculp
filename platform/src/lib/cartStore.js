@@ -129,13 +129,31 @@ export function saveAddress(address) {
 }
 
 // Convert cart to release-bound purchase requests
-export function cartToPurchaseRequests(cart, destination) {
-  return cart.map(item => ({
-    releaseId: item.releaseId,
-    variant: item.variant,
-    size: item.size,
-    quantity: item.quantity,
-    destination
-    // No amounts - server computes all pricing
-  }));
+// Conforms to contracts/purchase-request.schema.json
+export function cartToPurchaseRequests(cart, buyerId, destination) {
+  return cart.map(item => {
+    // Parse variant from cart item
+    // Cart stores variant as a string like "silver_925" but schema expects {metal, size?, finish?}
+    const metal = item.variant; // Assume variant is the metal identifier
+    const size = item.size || null;
+    
+    // Generate client-side request_id as idempotency key per purchase-request.schema.json
+    const requestId = crypto.randomUUID();
+    
+    return {
+      request_id: requestId,
+      buyer_id: buyerId,
+      release_id: item.releaseId,
+      listing_id: item.listingId,
+      variant: {
+        metal: metal,
+        size: size,
+        finish: null // Future: allow selection in cart
+      },
+      quantity: item.quantity,
+      destination: destination,
+      created_at: new Date().toISOString() // Client-generated, server validates
+      // No amounts - server computes all pricing per zero-client-amounts contract
+    };
+  });
 }
