@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://sculptura.dev/schemas/design-release.schema.json",
   "title": "design release",
-  "description": "immutable versioned handoff from Studio to Platform",
+  "description": "immutable versioned handoff from studio to platform. tamper-evident via hash chain: each record links to its predecessor via prev_hash. record_hash is computed as sha-256 over canonical json (sorted keys, no whitespace) of the full record excluding prev_hash. genesis record has prev_hash = null. independent parties can recompute hashes to verify chain integrity.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -18,7 +18,8 @@
     "metals_offered",
     "sizing",
     "castability",
-    "mass_estimate_g"
+    "mass_estimate_g",
+    "prev_hash"
   ],
   "properties": {
     "release_id": { "type": "string", "format": "uuid" },
@@ -26,6 +27,11 @@
     "version": { "type": "integer", "minimum": 1 },
     "creator_id": { "type": "string", "format": "uuid" },
     "created_at": { "type": "string", "format": "date-time" },
+    "prev_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "sha-256 hash of the immediately preceding release record in the chain. null only for the genesis record. links record n to record n-1 for tamper-evidence."
+    },
     "engine": {
       "type": "object",
       "additionalProperties": false,

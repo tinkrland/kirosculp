@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/tune-log.schema.json",
+  "title": "tune log",
+  "description": "immutable agent tuning event log. tamper-evident via hash chain: each batch links to its predecessor via prev_hash. record_hash is computed as sha-256 over canonical json (sorted keys, no whitespace) of the full batch excluding prev_hash. genesis batch has prev_hash = null. independent parties can recompute hashes to verify chain integrity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "batch_id",
+    "batch_timestamp",
+    "prev_hash",
+    "events"
+  ],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "unique identifier for this event batch"
+    },
+    "batch_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "utc timestamp when this batch was created (geographic ambiguity per operations rules)"
+    },
+    "prev_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "sha-256 hash of the immediately preceding batch in the chain. null only for the genesis batch. links batch n to batch n-1 for tamper-evidence."
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "event_id",
+          "event_type",
+          "timestamp",
+          "agent_id",
+          "session_id"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "session_start",
+              "tool_use",
+              "decision_point",
+              "error",
+              "session_end"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "identifier for the agent instance"
+          },
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tool_name": {
+            "type": ["string", "null"],
+            "description": "name of tool used (for tool_use events)"
+          },
+          "outcome": {
+            "type": ["string", "null"],
+            "enum": ["success", "failure", "partial", null],
+            "description": "outcome of the event"
+          },
+          "error_code": {
+            "type": ["string", "null"],
+            "description": "error code if outcome was failure"
+          },
+          "metadata": {
+            "type": ["object", "null"],
+            "description": "additional structured data about the event. must not include prompt text or reason fields per privacy rules."
+          }
+        }
+      }
+    }
+  }
+}

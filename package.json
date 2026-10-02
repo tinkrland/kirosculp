@@ -4,11 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "validate": "node scripts/validate-data-contracts.mjs && node scripts/validate-offerings.mjs && node scripts/validate-research.mjs && python3 scripts/validate-jsonl.py && python3 scripts/normalize-prose.py --check",
+    "validate": "node scripts/validate-data-contracts.mjs && node scripts/validate-offerings.mjs && node scripts/validate-research.mjs && node scripts/validate-jsonl.mjs && node scripts/normalize-prose.mjs --check",
     "audit:refresh": "python3 scripts/build-source-audit.py",
     "test": "node --test paracraft/test/",
     "test:creator-trust": "node scripts/test-private-creator-trust.mjs",
-    "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs"
+    "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs",
+    "test:hash-chain": "node scripts/test-hash-chain.mjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
