@@ -43,11 +43,11 @@ profile field that itself maps to evidence. no mapping, no claim.
 a creator opts a listing into guarantees, each of which is a hard
 routing constraint:
 
-- **recycled metals only** — routes only to partners whose profile
+- **recycled metals only**: routes only to partners whose profile
   shows certified recycled content for that alloy.
-- **made in usa** (or any country) — routes only to manufacturing
+- **made in usa** (or any country): routes only to manufacturing
   sites in that country.
-- **chain-of-custody certified** — routes only to partners holding the
+- **chain-of-custody certified**: routes only to partners holding the
   named certification.
 
 because routing enforces the constraint, the guarantee is a real

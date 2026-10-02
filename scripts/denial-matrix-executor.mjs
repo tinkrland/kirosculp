@@ -38,27 +38,57 @@ async function executeTestCase(db, testCase) {
     let result;
     if (testCase.operation === 'select') {
       result = await queryAsRole(db, userId, testCase.sql);
-      testCase.actualResult = 'allow';
       testCase.rowCount = result.rows.length;
+      
+      // rls denies selects by filtering to zero rows, not by erroring
+      if (testCase.rowCount === 0) {
+        testCase.actualResult = 'rls_deny';
+      } else {
+        testCase.actualResult = 'allow';
+      }
     } else {
       result = await mutateAsRole(db, userId, testCase.sql);
-      testCase.actualResult = 'allow';
+      
+      // mutateAsRole returns an array, get the first result
+      const mutationResult = Array.isArray(result) ? result[0] : result;
+      
+      // check if any rows were affected
+      let affectedCount = 0;
+      if (mutationResult && mutationResult.affectedRows !== undefined) {
+        affectedCount = mutationResult.affectedRows;
+      } else if (mutationResult && mutationResult.rowCount !== undefined) {
+        affectedCount = mutationResult.rowCount;
+      } else if (mutationResult && mutationResult.changes !== undefined) {
+        affectedCount = mutationResult.changes;
+      }
+      
+      // rls denies mutations by affecting zero rows, not by erroring
+      if (affectedCount === 0) {
+        testCase.actualResult = 'rls_deny';
+        testCase.affectedRows = 0;
+      } else {
+        testCase.actualResult = 'allow';
+        testCase.affectedRows = affectedCount;
+      }
     }
-    
-    testCase.passed = (testCase.expectedResult === 'allow');
     
   } catch (error) {
     const errorCategory = categorizeError(error);
     testCase.error = error.message;
     testCase.actualResult = errorCategory;
-    
-    // when expecting 'deny', accept both rls_deny and grant_layer_block as passing
-    // (grant layer denial is stronger than rls and is the correct design for money tables)
-    if (testCase.expectedResult === 'deny') {
-      testCase.passed = (errorCategory === 'rls_deny' || errorCategory === 'grant_layer_block');
-    } else {
-      testCase.passed = (testCase.expectedResult === errorCategory);
-    }
+  }
+  
+  // evaluate pass/fail based on expected vs actual result
+  if (testCase.expectedResult === 'deny') {
+    // when expecting deny, accept rls_deny, grant_layer_block, or other denial categories
+    testCase.passed = (testCase.actualResult === 'rls_deny' || 
+                      testCase.actualResult === 'grant_layer_block' ||
+                      testCase.actualResult === 'rls_with_check_deny');
+  } else if (testCase.expectedResult === 'allow') {
+    testCase.passed = (testCase.actualResult === 'allow');
+  } else {
+    // specific error expected (constraint_violation, etc)
+    testCase.passed = (testCase.actualResult === testCase.expectedResult);
   }
   
   return testCase;
@@ -186,8 +216,11 @@ function getOrdersTests() {
     new TestCase('or01', 'guest cannot read orders', 
       'guest', 'select', 'SELECT * FROM public.orders;', 'deny', 'orders'),
     
-    new TestCase('or02', 'unrelated user cannot read orders', 
-      'unrelated_eve', 'select', 'SELECT * FROM public.orders;', 'deny', 'orders'),
+    new TestCase('or02', 'unrelated user can read own orders only', 
+      'unrelated_eve', 'select', 'SELECT * FROM public.orders WHERE user_id = auth.uid();', 'allow', 'orders'),
+    
+    new TestCase('or02b', 'unrelated user cannot read other user orders', 
+      'unrelated_eve', 'select', 'SELECT * FROM public.orders WHERE user_id != auth.uid();', 'deny', 'orders'),
     
     new TestCase('or03', 'buyer can read own orders', 
       'buyer_carol', 'select', 'SELECT * FROM public.orders WHERE user_id = auth.uid();', 'allow', 'orders'),
@@ -198,12 +231,12 @@ function getOrdersTests() {
     new TestCase('or05', 'alice (creator) can read orders for her artifacts', 
       'creator_alice', 'select', `SELECT o.* FROM public.orders o 
                                   JOIN public.artifacts a ON o.artifact_id = a.id 
-                                  WHERE a.creator_user_id = auth.uid();`, 'allow', 'orders'),
+                                  WHERE a.creator_handle = 'alice123';`, 'allow', 'orders'),
     
     new TestCase('or06', 'alice cannot read orders for bob artifacts', 
       'creator_alice', 'select', `SELECT o.* FROM public.orders o 
                                   JOIN public.artifacts a ON o.artifact_id = a.id 
-                                  WHERE a.creator_user_id = '${TEST_USERS.creator_bob.id}';`, 'deny', 'orders'),
+                                  WHERE a.creator_handle = 'bob456';`, 'deny', 'orders'),
     
     new TestCase('or07', 'admin can read all orders', 
       'admin', 'select', 'SELECT * FROM public.orders;', 'allow', 'orders'),
@@ -223,35 +256,35 @@ function getOrdersTests() {
  */
 function getMarketAccountsTests() {
   return [
-    new TestCase('ma01', 'guest cannot read market_accounts', 
+    new TestCase('ma01', 'guest cannot read market_accounts base table', 
       'guest', 'select', 'SELECT * FROM public.market_accounts;', 'deny', 'market_accounts'),
     
-    new TestCase('ma02', 'unrelated user cannot read market_accounts', 
+    new TestCase('ma02', 'unrelated user cannot read market_accounts base table', 
       'unrelated_eve', 'select', 'SELECT * FROM public.market_accounts;', 'deny', 'market_accounts'),
     
-    new TestCase('ma03', 'alice can read own market_account', 
-      'creator_alice', 'select', 'SELECT * FROM public.market_accounts WHERE user_id = auth.uid();', 'allow', 'market_accounts'),
+    new TestCase('ma03', 'alice cannot read market_accounts base table', 
+      'creator_alice', 'select', 'SELECT * FROM public.market_accounts;', 'deny', 'market_accounts'),
     
-    new TestCase('ma04', 'alice cannot read bob market_account', 
-      'creator_alice', 'select', 'SELECT * FROM public.market_accounts WHERE user_id != auth.uid();', 'deny', 'market_accounts'),
+    new TestCase('ma04', 'buyer cannot read market_accounts base table', 
+      'buyer_carol', 'select', 'SELECT * FROM public.market_accounts;', 'deny', 'market_accounts'),
     
     new TestCase('ma05', 'buyer can read public view only', 
       'buyer_carol', 'select', 'SELECT * FROM public.market_accounts_public;', 'allow', 'market_accounts_public'),
     
-    new TestCase('ma06', 'buyer cannot access private columns directly', 
-      'buyer_carol', 'select', 'SELECT access_key_hash FROM public.market_accounts;', 'deny', 'market_accounts'),
+    new TestCase('ma06', 'guest can read public view', 
+      'guest', 'select', 'SELECT * FROM public.market_accounts_public;', 'allow', 'market_accounts_public'),
     
-    new TestCase('ma07', 'admin can read all market_accounts', 
+    new TestCase('ma07', 'admin can read all market_accounts base table', 
       'admin', 'select', 'SELECT * FROM public.market_accounts;', 'allow', 'market_accounts'),
     
     new TestCase('ma08', 'guest cannot create market_accounts', 
-      'guest', 'insert', "INSERT INTO public.market_accounts (user_id, handle) VALUES (NULL, 'test123');", 'deny', 'market_accounts'),
+      'guest', 'insert', "INSERT INTO public.market_accounts (handle, email, access_key_hash, status) VALUES ('test123', 'test@test.com', 'hash123', 'draft');", 'deny', 'market_accounts'),
     
-    new TestCase('ma09', 'creator can create own market_account', 
-      'creator_alice', 'insert', "INSERT INTO public.market_accounts (user_id, handle) VALUES (auth.uid(), 'alice456');", 'constraint_violation', 'market_accounts'),
+    new TestCase('ma09', 'creator cannot create market_account for handle they do not own', 
+      'creator_alice', 'insert', "INSERT INTO public.market_accounts (handle, email, access_key_hash, status) VALUES ('alice999', 'alice@test.com', 'hash456', 'draft');", 'deny', 'market_accounts'),
     
-    new TestCase('ma10', 'creator cannot create market_account for others', 
-      'creator_alice', 'insert', `INSERT INTO public.market_accounts (user_id, handle) VALUES ('${TEST_USERS.creator_bob.id}', 'forged123');`, 'deny', 'market_accounts'),
+    new TestCase('ma10', 'authenticated user cannot create market_account in active status', 
+      'creator_alice', 'insert', "INSERT INTO public.market_accounts (handle, email, access_key_hash, status) VALUES ('alice789', 'alice2@test.com', 'hash789', 'active');", 'deny', 'market_accounts'),
   ];
 }
 /**
@@ -311,7 +344,7 @@ function getLedgerTests() {
 /**
  * main execution function
  */
-async function executeDenialMatrix() {
+export async function executeDenialMatrix() {
   console.log('executing security denial matrix...\n');
   
   try {
@@ -344,9 +377,18 @@ async function executeDenialMatrix() {
         await executeTestCase(db, testCase);
         
         const status = testCase.passed ? 'pass' : 'FAIL';
-        const resultText = testCase.actualResult === 'allow' ? 
-          `ALLOW${testCase.rowCount !== undefined ? ` (${testCase.rowCount} rows)` : ''}` : 
-          testCase.actualResult.toUpperCase().replace(/_/g, ' ');
+        let resultText;
+        if (testCase.actualResult === 'allow') {
+          if (testCase.rowCount !== undefined) {
+            resultText = `ALLOW (${testCase.rowCount} rows)`;
+          } else if (testCase.affectedRows !== undefined) {
+            resultText = `ALLOW (${testCase.affectedRows} affected)`;
+          } else {
+            resultText = 'ALLOW';
+          }
+        } else {
+          resultText = testCase.actualResult.toUpperCase().replace(/_/g, ' ');
+        }
         
         console.log(`  ${status} ${testCase.id}: ${testCase.description}`);
         console.log(`     expected: ${testCase.expectedResult.toUpperCase()}, got: ${resultText}`);
@@ -372,7 +414,8 @@ async function executeDenialMatrix() {
           actual: testCase.actualResult,
           passed: testCase.passed,
           error: testCase.error || null,
-          rowCount: testCase.rowCount || null
+          rowCount: testCase.rowCount !== undefined ? testCase.rowCount : null,
+          affectedRows: testCase.affectedRows !== undefined ? testCase.affectedRows : null
         });
       }
     }

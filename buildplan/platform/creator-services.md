@@ -7,15 +7,15 @@ later; the unit is the toggle.
 
 ## the service toggles
 
-- **whitelabel storefront** — extends the white-label storefront
+- **whitelabel storefront**: extends the white-label storefront
   surface defined in
   [creator-surfaces.md](creator-surfaces.md) from a channel model into
   a priced add-on: creator's own domain, no sculptura chrome.
-- **whitelabel email** — transactional mail (order confirmations,
+- **whitelabel email**: transactional mail (order confirmations,
   drop notifications) sent under the creator's brand. requires
   verified domain: dkim/spf records on a domain the creator controls,
   or a domain managed through us (next toggle).
-- **creator-domain mail routing** — extends dns management: mx records
+- **creator-domain mail routing**: extends dns management: mx records
   route support@ / hello@ at the creator's domain into sculptura ops.
   buyers email what looks like (and is) the creator's front door;
   order-status and manufacturing questions are answered by sculptura
@@ -26,7 +26,7 @@ later; the unit is the toggle.
   replies speak as the brand's support identity, never impersonate
   the creator personally; anything signed as the creator is authored
   by the creator.
-- **dns management** — lovable-style: the creator's domain is hosted or
+- **dns management**: lovable-style: the creator's domain is hosted or
   bought through us, and records for storefront + email are
   auto-wired. registrar candidates are the developer-forward trio
   with usable apis (porkbun's documented api, name.com's, spaceship);
@@ -35,7 +35,7 @@ later; the unit is the toggle.
   remains the fallback. boundaries: the creator always owns the
   domain name itself; renewal liability, transfer locks, and whois
   privacy are real operational costs we take on only if this ships.
-- **free-subdomain creators (no custom domain)** — we own the parent
+- **free-subdomain creators (no custom domain)**: we own the parent
   zone, so we control subdomain records directly: no registrar is
   involved at all. a subdomain creator gets storefront + brand send-as
   + routed support (support@ handles manufacturing, triaged digest to
@@ -50,13 +50,13 @@ later; the unit is the toggle.
   real mailbox product (imap inboxes for creators) is a separate,
   unscheduled decision with spam/abuse and support liabilities of its
   own.
-- **whitelabel shipping** — creator-branded packaging on partner
+- **whitelabel shipping**: creator-branded packaging on partner
   shipments instead of sculptura's. growth-gated and the hardest one:
   orders ship directly from casting partners, so branded packaging
   means partners stocking creator-specific materials, with minimums
   and per-creator logistics. only viable with volume or a packaging
   collation step.
-- **personal thank-you sticker (thermal, printed live)** — the
+- **personal thank-you sticker (thermal, printed live)**: the
   cheaper alternative to whitelabel shipping, and it resolves the
   "partners will not print arbitrary cards" problem. the mechanism:
   the creator turns their handwriting into a custom font (glyph

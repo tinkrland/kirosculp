@@ -104,10 +104,10 @@ append-only enforcement, and group balance checks.
 real localstripe server (start one with `localstripe --port 4242`,
 default key `sk_test_123`):
 
-    SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
-    STRIPE_URL=http://localhost:4242 node simulate-order-purchase.js
+    supabase_url=... supabase_service_role_key=... \
+    stripe_url=http://localhost:4242 node simulate-order-purchase.js
 
-    SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node simulate-escrow-lifecycle.js
+    supabase_url=... supabase_service_role_key=... node simulate-escrow-lifecycle.js
 
 it creates its own test rows and cannot delete them (the ledger is
 append-only for service_role); cleanup is a management-api step owned by
@@ -149,10 +149,10 @@ the trusted pricing service decides the split for the release path.
 
 run it against a live spree (local or sandbox-proxied):
 
-    SPREE_URL=http://localhost:3000 \
-    SPREE_API_KEY=pk_... SPREE_TOKEN=<cart token> SPREE_ORDER=ord_xxx \
-    [SPREE_PROXY_AUTH='Bearer <token>'  # if behind the blaxel port proxy] \
-    SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=<service_role_jwt> \
+    spree_url=http://localhost:3000 \
+    spree_api_key=pk_... spree_token=<cart token> spree_order=ord_xxx \
+    [spree_proxy_auth='bearer <token>'  # if behind the blaxel port proxy] \
+    supabase_url=... supabase_service_role_key=<service_role_jwt> \
     node spree-order-sync.js
 
 the verified guest checkout sequence the sync consumes: create cart,
@@ -163,7 +163,7 @@ pm, ful (shipment), dr (rate).
 
 ### recorded run 3, 2026-09-26, spree order mirrored live
 
-guest checkout completed on the spree prototype (order R513075727,
+guest checkout completed on the spree prototype (order r513075727,
 $110: $100 prototype ring + $10 flat shipping, check payment
 completed). the sync mirrored it: order row placed, escrow hold held
 at 11000 cents with gateway_ref pm8z97wn, capture group balanced

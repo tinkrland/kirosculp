@@ -1,0 +1,20 @@
+# enforce lf line endings for all text files in this repository
+* text=auto eol=lf
+
+# binary files: no line-ending conversion
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.lockb binary

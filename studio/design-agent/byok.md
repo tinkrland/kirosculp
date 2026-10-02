@@ -96,7 +96,7 @@ exactly what the probe battery is for, and why it probes capabilities
 instead of checking credentials: the key connects, the model answers,
 and it still fails check 1 (vision) or check 3 (tools) with a message
 naming the model id and the failed check ("this endpoint serves
-X, which has no vision input; tessa is vision-first").
+x, which has no vision input; tessa is vision-first").
 
 reasoning models are not banned; they pass or fail on what they can
 do. but they get explicit handling when they do pass:
@@ -110,7 +110,7 @@ do. but they get explicit handling when they do pass:
   shows an estimated per-turn cost at setup so it is an informed one.
 - **latency tier:** a passing model whose probe turns take long enough
   to wreck the conversational flow gets a warning at setup ("this
-  model averages Xs per turn"), not a rejection; the floor is
+  model averages xs per turn"), not a rejection; the floor is
   capability, and slow-but-capable is the creator's tradeoff.
 - **parameter quirks:** some reasoning models reject common sampling
   parameters or system prompts; the probe uses the minimal parameter

@@ -79,7 +79,7 @@ is port/adapter shaped (ordersource, offermanager, invoicingport,
 fiscalizationport), which is the same model our adapter tier needs.
 
 the honest limit: its live integrations today are poland-market
-(Allegro, ERLI, KSeF fiscalization, polish invoicing suites) with
+(allegro, erli, ksef fiscalization, polish invoicing suites) with
 prestaShop/woocommerce destinations; none of shopify, wix, amazon,
 weebly, bigcartel, or bigcommerce are live. so it is the second
 reference implementation alongside openship: study the port/adapter
