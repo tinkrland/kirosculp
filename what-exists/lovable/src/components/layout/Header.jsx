@@ -1,11 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Search, User, Moon, Sun, ShoppingBag, Heart } from "lucide-react";
+import { Search, User, Moon, Sun, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
-import CartDrawer from "@/components/cart/CartDrawer";
 import CurrencySwitcher from "@/components/layout/CurrencySwitcher";
-import { getCart } from "@/lib/cartStore";
 import { getWishlist } from "@/lib/wishlistStore";
 import { useAuth } from "@/lib/AuthContext";
 
@@ -13,8 +11,6 @@ export default function Header() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
-  const [cartOpen, setCartOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(() => getCart().reduce((s, i) => s + (i.quantity || 1), 0));
   const [wishCount, setWishCount] = useState(() => getWishlist().length);
   const [dark, setDark] = useState(() => {
     if (typeof window !== "undefined") {
@@ -35,12 +31,9 @@ export default function Header() {
   }, [dark]);
 
   useEffect(() => {
-    const sync = () => setCartCount(getCart().reduce((s, i) => s + (i.quantity || 1), 0));
     const syncWish = () => setWishCount(getWishlist().length);
-    window.addEventListener("cart-updated", sync);
     window.addEventListener("wishlist-updated", syncWish);
     return () => {
-      window.removeEventListener("cart-updated", sync);
       window.removeEventListener("wishlist-updated", syncWish);
     };
   }, []);
@@ -51,7 +44,6 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="flex-shrink-0 flex items-baseline gap-0.5">
           <span className="font-wordmark text-2xl md:text-3xl text-foreground">sculptura</span>
-          <span className="font-wordmark text-sm text-muted-foreground/60 hidden md:inline">.shop</span>
         </Link>
 
         {/* Search */}
@@ -69,19 +61,9 @@ export default function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          <Link to="/explore">
-            <Button variant="ghost" className="text-sm tracking-wide rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary">
-              explore
-            </Button>
-          </Link>
           <Link to="/faq" className="hidden sm:inline-flex">
             <Button variant="ghost" className="text-sm tracking-wide rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary">
               faq
-            </Button>
-          </Link>
-          <Link to="/store/create" className="hidden sm:inline-flex">
-            <Button variant="ghost" className="text-sm tracking-wide rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary">
-              open a store
             </Button>
           </Link>
 
@@ -111,20 +93,6 @@ export default function Header() {
             )}
           </Link>
 
-          {/* Cart button */}
-          <button
-            onClick={() => setCartOpen(true)}
-            className="relative w-8 h-8 flex items-center justify-center rounded-full border border-border/60 bg-secondary/60 hover:bg-secondary transition-colors"
-            aria-label="open cart"
-          >
-            <ShoppingBag className="w-3.5 h-3.5 text-muted-foreground" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-foreground text-background text-[9px] font-mono flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
           <Link to={isAuthenticated ? "/dashboard/buyer" : "/store/access"}>
             <Button variant="outline" className="rounded-full text-sm tracking-wide border-border/80 gap-2">
               <User className="w-3.5 h-3.5" />
@@ -133,12 +101,6 @@ export default function Header() {
           </Link>
         </div>
       </div>
-
-      <CartDrawer
-        open={cartOpen}
-        onClose={() => setCartOpen(false)}
-        onCheckout={() => { setCartOpen(false); navigate("/checkout"); }}
-      />
     </header>
   );
 }

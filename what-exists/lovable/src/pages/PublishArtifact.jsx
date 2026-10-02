@@ -11,7 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { ArrowLeft, ArrowRight, Upload, X, Box, Check, Tag as TagIcon } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import { MATERIALS, REGIONS, getMfgCost, getFinalPrice, DELIVERY_ESTIMATES } from "@/lib/pricing";
+import { MATERIALS, REGIONS, getMfgCost, getFinalPrice, DELIVERY_ESTIMATES } from "@/lib/pricing-stub";
 import { SIZE_TYPES, presetSizes, defaultSizesFor } from "@/lib/sizing";
 import { slugify } from "@/lib/slug";
 

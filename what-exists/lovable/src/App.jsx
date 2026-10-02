@@ -17,18 +17,10 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import { CurrencyProvider } from '@/lib/CurrencyContext';
 import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home';
-import Explore from './pages/Explore';
 import ArtifactDetail from './pages/ArtifactDetail';
-import ShopProfile from './pages/ShopProfile';
-import ShopArtifactBySlug from './pages/ShopArtifactBySlug';
 import CollectionPage from './pages/CollectionPage';
 import PublishArtifact from './pages/PublishArtifact';
 import Onboarding from './pages/Onboarding';
-import CreateAccount from './pages/market/CreateAccount';
-import AccessAccount from './pages/market/AccessAccount';
-import MarketDashboard from './pages/market/MarketDashboard';
-import StoreSettings from './pages/market/StoreSettings';
-import MyStore from './pages/market/MyStore';
 import FAQ from './pages/FAQ';
 import SizeGuide from './pages/SizeGuide';
 import CreatorDocs from './pages/CreatorDocs';
@@ -42,7 +34,6 @@ import AdminDocs from './pages/admin/AdminDocs';
 import AdminIdea from './pages/admin/AdminIdea';
 import Compare from './pages/Compare';
 import Roadmap from './pages/Roadmap';
-import Checkout from './pages/Checkout';
 import Auth from './pages/Auth';
 import CommissionPage from './pages/CommissionPage';
 import DemoApp from './pages/DemoApp';
@@ -78,16 +69,6 @@ const RoutedApp = () => {
       <Route path="/admin/docs" element={<AdminDocs />} />
       <Route path="/admin/idea" element={<AdminIdea />} />
       <Route path="/onboarding" element={<Onboarding />} />
-      <Route path="/store/create" element={<CreateAccount />} />
-      <Route path="/store/access" element={<AccessAccount />} />
-      <Route path="/store/dashboard" element={<MarketDashboard />} />
-      <Route path="/store/settings" element={<StoreSettings />} />
-      <Route path="/store/mystore" element={<MyStore />} />
-
-      {/* legacy redirects keep older bookmarks working */}
-      <Route path="/market/create" element={<CreateAccount />} />
-      <Route path="/market/access" element={<AccessAccount />} />
-      <Route path="/market/dashboard" element={<MarketDashboard />} />
 
       {/* no-login creator demo sandbox (localStorage-backed) */}
       <Route path="/demo/app" element={<DemoApp />} />
@@ -96,13 +77,8 @@ const RoutedApp = () => {
       {/* main app shell */}
       <Route element={<AppLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
         <Route path="/artifact/:id" element={<ArtifactDetail />} />
-        <Route path="/shop/:username" element={<ShopProfile />} />
-        {/* slug-aware routes - fixed prefixes first so 'c' / 'commission' don't get matched as slugs */}
-        <Route path="/shop/:username/commission" element={<CommissionPage />} />
-        <Route path="/shop/:username/c/:collectionSlug" element={<CollectionPage />} />
-        <Route path="/shop/:username/:slug" element={<ShopArtifactBySlug />} />
+        <Route path="/publish" element={<PublishArtifact />} />
         <Route path="/publish" element={<PublishArtifact />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/size-guide" element={<SizeGuide />} />
@@ -114,7 +90,6 @@ const RoutedApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/compare" element={<Compare />} />
         <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/checkout" element={<Checkout />} />
         <Route path="/dashboard/buyer" element={<BuyerDashboard />} />
         <Route path="/list/:token" element={<SharedList />} />
         <Route path="*" element={<PageNotFound />} />

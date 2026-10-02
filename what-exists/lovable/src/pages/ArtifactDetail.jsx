@@ -9,10 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, MessageCircle, Package, Clock, Box, ShoppingCart, Check } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { DEMO_ARTIFACTS } from "@/lib/demoData";
-import { addToCart } from "@/lib/cartStore";
 import { toast } from "sonner";
-import CartDrawer from "@/components/cart/CartDrawer";
 import SeoTags from "@/components/seo/SeoTags";
 import { useCurrency } from "@/lib/CurrencyContext";
 
@@ -29,7 +26,7 @@ export default function ArtifactDetail() {
   });
 
   // Check demo data if id starts with "demo-"
-  const demoArtifact = id?.startsWith("demo-") ? DEMO_ARTIFACTS.find((a) => a.id === id) : null;
+  const demoArtifact = null; // commerce demo data removed
   const artifact = liveArtifact || demoArtifact;
 
   const [selectedMaterial, setSelectedMaterial] = useState(null);

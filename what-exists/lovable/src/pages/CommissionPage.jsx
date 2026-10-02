@@ -10,7 +10,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { db } from "@/lib/db";
 import { ArrowLeft, Clock, Zap, DollarSign } from "lucide-react";
-import { DEMO_STORES } from "@/lib/demoData";
+import { DEMO_STORES } from "@/lib/demoStores";
 import { getDemoStoreOverrides } from "@/lib/demoSandbox";
 import CommissionRequestForm from "@/components/commissions/CommissionRequestForm";
 import SeoTags from "@/components/seo/SeoTags";
