@@ -17,7 +17,7 @@ this is tamper-evidence, not a court-admissibility claim. the hash chain detects
 
 ## anchor format
 
-each file is named `{chain-type}-{date}.json` where date is YYYY-MM-DD in utc (geographic ambiguity per operations rules).
+each file is named `{chain-type}-{date}.json` where date is `YYYY-MM-DD` in utc (geographic ambiguity per operations rules).
 
 ```json
 {
