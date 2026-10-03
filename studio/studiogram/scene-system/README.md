@@ -28,6 +28,10 @@ lighting and backdrop are independent from the camera. presets provide a startin
 - backdrop presets
 - manual control over preset values
 
+## the asset boundary
+
+scene machinery holds only scene assets. releases enter a scene by reference, and nothing flows back into a release: see [scene assets vs release assets](scene-assets-vs-release-assets.md).
+
 ## system shape
 
 - one parameterized hand with shape controls for morphology and material controls for surface appearance

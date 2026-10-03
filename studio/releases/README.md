@@ -4,6 +4,8 @@ creates immutable, versioned design releases after validation. see the root `con
 
 only a [server-side validated, creator-approved](../validation/server-release-gate.md) immutable project revision can produce a release. the platform consumes its exact asset hashes; no local preview can authorize a transaction.
 
+scene assets never enter a release, and releases enter a studiogram scene by reference only: see the [scene assets vs release assets](../studiogram/scene-system/scene-assets-vs-release-assets.md) boundary.
+
 ## audited implementation reference
 
 **status: missing**

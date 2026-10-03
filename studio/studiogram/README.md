@@ -26,6 +26,7 @@ studiogram is a deterministic 3d scene system, not image generation. every photo
 - [hand/](hand/README.md): choose and shape a hand, one configurable base model with independent build, proportion, and surface controls
 - [jewelry/](jewelry/README.md): add and arrange jewelry, placing the real compiled artifact at named attachment locations without flattening it into an image
 - [scene-system/](scene-system/README.md): the scene machinery: parameterized hand, attachment points, camera, lighting, environment, and saved scene state
+- [props/](props/README.md): the platform-prepopulated background prop library, sam 3d ingestion, and the taste-never-capability rule
 - [capture/](capture/README.md): capture several views from the same scene, review their order, and export a clean image set for a product carousel
 - [behind-the-scenes/](behind-the-scenes/README.md): how one saved scene keeps the real artifact, hand rig, camera, lighting, and output connected
 
@@ -33,7 +34,7 @@ similar and reference services are listed in [references.md](references.md).
 
 ## relation to the studio leg
 
-studiogram is the virtual product studio itself: the scene system lives in [scene-system/](scene-system/README.md) and the capture flow wraps it. it sits in the studio domain because it consumes the design release and never becomes a source of geometry. the marketing-facing re-explanation lives in [marketing/](../../marketing/README.md).
+studiogram is the virtual product studio itself: the scene system lives in [scene-system/](scene-system/README.md) and the capture flow wraps it. it sits in the studio domain because it consumes the design release and never becomes a source of geometry. the [scene assets vs release assets](scene-system/scene-assets-vs-release-assets.md) boundary keeps the two worlds from ever mixing. the marketing-facing re-explanation lives in [marketing/](../../marketing/README.md).
 
 ## status
 
