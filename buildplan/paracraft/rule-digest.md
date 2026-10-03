@@ -464,4 +464,5 @@ source: openscad.org/cheatsheet; accessed: 2026-09-24; confidence: high (officia
 ## next extraction targets
 
 - per the gaps lists above: every partner's shrinkage factor, dimensional tolerance, sprue dimensions, and burnout setpoints remain unpublished and move to [acquire.md](acquire.md).
+- the morris and watson cad design guidelines section predates the source registry: no sources.jsonl record exists for it, so its values carry no verifiable lineage. it needs a source record or a fresh scrape before any of its rules can be promoted from drafted.
 - gildform hollow drain hole minimum diameter and count: the empirical evidence shows 3.5 mm is insufficient but no minimum is stated; this is a direct partner ask.
