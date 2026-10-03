@@ -1,0 +1,379 @@
+{
+  "schema": "benchmarks-manifest-v1",
+  "description": "expected verdicts for the paracraft benchmark test set. each entry declares the model file, the family it belongs to, and the expected verdict per named rule set version. the harness measures; this manifest records what the harness should find. a rule set that produces unexpected verdicts on the pathological family is wrong, not the pieces.",
+  "notes": [
+    "verdicts reflect the constraints in the named rule set version, not physical castability.",
+    "profile-001 v0.2.0 is the only active rule set at the time of this manifest.",
+    "all wall-ladder, feature-ladder, size-family, and symbolic-stress models compile to geometry the five ready measurements can evaluate; bounding_box and minimum_wall_thickness are fully measured.",
+    "hollow-shell models all contain hollow components (nested inner cavity); ctr-hollow-001 (severity error) in profile-001 v0.2.0 blocks all of them as invalid regardless of shell thickness or drain holes.",
+    "pathological p-003 contains a trapped inner component; ctr-nested-001 (severity error) blocks it as invalid.",
+    "all models have manifold geometry (ctr-mesh-001 passes); this is a property of correct openscad difference/union operations.",
+    "wall-ladder rungs at 0.3, 0.5, 0.7 mm trigger ctr-wall-001 warning (< 0.8 mm threshold from src-0010 cooksongold, src-0001 materialise); rungs at 0.8 mm and above pass.",
+    "ctr-thick-001 and ctr-wall-002/003 and ctr-feat-001 etc. are unmeasured by the five-measurement scope; overall status is manual_review when any constraint is unmeasured but no error fires.",
+    "symbolic-stress variant 2 (join_width_thin 0.6 mm) and claddagh crown tines (0.7 mm) trigger ctr-wall-001 warning.",
+    "size-family rings all have 1.0 mm walls, which pass ctr-wall-001 (>= 0.8 mm).",
+    "pathological p-001a gap 0.1 mm triggers ctr-clear-001 warning; p-001b gap 0.4 mm passes.",
+    "pathological p-004 slab 0.3 mm wall triggers ctr-wall-001 warning.",
+    "pathological p-005 band at exactly 0.8 mm passes ctr-wall-001."
+  ],
+  "rule_sets": [
+    {
+      "id": "profile-001",
+      "version": "0.2.0",
+      "file": "research/profiles/profile-001-lost-wax-silver-general.json",
+      "scope": "lost-wax casting, sterling silver, general"
+    }
+  ],
+  "families": [
+    {
+      "family": "wall-ladder",
+      "file": "benchmarks/wall-ladder.scad",
+      "description": "hollow bands stepping wall thickness from 0.3 mm to 1.2 mm",
+      "models": [
+        {
+          "id": "wall-ladder-0.3",
+          "description": "band with 0.3 mm wall (sub-minimum)",
+          "parameter": "wall_mm=0.3",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires (0.3 < 0.8 mm, severity warning); unmeasured constraints push to manual_review; overall passed=false"
+            }
+          }
+        },
+        {
+          "id": "wall-ladder-0.5",
+          "description": "band with 0.5 mm wall (below minimum, marginal at gildform empirical floor)",
+          "parameter": "wall_mm=0.5",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires (0.5 < 0.8 mm, severity warning); unmeasured constraints push to manual_review; overall passed=false"
+            }
+          }
+        },
+        {
+          "id": "wall-ladder-0.7",
+          "description": "band with 0.7 mm wall (below 0.8 mm threshold; at formlabs hollow-shell floor but inapplicable here)",
+          "parameter": "wall_mm=0.7",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires (0.7 < 0.8 mm, severity warning); unmeasured constraints push to manual_review; overall passed=false"
+            }
+          }
+        },
+        {
+          "id": "wall-ladder-0.8",
+          "description": "band with 0.8 mm wall (at threshold; must pass ctr-wall-001)",
+          "parameter": "wall_mm=0.8",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes (0.8 >= 0.8 mm); unmeasured constraints (ctr-thick-001 etc.) push overall to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "wall-ladder-1.0",
+          "description": "band with 1.0 mm wall (above threshold; safe)",
+          "parameter": "wall_mm=1.0",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes; unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "wall-ladder-1.2",
+          "description": "band with 1.2 mm wall (above threshold; safe)",
+          "parameter": "wall_mm=1.2",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes; unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "family": "feature-ladder",
+      "file": "benchmarks/feature-ladder.scad",
+      "description": "wires, stubs, holes, and prong-like features at descending sizes on a base plate",
+      "models": [
+        {
+          "id": "feature-ladder-all",
+          "description": "the complete feature-ladder file; individual sub-family features are assessed by the harness on the compiled mesh",
+          "parameter": "default",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "mesh-level measurements apply; ctr-wall-001 may warn on thin wires (0.3/0.35 mm diameter sub-minimum treated as walls by the ray-cast method); ctr-hole-001 and ctr-feat-001 are unmeasured by the five-measurement scope; overall manual_review"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "family": "hollow-shell",
+      "file": "benchmarks/hollow-shell.scad",
+      "description": "hollow pendants at 0.5/0.7/1.0/1.5 mm shell thickness, with and without drain holes",
+      "models": [
+        {
+          "id": "hollow-shell-nodrain-0.5",
+          "description": "hollow pendant, 0.5 mm shell, no drain holes",
+          "parameter": "shell_mm=0.5 drain=false",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires (hollow_parts detected, operator == false, severity error); ctr-nested-001 also fires; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-nodrain-0.7",
+          "description": "hollow pendant, 0.7 mm shell, no drain holes",
+          "parameter": "shell_mm=0.7 drain=false",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-nodrain-1.0",
+          "description": "hollow pendant, 1.0 mm shell, no drain holes",
+          "parameter": "shell_mm=1.0 drain=false",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-nodrain-1.5",
+          "description": "hollow pendant, 1.5 mm shell, no drain holes",
+          "parameter": "shell_mm=1.5 drain=false",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-drain-0.5",
+          "description": "hollow pendant, 0.5 mm shell, with drain holes (> 1.5 mm diameter, 2 holes per src-0001)",
+          "parameter": "shell_mm=0.5 drain=true",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires under the solid-only interim rule regardless of drain holes; drain holes are not in scope until a partner profile lifts the interim rule; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-drain-0.7",
+          "description": "hollow pendant, 0.7 mm shell (formlabs recommended minimum, src-0015), with drain holes",
+          "parameter": "shell_mm=0.7 drain=true",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires; overall invalid, passed=false. note: this model is the primary test that a future partner profile must pass when hollow support is confirmed."
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-drain-1.0",
+          "description": "hollow pendant, 1.0 mm shell, with drain holes",
+          "parameter": "shell_mm=1.0 drain=true",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "hollow-shell-drain-1.5",
+          "description": "hollow pendant, 1.5 mm shell, with drain holes",
+          "parameter": "shell_mm=1.5 drain=true",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-hollow-001 fires; overall invalid, passed=false"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "family": "size-family",
+      "file": "benchmarks/size-family.scad",
+      "description": "ring band at 1.0 mm wall across us sizes 3 to 13",
+      "models": [
+        {
+          "id": "size-family-us3",
+          "description": "ring band us size 3 (inner diameter 14.05 mm, value unverified see rule-digest)",
+          "parameter": "ring_size=3",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes (1.0 mm >= 0.8 mm); ctr-mesh-001 passes; bounding box within cooksongold envelope (30x50x70 mm, src-0010); unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "size-family-us6",
+          "description": "ring band us size 6 (inner diameter 16.51 mm, value unverified see rule-digest)",
+          "parameter": "ring_size=6",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes; unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "size-family-us9",
+          "description": "ring band us size 9 (inner diameter 18.89 mm, value unverified see rule-digest)",
+          "parameter": "ring_size=9",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes; unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "size-family-us12",
+          "description": "ring band us size 12 (inner diameter 21.26 mm, value unverified see rule-digest)",
+          "parameter": "ring_size=12",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes; unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "family": "symbolic-stress",
+      "file": "benchmarks/symbolic-stress.scad",
+      "description": "claddagh-like motif and double-heart base; thin joins and crown tines test wall minimum at production scale",
+      "models": [
+        {
+          "id": "symbolic-double-heart-safe",
+          "description": "double-heart with 1.0 mm join bridge (>= 0.8 mm; passes ctr-wall-001)",
+          "parameter": "join_width=1.0",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes (join >= 0.8 mm); unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "symbolic-double-heart-thin",
+          "description": "double-heart with 0.6 mm join bridge (< 0.8 mm; triggers ctr-wall-001 warning)",
+          "parameter": "join_width=0.6",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires on the 0.6 mm join (severity warning); overall warning or manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "symbolic-claddagh-like",
+          "description": "claddagh-like motif with 0.7 mm crown tines (below 0.8 mm; triggers ctr-wall-001 warning)",
+          "parameter": "default",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires on the 0.7 mm tines (severity warning); overall warning or manual_review; passed=false"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "family": "pathological",
+      "file": "benchmarks/pathological.scad",
+      "description": "disconnected components, near-tangent unions, trapped volumes, thin sliver, and boundary-value band",
+      "models": [
+        {
+          "id": "pathological-p001a",
+          "description": "two disconnected cubes with 0.1 mm gap (below 0.3 mm clearance threshold)",
+          "parameter": "case=p001a",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-clear-001 fires (0.1 mm < 0.3 mm, severity warning); overall warning or manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "pathological-p001b",
+          "description": "two disconnected cubes with 0.4 mm gap (above 0.3 mm clearance threshold; must pass)",
+          "parameter": "case=p001b",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-clear-001 passes (0.4 >= 0.3 mm); unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "pathological-p002",
+          "description": "two spheres in near-tangent union (near-zero clearance, < 0.3 mm)",
+          "parameter": "case=p002",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-clear-001 fires (gap approaches 0 mm); overall warning or manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "pathological-p003",
+          "description": "trapped volume: inner cube sealed inside outer shell (nested component)",
+          "parameter": "case=p003",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "fail",
+              "reason": "ctr-nested-001 fires (nested_components > 0, severity error); ctr-hollow-001 also fires; overall invalid, passed=false"
+            }
+          }
+        },
+        {
+          "id": "pathological-p004",
+          "description": "0.3 mm wall sliver (sub-minimum)",
+          "parameter": "case=p004",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires (0.3 < 0.8 mm, severity warning); overall warning or manual_review; passed=false"
+            }
+          }
+        },
+        {
+          "id": "pathological-p005",
+          "description": "ring band at exactly 0.8 mm wall (boundary value; must pass ctr-wall-001)",
+          "parameter": "case=p005",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "needs-manual-review",
+              "reason": "ctr-wall-001 passes (0.8 >= 0.8 mm; boundary value must not trigger a warning); unmeasured constraints push to manual_review; passed=false"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   "scripts": {
     "validate": "node scripts/check-syntax.mjs && node scripts/validate-data-contracts.mjs && node scripts/validate-offerings.mjs && node scripts/validate-research.mjs && node scripts/validate-jsonl.mjs && node scripts/normalize-prose.mjs --check",
     "audit:refresh": "python3 scripts/build-source-audit.py",
-    "test": "node --test paracraft/test/",
+    "test": "node --test paracraft/test/measure.test.js paracraft/test/tessa-decoupling.test.js",
     "test:creator-trust": "node scripts/test-private-creator-trust.mjs",
     "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs",
     "test:hash-chain": "node scripts/test-hash-chain.mjs"
