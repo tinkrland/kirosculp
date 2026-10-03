@@ -53,6 +53,42 @@ export async function handleCheckoutSubmit(req) {
     if (!listing || listing.release_id !== pr.releaseId) {
       return errorResponse(400, `Listing ${pr.listingId} does not reference release ${pr.releaseId}`);
     }
+
+    // 2. Submit-time destination gate: validate approved route exists
+    // Per contracts/checkout-intake.md, route approval is enforced at submit time
+    const routeValidation = await validateDestinationRoute(pr.destination.country_code, pr.listing_id);
+    
+    if (!routeValidation.approved) {
+      // Log rejection for demand signal analysis
+      await logRejectedSubmit({
+        reason_code: routeValidation.reason_code,
+        request_id: pr.request_id,
+        destination_country_code: pr.destination.country_code,
+        listing_id: pr.listing_id,
+        phase_id: routeValidation.phase_id,
+        market_status: routeValidation.market_status,
+        eliminated_routes: routeValidation.eliminated_routes,
+        timestamp_utc: new Date().toISOString()
+      });
+
+      // Return machine-readable rejection per contracts/checkout-intake.md
+      return {
+        status: 422,
+        body: {
+          error: {
+            code: routeValidation.reason_code,
+            message: routeValidation.message,
+            details: {
+              destination: pr.destination.country_code,
+              request_ids: purchaseRequests.map(r => r.request_id),
+              market_status: routeValidation.market_status,
+              phase_id: routeValidation.phase_id,
+              eliminated_routes: routeValidation.eliminated_routes
+            }
+          }
+        }
+      };
+    }
   }
 
   // 2. Route to operations for trusted pricing
@@ -113,6 +149,106 @@ async function fetchListing(listingId) {
   throw new Error('Not implemented: fetchListing');
 }
 
+async function validateDestinationRoute(countryCode, listingId) {
+  /**
+   * Submit-time destination gate per contracts/checkout-intake.md
+   * 
+   * Checks shipping-markets.json for approved routes to the destination.
+   * Returns rejection reason code if no route approved.
+   * 
+   * Reason codes:
+   * - route_not_approved: destination in markets file, approved_routes empty
+   * - route_pending: destination enabled, predicates under review
+   * - market_disabled: destination not in markets file at all
+   * - listing_route_constraint: listing constraints eliminate all routes
+   */
+  
+  // Load shipping-markets.json (in real implementation, cache this)
+  const markets = await loadShippingMarkets();
+  const market = markets.markets.find(m => m.country_code === countryCode);
+  
+  // market_disabled: destination not in shipping-markets.json
+  if (!market) {
+    return {
+      approved: false,
+      reason_code: 'market_disabled',
+      message: 'this destination is not enabled for checkout yet',
+      market_status: null,
+      phase_id: null,
+      eliminated_routes: null
+    };
+  }
+  
+  // route_not_approved: destination exists but no approved routes
+  if (market.approved_routes.length === 0) {
+    return {
+      approved: false,
+      reason_code: 'route_not_approved',
+      message: 'no approved manufacturing route exists for the selected destination',
+      market_status: market.status,
+      phase_id: market.phase_id,
+      eliminated_routes: null
+    };
+  }
+  
+  // Check listing-specific route constraints
+  const listing = await fetchListing(listingId);
+  const eligibleRoutes = market.approved_routes.filter(route => 
+    listingAllowsRoute(listing, route)
+  );
+  
+  // listing_route_constraint: listing eliminates all otherwise-approved routes
+  if (eligibleRoutes.length === 0) {
+    return {
+      approved: false,
+      reason_code: 'listing_route_constraint',
+      message: 'this listing cannot be fulfilled to the selected destination',
+      market_status: market.status,
+      phase_id: market.phase_id,
+      eliminated_routes: market.approved_routes
+    };
+  }
+  
+  // Route approved
+  return {
+    approved: true,
+    eligible_routes: eligibleRoutes
+  };
+}
+
+async function loadShippingMarkets() {
+  // Load operations/country-rollout/shipping-markets.json
+  // In real implementation, cache this data
+  throw new Error('Not implemented: loadShippingMarkets');
+}
+
+function listingAllowsRoute(listing, route) {
+  // Check if listing's provenance/routing constraints allow this route
+  // Example: EU-origin-only listings can't use non-EU routes
+  throw new Error('Not implemented: listingAllowsRoute');
+}
+
+async function logRejectedSubmit(rejectionData) {
+  /**
+   * Log rejected submit for demand signal analysis.
+   * 
+   * Logged fields:
+   * - reason_code
+   * - request_id (idempotency key)
+   * - destination_country_code
+   * - listing_id
+   * - phase_id (if market exists)
+   * - market_status (if market exists)
+   * - eliminated_routes (for listing_route_constraint)
+   * - timestamp_utc
+   * 
+   * Denied submits per destination signal which markets need route work next.
+   */
+  
+  // Insert into rejected_submits table or log stream
+  throw new Error('Not implemented: logRejectedSubmit');
+}
+
 async function callOperationsPricing(params) {
   // Call operations pricing service
   // This is where the trusted two-way pricing happens
@@ -134,7 +270,7 @@ function errorResponse(status, message) {
 }
 
 function successResponse(data) {
-  return { status: 200, body: data };
+  return { status, 200, body: data };
 }
 
 /**

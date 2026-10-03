@@ -68,6 +68,7 @@ export default function Checkout() {
   );
   const [saveAddr, setSaveAddr] = useState(!!savedAddr);
   const [notes, setNotes] = useState("");
+  const [destinationNotice, setDestinationNotice] = useState(null);
 
   useEffect(() => {
     const initCheckout = async () => {
@@ -113,6 +114,44 @@ export default function Checkout() {
     setStep((s) => Math.min(s + 1, 2));
   };
 
+  // Check if destination has approved routes (non-blocking notice)
+  const checkDestinationRoute = async (countryCode) => {
+    if (!countryCode) {
+      setDestinationNotice(null);
+      return;
+    }
+
+    try {
+      // Load shipping markets data (in production, this would be an API call)
+      // For now, client-side check against static data
+      const response = await fetch('/operations/country-rollout/shipping-markets.json');
+      const data = await response.json();
+      
+      const market = data.markets.find(m => m.country_code === countryCode);
+      
+      if (!market) {
+        setDestinationNotice({
+          type: 'warning',
+          message: "this destination isn't enabled yet. we're working on expanding availability."
+        });
+      } else if (market.approved_routes.length === 0) {
+        setDestinationNotice({
+          type: 'warning',
+          message: `${market.country_name} is in ${market.status} status. route approval is pending.`
+        });
+      } else {
+        setDestinationNotice({
+          type: 'success',
+          message: `${market.country_name} is available for delivery.`
+        });
+      }
+    } catch (error) {
+      console.error('Failed to check destination route:', error);
+      // Don't block on client-side check failure; server is authoritative
+      setDestinationNotice(null);
+    }
+  };
+
   const placeOrder = async () => {
     setIsPlacing(true);
     
@@ -150,6 +189,28 @@ export default function Checkout() {
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        
+        // Handle machine-readable rejection codes per contracts/checkout-intake.md
+        if (errorData.error && errorData.error.code) {
+          const { code, message, details } = errorData.error;
+          
+          // Log rejection for analytics
+          console.error('Checkout rejected:', {
+            reason_code: code,
+            destination: details.destination,
+            request_ids: details.request_ids,
+            timestamp: new Date().toISOString()
+          });
+          
+          // Show user-friendly error
+          toast.error(message);
+          
+          // Don't retry with same request_id - user must modify and resubmit
+          // which will mint new request_ids per idempotency rule
+          return;
+        }
+        
         throw new Error('Failed to submit order');
       }
 
@@ -329,7 +390,11 @@ export default function Checkout() {
                   <Label className="text-[11px] tracking-widest text-muted-foreground/50 uppercase">country</Label>
                   <select
                     value={address.country_code}
-                    onChange={(e) => setAddress((p) => ({ ...p, country_code: e.target.value }))}
+                    onChange={(e) => {
+                      const newCountryCode = e.target.value;
+                      setAddress((p) => ({ ...p, country_code: newCountryCode }));
+                      checkDestinationRoute(newCountryCode);
+                    }}
                     className="w-full rounded-xl bg-card border border-border/60 px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
                   >
                     <option value="">select country</option>
@@ -340,6 +405,15 @@ export default function Checkout() {
                     ))}
                   </select>
                 </div>
+                {destinationNotice && (
+                  <div className={`rounded-xl px-4 py-3 text-xs tracking-wide leading-relaxed ${
+                    destinationNotice.type === 'warning' 
+                      ? 'bg-amber-50 border border-amber-100 text-amber-700/80' 
+                      : 'bg-emerald-50 border border-emerald-100 text-emerald-700/80'
+                  }`}>
+                    {destinationNotice.message}
+                  </div>
+                )}
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input type="checkbox" checked={saveAddr} onChange={(e) => setSaveAddr(e.target.checked)} className="rounded" />
                   <span className="text-xs tracking-wide text-muted-foreground">save address for next time</span>

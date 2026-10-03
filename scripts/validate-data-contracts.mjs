@@ -405,3 +405,74 @@ if (brokenChain.valid) {
 }
 
 console.log("validated hash chain with 1 positive and 1 negative test case");
+
+
+// checkout intake rejection reason code validation
+// per contracts/checkout-intake.md
+
+const VALID_REJECTION_CODES = [
+  'route_not_approved',
+  'route_pending',
+  'market_disabled',
+  'listing_route_constraint'
+];
+
+// positive case: valid rejection response
+const validRejection = {
+  error: {
+    code: 'route_not_approved',
+    message: 'no approved manufacturing route exists for the selected destination',
+    details: {
+      destination: 'JP',
+      request_ids: ['550e8400-e29b-41d4-a716-446655440000'],
+      market_status: 'research',
+      phase_id: 'phase_2'
+    }
+  }
+};
+
+// negative case: invalid rejection code
+const invalidRejectionCode = {
+  error: {
+    code: 'invalid_destination', // not in VALID_REJECTION_CODES
+    message: 'some message',
+    details: {
+      destination: 'XX',
+      request_ids: []
+    }
+  }
+};
+
+// negative case: missing required fields
+const missingFields = {
+  error: {
+    code: 'route_not_approved',
+    // missing message and details
+  }
+};
+
+function validateCheckoutRejection(rejection, shouldPass) {
+  if (!rejection.error) return false;
+  if (!VALID_REJECTION_CODES.includes(rejection.error.code)) return false;
+  if (!rejection.error.message) return false;
+  if (!rejection.error.details) return false;
+  if (!rejection.error.details.destination) return false;
+  if (!rejection.error.details.request_ids || !Array.isArray(rejection.error.details.request_ids)) return false;
+  return true;
+}
+
+const checkoutPositive = validateCheckoutRejection(validRejection, true);
+const checkoutNegative1 = !validateCheckoutRejection(invalidRejectionCode, false);
+const checkoutNegative2 = !validateCheckoutRejection(missingFields, false);
+
+if (!checkoutPositive || !checkoutNegative1 || !checkoutNegative2) {
+  console.error("checkout intake rejection validation failed");
+  console.error({
+    validRejection: checkoutPositive,
+    invalidCode: checkoutNegative1,
+    missingFields: checkoutNegative2
+  });
+  process.exit(1);
+}
+
+console.log("validated checkout intake rejection codes with 1 positive and 2 negative test cases");
