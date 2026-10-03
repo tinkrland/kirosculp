@@ -2,6 +2,8 @@
 
 buyer-facing browsing, product detail, wishlists, carts, guest checkout, and authenticated account history. ordinary purchases do not require an account. commissions will.
 
+the engagement model (likes, lists, wishlist, follows, metal preference) is specified in [engagement.md](engagement.md).
+
 ## audited implementation reference
 
 **status: partial**
