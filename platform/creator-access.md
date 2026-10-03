@@ -12,16 +12,19 @@ automatically grants publication, discovery or commission availability.
 ## the artist account and its scope
 
 artist signup requires more than the buyer flow: an invite code, plus
-the gates below. the artist account is not the shop: the shop is a
+the gates below. the two words are not synonyms: an artist is the
+person with the ideas; a creator is the artist with marketplace
+entry. sculptura makes artists into creators: the invite admits an
+artist, and the gates below are what turn that artist into a
+creator. the artist account is not the shop: the shop is a
 separate handle and storefront object, currently connected to the
-artist. the artist account has entry to:
+artist. the account has entry to:
 
 - their studio (the design engine, releases)
 - their console (marketplace management: listings, orders, payouts)
 - their inspo collection (artist-account feature, separate from
   buyer lists, which belong to buyer accounts)
 
-"artist" and "creator" refer to the same account in repo docs.
 
 ## the separate gates
 
