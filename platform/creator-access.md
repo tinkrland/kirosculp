@@ -6,24 +6,32 @@ accounts, dumping reference urls and mass-publishing dropshipping listings
 are the excluded case.
 
 vgen-style invitations gate creator privileges, not ordinary buyer access.
-issuer eligibility and application/review mechanics remain open. no invitation
-automatically grants publication, discovery or commission availability.
+admission has two paths: an invite code, or signing up and waiting for
+manual review. issuer eligibility and application/review mechanics
+remain open. no invitation automatically grants publication, discovery
+or commission availability.
 
 ## the artist account and its scope
 
 artist signup requires more than the buyer flow: an invite code, plus
 the gates below. the two words are not synonyms: an artist is the
 person with the ideas; a creator is the artist with marketplace
-entry. sculptura makes artists into creators: the invite admits an
-artist, and the gates below are what turn that artist into a
-creator. the artist account is not the shop: the shop is a
-separate handle and storefront object, currently connected to the
-artist. the account has entry to:
+entry. sculptura makes artists into creators: the invite (or manual
+review) admits an artist, and the gates below are what turn that
+artist into a creator. the artist account is not the shop: the shop
+is a separate handle and storefront object, currently connected to
+the artist. the account has entry to:
 
-- their studio (the design engine, releases)
-- their console (marketplace management: listings, orders, payouts)
-- their inspo collection (artist-account feature, separate from
-  buyer lists, which belong to buyer accounts)
+- their studio (the design engine, releases) and inspo collection
+  (artist-account feature, separate from buyer lists, which belong
+  to buyer accounts) from admission onward
+- their console (marketplace management: listings, orders,
+  payouts) only once they are a creator
+
+the creator state presents as an earned creator badge and carries
+capability weight (console access). that makes it distinct from
+the cosmetic verification badges (verified email, verified phone),
+which are earned markers only and must never gate anything.
 
 
 ## the separate gates
