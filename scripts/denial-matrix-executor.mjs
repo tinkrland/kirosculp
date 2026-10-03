@@ -341,6 +341,172 @@ function getLedgerTests() {
       'admin', 'insert', "INSERT INTO public.ledger_entries (group_id, account, direction, amount_cents) VALUES (gen_random_uuid(), 'platform_fee', 'credit', 750);", 'deny', 'ledger_entries'),
   ];
 }
+
+/**
+ * artifacts test cases (authenticated role access control)
+ */
+function getArtifactsTests() {
+  return [
+    new TestCase('ar01', 'guest can read published artifacts only', 
+      'guest', 'select', "SELECT * FROM public.artifacts WHERE status = 'published';", 'allow', 'artifacts'),
+    
+    new TestCase('ar02', 'guest cannot read draft artifacts', 
+      'guest', 'select', "SELECT * FROM public.artifacts WHERE status = 'draft';", 'deny', 'artifacts'),
+    
+    new TestCase('ar03', 'buyer can read published artifacts', 
+      'buyer_carol', 'select', "SELECT * FROM public.artifacts WHERE status = 'published';", 'allow', 'artifacts'),
+    
+    new TestCase('ar04', 'buyer cannot read draft artifacts', 
+      'buyer_carol', 'select', "SELECT * FROM public.artifacts WHERE status = 'draft';", 'deny', 'artifacts'),
+    
+    new TestCase('ar05', 'alice can read own draft artifacts', 
+      'creator_alice', 'select', "SELECT * FROM public.artifacts WHERE created_by = auth.uid() AND status = 'draft';", 'allow', 'artifacts'),
+    
+    new TestCase('ar06', 'alice cannot read bob draft artifacts', 
+      'creator_alice', 'select', "SELECT * FROM public.artifacts WHERE created_by != auth.uid() AND status = 'draft';", 'deny', 'artifacts'),
+    
+    new TestCase('ar07', 'admin can read all artifacts including drafts', 
+      'admin', 'select', "SELECT * FROM public.artifacts;", 'allow', 'artifacts'),
+    
+    new TestCase('ar08', 'guest cannot insert artifacts', 
+      'guest', 'insert', "INSERT INTO public.artifacts (name, description, status, created_by) VALUES ('Test', 'Test artifact', 'draft', NULL);", 'deny', 'artifacts'),
+    
+    new TestCase('ar09', 'buyer cannot insert artifacts', 
+      'buyer_carol', 'insert', "INSERT INTO public.artifacts (name, description, status, created_by) VALUES ('Test', 'Test', 'draft', auth.uid());", 'deny', 'artifacts'),
+    
+    new TestCase('ar10', 'creator can insert artifacts with own created_by', 
+      'creator_alice', 'insert', "INSERT INTO public.artifacts (name, description, status, created_by, creator_handle) VALUES ('New Ring', 'Test', 'draft', auth.uid(), 'alice123');", 'allow', 'artifacts'),
+    
+    new TestCase('ar11', 'alice can update own artifacts', 
+      'creator_alice', 'update', "UPDATE public.artifacts SET description = 'Updated' WHERE created_by = auth.uid();", 'allow', 'artifacts'),
+    
+    new TestCase('ar12', 'alice cannot update bob artifacts', 
+      'creator_alice', 'update', "UPDATE public.artifacts SET description = 'Hijacked' WHERE created_by != auth.uid();", 'deny', 'artifacts'),
+    
+    new TestCase('ar13', 'admin can update all artifacts', 
+      'admin', 'update', "UPDATE public.artifacts SET status = 'published';", 'allow', 'artifacts'),
+  ];
+}
+
+/**
+ * creator_profiles test cases (authenticated role access control)
+ */
+function getCreatorProfilesTests() {
+  return [
+    new TestCase('cp01', 'guest can read all creator_profiles', 
+      'guest', 'select', 'SELECT * FROM public.creator_profiles;', 'allow', 'creator_profiles'),
+    
+    new TestCase('cp02', 'buyer can read all creator_profiles', 
+      'buyer_carol', 'select', 'SELECT * FROM public.creator_profiles;', 'allow', 'creator_profiles'),
+    
+    new TestCase('cp03', 'creator can read all creator_profiles', 
+      'creator_alice', 'select', 'SELECT * FROM public.creator_profiles;', 'allow', 'creator_profiles'),
+    
+    new TestCase('cp04', 'admin can read all creator_profiles', 
+      'admin', 'select', 'SELECT * FROM public.creator_profiles;', 'allow', 'creator_profiles'),
+    
+    new TestCase('cp05', 'guest cannot insert creator_profiles', 
+      'guest', 'insert', "INSERT INTO public.creator_profiles (user_id, username, display_name) VALUES (NULL, 'guest123', 'Guest');", 'deny', 'creator_profiles'),
+    
+    new TestCase('cp06', 'buyer cannot insert creator_profiles', 
+      'buyer_carol', 'insert', "INSERT INTO public.creator_profiles (user_id, username, display_name) VALUES (auth.uid(), 'carol123', 'Carol');", 'deny', 'creator_profiles'),
+    
+    new TestCase('cp07', 'creator can insert own creator_profile', 
+      'creator_bob', 'insert', "INSERT INTO public.creator_profiles (user_id, username, display_name, user_email) VALUES (auth.uid(), 'bob_new', 'Bob New', 'bob_new@test.local');", 'allow', 'creator_profiles'),
+    
+    new TestCase('cp08', 'alice can update own creator_profile', 
+      'creator_alice', 'update', "UPDATE public.creator_profiles SET bio = 'Updated bio' WHERE user_id = auth.uid();", 'allow', 'creator_profiles'),
+    
+    new TestCase('cp09', 'alice cannot update bob creator_profile', 
+      'creator_alice', 'update', "UPDATE public.creator_profiles SET bio = 'Hijacked' WHERE user_id != auth.uid();", 'deny', 'creator_profiles'),
+    
+    new TestCase('cp10', 'buyer cannot update creator_profiles', 
+      'buyer_carol', 'update', "UPDATE public.creator_profiles SET commission_open = false;", 'deny', 'creator_profiles'),
+    
+    new TestCase('cp11', 'admin can update all creator_profiles', 
+      'admin', 'update', "UPDATE public.creator_profiles SET commission_open = true;", 'allow', 'creator_profiles'),
+  ];
+}
+
+/**
+ * profiles test cases (authenticated role access control)
+ */
+function getProfilesTests() {
+  return [
+    new TestCase('pr01', 'guest can read all profiles', 
+      'guest', 'select', 'SELECT * FROM public.profiles;', 'allow', 'profiles'),
+    
+    new TestCase('pr02', 'buyer can read all profiles', 
+      'buyer_carol', 'select', 'SELECT * FROM public.profiles;', 'allow', 'profiles'),
+    
+    new TestCase('pr03', 'creator can read all profiles', 
+      'creator_alice', 'select', 'SELECT * FROM public.profiles;', 'allow', 'profiles'),
+    
+    new TestCase('pr04', 'admin can read all profiles', 
+      'admin', 'select', 'SELECT * FROM public.profiles;', 'allow', 'profiles'),
+    
+    new TestCase('pr05', 'guest cannot insert profiles', 
+      'guest', 'insert', "INSERT INTO public.profiles (id, email, display_name) VALUES (gen_random_uuid(), 'guest@test.com', 'Guest');", 'deny', 'profiles'),
+    
+    new TestCase('pr06', 'buyer can insert own profile', 
+      'buyer_carol', 'insert', "INSERT INTO public.profiles (id, email, display_name) VALUES (auth.uid(), 'carol_new@test.local', 'Carol New');", 'allow', 'profiles'),
+    
+    new TestCase('pr07', 'buyer can update own profile', 
+      'buyer_carol', 'update', "UPDATE public.profiles SET display_name = 'Carol Updated' WHERE id = auth.uid();", 'allow', 'profiles'),
+    
+    new TestCase('pr08', 'buyer cannot update other profiles', 
+      'buyer_carol', 'update', "UPDATE public.profiles SET display_name = 'Hijacked' WHERE id != auth.uid();", 'deny', 'profiles'),
+    
+    new TestCase('pr09', 'creator can update own profile', 
+      'creator_alice', 'update', "UPDATE public.profiles SET display_name = 'Alice Updated' WHERE id = auth.uid();", 'allow', 'profiles'),
+    
+    new TestCase('pr10', 'admin can update all profiles', 
+      'admin', 'update', "UPDATE public.profiles SET display_name = display_name || ' (verified)';", 'allow', 'profiles'),
+  ];
+}
+
+/**
+ * user_roles test cases (admin management only)
+ */
+function getUserRolesTests() {
+  return [
+    new TestCase('ur01', 'guest cannot read user_roles', 
+      'guest', 'select', 'SELECT * FROM public.user_roles;', 'deny', 'user_roles'),
+    
+    new TestCase('ur02', 'buyer cannot read user_roles', 
+      'buyer_carol', 'select', 'SELECT * FROM public.user_roles;', 'deny', 'user_roles'),
+    
+    new TestCase('ur03', 'creator cannot read user_roles', 
+      'creator_alice', 'select', 'SELECT * FROM public.user_roles;', 'deny', 'user_roles'),
+    
+    new TestCase('ur04', 'admin can read user_roles', 
+      'admin', 'select', 'SELECT * FROM public.user_roles;', 'allow', 'user_roles'),
+    
+    new TestCase('ur05', 'guest cannot insert user_roles', 
+      'guest', 'insert', "INSERT INTO public.user_roles (user_id, role) VALUES (gen_random_uuid(), 'admin');", 'deny', 'user_roles'),
+    
+    new TestCase('ur06', 'buyer cannot self-promote to admin', 
+      'buyer_carol', 'insert', "INSERT INTO public.user_roles (user_id, role) VALUES (auth.uid(), 'admin');", 'deny', 'user_roles'),
+    
+    new TestCase('ur07', 'creator cannot self-promote to admin', 
+      'creator_alice', 'insert', "INSERT INTO public.user_roles (user_id, role) VALUES (auth.uid(), 'admin');", 'deny', 'user_roles'),
+    
+    new TestCase('ur08', 'admin can insert user_roles', 
+      'admin', 'insert', `INSERT INTO public.user_roles (user_id, role) VALUES ('${TEST_USERS.buyer_carol.id}', 'admin');`, 'allow', 'user_roles'),
+    
+    new TestCase('ur09', 'buyer cannot update user_roles', 
+      'buyer_carol', 'update', "UPDATE public.user_roles SET role = 'admin';", 'deny', 'user_roles'),
+    
+    new TestCase('ur10', 'admin can update user_roles', 
+      'admin', 'update', "UPDATE public.user_roles SET role = 'member' WHERE role = 'admin';", 'allow', 'user_roles'),
+    
+    new TestCase('ur11', 'buyer cannot delete user_roles', 
+      'buyer_carol', 'delete', "DELETE FROM public.user_roles WHERE user_id = auth.uid();", 'deny', 'user_roles'),
+    
+    new TestCase('ur12', 'admin can delete user_roles', 
+      'admin', 'delete', "DELETE FROM public.user_roles WHERE role = 'member';", 'allow', 'user_roles'),
+  ];
+}
 /**
  * main execution function
  */
@@ -359,7 +525,11 @@ export async function executeDenialMatrix() {
       { name: 'Orders', tests: getOrdersTests() },
       { name: 'Market Accounts', tests: getMarketAccountsTests() },
       { name: 'Escrow Holds', tests: getEscrowTests() },
-      { name: 'Ledger Entries', tests: getLedgerTests() }
+      { name: 'Ledger Entries', tests: getLedgerTests() },
+      { name: 'Artifacts', tests: getArtifactsTests() },
+      { name: 'Creator Profiles', tests: getCreatorProfilesTests() },
+      { name: 'Profiles', tests: getProfilesTests() },
+      { name: 'User Roles', tests: getUserRolesTests() }
     ];
     
     let totalTests = 0;
