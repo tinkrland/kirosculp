@@ -270,7 +270,7 @@ function errorResponse(status, message) {
 }
 
 function successResponse(data) {
-  return { status, 200, body: data };
+  return { status: 200, body: data };
 }
 
 /**

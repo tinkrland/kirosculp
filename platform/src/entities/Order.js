@@ -15,7 +15,11 @@ export class Order {
     this.status = data.status;
     this.amounts = data.amounts; // server-computed: retail, manufacturing_cost, creator_net, platform_fee
     this.escrow = data.escrow; // escrow hold and ledger entry references
+    this.variant = data.variant;
+    this.quantity = data.quantity ?? 1;
+    this.destination = data.destination; // { country_code, region?, postal_code? }
     this.shipping_address = data.shipping_address;
+    this.request_id = data.request_id; // idempotency link to the purchase request
     this.created_at = data.created_at;
     this.updated_at = data.updated_at;
   }

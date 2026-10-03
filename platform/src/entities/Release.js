@@ -8,6 +8,7 @@ export class Release {
     this.version = data.version;
     this.creator_id = data.creator_id;
     this.created_at = data.created_at;
+    this.prev_hash = data.prev_hash ?? null; // hash chain link, contracts/design-release.schema.json
     this.engine = data.engine;
     this.type = data.type;
     this.parameters = data.parameters;
