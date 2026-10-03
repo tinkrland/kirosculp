@@ -38,8 +38,10 @@ three separate signals, deliberately not one "saves" feature:
 - account model: creator accounts and buyer accounts are entirely
   separate, with separate lists. the same person, the same email,
   still holds two accounts; engagement signals belong to the buyer
-  account and its buyer identifier number (bin). a creator who wants
-  to like, list, follow or wishlist switches to buyer mode.
+  account and its buyer identifier number (bin). the account types do
+  not even share a login surface: creators log in at
+  creator.sculptura.[tld] (e.g. /login), buyers at
+  customer.sculptura.[tld].
 - visibility: public to anyone with the link, and discoverable on
   the buyer's profile unless the buyer opts the list out of profile
   listing. a list can also be created private, but a private list is

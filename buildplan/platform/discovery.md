@@ -81,9 +81,10 @@ tab switches preserve the intent; they never re-run resolution.
   lists are shareable and viewable by anyone with the link; private
   ones are personal. lists are buyer-account-scoped: creator and
   buyer accounts are entirely separate, with separate lists, even
-  when the same person uses one email for both. a creator who wants
-  lists switches to buyer mode, where the account carries its own
-  buyer identifier number (bin). v1 keeps them out of the search tabs;
+  when the same person uses one email for both. the account types have
+  separate login surfaces: creators at creator.sculptura.[tld],
+  buyers at customer.sculptura.[tld]. the buyer account carries
+  its own buyer identifier number (bin). v1 keeps them out of the search tabs;
   surfacing them (e.g. "featured in lists" on a product page) is a
   later call.
 - **wishlists** are separate from lists: the flat save tool, private
