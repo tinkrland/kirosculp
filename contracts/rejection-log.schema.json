@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/rejection-log.schema.json",
+  "title": "checkout rejection log",
+  "description": "demand signal logging for rejected checkout submits. deliberately excludes buyer identity fields: this is a demand signal per destination, not a user record. logged when no approved route exists for the destination, or listing-specific routing constraints eliminate all otherwise-eligible routes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reason_code",
+    "request_id",
+    "country_code",
+    "listing_id",
+    "created_at"
+  ],
+  "properties": {
+    "reason_code": {
+      "type": "string",
+      "enum": [
+        "route_not_approved",
+        "route_pending",
+        "market_disabled",
+        "listing_route_constraint"
+      ],
+      "description": "machine-readable rejection reason. route_not_approved: destination is in shipping markets but has no approved routes. route_pending: destination is enabled but route predicates are under review. market_disabled: destination not in shipping markets file at all (default deny-by-default). listing_route_constraint: destination has approved routes, but listing's provenance or routing constraints eliminate every eligible route."
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "idempotency key from the purchase request. correlates rejection with the specific submit attempt."
+    },
+    "country_code": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2,
+      "pattern": "^[A-Z]{2}$",
+      "description": "destination country as ISO 3166-1 alpha-2. the market for which routing was unavailable."
+    },
+    "listing_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "the listing being purchased. required to understand which product demand signals come from."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "utc timestamp when the rejection occurred. must end with Z, no timezone abbreviations."
+    },
+    "phase_id": {
+      "type": ["string", "null"],
+      "description": "rollout phase id from shipping-markets.json when the market exists in the file. null when reason_code is market_disabled (destination absent from shipping markets entirely)."
+    }
+  }
+}

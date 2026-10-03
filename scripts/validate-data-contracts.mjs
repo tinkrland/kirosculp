@@ -477,6 +477,62 @@ if (!checkoutPositive || !checkoutNegative1 || !checkoutNegative2) {
 
 console.log("validated checkout intake rejection codes with 1 positive and 2 negative test cases");
 
+// rejection-log.schema.json with test cases
+const rejectionLogSchema = JSON.parse(fs.readFileSync(path.join(root, "contracts/rejection-log.schema.json"), "utf8"));
+const validateRejectionLog = ajv.compile(rejectionLogSchema);
+
+const rejectionLogPositiveCases = [
+  {
+    reason_code: "route_not_approved",
+    request_id: "550e8400-e29b-41d4-a716-446655440000",
+    country_code: "JP",
+    listing_id: "650e8400-e29b-41d4-a716-446655440000",
+    created_at: "2026-10-03T14:00:00Z",
+    phase_id: "phase_2"
+  }
+];
+
+const rejectionLogNegativeCases = [
+  {
+    name: "invalid reason_code",
+    data: {
+      reason_code: "destination_blocked", // not in enum
+      request_id: "550e8400-e29b-41d4-a716-446655440000",
+      country_code: "JP",
+      listing_id: "650e8400-e29b-41d4-a716-446655440000",
+      created_at: "2026-10-03T14:00:00Z",
+      phase_id: "phase_2"
+    }
+  },
+  {
+    name: "missing required field (listing_id)",
+    data: {
+      reason_code: "route_not_approved",
+      request_id: "550e8400-e29b-41d4-a716-446655440000",
+      country_code: "JP",
+      created_at: "2026-10-03T14:00:00Z",
+      phase_id: "phase_2"
+    }
+  }
+];
+
+for (const testCase of rejectionLogPositiveCases) {
+  if (!validateRejectionLog(testCase)) {
+    console.error("rejection-log.schema.json positive case failed");
+    console.error(validateRejectionLog.errors);
+    process.exit(1);
+  }
+}
+
+for (const testCase of rejectionLogNegativeCases) {
+  if (validateRejectionLog(testCase.data)) {
+    console.error(`rejection-log.schema.json negative case should have failed: ${testCase.name}`);
+    process.exit(1);
+  }
+}
+
+console.log("validated rejection-log.schema.json with 1 positive and 2 negative test cases");
+
 
 // route predicate record validation
 // per manufacturing/routing/route-approval.md

@@ -101,7 +101,7 @@ when the server rejects with a reason code:
 
 ## demand signal logging
 
-every rejected submit is logged server-side with:
+every rejected submit is logged server-side per [rejection-log.schema.json](rejection-log.schema.json):
 
 - reason code
 - request_id (idempotency key)
@@ -109,6 +109,8 @@ every rejected submit is logged server-side with:
 - listing_id
 - utc timestamp
 - phase_id (if market exists in shipping-markets.json)
+
+deliberately no buyer identity fields: this is a demand signal per destination, not a user record.
 
 denied submits per destination are the demand signal for which markets get route predicate work next. operations reviews these logs to prioritize phase_2 and phase_3 rollout.
 
