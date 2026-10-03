@@ -161,14 +161,22 @@ test("profile-001 on a 1mm box: five measured, rest unmeasured, manual review", 
   const m = measure(box);
   const r = validate(m, profile);
   const byId = Object.fromEntries(r.findings.map((f) => [f.constraint_id, f]));
-  assert.equal(byId["ctr-mesh-001"].status, "passed");
-  assert.equal(byId["ctr-nested-001"].status, "passed");
-  assert.equal(byId["ctr-wall-001"].status, "passed");
-  assert.equal(byId["ctr-clear-001"].status, "passed");
+
+  // the four constraints measurable on a plain box. profile-001 v0.2.0
+  // (commit 0eb6ea5) added ctr-hollow-001 and ctr-thick-001; both are
+  // unmeasured on a plain box, so unmeasured grows to 9.
+  const measuredSet = ["ctr-mesh-001", "ctr-nested-001", "ctr-clear-001", "ctr-wall-001"];
+  measuredSet.forEach((id) => {
+    assert.equal(byId[id].status, "passed", `${id} should pass`);
+  });
   assert.equal(byId["ctr-clear-001"].note, "single component, no clearances to check");
-  // everything outside the five-measurement scope must be unmeasured
+
+  // drift-proof: measured set is exactly the four above, unmeasured count
+  // equals total minus measured, so future profile growth only breaks this
+  // test if the measured set changes.
   const unmeasured = r.findings.filter((f) => f.status === "unmeasured");
-  assert.equal(unmeasured.length, 7);
+  assert.equal(unmeasured.length, r.findings.length - measuredSet.length);
+
   // the release gate forbids passed=true while any check is unmeasured
   assert.equal(r.status, "manual_review");
   assert.equal(r.passed, false);
