@@ -276,6 +276,7 @@ export function wallThickness(mesh) {
 export function measure(mesh) {
   const topo = topology(mesh);
   const components = connectedComponents(mesh);
+  const nested = nestedComponents(mesh, components);
   return {
     measurement_version: 1,
     units: "mm",
@@ -285,8 +286,19 @@ export function measure(mesh) {
     signed_volume_mm3: signedVolume(mesh),
     topology: topo,
     components: { count: components.length, method: "connected_component_analysis" },
-    nested_components: nestedComponents(mesh, components),
+    nested_components: nested,
     clearance: clearance(mesh, components),
     wall_thickness: wallThickness(mesh),
+    hollow_parts: hollowParts(nested),
+  };
+}
+
+// hollow parts: a component fully contained inside another component's closed
+// volume. nestedComponents already provides the detection via containment check.
+export function hollowParts(nested) {
+  return {
+    detected: nested.count > 0,
+    count: nested.count,
+    method: "nested_component_containment_check",
   };
 }

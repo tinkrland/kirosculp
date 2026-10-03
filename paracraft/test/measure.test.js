@@ -162,18 +162,17 @@ test("profile-001 on a 1mm box: five measured, rest unmeasured, manual review", 
   const r = validate(m, profile);
   const byId = Object.fromEntries(r.findings.map((f) => [f.constraint_id, f]));
 
-  // the four constraints measurable on a plain box. profile-001 v0.2.0
-  // (commit 0eb6ea5) added ctr-hollow-001 and ctr-thick-001; both are
-  // unmeasured on a plain box, so unmeasured grows to 9.
-  const measuredSet = ["ctr-mesh-001", "ctr-nested-001", "ctr-clear-001", "ctr-wall-001"];
+  // the five constraints measurable on a plain box (ctr-hollow-001 added in task 3)
+  const measuredSet = ["ctr-mesh-001", "ctr-nested-001", "ctr-clear-001", "ctr-wall-001", "ctr-hollow-001"];
   measuredSet.forEach((id) => {
     assert.equal(byId[id].status, "passed", `${id} should pass`);
   });
   assert.equal(byId["ctr-clear-001"].note, "single component, no clearances to check");
 
-  // drift-proof: measured set is exactly the four above, unmeasured count
-  // equals total minus measured, so future profile growth only breaks this
-  // test if the measured set changes.
+  // drift-proof: measured set is exactly the five above, unmeasured count
+  // equals total minus measured. profile-001 v0.2.0 added ctr-hollow-001 and
+  // ctr-thick-001; ctr-hollow-001 is now measured (hollow_parts), ctr-thick-001
+  // remains unmeasured on a plain box.
   const unmeasured = r.findings.filter((f) => f.status === "unmeasured");
   assert.equal(unmeasured.length, r.findings.length - measuredSet.length);
 
@@ -223,4 +222,20 @@ test("error-severity wall constraint: violation blocks with invalid", () => {
   const r2 = validate(measure(makeBox([0, 0, 0], [2, 2, 2])), strict);
   assert.equal(r2.status, "valid");
   assert.equal(r2.passed, true);
+});
+
+test("hollow_parts: nested fixture is hollow, others are not", () => {
+  const mNested = measure(nested);
+  assert.equal(mNested.hollow_parts.detected, true);
+  assert.equal(mNested.hollow_parts.count, 1);
+
+  const mBox = measure(box);
+  assert.equal(mBox.hollow_parts.detected, false);
+  assert.equal(mBox.hollow_parts.count, 0);
+
+  const mSlab = measure(slab);
+  assert.equal(mSlab.hollow_parts.detected, false);
+
+  const mTwoBoxes = measure(twoBoxes);
+  assert.equal(mTwoBoxes.hollow_parts.detected, false);
 });

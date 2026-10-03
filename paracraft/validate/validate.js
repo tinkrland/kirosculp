@@ -26,6 +26,8 @@ function measuredProperty(property, m) {
       return { value: m.clearance.min_mm, method: m.clearance.method };
     case "bounding_box":
       return { value: m.bounding_box.extents, method: "vertex_min_max" };
+    case "hollow_parts":
+      return { value: m.hollow_parts.detected, method: m.hollow_parts.method };
     default:
       return null; // not part of the five ready measurements
   }
