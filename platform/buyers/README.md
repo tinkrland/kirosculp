@@ -23,7 +23,9 @@ the engagement model (likes, lists, wishlist, follows, metal preference) is spec
 
 ### required changes
 
-- define buyer ownership and privacy for every list.
+- define buyer ownership and privacy for every list. the design is now
+  specified in [engagement.md](engagement.md); the remaining work is
+  implementing it.
 - support safe claiming of guest orders.
 - replace mixed demo/live behavior with explicit environments.
 

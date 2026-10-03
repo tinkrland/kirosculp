@@ -83,9 +83,13 @@ tab switches preserve the intent; they never re-run resolution.
   same rule as commissions. v1 keeps them out of the search tabs;
   surfacing them (e.g. "featured in lists" on a product page) is a
   later call.
-- **wishlists** are separate from lists: the flat save-for-later tool,
-  always private, never curated or shared. a wishlist is a personal
-  purchase-intent tracker, not an expression of taste; a list is.
+- **wishlists** are separate from lists: the flat save tool, private
+  from other buyers and never shareable, but creator-visible with the
+  buyer's identity redacted by default: the save name plus the saved
+  product is the signal, not who saved. a wishlist is both
+  purchase-intent and direction signal; the creator reads it, the
+  platform never interprets it. full model in
+  [engagement.md](../../platform/buyers/engagement.md).
 
 ## drops: scheduled release with a preclock
 
