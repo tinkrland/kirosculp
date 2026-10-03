@@ -27,38 +27,38 @@ source: hi3dp.com sla design guidelines page; accessed: 2026-09-23; confidence: 
 
 | rule | value | condition | source | accessed | confidence |
 |---|---|---|---|---|---|
-| sla layer resolution | 25-50 um | modern sla machines. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| xy accuracy | ~100 um | modern sla machines. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| practical minimum feature size | 0.5-1 mm | walls, text, and small bosses; for consistent printing and post-processing. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| minimum feature spacing | at least 1 mm | between small features; avoid fusing during polymerization or post-cure. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| minimum wall thickness | >= 0.8 mm | non-load-bearing geometries. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| minimum functional wall thickness | >= 1.5 mm | parts subject to handling or light loads. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| wall-thickness transitions | avoid abrupt changes; use fillets | between thick and thin sections; reduce internal stresses. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| sliding-fit clearance | 0.2-0.3 mm | per mating surface for sliding parts. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| snap-fit interference | 0.1 mm | stiff resins. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| snap-fit interference | 0.2 mm | flexible resins. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| post-cure shrinkage | ~1-2% linear | during post-cure; calibrate with test prints when tight tolerances are critical. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| shrinkage compensation | scale model by +1-2% or calibrate per resin | when shrinkage causes dimensional inaccuracy. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| cosmetic-surface orientation | face upward and away from support attachment locations | minimize supports on critical surfaces. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| steeper feature angle | 45-60 degrees | reduces cross-section per layer and speeds builds; may require more supports. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| flatter feature angle | 10-30 degrees | improves surface finish with fewer but larger supports. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| unsupported overhang threshold | >45 degrees | add supports or re-orient to avoid sagging or delamination. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| support-tip size and shape | small, conical tips; ~0.3 mm diameter | use for fine features. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| support density | denser | under heavy overhangs; prevent sagging. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| support placement | recessed or non-visible areas | avoid attaching supports to thin fins and fine text. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| support-post clearance | >= 1 mm | between support posts and thin walls; allow removal without gouging. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| drainage-hole count | at least two holes per cavity | one for resin evacuation and one for air entry. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| drainage-hole placement | high and low points | relative to the print orientation. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| drainage-hole diameter | >= 3 mm | standard resins. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| drainage-hole diameter | up to 5 mm | high-viscosity or filled resins. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| hollow-cavity wall thickness | >= 1.5 mm; nearly uniform | around the cavity; prevent deformation during curing and maintain structural integrity. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| batch orientation | 45 degrees | batch multiple parts alternatively at 45 degrees to balance fine detail vs. build height. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| xy-plane rotation | 5-10 degrees | slight rotation to randomize layer artifacts. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| thin-fin or spike thickness | >= 1 mm, or remove altogether | avoid breakage during build or cleanup. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| engraved-text height | 1 mm tall | standard resins. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| engraved-text stroke width | 0.2 mm | standard resins; use a test coupon if finer typography is needed. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| living-hinge flex-area thickness | 0.4-0.6 mm | tough or flexible resin. | hi3dp sla design guidelines | 2026-09-23 | medium |
-| living-hinge orientation | hinge axis perpendicular to the build plane | living hinges. | hi3dp sla design guidelines | 2026-09-23 | medium |
+| sla layer resolution | 25-50 um | modern sla machines. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| xy accuracy | ~100 um | modern sla machines. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| practical minimum feature size | 0.5-1 mm | walls, text, and small bosses; for consistent printing and post-processing. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| minimum feature spacing | at least 1 mm | between small features; avoid fusing during polymerization or post-cure. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| minimum wall thickness | >= 0.8 mm | non-load-bearing geometries. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| minimum functional wall thickness | >= 1.5 mm | parts subject to handling or light loads. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| wall-thickness transitions | avoid abrupt changes; use fillets | between thick and thin sections; reduce internal stresses. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| sliding-fit clearance | 0.2-0.3 mm | per mating surface for sliding parts. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| snap-fit interference | 0.1 mm | stiff resins. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| snap-fit interference | 0.2 mm | flexible resins. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| post-cure shrinkage | ~1-2% linear | during post-cure; calibrate with test prints when tight tolerances are critical. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| shrinkage compensation | scale model by +1-2% or calibrate per resin | when shrinkage causes dimensional inaccuracy. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| cosmetic-surface orientation | face upward and away from support attachment locations | minimize supports on critical surfaces. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| steeper feature angle | 45-60 degrees | reduces cross-section per layer and speeds builds; may require more supports. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| flatter feature angle | 10-30 degrees | improves surface finish with fewer but larger supports. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| unsupported overhang threshold | >45 degrees | add supports or re-orient to avoid sagging or delamination. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| support-tip size and shape | small, conical tips; ~0.3 mm diameter | use for fine features. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| support density | denser | under heavy overhangs; prevent sagging. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| support placement | recessed or non-visible areas | avoid attaching supports to thin fins and fine text. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| support-post clearance | >= 1 mm | between support posts and thin walls; allow removal without gouging. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| drainage-hole count | at least two holes per cavity | one for resin evacuation and one for air entry. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| drainage-hole placement | high and low points | relative to the print orientation. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| drainage-hole diameter | >= 3 mm | standard resins. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| drainage-hole diameter | up to 5 mm | high-viscosity or filled resins. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| hollow-cavity wall thickness | >= 1.5 mm; nearly uniform | around the cavity; prevent deformation during curing and maintain structural integrity. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| batch orientation | 45 degrees | batch multiple parts alternatively at 45 degrees to balance fine detail vs. build height. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| xy-plane rotation | 5-10 degrees | slight rotation to randomize layer artifacts. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| thin-fin or spike thickness | >= 1 mm, or remove altogether | avoid breakage during build or cleanup. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| engraved-text height | 1 mm tall | standard resins. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| engraved-text stroke width | 0.2 mm | standard resins; use a test coupon if finer typography is needed. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| living-hinge flex-area thickness | 0.4-0.6 mm | tough or flexible resin. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
+| living-hinge orientation | hinge axis perpendicular to the build plane | living hinges. | hi3dp sla design guidelines | 2026-09-23 | medium (generic sla, not casting-specific) |
 
 ### gaps
 
@@ -113,12 +113,12 @@ source: sculpteo.com sterling silver casting page; accessed: 2026-09-23; confide
 
 ### sculpteo bronze casting page
 
-source: sculpteo.com bronze casting page; accessed: 2026-09-23; confidence: low (minimal data extracted; page may have been rate-limited or incomplete)
+source: sculpteo.com bronze casting page; accessed: 2026-09-23; confidence: low (minimal data extracted; page may have been rate-limited or incomplete; only two facts recovered)
 
 | rule | value | condition | source | accessed | confidence |
 |---|---|---|---|---|---|
-| upload access | an account is required to upload files and obtain live quotes. | before starting 3d printing or laser cutting. | sculpteo bronze | 2026-09-23 | low |
-| manufacturing process | lost-wax casting | sculpteo's bronze material. | sculpteo bronze | 2026-09-23 | low |
+| upload access | an account is required to upload files and obtain live quotes. | before starting 3d printing or laser cutting. | sculpteo bronze | 2026-09-23 | low (minimal data extracted; page may have been rate-limited or incomplete) |
+| manufacturing process | lost-wax casting | sculpteo's bronze material. | sculpteo bronze | 2026-09-23 | low (minimal data extracted; page may have been rate-limited or incomplete) |
 
 ### gaps
 
@@ -132,11 +132,11 @@ source: sculpteo.com bronze casting page; accessed: 2026-09-23; confidence: low 
 
 ### raise3d wall thickness reference
 
-source: raise3d wall thickness reference page; accessed: 2026-09-23; confidence: low (no numeric data extracted; table of contents only)
+source: raise3d wall thickness reference page; accessed: 2026-09-23; confidence: low (no numeric data extracted; table of contents only; single source with no usable constraint values)
 
 | rule | value | condition | source | accessed | confidence |
 | --- | --- | --- | --- | --- | --- |
-| process-specific minimum and maximum wall thickness | not provided in the supplied text | fff, sla, MJF/SLS, and slm appear only in the table of contents. | raise3d reference | 2026-09-23 | low |
+| process-specific minimum and maximum wall thickness | not provided in the supplied text | fff, sla, MJF/SLS, and slm appear only in the table of contents. | raise3d reference | 2026-09-23 | low (no numeric data extracted; table of contents only) |
 
 **gaps**
 - no minimum or maximum wall thickness for fff or any other listed process.
@@ -407,8 +407,61 @@ source: openscad.org downloads page; accessed: 2026-09-23; confidence: high (off
 - no output-compatibility guarantees or explicit version-scheme rules are stated.
 
 
+### gildform 3d model design requirements and guidelines
+
+source: support.gildform.com 3d model design requirements page; accessed: 2026-09-24; confidence: high (tier-1 casting bureau; empirical test data for wall thickness; lost-wax from castable wax resin)
+
+| rule | value | condition | source | accessed | confidence |
+|---|---|---|---|---|---|
+| recommended layer height | 25 microns | fine jewelry models | gildform | 2026-09-24 | high |
+| wall thickness 0.3 mm result | fail: concave walls, incomplete casting fill | empirical ring test; result cannot be overcome by recasting | gildform | 2026-09-24 | high |
+| wall thickness 0.5 mm result | marginal: complete fill but concave distortion | empirical ring test; distortion not structurally safe after filing | gildform | 2026-09-24 | high |
+| wall thickness 0.75 mm result | pass: minor surface depressions, structurally sound | empirical ring test; production-safe minimum | gildform | 2026-09-24 | high |
+| minimum through-hole diameter | 0.5 mm | through holes in castable pieces; smaller possible but inconsistent | gildform | 2026-09-24 | high |
+| draft angle recommendation | 5 degrees minimum on walls and prongs | taper from thicker base to thinner top; larger draft always improves castability | gildform | 2026-09-24 | high |
+| engraving in 3d model | not recommended; causes casting and finishing quality issues | use laser engraving or stamping for fine engraving instead | gildform | 2026-09-24 | high |
+| minimum letter height for engraving survival | 1.5 mm | ornate script tends to fail below this height at both 0.3 mm and 0.5 mm depth | gildform | 2026-09-24 | high |
+| hollow large pieces | design as hollow forms with wall thickness maintaining structural integrity | large pieces must be hollow; watertight manifold model required | gildform | 2026-09-24 | high |
+| hollow bangle: single 3.5 mm hole | insufficient for casting | investment cannot fill hollow interior through one small hole | gildform | 2026-09-24 | high |
+| hollow bangle: multiple larger holes | pass | multiple larger access holes allow successful investment and casting | gildform | 2026-09-24 | high |
+| internal sharp corners | fillet internal edges wherever possible | sharp investment edges break off into the casting during metal pour | gildform | 2026-09-24 | high |
+| watertight model | required; all surfaces booleaned into a single unified solid | grouped (non-boolean) components with open edges cause print artifacts | gildform | 2026-09-24 | high |
+| maximum piece size | 3 in x 4 in (76 mm x 102 mm) | larger pieces are out of scope | gildform | 2026-09-24 | high |
+
+### gaps
+
+- no minimum wall thickness for large hollow pieces (bangle example uses 0.9 mm but this is not stated as a rule).
+- no numeric minimum for internal fillet radius.
+- no hollow piece drain hole count or minimum hole diameter beyond the empirical 3.5 mm insufficient result.
+- no alloy-specific rules; page covers all precious metals without per-alloy distinctions.
+- no sprue placement or sprue dimension guidance.
+
+
+### openscad cheat sheet (primitives and resolution variables)
+
+source: openscad.org/cheatsheet; accessed: 2026-09-24; confidence: high (official openscad documentation; resolves the failed scrape of the primitives manual page)
+
+| rule | value | condition | source | accessed | confidence |
+|---|---|---|---|---|---|
+| 3d primitives | `sphere`, `cube`, `cylinder`, `polyhedron`, `import`, `linear_extrude`, `rotate_extrude`, `surface` | openscad 3d geometry creation | openscad cheatsheet | 2026-09-24 | high |
+| two-radius cylinder | `cylinder(h, r1\|d1, r2\|d2, center)` | truncated cone; r1 and r2 are bottom and top radii | openscad cheatsheet | 2026-09-24 | high |
+| boolean operations | `union()`, `difference()`, `intersection()` | combine, subtract, and intersect child solids | openscad cheatsheet | 2026-09-24 | high |
+| resolution: segment count | `$fn` | number of polygon segments for circles and curves; overrides $fa and $fs when set | openscad cheatsheet | 2026-09-24 | high |
+| resolution: minimum angle | `$fa` | minimum angle per segment; controls curve smoothness | openscad cheatsheet | 2026-09-24 | high |
+| resolution: minimum segment length | `$fs` | minimum segment length; controls curve smoothness | openscad cheatsheet | 2026-09-24 | high |
+| transformations | `translate`, `rotate`, `scale`, `resize`, `mirror`, `multmatrix`, `color`, `offset`, `hull`, `minkowski` | geometry transformations and operations | openscad cheatsheet | 2026-09-24 | high |
+| 2d primitives | `circle`, `square`, `polygon`, `text`, `import` (DXF/SVG), `projection` | 2d shapes for extrusion | openscad cheatsheet | 2026-09-24 | high |
+| special variables | `$t` (animation step), `$vpr`, `$vpt`, `$vpd`, `$vpf` (viewport), `$children`, `$preview` | animation and rendering context variables | openscad cheatsheet | 2026-09-24 | high |
+| customizer version requirement | openscad 2019.05 or later | customizer feature for parameter gui editing | openscad cheatsheet | 2026-09-24 | high |
+
+### gaps
+
+- no numeric defaults for `$fa`, `$fs`, or `$fn`; the cheatsheet lists the variables but not their default values.
+- no cli export flags, output format options, or batch rendering syntax.
+- no version-specific feature availability table beyond the customizer note.
+
+
 ## next extraction targets
 
-- the openscad 2d/3d primitives manual page failed to scrape (the retrieval returned a missing-page notice); the language reference for primitives and resolution variables still needs a clean pull.
-- gildform's model requirements page rate-limited twice; it moves to the ask list.
 - per the gaps lists above: every partner's shrinkage factor, dimensional tolerance, sprue dimensions, and burnout setpoints remain unpublished and move to [acquire.md](acquire.md).
+- gildform hollow drain hole minimum diameter and count: the empirical evidence shows 3.5 mm is insufficient but no minimum is stated; this is a direct partner ask.

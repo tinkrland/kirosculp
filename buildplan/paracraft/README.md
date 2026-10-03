@@ -30,3 +30,7 @@ tessa may depend on paracraft: her proposals target paracraft's parameter envelo
 ## boundaries
 
 paracraft does not quote prices, choose partners, or decide route eligibility: those belong to [operations](../../operations/README.md) and [manufacturing](../../manufacturing/README.md). tessa hands paracraft constrained parameters; paracraft never receives freeform intent. a rule value without a dated source is `drafted`, never active.
+
+## build environment notes
+
+**npm test on windows node v22:** `node --test paracraft/test/` fails on windows node v22 (tested: v22.22.2) because node treats the path as a module identifier, not a directory glob. it resolves to nothing and exits without running tests. the explicit file list (`node --test paracraft/test/measure.test.js paracraft/test/tessa-decoupling.test.js`) works and was used in package.json. the test script has been reverted to the glob form (`node --test paracraft/test/`) to match the documented interface; teams running on windows node v22 must either upgrade to a node version where the directory-glob behaviour is restored, or use the explicit file list locally. ci must use linux or macos, or explicitly list files. this issue was observed on windows powershell 5.1 with node v22.22.2; it does not affect unix-like environments where the shell expands the path before node sees it.

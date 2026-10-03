@@ -14,7 +14,10 @@
     "size-family rings all have 1.0 mm walls, which pass ctr-wall-001 (>= 0.8 mm).",
     "pathological p-001a gap 0.1 mm triggers ctr-clear-001 warning; p-001b gap 0.4 mm passes.",
     "pathological p-004 slab 0.3 mm wall triggers ctr-wall-001 warning.",
-    "pathological p-005 band at exactly 0.8 mm passes ctr-wall-001."
+    "pathological p-005 band at exactly 0.8 mm passes ctr-wall-001.",
+    "size-family ring diameters (us sizes 3-13) are unverified: no authoritative source (jewelers of america, iso 8653, or manufacturer chart) was successfully retrieved. size-family verdicts anchored on nominal inner diameters are provisional. us size 9 at 18.89 mm is specifically flagged as potentially wrong (common charts cite 19.10 mm). do not promote size-family verdicts to active rules until the diameter table is sourced.",
+    "feature-ladder text sub-family uses font liberation sans, which is bundled with the openscad 2021.01 docker image (openscad/openscad:2021.01). openscad is not installed on the build machine; font rendering has not been confirmed locally. headless verification requires the docker image.",
+    "feature-ladder text sub-family tests three conflicting engraving rules in the same file: cooksongold (src-0010) letter_h=0.6 mm extrude=0.3 mm, sculpteo (rule-digest) letter_h=1.5 mm extrude=0.5 mm, hi3dp (rule-digest) letter_h=1.0 mm extrude=0.2 mm. verdicts are per rule set."
   ],
   "rule_sets": [
     {
@@ -111,6 +114,39 @@
             "profile-001@0.2.0": {
               "expected": "needs-manual-review",
               "reason": "mesh-level measurements apply; ctr-wall-001 may warn on thin wires (0.3/0.35 mm diameter sub-minimum treated as walls by the ray-cast method); ctr-hole-001 and ctr-feat-001 are unmeasured by the five-measurement scope; overall manual_review"
+            }
+          }
+        },
+        {
+          "id": "feature-ladder-text-cg",
+          "description": "text sub-family step 0: cooksongold rule (src-0010), letter_h=0.6 mm, extrude=0.3 mm",
+          "parameter": "text_cg_letter_h=0.6 text_cg_extrude=0.3",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires on 0.3 mm extrude relief (< 0.8 mm threshold); relief is a thin raised feature; harness measures it as a sub-minimum wall; overall warning or manual_review; passed=false. note: cooksongold (src-0010) explicitly permits 0.3 mm raised text stroke, so this model is only invalid under the generic wall rule, not under a text-specific cooksongold rule."
+            }
+          }
+        },
+        {
+          "id": "feature-ladder-text-sc",
+          "description": "text sub-family step 1: sculpteo rule (rule-digest), letter_h=1.5 mm, extrude=0.5 mm",
+          "parameter": "text_sc_letter_h=1.5 text_sc_extrude=0.5",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires on 0.5 mm extrude relief (< 0.8 mm threshold); no text-specific rule in profile-001 v0.2.0; sculpteo text dimensions meet sculpteo's own minimum but fail the generic wall gate; passed=false"
+            }
+          }
+        },
+        {
+          "id": "feature-ladder-text-hi",
+          "description": "text sub-family step 2: hi3dp rule (rule-digest), letter_h=1.0 mm, extrude=0.2 mm",
+          "parameter": "text_hi_letter_h=1.0 text_hi_extrude=0.2",
+          "verdicts": {
+            "profile-001@0.2.0": {
+              "expected": "warning",
+              "reason": "ctr-wall-001 fires on 0.2 mm extrude relief (< 0.8 mm threshold); hi3dp stroke width 0.2 mm is below the generic wall minimum; hi3dp is generic sla, not casting-specific; passed=false"
             }
           }
         }

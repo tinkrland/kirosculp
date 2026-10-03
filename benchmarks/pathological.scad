@@ -71,10 +71,6 @@ module p003() {
 
 // p-004: sub-minimum wall sliver; 0.3 mm wall is below the 0.8 mm threshold
 module p004() {
-    difference() {
-        cube([slab_x, slab_y, 0.3]);
-        // open top to create a shell; not needed here; slab itself is the thin wall
-    }
     cube([slab_x, slab_y, 0.3]);
 }
 
