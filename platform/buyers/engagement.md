@@ -47,7 +47,9 @@ three separate signals, deliberately not one "saves" feature:
   expansion pass, the same cycle as free-tag clustering.
 - creator visibility: creators see aggregate list-save counts and
   which public lists contain their pieces, since public lists are
-  public. private-list saves show as anonymous saves only.
+  public. list saves are distinct from wishlist saves: lists are a
+  public curation surface, wishlist is the private-save surface
+  with creator visibility per above.
 - anti-gaming: a shared list is free promotion, so list creation
   and list-visibility spam are rate-limited, and list-save signals
   are trust-weighted. one coordinated shop's lists full of its own
@@ -55,20 +57,32 @@ three separate signals, deliberately not one "saves" feature:
 
 ### wishlist
 
-- what: one private, unshareable list on the account. the
-  closest-to-purchase signal, therefore the most sensitive and the
-  most gameable.
-- visibility: fully private. never shareable, never shown to
-  creators with any identity, never shown on the buyer's profile.
-  creators may see an anonymous aggregate count ("42 people want
-  this"); whether that aggregate is exposed at all is a launch-time
-  product decision, not a schema one.
-- signal use: wishlist adds count toward discovery ranking as
-  demand signal, even though the list itself is invisible. the
-  visibility layer and the signal layer are separate: an invisible
-  signal can still be a signal. trust-weighted like everything else.
-- no partial visibility: no "your friend wished for this" features,
-  no shared wishlists, no notifications to creators about who.
+- what: the account's private save. the buyer can name or group
+  their wishlist saves ("romantasyera"). the closest-to-purchase
+  signal, therefore the most sensitive and the most gameable.
+- visibility: private from other buyers. never shareable, never
+  shown on the buyer's profile, never surfaced to other buyers in
+  any form. but the creator sees each save: "___ added this to
+  their wishlist 'romantasyera'", buyer name and list name both.
+  the buyer controls this with a first-class visibility setting
+  (opt-out respected from the oct 2026 decision), and the save
+  flow states the visibility plainly, not buried in settings.
+- why creator-visible: this is the demographic and direction signal.
+  the creator sees who is saving their work and how buyers name
+  their saves, and reads it themselves: who their demographic is
+  becoming, what style they might lean toward. the platform does
+  not interpret the signal, summarize it, or suggest anything from
+  it; interpretation is the creator's own, consistent with the
+  standing rule that sculptura never recommends styles, rates, or
+  directions.
+- signal use: wishlist adds also count toward discovery ranking as
+  demand signal, trust-weighted. the visibility layer and the
+  signal layer remain separate.
+- anti-gaming: identity-bearing visibility is a sybil surface: a
+  coordinated buyer account can fake demographic signal for a
+  creator. saves are trust-weighted before ranking, and creator
+  facing save feeds show buyer trust context to sculptura
+  operations only, never to the creator.
 
 ## follows
 
@@ -152,12 +166,15 @@ one engagement-event contract, with a visibility class per event:
 
 - events: like_add, like_remove, list_create, list_add, list_share,
   wishlist_add, follow_creator, follow_aesthetic, follow_remove
-- visibility classes: buyer-private (like, wishlist), public
-  (list), aggregate-only (creator-facing counts)
+- visibility classes: buyer-private (like), buyer-private-to-others
+  but creator-visible (wishlist saves, subject to the buyer's
+  visibility setting), public (list), aggregate-only
+  (creator-facing counts)
 - every event carries buyer trust class at aggregation time, never
   at event emission
-- no free-text event payloads except list names, which are public
-  by the list's own visibility, never identity-bearing
+- free-text payloads are buyer-authored save and list names only;
+  identity in creator-facing surfaces is the platform account name,
+  never free text
 
 schema work is a later kiro task once this model is stable; this
 document is the design it implements.
