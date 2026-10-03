@@ -28,10 +28,12 @@ the artist. the account has entry to:
 - their console (marketplace management: listings, orders,
   payouts) only once they are a creator
 
-the creator state presents as an earned creator badge and carries
-capability weight (console access). that makes it distinct from
-the cosmetic verification badges (verified email, verified phone),
-which are earned markers only and must never gate anything.
+the creator state is a step, not a badge: the next stage in the
+artist-to-creator progression, earned by clearing the gates. it
+carries capability weight (console access), which keeps it
+distinct from the cosmetic verification badges (verified email,
+verified phone), which are earned markers only and never gate
+anything.
 
 
 ## the separate gates
