@@ -74,13 +74,16 @@ tab switches preserve the intent; they never re-run resolution.
   a shop's lookbooks. they appear on the creator page (overview strip
   and a collections view), can be tagged within the vocabulary, and
   are marketing objects: they reference listings, never raw releases.
-- **lists** are non-creator objects, like etsy lists: any logged-in
-  user (creator or buyer, but never a marketing object) curates pieces
+- **lists** are non-creator objects, like etsy lists: a buyer account
+  (never a marketing object) curates pieces
   from any creators into named, ordered lists ("gift ideas", "stack
   goals", "moody gold"), with **public or private visibility**. public
   lists are shareable and viewable by anyone with the link; private
-  ones are personal. lists are user-scoped, so login is required, the
-  same rule as commissions. v1 keeps them out of the search tabs;
+  ones are personal. lists are buyer-account-scoped: creator and
+  buyer accounts are entirely separate, with separate lists, even
+  when the same person uses one email for both. a creator who wants
+  lists switches to buyer mode, where the account carries its own
+  buyer identifier number (bin). v1 keeps them out of the search tabs;
   surfacing them (e.g. "featured in lists" on a product page) is a
   later call.
 - **wishlists** are separate from lists: the flat save tool, private
