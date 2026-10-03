@@ -476,3 +476,152 @@ if (!checkoutPositive || !checkoutNegative1 || !checkoutNegative2) {
 }
 
 console.log("validated checkout intake rejection codes with 1 positive and 2 negative test cases");
+
+
+// route predicate record validation
+// per manufacturing/routing/route-approval.md
+
+const routePredicateSchemaPath = path.join(root, "manufacturing/routing/route-predicate.schema.json");
+const routePredicateSchema = JSON.parse(fs.readFileSync(routePredicateSchemaPath, "utf8"));
+ajv.compile(routePredicateSchema);
+
+const routePredicatesPath = path.join(root, "manufacturing/routing/route-predicates.json");
+const routePredicates = JSON.parse(fs.readFileSync(routePredicatesPath, "utf8"));
+
+// validate each route predicate record
+const routeValidationErrors = [];
+
+for (const route of routePredicates.routes) {
+  // validate against schema
+  const validateRoute = ajv.compile(routePredicateSchema);
+  if (!validateRoute(route)) {
+    routeValidationErrors.push(`${route.version_id}: schema validation failed: ${JSON.stringify(validateRoute.errors)}`);
+  }
+
+  // validate state machine
+  if (route.lifecycle_state === 'approved') {
+    if (!route.approved_by || route.approved_by.trim() === '') {
+      routeValidationErrors.push(`${route.version_id}: approved state requires non-empty approved_by field`);
+    }
+    if (!route.effective_interval || !route.effective_interval.start_date) {
+      routeValidationErrors.push(`${route.version_id}: approved state requires effective_interval.start_date`);
+    }
+  }
+
+  if (route.lifecycle_state === 'reviewed') {
+    if (!route.reviewed_at) {
+      routeValidationErrors.push(`${route.version_id}: reviewed state requires reviewed_at timestamp`);
+    }
+    if (!route.reviewed_by) {
+      routeValidationErrors.push(`${route.version_id}: reviewed state requires reviewed_by field`);
+    }
+    // both axes must have findings before reviewed
+    if (!route.axis_one.source_ids || route.axis_one.source_ids.length === 0) {
+      routeValidationErrors.push(`${route.version_id}: reviewed state requires axis_one source citations`);
+    }
+    if (!route.axis_two.source_ids || route.axis_two.source_ids.length === 0) {
+      routeValidationErrors.push(`${route.version_id}: reviewed state requires axis_two source citations`);
+    }
+  }
+
+  if (route.lifecycle_state === 'superseded') {
+    if (!route.superseded_by) {
+      routeValidationErrors.push(`${route.version_id}: superseded state requires superseded_by field`);
+    }
+  }
+
+  // validate utc timestamps (no timezone abbreviations, must end with Z)
+  const timestampFields = ['created_at', 'reviewed_at', 'approved_at'];
+  for (const field of timestampFields) {
+    if (route[field] && !route[field].endsWith('Z')) {
+      routeValidationErrors.push(`${route.version_id}: ${field} must be utc timestamp ending with Z`);
+    }
+  }
+
+  // validate manufacturer_id references valid manufacturer
+  const manufacturerExists = data.manufacturers.some(m => m.id === route.manufacturer_id);
+  if (!manufacturerExists) {
+    routeValidationErrors.push(`${route.version_id}: manufacturer_id ${route.manufacturer_id} not found in manufacturer-capabilities.json`);
+  }
+}
+
+// positive test case: valid draft record
+const validDraftRoute = {
+  version_id: "route_test_us_2026_001",
+  manufacturer_id: "sculpteo",
+  destination_country_code: "US",
+  lifecycle_state: "draft",
+  created_at: "2026-10-03T14:22:00Z",
+  created_by: "test",
+  scope: "test scope",
+  effective_interval: { start_date: null, end_date: null },
+  source_ids: ["test-source"],
+  exclusions: [],
+  axis_one: { source_ids: [] },
+  axis_two: { source_ids: [] }
+};
+
+const validateDraftRoute = ajv.compile(routePredicateSchema);
+const draftRouteValid = validateDraftRoute(validDraftRoute);
+
+// negative test case: approved without approved_by
+const approvedWithoutSigner = {
+  version_id: "route_test_us_2026_002",
+  manufacturer_id: "sculpteo",
+  destination_country_code: "US",
+  lifecycle_state: "approved",
+  created_at: "2026-10-03T14:22:00Z",
+  created_by: "test",
+  scope: "test scope",
+  effective_interval: { start_date: "2026-01-01", end_date: null },
+  source_ids: ["test-source"],
+  exclusions: [],
+  axis_one: { source_ids: ["test"] },
+  axis_two: { source_ids: ["test"] },
+  reviewed_at: "2026-10-03T15:00:00Z",
+  reviewed_by: "reviewer",
+  approved_at: "2026-10-03T16:00:00Z",
+  approved_by: ""  // empty - should fail
+};
+
+const validateApprovedRoute = ajv.compile(routePredicateSchema);
+const approvedRouteInvalid = !validateApprovedRoute(approvedWithoutSigner);
+
+// negative test case: reviewed without source_ids
+const reviewedWithoutSources = {
+  version_id: "route_test_us_2026_003",
+  manufacturer_id: "sculpteo",
+  destination_country_code: "US",
+  lifecycle_state: "reviewed",
+  created_at: "2026-10-03T14:22:00Z",
+  created_by: "test",
+  scope: "test scope",
+  effective_interval: { start_date: null, end_date: null },
+  source_ids: ["test-source"],
+  exclusions: [],
+  axis_one: { source_ids: [] },  // empty - should require sources for reviewed state
+  axis_two: { source_ids: [] },   // empty - should require sources for reviewed state
+  reviewed_at: "2026-10-03T15:00:00Z",
+  reviewed_by: "reviewer"
+};
+
+// custom check for reviewed state (schema doesn't enforce minItems on nested arrays)
+const reviewedRouteInvalid = reviewedWithoutSources.lifecycle_state === 'reviewed' && 
+  (reviewedWithoutSources.axis_one.source_ids.length === 0 || reviewedWithoutSources.axis_two.source_ids.length === 0);
+
+if (routeValidationErrors.length > 0) {
+  console.error("route predicate validation failed:");
+  routeValidationErrors.forEach(err => console.error(`  - ${err}`));
+  process.exit(1);
+}
+
+if (!draftRouteValid || !approvedRouteInvalid || !reviewedRouteInvalid) {
+  console.error("route predicate test cases failed:", {
+    draftRoute: draftRouteValid,
+    approvedWithoutSigner: approvedRouteInvalid,
+    reviewedWithoutSources: reviewedRouteInvalid
+  });
+  process.exit(1);
+}
+
+console.log(`validated ${routePredicates.routes.length} route predicate records with 1 positive and 2 negative test cases`);

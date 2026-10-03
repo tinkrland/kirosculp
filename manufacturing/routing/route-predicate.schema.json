@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "sculptura route predicate record",
+  "description": "documents one manufacturer-to-destination route with both regulatory axes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version_id",
+    "manufacturer_id",
+    "destination_country_code",
+    "lifecycle_state",
+    "created_at",
+    "created_by",
+    "scope",
+    "effective_interval",
+    "source_ids",
+    "exclusions",
+    "axis_one",
+    "axis_two"
+  ],
+  "properties": {
+    "version_id": {
+      "type": "string",
+      "pattern": "^route_[a-z0-9_]+_[0-9]{4}_[0-9]{3}$",
+      "description": "unique identifier: route_{manufacturer}_{destination}_{year}_{sequence}"
+    },
+    "manufacturer_id": {
+      "type": "string",
+      "description": "references manufacturer in manufacturing/reference/manufacturer-capabilities.json"
+    },
+    "destination_country_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "iso 3166-1 alpha-2 destination country"
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": ["draft", "reviewed", "approved", "expired", "superseded"],
+      "description": "route lifecycle state per manufacturing/routing/route-approval.md"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "utc timestamp when record was created"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "system or user who created the record"
+    },
+    "scope": {
+      "type": "string",
+      "description": "what this route covers (materials, processes, weight limits)"
+    },
+    "effective_interval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "start_date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "when approval becomes active (if approved)"
+        },
+        "end_date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "when approval expires (optional)"
+        }
+      }
+    },
+    "review_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "when the record should be reviewed for continued accuracy"
+    },
+    "reviewed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "utc timestamp when review was completed"
+    },
+    "reviewed_by": {
+      "type": ["string", "null"],
+      "description": "user who reviewed the record"
+    },
+    "approved_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "utc timestamp when approval was signed"
+    },
+    "approved_by": {
+      "type": ["string", "null"],
+      "description": "named human who approved the route (never auto-filled)"
+    },
+    "superseded_by": {
+      "type": ["string", "null"],
+      "description": "version_id of the record that supersedes this one"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "source identifiers from the dated research pack"
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "what this route does not cover"
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "free-form research notes"
+    },
+    "axis_one": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "finished-article market eligibility: fineness, marking, assay",
+      "properties": {
+        "fineness_requirements": {
+          "type": ["string", "null"]
+        },
+        "marking_requirements": {
+          "type": ["string", "null"]
+        },
+        "ccm_entitlement": {
+          "type": ["boolean", "null"]
+        },
+        "national_mark_path": {
+          "type": ["string", "null"]
+        },
+        "assay_capability": {
+          "type": ["string", "null"]
+        },
+        "assay_office_country": {
+          "type": ["string", "null"]
+        },
+        "fees": {
+          "type": ["string", "null"]
+        },
+        "turnaround_days": {
+          "type": ["integer", "null"]
+        },
+        "custody": {
+          "type": ["string", "null"]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["source_ids"]
+    },
+    "axis_two": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "physical route and landed treatment: customs, import, logistics",
+      "properties": {
+        "customs_procedure": {
+          "type": ["string", "null"]
+        },
+        "classification": {
+          "type": ["string", "null"]
+        },
+        "valuation_basis": {
+          "type": ["string", "null"]
+        },
+        "vat_role": {
+          "type": ["string", "null"]
+        },
+        "ior": {
+          "type": ["string", "null"]
+        },
+        "incoterm": {
+          "type": ["string", "null"]
+        },
+        "carrier_restrictions": {
+          "type": ["string", "null"]
+        },
+        "insurance": {
+          "type": ["string", "null"]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["source_ids"]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lifecycle_state": {
+            "const": "reviewed"
+          }
+        },
+        "required": ["lifecycle_state"]
+      },
+      "then": {
+        "required": ["reviewed_at", "reviewed_by"],
+        "properties": {
+          "axis_one": {
+            "required": ["fineness_requirements", "marking_requirements", "source_ids"]
+          },
+          "axis_two": {
+            "required": ["customs_procedure", "classification", "source_ids"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle_state": {
+            "const": "approved"
+          }
+        },
+        "required": ["lifecycle_state"]
+      },
+      "then": {
+        "required": ["approved_at", "approved_by", "reviewed_at", "reviewed_by"],
+        "properties": {
+          "approved_by": {
+            "minLength": 1
+          },
+          "effective_interval": {
+            "required": ["start_date"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle_state": {
+            "const": "superseded"
+          }
+        },
+        "required": ["lifecycle_state"]
+      },
+      "then": {
+        "required": ["superseded_by"]
+      }
+    }
+  ]
+}
