@@ -9,6 +9,20 @@ vgen-style invitations gate creator privileges, not ordinary buyer access.
 issuer eligibility and application/review mechanics remain open. no invitation
 automatically grants publication, discovery or commission availability.
 
+## the artist account and its scope
+
+artist signup requires more than the buyer flow: an invite code, plus
+the gates below. the artist account is not the shop: the shop is a
+separate handle and storefront object, currently connected to the
+artist. the artist account has entry to:
+
+- their studio (the design engine, releases)
+- their console (marketplace management: listings, orders, payouts)
+- their inspo collection (artist-account feature, separate from
+  buyer lists, which belong to buyer accounts)
+
+"artist" and "creator" refer to the same account in repo docs.
+
 ## the separate gates
 
 | gate | requirement |

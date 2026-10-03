@@ -2,6 +2,26 @@
 
 sculptura-hosted and white-label storefront presentation, including collections, profile content, brand settings, and connected sales channels. sculptura remains the source of truth for design releases and fulfillment state.
 
+## public surfaces and the placeholder domain
+
+sculptura does not have its final tld yet. `sculptura.dev` is the
+placeholder used across docs for whichever tld is acquired; every
+`*.sculptura.dev` subdomain below inherits that placeholder.
+
+| surface | lives at | belongs to |
+|---|---|---|
+| storefront | `sculptura.dev/@shopname` | the shop handle (e.g. mahika's shop is `@divajewels`) |
+| artist profile | `artists.sculptura.dev/@artistname` | the artist's name handle (e.g. `artists.sculptura.dev/@mahika`) |
+| artist login | `artists.sculptura.dev/login` | the artist account |
+| buyer surface | `customer.sculptura.dev` | the buyer account |
+
+the artist name and the shop handle are two different handles in two
+independent namespaces on two different surfaces: changing one never
+changes the other, and neither is derived from the immutable backend
+ids. the artist account and the shop are separate objects, currently
+connected; see
+[creator access](../creator-access.md).
+
 ## publication and analytics policy
 
 publishing a hosted or white-label storefront requires a private verified phone number
