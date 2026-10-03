@@ -62,27 +62,29 @@ three separate signals, deliberately not one "saves" feature:
   signal, therefore the most sensitive and the most gameable.
 - visibility: private from other buyers. never shareable, never
   shown on the buyer's profile, never surfaced to other buyers in
-  any form. but the creator sees each save: "___ added this to
-  their wishlist 'romantasyera'", buyer name and list name both.
-  the buyer controls this with a first-class visibility setting
-  (opt-out respected from the oct 2026 decision), and the save
-  flow states the visibility plainly, not buried in settings.
-- why creator-visible: this is the demographic and direction signal.
-  the creator sees who is saving their work and how buyers name
-  their saves, and reads it themselves: who their demographic is
-  becoming, what style they might lean toward. the platform does
-  not interpret the signal, summarize it, or suggest anything from
-  it; interpretation is the creator's own, consistent with the
-  standing rule that sculptura never recommends styles, rates, or
-  directions.
+  any form. the creator sees each save with the buyer's identity
+  redacted by default: the wishlist name and the saved product are
+  the signal, not who did the saving. the creator's view is
+  "someone added this to a wishlist 'romantasyera'". a buyer who
+  wants to be identified can opt in; a buyer who wants no save
+  visibility at all can opt out entirely. both settings are stated
+  plainly at save time, not buried in settings.
+- why creator-visible: the signal is the save name and the product:
+  which pieces land in which named context ("romantasy" vs
+  "wedding" vs "gifts for mom") tells the creator what direction
+  their audience is pulling and who their demographic is becoming.
+  the platform does not interpret the signal, summarize it, or
+  suggest anything from it; interpretation is the creator's own,
+  consistent with the standing rule that sculptura never recommends
+  styles, rates, or directions.
 - signal use: wishlist adds also count toward discovery ranking as
   demand signal, trust-weighted. the visibility layer and the
   signal layer remain separate.
-- anti-gaming: identity-bearing visibility is a sybil surface: a
-  coordinated buyer account can fake demographic signal for a
-  creator. saves are trust-weighted before ranking, and creator
-  facing save feeds show buyer trust context to sculptura
-  operations only, never to the creator.
+- anti-gaming: redacted-by-default lowers the sybil surface, but a
+  coordinated buyer account can still fake demographic signal
+  through save names and product choices. saves are trust-weighted
+  before ranking, and creator-facing save feeds show buyer trust
+  context to sculptura operations only, never to the creator.
 
 ## follows
 
@@ -167,9 +169,9 @@ one engagement-event contract, with a visibility class per event:
 - events: like_add, like_remove, list_create, list_add, list_share,
   wishlist_add, follow_creator, follow_aesthetic, follow_remove
 - visibility classes: buyer-private (like), buyer-private-to-others
-  but creator-visible (wishlist saves, subject to the buyer's
-  visibility setting), public (list), aggregate-only
-  (creator-facing counts)
+  but creator-visible with identity redacted (wishlist saves;
+  buyer identity is opt-in, full save invisibility is opt-out),
+  public (list), aggregate-only (creator-facing counts)
 - every event carries buyer trust class at aggregation time, never
   at event emission
 - free-text payloads are buyer-authored save and list names only;
