@@ -45,6 +45,7 @@ import treatment. country or convention membership never grants both approvals.
 
 store manufacturing origin, assay detours, dispatch, destination territory,
 customs territory, vat territory, origin proof and goods status independently.
+an approved route is defined in [route-approval.md](route-approval.md).
 use the [route evidence contract](../research/topics/order-routing/route-evidence-contract.md)
 before promoting research into versioned route predicates. the country research
 matrix remains unapproved and cannot activate checkout.

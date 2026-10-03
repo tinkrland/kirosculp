@@ -129,3 +129,7 @@ no amount computation occurs in this validation path. destination routing is ind
 - `contracts/purchase-request.schema.json`: defines request structure and destination format
 - `operations/country-rollout/shipping-markets.json`: authoritative deny-by-default market data
 - `operations/country-rollout/shipping-markets.schema.json`: market data validation
+
+## what approved means
+
+the reason codes above bind to the route approval definition in [manufacturing/routing/route-approval.md](../manufacturing/routing/route-approval.md): both regulatory axes approved, unexpired, on a signed versioned predicate record.
