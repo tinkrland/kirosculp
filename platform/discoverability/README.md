@@ -26,9 +26,3 @@ discovery is earned by published listings and explicit eligibility or curation r
 - record why an item was eligible and ranked.
 
 see the [complete source audit](../../docs/current-state-audit.md) for cross-domain findings and build order.
-
-## taste intelligence
-
-ranking signal math lives in the deterministic affinity-map engine: see
-[affinity-map.md](affinity-map.md). it computes affinity; this layer's
-policy decides.
