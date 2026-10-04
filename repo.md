@@ -1,6 +1,6 @@
 # how this repository is organized
 
-this file explains the repository itself. the [readme](README.md) explains the product. [`explain.md`](explain.md) is the one-shot product story and [`explain/`](explain/index.md) holds the detailed guides.
+this file explains the repository itself. the [readme](README.md) explains the product. [`explain.md`](explain.md) is the one-shot product story and [`explain/`](explain/index.md) holds the detailed guides. [`onthehorizon.md`](onthehorizon.md) parks indefinitely-future ideas with no build order attached.
 
 ## repository map
 
