@@ -17,14 +17,14 @@
           "id": "wall-ladder-0.3",
           "parameter": "wall_mm=0.3",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/wall-ladder-wall-ladder-0.3.stl",
-          "stl_sha256": "3227d024ba59b3d50c243546965b91ece6fec059c690f9baeb97af8567177578"
+          "stl_sha256": "03e4ed0ee0c923b917916b5aa52a4a72e8bfd875b0eb53c91d9335bc340230a9"
         },
         {
           "compile": {
@@ -35,14 +35,14 @@
           "id": "wall-ladder-0.5",
           "parameter": "wall_mm=0.5",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/wall-ladder-wall-ladder-0.5.stl",
-          "stl_sha256": "b13d1235020a0ec5d4c769d180b3eddb450752d06b705cbdbde33cca0b1e6c2d"
+          "stl_sha256": "c030573783dfd15f51cf5d8fa6c9d03425325ea4d346ad695b0360c3eba266c1"
         },
         {
           "compile": {
@@ -53,14 +53,14 @@
           "id": "wall-ladder-0.7",
           "parameter": "wall_mm=0.7",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/wall-ladder-wall-ladder-0.7.stl",
-          "stl_sha256": "4e4c44fe0f27788e78c72aca9cce86636f8ba6b95bde46b5a1e9e70ae96f518e"
+          "stl_sha256": "b737507b5ee0dc9caa760957f87266ecbc835f5df60a21ed8eba12cb75fc0820"
         },
         {
           "compile": {
@@ -71,14 +71,14 @@
           "id": "wall-ladder-0.8",
           "parameter": "wall_mm=0.8",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/wall-ladder-wall-ladder-0.8.stl",
-          "stl_sha256": "b43f9f5a53ab7588d03a619abe2de3ec2b378fe27165eb0399a7b0b1c137f2de"
+          "stl_sha256": "d2d2cb70f1b7d7ed60d5c873a1332dd2474a7cb86bafabb3bea187ee1d6bc95d"
         },
         {
           "compile": {
@@ -89,14 +89,14 @@
           "id": "wall-ladder-1.0",
           "parameter": "wall_mm=1.0",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/wall-ladder-wall-ladder-1.0.stl",
-          "stl_sha256": "39ee01a50e45ff5d39a96cfd17847ba578988675d6af9abe0b88e6650d21f6ce"
+          "stl_sha256": "8cfda7720cb9bb150c0815dd68f097593cba3ed3f59148badf9984915bea457c"
         },
         {
           "compile": {
@@ -107,14 +107,14 @@
           "id": "wall-ladder-1.2",
           "parameter": "wall_mm=1.2",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/wall-ladder-wall-ladder-1.2.stl",
-          "stl_sha256": "b660e7374fedeefb48dc7290f43f199e9e4726878b53d04a813591eb7b215577"
+          "stl_sha256": "5c4cf7caacf24261f76e6359f329cf4a3ba4b8207a434f4d12d97ec7702cfed9"
         }
       ],
       "scad_file": "benchmarks/wall-ladder.scad",
@@ -139,14 +139,14 @@
           "id": "feature-ladder-all",
           "parameter": "default",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/feature-ladder-feature-ladder-all.stl",
-          "stl_sha256": "75673be1e6a332868cc4a9010925e9ab99dcc1b00199f0cf8a106dfd24cc68fd"
+          "stl_sha256": "11c82be35bf7f605ddd9e234f1bdd5ed13a18a378080b896b072087a2ec9df75"
         },
         {
           "compile": {
@@ -157,14 +157,14 @@
           "id": "feature-ladder-text-cg",
           "parameter": "text_cg_letter_h=0.6 text_cg_extrude=0.3",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/feature-ladder-feature-ladder-text-cg.stl",
-          "stl_sha256": "cdfa7c69dc4dd97b7df7df9a005051709e30ba67f88dad9ff0b4ec6f61239370"
+          "stl_sha256": "80e10f3c3d30f1001624829cf7906836b163c55167abfffd2c6470852a7b3099"
         },
         {
           "compile": {
@@ -175,14 +175,14 @@
           "id": "feature-ladder-text-sc",
           "parameter": "text_sc_letter_h=1.5 text_sc_extrude=0.5",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/feature-ladder-feature-ladder-text-sc.stl",
-          "stl_sha256": "f2f790ee33a40dd969a554618b6ae5f08f82128f06b1b06c221554fe0668d337"
+          "stl_sha256": "700fa2e9f6d6458d0a77726ee8db79d7b97106a0567b9ad9c3bdbd259b075397"
         },
         {
           "compile": {
@@ -193,14 +193,14 @@
           "id": "feature-ladder-text-hi",
           "parameter": "text_hi_letter_h=1.0 text_hi_extrude=0.2",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/feature-ladder-feature-ladder-text-hi.stl",
-          "stl_sha256": "e2d08748b394381e2d60c94eebe8886047b9c1a5cfa1374dc28b1563bbeaab36"
+          "stl_sha256": "531110decca9273c6dc49969f17f12439c9037449e6bb21d23a10955a1081edc"
         }
       ],
       "scad_file": "benchmarks/feature-ladder.scad",
@@ -225,14 +225,14 @@
           "id": "hollow-shell-nodrain-0.5",
           "parameter": "shell_mm=0.5 drain=false",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-nodrain-0.5.stl",
-          "stl_sha256": "3ec0873cef94c72a2117c0a817ed2752592db5d06c4b77527ec8c8fbd099b466"
+          "stl_sha256": "9082dbe88a92d232705a5d9603bf09e3d58a079c6a8144d3dea9b668579bbe04"
         },
         {
           "compile": {
@@ -243,14 +243,14 @@
           "id": "hollow-shell-nodrain-0.7",
           "parameter": "shell_mm=0.7 drain=false",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-nodrain-0.7.stl",
-          "stl_sha256": "dc11a4508cb96b1a749e0f386ec5e59f59d25c2acee4fa9a5f9d6c7c21bdfc19"
+          "stl_sha256": "065d1da5a32de50562918b6a9d8f185c97a8d2dcaf01dd57316fa37dbc2627a7"
         },
         {
           "compile": {
@@ -261,14 +261,14 @@
           "id": "hollow-shell-nodrain-1.0",
           "parameter": "shell_mm=1.0 drain=false",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-nodrain-1.0.stl",
-          "stl_sha256": "6f583adb593054bb9a2f60141c562c8d7d87417f114cd8058a697367710bb4cc"
+          "stl_sha256": "4939d5f6e91110651d61bfd6f69eb4f25879f6c636613e30942b643a82ed5661"
         },
         {
           "compile": {
@@ -279,14 +279,14 @@
           "id": "hollow-shell-nodrain-1.5",
           "parameter": "shell_mm=1.5 drain=false",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-nodrain-1.5.stl",
-          "stl_sha256": "e5761d51c3f33d102f5917a3a26302a1acb5b30b694830d113ce10036a94d7f7"
+          "stl_sha256": "452128d4db3a49d69f6c2db7ae04b0dd01f6b6504f30b6985cf937e4a43720a3"
         },
         {
           "compile": {
@@ -297,14 +297,14 @@
           "id": "hollow-shell-drain-0.5",
           "parameter": "shell_mm=0.5 drain=true",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-drain-0.5.stl",
-          "stl_sha256": "3aeb4a74c940b3552df0dd54ca2f37690f538c4a55cbdde1951b64ee63878c5e"
+          "stl_sha256": "1fdcf32017581966cad48d358f093401c026d3f233be07aa8245b5383882e002"
         },
         {
           "compile": {
@@ -315,14 +315,14 @@
           "id": "hollow-shell-drain-0.7",
           "parameter": "shell_mm=0.7 drain=true",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-drain-0.7.stl",
-          "stl_sha256": "5f5f906909ca33f14af635286eec248bec51f9dc1d52ba369b13ac1fcfe15902"
+          "stl_sha256": "6f2891cf860b950eee05583a05106b767503c186d88d48b29d57f6c92d9cb151"
         },
         {
           "compile": {
@@ -333,14 +333,14 @@
           "id": "hollow-shell-drain-1.0",
           "parameter": "shell_mm=1.0 drain=true",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-drain-1.0.stl",
-          "stl_sha256": "7b1dd75f6f0a0c58b00d0a566c5390d6894271a737989b06fc09be2930e3caf9"
+          "stl_sha256": "226d9223ec65707a51af185030dee13d9b31e867006748e40d0e24f6877ed104"
         },
         {
           "compile": {
@@ -351,14 +351,14 @@
           "id": "hollow-shell-drain-1.5",
           "parameter": "shell_mm=1.5 drain=true",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/hollow-shell-hollow-shell-drain-1.5.stl",
-          "stl_sha256": "35ade961fff4e82aed623e3167f3b2416e91bfe23d744b9cb1f2d064221917e3"
+          "stl_sha256": "d40fa2945653de601563441de6bcbac6984e7636cfbaf48610297b9290e3109e"
         }
       ],
       "scad_file": "benchmarks/hollow-shell.scad",
@@ -383,14 +383,14 @@
           "id": "size-family-us3",
           "parameter": "ring_size=3",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/size-family-size-family-us3.stl",
-          "stl_sha256": "3837aea82379585fe51eddb1770e83057eeb08096b81402761d3d2f81e0281cd"
+          "stl_sha256": "6714cbdca5f8e7ea781a4f739f522045160c3c677bc69ccc391b51c6abec6d4a"
         },
         {
           "compile": {
@@ -401,14 +401,14 @@
           "id": "size-family-us6",
           "parameter": "ring_size=6",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/size-family-size-family-us6.stl",
-          "stl_sha256": "a5d9579d21df3d71c6c17e7c2e8517dbaeb8020e8bf07d70014ea794c02dce18"
+          "stl_sha256": "58959ad1da0d76200550d11429b613f7e7271fcb955800c797778456d2091199"
         },
         {
           "compile": {
@@ -419,14 +419,14 @@
           "id": "size-family-us9",
           "parameter": "ring_size=9",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/size-family-size-family-us9.stl",
-          "stl_sha256": "ed9f6352088ede0a2d237872db48bffccd519ce2c2e2425d02f8d869fd1a0dba"
+          "stl_sha256": "500fd36865fa1084e636648b2b7b75849571afda96ff46c08b8a70680a046018"
         },
         {
           "compile": {
@@ -437,14 +437,14 @@
           "id": "size-family-us12",
           "parameter": "ring_size=12",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/size-family-size-family-us12.stl",
-          "stl_sha256": "82c8ad25ab7ca30c93f8270d1efcf9bf76a4384cfa53c77fd7a96572b1f1ecdf"
+          "stl_sha256": "003c43125a212a445f14a95098af36c041dbb872c2dbd8f51079874d277e956a"
         }
       ],
       "scad_file": "benchmarks/size-family.scad",
@@ -469,14 +469,14 @@
           "id": "symbolic-double-heart-safe",
           "parameter": "join_width=1.0",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/symbolic-stress-symbolic-double-heart-safe.stl",
-          "stl_sha256": "cd4795aba3dd943ab4f674895c8a82cf81aee162df36561de67925698047ea48"
+          "stl_sha256": "a8a125a98962df7587ad911e304959f8e0e26accede7671133af37ed93c9d633"
         },
         {
           "compile": {
@@ -487,14 +487,14 @@
           "id": "symbolic-double-heart-thin",
           "parameter": "join_width=0.6",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/symbolic-stress-symbolic-double-heart-thin.stl",
-          "stl_sha256": "23425d679cb9025021355d29175264ee791ffe7d604702d006143daf6b8e3ccf"
+          "stl_sha256": "8faebdc4f8df3514da5dcbe1c3c15037605942fdb08471e9a381a61ad553e2e8"
         },
         {
           "compile": {
@@ -505,14 +505,14 @@
           "id": "symbolic-claddagh-like",
           "parameter": "default",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/symbolic-stress-symbolic-claddagh-like.stl",
-          "stl_sha256": "ce8706cca48966d35b74d2d4f2bb972f3f1f8082d2ceff76e5913259f349342d"
+          "stl_sha256": "632d8c8f5f3cdeee41eda4310c8679288b727faebb78dbe95fde7e1e426c99dc"
         }
       ],
       "scad_file": "benchmarks/symbolic-stress.scad",
@@ -537,7 +537,7 @@
           "id": "pathological-p001a",
           "parameter": "case=p001a",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
@@ -555,7 +555,7 @@
           "id": "pathological-p001b",
           "parameter": "case=p001b",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
@@ -573,14 +573,14 @@
           "id": "pathological-p002",
           "parameter": "case=p002",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
             }
           },
           "stl_file": "benchmarks/stl/pathological-pathological-p002.stl",
-          "stl_sha256": "ad729aec1f34da9c2cccdf6e85a9e4bbfa9b30197268babafefc06bb30845a3d"
+          "stl_sha256": "205147156e69c976bdc15fca78892b643a344505158b74ff121fb603617a0407"
         },
         {
           "compile": {
@@ -591,7 +591,7 @@
           "id": "pathological-p003",
           "parameter": "case=p003",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "invalid",
               "expected": "fail",
               "match": true
@@ -609,7 +609,7 @@
           "id": "pathological-p004",
           "parameter": "case=p004",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "warning",
               "match": true
@@ -627,7 +627,7 @@
           "id": "pathological-p005",
           "parameter": "case=p005",
           "results": {
-            "profile-001@0.2.0": {
+            "profile-001@0.3.0": {
               "actual": "manual_review",
               "expected": "needs-manual-review",
               "match": true
@@ -644,14 +644,17 @@
     }
   ],
   "metadata": {
+    "digest_matched_known_good": true,
     "docker_server_version": "28.3.2",
     "harness_version": "1",
     "image_digest": "openscad/openscad@sha256:147e48525bec392bcf628d7a6d5ea4ccac71b16251952328f86e1061cbf47c37",
-    "manifest_sha256": "cd07cd2d1d8425e42d9da8c6bbf7e2dfe930d0c0c739ea6f5182f2fbd80bbbbf",
+    "known_good_digest": "openscad/openscad@sha256:147e48525bec392bcf628d7a6d5ea4ccac71b16251952328f86e1061cbf47c37",
+    "manifest_sha256": "f039247b5d29a194c760fa8c0bdc9c41d2c26b44a9745d5bd218d87bba759f4c",
     "measurement_library": "paracraft/measure/measurements.js",
     "no_compile_mode": false,
     "pinned_image": "openscad/openscad:2021.01",
     "schema": "benchmark-report-v1",
+    "strict_digest_mode": true,
     "validation_library": "paracraft/validate/validate.js"
   },
   "schema": "benchmark-report-v1",

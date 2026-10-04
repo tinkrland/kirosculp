@@ -113,5 +113,5 @@
 - image digest: `openscad/openscad@sha256:147e48525bec392bcf628d7a6d5ea4ccac71b16251952328f86e1061cbf47c37`
 - measurement library: `paracraft/measure/measurements.js`
 - validation library: `paracraft/validate/validate.js`
-- manifest sha256: `cd07cd2d1d8425e42d9da8c6bbf7e2dfe930d0c0c739ea6f5182f2fbd80bbbbf`
+- manifest sha256: `f039247b5d29a194c760fa8c0bdc9c41d2c26b44a9745d5bd218d87bba759f4c`
 
