@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
@@ -7,8 +8,14 @@ import addFormats from "ajv-formats";
 const root = process.cwd();
 const profilesDir = path.join(root, "research/profiles");
 const promotionsDir = path.join(root, "research/promotions");
+const reportPath = path.join(root, "benchmarks/report.json");
 const schemaPath = path.join(profilesDir, "profile.schema.json");
 const promotionSchemaPath = path.join(promotionsDir, "promotion.schema.json");
+
+// sha256 of the committed report.json (computed once)
+const actualReportSha256 = fs.existsSync(reportPath)
+  ? createHash("sha256").update(fs.readFileSync(reportPath)).digest("hex")
+  : null;
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
@@ -57,6 +64,18 @@ for (const promo of promotions) {
   for (const eid of promo.evidence_ids ?? []) {
     if (!evidenceIds.has(eid)) {
       failures.push(`promotions.jsonl ${promo.promotion_id}: cites unknown evidence ${eid}`);
+    }
+  }
+  // harness_report_sha256 must equal the sha256 of the committed benchmarks/report.json
+  if (promo.harness_report_sha256) {
+    if (!actualReportSha256) {
+      failures.push(`promotions.jsonl ${promo.promotion_id}: harness_report_sha256 present but benchmarks/report.json not found`);
+    } else if (promo.harness_report_sha256 !== actualReportSha256) {
+      failures.push(
+        `promotions.jsonl ${promo.promotion_id}: harness_report_sha256 mismatch\n` +
+        `  promotion: ${promo.harness_report_sha256}\n` +
+        `  actual:    ${actualReportSha256}`
+      );
     }
   }
 }

@@ -382,56 +382,43 @@ async function main() {
           const cr = compileScad(scadPath, stlPath, model.parameter);
           compileOk = cr.ok;
           stderrTail = cr.stderr ? cr.stderr.trim().split("\n").slice(-5).join("\n") : "";
-          if (!compileOk) log(`    compile failed for ${model.id}`);
+          if (!compileOk) {
+            die(`model compile error: ${model.id} (${family.file})\n${stderrTail}`);
+          }
         }
 
         const measured = measureStl(stlPath);
+        if (!measured) {
+          die(`model produced no stl: ${model.id} (expected at ${stlPath})`);
+        }
+
         const modelResult = {
           id: model.id,
           description: model.description,
           parameter: model.parameter,
           compile: { ok: compileOk, stderr_tail: stderrTail },
           stl_file: `benchmarks/stl/${stlName}`,
-          stl_sha256: measured?.stl_sha256 ?? null,
+          stl_sha256: measured.stl_sha256,
           results: {},
         };
 
-        if (!measured) {
-          errorModels += 1;
-          for (const rsKey of Object.keys(model.verdicts)) {
-            modelResult.results[rsKey] = {
-              expected: model.verdicts[rsKey].expected,
-              actual: "stl-missing",
-              match: false,
-              note: "stl not available; compile failed",
-            };
+        for (const rsKey of Object.keys(model.verdicts)) {
+          const expected = model.verdicts[rsKey].expected;
+          const validation = measured.validation[rsKey];
+          if (!validation) {
+            die(`model missing from manifest profiles: ${model.id} references rule set ${rsKey} which is not loaded`);
           }
-        } else {
-          for (const rsKey of Object.keys(model.verdicts)) {
-            const expected = model.verdicts[rsKey].expected;
-            const validation = measured.validation[rsKey];
-            if (!validation) {
-              modelResult.results[rsKey] = {
-                expected,
-                actual: "no-validation",
-                match: false,
-                note: "rule set not in harness profiles",
-              };
-              mismatchedModels += 1;
-              continue;
-            }
-            const actual = validation.status;
-            const match = verdictMatch(expected, actual);
-            modelResult.results[rsKey] = { expected, actual, match };
-            if (match) {
-              passedModels += 1;
-            } else {
-              mismatchedModels += 1;
-              log(`    MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
-            }
+          const actual = validation.status;
+          const match = verdictMatch(expected, actual);
+          modelResult.results[rsKey] = { expected, actual, match };
+          if (match) {
+            passedModels += 1;
+          } else {
+            mismatchedModels += 1;
+            log(`    MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
           }
-          log(`    ${model.id}: status=${measured.validation[Object.keys(model.verdicts)[0]]?.status}`);
         }
+        log(`    ${model.id}: status=${measured.validation[Object.keys(model.verdicts)[0]]?.status}`);
 
         familyResult.model_results.push(modelResult);
       }
@@ -445,7 +432,9 @@ async function main() {
       let compileResult = { ok: true, stderr: "" };
       if (!noCompile) {
         compileResult = compileScad(scadPath, stlPath);
-        if (!compileResult.ok) log(`  compile failed for ${family.family}`);
+        if (!compileResult.ok) {
+          die(`model compile error: ${family.family} (${family.file})\n${compileResult.stderr?.trim().split("\n").slice(-5).join("\n") ?? ""}`);
+        }
       }
       familyResult.compile = {
         ok: compileResult.ok,
@@ -455,70 +444,43 @@ async function main() {
       };
 
       const measured = measureStl(stlPath);
-      if (measured) {
-        familyResult.stl_sha256 = measured.stl_sha256;
-        familyResult.measurements = measured.measurements;
-        familyResult.validation = measured.validation;
-        for (const rs of manifest.rule_sets) {
-          const key = `${rs.id}@${rs.version}`;
-          log(`  ${family.family} / ${key}: status=${measured.validation[key].status}`);
-        }
+      if (!measured) {
+        die(`model produced no stl: ${family.family} (expected at ${stlPath})`);
+      }
 
-        for (const model of family.models) {
-          totalModels += 1;
-          const modelResult = {
-            id: model.id,
-            description: model.description,
-            parameter: model.parameter,
-            results: {},
-          };
-          for (const rsKey of Object.keys(model.verdicts)) {
-            const expected = model.verdicts[rsKey].expected;
-            const validation = measured.validation[rsKey];
-            if (!validation) {
-              modelResult.results[rsKey] = {
-                expected,
-                actual: "no-validation",
-                match: false,
-                note: "rule set not in harness profiles",
-              };
-              mismatchedModels += 1;
-              continue;
-            }
-            const actual = validation.status;
-            const match = verdictMatch(expected, actual);
-            modelResult.results[rsKey] = { expected, actual, match };
-            if (match) {
-              passedModels += 1;
-            } else {
-              mismatchedModels += 1;
-              log(`  MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
-            }
+      familyResult.stl_sha256 = measured.stl_sha256;
+      familyResult.measurements = measured.measurements;
+      familyResult.validation = measured.validation;
+      for (const rs of manifest.rule_sets) {
+        const key = `${rs.id}@${rs.version}`;
+        log(`  ${family.family} / ${key}: status=${measured.validation[key].status}`);
+      }
+
+      for (const model of family.models) {
+        totalModels += 1;
+        const modelResult = {
+          id: model.id,
+          description: model.description,
+          parameter: model.parameter,
+          results: {},
+        };
+        for (const rsKey of Object.keys(model.verdicts)) {
+          const expected = model.verdicts[rsKey].expected;
+          const validation = measured.validation[rsKey];
+          if (!validation) {
+            die(`model missing from manifest profiles: ${model.id} references rule set ${rsKey} which is not loaded`);
           }
-          familyResult.model_results.push(modelResult);
+          const actual = validation.status;
+          const match = verdictMatch(expected, actual);
+          modelResult.results[rsKey] = { expected, actual, match };
+          if (match) {
+            passedModels += 1;
+          } else {
+            mismatchedModels += 1;
+            log(`  MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
+          }
         }
-      } else {
-        log(`  no stl for ${family.family} (compile failed and no cached file)`);
-        for (const model of family.models) {
-          totalModels += 1;
-          errorModels += 1;
-          familyResult.model_results.push({
-            id: model.id,
-            description: model.description,
-            parameter: model.parameter,
-            results: Object.fromEntries(
-              Object.keys(model.verdicts).map((rsKey) => [
-                rsKey,
-                {
-                  expected: model.verdicts[rsKey].expected,
-                  actual: "stl-missing",
-                  match: false,
-                  note: "stl not available; compile failed",
-                },
-              ])
-            ),
-          });
-        }
+        familyResult.model_results.push(modelResult);
       }
     }
 
