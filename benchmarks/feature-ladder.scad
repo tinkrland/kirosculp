@@ -13,9 +13,9 @@
 //   raised text max height, cooksongold (src-0010): 0.60 mm
 //   raised letter spacing, cooksongold (src-0010): 0.30 mm
 //   prong min diameter, formlabs / materialise (src-0001, 2026-09-24): 0.35 mm feature floor
-//   hole depth <= diameter rule: morris and watson section of the rule digest
-//     (no source record in sources.jsonl yet; needs registration) and formlabs
-//     casting whitepaper (src-0015, 2026-09-23)
+//   hole depth <= diameter rule: morris and watson cad design guidelines
+//     (src-0022, verified 2026-10-04) and formlabs casting whitepaper
+//     (src-0015, 2026-09-23)
 //   text engraving: three conflicting rules tested together:
 //     cooksongold (src-0010): 0.30 mm stroke, 0.60 mm max height, 0.30 mm spacing
 //     sculpteo (rule-digest): 0.50 mm stroke width, 1.50 mm height

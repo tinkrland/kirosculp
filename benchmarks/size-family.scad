@@ -5,31 +5,32 @@
 //   the harness checks that wall thickness, bounding box, and volume scale
 //   deterministically with size and that no size produces unexpected violations.
 //
-// us ring size to inner diameter mapping (iso 8653 / jewellers of america):
-//   size 3  -> 14.05 mm inner diameter
-//   size 6  -> 16.51 mm inner diameter
-//   size 9  -> 18.89 mm inner diameter
-//   size 12 -> 21.26 mm inner diameter
-// source: jewelers of america ring size chart (value unverified, see rule-digest;
-//   a direct partner answer replaces these nominal diameters in the active profile.)
+// us ring size to inner diameter mapping (gia 4cs ring size chart, src-0023,
+// accessed 2026-10-04):
+//   size 3  -> 14.10 mm inner diameter
+//   size 6  -> 16.50 mm inner diameter
+//   size 9  -> 19.00 mm inner diameter
+//   size 12 -> 21.40 mm inner diameter
+// gia rounds to one decimal; a second chart source is desirable before these
+//   diameters are treated as tight tolerances (see rule-digest gia section).
 // wall thickness 1.0 mm from materialise ring band rule (src-0001, 2026-09-24)
 // band height: value unverified, see rule-digest.
 
 /* [ring size family parameters] */
 // list of [us_size, inner_diameter_mm] pairs
-// inner diameters nominally from jewellers of america chart; value unverified, see rule-digest
+// inner diameters from the gia 4cs ring size chart (src-0023, 2026-10-04)
 ring_sizes = [
-    [3,  14.05],
-    [4,  14.86],
+    [3,  14.10],
+    [4,  14.90],
     [5,  15.70],
-    [6,  16.51],
-    [7,  17.35],
-    [8,  18.19],
-    [9,  18.89],
-    [10, 19.76],
+    [6,  16.50],
+    [7,  17.30],
+    [8,  18.10],
+    [9,  19.00],
+    [10, 19.80],
     [11, 20.60],
-    [12, 21.26],
-    [13, 22.10]
+    [12, 21.40],
+    [13, 22.20]
 ];
 // wall thickness in mm; 1.0 mm from materialise ring band minimum (src-0001, 2026-09-24)
 wall_mm = 1.0;

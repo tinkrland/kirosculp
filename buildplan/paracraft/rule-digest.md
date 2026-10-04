@@ -187,7 +187,7 @@ source: formlabs investment casting guide pdf; accessed: 2026-09-23; confidence:
 
 ### morris and watson cad design guidelines
 
-source: morris and watson cad design guidelines page; accessed: 2026-09-23; confidence: high (tier-1 casting bureau; direct manufacturer documentation)
+source: morris and watson cad design guidelines page (src-0022); accessed: 2026-09-23, verified and registered via re-scrape 2026-10-04; confidence: high (tier-1 casting bureau; direct manufacturer documentation)
 
 | rule | value | condition | source | accessed | confidence |
 | --- | --- | --- | --- | --- | --- |
@@ -201,10 +201,19 @@ source: morris and watson cad design guidelines page; accessed: 2026-09-23; conf
 | pilot-hole design | use a small pilot divot; drill the full hole later | if the design requires holes | morris and watson | 2026-09-23 | high |
 | cad model integrity | no naked edges; watertight model | model geometry; both are listed as common casting issues | morris and watson | 2026-09-23 | high |
 | support and metal flow | avoid thin or unsupported components and designs that restrict metal flow | model design; no numeric definition of "thin" is supplied | morris and watson | 2026-09-23 | high |
+| minimum design thickness | >= 0.40 mm | general sections (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| broad or flat area thickness | >= 0.50 mm | broad or flat areas (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| moulding thickness | >= 0.90 mm | if the piece will be moulded for multiple copies (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| raised text min width and spacing | >= 0.30 mm | raised text (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| raised text max height | <= 0.50 mm | raised text (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| recessed text min width and spacing | >= 0.30 mm | recessed text (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| recessed text max depth | <= 0.30 mm, and no deeper than the opening width | recessed text (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| recessed text draft taper | 5-10 degrees, bottom narrower than opening | recommended where possible (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
+| font recommendation | sans serif, square angles; avoid curves tapering to a point | text, hallmarks, logos, stamps (added in 2026-10-04 re-scrape) | morris and watson (src-0022) | 2026-10-04 | high |
 
 **gaps**
 
-- no numeric minimum section/wall thickness, shrinkage allowance, sprue requirements or alloy-specific casting rules are provided.
+- shrinkage allowance, sprue requirements and alloy-specific casting rules are not provided. the 2026-10-04 re-scrape recovered numeric thickness rules (0.40/0.50/0.90 mm) the original pass missed; they are now the most permissive thickness figures in the store and remain unreconciled with materialise, jfd and gildform.
 - hole-depth guidance is not reconciled: the source states both <= 0.30 mm maximum depth and depth <= opening width/diameter.
 
 
@@ -461,8 +470,30 @@ source: openscad.org/cheatsheet; accessed: 2026-09-24; confidence: high (officia
 - no version-specific feature availability table beyond the customizer note.
 
 
+### gia us ring size chart
+
+source: gia 4cs ring size chart (src-0023); accessed: 2026-10-04; confidence: high (tier-1 industry body; conversion table)
+
+| rule | value | condition | source | accessed | confidence |
+|---|---|---|---|---|---|
+| us size 3 inside diameter | 14.1 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 4 inside diameter | 14.9 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 5 inside diameter | 15.7 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 6 inside diameter | 16.5 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 7 inside diameter | 17.3 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 8 inside diameter | 18.1 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 9 inside diameter | 19.0 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 10 inside diameter | 19.8 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 11 inside diameter | 20.6 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 12 inside diameter | 21.4 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+| us size 13 inside diameter | 22.2 mm | nominal finished ring | gia (src-0023) | 2026-10-04 | high |
+
+**gaps**
+
+- gia rounds to one decimal (0.2 mm per quarter size). two-decimal charts disagree at the second decimal (size 9 is often cited as 19.10 mm); a second chart source is desirable before these diameters are treated as tight tolerances.
+
 ## next extraction targets
 
 - per the gaps lists above: every partner's shrinkage factor, dimensional tolerance, sprue dimensions, and burnout setpoints remain unpublished and move to [acquire.md](acquire.md).
-- the morris and watson cad design guidelines section predates the source registry: no sources.jsonl record exists for it, so its values carry no verifiable lineage. it needs a source record or a fresh scrape before any of its rules can be promoted from drafted.
+- the morris and watson source is registered as of 2026-10-04 (src-0022): the page was re-scraped, all previously cited values were verified present, and the material-thickness and text rules the original pass missed were added.
 - gildform hollow drain hole minimum diameter and count: the empirical evidence shows 3.5 mm is insufficient but no minimum is stated; this is a direct partner ask.
