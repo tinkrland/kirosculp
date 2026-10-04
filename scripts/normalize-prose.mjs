@@ -103,10 +103,13 @@ function* walkMarkdownFiles(dir, excludeDirs = ['node_modules', '.git', 'what-ex
 function main() {
   const args = process.argv.slice(2);
   const checkMode = args.includes('--check');
+  // generated artifacts excluded from prose normalisation
+  const excludeFiles = ['benchmarks/report.md'];
   const changed = [];
   
   for (const file of walkMarkdownFiles(ROOT)) {
     const relativePath = path.relative(ROOT, file).replace(/\\/g, '/');
+    if (excludeFiles.some(ex => relativePath === ex || relativePath.endsWith('/' + ex))) continue;
     const old = fs.readFileSync(file, 'utf8');
     const newContent = rewrite(old);
     

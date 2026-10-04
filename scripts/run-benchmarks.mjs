@@ -174,12 +174,30 @@ function pullImageIfNeeded() {
 
 // ---- openscad compile -------------------------------------------------------
 
-function compileScad(scadPath, stlPath) {
+// parseDefines: turn "case=p001a" into ["-D", 'case="p001a"'] for openscad.
+// each token is "key=value"; the value is passed as a quoted string.
+// "default" and "" are ignored (no -D override).
+function parseDefines(paramStr) {
+  if (!paramStr || paramStr === "default") return [];
+  const defs = [];
+  for (const token of paramStr.trim().split(/\s+/)) {
+    const eq = token.indexOf("=");
+    if (eq < 0) continue;
+    const key = token.slice(0, eq);
+    const val = token.slice(eq + 1);
+    // pass string values quoted so openscad parses them as strings not identifiers
+    defs.push("-D", `${key}="${val}"`);
+  }
+  return defs;
+}
+
+function compileScad(scadPath, stlPath, paramStr) {
   // mount the repo root as /workdir; openscad reads from /workdir/benchmarks/
   const relScad = path.relative(ROOT, scadPath).replace(/\\/g, "/");
   const relStl = path.relative(ROOT, stlPath).replace(/\\/g, "/");
+  const defines = parseDefines(paramStr);
 
-  // openscad cli: openscad -o output.stl --export-format binstl input.scad
+  // openscad cli: openscad -o output.stl --export-format binstl [-D ...] input.scad
   const args = [
     "run", "--rm",
     "--volume", `${ROOT}:/workdir`,
@@ -187,10 +205,12 @@ function compileScad(scadPath, stlPath) {
     "openscad",
     "--export-format", OPENSCAD_EXPORT_FORMAT,
     "-o", `/workdir/${relStl}`,
+    ...defines,
     `/workdir/${relScad}`,
   ];
 
-  log(`  compiling ${path.basename(scadPath)} ...`);
+  const label = defines.length ? `${path.basename(scadPath)} (${paramStr})` : path.basename(scadPath);
+  log(`  compiling ${label} ...`);
   const result = spawnSync("docker", args, {
     encoding: "utf8",
     timeout: 120000, // 2 minutes per file
@@ -291,120 +311,199 @@ async function main() {
   let mismatchedModels = 0;
   let errorModels = 0;
 
+  // measureStl: load an stl and validate it against all rule sets.
+  // returns { stl_sha256, measurements, validation } or null if file missing.
+  function measureStl(stlPath) {
+    if (!existsSync(stlPath)) return null;
+    const sha = sha256File(stlPath);
+    const buf = readFileSync(stlPath);
+    const mesh = loadSTL(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+    const m = measure(mesh);
+    const validation = {};
+    for (const rs of manifest.rule_sets) {
+      const key = `${rs.id}@${rs.version}`;
+      validation[key] = validate(m, profiles[key]);
+    }
+    return { stl_sha256: sha, measurements: m, validation };
+  }
+
+  // isPerModel: true when any model in the family has a non-default parameter.
+  // per-model families compile one stl per model using -D overrides.
+  function isPerModel(family) {
+    return family.models.some((m) => m.parameter && m.parameter !== "default");
+  }
+
   for (const family of families) {
     const scadPath = path.join(ROOT, family.file);
     if (!existsSync(scadPath)) {
       die(`scad file not found: ${scadPath}`);
     }
 
-    const stlName = `${family.family}.stl`;
-    const stlPath = path.join(STL_DIR, stlName);
-
-    // compile
-    let compileResult = { ok: true, stderr: "" };
-    if (!noCompile) {
-      compileResult = compileScad(scadPath, stlPath);
-    }
+    const perModel = isPerModel(family);
 
     const familyResult = {
       family: family.family,
       scad_file: family.file,
-      stl_file: `benchmarks/stl/${stlName}`,
-      compile: {
-        ok: compileResult.ok,
-        stderr_tail: compileResult.stderr
-          ? compileResult.stderr.trim().split("\n").slice(-5).join("\n")
-          : "",
-      },
-      stl_sha256: null,
-      measurements: null,
-      validation: {},
+      stl_file: perModel ? "per-model" : `benchmarks/stl/${family.family}.stl`,
+      compile: { ok: true, stderr_tail: "" },
+      stl_sha256: perModel ? null : null,
+      measurements: perModel ? null : null,
+      validation: perModel ? null : {},
       model_results: [],
     };
 
-    if (!compileResult.ok) {
-      log(`  compile failed for ${family.family}`);
-      familyResult.compile.ok = false;
-      // still attempt measurement if an older stl exists
-    }
+    if (perModel) {
+      // ---- per-model mode: one stl per manifest model entry ----
+      log(`  ${family.family}: per-model compilation (${family.models.length} models)`);
 
-    // measure
-    if (existsSync(stlPath)) {
-      familyResult.stl_sha256 = sha256File(stlPath);
-      const buf = readFileSync(stlPath);
-      const mesh = loadSTL(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
-      const m = measure(mesh);
-      familyResult.measurements = m;
-
-      // validate against each rule set
-      for (const rs of manifest.rule_sets) {
-        const key = `${rs.id}@${rs.version}`;
-        const profile = profiles[key];
-        const validation = validate(m, profile);
-        familyResult.validation[key] = validation;
-        log(`  ${family.family} / ${key}: status=${validation.status}`);
-      }
-
-      // compare against manifest model entries
       for (const model of family.models) {
         totalModels += 1;
+        const stlName = `${family.family}-${model.id}.stl`;
+        const stlPath = path.join(STL_DIR, stlName);
+
+        let compileOk = true;
+        let stderrTail = "";
+        if (!noCompile) {
+          const cr = compileScad(scadPath, stlPath, model.parameter);
+          compileOk = cr.ok;
+          stderrTail = cr.stderr ? cr.stderr.trim().split("\n").slice(-5).join("\n") : "";
+          if (!compileOk) log(`    compile failed for ${model.id}`);
+        }
+
+        const measured = measureStl(stlPath);
         const modelResult = {
           id: model.id,
           description: model.description,
           parameter: model.parameter,
+          compile: { ok: compileOk, stderr_tail: stderrTail },
+          stl_file: `benchmarks/stl/${stlName}`,
+          stl_sha256: measured?.stl_sha256 ?? null,
           results: {},
         };
 
-        for (const rsKey of Object.keys(model.verdicts)) {
-          const expected = model.verdicts[rsKey].expected;
-          const validation = familyResult.validation[rsKey];
-          if (!validation) {
+        if (!measured) {
+          errorModels += 1;
+          for (const rsKey of Object.keys(model.verdicts)) {
             modelResult.results[rsKey] = {
-              expected,
-              actual: "no-validation",
+              expected: model.verdicts[rsKey].expected,
+              actual: "stl-missing",
               match: false,
-              note: "rule set not in harness profiles",
+              note: "stl not available; compile failed",
             };
-            mismatchedModels += 1;
-            continue;
           }
-          const actual = validation.status;
-          const match = verdictMatch(expected, actual);
-          modelResult.results[rsKey] = {
-            expected,
-            actual,
-            match,
-          };
-          if (match) {
-            passedModels += 1;
-          } else {
-            mismatchedModels += 1;
-            log(`  MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
+        } else {
+          for (const rsKey of Object.keys(model.verdicts)) {
+            const expected = model.verdicts[rsKey].expected;
+            const validation = measured.validation[rsKey];
+            if (!validation) {
+              modelResult.results[rsKey] = {
+                expected,
+                actual: "no-validation",
+                match: false,
+                note: "rule set not in harness profiles",
+              };
+              mismatchedModels += 1;
+              continue;
+            }
+            const actual = validation.status;
+            const match = verdictMatch(expected, actual);
+            modelResult.results[rsKey] = { expected, actual, match };
+            if (match) {
+              passedModels += 1;
+            } else {
+              mismatchedModels += 1;
+              log(`    MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
+            }
           }
+          log(`    ${model.id}: status=${measured.validation[Object.keys(model.verdicts)[0]]?.status}`);
         }
+
         familyResult.model_results.push(modelResult);
       }
+
     } else {
-      log(`  no stl for ${family.family} (compile failed and no cached file)`);
-      for (const model of family.models) {
-        totalModels += 1;
-        errorModels += 1;
-        familyResult.model_results.push({
-          id: model.id,
-          description: model.description,
-          parameter: model.parameter,
-          results: Object.fromEntries(
-            Object.keys(model.verdicts).map((rsKey) => [
-              rsKey,
-              {
-                expected: model.verdicts[rsKey].expected,
-                actual: "stl-missing",
+      // ---- family mode: one stl for the whole family ----
+      const stlName = `${family.family}.stl`;
+      const stlPath = path.join(STL_DIR, stlName);
+      familyResult.stl_file = `benchmarks/stl/${stlName}`;
+
+      let compileResult = { ok: true, stderr: "" };
+      if (!noCompile) {
+        compileResult = compileScad(scadPath, stlPath);
+        if (!compileResult.ok) log(`  compile failed for ${family.family}`);
+      }
+      familyResult.compile = {
+        ok: compileResult.ok,
+        stderr_tail: compileResult.stderr
+          ? compileResult.stderr.trim().split("\n").slice(-5).join("\n")
+          : "",
+      };
+
+      const measured = measureStl(stlPath);
+      if (measured) {
+        familyResult.stl_sha256 = measured.stl_sha256;
+        familyResult.measurements = measured.measurements;
+        familyResult.validation = measured.validation;
+        for (const rs of manifest.rule_sets) {
+          const key = `${rs.id}@${rs.version}`;
+          log(`  ${family.family} / ${key}: status=${measured.validation[key].status}`);
+        }
+
+        for (const model of family.models) {
+          totalModels += 1;
+          const modelResult = {
+            id: model.id,
+            description: model.description,
+            parameter: model.parameter,
+            results: {},
+          };
+          for (const rsKey of Object.keys(model.verdicts)) {
+            const expected = model.verdicts[rsKey].expected;
+            const validation = measured.validation[rsKey];
+            if (!validation) {
+              modelResult.results[rsKey] = {
+                expected,
+                actual: "no-validation",
                 match: false,
-                note: "stl not available; compile failed",
-              },
-            ])
-          ),
-        });
+                note: "rule set not in harness profiles",
+              };
+              mismatchedModels += 1;
+              continue;
+            }
+            const actual = validation.status;
+            const match = verdictMatch(expected, actual);
+            modelResult.results[rsKey] = { expected, actual, match };
+            if (match) {
+              passedModels += 1;
+            } else {
+              mismatchedModels += 1;
+              log(`  MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
+            }
+          }
+          familyResult.model_results.push(modelResult);
+        }
+      } else {
+        log(`  no stl for ${family.family} (compile failed and no cached file)`);
+        for (const model of family.models) {
+          totalModels += 1;
+          errorModels += 1;
+          familyResult.model_results.push({
+            id: model.id,
+            description: model.description,
+            parameter: model.parameter,
+            results: Object.fromEntries(
+              Object.keys(model.verdicts).map((rsKey) => [
+                rsKey,
+                {
+                  expected: model.verdicts[rsKey].expected,
+                  actual: "stl-missing",
+                  match: false,
+                  note: "stl not available; compile failed",
+                },
+              ])
+            ),
+          });
+        }
       }
     }
 
@@ -456,13 +555,23 @@ async function main() {
   // provenance file for stl dir
   if (!noCompile && imageDigest) {
     const provenancePath = path.join(STL_DIR, "provenance.json");
+    // collect stl entries from both family-level and per-model results
+    const stlEntries = [];
+    for (const f of familyResults) {
+      if (f.stl_sha256) {
+        stlEntries.push({ file: f.stl_file, sha256: f.stl_sha256 });
+      }
+      for (const mr of f.model_results ?? []) {
+        if (mr.stl_sha256) {
+          stlEntries.push({ file: mr.stl_file, sha256: mr.stl_sha256 });
+        }
+      }
+    }
     const provenance = stableJson({
       pinned_image: PINNED_IMAGE,
       image_digest: imageDigest,
       docker_server_version: dockerVersion,
-      stl_files: familyResults
-        .filter((f) => f.stl_sha256)
-        .map((f) => ({ file: f.stl_file, sha256: f.stl_sha256 })),
+      stl_files: stlEntries,
     });
     writeFileSync(provenancePath, provenance + "\n", "utf8");
   }

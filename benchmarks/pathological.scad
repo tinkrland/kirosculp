@@ -83,10 +83,23 @@ module p005() {
     }
 }
 
-// layout: each case in a separate x/y region
-translate([  0,  0, 0]) p001a();
-translate([ 20,  0, 0]) p001b();
-translate([ 40,  0, 0]) p002();
-translate([  0, 20, 0]) p003();
-translate([ 20, 20, 0]) p004();
-translate([ 40, 20, 0]) p005();
+// case selector: when the harness passes -D case="p001a" (etc.), only that
+// module renders. when case="" (default), all cases render together so the
+// file works normally in the openscad gui.
+case = "";  // set by harness via -D; empty string = render all
+
+if (case == "p001a") { p001a(); }
+else if (case == "p001b") { p001b(); }
+else if (case == "p002")  { p002();  }
+else if (case == "p003")  { p003();  }
+else if (case == "p004")  { p004();  }
+else if (case == "p005")  { p005();  }
+else {
+    // default: all cases side by side (gui / no -D override)
+    translate([  0,  0, 0]) p001a();
+    translate([ 20,  0, 0]) p001b();
+    translate([ 40,  0, 0]) p002();
+    translate([  0, 20, 0]) p003();
+    translate([ 20, 20, 0]) p004();
+    translate([ 40, 20, 0]) p005();
+}

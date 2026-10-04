@@ -26,33 +26,38 @@ spacing = 6;   // value unverified, see rule-digest
 /* [Hidden] */
 $fn = 64;
 
-// single heart silhouette approximated as two circles and a triangle
-// all in xy plane at z = 0; extruded to base_thickness
+// single heart silhouette: hull of two circles (upper lobes) and a point
+// (lower tip). hull() guarantees a convex result with no internal coincident
+// edges, avoiding the non-manifold t-junctions that a union of overlapping
+// circles and a polygon produces in openscad 2021.01.
 module heart_2d(r) {
     offset = r * 0.5;
-    union() {
-        translate([-offset, 0, 0]) circle(r = r);
-        translate([ offset, 0, 0]) circle(r = r);
-        polygon(points = [
-            [-2 * r, -r * 0.2],
-            [ 2 * r, -r * 0.2],
-            [     0, -2.2 * r]
-        ]);
+    hull() {
+        translate([-offset, r * 0.2]) circle(r = r);
+        translate([ offset, r * 0.2]) circle(r = r);
+        // lower tip: tiny circle so hull() produces the pointed bottom
+        translate([0, -r * 1.6]) circle(r = r * 0.05);
     }
 }
 
 // double heart: two hearts joined at the midline by a bridge of width join_mm
+// bridge_overlap: small epsilon so the bridge cube intersects the heart bodies
+// rather than touching them face-to-face. touching (coincident) faces in a
+// union produce non-manifold output in openscad 2021.01; an epsilon overlap
+// ensures the boolean merges cleanly.
 module double_heart(join_mm) {
     sep = heart_r * 2.2;
     bridge_len = sep - 2 * heart_r + 2;
+    bridge_overlap = 0.1;  // epsilon overlap into each heart body
     union() {
         translate([-sep / 2, 0, 0]) linear_extrude(height = base_thickness)
             heart_2d(heart_r);
         translate([ sep / 2, 0, 0]) linear_extrude(height = base_thickness)
             heart_2d(heart_r);
-        // the join bridge: thickness is join_mm in y
-        translate([-bridge_len / 2, -join_mm / 2, 0])
-            cube([bridge_len, join_mm, base_thickness]);
+        // the join bridge extends bridge_overlap into each heart to avoid
+        // coincident-face non-manifold issues in the boolean union
+        translate([-(bridge_len / 2 + bridge_overlap), -join_mm / 2, 0])
+            cube([bridge_len + 2 * bridge_overlap, join_mm, base_thickness]);
     }
 }
 

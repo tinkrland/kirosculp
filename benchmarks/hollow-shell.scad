@@ -30,7 +30,11 @@ drain_count = 2;
 spacing = 6;   // value unverified, see rule-digest
 
 /* [Hidden] */
-$fn = 48;
+// $fn reduced from 48 to 16: the hollow-shell benchmark tests ctr-hollow-001
+// detection and shell thickness, not surface smoothness. sphere() at $fn=48
+// with 8 variants exceeds the 2-minute per-file compile timeout; $fn=16 keeps
+// each compile under 10 seconds while producing the same rule verdicts.
+$fn = 16;
 
 module drain_holes(shell_mm) {
     inner_z = outer_z - 2 * shell_mm;
