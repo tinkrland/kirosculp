@@ -52,10 +52,10 @@ import { validate } from "../paracraft/validate/validate.js";
 // ---- toolchain pins --------------------------------------------------------
 
 const PINNED_IMAGE = "openscad/openscad:2021.01";
-// image digest is recorded at runtime via "docker inspect" into the metadata.
-// we do not hardcode a digest here because the image may be pulled from
-// multiple registries and the digest observed locally is the authoritative pin.
-// the harness refuses to run with a different image tag.
+// known-good image digest recorded from the 2026-10-04 bench run (31/31 pass).
+// the harness warns when the observed digest differs from this value.
+// pass --strict-digest to fail (exit 1) on a digest mismatch instead of warning.
+const KNOWN_GOOD_DIGEST = "openscad/openscad@sha256:147e48525bec392bcf628d7a6d5ea4ccac71b16251952328f86e1061cbf47c37";
 
 const OPENSCAD_EXPORT_FORMAT = "binstl";
 
@@ -252,6 +252,7 @@ function verdictMatch(expected, actualStatus) {
 async function main() {
   const args = process.argv.slice(2);
   const noCompile = args.includes("--no-compile");
+  const strictDigest = args.includes("--strict-digest");
   const familyFilter = (() => {
     const idx = args.indexOf("--family");
     return idx >= 0 ? args[idx + 1] : null;
@@ -275,7 +276,7 @@ async function main() {
     profiles[key] = profile;
   }
 
-  // docker check
+  // docker check + digest enforcement
   let dockerVersion = null;
   let imageDigest = null;
   if (!noCompile) {
@@ -286,6 +287,20 @@ async function main() {
     log(`  docker server: ${dockerVersion}`);
     log(`  image: ${PINNED_IMAGE}`);
     log(`  digest: ${imageDigest}`);
+    if (imageDigest !== KNOWN_GOOD_DIGEST) {
+      const msg =
+        `digest mismatch:\n` +
+        `  observed:  ${imageDigest}\n` +
+        `  known-good: ${KNOWN_GOOD_DIGEST}\n` +
+        `  the image content may have changed. verdicts may differ from the recorded run.\n` +
+        `  to accept the new digest, update KNOWN_GOOD_DIGEST in scripts/run-benchmarks.mjs\n` +
+        `  after confirming all verdicts still match.`;
+      if (strictDigest) {
+        die(msg);
+      } else {
+        log(`  WARNING: ${msg}`);
+      }
+    }
   } else {
     log("--no-compile: skipping docker. using existing stl files.");
   }
@@ -518,14 +533,17 @@ async function main() {
   // metadata (run context, not interleaved with results)
   const metadata = {
     harness_version: "1",
+    known_good_digest: KNOWN_GOOD_DIGEST,
     schema: "benchmark-report-v1",
     pinned_image: PINNED_IMAGE,
     image_digest: imageDigest ?? "skipped",
+    digest_matched_known_good: noCompile ? null : (imageDigest === KNOWN_GOOD_DIGEST),
     docker_server_version: dockerVersion ?? "skipped",
     measurement_library: "paracraft/measure/measurements.js",
     validation_library: "paracraft/validate/validate.js",
     manifest_sha256: sha256File(MANIFEST_PATH),
     no_compile_mode: noCompile,
+    strict_digest_mode: strictDigest,
   };
 
   // strip non-deterministic fields from measurements in the report body.

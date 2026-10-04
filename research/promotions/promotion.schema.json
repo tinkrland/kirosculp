@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/promotion.schema.json",
+  "title": "paracraft rule promotion record",
+  "description": "records the evidence and harness witness that promoted a profile constraint from drafted to active. a constraint becomes active only after cross-checking against a minimum of two independent sources (or one source plus a direct partner answer) and reproducing its threshold in the benchmark harness.",
+  "type": "object",
+  "required": [
+    "promotion_id",
+    "constraint_id",
+    "profile_id",
+    "profile_version",
+    "property",
+    "value",
+    "unit",
+    "promotion_date",
+    "evidence_ids",
+    "benchmark_models",
+    "harness_report_sha256",
+    "harness_image_digest",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "promotion_id": {
+      "type": "string",
+      "pattern": "^promo-[a-z0-9-]+$",
+      "description": "stable identifier for this promotion record"
+    },
+    "constraint_id": {
+      "type": "string",
+      "pattern": "^ctr-[a-z0-9]+-\\d+$",
+      "description": "the constraint being activated, must match a constraint in the named profile"
+    },
+    "profile_id": {
+      "type": "string",
+      "pattern": "^profile-\\d+$"
+    },
+    "profile_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the profile version in which the constraint becomes active"
+    },
+    "property": {
+      "type": "string",
+      "description": "the constraint property name, for readability"
+    },
+    "value": {
+      "type": ["number", "boolean", "string"],
+      "description": "the promoted threshold value"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "promotion_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "type": "string", "pattern": "^evid-[a-z0-9-]+$" },
+      "description": "minimum two independent evidence ids that cross-check the threshold. one may be a direct partner answer if recorded as evidence."
+    },
+    "benchmark_models": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "manifest model ids whose harness verdicts reproduce the threshold (fires below it, passes at or above it)"
+    },
+    "harness_report_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "sha256 of benchmarks/report.json from the harness run that witnessed the verdicts"
+    },
+    "harness_image_digest": {
+      "type": "string",
+      "description": "docker image digest recorded in that harness run"
+    },
+    "notes": {
+      "type": "string",
+      "description": "human-readable rationale for the promotion; cite any resolution of contradictions"
+    }
+  }
+}

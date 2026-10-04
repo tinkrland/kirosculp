@@ -49,6 +49,10 @@
               "inputs": { "type": "string" }
             }
           },
+          "status": {
+            "enum": ["drafted", "active"],
+            "description": "drafted: value not yet cross-checked against a second independent source or partner answer. active: cross-checked and reproduced in the benchmark harness; a promotion record in research/promotions/promotions.jsonl must reference this constraint_id."
+          },
           "notes": { "type": "string" }
         }
       }

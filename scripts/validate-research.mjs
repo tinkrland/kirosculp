@@ -6,11 +6,14 @@ import addFormats from "ajv-formats";
 
 const root = process.cwd();
 const profilesDir = path.join(root, "research/profiles");
+const promotionsDir = path.join(root, "research/promotions");
 const schemaPath = path.join(profilesDir, "profile.schema.json");
+const promotionSchemaPath = path.join(promotionsDir, "promotion.schema.json");
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
 const validateProfile = ajv.compile(JSON.parse(fs.readFileSync(schemaPath, "utf8")));
+const validatePromotion = ajv.compile(JSON.parse(fs.readFileSync(promotionSchemaPath, "utf8")));
 
 // lineage registries
 const readJsonl = (file) =>
@@ -23,7 +26,48 @@ const readJsonl = (file) =>
 const evidenceIds = new Set(readJsonl("evidence/evidence.jsonl").map((r) => r.evidence_id));
 const sourceIds = new Set(readJsonl("sources/sources.jsonl").map((r) => r.source_id));
 
+// ---- promotions validation --------------------------------------------------
+
 const failures = [];
+
+const promotionsFile = path.join(promotionsDir, "promotions.jsonl");
+const promotions = fs.existsSync(promotionsFile)
+  ? fs
+      .readFileSync(promotionsFile, "utf8")
+      .split("\n")
+      .filter((l) => l.trim())
+      .map((l, i) => {
+        try {
+          return JSON.parse(l);
+        } catch (e) {
+          failures.push(`promotions.jsonl line ${i + 1}: invalid json: ${e.message}`);
+          return null;
+        }
+      })
+      .filter(Boolean)
+  : [];
+
+for (const promo of promotions) {
+  if (!validatePromotion(promo)) {
+    failures.push(`promotions.jsonl ${promo.promotion_id ?? "(unknown)"}: schema failure`);
+    for (const err of validatePromotion.errors) {
+      failures.push(`  ${err.instancePath || "(root)"} ${err.message}`);
+    }
+  }
+  for (const eid of promo.evidence_ids ?? []) {
+    if (!evidenceIds.has(eid)) {
+      failures.push(`promotions.jsonl ${promo.promotion_id}: cites unknown evidence ${eid}`);
+    }
+  }
+}
+
+// build a set of (profile_id@profile_version, constraint_id) pairs covered by promotions
+const promotedKeys = new Set(
+  promotions.map((p) => `${p.profile_id}@${p.profile_version}:${p.constraint_id}`)
+);
+
+// ---- profile validation ----------------------------------------------------
+
 const profiles = fs
   .readdirSync(profilesDir)
   .filter((f) => f.startsWith("profile-") && f.endsWith(".json"));
@@ -51,6 +95,17 @@ for (const file of profiles) {
         failures.push(`${file}: ${constraint.constraint_id} cites unknown evidence ${id}`);
       }
     }
+
+    // active constraints must have a matching promotion record
+    if (constraint.status === "active") {
+      const key = `${profile.profile_id}@${profile.version}:${constraint.constraint_id}`;
+      if (!promotedKeys.has(key)) {
+        failures.push(
+          `${file}: ${constraint.constraint_id} is status:active but has no promotion record ` +
+          `in promotions.jsonl for ${profile.profile_id}@${profile.version}`
+        );
+      }
+    }
   }
 
   for (const id of profile.source_lineage) {
@@ -70,3 +125,4 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`research profiles valid: ${profiles.length} checked (${profiles.join(", ")})`);
+console.log(`promotions valid: ${promotions.length} record(s) checked`);

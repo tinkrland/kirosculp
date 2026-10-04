@@ -11,3 +11,4 @@ benchmarks/stl/
 .env
 .env.*
 !.env.example
+.bob/

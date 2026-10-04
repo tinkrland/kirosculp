@@ -22,7 +22,7 @@
   "rule_sets": [
     {
       "id": "profile-001",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "file": "research/profiles/profile-001-lost-wax-silver-general.json",
       "scope": "lost-wax casting, sterling silver, general"
     }
