@@ -326,6 +326,10 @@ async function main() {
   let mismatchedModels = 0;
   let errorModels = 0;
 
+  // op-keyed view: map of op_id -> array of { model_id, family, rsKey, expected, actual, match }
+  // built from manifest model ops arrays as models are processed.
+  const opsView = {};
+
   // measureStl: load an stl and validate it against all rule sets.
   // returns { stl_sha256, measurements, validation } or null if file missing.
   function measureStl(stlPath) {
@@ -417,6 +421,11 @@ async function main() {
             mismatchedModels += 1;
             log(`    MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
           }
+          // populate op-keyed view from manifest ops array
+          for (const opId of model.ops ?? []) {
+            if (!opsView[opId]) opsView[opId] = [];
+            opsView[opId].push({ model_id: model.id, family: family.family, rs: rsKey, expected, actual, match });
+          }
         }
         log(`    ${model.id}: status=${measured.validation[Object.keys(model.verdicts)[0]]?.status}`);
 
@@ -479,6 +488,11 @@ async function main() {
             mismatchedModels += 1;
             log(`  MISMATCH ${model.id}: expected=${expected} actual=${actual}`);
           }
+          // populate op-keyed view from manifest ops array
+          for (const opId of model.ops ?? []) {
+            if (!opsView[opId]) opsView[opId] = [];
+            opsView[opId].push({ model_id: model.id, family: family.family, rs: rsKey, expected, actual, match });
+          }
         }
         familyResult.model_results.push(modelResult);
       }
@@ -491,6 +505,14 @@ async function main() {
   // ---- build report --------------------------------------------------------
 
   const allMatch = mismatchedModels === 0 && errorModels === 0;
+
+  // build stable ops_view: sort op keys, sort entries within each op
+  const opsViewStable = {};
+  for (const opId of Object.keys(opsView).sort()) {
+    opsViewStable[opId] = opsView[opId].slice().sort((a, b) =>
+      a.model_id.localeCompare(b.model_id) || a.rs.localeCompare(b.rs)
+    );
+  }
 
   // metadata (run context, not interleaved with results)
   const metadata = {
@@ -522,6 +544,7 @@ async function main() {
       all_match: allMatch,
     },
     families: familyResults,
+    ops_view: opsViewStable,
     metadata,
   };
 
@@ -626,6 +649,25 @@ function buildMarkdownReport(report) {
       }
     }
     lines.push("");
+  }
+
+  lines.push("## verdicts by operation");
+  lines.push("");
+  if (Object.keys(report.ops_view ?? {}).length === 0) {
+    lines.push("_no manifest entries declare ops arrays in this run._");
+    lines.push("");
+  } else {
+    for (const [opId, entries] of Object.entries(report.ops_view)) {
+      lines.push(`### ${opId}`);
+      lines.push("");
+      lines.push("| model | family | rule set | expected | actual | match |");
+      lines.push("|---|---|---|---|---|---|");
+      for (const e of entries) {
+        const matchStr = e.match ? "ok" : "MISMATCH";
+        lines.push(`| ${e.model_id} | ${e.family} | ${e.rs} | ${e.expected} | ${e.actual} | ${matchStr} |`);
+      }
+      lines.push("");
+    }
   }
 
   lines.push("## provenance");

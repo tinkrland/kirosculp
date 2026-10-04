@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/declaration.schema.json",
+  "title": "paracraft operation declaration record",
+  "description": "the typed record a studio parameter state carries for a single declared operation. this is the studio-to-paracraft handshake: the studio tells paracraft what it is doing and the relevant dimensions; paracraft evaluates the op's constraints against those declared values. the harness does not infer operations from mesh geometry. one declaration per operation per surface. this file is a contract sketch, not engine code; no compiler changes in this batch.",
+  "type": "object",
+  "required": ["op", "surface"],
+  "additionalProperties": false,
+  "properties": {
+    "op": {
+      "type": "string",
+      "pattern": "^op-[a-z0-9_-]+$",
+      "description": "the op_id of the declared operation. must match a record in research/operations/operations.jsonl."
+    },
+    "surface": {
+      "type": "string",
+      "minLength": 1,
+      "description": "a stable identifier for the surface or body this operation is applied to. used in verdict output to locate the failing operation. examples: 'ring-shank-exterior', 'pendant-face-front', 'band-inner'. arbitrary string; paracraft does not validate it against a registry in this batch."
+    },
+    "method": {
+      "type": "string",
+      "enum": ["text", "pattern", "freehand"],
+      "description": "optional method qualifier for operations that have sub-types. text: the operation was applied as typography (letter forms). pattern: the operation was applied as a repeating geometric pattern. freehand: the operation was applied as an arbitrary drawn form. not all ops use method. engrave and emboss use it; wire, stub, and through_hole do not."
+    },
+    "depth_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-engrave: the depth of the recess below the parent surface, in mm. the remaining wall after the cut is inferred as base_wall_mm - depth_mm when base_wall_mm is provided, or must be supplied as remaining_wall_mm."
+    },
+    "height_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-emboss: the height of the raised relief above the parent surface, in mm. for op-wire and op-stub: the total height of the element above its base attachment point, in mm."
+    },
+    "width_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-engrave: the width of the recess at its opening, in mm. for op-emboss: the width of the relief feature at its neck (narrowest point), in mm. governs depth-to-width ratio checks."
+    },
+    "diameter_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-wire, op-stub: the diameter of the element at its tip (narrowest point), in mm. for op-through_hole: the diameter of the hole at its opening, in mm."
+    },
+    "remaining_wall_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-engrave: the wall thickness remaining below the bottom of the recess, in mm. if not supplied, the harness infers it from base_wall_mm - depth_mm. this is the value checked against ctr-wall-001 and ctr-engrave-002."
+    },
+    "base_wall_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "the wall thickness of the parent body at the point of operation, before the operation is applied. used to infer remaining_wall_mm for op-engrave when remaining_wall_mm is not supplied directly."
+    },
+    "spacing_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-engrave and op-emboss: the minimum spacing between adjacent features of the same operation on the same surface, in mm. checked against min_spacing in ctr-engrave-001 and ctr-engrave-002."
+    },
+    "draft_angle_deg": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 90,
+      "description": "for op-engrave: the taper angle on the walls of the recess, in degrees. 0 is vertical walls; positive values mean the opening is wider than the bottom. hoover & strong (src-0007) recommend 7 degrees; morris and watson (src-0022) recommend 5-10 degrees."
+    },
+    "depth_to_width_ratio": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "for op-engrave: ratio of depth_mm to width_mm. if not supplied, the harness computes it from depth_mm / width_mm when both are present. cooksongold / stuller consensus: max 2.0. materialise: max 1.0. conflict unresolved."
+    }
+  },
+  "examples": [
+    {
+      "op": "op-engrave",
+      "surface": "ring-shank-exterior",
+      "method": "text",
+      "depth_mm": 0.3,
+      "width_mm": 0.5,
+      "base_wall_mm": 1.2,
+      "spacing_mm": 0.3,
+      "draft_angle_deg": 7
+    },
+    {
+      "op": "op-emboss",
+      "surface": "pendant-face-front",
+      "method": "pattern",
+      "height_mm": 0.4,
+      "width_mm": 0.3,
+      "spacing_mm": 0.3
+    },
+    {
+      "op": "op-wire",
+      "surface": "filigree-base",
+      "diameter_mm": 0.5,
+      "height_mm": 3.0
+    },
+    {
+      "op": "op-through_hole",
+      "surface": "base-plate",
+      "diameter_mm": 0.5
+    }
+  ]
+}

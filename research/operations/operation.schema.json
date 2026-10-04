@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sculptura.dev/schemas/operation.schema.json",
+  "title": "paracraft operation record",
+  "description": "a declared operation type in the paracraft vocabulary. an operation is what the studio says it is doing to the metal: removing material, adding relief, piercing, or building a freestanding element. the harness does not infer operations from mesh geometry; the parameter state declares them. constraints attach to operations via applies_to_ops in the profile schema.",
+  "type": "object",
+  "required": [
+    "op_id",
+    "semantic_class",
+    "label",
+    "description",
+    "canonical_properties",
+    "applies_to_constraints",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^op-[a-z0-9_-]+$",
+      "description": "stable identifier for this operation type. used as the value in a declaration record's op field and in constraint applies_to_ops arrays."
+    },
+    "semantic_class": {
+      "enum": ["subtractive", "additive", "perforation", "freestanding_element"],
+      "description": "the class of material relationship this operation creates. subtractive: material removed from an existing body (engrave, mill). additive: material raised above an existing surface (emboss, raised relief). perforation: a through or blind void that goes to the extent of the body (through hole, pilot divot). freestanding_element: a body attached at a base but free at its tip (wire, prong, stub)."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "short human-readable name for display (e.g. 'engrave', 'emboss')."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "prose description of what this operation physically does and how it differs from adjacent operations."
+    },
+    "canonical_properties": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "the measured or declared property names that rules for this operation type may reference. these are the dimensions a declaration record must supply for the harness to evaluate constraints. example: engrave requires depth_mm and width_mm; emboss requires height_mm and neck_mm."
+    },
+    "applies_to_constraints": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ctr-[a-z0-9]+-\\d+$" },
+      "description": "constraint ids from the active profile that are specifically meaningful for this operation type. a constraint can appear in multiple op records. this list is informational; the authoritative gate is applies_to_ops on the constraint itself."
+    },
+    "status": {
+      "enum": ["drafted", "active"],
+      "description": "drafted: op vocabulary entry is under review. active: the op is exercised by at least one benchmark model and its constraints have passed the harness."
+    },
+    "notes": {
+      "type": "string",
+      "description": "optional rationale, known conflicts, or scope limits."
+    }
+  }
+}

@@ -42,6 +42,11 @@
             "minItems": 1,
             "items": { "type": "string", "pattern": "^evid-[a-z0-9-]+$" }
           },
+          "applies_to_ops": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^op-[a-z0-9_-]+$" },
+            "description": "op_ids from research/operations/operations.jsonl that this constraint is specifically relevant to. a constraint with no applies_to_ops applies to all geometry. a constraint with applies_to_ops applies only when the declared operation matches one of the listed ids."
+          },
           "measurement": {
             "type": "object",
             "properties": {

@@ -1,7 +1,7 @@
 {
   "profile_id": "profile-001",
   "name": "Lost-Wax Casting — Sterling Silver — General",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "created": "2026-09-24",
   "scope": {
     "process": "lost-wax casting from printed wax/resin",
@@ -62,6 +62,7 @@
       "unit": "mm",
       "severity": "warning",
       "status": "drafted",
+      "applies_to_ops": ["op-wire", "op-stub"],
       "evidence": [
         "evid-feat-001",
         "evid-feat-002"
@@ -79,6 +80,7 @@
       "unit": "mm",
       "severity": "warning",
       "status": "drafted",
+      "applies_to_ops": ["op-emboss"],
       "evidence": [
         "evid-feat-003",
         "evid-feat-004"
@@ -98,6 +100,7 @@
       "unit": "mm",
       "severity": "warning",
       "status": "drafted",
+      "applies_to_ops": ["op-engrave"],
       "evidence": [
         "evid-feat-003",
         "evid-feat-004",
