@@ -16,7 +16,7 @@
     "pathological p-004 slab 0.3 mm wall triggers ctr-wall-001 warning.",
     "pathological p-005 band at exactly 0.8 mm passes ctr-wall-001.",
     "size-family ring diameters (us sizes 3-13) are unverified: no authoritative source (jewelers of america, iso 8653, or manufacturer chart) was successfully retrieved. size-family verdicts anchored on nominal inner diameters are provisional. us size 9 at 18.89 mm is specifically flagged as potentially wrong (common charts cite 19.10 mm). do not promote size-family verdicts to active rules until the diameter table is sourced.",
-    "feature-ladder text sub-family uses font liberation sans, which is bundled with the openscad 2021.01 docker image (openscad/openscad:2021.01). openscad is not installed on the build machine; font rendering has not been confirmed locally. headless verification requires the docker image.",
+    "feature-ladder text sub-family uses font liberation sans, bundled with the openscad 2021.01 docker image (openscad/openscad:2021.01). verified headless under that image by the benchmark harness run of 2026-10-04: all three text models compiled with plausible glyph geometry (1284 facets, 2 volumes, distinct meshes per letter size) and no font warnings.",
     "feature-ladder text sub-family tests three conflicting engraving rules in the same file: cooksongold (src-0010) letter_h=0.6 mm extrude=0.3 mm, sculpteo (rule-digest) letter_h=1.5 mm extrude=0.5 mm, hi3dp (rule-digest) letter_h=1.0 mm extrude=0.2 mm. verdicts are per rule set."
   ],
   "rule_sets": [

@@ -8,7 +8,7 @@
     "audit:refresh": "python3 scripts/build-source-audit.py",
     "bench": "node scripts/run-benchmarks.mjs",
     "bench:no-compile": "node scripts/run-benchmarks.mjs --no-compile",
-    "test": "node --test paracraft/test/measure.test.js paracraft/test/tessa-decoupling.test.js",
+    "test": "node --test paracraft/test/",
     "test:creator-trust": "node scripts/test-private-creator-trust.mjs",
     "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs",
     "test:hash-chain": "node scripts/test-hash-chain.mjs"
