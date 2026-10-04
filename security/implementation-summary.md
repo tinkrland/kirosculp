@@ -1,7 +1,7 @@
 # security containment implementation summary
 
 **implementation period:** october 1, 2026
-**branch:** kiro/security-containment
+**branch:** ide-containment (renamed from kiro/security-containment)
 **status:** core infrastructure complete, ready for production verification
 
 ## objective
