@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "as_of": "2026-10-05",
   "deny_by_default": true,
   "gate": "verified_payout_account",
@@ -7,7 +7,24 @@
   "assignment_point": "payout_account_verification",
   "runtime_query_required": true,
   "visibility": "private_provider_legal_data",
-  "rails": ["stripe_connect", "paypal_payouts", "payoneer"],
+  "rails": [
+    "stripe_connect",
+    "paypal_payouts",
+    "payoneer"
+  ],
+  "aml_policy": {
+    "dpms_stance": "grey_list_markets_hold",
+    "fatf_as_of_plenary": "2026-06-19",
+    "recheck_cadence": "each fatf plenary, october, february, june",
+    "sanctions": "deny_by_default, screened per payout by the rail adapters",
+    "latam_admission": "no hard regional admission exclusion; distinct from the eaeu admission consideration",
+    "tier_meanings": {
+      "standard": "off all lists, routine rail screening",
+      "enhanced": "off all lists, elevated soft-risk factors, longer payout review where triggered",
+      "grey_hold": "fatf grey list; hold, not admitted in the default pass; stricter payout approval if ever opened",
+      "sanctions_conditional": "sanctions regime in flux; deny-by-default until stabilized"
+    }
+  },
   "markets": [
     {
       "market": "US",
@@ -16,6 +33,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -25,6 +44,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -34,6 +55,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -43,7 +66,11 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
-      "constraints": ["paypal payouts is send, receive, withdraw in ie, not fully localized"]
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "paypal payouts is send, receive, withdraw in ie, not fully localized"
+      ]
     },
     {
       "market": "DE",
@@ -52,6 +79,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -61,6 +90,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -70,6 +101,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -79,6 +112,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -88,6 +123,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -97,6 +134,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -106,6 +145,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -115,6 +156,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -124,25 +167,9 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
-    },
-    {
-      "market": "MX",
-      "stripe_connect": "available",
-      "paypal_payouts": "available_with_constraints",
-      "payoneer": "available",
-      "primary_rail": "stripe_connect",
-      "fallback_rail": "payoneer",
-      "constraints": ["paypal payouts is receive and withdraw in mx, not fully localized"]
-    },
-    {
-      "market": "BR",
-      "stripe_connect": "available",
-      "paypal_payouts": "available_with_constraints",
-      "payoneer": "available",
-      "primary_rail": "stripe_connect",
-      "fallback_rail": "payoneer",
-      "constraints": ["paypal brl balance is in-country only; cross-border recipients get conversion at paypal's spread"]
     },
     {
       "market": "AU",
@@ -151,6 +178,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -160,6 +189,8 @@
       "payoneer": "available",
       "primary_rail": "stripe_connect",
       "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -169,6 +200,8 @@
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": [
         "law 6493 restricts cross-border payment processing to licensed providers",
         "paypal has processed no tr payments since its 2016 bddk license refusal exit",
@@ -178,12 +211,62 @@
       ]
     },
     {
+      "market": "MA",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
+      "market": "DZ",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "removed from the fatf grey list at the 2026-06 plenary after completing its action plan"
+      ]
+    },
+    {
+      "market": "TN",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "unverified",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "no payout rail source-verified yet: paypal payouts unsupported, payoneer coverage unconfirmed; research-only"
+      ]
+    },
+    {
+      "market": "EG",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
       "market": "IN",
       "stripe_connect": "preview",
       "paypal_payouts": "available_with_constraints",
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": "paypal_payouts",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": [
         "stripe in is a preview market, contact sales, no self-serve express account creation",
         "paypal payouts lists in as receive and withdraw; marketplace payout feasibility into in is unverified",
@@ -197,6 +280,8 @@
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -206,7 +291,48 @@
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
+    },
+    {
+      "market": "NP",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "unavailable",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "grey_hold",
+      "fatf_grey_list": true,
+      "constraints": [
+        "on the fatf grey list as of the 2026-06 plenary; dpms stance: hold, stricter payout approval if ever opened"
+      ]
+    },
+    {
+      "market": "MY",
+      "stripe_connect": "available",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "paypal myr handling: malaysian users cannot send payouts requiring myr exchange, or myr balances to non-malaysian users"
+      ]
+    },
+    {
+      "market": "ID",
+      "stripe_connect": "preview",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "stripe id is a preview market, contact sales, no self-serve express account creation"
+      ]
     },
     {
       "market": "PH",
@@ -215,16 +341,50 @@
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": "paypal_payouts",
-      "constraints": ["paypal payouts withdrawal in ph is local-currency"]
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "paypal payouts withdrawal in ph is local-currency"
+      ]
     },
     {
-      "market": "NG",
-      "stripe_connect": "extended_network_only",
-      "paypal_payouts": "unavailable",
+      "market": "VN",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
       "payoneer": "available",
-      "primary_rail": "payoneer",
+      "primary_rail": null,
       "fallback_rail": null,
-      "constraints": ["ng is a stripe extended-network market served via paystack, which is not stripe connect"]
+      "aml_tier": "grey_hold",
+      "fatf_grey_list": true,
+      "constraints": [
+        "on the fatf grey list as of the 2026-06 plenary; dpms stance: hold, stricter payout approval if ever opened"
+      ]
+    },
+    {
+      "market": "MX",
+      "stripe_connect": "available",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "paypal payouts is receive and withdraw in mx, not fully localized"
+      ]
+    },
+    {
+      "market": "BR",
+      "stripe_connect": "available",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "paypal brl balance is in-country only; cross-border recipients get conversion at paypal's spread"
+      ]
     },
     {
       "market": "AR",
@@ -233,6 +393,22 @@
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": "paypal_payouts",
+      "aml_tier": "enhanced",
+      "fatf_grey_list": false,
+      "constraints": [
+        "cepo cambiario lifted april 2025, managed float; residual friction is conversion spread and payout fee/limit noise",
+        "elevated soft risk from argentina's long-standing card-fraud environment, mostly a buyer-side concern"
+      ]
+    },
+    {
+      "market": "CL",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
     },
     {
@@ -242,18 +418,236 @@
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": "paypal_payouts",
-      "constraints": ["paypal co is cross-border payouts only"]
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "paypal co is cross-border payouts only"
+      ]
     },
     {
-      "market": "CL",
+      "market": "PE",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
+      "market": "UY",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "unavailable",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "rails not yet researched; tier recorded only"
+      ]
+    },
+    {
+      "market": "PY",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "unavailable",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "enhanced",
+      "fatf_grey_list": false,
+      "constraints": [
+        "rails not yet researched; tier recorded only",
+        "legacy ciudad del este cash-economy reputation in regional ml typologies, formally low risk"
+      ]
+    },
+    {
+      "market": "BO",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "grey_hold",
+      "fatf_grey_list": true,
+      "constraints": [
+        "on the fatf grey list since october 2023; dpms stance: hold, stricter payout approval if ever opened"
+      ]
+    },
+    {
+      "market": "VE",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "sanctions_conditional",
+      "fatf_grey_list": false,
+      "constraints": [
+        "on the fatf grey list as of the 2026-06 plenary",
+        "ofac venezuela regime thawing through 2026 general licenses but volatile; deny-by-default until stabilized, recheck quarterly"
+      ]
+    },
+    {
+      "market": "NG",
+      "stripe_connect": "extended_network_only",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "ng is a stripe extended-network market served via paystack, which is not stripe connect"
+      ]
+    },
+    {
+      "market": "GH",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
+      "market": "SN",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "unverified",
+      "primary_rail": "paypal_payouts",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "payoneer coverage unconfirmed; research the payoneer side before relying on the fallback"
+      ]
+    },
+    {
+      "market": "CM",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "grey_hold",
+      "fatf_grey_list": true,
+      "constraints": [
+        "on the fatf grey list as of the 2026-06 plenary; dpms stance: hold"
+      ]
+    },
+    {
+      "market": "CI",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "unavailable",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "grey_hold",
+      "fatf_grey_list": true,
+      "constraints": [
+        "on the fatf grey list as of the 2026-06 plenary; dpms stance: hold"
+      ]
+    },
+    {
+      "market": "KE",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "grey_hold",
+      "fatf_grey_list": true,
+      "constraints": [
+        "on the fatf grey list as of the 2026-06 plenary; dpms stance: hold, stricter payout approval if ever opened"
+      ]
+    },
+    {
+      "market": "TZ",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
+      "market": "UG",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
+      "market": "ET",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "not_researched",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "rails not yet researched; tier recorded only"
+      ]
+    },
+    {
+      "market": "ZA",
       "stripe_connect": "unavailable",
       "paypal_payouts": "available",
       "payoneer": "available",
       "primary_rail": "payoneer",
       "fallback_rail": "paypal_payouts",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
       "constraints": []
+    },
+    {
+      "market": "BW",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": []
+    },
+    {
+      "market": "NA",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "unavailable",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "removed from the fatf grey list at the 2026-06 plenary; rails not yet researched"
+      ]
+    },
+    {
+      "market": "MZ",
+      "stripe_connect": "not_researched",
+      "paypal_payouts": "not_researched",
+      "payoneer": "not_researched",
+      "primary_rail": null,
+      "fallback_rail": null,
+      "aml_tier": "standard",
+      "fatf_grey_list": false,
+      "constraints": [
+        "rails not yet researched; tier recorded only"
+      ]
     }
   ],
-  "deferred_markets": ["MA", "DZ", "TN"],
   "out_of_scope_here": "eaeu artist-admission exclusion stays in admission policy, not payout routing"
 }
