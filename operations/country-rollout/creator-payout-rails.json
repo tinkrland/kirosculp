@@ -551,11 +551,15 @@
     },
     {
       "market": "UY",
-      "reason": "rails not yet researched; tier recorded only"
+      "reason": "v2 candidate: paypal payouts supported (send, receive, withdraw); payoneer coverage unverified; no native stripe"
     },
     {
       "market": "PY",
       "reason": "rails not yet researched; enhanced-tier note retained for the ciudad del este legacy reputation"
+    },
+    {
+      "market": "CR",
+      "reason": "v2 candidate: paypal payouts supported (send, receive, withdraw), payoneer accepted, real freelancer and creative scene; no native stripe"
     },
     {
       "market": "SN",
@@ -595,27 +599,27 @@
     },
     {
       "market": "SA",
-      "reason": "gcc parked by decision"
+      "reason": "v2 candidate: gcc; paypal payouts supported"
     },
     {
       "market": "AE",
-      "reason": "gcc parked by decision, despite full stripe support"
+      "reason": "v2 candidate: gcc, with full stripe support"
     },
     {
       "market": "QA",
-      "reason": "gcc parked by decision"
+      "reason": "gcc parked, no v2 plan"
     },
     {
       "market": "KW",
-      "reason": "gcc parked by decision; fatf grey list as of 2026-06"
+      "reason": "gcc parked, no v2 plan; fatf grey list as of 2026-06"
     },
     {
       "market": "BH",
-      "reason": "gcc parked by decision"
+      "reason": "gcc parked, no v2 plan"
     },
     {
       "market": "OM",
-      "reason": "gcc parked by decision"
+      "reason": "gcc parked, no v2 plan"
     },
     {
       "market": "IR",

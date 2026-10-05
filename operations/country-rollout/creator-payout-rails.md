@@ -247,16 +247,19 @@ group. the paypal myr constraint is recorded for the fallback adapter.
 not blanket-opened; each parked market carries its one-line reason in
 the json. current parked set:
 
+- v2 candidates: CR (paypal supported, payoneer accepted, real
+  freelancer and creative scene), UY (paypal supported, payoneer
+  coverage unverified), AE (gcc, full stripe support), SA (gcc,
+  paypal supported)
 - rails unresolved or unverified: TN (no source-verified rail, no
   visible creator-market signal yet; later-version candidate if
   payoneer coverage verifies), SN (paypal yes, payoneer unverified),
-  UY, PY, ET (rails not yet researched)
+  PY, ET (rails not yet researched)
 - no creator-cohort signal yet despite workable rails: TZ, UG, BW
 - recently delisted, rails not yet researched: MZ (october 2025), NA
   (june 2026)
 - grey-listed, held, no signal: CM, CI
-- gcc parked by decision: SA, AE (despite full stripe support), QA,
-  KW (also grey-listed), BH, OM
+- gcc parked, no v2 plan: QA, KW (also grey-listed), BH, OM
 - out of scope, sanctions: IR, SY
 - out of scope, fatf grey list: IQ, LB (since october 2024), YE
 - out of scope, no viable payout rail: PS
