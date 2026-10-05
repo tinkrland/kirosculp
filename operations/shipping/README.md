@@ -2,6 +2,11 @@
 
 serviceability, labels, tracking, delivery events, returns, customs documents, address rules, and delivery exceptions. a carrier advertising worldwide coverage does not make every destination supported.
 
+## address rules
+
+- po boxes are not accepted as delivery addresses. a physical street address is required at checkout, reason-coded at submit time. this is an anti-abuse rule (from the payout-side anti-fraud intuition list: no p.o.-box shipping) and a practical one: carriers require deliverable street addresses for our parcel classes, and proof-of-delivery is part of the dispute-evidence chain.
+- this applies to the buyer delivery address side only. manufacturer and foundry addresses (pattern-print broker to foundry routing, see onthehorizon.md) are internal logistics, not checkout addresses.
+
 
 see [`locale.md`](locale.md) for the country clusters, eu and non-eu distinctions, ccm groupings, and route-specific rollout concerns.
 
