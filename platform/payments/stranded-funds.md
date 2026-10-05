@@ -81,9 +81,9 @@ as ours. it is theirs, stranded.
 
 ## open questions
 
-- threshold value: creator-onboarding.md currently records usd 20 /
-  eur 20; a raise to 50/50 is under discussion. resolve before this
-  policy's prompts are parameterized.
+- threshold value resolved october 2026: first payout usd 50 /
+  eur 50, subsequent payouts usd 25 / eur 25. parameterize the prompts
+  on the two-level rule.
 - per-market dormancy tables: a legal pass per active market, later.
 - de minimis handling: whether a below-de-minimis balance can be
   waived or donated with consent, state by state. counsel question,

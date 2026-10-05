@@ -10,12 +10,12 @@ signup itself does not intentionally require full kyc. creators can build a prof
 
 ## payout gate
 
-identity and payout verification must be complete before money is released. the initial product threshold is:
+identity and payout verification must be complete before money is released. the thresholds are:
 
-- usd balance: **$20**
-- eur balance: **€20**
+- first payout: usd balance **$50**, eur balance **€50**
+- subsequent payouts: usd balance **$25**, eur balance **€25**
 
-reaching the threshold should prompt provider-hosted payout onboarding if it is incomplete. a creator may also complete it earlier voluntarily.
+reaching the first-payout threshold should prompt provider-hosted payout onboarding if it is incomplete. a creator may also complete it earlier voluntarily. after the first payout clears, the payout threshold drops to the subsequent level.
 
 this is product intent, not a promise that every provider permits deferred verification. stripe, paypal, a regulator, sanctions screening, transaction monitoring, or a connected-account configuration may require information earlier. provider requirements win, and the product must surface that honestly instead of bypassing it.
 
