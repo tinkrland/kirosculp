@@ -10,6 +10,8 @@ see:
 
 - [`creator-onboarding.md`](creator-onboarding.md)
 - [`creator-payout-policy.json`](creator-payout-policy.json)
+- [`creator-payout-rails.md`](creator-payout-rails.md)
+- [`creator-payout-rails.json`](creator-payout-rails.json)
 
 ## shipping
 

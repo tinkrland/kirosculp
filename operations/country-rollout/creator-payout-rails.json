@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-05",
+  "deny_by_default": true,
+  "gate": "verified_payout_account",
+  "gate_rail_agnostic": true,
+  "assignment_point": "payout_account_verification",
+  "runtime_query_required": true,
+  "visibility": "private_provider_legal_data",
+  "rails": ["stripe_connect", "paypal_payouts", "payoneer"],
+  "markets": [
+    {
+      "market": "US",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "CA",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "GB",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "IE",
+      "stripe_connect": "available",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": ["paypal payouts is send, receive, withdraw in ie, not fully localized"]
+    },
+    {
+      "market": "DE",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "AT",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "CH",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "FR",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "BE",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "NL",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "IT",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "PT",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "ES",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "MX",
+      "stripe_connect": "available",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": ["paypal payouts is receive and withdraw in mx, not fully localized"]
+    },
+    {
+      "market": "BR",
+      "stripe_connect": "available",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": ["paypal brl balance is in-country only; cross-border recipients get conversion at paypal's spread"]
+    },
+    {
+      "market": "AU",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "NZ",
+      "stripe_connect": "available",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "stripe_connect",
+      "fallback_rail": "payoneer",
+      "constraints": []
+    },
+    {
+      "market": "TR",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "constraints": [
+        "law 6493 restricts cross-border payment processing to licensed providers",
+        "paypal has processed no tr payments since its 2016 bddk license refusal exit",
+        "paypal's own payouts table still lists tr as fully localized; treated as a stale documentation error, deny-by-default stands until paypal states otherwise",
+        "payoneer performs its own kyc for tr",
+        "commercial income requires an appropriate business registration, sole proprietorship or entity"
+      ]
+    },
+    {
+      "market": "IN",
+      "stripe_connect": "preview",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "constraints": [
+        "stripe in is a preview market, contact sales, no self-serve express account creation",
+        "paypal payouts lists in as receive and withdraw; marketplace payout feasibility into in is unverified",
+        "upgrade paths: stripe global payouts or a stripe sales conversation"
+      ]
+    },
+    {
+      "market": "PK",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "constraints": []
+    },
+    {
+      "market": "BD",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "constraints": []
+    },
+    {
+      "market": "PH",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "constraints": ["paypal payouts withdrawal in ph is local-currency"]
+    },
+    {
+      "market": "NG",
+      "stripe_connect": "extended_network_only",
+      "paypal_payouts": "unavailable",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": null,
+      "constraints": ["ng is a stripe extended-network market served via paystack, which is not stripe connect"]
+    },
+    {
+      "market": "AR",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "constraints": []
+    },
+    {
+      "market": "CO",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available_with_constraints",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "constraints": ["paypal co is cross-border payouts only"]
+    },
+    {
+      "market": "CL",
+      "stripe_connect": "unavailable",
+      "paypal_payouts": "available",
+      "payoneer": "available",
+      "primary_rail": "payoneer",
+      "fallback_rail": "paypal_payouts",
+      "constraints": []
+    }
+  ],
+  "deferred_markets": ["MA", "DZ", "TN"],
+  "out_of_scope_here": "eaeu artist-admission exclusion stays in admission policy, not payout routing"
+}
