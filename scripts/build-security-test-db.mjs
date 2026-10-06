@@ -2,7 +2,7 @@
 // build-security-test-db.mjs
 //
 // builds a local pglite database with the full cumulative migration history:
-// 16 lovable migrations + 10 foundation corrective migrations.
+// 16 lovable migrations + 11 foundation corrective migrations.
 //
 // usage:
 //   import { buildTestDatabase } from './scripts/build-security-test-db.mjs';
@@ -48,6 +48,7 @@ const FOUNDATION_MIGRATIONS = [
   '0008_order_purchase_idempotency.sql',
   '0009_private_creator_trust.sql',
   '0010_private_buyer_trust.sql',
+  '0011_payout_signal_evidence.sql',
 ];
 
 async function applyMigration(db, filepath, name) {
@@ -246,7 +247,7 @@ export async function buildTestDatabase() {
   }
   
   // apply foundation migrations
-  console.log('\napplying foundation migrations (10 files)...');
+  console.log(`\napplying foundation migrations (${FOUNDATION_MIGRATIONS.length} files)...`);
   const foundationPath = path.join(root, 'migrations');
   
   for (const filename of FOUNDATION_MIGRATIONS) {

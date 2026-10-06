@@ -41,11 +41,35 @@ clean.
 
 `npm run check:signals-hygiene` fails if either appears in the signals paths.
 
+## storage
+
+[migration 0011](../../migrations/0011_payout_signal_evidence.sql) adds three
+tables in the private `sculptura_private` schema.
+
+| table | holds | lifetime |
+|---|---|---|
+| `creator_signal_events` | keyed device hash, keyed ip digest, key id, bounded features | purged after 12 months |
+| `payout_signal_decisions` | outcome, reason codes, flags, source attribution | append-only, kept |
+| `payout_signal_policy` | per-market mandatory checks, keyed by iso alpha-2 | reviewed migrations only |
+
+there is no column for a raw fingerprint, a plaintext ip, a country, or a
+corridor on the evidence tables. stored features are a closed shape enforced by
+a check constraint. the policy table is check-selection configuration, not a
+subject record. `npm run check:trust-geography` fails if a trust table or a
+signal evidence table gains a geography-like column, or if a foreign key links
+trust and signals.
+
+clients have no write path. the server records a check through
+`record_payout_signal_check`, executable by `service_role` only, which is atomic
+and idempotent per submission id. admins read through
+`admin_get_payout_signals` or the admin-only rls policies.
+
 ## commands
 
 ```text
 npm run validate:signal-sources     # source ledger has license, terms, boundary
 npm run check:signals-hygiene       # no provider databases, no secret-shaped values
+npm run check:trust-geography       # no geography in trust or signal evidence schema
 npm run test:signals-and-ip-intel   # all signals tests, offline, fixtures only
 ```
 

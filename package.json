@@ -10,6 +10,7 @@
     "test:creator-trust": "node scripts/test-private-creator-trust.mjs",
     "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs",
     "validate:signal-sources": "node scripts/validate-signal-sources.mjs",
+    "check:trust-geography": "node scripts/check-trust-schema-invariant.mjs",
     "check:signals-hygiene": "node scripts/check-signals-hygiene.mjs",
     "test:signals-and-ip-intel": "node --test \"platform/signals/test/*.test.mjs\""
   },

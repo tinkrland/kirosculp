@@ -37,3 +37,15 @@ see [the schema contract and access requirements](../admin/creator-trust/README.
 - [0010_private_buyer_trust.sql](0010_private_buyer_trust.sql): the separate
   registered-buyer model, using 0009 evidence validation and admin-only
   authorization. locally tested only; apply after 0009 when deployment is authorized.
+
+## payout signal evidence
+
+- [0011_payout_signal_evidence.sql](0011_payout_signal_evidence.sql): private,
+  append-only evidence for payout fraud control at the two money moments. a
+  per-market check-selection policy, 12-month signal events, and permanent
+  decision records carrying reason codes, flags and source attribution. no table
+  is a trust record, none references the trust tables, and only the policy table
+  carries a market code. writes go through one service_role-only function.
+  locally tested only; apply after 0010 when deployment is authorized.
+  keep sculptura_private out of postgrest exposed schemas. see
+  [the signals module](../platform/signals/README.md).
