@@ -1,0 +1,237 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "creator payout rails by market",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "as_of",
+    "deny_by_default",
+    "gate",
+    "gate_rail_agnostic",
+    "assignment_point",
+    "runtime_query_required",
+    "visibility",
+    "rails",
+    "aml_policy",
+    "markets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "deny_by_default": {
+      "const": true
+    },
+    "gate": {
+      "const": "verified_payout_account"
+    },
+    "gate_rail_agnostic": {
+      "const": true
+    },
+    "assignment_point": {
+      "const": "payout_account_verification"
+    },
+    "runtime_query_required": {
+      "const": true
+    },
+    "visibility": {
+      "const": "private_provider_legal_data"
+    },
+    "rails": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "stripe_connect",
+          "paypal_payouts",
+          "payoneer"
+        ]
+      }
+    },
+    "aml_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dpms_stance",
+        "fatf_as_of_plenary",
+        "recheck_cadence",
+        "sanctions",
+        "latam_admission",
+        "tier_meanings"
+      ],
+      "properties": {
+        "dpms_stance": {
+          "const": "grey_list_markets_hold"
+        },
+        "fatf_as_of_plenary": {
+          "type": "string"
+        },
+        "recheck_cadence": {
+          "type": "string"
+        },
+        "sanctions": {
+          "type": "string"
+        },
+        "latam_admission": {
+          "type": "string"
+        },
+        "tier_meanings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "standard",
+            "enhanced",
+            "grey_hold",
+            "sanctions_conditional"
+          ],
+          "properties": {
+            "standard": {
+              "type": "string"
+            },
+            "enhanced": {
+              "type": "string"
+            },
+            "grey_hold": {
+              "type": "string"
+            },
+            "sanctions_conditional": {
+              "type": "string"
+            }
+          }
+        },
+        "grey_list_removals_2025_10": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          }
+        }
+      }
+    },
+    "markets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "market",
+          "stripe_connect",
+          "paypal_payouts",
+          "payoneer",
+          "primary_rail",
+          "aml_tier",
+          "fatf_grey_list",
+          "constraints"
+        ],
+        "properties": {
+          "market": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "stripe_connect": {
+            "enum": [
+              "available",
+              "available_with_constraints",
+              "preview",
+              "extended_network_only",
+              "unavailable",
+              "not_researched"
+            ]
+          },
+          "paypal_payouts": {
+            "enum": [
+              "available",
+              "available_with_constraints",
+              "unavailable",
+              "not_researched"
+            ]
+          },
+          "payoneer": {
+            "enum": [
+              "available",
+              "unavailable",
+              "unverified",
+              "not_researched"
+            ]
+          },
+          "primary_rail": {
+            "anyOf": [
+              {
+                "enum": [
+                  "stripe_connect",
+                  "paypal_payouts",
+                  "payoneer"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fallback_rail": {
+            "anyOf": [
+              {
+                "enum": [
+                  "stripe_connect",
+                  "paypal_payouts",
+                  "payoneer"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "aml_tier": {
+            "enum": [
+              "standard",
+              "enhanced",
+              "grey_hold",
+              "sanctions_conditional"
+            ]
+          },
+          "fatf_grey_list": {
+            "type": "boolean"
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "out_of_scope_here": {
+      "type": "string"
+    },
+    "parked_markets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "market",
+          "reason"
+        ],
+        "properties": {
+          "market": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

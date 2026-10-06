@@ -26,6 +26,11 @@
       "id": "razorpay",
       "role": "regional_candidate",
       "status": "future_research"
+    },
+    {
+      "id": "payoneer",
+      "role": "regional_candidate",
+      "status": "planned"
     }
   ]
 }
