@@ -112,7 +112,9 @@ garbage, truncated, future-dated or stale loads as an unavailable source, which 
 policy turns into `feed_unavailable` and `needs_review`.
 
 the staleness limits (tor 48 hours, x4bnet 14 days, ip2proxy lite 45 days) are
-operational defaults chosen in this leg. they are not owner rulings and need review.
+owner-ratified settings (ruling 2026-10-06). they were first proposed as
+implementation defaults. they are parked for a revisit once real traffic volume
+exists, and that revisit is planned, not optional.
 
 ```text
 node scripts/import-ip-feeds.mjs --fetch                 # public lists only, needs no key
@@ -180,8 +182,65 @@ release). a missing, corrupt, truncated or stale database loads as an unavailabl
 source, which records coverage `none`, which is the normal no-geo path above. tests
 inject `open` and use no real database.
 
-the 30 day age limit is an operational default chosen in this leg, like the feed
-staleness limits, and needs review.
+the 30 day age limit is an owner-ratified setting, like the feed staleness limits,
+with the same planned revisit once real traffic volume exists.
+
+the embargo list reviewer is the owner, quarterly and on major sanctions news (ofac,
+un, eu). revisions land as reviewed migrations, as seeded. an automated
+sanctions-feed watcher may assist later; the named reviewer stays.
+
+## payout eligibility: not yet
+
+[`payout-eligibility.mjs`](payout-eligibility.mjs) answers "not yet" at payout
+onboarding, before any signal check. two owner rulings (2026-10-06) share it. both
+are age and roadmap state. neither is fraud or a legal event.
+
+- **minor creator.** publication requires the age attestation. a minor's earnings
+  accrue in the ledger with no payout rail, as an ordinary `creator_payable`
+  liability. there is no special ledger event type and no ledger change. payout
+  onboarding stays `not_yet`, never `no`, until the creator turns 18 and passes
+  their own provider kyc. there is no parental payee, no parental kyc and no
+  third-party payout in v1. a parental-payee model is deferred to v2 pending counsel
+  review.
+- **parked market.** a creator resident in a v2 parked market publishes and earns,
+  the balance accrues, and onboarding returns `not_yet`. the hold lifts when the
+  market opens, or when the creator presents a bank rail in an already enabled
+  market. the rail market selects the checks, never the residence.
+
+how it works:
+
+- the gate asks the evaluator after it has the rail market and before it calls the
+  signal service. a `not_yet` answer returns `{ status: 'not_yet' }` to the browser
+  and `{ eligibility: 'not_yet', cause }` to the server-side workflow. no signal
+  check runs, no device signal is collected, no decision row is written, no
+  `needs_review` is raised, and no trust record is read or written.
+- age comes first. an attestation of `{ status: 'minor', majorityDate }` parks the
+  creator in every market, with or without a rail, until `majorityDate` (utc). an
+  `adult` attestation proceeds. a missing attestation is `not_yet`
+  (`age_attestation_missing`) and a malformed one is `not_yet`
+  (`age_attestation_invalid`). age alone never unlocks anything: at 18 the creator
+  still needs a verified payout account from their own kyc, and until they have one the
+  gate holds as it does for any creator without a rail.
+- the market check reads `operations/country-rollout/creator-payout-rails.json` on
+  every call (the matrix requires a runtime query), so a market that opens lifts the
+  hold with no code change. a rail in a market the matrix does not enable is `not_yet`
+  (the matrix is deny by default).
+- the hold list is named config in
+  [`parked-market-policy.mjs`](parked-market-policy.mjs), seeded with `SA` only.
+  `npm run check:parked-hold` fails if the list is empty, or names a sanctions,
+  fatf grey-listed, out-of-scope or embargoed market, or a code the matrix does not
+  know. the matrix parks several kinds of market, and only roadmap state belongs here.
+- a failure to read the facts or the matrix is a `hold` (503), never a false
+  `not_yet` and never a pass. a lookup of the rail market that throws is also a hold.
+- the gate now requires `resolveCreatorFacts` and `eligibility`. omitting either
+  throws, so the park cannot be skipped by leaving a dependency out.
+- residence is read, used to choose between proceed and not yet, and discarded. it is
+  not stored, returned or logged. the browser and the telemetry carry no age, market,
+  date or creator id.
+
+not built here, because no code for them exists in the repo: capturing the age
+attestation at publication, and reading residence from a creator record. the gate
+takes both through `resolveCreatorFacts`.
 
 ## payout gate
 
@@ -201,14 +260,15 @@ is a 400. everything that decides the outcome is derived server side:
   (`clientIpFromTrustedProxy`), never the leftmost `x-forwarded-for` entry, which
   the client controls.
 
-what the browser is told is one word: `continue` or `review`. never a reason code,
-a flag, a source, or a market: that would tell an attacker which detector to
-evade. the full decision, including reason codes, goes to the caller's second
-return value for the server-side payout workflow only.
+what the browser is told is one word: `continue`, `review` or `not_yet`. never a
+reason code, a flag, a source, a market or an age: that would tell an attacker which
+detector to evade. the full decision, including reason codes, goes to the caller's
+second return value for the server-side payout workflow only. `not_yet` is answered
+before the signal service runs; see [payout eligibility](#payout-eligibility-not-yet).
 
 any failure not caused by the caller (`PolicyUnavailableError`,
-`CheckNotRecordedError`, an unresolvable market, an unresolvable client address, or
-anything unexpected) is a 503 hold. it is never turned into `continue` and never
+`CheckNotRecordedError`, an unresolvable market, an unresolvable client address, an
+unreadable eligibility fact or rails matrix, or anything unexpected) is a 503 hold. it is never turned into `continue` and never
 into a user-facing failure, because it is this leg's own outage.
 
 ## decision service
@@ -290,6 +350,7 @@ npm run validate:signal-sources     # source ledger has license, terms, boundary
 npm run check:signals-hygiene       # no provider databases, no secret-shaped values
 npm run check:trust-geography       # no geography in trust or signal evidence schema
 npm run check:embargo-greylist      # territory list and trigger disjoint from the fatf grey list
+npm run check:parked-hold           # parked-market hold list is roadmap state only
 npm run test:signals-and-ip-intel   # all signals tests, offline, fixtures only
 ```
 

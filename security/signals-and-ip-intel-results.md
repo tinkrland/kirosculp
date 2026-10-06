@@ -1,8 +1,8 @@
 # signals-and-ip-intel results
 
 **implementation period:** october 6, 2026
-**branch:** security (batches 1-7 on origin/security through commit 2615d29; batch 8 is the section below)
-**status:** all eight batches implemented and verified locally; no live
+**branch:** security (batches 1-8 on origin/security through commit e3d04cf; batch 9 is the last section before test evidence)
+**status:** all nine batches implemented and verified locally; no live
 provider, no live supabase mutation, no real payout.
 
 ## objective
@@ -68,7 +68,8 @@ resolved).
 | 5 | ab960fa | `payout-signal-check.mjs`, `db-ports.mjs` |
 | 6 | 2aab55d | `payout-gate.mjs` |
 | 7 | 2615d29 | verification, results document, prose and hygiene checks |
-| 8 | see below | embargoed-territory review hold, geolite2 reader, migration 0012 |
+| 8 | e3d04cf | embargoed-territory review hold, geolite2 reader, migration 0012 |
+| 9 | see below | minor-creator park and parked-market hold ("not yet"), ratified settings, assigned reviewer |
 
 batches 1 to 6 are on `origin/security` as of this writing (verified by
 `git ls-remote origin security` matching local `HEAD`).
@@ -241,9 +242,126 @@ mutation first survived (a country on a coverage-none result), because the adapt
 contract already forbids that shape. a direct test of `evaluateChecks` with the
 malformed shape was added, and the mutation is now caught.
 
-deliberately not built, per the owner: the minor-creator age gate and the
-parked-market hold flow (the faizah case). the owner rulings on both are still open.
-the fixtures exist in `platform/creators/demo-roster.md`.
+the minor-creator age gate and the parked-market hold flow (the faizah case) were
+deliberately not built in batch 8, because the owner rulings were open. the rulings
+landed afterwards and batch 9 builds them.
+
+## batch 9: "not yet" (owner rulings, 2026-10-06)
+
+four rulings landed after batch 8 (spec commit c3473b9). this batch builds the first
+two, and records the last two.
+
+**1. minor-creator park (jeremiah brown jr. fixture).** v1 is a pure park.
+publication requires the age attestation. a minor's earnings accrue in the ledger
+with no payout rail. payout onboarding returns `not_yet`, never `no`. payout unlocks
+at 18 when the creator passes their own provider kyc. no parental payee, no parental
+kyc, no third-party payout. the accrual is an ordinary `creator_payable` liability
+with no special event type.
+
+**2. parked-market hold (faizah aisler fixture).** a creator resident in a v2 parked
+market publishes and earns, the balance accrues, and onboarding returns `not_yet`.
+funds release when the market opens or the creator presents a bank rail in an
+already enabled market, keyed by rail. this is roadmap state: no `needs_review`, no
+trust input, no signal check.
+
+what was built, with no migration (0012 is still the last):
+
+- `payout-eligibility.mjs`: an evaluator with two outcomes, `proceed` and `not_yet`.
+  age is checked first, so a minor is parked in every market, with or without a rail.
+  then the rail market, then residence against the hold list. the rails matrix is
+  read on every call, so an opened market lifts the hold with no code change.
+- `parked-market-policy.mjs`: the hold list, named config, seeded with `SA` only.
+- `payout-gate.mjs`: the gate now resolves the rail market, then asks the evaluator,
+  and answers `not_yet` before the signal service runs. it requires two new
+  dependencies, `resolveCreatorFacts` and `eligibility`, and refuses to be built
+  without them, so the park cannot be skipped by omission. a rail lookup that throws
+  is now a distinct hold (`market_lookup_failed`), where before it was folded into
+  `market_unknown`. a creator with no rail yet is a normal state.
+- `scripts/check-parked-hold-policy.mjs` (`npm run check:parked-hold`): fails on an
+  empty list, a sanctions, grey-listed, out-of-scope or embargoed market, or a code the
+  matrix does not know. a market that has opened is reported for cleanup and does
+  not fail.
+
+properties, each with tests:
+
+- `not_yet` writes nothing: against the real schema and rails matrix, the counts of
+  decisions, device events, trust rows and ledger entries are unchanged, even from an
+  embargoed address.
+- the two layers are independent: a parked-market creator who does present an enabled
+  rail still gets the embargo review from a cu address, with reason
+  `ip_geo_embargoed_territory`, and still writes no trust.
+- the browser hears `{ status: 'not_yet' }` and nothing else. the server-side
+  decision carries a cause. neither the body nor the telemetry carries an age, market,
+  date, creator id or residence.
+- an unreadable fact or matrix is a 503 hold, never a false `not_yet` and never a
+  pass. a minor is still told `not_yet` when the matrix is unreadable, because the
+  matrix is not needed to decide.
+- the ledger is unchanged: the six existing accounts, no age or market column, an
+  ordinary balanced group that credits `creator_payable`, and the service role still
+  cannot edit an entry.
+
+decisions i made that were not in the rulings, for the owner to confirm:
+
+1. **the hold list is `SA` only.** the matrix parks 25 markets for very different
+   reasons. ae, cr and uy are also v2 candidates. qa, bh and om are "gcc parked, no v2
+   plan", where "not yet" may promise something the roadmap does not intend. tn, py, sn,
+   tz, ug, bw, et, mz and na are parked for missing rails or signal. none of these were
+   named, so none are on the list. a resident of an unlisted parked market gets the
+   gate's existing hold (503) today, not `not_yet`. extending the list is a reviewed
+   change, and the check script guards it.
+2. **a missing age attestation is `not_yet`** (`age_attestation_missing`), not a
+   pass and not a hold. publication requires one, so a creator without it is a data gap
+   that should not pay out, and `not_yet` is the recoverable answer.
+3. **a rail in a market the matrix does not enable is `not_yet`.** the matrix is deny
+   by default. a sanctions or out-of-scope market is not on the hold list, so it is not
+   promised a friendly park either.
+4. **the attestation shape.** `{ status: 'adult' }` or `{ status: 'minor', majorityDate }`
+   with the date they turn 18 as `yyyy-mm-dd`, compared in utc. a february 29 birth
+   should be recorded as march 1 of the eighteenth year so the park never ends early.
+   a majority date more than 18 years ahead is treated as invalid.
+
+**3. staleness defaults are ratified.** tor 48 hours, x4bnet 14 days, ip2proxy lite
+45 days and the geolite2 database 30 days are owner settings, not implementation
+defaults. the readme, `feeds.mjs` and this document no longer call them defaults.
+the planned real-traffic revisit is recorded in the open-items section below.
+
+**4. the embargo-list reviewer is the owner,** quarterly and on major sanctions news
+(ofac, un, eu). revisions land as reviewed migrations. recorded as assigned in the
+open-items section below.
+
+batch 9 evidence:
+
+```text
+npm run test:signals-and-ip-intel   -> 285 passed, 0 failed (was 247)
+                                       eligibility 38 (new), gate 22, ip 28
+npm run check:parked-hold           -> clean: 1 listed, none sanctioned, grey-listed or embargoed
+npm run check:embargo-greylist      -> disjoint, unchanged
+npm run check:trust-geography       -> holds, unchanged
+npm run check:signals-hygiene       -> clean, includes the new script
+npm run validate:signal-sources     -> 6 signals entries of 26
+npm run test:creator-trust          -> 63 passed
+npm run test:buyer-trust            -> 66 passed
+denial matrix via executeDenialMatrix() -> 63/63
+```
+
+batch 9 mutation checks: 25 injected, all caught. they cover the age check removed,
+the birthday off by one day, a minor let through with a rail, a missing or invalid
+attestation passing, a rail in a disabled market proceeding, the hold applying to an
+enabled rail, the hold ignoring an opened market, a matrix failure swallowed into
+`proceed`, residence validation removed, `deny_by_default` not required, an
+enabled-and-parked overlap allowed, the matrix cached, the gate not short-circuiting,
+an outage turned into `not_yet`, the residence sent to the service as the market,
+the cause leaked to the browser, a creator id in telemetry, a 403 for `not_yet`, a
+failed rail lookup treated as no rail, `IR` added to the hold list, and the checker
+losing each of its three rules. one mutation first survived (ignoring the enabled
+check), because the loader already rejects a matrix with a market both enabled and
+parked. a test with an inconsistent matrix was added, and it is now caught.
+
+a flaky test was found and fixed along the way. `ip.test.mjs` asserted that 60,000
+ranges parse in under 3 seconds. node runs test files in parallel, and that bound
+failed at 3.0 to 3.1 seconds under load, three times in about eighteen runs, with correct output.
+the bounds are now 20 and 15 seconds, enough to catch a quadratic parse. after the
+change the full suite passed 8 of 8 serial runs.
 
 ## test evidence
 
@@ -362,16 +480,25 @@ the committed change.
 
 ## deferred
 
-- **the minor-creator age gate and the parked-market hold flow.** owner rulings
-  are open. not built in batch 8.
+- **(built in batch 9) the minor-creator park and the parked-market hold.** the
+  owner rulings landed and are implemented. what remains open is the surrounding
+  product, none of which exists in the repo: capturing the age attestation at
+  publication, reading residence from a creator record, wiring `resolveCreatorFacts`
+  and `eligibility` into a real payout route, and the hold list beyond `SA` (owner
+  decision, see batch 9). a parental-payee model is deferred to v2 pending counsel
+  review, since child-earnings law varies by market.
 - **a real geolite2 database run.** the reader is tested with an injected opener
   and placeholder files. it has never opened a real `.mmdb`, because that needs a
   maxmind account. the first real database should be checked with a few known
   addresses before relying on it.
-- **the embargo list contents.** the v1 seed (cu, ir, sy, kp) is a starting point.
-  the owner should review it, and the list should get a named reviewer and a
-  revisit cadence.
-- **geo reader age limit** (30 days) is an operational default, not an owner ruling.
+- **assigned: the embargo list reviewer is the owner.** cadence is quarterly, plus
+  on major sanctions news (ofac, un, eu). revisions land as reviewed migrations, as
+  seeded. an automated sanctions-feed watcher may assist later; the named reviewer
+  stays. the v1 seed (cu, ir, sy, kp) is unchanged. this item is assigned, not open.
+- **planned revisit: the ratified ip settings.** the feed staleness limits and the
+  geolite2 age limit are owner settings. they are parked for a review once real
+  traffic volume exists. the revisit is expected, and it rides on the same trigger as
+  the ipv6 `coverage_unavailable` revisit below.
 - **(superseded by batch 8) the geolite2 reader** was deferred in batches 1 to 7
   and is now written. geo is persisted only as attribution on a decision.
 - **a commercial feed integration** (maxmind anonymous ip, ipinfo privacy
@@ -379,10 +506,11 @@ the committed change.
   gap for vpn, tor and datacenter. the adapter boundary and a contract-tested
   stub exist (`stub-commercial-adapter.mjs`); no real commercial account or
   integration was created.
-- **feed staleness limits** (tor 48 hours, x4bnet 14 days, ip2proxy lite 45
-  days) are operational defaults chosen during implementation, not owner
-  rulings. they should be reviewed against real feed update cadence before
-  live use.
+- **(ratified) feed staleness limits** (tor 48 hours, x4bnet 14 days, ip2proxy
+  lite 45 days) are owner settings as of the 2026-10-06 ruling, no longer
+  implementation defaults. the planned revisit is listed above. the limits should
+  still be compared with the real feed update cadence when the first live import
+  runs.
 - **the `coverage_unavailable` consequence for ipv6 traffic in a strict
   market.** implemented exactly as the spec's open item describes
   (`needs_review`), but the spec itself flags this as needing owner
@@ -401,7 +529,7 @@ the committed change.
 
 ## deployment and payment state
 
-migrations through 0012 are verified locally against pglite only. no
+migrations through 0012 (batch 9 added none) are verified locally against pglite only. no
 migration in this leg was applied to any live supabase project. no live ip
 provider was called. no real payout, transfer, or payment occurred at any
 point in this implementation or its verification. implementation, local

@@ -14,9 +14,15 @@
 //   - the client address comes from the trusted proxy chain, never the leftmost
 //     x-forwarded-for entry, which the client controls
 //
-// what the browser gets back: continue, review or hold. never a reason code, a
-// flag, a source or a market. telling an attacker which detector fired helps them
-// evade it. the full decision goes to the server-side payout workflow only.
+// what the browser gets back: continue, review, not_yet or hold. never a reason
+// code, a flag, a source, a market or an age. telling an attacker which detector
+// fired helps them evade it. the full decision goes to the server-side payout
+// workflow only.
+//
+// not_yet (batch 9) is answered before any signal check. a minor creator, or a
+// creator resident in a parked market with no rail in an enabled market, has no
+// payout path yet. that is roadmap and age state, not fraud, so nothing is
+// collected, nothing is recorded and no review is raised. see payout-eligibility.mjs.
 
 import {
   PayoutSignalCheckService, ServiceInputError, MoneyMomentNotAllowedError, PolicyUnavailableError,
@@ -93,12 +99,22 @@ const toClientStatus = (outcome) => (outcome === 'pass' ? 'continue' : 'review')
  * @param {(request: object) => Promise<null | { creatorProfileId: string | null }>} deps.authenticate
  *   resolves the session. null means no valid session. a null creatorProfileId means a signed-in non-creator.
  * @param {(creatorProfileId: string) => Promise<string | null>} deps.resolveMarket
- *   the creator's market from the verified payout record, or null when not yet known
+ *   the creator's rail market from the verified payout record, or null when there is none yet.
+ *   a throw is an outage and holds. null is a normal state.
+ * @param {(creatorProfileId: string) => Promise<null | { residenceMarket: string | null,
+ *   ageAttestation: null | { status: 'adult' | 'minor', majorityDate?: string } }>} deps.resolveCreatorFacts
+ *   the age attestation and residence the server holds for this creator. null means neither is on file.
+ * @param {{ evaluate: (facts: object) => Promise<{ status: 'proceed' } | { status: 'not_yet', cause: string }> }} deps.eligibility
+ *   see payout-eligibility.mjs. required: a gate without it would skip the age and parked-market park silently.
  * @param {(request: object) => string | null} deps.clientIp
  * @param {(event: object) => void} [deps.telemetry]
  */
-export function createPayoutSignalGate({ service, authenticate, resolveMarket, clientIp, telemetry = null }) {
-  for (const [name, value] of Object.entries({ service, authenticate, resolveMarket, clientIp })) {
+export function createPayoutSignalGate({
+  service, authenticate, resolveMarket, resolveCreatorFacts, eligibility: eligibilityEvaluator, clientIp, telemetry = null,
+}) {
+  for (const [name, value] of Object.entries({
+    service, authenticate, resolveMarket, resolveCreatorFacts, eligibilityEvaluator, clientIp,
+  })) {
     if (typeof value !== 'object' && typeof value !== 'function') throw new TypeError(`${name} is required`);
   }
   const emit = (event) => {
@@ -134,9 +150,41 @@ export function createPayoutSignalGate({ service, authenticate, resolveMarket, c
       const device = Object.hasOwn(body, 'device') ? body.device : null;
 
       // 4. everything that selects or weighs a check comes from the server.
-      let market = null;
-      try { market = await resolveMarket(session.creatorProfileId); } catch { market = null; }
-      if (typeof market !== 'string') {
+      //    the rail market is the market of the verified payout record. null means the
+      //    creator has no verified rail yet, which is a normal state and not an error.
+      //    only a lookup that throws is our outage.
+      let market;
+      try { market = await resolveMarket(session.creatorProfileId); } catch {
+        emit({ event: 'payout_signal_gate', result: 'hold', cause: 'market_lookup_failed', moment });
+        return reply(503, { status: 'hold' });
+      }
+      const railMarket = typeof market === 'string' ? market : null;
+
+      // 4b. "not yet", before any signal check. a minor creator and a creator resident in
+      //     a parked market have no payout path yet. that is roadmap and age state, not
+      //     fraud: no signal check runs, nothing is recorded, no needs_review, no trust
+      //     input. the browser hears "not_yet", never a cause.
+      let eligibility;
+      try {
+        const facts = await resolveCreatorFacts(session.creatorProfileId);
+        eligibility = await eligibilityEvaluator.evaluate({
+          residenceMarket: facts?.residenceMarket ?? null,
+          railMarket,
+          ageAttestation: facts?.ageAttestation ?? null,
+        });
+      } catch (error) {
+        // the facts or the matrix could not be read. this is our outage, so hold and retry.
+        // it is never turned into "not_yet" (which would tell a creator something untrue)
+        // and never into a pass.
+        emit({ event: 'payout_signal_gate', result: 'hold', cause: error?.code ?? 'eligibility_unavailable', moment });
+        return reply(503, { status: 'hold' });
+      }
+      if (eligibility.status === 'not_yet') {
+        emit({ event: 'payout_signal_gate', result: 'not_yet', cause: eligibility.cause, moment });
+        return reply(200, { status: 'not_yet' }, { eligibility: 'not_yet', cause: eligibility.cause });
+      }
+
+      if (railMarket === null) {
         // without a market the mandatory checks are unknown. holding is the only
         // answer that is neither a silent pass nor a guess.
         emit({ event: 'payout_signal_gate', result: 'hold', cause: 'market_unknown', moment });

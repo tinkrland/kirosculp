@@ -9,8 +9,9 @@
 // unavailable source. that becomes `feed_unavailable` and `needs_review` for a
 // mandatory check, never a silent pass and never a hard user fail (ruling 2).
 //
-// the staleness limits below are operational defaults chosen here, not owner
-// rulings. they are flagged for owner review in the results document.
+// the staleness limits below are owner-ratified settings (ruling 2026-10-06),
+// first proposed as implementation defaults. they are parked for a revisit once
+// real traffic volume exists; that revisit is expected, not optional.
 
 import crypto from 'node:crypto';
 import fs from 'node:fs';

@@ -12,6 +12,7 @@ import {
   createPayoutSignalGate, clientIpFromTrustedProxy, ROUTES, MAX_BODY_BYTES,
 } from '../payout-gate.mjs';
 import { PayoutSignalCheckService } from '../payout-signal-check.mjs';
+import { createEligibilityEvaluator } from '../payout-eligibility.mjs';
 import { FreeIpIntelligenceAdapter } from '../ip-intelligence.mjs';
 import { loadFeeds } from '../feeds.mjs';
 import { RAW_MARKER, makeKeyRing, desktopPayload } from './fixtures.mjs';
@@ -22,6 +23,11 @@ const ALICE = '10000000-0000-0000-0000-000000000001';
 const BOB = '10000000-0000-0000-0000-000000000003';
 const ONBOARDING = '/payout/onboarding/signals';
 const REQUEST = '/payout/request/signals';
+
+/** the real evaluator over a small fixed matrix. batch 9 behavior is tested in eligibility.test.mjs. */
+const ELIGIBILITY = createEligibilityEvaluator({
+  loadRails: async () => ({ enabledMarkets: new Set(['GB', 'IN', 'US']), parkedMarkets: new Map([['SA', 'v2']]) }),
+});
 
 // ---------------------------------------------------------------- test doubles
 
@@ -63,12 +69,15 @@ function makeGate(world = {}, { ipAdapter, service: serviceOverride } = {}) {
 
   const events = [];
   const state = {
-    session: { creatorProfileId: ALICE }, market: 'GB', ip: IPS.residential, ...world,
+    session: { creatorProfileId: ALICE }, market: 'GB', ip: IPS.residential,
+    facts: { residenceMarket: 'GB', ageAttestation: { status: 'adult' } }, ...world,
   };
   const gate = createPayoutSignalGate({
     service,
     authenticate: async () => state.session,
     resolveMarket: async (id) => { seen.resolvedFor = id; return typeof state.market === 'function' ? state.market() : state.market; },
+    resolveCreatorFacts: async () => state.facts,
+    eligibility: ELIGIBILITY,
     clientIp: () => state.ip,
     telemetry: (e) => events.push(e),
   });
@@ -140,7 +149,7 @@ test('negative: no session is a 401 and reaches nothing', async () => {
   } finally { cleanup(); }
   const throwing = createPayoutSignalGate({
     service: {}, authenticate: async () => { throw new Error(`session store down ${RAW_MARKER}`); },
-    resolveMarket: async () => 'GB', clientIp: () => IPS.residential,
+    resolveMarket: async () => 'GB', resolveCreatorFacts: async () => null, eligibility: ELIGIBILITY, clientIp: () => IPS.residential,
   });
   const r = await throwing.handle(post(ONBOARDING, good()));
   assert.equal(r.status, 401, 'an auth failure is a 401, never an exception');
@@ -248,7 +257,8 @@ test('negative: an unknown market is a hold, never a guess and never a pass', as
       assert.equal(r.decision, null);
       assert.equal(seen.checks.length, 0);
       assert.equal(recorder.rows.size, 0);
-      assert.equal(events[0].cause, 'market_unknown');
+      // no verified rail is a normal state that holds; a lookup that throws is an outage that holds.
+      assert.equal(events[0].cause, typeof market === 'function' ? 'market_lookup_failed' : 'market_unknown');
     } finally { cleanup(); }
   }
 });
@@ -409,6 +419,7 @@ test('positive: telemetry carries ids and outcomes only, and a throwing hook can
     });
     const gate2 = createPayoutSignalGate({
       service, authenticate: async () => ({ creatorProfileId: ALICE }), resolveMarket: async () => 'GB',
+      resolveCreatorFacts: async () => ({ residenceMarket: 'GB', ageAttestation: { status: 'adult' } }), eligibility: ELIGIBILITY,
       clientIp: () => IPS.residential, telemetry: () => { throw new Error('hook failed'); },
     });
     assert.equal((await gate2.handle(post(ONBOARDING, good()))).status, 200);

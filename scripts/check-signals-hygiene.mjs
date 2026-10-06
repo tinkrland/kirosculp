@@ -77,6 +77,7 @@ export const SIGNALS_TARGETS = [
   'scripts/check-trust-schema-invariant.mjs',
   'scripts/import-ip-feeds.mjs',
   'scripts/check-embargo-greylist-disjoint.mjs',
+  'scripts/check-parked-hold-policy.mjs',
   'migrations',
   'security',
 ];
