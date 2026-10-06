@@ -16,22 +16,25 @@ provider access, or unresolved policy is recorded as blocked, never passed.
 
 ## review gates before implementation
 
-### gate 0.1: resolve policy decisions
+### gate 0.1: resolve policy decisions (closed 2026-10-06)
 
-**review questions**:
+the owner ruled on all six questions. the rulings are recorded in
+`requirements.md` (gate 0.1 rulings) and `design.md` (owner rulings).
 
-- for a strict-corridor vpn/proxy positive, is the outcome `fail` or
-  `needs_review`?
-- when a mandatory provider/feed is unavailable, is the outcome `fail` or
-  `needs_review`?
-- what user-consent and collection-failure behavior applies to thumbmarkjs?
-- which payout rail key is authoritative while the referenced
-  `creator-payout-rails.md` file is absent?
-- may admins view raw-derived network evidence, or only redacted reason codes?
-- what keyed-hash algorithm, key rotation, and retention period are approved?
+- strict vpn/proxy positive: `needs_review`; `fail` configurable per corridor
+  later.
+- mandatory feed unavailable: `needs_review` with `feed_unavailable`.
+- consent and collection failure: plain-language disclosure, no blocking modal;
+  failed collection is `needs_review`.
+- rail key: iso 3166-1 alpha-2, matching creator-payout-rails.json.
+- admin visibility: decision records, reason codes, flags, attribution, stored
+  features; raw payloads purged by design.
+- hashing: hmac-sha256, quarterly rotation, key id per row, 12-month signal
+  event purge; hash chain is a follow-up.
 
-**exit evidence**: review notes update `requirements.md` and `design.md`; no
-implementation task begins while a required policy choice remains ambiguous.
+one consequence is open for owner confirmation: a mandatory check with no
+coverage for the address (ipv6 under the free feeds) yields `needs_review` with
+`coverage_unavailable`.
 
 ### gate 0.2: confirm source and dependency availability
 
@@ -40,13 +43,30 @@ implementation task begins while a required policy choice remains ambiguous.
 - inspect `package.json` before adding any dependency.
 - verify thumbmarkjs license and maintenance evidence in the source ledger.
 - verify current licenses, attribution, update process, and supported fields for
-  GeoLite2, IP2Proxy Lite, x4bnet lists_vpn, and published tor exit lists.
+  geolite2, ip2proxy lite, x4bnet lists_vpn, and published tor exit lists.
 - confirm whether local postgres/supabase or pglite is the supported test path.
 - confirm whether the existing product branch has payout onboarding and payout
   request call sites; if absent, define contract-level integration fixtures.
 
 **exit evidence**: source paths and external sources are logged with boundary
 notes; missing tools are recorded as prerequisites or blockers.
+
+**results (2026-10-06)**:
+
+- thumbmarkjs: mit, v1.12.0, published 2026-09-25 (npm registry).
+- geolite2: cc by-sa 4.0 plus eula; attribution required; destroy old versions
+  within 30 days of a new release.
+- ip2proxy lite: free with attribution; open proxies only. vpn, tor, and
+  datacenter are commercial-edition data. this corrected the first draft.
+- x4bnet lists_vpn: mit, ipv4 only, use output/vpn and output/datacenter paths.
+- tor bulk exit list: ipv4 only, no explicit license statement found.
+- node 22.22.2, npm ci clean, pglite available. creator-trust (63) and
+  buyer-trust (66) tests pass as baseline.
+- python 3.11 is used with `PYTHONUTF8=1`; the validate script calls `python3`,
+  which does not exist on this windows install, so its steps run individually.
+  `normalize-prose.py --check` has 6 pre-existing violations outside this leg.
+- no payout onboarding or payout request call sites exist in product code (only
+  in what-exists snapshots), so batch 6 is contract-level.
 
 ## batch 1: source ledger and dependency baseline
 
@@ -57,7 +77,7 @@ reproducible before code depends on them.
 
 **work**:
 
-1. add source-ledger entries for thumbmarkjs, GeoLite2, IP2Proxy Lite, x4bnet
+1. add source-ledger entries for thumbmarkjs, geolite2, ip2proxy lite, x4bnet
    lists_vpn, and the published tor exit-node source.
 2. record license, attribution, update/version behavior, and the exact boundary
    of each source. do not commit provider databases, api keys, or secrets.
@@ -94,8 +114,11 @@ separation before adding signal processing.
    event identity, and request/submission idempotency.
 5. add a schema-invariant checker that inspects all trust tables and fails on
    market, geography, region, or corridor-like columns.
-6. decide and document whether network evidence is admin-readable in full or
-   redacted at the database boundary.
+6. admin read access is decided (ruling 5): decision records, reason codes,
+   flags, attribution, and stored features, admin-only. no redaction layer.
+7. add a service-only purge function for signal events older than 12 months
+   (ruling 6) and a policy table keyed by iso alpha-2 market, seeded from
+   reviewed values.
 
 **tests**:
 
@@ -122,8 +145,8 @@ fingerprint attributes or creating a trust score.
 
 1. define the browser collection allowlist and reject biometric, skin, body,
    camera, microphone, and unknown attributes.
-2. implement the server-side canonicalizer, keyed hash, and bounded feature
-   extractor.
+2. implement the server-side canonicalizer, hmac-sha256 keyed hash with a key id
+   (quarterly rotation), and bounded feature extractor.
 3. implement request-scoped raw-input disposal and redacted error/log handling.
 4. persist only the processed hash, features, processor version, and money-
    moment metadata.
@@ -157,8 +180,9 @@ fixture data.
 **work**:
 
 1. implement the typed `IpIntelligenceAdapter` port and result contract.
-2. implement fixture-backed source readers for geo, ip2proxy classifications,
-   x4bnet vpn ranges, and tor exit ranges.
+2. implement fixture-backed source readers for geo, ip2proxy lite open proxies
+   (proxy flag), x4bnet vpn and datacenter ranges, and tor exit ranges, with
+   per-flag coverage (ipv6 coverage is `none` for vpn, datacenter, and tor).
 3. implement `FreeIpIntelligenceAdapter` composition, source attribution, feed
    version metadata, and explicit precedence.
 4. store only a keyed ip digest and bounded result evidence; never persist the
@@ -176,6 +200,8 @@ fixture data.
 - negative: a conflicting negative cannot erase a trusted positive flag.
 - negative: a source error is not converted into a clean result.
 - negative: malformed ip input is rejected without persistence.
+- negative: an ipv6 address reports coverage `none` for vpn, datacenter, and
+  tor, and is never reported as clean for those flags.
 - negative: plaintext ip is absent from rows, logs, and fixtures after lookup.
 - positive: the same caller contract works with the stub commercial adapter.
 - negative: caller code fails review/test if it imports a vendor-specific field.
@@ -192,7 +218,8 @@ requests, with strict-corridor behavior isolated to policy configuration.
 
 **work**:
 
-1. implement versioned payout signal policy loading by the reviewed rail key.
+1. implement versioned payout signal policy loading by iso alpha-2 market, with
+   a `DEFAULT` row for markets without a specific policy.
 2. implement `PayoutSignalCheckService` orchestration over device processor,
    ip adapter, and persistence ports.
 3. enforce the two allowed money moments at the service boundary.
@@ -231,7 +258,7 @@ collection surface or moving money.
 **work**:
 
 1. identify the payout onboarding and payout request server entry points.
-2. pass server-authorized creator identity, submission id, rail key, observed ip,
+2. pass server-authorized creator identity, submission id, market, observed ip,
    and transient device payload into the check service.
 3. ensure callers cannot provide policy outcome, trust level, geography score,
    or provider-derived result fields.
@@ -353,6 +380,15 @@ not complete until every executable local test has a recorded result.
   approved
 
 no implementation file is created by the spec-only phase.
+
+## follow-ups (not in this spec)
+
+- hash-chain treatment for decision records, as already ruled for dispute
+  evidence.
+- commercial feed decision (ip2proxy commercial, maxmind anonymous ip, or ipinfo
+  privacy detection) to close the ipv6 and vpn/tor/datacenter coverage gap.
+- measure false-positive rates before configuring `fail` for any corridor.
+- owner confirmation of the `coverage_unavailable` consequence for ipv6.
 
 ## handoff criteria
 

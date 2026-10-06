@@ -13,6 +13,42 @@ this is a security-leg feature. it builds on the private trust foundation from
 migrations 0009 and 0010 and the aml considerations, without turning the aml
 documentation into a deployed program.
 
+## gate 0.1 rulings (owner, 2026-10-06)
+
+these rulings close the open decisions from the first draft. they bind design
+and implementation.
+
+1. strict-corridor vpn/proxy positive: `needs_review`, not `fail`. lite-grade
+   feeds have false positives, and hard-failing a first payout on a
+   misclassified carrier is the wrong default. `fail` may be configured per
+   corridor later, once false-positive rates are measured.
+2. mandatory feed unavailable: `needs_review` with an explicit
+   `feed_unavailable` reason. never a silent pass, never a hard user fail for
+   our own outage.
+3. thumbmark consent and collection failure: plain-language disclosure in the
+   payout flow, no blocking modal. a failed collection is `needs_review`, never
+   a silent pass.
+4. rail key: the security branch carries the payout rails matrix at
+   operations/country-rollout/creator-payout-rails.json. the check-policy
+   configuration is keyed by iso 3166-1 alpha-2 codes matching that file. the
+   earlier path-mismatch open item is resolved and the matrix is cited directly.
+5. admin visibility: admins see decision records with reason codes, flags, and
+   source attribution, per the 0009/0010 admin-only pattern. raw payloads are
+   purged by design; stored features are admin-only.
+6. hashing and retention: hmac-sha256 with a server-held key, quarterly
+   rotation, a key id on each hash row. signal events purge after 12 months.
+   decision records are append-only evidence. a hash-chain treatment (already
+   ruled for dispute evidence) is a follow-up and is not implemented here.
+
+## gate 0.2 finding (2026-10-06): what the free feeds can flag
+
+the first draft assumed ip2proxy lite supplies proxy, vpn, and tor flags. that
+was wrong. the lite edition lists open proxies (pub) only; vpn, tor exits, and
+datacenter ranges are commercial-edition data. the corrected v1 flag sources are
+in req-5. the corrected mapping also leaves ipv6 uncovered for vpn, datacenter,
+and tor, because x4bnet and the tor bulk exit list are ipv4 only. this is a
+known limitation, recorded in req-5 and req-7, not a silent gap.
+
 ## source evidence baseline
 
 this spec operates against the security branch of origin (kirosculp). spec
@@ -32,6 +68,8 @@ source files read:
 - scripts/build-security-test-db.mjs (cumulative migration replay harness)
 - scripts/seed-security-test-data.mjs, scripts/test-helpers.mjs
 - scripts/denial-matrix-executor.mjs
+- operations/country-rollout/creator-payout-rails.json, .md, and .schema.json
+- research/sources/sources.jsonl (source ledger)
 
 ## the invariant that governs everything here
 
@@ -90,22 +128,27 @@ persist. no raw fingerprint attribute vector is written to durable storage.
 needs a logged source with a boundary column saying what the source actually
 supports")
 
-- thumbmarkjs: mit-licensed, actively maintained. permitted for browser signal
-  collection.
-- maxmind geolite2: used for geo. its license (creative commons with
-  attribution and update obligations) must be recorded in sources with a
-  boundary note; the end-user license requires periodic database updates and
-  attribution. no geolite2 data is redistributed in the repo.
-- ip2proxy lite: used for proxy/vpn/tor flags under its lite license; recorded
-  in sources with its attribution and update terms.
-- community lists (x4bnet lists_vpn, published tor exit node lists): used for
-  datacenter/vpn and exit-range flags; each list's license and source url
-  recorded in sources.
+- thumbmarkjs: mit license, v1.12.0, last published 2026-09-25 (npm registry).
+  permitted for browser signal collection.
+- maxmind geolite2: used for geo only. license is creative commons
+  attribution-sharealike 4.0 plus the maxmind geolite eula. attribution is
+  required. the eula requires prompt use of updated databases and destruction
+  of old versions within 30 days of a new release. no geolite2 data is
+  redistributed in the repo.
+- ip2proxy lite: free for commercial use with attribution; terms at
+  https://lite.ip2location.com/data-license. open proxies (pub) only. used for
+  the proxy flag and nothing else.
+- x4bnet lists_vpn: mit license, ipv4 only. the adapter reads
+  output/vpn/ipv4.txt (vpn flag) and output/datacenter/ipv4.txt (datacenter
+  flag). the legacy ipv4.txt path is slated for removal in 2026 and is not used.
+- tor bulk exit list (check.torproject.org/torbulkexitlist): ipv4 only. no
+  explicit license statement was found on the list or on the tor metrics pages,
+  so the ledger records that gap and does not assume a license.
 
-no provider database file, api key, or secret is committed. sources.md records
-what each feed actually supports in its boundary column. the adapter boundary
-(req-4) exists precisely so a commercial feed can replace these without caller
-changes.
+no provider database file, api key, or secret is committed. the source ledger
+(research/sources/sources.jsonl) records what each feed actually supports in a
+boundary field. the adapter boundary (req-4) exists so a commercial feed can
+replace these without caller changes.
 
 ## requirements
 
@@ -129,6 +172,10 @@ browser attributes.
   to compute.
 - negative: a client that submits a fabricated trust score or level is ignored;
   the server derives everything.
+- the payout flow shows a plain-language disclosure of the device check. there
+  is no blocking modal (ruling 3).
+- negative: a failed or unavailable collection produces `needs_review` with a
+  `collection_unavailable` reason, never a silent pass.
 
 **source file references**:
 - security/aml/considerations/trust-and-geography.md (strict mode is a check
@@ -153,6 +200,12 @@ storage or logs.
   features.
 - negative: a test that inspects durable storage and logs after processing
   finds no raw payload.
+- the device hash is hmac-sha256 with a server-held key. every hash row carries
+  the key id. keys rotate quarterly (ruling 6).
+- signal events purge after 12 months through a service-only purge function.
+  decision records are not purged by that rule.
+- negative: a purge run removes events older than 12 months and keeps newer
+  ones, and the purge path cannot be used to edit a row.
 
 **source file references**:
 - security/aml/considerations/sourcing-and-privacy.md (private evidence kept
@@ -177,6 +230,9 @@ following the 0009/0010 grant and rls pattern.
 - the table has no geography/market/corridor column.
 - creator_trust and buyer_trust gain no new signal, geography, or corridor
   column.
+- admins can read decision records with reason codes, flags, and source
+  attribution, plus stored device features, under the 0009/0010 admin-only
+  pattern (ruling 5). raw payloads never exist to be read.
 - negative: a migration review that adds a corridor column to any trust table
   is rejected (documented as a review invariant).
 
@@ -193,9 +249,9 @@ without touching callers)
 (the enforcement surface) depend only on this interface, which returns a typed
 result: geo fields (for routing/compliance records, not trust) and network
 flags (proxy, vpn, tor, datacenter/hosting). the v1 implementation composes
-free sources: maxmind geolite2 for geo, ip2proxy lite for proxy/vpn/tor, and
-community lists (x4bnet lists_vpn, published tor exit nodes) for datacenter and
-exit ranges. a commercial feed (maxmind anonymous ip, ipinfo privacy detection)
+free sources: maxmind geolite2 for geo, ip2proxy lite for the proxy flag, x4bnet
+lists_vpn for the vpn and datacenter flags, and the published tor bulk exit list
+for the tor flag. a commercial feed (maxmind anonymous ip, ipinfo privacy detection)
 must be substitutable by implementing the same interface, with zero changes to
 callers.
 
@@ -232,6 +288,13 @@ the result records which source produced each flag for auditability.
 - precedence is documented: when sources disagree, the rule for the final flag
   is explicit and tested.
 - negative: a flag with no source attribution is a defect.
+- flag sources in v1: proxy from ip2proxy lite; vpn and datacenter from
+  x4bnet; tor from the tor bulk exit list. no other source raises these flags.
+- each result carries per-flag `coverage` (`full`, `partial`, `none`). the free
+  adapter reports `none` for vpn, datacenter, and tor on ipv6 addresses because
+  x4bnet and the tor list are ipv4 only.
+- negative: a flag whose coverage is `none` is not evidence of a clean address.
+  it is treated as not evaluated and never counted as a pass signal.
 
 **source file references**:
 - security/aml/README.md (express suspicion as reviewable evidence)
@@ -270,7 +333,8 @@ ip/device checks run at the money moments; that is all they change)
 
 **requirement**: a corridor configuration marks in, pk, bd as strict. at a money
 moment, if the corridor is strict, vpn/proxy checks are mandatory: a vpn/proxy
-positive produces fail or needs-review per policy. in non-strict corridors the
+positive produces `needs_review` (ruling 1); `fail` can be configured per
+corridor later. in non-strict corridors the
 same checks may run but are not mandatory gates. the corridor value selects the
 check set only. it is never stored in a trust record, never weights a trust
 level, and never becomes a durable attribute of the person.
@@ -280,6 +344,19 @@ level, and never becomes a durable attribute of the person.
   moments.
 - the corridor-to-strictness map is configuration, revisable as rails change
   (per trust-and-geography.md: strictness tracks rail maturity).
+- the configuration is keyed by iso 3166-1 alpha-2 codes that match
+  `markets[].market` in operations/country-rollout/creator-payout-rails.json. a
+  test fails if a policy market is absent from that file. the market comes from
+  the server-side payout account verification, never from the client or from the
+  request ip.
+- a strict-corridor vpn/proxy positive yields `needs_review`, never `pass` and,
+  by default, never `fail`.
+- a mandatory check whose feed is unavailable yields `needs_review` with reason
+  `feed_unavailable`. a mandatory check whose coverage is `none` for the address
+  (ipv6 in the free adapter) yields `needs_review` with reason
+  `coverage_unavailable`. this follows ruling 2 (never a silent pass) but may
+  route a large share of strict-corridor requests to review. flagged for owner
+  confirmation; measure before relying on it.
 - no trust table row gains a corridor/market/geography field as a result of a
   strict-mode check.
 - negative: a test asserts that running a strict-mode check does not write any
@@ -288,11 +365,12 @@ level, and never becomes a durable attribute of the person.
 **source file references**:
 - security/aml/considerations/trust-and-geography.md (corridor strictness tracks
   rail maturity and is revisited when rails change; in/pk/bd named there)
-- operations/country-rollout/creator-payout-policy.json (the payout policy and
-  provider list that exists in this snapshot; trust-and-geography.md also cites
-  a creator-payout-rails.md path that is not present in this snapshot, so the
-  corridor-to-strictness map is introduced by this spec as new configuration and
-  flagged for reconciliation during design)
+- operations/country-rollout/creator-payout-rails.json (schema v3, as_of
+  2026-10-05): in, pk, and bd each list payoneer as primary rail with aml tier
+  standard. the matrix is dated research evidence and says the runtime must query
+  current provider capability data, so strictness is revisited when it changes.
+- operations/country-rollout/creator-payout-rails.md and
+  creator-payout-rails.schema.json (same sync)
 
 ### req-8: no geography in trust, verified as a schema invariant
 
@@ -361,9 +439,9 @@ calls to ip providers (provider lookups are stubbed with fixture datasets).
   blocked, not passed.
 
 **source file references**:
-- scripts/build-security-test-db.mjs (FOUNDATION_MIGRATIONS list extends to 0011+)
+- scripts/build-security-test-db.mjs (`FOUNDATION_MIGRATIONS` list extends to 0011+)
 - scripts/seed-security-test-data.mjs (6 seeded identities incl. creator_alice)
-- scripts/test-helpers.mjs (queryAsRole, mutateAsRole, auth.uid context)
+- scripts/test-helpers.mjs (`queryAsRole`, `mutateAsRole`, auth.uid context)
 
 ### req-11: positive and negative tests for every check path
 
@@ -375,8 +453,11 @@ security-execution.md (zero rows means denied; positive controls required)
   recorded for review.
 - ip proxy/vpn/tor: a residential ip passes; a tor exit / known vpn / datacenter
   ip raises the flag.
-- strict corridor: in/pk/bd with a vpn positive is mandatory-blocked or
-  needs-review; a non-strict corridor with the same positive is not a hard gate.
+- strict corridor: in/pk/bd with a vpn positive is `needs_review`; a non-strict
+  corridor with the same positive is not a gate.
+- unavailable inputs: a failed device collection, an unavailable mandatory feed,
+  and a mandatory check with no coverage each give `needs_review` with their own
+  reason code, and none gives `pass`.
 - adapter swap: the same caller test passes against the free implementation and
   a swapped stub implementation.
 - schema invariant: trust tables carry no geography column (passes); a throwaway
@@ -449,6 +530,14 @@ verification, and live operation are three separate claims.
 
 8. **site-wide device tracking or analytics**: signals are collected only at the
    two money moments, never for general analytics or cross-site tracking.
+
+9. **hash-chain evidence**: decision records are append-only evidence and are a
+   candidate for the hash-chain treatment already ruled for dispute evidence.
+   not implemented in this spec; recorded as a follow-up (ruling 6).
+
+10. **ipv6 coverage for vpn, datacenter, and tor**: the free feeds cannot flag
+    these on ipv6. closing the gap needs a commercial feed or another source and
+    is deferred behind the adapter boundary.
 
 ## success criteria
 

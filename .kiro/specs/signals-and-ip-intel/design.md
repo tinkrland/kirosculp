@@ -21,7 +21,7 @@ all durable records live in the private operational schema and use explicit
 server-side write paths. creator trust and buyer trust remain unchanged. no
 client route, public view, or creator-facing response projects these records.
 
-## policy resolutions and open decisions
+## policy resolutions and owner rulings
 
 ### resolution 1: trust remains behavior-only
 
@@ -33,8 +33,9 @@ trust level.
 
 ### resolution 2: corridor is runtime configuration, not person data
 
-strictness is represented by a versioned check-policy configuration keyed by the
-payout rail or execution corridor. the runtime reads the configuration while
+strictness is represented by a versioned check-policy configuration keyed by
+iso 3166-1 alpha-2 market codes that match `markets[].market` in the payout
+rails matrix (resolution 3). the runtime reads the configuration while
 processing a money moment and records the selected policy version in the check
 evidence. it does not persist a geography-derived creator attribute. the
 configuration may identify `in`, `pk`, and `bd` as strict for v1 because that is
@@ -44,25 +45,56 @@ this is a check-selection fact about the payout rail. it is not a trust input.
 when rail capability changes, operators can revise the configuration without
 changing callers or trust records.
 
-### resolution 3: payout policy path mismatch is recorded, not silently fixed
+### resolution 3: the payout rails matrix is the cited source (ruling 4)
 
-`security/aml/considerations/trust-and-geography.md` links to
-`operations/country-rollout/creator-payout-rails.md`, but that file is not in
-the current snapshot. the available policy file is
-`operations/country-rollout/creator-payout-policy.json`. this design uses a new
-signals check-policy configuration rather than pretending the absent matrix
-exists. reconciling the payout-rail source of truth is a prerequisite for live
-activation and remains an explicit review item.
+the security branch carries `operations/country-rollout/creator-payout-rails.json`
+with its md and schema. the check-policy configuration is keyed by iso 3166-1
+alpha-2 codes matching `markets[].market` in that file. the earlier path
+mismatch is resolved and no reconciliation flag remains. the matrix is dated
+research evidence (as_of 2026-10-05) and says the runtime must query current
+provider capability data, so the strict-market set is revisited whenever the
+matrix changes. in, pk, and bd each show payoneer as primary rail and aml tier
+standard in that copy. the market value comes from server-side payout account
+verification, never from the client or the request ip.
 
-### open decision: final outcome policy for a strict vpn/proxy positive
+### owner rulings from gate 0.1 (2026-10-06)
 
-the user brief requires vpn/proxy checks to be mandatory in strict corridors,
-but does not choose between `fail` and `needs_review` for a positive. the
-implementation must not silently choose. the policy configuration therefore
-contains an explicit `positive_outcome` value, and the spec review must select
-`fail` or `needs_review` before implementation. until then, the local fixture
-suite may assert that the check is mandatory and produces the configured
-non-pass outcome, but may not claim the final product policy is settled.
+1. strict vpn/proxy positive: `needs_review`. lite-grade feeds produce false
+   positives, and failing a first payout on a misclassified carrier is the wrong
+   default. `positive_outcome` stays a per-market policy column so `fail` can be
+   configured later, once false-positive rates are measured.
+2. mandatory feed unavailable: `needs_review` with reason `feed_unavailable`.
+   never a silent pass, never a hard fail for our own outage.
+3. collection and consent: plain-language disclosure in the payout flow, no
+   blocking modal. a failed collection is `needs_review` with reason
+   `collection_unavailable`.
+4. rail key: resolution 3.
+5. admin visibility: admins read decision records (reason codes, flags, source
+   attribution) and stored features under the 0009/0010 admin-only pattern. raw
+   payloads are purged by design.
+6. hashing and retention: hmac-sha256 with a server-held key, quarterly
+   rotation, a key id on each hash row. signal events purge after 12 months.
+   decision records are append-only evidence. hash-chain treatment is a
+   follow-up and is not implemented here.
+
+### gate 0.2 correction: what the free feeds can and cannot flag
+
+ip2proxy lite lists open proxies only. vpn, tor exit, and datacenter data are
+commercial-edition fields. the first draft of this design wrongly assigned
+proxy, vpn, and tor to lite. v1 flag sources are:
+
+| flag | v1 source | ipv4 | ipv6 |
+|---|---|---|---|
+| proxy | ip2proxy lite (open proxies) | full | full |
+| vpn | x4bnet output/vpn/ipv4.txt | full | none |
+| datacenter | x4bnet output/datacenter/ipv4.txt | full | none |
+| tor | tor bulk exit list | full | none |
+
+"none" means not evaluated, not clean. the adapter reports per-flag coverage so
+the policy can tell the difference (component 5). a mandatory check with
+coverage `none` yields `needs_review` with reason `coverage_unavailable`. that is
+a consequence of ruling 2 and is open for owner confirmation, because it may send
+a large share of strict-corridor requests to review.
 
 ## architecture
 
@@ -91,8 +123,8 @@ export interface DeviceSignalCollector {
 ```
 
 `ThumbmarkDeviceSignalCollector` is the only client implementation. it invokes
-thumbmarkjs when the money-moment component is mounted or submitted, subject to
-the product's user-consent and failure behavior decision. it sends the payload
+thumbmarkjs when the money-moment component is mounted or submitted, after a
+plain-language disclosure in the payout flow (no blocking modal). it sends the payload
 to the server endpoint over the authenticated payout flow. it does not calculate
 trust, risk, geography, or an enforcement outcome.
 
@@ -102,9 +134,9 @@ enter the payload. if thumbmarkjs changes its output, an unknown attribute is
 rejected or dropped rather than automatically persisted.
 
 **failure behavior**: if collection fails, the server receives a typed
-`collection_unavailable` state, not a fabricated empty fingerprint. whether an
-unavailable signal blocks onboarding or creates a review decision is part of
-the reviewed money-moment policy, not a client-side fallback.
+`collection_unavailable` state, not a fabricated empty fingerprint. the decision
+is `needs_review` with that reason (ruling 3), never a silent pass and never a
+client-side fallback.
 
 ### component 2: server device processor
 
@@ -122,7 +154,8 @@ export type DeviceFeatureSet = {
 };
 
 export type ProcessedDeviceSignal = {
-  deviceHash: string;
+  deviceHash: string; // hmac-sha256, hex
+  hashKeyId: string;
   features: DeviceFeatureSet;
   processorVersion: string;
 };
@@ -137,8 +170,9 @@ processing steps:
 1. validate the authenticated caller and money-moment submission id.
 2. validate the payload against the collection allowlist and size limits.
 3. canonicalize permitted input fields in a deterministic order.
-4. compute a server-side keyed hash using a secret held by the server runtime.
-   the key is not returned to the client or stored in the row.
+4. compute hmac-sha256 over the canonical form with the active server-held key.
+   key material is never returned to the client or stored in a row. the key id
+   is stored on the hash row.
 5. derive a bounded feature set. features are categorical/count indicators,
    not a numeric fraud or trust score.
 6. persist the hash, feature set, processor version, and event metadata through
@@ -146,10 +180,13 @@ processing steps:
 7. clear the raw payload from request-scoped memory and ensure it is absent from
    logs, thrown errors, tracing attributes, and durable retry payloads.
 
-**hash choice**: the exact keyed-hash algorithm and key-rotation procedure are
-an implementation decision that must be recorded before coding. the design
-requires a keyed server-side hash, not an unsalted browser hash, because the
-purpose is controlled repeat comparison without exposing a reusable identifier.
+**hash choice (ruling 6)**: hmac-sha256 with a server-held key, rotated
+quarterly. every hash row records the key id, so rows made under a retired key
+stay attributable. the hash is server-side and keyed, not an unsalted browser
+hash, because the purpose is controlled repeat comparison without exposing a
+reusable identifier. comparing hashes across a rotation needs both keys, so a
+retired key is kept until the rows it produced have purged (12 months). key
+storage and distribution are an operations concern and no key is committed.
 
 **retention**: the database schema must not include a raw payload column. a
 queue or retry mechanism must carry only the processed representation. failure
@@ -181,8 +218,13 @@ export type IpFlag = {
   confidence: 'low' | 'medium' | 'high';
 };
 
+export type Coverage = 'full' | 'partial' | 'none';
+
 export type IpIntelligenceResult = {
   adapterVersion: string;
+  ipVersion: 4 | 6;
+  // none means not evaluated, never clean
+  coverage: Record<'proxy' | 'vpn' | 'tor' | 'datacenter', Coverage>;
   geo: {
     countryCode: string | null;
     subdivisionCode: string | null;
@@ -226,10 +268,10 @@ interface RangeListSource {
 source responsibilities:
 
 - `MaxMindGeoLite2Source`: country/subdivision geo only.
-- `Ip2ProxyLiteSource`: proxy, vpn, tor, and provider-supplied network
-  classification fields supported by the installed dataset.
-- `X4bnetVpnRangeSource`: community vpn/datacenter range membership.
-- `TorExitNodeSource`: published tor exit range membership.
+- `Ip2ProxyLiteSource`: the proxy flag only (open proxies, ipv4 and ipv6).
+- `X4bnetVpnRangeSource`: vpn flag from output/vpn/ipv4.txt and datacenter flag
+  from output/datacenter/ipv4.txt. ipv4 only.
+- `TorExitNodeSource`: tor flag from the published bulk exit list. ipv4 only.
 
 community-list entries must be normalized into a versioned local range format.
 feeds are updated out of band by a reproducible local data import script; the
@@ -245,26 +287,28 @@ v1 uses conservative boolean flag composition:
 - a positive from a more specific list does not get erased by a negative from a
   less specific or stale source.
 - source attribution contains every positive source, not only the winning one.
-- `tor` is true when ip2proxy identifies tor or the address is in the published
-  tor exit list.
-- `vpn` or `proxy` is true when ip2proxy identifies it or the community vpn
-  list contains it.
-- `datacenter` is true when a supported source identifies hosting/datacenter or
-  the configured community range identifies it.
+- `tor` is true when the address is in the published tor bulk exit list.
+- `vpn` is true when the address is in x4bnet's vpn list.
+- `datacenter` is true when the address is in x4bnet's datacenter list.
+- `proxy` is true when ip2proxy lite lists the address as an open proxy.
+- a flag's `coverage` is `none` when no configured source can evaluate it for
+  that address family (vpn, datacenter, tor on ipv6). such a flag has
+  `value: false` but is not evidence of a clean address, and downstream code
+  must read `coverage` before treating `false` as a negative.
 - conflicting geo values do not produce a trust or enforcement score. the result
   carries a `geo_conflict` diagnostic for operational review, subject to the
   final result contract.
 - a feed error is represented as source-unavailable metadata. it is not
   converted to a clean result.
 
-whether an unavailable mandatory source causes `needs_review` or blocks the
-money moment is a policy decision that must be settled with the strict-positive
-outcome above. the adapter itself reports availability; it does not enforce.
+an unavailable mandatory source yields `needs_review` with reason
+`feed_unavailable` (ruling 2). the adapter itself reports availability and
+coverage; it does not enforce.
 
 ### component 6: commercial adapter substitution
 
 `CommercialIpIntelligenceAdapter` implements the same port. the first supported
-configuration targets either MaxMind Anonymous IP or ipinfo privacy detection,
+configuration targets either maxmind anonymous ip or ipinfo privacy detection,
 with geo supplied by the selected commercial contract where licensed. no
 commercial dependency is required for the v1 local implementation.
 
@@ -287,8 +331,11 @@ attribution, and availability state. they do not assert vendor-specific fields.
 
 ### component 7: private persistence model
 
-new migrations are numbered after 0010. proposed tables are below; exact names
-and columns remain subject to requirements review before implementation.
+the migration is numbered 0011, after 0010. the tables below are the planned
+shape. the first draft listed four tables; a separate `ip_intelligence_events`
+table is dropped because network flags and source attribution must survive the
+12-month purge on the decision record (ruling 5), which would leave that table
+holding only an ip digest. the digest moves onto the signal event instead.
 
 #### `sculptura_private.creator_signal_events`
 
@@ -298,47 +345,48 @@ one event per processed device signal and money moment. candidate fields:
 - `creator_profile_id` referencing `public.creator_profiles(id)`
 - `moment` constrained to `payout_onboarding` or `payout_request`
 - `submission_id` unique within the money-moment request space
-- `device_hash`
+- `device_hash` (hmac-sha256 hex, null when collection failed)
+- `ip_digest` (hmac-sha256 hex of the observed ip, never the plaintext ip)
+- `hash_key_id` (key id used for both hashes)
+- `collection_status` (`complete`, `partial`, `unavailable`)
 - `device_features` jsonb with strict object validation
 - `processor_version`
 - `occurred_at`
-- `retention_state` or processed status if needed for operational cleanup
+
+update is always rejected. rows older than 12 months are removed only by a
+service-only purge function (ruling 6). decision records reference the event by
+`submission_id` with no foreign key, so the purge never orphans or edits them.
 
 this table contains no raw thumbmark payload. it contains no country, market,
 region, corridor, or geography field.
 
-#### `sculptura_private.ip_intelligence_events`
-
-one per ip lookup attached to the money-moment event. candidate fields:
-
-- `id`
-- `signal_event_id` referencing the creator signal event
-- `ip_digest` as a server-side keyed digest, never plaintext ip
-- `adapter_version`
-- `geo_evidence` jsonb, limited to routing/compliance evidence
-- `network_flags` jsonb with typed source attribution
-- `sources` jsonb
-- `lookup_status`
-- `occurred_at`
-
-plaintext ip addresses are not persisted. the table does not join into trust
-calculation and carries no trust level.
+plaintext ip addresses are not persisted. geo returned by the adapter is not
+persisted in v1: nothing in the enforcement path needs it, and keeping it out of
+the schema is the safest reading of the geography invariant. a later leg that
+needs geo for routing or compliance records must add it deliberately.
 
 #### `sculptura_private.payout_signal_decisions`
 
-one immutable decision per money-moment attempt. candidate fields:
+one immutable, append-only decision per money-moment attempt. fields:
 
 - `id`
 - `creator_profile_id`
 - `moment`
 - `submission_id` unique for idempotency
-- `selected_checks` jsonb
-- `device_signal_event_id`
-- `ip_intelligence_event_id`
-- `outcome` constrained to `pass`, `fail`, or `needs_review`
-- `reason_codes` jsonb
+- `request_digest` (sha256 of the canonical decision payload, for replay checks)
 - `policy_version`
+- `selected_checks` jsonb
+- `outcome` constrained to `pass` or `needs_review` or `fail`
+- `reason_codes` jsonb (for example `vpn_detected`, `proxy_detected`,
+  `feed_unavailable`, `coverage_unavailable`, `collection_unavailable`)
+- `network_flags` jsonb: per flag the value, coverage, source id, and dataset
+  version
+- `adapter_version`
 - `occurred_at`
+
+the record carries no market, country, or corridor field. it refers to the
+policy by `policy_version`, which names a reviewed policy set, not a person's
+market.
 
 this is evidence of a decision, not a trust record. it may include the
 policy version and check names needed to explain why a check ran, but no
@@ -349,19 +397,19 @@ geography-derived value may be copied into creator trust or buyer trust.
 versioned operator configuration for check selection. candidate fields:
 
 - `policy_version`
-- `rail_key` or an equivalent payout capability key
-- `strict_vpn_proxy_required`
-- `strict_tor_required` if separately approved
-- `positive_outcome` pending review
+- `market` (iso 3166-1 alpha-2, or `DEFAULT`), primary key with `policy_version`
+- `mandatory_checks` text array drawn from `proxy`, `vpn`, `tor`, `datacenter`
+- `positive_outcome` constrained to `needs_review` or `fail`, seeded as
+  `needs_review` (ruling 1)
 - `enabled`
-- `effective_from`
-- `created_by`
 
-if a corridor or country key is needed to select a payout rail, it belongs in
-this policy/configuration boundary, not in a subject trust table. the exact
-key must be reconciled with the missing payout-rail matrix before implementation.
+the v1 seed is `DEFAULT` with no mandatory checks, plus `IN`, `PK`, and `BD`
+with `proxy` and `vpn` mandatory. rows change only through reviewed
+migrations, like the trust level taxonomy in 0009. this is the one place a
+market code lives. it is configuration that selects checks, never a subject
+record, and a test cross-checks every policy market against the rails matrix.
 
-all four tables use the `sculptura_private` pattern from 0009/0010:
+all three tables use the `sculptura_private` pattern from 0009/0010:
 
 - no postgrest exposure
 - no anon or authenticated direct writes
@@ -370,9 +418,10 @@ all four tables use the `sculptura_private` pattern from 0009/0010:
 - append-only event and decision history where records explain enforcement
 - explicit grants rather than inherited public-schema defaults
 
-whether admin humans should view raw network evidence or only redacted reason
-codes is an open privacy review item. no public or creator-facing surface may
-show the records by default.
+admins read decision records, reason codes, flags, source attribution, and
+stored features (ruling 5). no public or creator-facing surface shows them.
+server writes go through one `service_role`-only function; clients have no
+direct write path.
 
 ### component 8: money-moment orchestration service
 
@@ -385,7 +434,8 @@ export type PayoutSignalInput = {
   submissionId: string;
   observedIp: IpAddress;
   rawDevicePayload: RawThumbmarkPayload | null;
-  railKey: string;
+  // iso 3166-1 alpha-2, from server-side payout account verification
+  market: string;
 };
 
 export type PayoutSignalDecision = {
@@ -404,8 +454,9 @@ execution flow:
 
 1. authenticate the creator and authorize the payout action.
 2. assert the moment is `payout_onboarding` or `payout_request`.
-3. load the payout policy by rail key and policy version.
-4. process the raw device payload if present; do not persist raw input.
+3. load the active policy row for the market, falling back to `DEFAULT`.
+4. process the raw device payload; do not persist raw input. a missing or failed
+   payload becomes `collection_unavailable`.
 5. resolve the observed ip through the injected adapter.
 6. select mandatory checks from policy configuration.
 7. evaluate the selected checks against derived device and network results.
@@ -428,18 +479,31 @@ policy evaluation is deliberately small and explicit:
   configured outcome, but vpn/proxy is not mandatory solely because the corridor
   is non-strict.
 - strict corridor: vpn/proxy checks must be selected and evaluated at both
-  money moments. a positive must produce the reviewed `positive_outcome` rather
-  than `pass`.
+  money moments. a positive produces the policy's `positive_outcome`, which is
+  `needs_review` in the v1 seed (ruling 1), never `pass`.
+- a failed device collection is `needs_review` in every market
+  (`collection_unavailable`, ruling 3).
 - tor and datacenter flags are evidence and may be selected as checks by policy;
   the user brief only makes vpn/proxy mandatory in strict corridors.
 - no signal result writes a trust level.
 - no geo result changes a trust level.
 - no outcome automatically declares fraud, aml suspicion, or criminality.
 
-if policy or provider data is unavailable, the service returns an explicit
-unavailable reason. it must not fail open silently in a strict mandatory check
-path. the final unavailable behavior is a review decision and must be encoded in
-policy before implementation.
+evaluation order for the outcome, first match wins:
+
+1. a mandatory check whose feed errored: `needs_review`, `feed_unavailable`.
+2. a mandatory check whose coverage is `none` for the address:
+   `needs_review`, `coverage_unavailable`.
+3. a mandatory check that is positive: the policy `positive_outcome` with the
+   matching `*_detected` reason.
+4. a failed or missing device collection: `needs_review`,
+   `collection_unavailable`.
+5. otherwise `pass`.
+
+several reasons can apply at once, and all of them are recorded in
+`reason_codes`. the strongest outcome wins (`fail` over `needs_review` over
+`pass`). unavailable data never resolves to `pass`, and an outage on our side is
+never a hard user fail (ruling 2).
 
 ## data flow
 
@@ -453,9 +517,9 @@ authenticated server endpoint
         |                                  |
         |                                  +--> creator_signal_events
         |
-        +--> observed ip -> IpIntelligenceAdapter -> typed flags + geo evidence
+        +--> observed ip -> IpIntelligenceAdapter -> typed flags + coverage
                                            |
-                                           +--> ip_intelligence_events
+                                           +--> ip digest -> creator_signal_events
         |
         v
 versioned payout signal policy
@@ -470,8 +534,8 @@ payout workflow receives pass/fail/needs_review
 ```
 
 raw device payload and plaintext ip terminate at the processing boundary. geo
-is retained only as bounded routing/compliance evidence when the reviewed
-retention policy allows it. neither becomes a trust field.
+is not persisted in v1. network flags and source attribution stay on the
+decision record. none of it becomes a trust field.
 
 ## security and privacy controls
 
@@ -527,7 +591,14 @@ negative controls:
 - strict in/pk/bd with a vpn/proxy positive cannot produce `pass`.
 - a non-strict corridor does not accidentally enforce a strict-only check.
 - a trust table with a geography-like column fails the schema invariant test.
-- a provider adapter failure is not treated as a clean positive result.
+- a provider adapter failure is not treated as a clean result.
+- an unavailable mandatory feed gives `needs_review` with `feed_unavailable`,
+  never `pass` and never `fail`.
+- an ipv6 address never reports clean for vpn, datacenter, or tor.
+- every policy market exists in creator-payout-rails.json.
+- events older than 12 months purge; decisions survive the purge.
+- hash rows carry a key id, and a row made under a retired key stays
+  attributable.
 
 ## deployment and verification boundaries
 
@@ -538,14 +609,25 @@ requests, or payout provider behavior.
 
 before live activation, separately verify:
 
-1. the payout rail and corridor source of truth, including the missing
-   `creator-payout-rails.md` reconciliation.
+1. the rails matrix is dated research evidence and must be re-queried at
+   runtime per its own rule; the strict-market set is re-verified whenever the
+   matrix changes.
 2. licensed data acquisition, updates, attribution, and retention for each
    selected feed.
-3. the final policy for strict vpn/proxy positives and unavailable mandatory
-   feeds.
+3. measured false-positive rates before any per-corridor `fail` config, and
+   owner confirmation of the `coverage_unavailable` consequence for ipv6.
 4. real supabase role and rls behavior for all new private tables.
 5. provider contract, privacy notice, retention, and jurisdiction review.
 6. payout workflow integration and idempotent external provider behavior.
 
 no live deployment, real payment, or real payout is part of this design leg.
+
+## follow-ups
+
+- hash-chain treatment for decision records, as already ruled for dispute
+  evidence. not implemented here.
+- commercial feed decision to close the ipv6 and vpn/tor/datacenter gap.
+- per-corridor `fail` configuration once false-positive rates are measured.
+- a typescript port of the service: production is typescript/node, but this repo
+  has no typescript toolchain, so v1 is es modules with jsdoc types. the
+  interfaces above are the contract for the port.
