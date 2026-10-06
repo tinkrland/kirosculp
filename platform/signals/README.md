@@ -124,6 +124,46 @@ bad download never replaces a working set. the two ip2proxy lite files need a fr
 account and the ip2location lite terms, including the attribution acknowledgment,
 so they are only ever read from disk.
 
+## decision service
+
+[`payout-signal-check.mjs`](payout-signal-check.mjs) runs at payout onboarding and
+payout request and nowhere else. it records one reviewable decision per submission
+id. the decision is evidence, not an account action. the market only selects which
+checks are mandatory: it is read for the policy and then discarded, and is not
+stored, returned, or passed to a lookup.
+
+| situation | outcome | reason code |
+|---|---|---|
+| mandatory check positive (strict market) | `needs_review` | `proxy_detected`, `vpn_detected`, ... |
+| mandatory feed unavailable or adapter down | `needs_review` | `feed_unavailable` |
+| mandatory check not evaluated (ipv6, private address) | `needs_review` | `coverage_unavailable` |
+| device collection failed or missing, any market | `needs_review` | `collection_unavailable` |
+| everything evaluated and clean | `pass` | none |
+
+`fail` is produced only where a policy row sets `positive_outcome = 'fail'`, and
+only for a real positive. an outage is never a fail. a positive outside the
+mandatory set, in a non-strict market for example, is recorded as evidence and does
+not gate.
+
+what the payout workflow must do with the result:
+
+- `pass`: continue.
+- `needs_review`: hold the payout step for a person. this is not a rejection.
+- `fail`: not produced by the v1 seed. if a policy ever enables it, treat it as a
+  stronger hold, not an automatic ban.
+- a thrown `PolicyUnavailableError` or `CheckNotRecordedError`: nothing was
+  decided. hold and retry with the same submission id. never treat it as a pass and
+  never as a user failure, because it is our outage.
+
+the service rejects any input field it does not know, so a caller cannot supply an
+outcome, a trust value, a policy, geography, or a provider result. a repeat of a
+known submission returns the stored decision without recomputing, so a retry is
+safe even if a feed changed state in between. the same submission id with a
+different device, address, creator or moment is refused.
+
+[`db-ports.mjs`](db-ports.mjs) implements the policy store and recorder over any
+`query(sql, params)` function. it imports no driver and uses only parameterized sql.
+
 ## storage
 
 [migration 0011](../../migrations/0011_payout_signal_evidence.sql) adds three
