@@ -75,6 +75,7 @@ export const SIGNALS_TARGETS = [
   'scripts/validate-signal-sources.mjs',
   'scripts/check-signals-hygiene.mjs',
   'scripts/check-trust-schema-invariant.mjs',
+  'scripts/import-ip-feeds.mjs',
   'migrations',
   'security',
 ];

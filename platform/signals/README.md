@@ -78,6 +78,52 @@ SIGNALS_HMAC_KEYS=k-2026-q3:<base64 32 bytes>,k-2026-q4:<base64 32 bytes>
 the raw payload is never stored, logged, or echoed in an error. the processor
 returns counts and fixed reason codes only.
 
+## ip intelligence
+
+[`ip-intelligence.mjs`](ip-intelligence.mjs) defines the port. callers get one
+result shape and never a vendor field name, so a commercial feed replaces the free
+one by writing another adapter. the service validates every result with
+`assertIpIntelligenceResult`, so an adapter cannot slip an unattributed positive or
+a "clean" unevaluated flag past the policy.
+
+rules the adapter enforces:
+
+- a flag with coverage `none` was not evaluated. it is stored as `false` with
+  coverage `none` and is never a pass signal. ipv6 is `none` for vpn, datacenter
+  and tor under the free feeds.
+- a source that errors is `unavailable`, never a negative.
+- a positive from any source raises the flag, and a negative cannot erase it.
+- an ipv4 client on a dual-stack socket (`::ffff:a.b.c.d`) is looked up as ipv4.
+- private, loopback, link-local, multicast and reserved addresses are never judged
+  clean. every flag reports coverage `none`.
+- a malformed address throws before any source is called.
+
+geo is returned by the port and is not persisted. the geolite2 reader is not
+written in v1 because reading its `.mmdb` format needs a parser dependency, and
+nothing in the enforcement path uses geo.
+
+### feeds
+
+the free adapter reads feed files from `platform/signals/data/` (gitignored),
+described by a `manifest.json` with a sha-256 and a retrieval date per file.
+[`feeds.mjs`](feeds.mjs) loads them. a feed that is missing, tampered with, mostly
+garbage, truncated, future-dated or stale loads as an unavailable source, which the
+policy turns into `feed_unavailable` and `needs_review`.
+
+the staleness limits (tor 48 hours, x4bnet 14 days, ip2proxy lite 45 days) are
+operational defaults chosen in this leg. they are not owner rulings and need review.
+
+```text
+node scripts/import-ip-feeds.mjs --fetch                 # public lists only, needs no key
+node scripts/import-ip-feeds.mjs --from-dir <dir>        # local files, including ip2proxy lite
+```
+
+[`import-feeds.mjs`](import-feeds.mjs) stages new files, validates them with the
+same loader the service uses, and swaps the directory only if every feed is ok. a
+bad download never replaces a working set. the two ip2proxy lite files need a free
+account and the ip2location lite terms, including the attribution acknowledgment,
+so they are only ever read from disk.
+
 ## storage
 
 [migration 0011](../../migrations/0011_payout_signal_evidence.sql) adds three
