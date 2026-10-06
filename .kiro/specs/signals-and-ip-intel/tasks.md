@@ -565,3 +565,48 @@ the minor-creator age gate and the parked-market hold flow (`faizah aisler`
 in `platform/creators/demo-roster.md`) are not implemented. the owner has
 not yet ruled on either, and fixtures existing is not authorization to build
 against them.
+
+## batch 8 implementation record (2026-10-06)
+
+batch 8 is complete. commit on `security`, pushed to `origin/security`:
+
+```text
+e3d04cf  add embargoed-territory review hold and geolite2 reader  (batch 8)
+```
+
+work items from the addendum, as built:
+
+1. geolite2 country reader: done, `geo-reader.mjs`, `maxmind@5.0.7`. manifest
+   hash, 100 kb size floor and 30 day age limit. tested with an injected opener.
+2. migration 0012 and the disjointness check: done. trigger plus
+   `check-embargo-greylist-disjoint.mjs` (`npm run check:embargo-greylist`),
+   also added to the hygiene scan targets.
+3. territory rule in `evaluateChecks`: done, independent of corridor strictness.
+4. decision shape and attribution: done, `geo_evidence` column and a sixteenth
+   argument on the write function.
+5. read-time pattern view: done, admin function only.
+6. review outcome vocabulary: done, `review-outcomes.mjs`.
+
+tests from the addendum, all present with positive and negative cases in
+`territory.test.mjs` (37) and `geo-reader.test.mjs` (9): us-rail cu hold with
+attribution; non-strict corridor unchanged; no-geo pass with clean rail and
+flags; grey-listed code rejected on insert and update; single hit against six
+months of hits distinguishable; no trust write; never `fail` alone.
+
+verification: 247 signals tests, creator-trust 63, buyer-trust 66, denial
+matrix 63/63, geography invariant, hygiene, source ledger (6 signals entries of
+26), prose check at the 6-violation baseline, 10 injected mutations all caught.
+
+two defects were found and fixed while finishing the batch: the reader fell
+back to `registered_country`, which contradicted the no-geo ruling for
+satellite ranges, and the first pattern view was readable by any signed-in
+user through a plain select. both are covered by tests now.
+
+not built, per the owner: the minor-creator age gate and the parked-market
+hold flow. owner rulings are open.
+
+owner follow-ups: review the v1 embargo list (cu, ir, sy, kp) and name a
+reviewer and cadence; review the 30 day geo age limit and the feed staleness
+defaults; check the reader against a real geolite2 database once an account
+exists. deferred unchanged: commercial feed, hash chain, platform payout route
+wiring, typescript port, live deployment.

@@ -600,3 +600,63 @@ territory check, and still never as a trust input.
 
 see `design.md` for the per-batch build record and `tasks.md` for the
 addendum's own requirements and tasks.
+
+## batch 8 implementation record (2026-10-06)
+
+batch 8 (the embargoed-territory review hold) landed on `security` at commit
+`e3d04cf`, pushed to `origin/security`. 247 signals tests pass, up from 200.
+the creator-trust (63), buyer-trust (66) and denial-matrix (63/63) results are
+unchanged with migration 0012 in the replay chain.
+
+requirements as built, each traced to the addendum in tasks.md:
+
+- a money-moment request whose ip resolves to a listed embargoed or sanctioned
+  territory is `needs_review` with reason `ip_geo_embargoed_territory` and geo
+  source attribution. it runs in every corridor, strict or not. it never
+  produces `fail` by itself and never writes a trust record.
+- the review-trigger list is versioned named config with a per-row enabled flag,
+  authority and effective date. v1 seed is cu, ir, sy, kp. the seed is a
+  starting point for the owner to revise, not a legal determination.
+- grey-listed markets cannot be on the list. a trigger rejects the five codes
+  in the rails matrix, and a script reconciles the live list and the trigger
+  against `operations/country-rollout/creator-payout-rails.json`. an empty list
+  fails the script rather than passing vacuously.
+- missing or unusable geo is normal. it adds no reason code and changes no
+  outcome. when a source answered with no match, the decision records that with
+  attribution. when no source answered, the decision records coverage `none`.
+- severity by pattern is read-time counts over existing decision rows. nothing
+  is stored and nothing is scored, so a one-off never permanently flags anyone.
+- a review ends in `release` or `stranded_funds_hold`. account actions are
+  rejected by `assertReviewOutcome`, and no timer or clock exists, so a hold
+  cannot become a fail by backlog.
+- an unreadable territory list is a hold (`PolicyUnavailableError`), not a pass.
+
+corrections and findings during batch 8, recorded so the spec does not drift
+from the code:
+
+- **geo contract.** the port's geo shape is now
+  `{ countryCode, subdivisionCode, coverage, source }`, with coverage either
+  `full` or `none`. the earlier
+  `available` boolean conflated "evaluated, no match" with "not evaluated".
+  coverage `none` cannot carry a country.
+- **registered country.** the reader uses the located `country` only. a first
+  draft fell back to `registered_country`, which is where a network owner
+  registered a block, not where a user is, and contradicts the ruling that a
+  satellite range is no geo. corrected and tested.
+- **security finding.** a `security definer` function does not inherit the
+  caller's rls, and a plain view does not re-apply base table rls. the pattern
+  view is revoked from anon and authenticated, and the admin function is the
+  only read path.
+- **geography invariant.** a table-level exemption for geo on decisions was
+  rejected. the checker has an exact column allowlist containing only
+  `payout_signal_decisions.geo_evidence`. trust tables get no exemption.
+- **req-9 geo retention, narrowed again.** geo is now persisted, but only as
+  source attribution on a decision, in one column, with no plaintext ip.
+- **breaking change.** `record_payout_signal_check` gained a sixteenth argument
+  for geo evidence. it was dropped and recreated by design.
+
+still open, all assigned to the owner: the embargo list contents and a named
+reviewer with a revisit cadence; the operational age limit of 30 days for the
+geolite2 database; the feed staleness defaults from batch 4. the minor-creator
+age gate and the parked-market hold flow were deliberately not built, because
+the owner rulings are open.

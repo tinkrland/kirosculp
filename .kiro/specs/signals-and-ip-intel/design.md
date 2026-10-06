@@ -687,3 +687,66 @@ follow-ups resolved:
 see `security/signals-and-ip-intel-results.md` on the security branch for
 full test counts, the mutation-testing record (13 injected bugs, all caught),
 and the verified/blocked/deferred breakdown.
+
+## batch 8 implementation record (2026-10-06)
+
+batch 8 shipped as `e3d04cf` on `security`. file-for-component mapping:
+
+| component | file |
+|---|---|
+| migration 0012 (reason code, geo evidence, list table, grey-list trigger, pattern view, admin function, 16-argument write fn) | `migrations/0012_embargoed_territory_review.sql` |
+| geolite2 country reader with manifest, size floor, age limit | `platform/signals/geo-reader.mjs` |
+| geo contract and adapter wiring | `platform/signals/ip-intelligence.mjs` |
+| territory check inside `evaluateChecks`, territory list dependency | `platform/signals/payout-signal-check.mjs` |
+| territory list store, geo evidence in the recorder | `platform/signals/db-ports.mjs` |
+| review outcome vocabulary | `platform/signals/review-outcomes.mjs` |
+| list and trigger reconciliation against the rails matrix | `scripts/check-embargo-greylist-disjoint.mjs` |
+| exact-column geo allowlist | `scripts/check-trust-schema-invariant.mjs` |
+
+design decisions, with the reason for each:
+
+1. **the check is independent of `mandatoryChecks`.** it lives in
+   `evaluateChecks` but outside the strict-corridor loop, so an empty mandatory
+   set (every non-strict market) cannot skip it. a mutation that made it
+   depend on the mandatory set is caught.
+2. **a territory hold is capped at `needs_review`.** if a real mandatory
+   positive is also present and the policy configures `fail`, that outcome
+   still applies. the territory alone never escalates.
+3. **geo has two absent states.** coverage `full` with a null country is
+   "evaluated, no match". coverage `none` is "not evaluated". neither adds a
+   reason. both are stored as attribution. a malformed result carrying a
+   country beside coverage `none` is rejected by the contract, and
+   `evaluateChecks` also ignores it as defense in depth.
+4. **a list read failure is a hold.** the territory list store is a required
+   service dependency. an unreadable list throws `PolicyUnavailableError`. an
+   unknown list version returns an empty set, documented in `db-ports.mjs`, so
+   configuration must name a real version.
+5. **the pattern is a plain view plus an admin function.** probing in pglite
+   showed that a security definer function does not inherit caller rls and a
+   plain view does not re-apply base table rls. the view is granted to
+   service_role only, and `admin_get_embargo_pattern(uuid)` checks the admin
+   role itself. counts only: hits, distinct moments, first and last hit,
+   total decisions. no score, trust or risk field.
+6. **the grey-list guard has two halves.** a trigger holds the five codes
+   from the rails matrix, because that file lives outside the database. the
+   script reconciles the list and the trigger against the matrix, so drift in
+   the matrix fails the check instead of silently passing.
+7. **geo persistence is one column.** `payout_signal_decisions.geo_evidence`
+   holds country code, coverage, source id and dataset version, validated by
+   `valid_geo_evidence`. the invariant checker allows that exact column and
+   nothing broader.
+8. **the dependency.** `maxmind@5.0.7`, pinned exact, mit, with mmdb-lib 3.0.3
+   (mit) and tiny-lru 13.0.0 (bsd-3-clause). ledger entry src-0026. the
+   reader's `open` function is injected, so no real database is used in tests.
+
+verification: 10 injected mutations (territory check removed, made dependent
+on strictness, escalated to fail, missing geo turned into a reason, a country
+on a coverage-none result matching, grey-list trigger removed, trigger missing
+one code, pattern view granted to authenticated, review-outcome assertion
+disabled, invariant allowlist emptied), all caught. one survived at first and
+led to a direct test of the malformed shape.
+
+not verified: the reader has never opened a real `.mmdb`, because that needs a
+maxmind account. the first real database should be checked against a few known
+addresses before anyone relies on it. nothing here is applied to a live
+database.
