@@ -562,3 +562,41 @@ signals-and-ip-intel requirements are satisfied when:
 
 no check may be labeled verified when it is skipped, mocked away, blocked by a
 missing live provider, or dependent on a live supabase project.
+
+## implementation record (2026-10-06)
+
+batches 1-7 landed on the `security` branch (commits `aacf3fd` through
+`2615d29`, pushed to `origin/security`). 200 signals tests pass, the existing
+63-cell denial matrix shows no regression with migration 0011 added to the
+replay chain, and the geography invariant holds and was proven non-vacuous.
+full detail is in `security/signals-and-ip-intel-results.md` on that branch.
+
+three corrections to this requirements document, discovered during
+implementation and carried through code and tests rather than left as a
+drift between spec and reality:
+
+- **req-4/req-5 flag-source correction**: ip2proxy lite does not supply vpn or
+  tor flags, only open proxies. the free-adapter mapping actually implemented
+  is proxy from ip2proxy lite, vpn and datacenter from x4bnet, tor from the
+  tor bulk exit list. this was caught at gate 0.2, before any code was
+  written, and is reflected in req-4/req-5 and design.md as shipped.
+- **req-9/design geo retention**: geo is not persisted anywhere in v1, not
+  even for routing or compliance records as req-4 originally allowed. nothing
+  in the enforcement path at the two money moments used it, so the stricter
+  reading of the geography invariant was taken. the ip intelligence port
+  still returns geo (`coverage.geo`-shaped), so a later leg can persist it
+  deliberately if a real need appears; see the embargoed-territory addendum
+  below, which is the first such need.
+- **req-7 ipv6 coverage_unavailable, owner ruling (2026-10-06)**: acknowledged,
+  accepted for v1, revisit when real traffic numbers exist. a strict-market
+  ipv6 request with a mandatory check that has no coverage resolves to
+  `needs_review` with reason `coverage_unavailable`, exactly as implemented.
+  this closes the one open item from the original spec review.
+
+one item from the original non-requirements list is superseded by the
+addendum below: req-4's deferral of a geo reader is narrowed, not reversed.
+geo lookup is required starting with the addendum, but only for the embargoed-
+territory check, and still never as a trust input.
+
+see `design.md` for the per-batch build record and `tasks.md` for the
+addendum's own requirements and tasks.

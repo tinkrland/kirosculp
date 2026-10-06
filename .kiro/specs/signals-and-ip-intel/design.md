@@ -631,3 +631,59 @@ no live deployment, real payment, or real payout is part of this design leg.
 - a typescript port of the service: production is typescript/node, but this repo
   has no typescript toolchain, so v1 is es modules with jsdoc types. the
   interfaces above are the contract for the port.
+
+## implementation record (2026-10-06)
+
+what shipped on the `security` branch matches this design with the
+corrections below. file-for-component mapping, for a reviewer tracing design
+to code:
+
+| component | file |
+|---|---|
+| migration 0011 (3 tables, write fn, purge fn, admin rpc) | `migrations/0011_payout_signal_evidence.sql` |
+| geography invariant checker | `scripts/check-trust-schema-invariant.mjs` |
+| key ring (component 2's hash choice) | `platform/signals/key-ring.mjs` |
+| client collector (component 1) | `platform/signals/collector.mjs` |
+| server device processor (component 2) | `platform/signals/device-processor.mjs` |
+| ip intelligence port + free adapter (components 3-5) | `platform/signals/ip-intelligence.mjs` |
+| feed loader and importer (component 4 detail) | `platform/signals/feeds.mjs`, `platform/signals/import-feeds.mjs`, `scripts/import-ip-feeds.mjs` |
+| money-moment service (component 8) | `platform/signals/payout-signal-check.mjs` |
+| database ports | `platform/signals/db-ports.mjs` |
+| http-shaped entry contract (not separately designed above) | `platform/signals/payout-gate.mjs` |
+
+three deviations from the design as drafted, each forced by something read
+from a real source during implementation rather than chosen for convenience:
+
+1. **flag-source correction** (component 4/5): corrected before any code was
+   written, at gate 0.2. see the requirements record above; design.md's
+   component 4/5 text was updated in place rather than left stale, so it now
+   describes the free adapter as shipped.
+2. **three private tables, not four**: the first design draft proposed a
+   separate `ip_intelligence_events` table. it was dropped before migration
+   0011 was written, because network flags and source attribution need to
+   survive the decision record's lifetime (append-only, not purged) while an
+   ip-keyed event would otherwise sit on the 12-month event purge. the ip
+   digest moved onto `creator_signal_events` instead. this is recorded in the
+   migration's own comments and in `security/signals-and-ip-intel-results.md`.
+3. **geo is not persisted at all in v1**: narrower than this design's original
+   "routing/compliance records only" allowance. nothing in the two money
+   moments needed it, so the port returns geo but nothing writes it to a row.
+   the embargoed-territory addendum below is the first consumer, and adds its
+   own storage for it rather than retroactively widening this leg's tables.
+
+follow-ups resolved:
+
+- the ipv6 `coverage_unavailable` question: owner ruling recorded in
+  requirements.md above. closed, not deferred.
+- a commercial feed decision: still open, still deferred. the adapter
+  boundary and a contract-tested stub (`stub-commercial-adapter.mjs`, test-only)
+  exist; no real commercial integration does.
+- per-corridor `fail` configuration: still deferred pending measured
+  false-positive rates. the `positive_outcome` column and a passing test for
+  the configuration exist; the v1 seed uses `needs_review` everywhere.
+- the typescript port: still deferred. no typescript toolchain was added.
+- the hash-chain treatment for decision records: still deferred, unchanged.
+
+see `security/signals-and-ip-intel-results.md` on the security branch for
+full test counts, the mutation-testing record (13 injected bugs, all caught),
+and the verified/blocked/deferred breakdown.

@@ -403,3 +403,165 @@ this spec leg is ready for implementation review when:
 - unresolved policy choices are visible and assigned to review.
 - spec files are committed to `sculptura/agent-instructions`; no spec file is
   committed to the product `security` branch.
+
+## implementation record (2026-10-06)
+
+batches 1-7 are complete. commits on `security` (pushed to `origin/security`):
+
+```text
+aacf3fd  add signals source ledger and hygiene guards            (batch 1)
+f2fc7c6  add payout signal evidence schema and geography invariant (batch 2)
+38b5474  add device signal collector, processor and key ring       (batch 3)
+3e58bc7  add ip intelligence port, free adapter and feed importer  (batch 4)
+ab960fa  add payout signal decision service                        (batch 5)
+2aab55d  add payout gate contract for the two money moments        (batch 6)
+2615d29  add signals-and-ip-intel results and verification record  (batch 7)
+```
+
+(`2615d29` is `b9d64ba` after a rebase onto an unrelated upstream commit;
+content is unchanged.)
+
+verification: 200 signals tests, denial matrix 63/63 with no regression,
+geography invariant holds and was proven non-vacuous, creator-trust (63) and
+buyer-trust (66) unaffected, hygiene and source-ledger checks clean, 13
+injected mutations across the two most safety-critical modules all caught.
+full breakdown in `security/signals-and-ip-intel-results.md`.
+
+batch 6 shipped `payout-gate.mjs`, an http-shaped entry contract not called
+out as a separate component in the original design. it was added because the
+decision service alone has no transport boundary, and a reviewer needs
+something to point a real payout route at. it is documented in design.md's
+implementation record above.
+
+three corrections were made during implementation; see requirements.md's
+implementation record for what and why. none required a scope change, a
+dropped requirement, or a different architecture: all three sharpened the
+original design in response to something read from a source, not a reason to
+revisit the plan.
+
+one spec review item was closed by the owner, mid-session, after batch 7:
+the ipv6 `coverage_unavailable` consequence in strict markets is accepted for
+v1, revisit when real traffic numbers exist. implementation already matched
+this ruling; no code change was needed.
+
+## batch 8: embargoed-territory ip hold (addendum, 2026-10-06)
+
+owner-authored design addendum, recorded here before implementation per the
+spec-first workflow. this batch starts after batch 7's results are recorded,
+not before, per the owner's explicit sequencing.
+
+### scope
+
+at a money moment, if the ip geo result places the request in a named
+embargoed or sanctioned territory, hold for human review. the payout rail
+being `us` and the corridor being non-strict changes nothing: this check is
+independent of the strict-corridor mandatory-check mechanism built in batches
+1-7, and runs regardless of market strictness.
+
+**requirement**: a money-moment request whose ip geo resolves to a
+configured embargoed-territory code produces `needs_review` with reason
+`ip_geo_embargoed_territory`, carrying the geo source's attribution the same
+way a network flag does. never `fail` automatically. never a trust-table
+write of any kind. the corridor's own strictness is unaffected: a non-strict
+rail (`us`) with an embargoed-territory ip is still just `needs_review` on
+this one ground, not escalated by the rail.
+
+**requirement**: the review-trigger list is named configuration, structured
+like the existing `payout_signal_policy` market-keyed table: a list of
+territory codes, each with the sanctions/embargo authority and date that
+justifies its presence, revisable as sanctions lists change. grey-listed
+markets (fatf grey list, distinct from an embargo or sanctions regime) must
+never appear on this list: a schema check enforces the two lists stay
+disjoint, mirroring the geography-invariant pattern already in the codebase.
+
+**requirement**: review severity may weigh pattern. a single embargoed-
+territory ip at one money moment is weaker evidence than the same territory
+appearing across every money moment for six months. the decision record
+already stores enough (creator, moment, timestamp, reason codes) to compute
+this without a new table; the review surface reads history, it does not
+change what gets written per-event. a one-off never permanently flags a
+creator: there is still no trust write, and the aggregation is a read-time
+view for the reviewer, not a stored score.
+
+**requirement**: the review outcome itself is release or a stranded-funds
+hold, never an account action (no ban, no permanent flag, no automatic
+rejection). this matches the existing instruction that a decision is
+evidence, not an action, and extends it to say what the two possible human
+outcomes are.
+
+**requirement**: missing or unusable geo at a money moment (no geo source
+configured, satellite ip range, a private address already handled by the
+non-public rule in `ip-intelligence.mjs`) is a normal condition. no
+embargoed-territory check fires, and the decision records the geo
+unavailability as attribution (so an admin can see why), not as a reason
+code that drives the outcome. a request with a clean rail and clean network
+flags still passes when geo could not be resolved.
+
+**explicit failure mode to avoid**: a `needs_review` queue so overloaded by
+volume that it becomes auto-fail by backlog. this batch does not implement
+queue management or an sla; it is recorded here so the queue design (owned by
+whichever leg builds the review surface) inherits the constraint instead of
+rediscovering it.
+
+### why this needs the geo reader now
+
+batches 1-7 deferred a geolite2 reader because nothing in the money-moment
+enforcement path used geo (design.md, deferred items). this addendum is the
+first requirement that reads geo as part of a decision, so the deferral ends
+here, scoped to exactly this check. the ip intelligence port already returns
+a `geo` field (currently unused downstream); this batch is the first caller.
+
+### work
+
+1. a geolite2 country-db reader satisfying the port's existing `geo.lookup(ip)`
+   shape. mmdb parsing needs a dependency; use the smallest actively
+   maintained one available, pinned exact. the reader participates in the
+   feed-manifest validation pattern (`feeds.mjs`) so a missing or stale
+   geolite2 database is unavailable, not silently wrong, consistent with
+   every other feed in this leg. the eula's 30-day update-and-destroy
+   obligation (already logged in the source ledger, src-0022) applies.
+2. a new migration (0012) adding the review-trigger list, structured like
+   `payout_signal_policy`: territory code, authority, effective date,
+   enabled. a schema check (extending `check-trust-schema-invariant.mjs` or a
+   sibling script) asserts no territory code on this list also appears as a
+   fatf grey-listed market in the payout rails matrix.
+3. extend `evaluateChecks` (`payout-signal-check.mjs`) with the
+   territory-hold rule as an independent check path, not folded into the
+   existing mandatory-checks loop: it does not depend on corridor strictness
+   and must not be skipped because a market's `mandatoryChecks` is empty.
+4. extend the stored decision shape with the geo-based reason code and its
+   source attribution, following the same `network_flags`-style attribution
+   object already used for proxy/vpn/tor/datacenter.
+5. a read-time pattern view for the review surface (sustained vs single-event
+   embargoed-territory hits per creator), built from existing decision rows.
+   no new write path, no stored score, no trust-table involvement.
+6. document the review outcome contract (release / stranded-funds hold) as
+   the gate's second return value already supports arbitrary server-side
+   payout-workflow outcomes; this is a vocabulary addition, not a new
+   transport.
+
+### tests
+
+- positive: a us-rail request with an embargoed-territory geo result is
+  `needs_review` with `ip_geo_embargoed_territory` and full attribution.
+- positive: the same request's corridor strictness (non-strict, us) does not
+  change the outcome or get bypassed.
+- negative: a request with no geo result (satellite range, unconfigured
+  reader, private address) passes cleanly when every other check is clean;
+  the decision records geo-unavailable attribution but no reason code from
+  it.
+- negative: a grey-listed market's code cannot be added to the
+  review-trigger list; the schema check rejects it.
+- positive: a single embargoed-territory hit and six months of sustained
+  hits are both readable from existing decision rows without a new table,
+  and the read-time view distinguishes them.
+- negative: no code path from this check reaches a trust-table write, proven
+  the same way as the existing geography-invariant and no-trust-write tests.
+- negative: an embargoed-territory hit never produces `fail` on its own.
+
+### out of scope for this batch
+
+the minor-creator age gate and the parked-market hold flow (`faizah aisler`
+in `platform/creators/demo-roster.md`) are not implemented. the owner has
+not yet ruled on either, and fixtures existing is not authorization to build
+against them.
