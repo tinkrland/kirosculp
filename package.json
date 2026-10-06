@@ -8,7 +8,10 @@
     "audit:refresh": "python3 scripts/build-source-audit.py",
     "test": "node --test paracraft/test/",
     "test:creator-trust": "node scripts/test-private-creator-trust.mjs",
-    "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs"
+    "test:buyer-trust": "node scripts/test-private-buyer-trust.mjs",
+    "validate:signal-sources": "node scripts/validate-signal-sources.mjs",
+    "check:signals-hygiene": "node scripts/check-signals-hygiene.mjs",
+    "test:signals-and-ip-intel": "node --test \"platform/signals/test/*.test.mjs\""
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
