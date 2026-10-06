@@ -7,8 +7,14 @@
     "kyc_required_before_release": true,
     "trigger": "threshold_reached_or_earlier_provider_requirement",
     "minimums": {
-      "USD": 20,
-      "EUR": 20
+      "first_payout": {
+        "USD": 50,
+        "EUR": 50
+      },
+      "subsequent_payouts": {
+        "USD": 25,
+        "EUR": 25
+      }
     }
   },
   "providers": [

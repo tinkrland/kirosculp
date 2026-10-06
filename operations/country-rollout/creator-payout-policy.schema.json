@@ -3,23 +3,59 @@
   "title": "creator signup and payout policy",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "signup_scope", "upfront_full_kyc_intended", "provider_requirements_override_product_timing", "payout_gate", "providers"],
+  "required": [
+    "schema_version",
+    "signup_scope",
+    "upfront_full_kyc_intended",
+    "provider_requirements_override_product_timing",
+    "payout_gate",
+    "providers"
+  ],
   "properties": {
-    "schema_version": { "type": "integer", "minimum": 1 },
-    "signup_scope": { "const": "provider_supported_jurisdictions" },
-    "upfront_full_kyc_intended": { "type": "boolean" },
-    "provider_requirements_override_product_timing": { "const": true },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "signup_scope": {
+      "const": "provider_supported_jurisdictions"
+    },
+    "upfront_full_kyc_intended": {
+      "type": "boolean"
+    },
+    "provider_requirements_override_product_timing": {
+      "const": true
+    },
     "payout_gate": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kyc_required_before_release", "trigger", "minimums"],
+      "required": [
+        "kyc_required_before_release",
+        "trigger",
+        "minimums"
+      ],
       "properties": {
-        "kyc_required_before_release": { "const": true },
-        "trigger": { "const": "threshold_reached_or_earlier_provider_requirement" },
+        "kyc_required_before_release": {
+          "const": true
+        },
+        "trigger": {
+          "const": "threshold_reached_or_earlier_provider_requirement"
+        },
         "minimums": {
           "type": "object",
-          "additionalProperties": { "type": "number", "exclusiveMinimum": 0 },
-          "required": ["USD", "EUR"]
+          "description": "two-level payout thresholds per the 2026-10-05 owner ruling: first payout, then all payouts after the first",
+          "additionalProperties": false,
+          "required": [
+            "first_payout",
+            "subsequent_payouts"
+          ],
+          "properties": {
+            "first_payout": {
+              "$ref": "#/$defs/currencyMinimums"
+            },
+            "subsequent_payouts": {
+              "$ref": "#/$defs/currencyMinimums"
+            }
+          }
         }
       }
     },
@@ -29,13 +65,49 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "role", "status"],
+        "required": [
+          "id",
+          "role",
+          "status"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "role": { "type": "string", "enum": ["primary", "secondary_candidate", "regional_candidate"] },
-          "status": { "type": "string", "enum": ["planned", "research", "future_research", "active", "paused"] }
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary_candidate",
+              "regional_candidate"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "research",
+              "future_research",
+              "active",
+              "paused"
+            ]
+          }
         }
       }
+    }
+  },
+  "$defs": {
+    "currencyMinimums": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "required": [
+        "USD",
+        "EUR"
+      ],
+      "minProperties": 2
     }
   }
 }
