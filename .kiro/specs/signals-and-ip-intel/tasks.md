@@ -62,8 +62,11 @@ notes; missing tools are recorded as prerequisites or blockers.
 - tor bulk exit list: ipv4 only, no explicit license statement found.
 - node 22.22.2, npm ci clean, pglite available. creator-trust (63) and
   buyer-trust (66) tests pass as baseline.
-- python 3.11 is used with `PYTHONUTF8=1`; the validate script calls `python3`,
-  which does not exist on this windows install, so its steps run individually.
+- python 3.11 is used with `PYTHONUTF8=1`. it is installed under
+  `%LOCALAPPDATA%\Programs\Python\Python311`, which is not on `PATH`; the only
+  `python3` found is the microsoft store stub. `npm run validate` calls
+  `python3`, so its steps were run individually during batches 1 to 7, and
+  end to end in batch 8 with a temporary `python3` shim on `PATH`.
   `normalize-prose.py --check` has 6 pre-existing violations outside this leg.
 - no payout onboarding or payout request call sites exist in product code (only
   in what-exists snapshots), so batch 6 is contract-level.
