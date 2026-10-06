@@ -13,5 +13,8 @@ reviewed contracts/legal scope, provider capability verification and recorded te
   minimum necessary data and creator-location protections.
 - [review, audit and tests](review-audit-and-tests.md): human judgment,
   proportionate holds, operational accountability and unexecuted acceptance cases.
+- [trust and geography](trust-and-geography.md): behavior-only trust,
+  geography as proxy versus signal, disparate-impact avoidance and the
+  strict-mode check-surface boundary.
 
 back to [scenarios](../scenarios/README.md) and [aml overview](../README.md).
