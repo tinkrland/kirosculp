@@ -1,0 +1,6310 @@
+{
+  "schema": "affinity-table-v1",
+  "description": "structural affinity table v0.1: the cold-start taste prior computed from the governed vocabulary alone. per term, ranked neighbors with weighted shared-facet explanations. deterministic: rebuilds byte-identical from the pinned inputs. the discoverability policy layer owns every ranking call made from this table.",
+  "engine": {
+    "name": "affinity-map",
+    "version": "0.1.0"
+  },
+  "config": {
+    "version": "0.1.0",
+    "sha256": "0a99d2fe9c319d3024eac8ebe98916b36df5c0920f93ac36ecda1d84e9f40f69"
+  },
+  "vocabularies": [
+    {
+      "key": "style-vocabulary",
+      "path": "offerings/styles/style-vocabulary.jsonl",
+      "sha256": "216a540df5f5bb292b081d0290ba49a907bfa8627e4bebfdc7200e657a14ba6e",
+      "records": 13,
+      "versions": {
+        "0.2.0": 2,
+        "0.3.0": 7,
+        "0.3.1": 4
+      }
+    },
+    {
+      "key": "symbol",
+      "path": "offerings/styles/symbol-vocabulary.jsonl",
+      "sha256": "fc5ff410959e87ee5236a6ccf26ca2cec0ada8d75b420f9936a7d9cb4e873925",
+      "records": 24,
+      "versions": {
+        "0.1.0": 24
+      }
+    },
+    {
+      "key": "wear-context",
+      "path": "offerings/styles/wear-context-vocabulary.jsonl",
+      "sha256": "c18eaedaa69d0caeb74040a895963ae1ae7a13c9a477230fc89f648e42e13d01",
+      "records": 4,
+      "versions": {
+        "0.1.0": 4
+      }
+    }
+  ],
+  "determinism": {
+    "schema": "affinity-map-determinism-v1",
+    "input_hash": "ec0c6281c919a00d6b082c1ca36f6016ed299b1a238896c0fa14fb7f5bf7a891",
+    "output_hash": "4ce978588d0e02e2d0bae7229464be5cbb491632f21cd1424014fe297b21afc8",
+    "method": "input hash: sha256 over the engine version, config sha256, and each vocabulary key, path and sha256 in config input order. output hash: sha256 over this table serialized canonically (json, two-space indent, trailing newline) with determinism.output_hash set to null. same inputs and config produce identical output, verified by check-affinity-table.mjs.",
+    "corpus": null,
+    "corpus_note": "the authored affinity corpus is an open item in the spec. v0.1 is the structural prior from the governed vocabulary alone and blends with real co-occurrence counts deterministically later. decay has no meaning here: the structural prior carries no time component."
+  },
+  "terms": [
+    {
+      "term": "georgian",
+      "name": "georgian style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 7,
+      "facets": {
+        "ornate": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features",
+            "axes"
+          ]
+        },
+        "scrollwork": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "floral": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "nature": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "repousse": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "cannetille": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "antique": {
+          "raw": 1,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.6941074346,
+      "neighbors": [
+        {
+          "term": "art_nouveau",
+          "vocabulary": "style-vocabulary",
+          "score": 0.5788182372,
+          "norms": [
+            1.6941074346,
+            2.2231734075
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 1,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.7
+            },
+            {
+              "facet": "ornate",
+              "left": 0.7,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            },
+            {
+              "facet": "nature",
+              "left": 0.5,
+              "right": 0.8,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            },
+            {
+              "facet": "floral",
+              "left": 0.4,
+              "right": 0.9,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.6,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.5679984805,
+          "norms": [
+            1.6941074346,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 1,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.9
+            },
+            {
+              "facet": "ornate",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "feature",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.6,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            },
+            {
+              "facet": "floral",
+              "left": 0.4,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.24
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.4316788452,
+          "norms": [
+            1.6941074346,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 1,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.8
+            },
+            {
+              "facet": "ornate",
+              "left": 0.7,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.6,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3486621544,
+          "norms": [
+            1.6941074346,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 1,
+              "right": 0.4,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            },
+            {
+              "facet": "ornate",
+              "left": 0.7,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.35
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.6,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            }
+          ]
+        },
+        {
+          "term": "egyptian_revival",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3414121943,
+          "norms": [
+            1.6941074346,
+            1.7635192089
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 1,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.6
+            },
+            {
+              "facet": "ornate",
+              "left": 0.7,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "victorian",
+      "name": "victorian style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 10,
+      "facets": {
+        "heart": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "knot": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "serpent": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "floral": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "bird": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "scrollwork": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "tree": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "antique": {
+          "raw": 0.9,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "ornate": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "organic": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 2.0784609691,
+      "neighbors": [
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.5679984805,
+          "norms": [
+            2.0784609691,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.9,
+              "right": 1,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.9
+            },
+            {
+              "facet": "ornate",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            },
+            {
+              "facet": "floral",
+              "left": 0.6,
+              "right": 0.4,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.24
+            }
+          ]
+        },
+        {
+          "term": "art_nouveau",
+          "vocabulary": "style-vocabulary",
+          "score": 0.5345418851,
+          "norms": [
+            2.0784609691,
+            2.2231734075
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.9,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.63
+            },
+            {
+              "facet": "organic",
+              "left": 0.6,
+              "right": 0.95,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.57
+            },
+            {
+              "facet": "floral",
+              "left": 0.6,
+              "right": 0.9,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.54
+            },
+            {
+              "facet": "ornate",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3356481481,
+          "norms": [
+            2.0784609691,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.9,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.72
+            },
+            {
+              "facet": "ornate",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "egyptian_revival",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2782775069,
+          "norms": [
+            2.0784609691,
+            1.7635192089
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.9,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.54
+            },
+            {
+              "facet": "ornate",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2733606252,
+          "norms": [
+            2.0784609691,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.8,
+              "right": 0.5,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            },
+            {
+              "facet": "antique",
+              "left": 0.9,
+              "right": 0.4,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "art_nouveau",
+      "name": "art nouveau style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 8,
+      "facets": {
+        "whiplash_curve": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "floral": {
+          "raw": 0.9,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "nature": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "scrollwork": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "freeform_asymmetry": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "organic": {
+          "raw": 0.95,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "ornate": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "antique": {
+          "raw": 0.7,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 2.2231734075,
+      "neighbors": [
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.5788182372,
+          "norms": [
+            2.2231734075,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.7,
+              "right": 1,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.7
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            },
+            {
+              "facet": "nature",
+              "left": 0.8,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            },
+            {
+              "facet": "floral",
+              "left": 0.9,
+              "right": 0.4,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.5345418851,
+          "norms": [
+            2.2231734075,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.7,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.63
+            },
+            {
+              "facet": "organic",
+              "left": 0.95,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.57
+            },
+            {
+              "facet": "floral",
+              "left": 0.9,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.54
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "organic_modern",
+          "vocabulary": "style-vocabulary",
+          "score": 0.458778311,
+          "norms": [
+            2.2231734075,
+            1.8309833424
+          ],
+          "shared_facets": [
+            {
+              "facet": "organic",
+              "left": 0.95,
+              "right": 0.85,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.8075
+            },
+            {
+              "facet": "nature",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "whiplash_curve",
+              "left": 1,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.5
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2532040508,
+          "norms": [
+            2.2231734075,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2100202698,
+          "norms": [
+            2.2231734075,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.5,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            },
+            {
+              "facet": "antique",
+              "left": 0.7,
+              "right": 0.4,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.28
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "edwardian",
+      "name": "edwardian style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 8,
+      "facets": {
+        "bow": {
+          "raw": 0.9,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "garland": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "ribbon": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "lace": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "scrollwork": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "antique": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "ornate": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "dainty": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 2.0784609691,
+      "neighbors": [
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.4316788452,
+          "norms": [
+            2.0784609691,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.8,
+              "right": 1,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.8
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3356481481,
+          "norms": [
+            2.0784609691,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.8,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.72
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3329045238,
+          "norms": [
+            2.0784609691,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "bow",
+              "left": 0.9,
+              "right": 0.4,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "antique",
+              "left": 0.8,
+              "right": 0.4,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.32
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.5,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "art_nouveau",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2532040508,
+          "norms": [
+            2.0784609691,
+            2.2231734075
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "egyptian_revival",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2291697116,
+          "norms": [
+            2.0784609691,
+            1.7635192089
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "art_deco",
+      "name": "art deco style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.2.0",
+      "updated": "2026-09-27",
+      "facet_count": 11,
+      "facets": {
+        "geometric_step": {
+          "raw": 0.9,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "symmetry": {
+          "raw": 0.85,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "chevron": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "fan": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "sunburst": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "zigzag": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "contrast": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "calibre": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "geometric": {
+          "raw": 0.9,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "clean": {
+          "raw": 0.7,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "antique": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 2.4046829313,
+      "neighbors": [
+        {
+          "term": "egyptian_revival",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2758975516,
+          "norms": [
+            2.4046829313,
+            1.7635192089
+          ],
+          "shared_facets": [
+            {
+              "facet": "geometric",
+              "left": 0.9,
+              "right": 0.5,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.45
+            },
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "geometric_step",
+              "left": 0.9,
+              "right": 0.4,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        },
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1472829524,
+          "norms": [
+            2.4046829313,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 1,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.6
+            }
+          ]
+        },
+        {
+          "term": "mid_century_modernist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1232526025,
+          "norms": [
+            2.4046829313,
+            1.8894443628
+          ],
+          "shared_facets": [
+            {
+              "facet": "clean",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1080423609,
+          "norms": [
+            2.4046829313,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.54
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0960376541,
+          "norms": [
+            2.4046829313,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "retro",
+      "name": "retro style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.1",
+      "updated": "2026-09-28",
+      "facet_count": 9,
+      "facets": {
+        "sphere": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "bow": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "bold_curves": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "dimensional_goldwork": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "fabric_motif": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "scrollwork": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "chunky": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "ornate": {
+          "raw": 0.5,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "antique": {
+          "raw": 0.4,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.7776388835,
+      "neighbors": [
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3486621544,
+          "norms": [
+            1.7776388835,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.4,
+              "right": 1,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            },
+            {
+              "facet": "ornate",
+              "left": 0.5,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.35
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3329045238,
+          "norms": [
+            1.7776388835,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "bow",
+              "left": 0.4,
+              "right": 0.9,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "antique",
+              "left": 0.4,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.32
+            },
+            {
+              "facet": "ornate",
+              "left": 0.5,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2733606252,
+          "norms": [
+            1.7776388835,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.5,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            },
+            {
+              "facet": "antique",
+              "left": 0.4,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        },
+        {
+          "term": "biker",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2196592501,
+          "norms": [
+            1.7776388835,
+            1.8439088915
+          ],
+          "shared_facets": [
+            {
+              "facet": "chunky",
+              "left": 0.8,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.72
+            }
+          ]
+        },
+        {
+          "term": "art_nouveau",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2100202698,
+          "norms": [
+            1.7776388835,
+            2.2231734075
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.5,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.3
+            },
+            {
+              "facet": "antique",
+              "left": 0.4,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.28
+            },
+            {
+              "facet": "scrollwork",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "mid_century_modernist",
+      "name": "mid-century modernist style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.1",
+      "updated": "2026-09-28",
+      "facet_count": 7,
+      "facets": {
+        "abstract_form": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "clean_line": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "sphere": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "sculptural_form": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "geometric_abstract": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "modern": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "clean": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.8894443628,
+      "neighbors": [
+        {
+          "term": "organic_modern",
+          "vocabulary": "style-vocabulary",
+          "score": 0.4393646244,
+          "norms": [
+            1.8894443628,
+            1.8309833424
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.8,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.64
+            },
+            {
+              "facet": "sculptural_form",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "clean",
+              "left": 0.8,
+              "right": 0.5,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            }
+          ]
+        },
+        {
+          "term": "brutalist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1411349664,
+          "norms": [
+            1.8894443628,
+            2.1
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            }
+          ]
+        },
+        {
+          "term": "biker",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1377741279,
+          "norms": [
+            1.8894443628,
+            1.8439088915
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "art_deco",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1232526025,
+          "norms": [
+            1.8894443628,
+            2.4046829313
+          ],
+          "shared_facets": [
+            {
+              "facet": "clean",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0714551594,
+          "norms": [
+            1.8894443628,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "sphere",
+              "left": 0.4,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.24
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "brutalist",
+      "name": "brutalist style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.1",
+      "updated": "2026-09-28",
+      "facet_count": 7,
+      "facets": {
+        "raw_texture": {
+          "raw": 0.9,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "heavy_form": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "industrial": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "architectural_mass": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "chunky": {
+          "raw": 0.9,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "modern": {
+          "raw": 0.7,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "raw": {
+          "raw": 0.9,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 2.1,
+      "neighbors": [
+        {
+          "term": "biker",
+          "vocabulary": "style-vocabulary",
+          "score": 0.624966319,
+          "norms": [
+            2.1,
+            1.8439088915
+          ],
+          "shared_facets": [
+            {
+              "facet": "chunky",
+              "left": 0.9,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.81
+            },
+            {
+              "facet": "raw",
+              "left": 0.9,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.63
+            },
+            {
+              "facet": "heavy_form",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "modern",
+              "left": 0.7,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1928722116,
+          "norms": [
+            2.1,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "chunky",
+              "left": 0.9,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.72
+            }
+          ]
+        },
+        {
+          "term": "organic_modern",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1456412303,
+          "norms": [
+            2.1,
+            1.8309833424
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            }
+          ]
+        },
+        {
+          "term": "mid_century_modernist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1411349664,
+          "norms": [
+            2.1,
+            1.8894443628
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "organic_modern",
+      "name": "organic modern style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.1",
+      "updated": "2026-09-28",
+      "facet_count": 7,
+      "facets": {
+        "whiplash_curve": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "nature": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "biomorphic_form": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "sculptural_form": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "organic": {
+          "raw": 0.85,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "modern": {
+          "raw": 0.8,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "clean": {
+          "raw": 0.5,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.8309833424,
+      "neighbors": [
+        {
+          "term": "art_nouveau",
+          "vocabulary": "style-vocabulary",
+          "score": 0.458778311,
+          "norms": [
+            1.8309833424,
+            2.2231734075
+          ],
+          "shared_facets": [
+            {
+              "facet": "organic",
+              "left": 0.85,
+              "right": 0.95,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.8075
+            },
+            {
+              "facet": "nature",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "whiplash_curve",
+              "left": 0.5,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.5
+            }
+          ]
+        },
+        {
+          "term": "mid_century_modernist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.4393646244,
+          "norms": [
+            1.8309833424,
+            1.8894443628
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.8,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.64
+            },
+            {
+              "facet": "sculptural_form",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "clean",
+              "left": 0.5,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.4
+            }
+          ]
+        },
+        {
+          "term": "brutalist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1456412303,
+          "norms": [
+            1.8309833424,
+            2.1
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.8,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            }
+          ]
+        },
+        {
+          "term": "biker",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1421730845,
+          "norms": [
+            1.8309833424,
+            1.8439088915
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.8,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1340120681,
+          "norms": [
+            1.8309833424,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "organic",
+              "left": 0.85,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.51
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "celestial",
+      "name": "celestial style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 6,
+      "facets": {
+        "star": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "moon": {
+          "raw": 0.9,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "sun": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "crescent": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "constellation_dot": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "ornate": {
+          "raw": 0.4,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.8601075238,
+      "neighbors": [
+        {
+          "term": "metal_silver",
+          "vocabulary": "symbol",
+          "score": 0.3421286646,
+          "norms": [
+            1.8601075238,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "moon",
+              "left": 0.9,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.9
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.2793468849,
+          "norms": [
+            1.8601075238,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "moon",
+              "left": 0.9,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.9
+            }
+          ]
+        },
+        {
+          "term": "metal_gold",
+          "vocabulary": "symbol",
+          "score": 0.2661000724,
+          "norms": [
+            1.8601075238,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "sun",
+              "left": 0.7,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.7
+            }
+          ]
+        },
+        {
+          "term": "sign_leo",
+          "vocabulary": "symbol",
+          "score": 0.2172697993,
+          "norms": [
+            1.8601075238,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "sun",
+              "left": 0.7,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.7
+            }
+          ]
+        },
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0888544194,
+          "norms": [
+            1.8601075238,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.4,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.28
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "gothic",
+      "name": "gothic style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 9,
+      "facets": {
+        "cross": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "dagger": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "dark_ornate": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "point": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "oxidized_finish": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "chain": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "skull": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "ornate": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "dark": {
+          "raw": 1,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 2.0760539492,
+      "neighbors": [
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1194179762,
+          "norms": [
+            2.0760539492,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1112399356,
+          "norms": [
+            2.0760539492,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "egyptian_revival",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0983294639,
+          "norms": [
+            2.0760539492,
+            1.7635192089
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        },
+        {
+          "term": "biker",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0940425523,
+          "norms": [
+            2.0760539492,
+            1.8439088915
+          ],
+          "shared_facets": [
+            {
+              "facet": "skull",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0834299517,
+          "norms": [
+            2.0760539492,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "biker",
+      "name": "biker style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.3.0",
+      "updated": "2026-09-28",
+      "facet_count": 7,
+      "facets": {
+        "chain_link": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "skull": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "heavy_form": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "rope_twist": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "chunky": {
+          "raw": 0.9,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "raw": {
+          "raw": 0.7,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "modern": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.8439088915,
+      "neighbors": [
+        {
+          "term": "brutalist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.624966319,
+          "norms": [
+            1.8439088915,
+            2.1
+          ],
+          "shared_facets": [
+            {
+              "facet": "chunky",
+              "left": 0.9,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.81
+            },
+            {
+              "facet": "raw",
+              "left": 0.7,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.63
+            },
+            {
+              "facet": "heavy_form",
+              "left": 0.7,
+              "right": 0.8,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.56
+            },
+            {
+              "facet": "modern",
+              "left": 0.6,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2196592501,
+          "norms": [
+            1.8439088915,
+            1.7776388835
+          ],
+          "shared_facets": [
+            {
+              "facet": "chunky",
+              "left": 0.9,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.72
+            }
+          ]
+        },
+        {
+          "term": "organic_modern",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1421730845,
+          "norms": [
+            1.8439088915,
+            1.8309833424
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "mid_century_modernist",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1377741279,
+          "norms": [
+            1.8439088915,
+            1.8894443628
+          ],
+          "shared_facets": [
+            {
+              "facet": "modern",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "gothic",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0940425523,
+          "norms": [
+            1.8439088915,
+            2.0760539492
+          ],
+          "shared_facets": [
+            {
+              "facet": "skull",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "egyptian_revival",
+      "name": "egyptian revival style",
+      "vocabulary": "style-vocabulary",
+      "version": "0.2.0",
+      "updated": "2026-09-27",
+      "facet_count": 8,
+      "facets": {
+        "lotus": {
+          "raw": 0.8,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "pyramid_form": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "scarab": {
+          "raw": 0.7,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "eye_of_horus": {
+          "raw": 0.6,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "geometric_step": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "antique": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "ornate": {
+          "raw": 0.6,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        },
+        "geometric": {
+          "raw": 0.5,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
+        }
+      },
+      "norm": 1.7635192089,
+      "neighbors": [
+        {
+          "term": "georgian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3414121943,
+          "norms": [
+            1.7635192089,
+            1.6941074346
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 1,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.6
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            }
+          ]
+        },
+        {
+          "term": "victorian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2782775069,
+          "norms": [
+            1.7635192089,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.54
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            }
+          ]
+        },
+        {
+          "term": "art_deco",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2758975516,
+          "norms": [
+            1.7635192089,
+            2.4046829313
+          ],
+          "shared_facets": [
+            {
+              "facet": "geometric",
+              "left": 0.5,
+              "right": 0.9,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.45
+            },
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            },
+            {
+              "facet": "geometric_step",
+              "left": 0.4,
+              "right": 0.9,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        },
+        {
+          "term": "edwardian",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2291697116,
+          "norms": [
+            1.7635192089,
+            2.0784609691
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.8,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.48
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        },
+        {
+          "term": "art_nouveau",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1989486833,
+          "norms": [
+            1.7635192089,
+            2.2231734075
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 0.6,
+              "right": 0.7,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            },
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_gold",
+      "name": "gold",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "gold": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "sun": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "planet"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "element_earth",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "gold",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "element_fire",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "gold",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_leo",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "sun",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "celestial",
+          "vocabulary": "style-vocabulary",
+          "score": 0.2661000724,
+          "norms": [
+            1.4142135624,
+            1.8601075238
+          ],
+          "shared_facets": [
+            {
+              "facet": "sun",
+              "left": 1,
+              "right": 0.7,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_silver",
+      "name": "silver",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "silver": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "moon": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "planet"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "element_air",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "silver",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "element_water",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "silver",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "moon",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "celestial",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3421286646,
+          "norms": [
+            1.4142135624,
+            1.8601075238
+          ],
+          "shared_facets": [
+            {
+              "facet": "moon",
+              "left": 1,
+              "right": 0.9,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_platinum",
+      "name": "platinum",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 1,
+      "facets": {
+        "platinum": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        }
+      },
+      "norm": 1,
+      "neighbors": []
+    },
+    {
+      "term": "metal_copper",
+      "name": "copper",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "copper": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "venus": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "planet"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "sign_libra",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "venus",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_taurus",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "venus",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_iron",
+      "name": "iron",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "iron": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "mars": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "planet"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mars",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_scorpio",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mars",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_tin",
+      "name": "tin",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "tin": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "jupiter": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "planet"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "sign_pisces",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "jupiter",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_sagittarius",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "jupiter",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_lead",
+      "name": "lead",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "lead": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "saturn": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "planet"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "saturn",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "saturn",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "metal_mercury",
+      "name": "mercury",
+      "vocabulary": "symbol",
+      "kind": "metal_symbol",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 1,
+      "facets": {
+        "mercury": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id",
+            "planet"
+          ]
+        }
+      },
+      "norm": 1,
+      "neighbors": [
+        {
+          "term": "sign_gemini",
+          "vocabulary": "symbol",
+          "score": 0.5773502692,
+          "norms": [
+            1,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mercury",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_virgo",
+          "vocabulary": "symbol",
+          "score": 0.5773502692,
+          "norms": [
+            1,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mercury",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "element_fire",
+      "name": "fire element",
+      "vocabulary": "symbol",
+      "kind": "element",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "fire": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "gold": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "metal_affinity"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "element_earth",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "gold",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_gold",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "gold",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_leo",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_sagittarius",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "element_earth",
+      "name": "earth element",
+      "vocabulary": "symbol",
+      "kind": "element",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "earth": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "gold": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "metal_affinity"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "element_fire",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "gold",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_gold",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "gold",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_taurus",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_virgo",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "element_air",
+      "name": "air element",
+      "vocabulary": "symbol",
+      "kind": "element",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "air": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "silver": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "metal_affinity"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "element_water",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "silver",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_silver",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "silver",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_gemini",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_libra",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "element_water",
+      "name": "water element",
+      "vocabulary": "symbol",
+      "kind": "element",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 2,
+      "facets": {
+        "water": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "symbol_id"
+          ]
+        },
+        "silver": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "metal_affinity"
+          ]
+        }
+      },
+      "norm": 1.4142135624,
+      "neighbors": [
+        {
+          "term": "element_air",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "silver",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_silver",
+          "vocabulary": "symbol",
+          "score": 0.5,
+          "norms": [
+            1.4142135624,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "silver",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_pisces",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_scorpio",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.4142135624,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_aries",
+      "name": "aries",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "fire": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "cardinal": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "mars": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_fire",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_iron",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "mars",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_leo",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_taurus",
+      "name": "taurus",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "earth": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "fixed": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "venus": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_earth",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_copper",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "venus",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fixed",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_leo",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fixed",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_gemini",
+      "name": "gemini",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "air": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "mutable": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "mercury": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "sign_virgo",
+          "vocabulary": "symbol",
+          "score": 0.6666666667,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mercury",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            },
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_mercury",
+          "vocabulary": "symbol",
+          "score": 0.5773502692,
+          "norms": [
+            1.7320508076,
+            1
+          ],
+          "shared_facets": [
+            {
+              "facet": "mercury",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "element_air",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_libra",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_cancer",
+      "name": "cancer",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "water": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "cardinal": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "moon": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_water",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_silver",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "moon",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_libra",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_leo",
+      "name": "leo",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "fire": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "fixed": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "sun": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_fire",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_gold",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "sun",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fixed",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_sagittarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_virgo",
+      "name": "virgo",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "earth": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "mutable": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "mercury": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "sign_gemini",
+          "vocabulary": "symbol",
+          "score": 0.6666666667,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mercury",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            },
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_mercury",
+          "vocabulary": "symbol",
+          "score": 0.5773502692,
+          "norms": [
+            1.7320508076,
+            1
+          ],
+          "shared_facets": [
+            {
+              "facet": "mercury",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "element_earth",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_pisces",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_libra",
+      "name": "libra",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "air": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "cardinal": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "venus": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_air",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_copper",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "venus",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_scorpio",
+      "name": "scorpio",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "water": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "fixed": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "mars": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_water",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_iron",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "mars",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fixed",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mars",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_sagittarius",
+      "name": "sagittarius",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "fire": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "mutable": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "jupiter": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "sign_pisces",
+          "vocabulary": "symbol",
+          "score": 0.6666666667,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "jupiter",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            },
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "element_fire",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_tin",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "jupiter",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fire",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_gemini",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_capricorn",
+      "name": "capricorn",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "earth": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "cardinal": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "saturn": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_earth",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "earth",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_lead",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "saturn",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aquarius",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "saturn",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_aries",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "cardinal",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_aquarius",
+      "name": "aquarius",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "air": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "fixed": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "saturn": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "element_air",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_lead",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "saturn",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_capricorn",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "saturn",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_gemini",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "air",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_leo",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "fixed",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "sign_pisces",
+      "name": "pisces",
+      "vocabulary": "symbol",
+      "kind": "zodiac_sign",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 3,
+      "facets": {
+        "water": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "element"
+          ]
+        },
+        "mutable": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "modality"
+          ]
+        },
+        "jupiter": {
+          "raw": 1,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "ruler"
+          ]
+        }
+      },
+      "norm": 1.7320508076,
+      "neighbors": [
+        {
+          "term": "sign_sagittarius",
+          "vocabulary": "symbol",
+          "score": 0.6666666667,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "jupiter",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            },
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "element_water",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "metal_tin",
+          "vocabulary": "symbol",
+          "score": 0.4082482905,
+          "norms": [
+            1.7320508076,
+            1.4142135624
+          ],
+          "shared_facets": [
+            {
+              "facet": "jupiter",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_cancer",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "water",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        },
+        {
+          "term": "sign_gemini",
+          "vocabulary": "symbol",
+          "score": 0.3333333333,
+          "norms": [
+            1.7320508076,
+            1.7320508076
+          ],
+          "shared_facets": [
+            {
+              "facet": "mutable",
+              "left": 1,
+              "right": 1,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "everyday_wear",
+      "name": "everyday wear",
+      "vocabulary": "wear-context",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 0,
+      "facets": {},
+      "norm": 0,
+      "neighbors": []
+    },
+    {
+      "term": "stacks",
+      "name": "stacks",
+      "vocabulary": "wear-context",
+      "kind": "styling group",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 0,
+      "facets": {},
+      "norm": 0,
+      "neighbors": []
+    },
+    {
+      "term": "special_occasion",
+      "name": "special occasion",
+      "vocabulary": "wear-context",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 0,
+      "facets": {},
+      "norm": 0,
+      "neighbors": []
+    },
+    {
+      "term": "ceremony_commitment",
+      "name": "ceremony and commitment",
+      "vocabulary": "wear-context",
+      "version": "0.1.0",
+      "updated": "2026-09-27",
+      "facet_count": 0,
+      "facets": {},
+      "norm": 0,
+      "neighbors": []
+    }
+  ],
+  "confusable_cross_check": [
+    {
+      "term": "georgian",
+      "target": "victorian",
+      "status": "confirmed",
+      "target_score": 0.5679984805,
+      "rank": 2,
+      "in_top_k": true
+    },
+    {
+      "term": "victorian",
+      "target": "georgian",
+      "status": "confirmed",
+      "target_score": 0.5679984805,
+      "rank": 1,
+      "in_top_k": true
+    },
+    {
+      "term": "victorian",
+      "target": "art_nouveau",
+      "status": "confirmed",
+      "target_score": 0.5345418851,
+      "rank": 2,
+      "in_top_k": true
+    },
+    {
+      "term": "art_nouveau",
+      "target": "victorian",
+      "status": "confirmed",
+      "target_score": 0.5345418851,
+      "rank": 2,
+      "in_top_k": true
+    },
+    {
+      "term": "art_nouveau",
+      "target": "organic_modern",
+      "status": "confirmed",
+      "target_score": 0.458778311,
+      "rank": 3,
+      "in_top_k": true
+    },
+    {
+      "term": "edwardian",
+      "target": "victorian",
+      "status": "confirmed",
+      "target_score": 0.3356481481,
+      "rank": 2,
+      "in_top_k": true
+    },
+    {
+      "term": "edwardian",
+      "target": "art_nouveau",
+      "status": "confirmed",
+      "target_score": 0.2532040508,
+      "rank": 4,
+      "in_top_k": true
+    },
+    {
+      "term": "art_deco",
+      "target": "mid_century_modernist",
+      "status": "confirmed",
+      "target_score": 0.1232526025,
+      "rank": 3,
+      "in_top_k": true
+    },
+    {
+      "term": "art_deco",
+      "target": "egyptian_revival",
+      "status": "confirmed",
+      "target_score": 0.2758975516,
+      "rank": 1,
+      "in_top_k": true
+    },
+    {
+      "term": "retro",
+      "target": "mid_century_modernist",
+      "status": "drift",
+      "target_score": 0.0714551594,
+      "rank": 9,
+      "in_top_k": false,
+      "computed_neighbors": [
+        "georgian",
+        "edwardian",
+        "victorian",
+        "biker",
+        "art_nouveau"
+      ]
+    },
+    {
+      "term": "mid_century_modernist",
+      "target": "brutalist",
+      "status": "confirmed",
+      "target_score": 0.1411349664,
+      "rank": 2,
+      "in_top_k": true
+    },
+    {
+      "term": "brutalist",
+      "target": "biker",
+      "status": "confirmed",
+      "target_score": 0.624966319,
+      "rank": 1,
+      "in_top_k": true
+    },
+    {
+      "term": "brutalist",
+      "target": "mid_century_modernist",
+      "status": "confirmed",
+      "target_score": 0.1411349664,
+      "rank": 4,
+      "in_top_k": true
+    },
+    {
+      "term": "organic_modern",
+      "target": "art_nouveau",
+      "status": "confirmed",
+      "target_score": 0.458778311,
+      "rank": 1,
+      "in_top_k": true
+    },
+    {
+      "term": "celestial",
+      "target": "art_deco",
+      "status": "drift",
+      "target_score": 0,
+      "rank": null,
+      "in_top_k": false,
+      "computed_neighbors": [
+        "metal_silver",
+        "sign_cancer",
+        "metal_gold",
+        "sign_leo",
+        "georgian"
+      ]
+    },
+    {
+      "term": "celestial",
+      "target": "gothic",
+      "status": "drift",
+      "target_score": 0.062149059,
+      "rank": 8,
+      "in_top_k": false,
+      "computed_neighbors": [
+        "metal_silver",
+        "sign_cancer",
+        "metal_gold",
+        "sign_leo",
+        "georgian"
+      ]
+    },
+    {
+      "term": "gothic",
+      "target": "victorian",
+      "status": "confirmed",
+      "target_score": 0.1112399356,
+      "rank": 2,
+      "in_top_k": true
+    },
+    {
+      "term": "biker",
+      "target": "brutalist",
+      "status": "confirmed",
+      "target_score": 0.624966319,
+      "rank": 1,
+      "in_top_k": true
+    },
+    {
+      "term": "egyptian_revival",
+      "target": "art_deco",
+      "status": "confirmed",
+      "target_score": 0.2758975516,
+      "rank": 3,
+      "in_top_k": true
+    }
+  ],
+  "summary": {
+    "term_count": 41,
+    "by_vocabulary": {
+      "style-vocabulary": 13,
+      "symbol": 24,
+      "wear-context": 4
+    },
+    "neighbor_edge_count": 162,
+    "scored_pair_count": 116,
+    "empty_neighborhoods": [
+      "metal_platinum",
+      "everyday_wear",
+      "stacks",
+      "special_occasion",
+      "ceremony_commitment"
+    ],
+    "confusable_edge_count": 19,
+    "confusable_confirmed": 16,
+    "confusable_drift": 3,
+    "confusable_unknown_targets": 0,
+    "top_k": 5,
+    "min_score": 0
+  }
+}

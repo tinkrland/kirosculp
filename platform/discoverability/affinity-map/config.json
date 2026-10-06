@@ -1,0 +1,62 @@
+{
+  "schema": "affinity-map-config-v1",
+  "version": "0.1.0",
+  "updated": "2026-10-06",
+  "description": "scoring configuration for the structural affinity table. every weight and every facet crosswalk choice lives here, never in a code constant and never in a model. changing any value in this file is a versioned config change and changes the output hash.",
+  "inputs": [
+    {
+      "key": "style-vocabulary",
+      "path": "offerings/styles/style-vocabulary.jsonl",
+      "term_id_field": "style_id"
+    },
+    {
+      "key": "symbol",
+      "path": "offerings/styles/symbol-vocabulary.jsonl",
+      "term_id_field": "symbol_id"
+    },
+    {
+      "key": "wear-context",
+      "path": "offerings/styles/wear-context-vocabulary.jsonl",
+      "term_id_field": "context_id"
+    }
+  ],
+  "scoring": {
+    "score": "weighted_cosine",
+    "facet_class_weights": {
+      "feature": 1.0,
+      "axis": 1.0
+    },
+    "facet_merge": "max",
+    "score_rounding_decimals": 10,
+    "top_k": 5,
+    "min_score": 0.0
+  },
+  "facet_sources": {
+    "style-vocabulary": [
+      { "field": "features", "class": "feature", "weight": 1.0 },
+      { "field": "axes", "class": "axis", "weight": 1.0 }
+    ],
+    "metal_symbol": [
+      { "field": "symbol_id", "strip_prefix": "metal_", "class": "feature", "weight": 1.0 },
+      { "field": "planet", "class": "feature", "weight": 1.0 }
+    ],
+    "element": [
+      { "field": "symbol_id", "strip_prefix": "element_", "class": "feature", "weight": 1.0 },
+      { "field": "metal_affinity", "class": "feature", "weight": 1.0 }
+    ],
+    "zodiac_sign": [
+      { "field": "element", "class": "feature", "weight": 1.0 },
+      { "field": "modality", "class": "feature", "weight": 1.0 },
+      { "field": "ruler", "class": "feature", "weight": 1.0 }
+    ],
+    "wear-context": []
+  },
+  "notes": [
+    "keys of facet_sources: the vocabulary field value for styles and wear contexts, the kind field for symbols. each entry says which record fields become facets, what class each facet lands in, and a per-field weight multiplier on top of the class weight.",
+    "facet names are shared across vocabularies on purpose. the planet field of a metal symbol and the ruler field of a zodiac sign land in the same feature namespace as style features, so celestial's moon and sun features meet the classical correspondences: metal_silver via planet moon, metal_gold via planet sun, cancer and leo via their rulers. this is the union lesson: a style-only pass strands celestial because its real neighbors are symbol-layer terms.",
+    "facet_merge max keeps the highest weighted intensity when two sources of the same term emit the same facet name (georgian carries ornate as both a feature and an axis, at equal values). this matches the reference cosine pass, where axes overwrite features of the same name with no numeric difference at equal weights.",
+    "the wear-context vocabulary contributes rows for coverage but carries no feature or axis content in v0.1, so its neighborhoods come out empty and are reported honestly rather than padded.",
+    "the crosswalk is structural only. links that need authored meaning, for example gothic toward the saturn or mars correspondences, are corpus authoring and stay out of the structural table.",
+    "default weights are 1.0 everywhere so v0.1 reproduces the reference cosine pass over the style file exactly. the knobs exist so later tuning is a config version bump, not a code change."
+  ]
+}

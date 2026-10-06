@@ -1,6 +1,10 @@
 # affinity-map: deterministic taste-intelligence engine
 
-status: drafted specification. no implementation exists yet.
+status: drafted specification. the cold-start structural half is
+implemented as [affinity-map/](affinity-map/) v0.1: the structural
+affinity table computed from the governed vocabulary alone.
+profile-to-character matching, decay, the corpus, and creator affinity
+are not implemented yet.
 
 affinity-map computes affinity between buyer affinity profiles and object
 character records. it is a pure engine: deterministic, explainable, and free

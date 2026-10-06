@@ -31,4 +31,5 @@ see the [complete source audit](../../docs/current-state-audit.md) for cross-dom
 
 ranking signal math lives in the deterministic affinity-map engine: see
 [affinity-map.md](affinity-map.md). it computes affinity; this layer's
-policy decides.
+policy decides. the v0.1 cold-start structural table is built and checked
+in [affinity-map/](affinity-map/).
