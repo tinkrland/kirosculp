@@ -660,3 +660,27 @@ reviewer with a revisit cadence; the operational age limit of 30 days for the
 geolite2 database; the feed staleness defaults from batch 4. the minor-creator
 age gate and the parked-market hold flow were deliberately not built, because
 the owner rulings are open.
+
+## owner rulings (2026-10-06, closing the batch 8 follow-ups)
+
+- **feed staleness defaults ratified.** tor bulk exit list 48 hours, x4bnet 14
+  days, ip2proxy lite 45 days, geolite2 database 30 days. these are now owner
+  settings, not implementation defaults, and are parked for revisit once real
+  traffic volume exists. the revisit is expected then, not optional.
+- **embargoed-territory list reviewer.** the owner is the named reviewer for
+  now. cadence: quarterly, plus on major sanctions news (ofac, un, eu).
+  revisions land as reviewed migrations, as seeded. an automated
+  sanctions-feed watcher may assist later; the named reviewer stays.
+- **minor-creator age gate (jeremiah brown jr. case).** v1 is pure park.
+  publication requires the age attestation (ruled earlier). a minor creator's
+  earnings accrue in the ledger with no payout rail: payout onboarding stays
+  `not yet`, never `no`, and payout unlocks at 18 when the creator passes
+  their own provider kyc. no parental payee, no parental kyc, no
+  third-party payouts in v1. a parental-payee model is deferred to v2 pending
+  a counsel review, since child-earnings law varies by market.
+- **parked-market flow (faizah aisler case).** a creator resident in a v2
+  parked market (sa) publishes and earns; the balance accrues; payout
+  onboarding returns `not yet`, never `no`. funds release when the market
+  opens or the creator presents a bank rail in an already-enabled market,
+  per the rail-keying rule. this is the stranded-funds policy applied to
+  roadmap state, not a fraud or legal event.
