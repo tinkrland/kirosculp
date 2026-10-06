@@ -124,6 +124,34 @@ bad download never replaces a working set. the two ip2proxy lite files need a fr
 account and the ip2location lite terms, including the attribution acknowledgment,
 so they are only ever read from disk.
 
+## payout gate
+
+[`payout-gate.mjs`](payout-gate.mjs) is the server-side entry contract for the two
+routes, `/payout/onboarding/signals` and `/payout/request/signals`. no payout
+endpoint exists yet in product code, so this is the contract the platform payout
+leg wires up, not a duplicate payout flow.
+
+what the browser may send: a submission id and the device payload, nothing else.
+a market, a trust value, an outcome, a provider result, or an address in the body
+is a 400. everything that decides the outcome is derived server side:
+
+- the creator comes from the authenticated session.
+- the market comes from the creator's verified payout record, read fresh on every
+  call, never from the body.
+- the client address comes from the trusted proxy chain
+  (`clientIpFromTrustedProxy`), never the leftmost `x-forwarded-for` entry, which
+  the client controls.
+
+what the browser is told is one word: `continue` or `review`. never a reason code,
+a flag, a source, or a market: that would tell an attacker which detector to
+evade. the full decision, including reason codes, goes to the caller's second
+return value for the server-side payout workflow only.
+
+any failure not caused by the caller (`PolicyUnavailableError`,
+`CheckNotRecordedError`, an unresolvable market, an unresolvable client address, or
+anything unexpected) is a 503 hold. it is never turned into `continue` and never
+into a user-facing failure, because it is this leg's own outage.
+
 ## decision service
 
 [`payout-signal-check.mjs`](payout-signal-check.mjs) runs at payout onboarding and
