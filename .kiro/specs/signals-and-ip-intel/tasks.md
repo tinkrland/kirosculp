@@ -613,3 +613,81 @@ reviewer and cadence; review the 30 day geo age limit and the feed staleness
 defaults; check the reader against a real geolite2 database once an account
 exists. deferred unchanged: commercial feed, hash chain, platform payout route
 wiring, typescript port, live deployment.
+
+## batch 9: "not yet" at payout onboarding (owner rulings, 2026-10-06)
+
+the four follow-up rulings landed as spec commit c3473b9 (recorded in
+requirements.md). batch 9 builds the first two and records the last two. no
+migration: 0012 is still the last.
+
+### work, as built
+
+1. `platform/signals/payout-eligibility.mjs`: a pure evaluator with two
+   outcomes, `proceed` and `not_yet`. age is checked first (a minor is parked
+   in every market, with or without a rail, until the day they turn 18), then
+   the rail market, then residence against the hold list. the rails matrix is
+   read on every call (`runtime_query_required`), so an opened market lifts the
+   hold with no code change. it reads no trust, writes no ledger or decision,
+   makes no payout and keeps no residence.
+2. `platform/signals/parked-market-policy.mjs`: the hold list, frozen named
+   config, seeded with `SA` only.
+3. `platform/signals/payout-gate.mjs`: the gate resolves the rail market, asks
+   the evaluator, and answers `not_yet` before the signal service runs. it now
+   requires `resolveCreatorFacts` and `eligibility` and throws without them, so
+   the park cannot be skipped by omission. a rail lookup that throws is a
+   distinct hold cause (`market_lookup_failed`); a creator with no rail yet is a
+   normal state, not an error.
+4. `scripts/check-parked-hold-policy.mjs` (`npm run check:parked-hold`, added to
+   the hygiene scan): fails on an empty list, or a sanctions, fatf grey-listed,
+   out-of-scope or embargoed market, or a code the rails matrix does not know. a
+   market that has opened is reported for cleanup, not failed.
+5. the ratified settings (ruling 3) and the assigned reviewer (ruling 4) are
+   written into `platform/signals/README.md`, `platform/signals/feeds.mjs` and
+   `security/signals-and-ip-intel-results.md`, which no longer call the staleness
+   and geo-age limits implementation defaults.
+
+### tests
+
+`platform/signals/test/eligibility.test.mjs` (38) plus changes to
+`gate.test.mjs`, with positive and negative cases for each path: a minor told
+not yet in every market and unlocked on the birthday to the second; a missing
+or malformed attestation; a parked-market resident held and released by an
+enabled rail; the matrix read fresh so an opened market lifts the hold; not_yet
+writing nothing against the real schema (no decision, device event, trust row or
+ledger entry), even from an embargoed address; the two layers independent (an
+enabled rail from a cu address still gets the embargo review and still writes no
+trust); the browser and telemetry carrying no age, market, date or creator id; an
+unreadable fact or matrix a hold, never a false not_yet; the ledger unchanged (six
+accounts, no new column, append-only); and the gate refusing to build without the
+eligibility pieces.
+
+verification: 285 signals tests, creator-trust 63, buyer-trust 66, denial matrix
+63/63, geography invariant, hygiene (with the new script), source ledger, prose
+check at the 6-violation baseline. 25 injected mutations, all caught. one first
+survived (ignoring the enabled-market check), because the loader already rejects a
+matrix with a market both enabled and parked; a test with an inconsistent matrix
+closed it.
+
+a flaky timing test in `ip.test.mjs` was found and fixed: a 3-second parse bound
+failed under node's parallel test runner with correct output. the bounds are now
+20 and 15 seconds, enough to catch a quadratic parse. the suite then passed eight
+serial runs.
+
+### decisions not in the rulings, flagged for the owner
+
+- the hold list is `SA` only. the matrix parks 25 markets for different reasons;
+  ae, cr and uy are v2 candidates, qa, bh and om are "no v2 plan", and the rest are
+  missing rails or signal. none were named, so none are on the list. a resident of
+  an unlisted parked market gets the gate's existing 503 hold, not `not_yet`.
+- a missing age attestation is `not_yet` (`age_attestation_missing`); a malformed
+  one is `not_yet` (`age_attestation_invalid`). neither is a pass.
+- a rail in a market the matrix does not enable is `not_yet` (deny by default).
+- the attestation shape is `{ status: 'adult' }` or
+  `{ status: 'minor', majorityDate }`, compared in utc, with a feb-29 birth recorded
+  as mar 1 so the park never ends early.
+
+### out of scope, no code exists for it in the repo
+
+capturing the age attestation at publication, reading residence from a creator
+record, and wiring the gate into a real payout route. a parental-payee model is
+deferred to v2 pending counsel review.

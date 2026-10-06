@@ -684,3 +684,48 @@ the owner rulings are open.
   opens or the creator presents a bank rail in an already-enabled market,
   per the rail-keying rule. this is the stranded-funds policy applied to
   roadmap state, not a fraud or legal event.
+
+## batch 9 implementation record (2026-10-06)
+
+the four owner rulings above (spec commit c3473b9) are now built or recorded.
+batch 9 landed on `security` at `d912f7d`, pushed to `origin/security`. 285
+signals tests pass, up from 247. no migration was added. creator-trust (63),
+buyer-trust (66) and the denial matrix (63/63) are unchanged.
+
+- **minor-creator park (ruling 3 above).** built. publication requires the age
+  attestation; a minor is told `not_yet` in every market until the day they turn
+  18, when a verified payout account from their own kyc is still required. earnings
+  accrue as an ordinary `creator_payable` liability with no special event type and
+  no ledger change. no parental payee, kyc or third-party payout. a parental-payee
+  model stays deferred to v2 pending counsel review.
+- **parked-market hold (ruling 4 above).** built. a resident of a listed
+  roadmap-parked market with no enabled rail is told `not_yet`. an enabled rail
+  lifts the hold and the rail market, not the residence, selects the checks. the
+  rails matrix is read on every call, so an opened market lifts the hold with no
+  code change. no `needs_review`, no trust input, no signal check for this state.
+- **ratified ip settings (ruling 1 above).** the feed staleness limits (tor 48h,
+  x4bnet 14d, ip2proxy 45d) and the geolite2 age limit (30d) are now written as
+  owner settings in the readme, `feeds.mjs` and the results doc, with the planned
+  real-traffic revisit recorded. they no longer read as implementation defaults.
+- **embargo-list reviewer (ruling 2 above).** recorded as assigned to the owner,
+  quarterly plus major sanctions news, in the results doc's open-items section. the
+  item now reads assigned, not open.
+
+both built rulings share one shape: a pre-check (`payout-eligibility.mjs`) that
+returns `proceed` or `not_yet` before any signal check, so neither records a
+decision, collects a device signal, raises a review, or touches trust. the only two
+outcomes are `proceed` and `not_yet`: there is no `no`, `fail` or `review` in this
+layer. the browser hears only `not_yet`; the cause stays server-side and names no
+one. an unreadable fact or rails matrix is a hold, never a false `not_yet` and never
+a pass.
+
+decisions made beyond the literal rulings, for owner confirmation: the hold list is
+`SA` only (the matrix parks 25 markets for different reasons, and only the one named
+market is on the list); a missing or malformed age attestation is `not_yet`, not a
+pass; a rail in a market the matrix does not enable is `not_yet` (deny by default);
+and the attestation shape is `{ status: 'adult' | 'minor', majorityDate? }` compared
+in utc, with a feb-29 birth recorded as mar 1 so the park never ends early.
+
+still not built, because no product code for it exists in the repo: age-attestation
+capture at publication, residence lookup from a creator record, and real payout-route
+wiring. the gate takes both facts through a `resolveCreatorFacts` dependency.

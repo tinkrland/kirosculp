@@ -750,3 +750,61 @@ not verified: the reader has never opened a real `.mmdb`, because that needs a
 maxmind account. the first real database should be checked against a few known
 addresses before anyone relies on it. nothing here is applied to a live
 database.
+
+## batch 9 implementation record (2026-10-06)
+
+batch 9 shipped as `d912f7d` on `security`, pushed to `origin/security`. no
+migration. file-for-component mapping:
+
+| component | file |
+|---|---|
+| eligibility evaluator (proceed / not_yet) | `platform/signals/payout-eligibility.mjs` |
+| the parked-market hold list | `platform/signals/parked-market-policy.mjs` |
+| gate wiring (not_yet before the signal check) | `platform/signals/payout-gate.mjs` |
+| hold-list reconciliation against the rails matrix and embargo list | `scripts/check-parked-hold-policy.mjs` |
+
+design decisions, with the reason for each:
+
+1. **one evaluator for two rulings.** the minor-creator park and the
+   parked-market hold have the same shape: a pre-check that returns `proceed` or
+   `not_yet` before any signal check. they share `payout-eligibility.mjs` rather
+   than living in two places.
+2. **age is checked first.** a minor is parked in every market, with or without a
+   rail, so the age branch returns before the market branch is read. age alone
+   never unlocks anything: at 18 the gate still holds until a verified payout
+   account exists, exactly as it does for any creator without a rail.
+3. **the matrix is read on every call.** the rails file declares
+   `runtime_query_required`, and reading it per call means a market that moves from
+   `parked_markets` to `markets` lifts the hold with no code change. the stale
+   hold-list entry can then be removed at leisure, and the check script reports it.
+4. **the hold list is separate from the matrix.** the matrix parks markets for
+   many reasons (missing rails, no signal, sanctions, grey list). only roadmap state
+   should say "not yet", so the hold list names those markets explicitly and the
+   check script rejects a sanctions, grey-listed, out-of-scope or embargoed entry.
+5. **not_yet is answered in the gate, before the service.** so no signal check
+   runs, no device signal is collected and no decision is recorded for a creator who
+   has no payout path yet. the two layers stay independent: a parked-market creator
+   who does present an enabled rail still gets the embargo review.
+6. **the gate requires the new dependencies.** `resolveCreatorFacts` and
+   `eligibility` are mandatory, so a caller cannot wire the gate and silently skip
+   the park. a rail lookup that throws became its own hold cause, separated from the
+   normal no-rail state.
+7. **no ledger change.** accrual for a not-yet-eligible creator is an ordinary
+   `creator_payable` liability on the existing ledger. a test asserts the six
+   accounts are unchanged, no age or market column was added, and the service role
+   still cannot edit an entry.
+
+these are owner-ratified settings now, recorded in the result doc and the readme:
+the feed staleness limits and the geolite2 age limit, parked for a real-traffic
+revisit; and the embargo-list reviewer, assigned to the owner with a
+quarterly-plus-news cadence.
+
+verification: 25 injected mutations, all caught. one first survived (ignoring the
+enabled-market check in the parked-resident branch), because the matrix loader
+already rejects an enabled-and-parked overlap; a test with an inconsistent matrix
+closed it. a flaky timing test in `ip.test.mjs` was fixed (parallel-load timing,
+not a logic bug).
+
+not built, because no code for it exists in the repo: age-attestation capture at
+publication, residence lookup from a creator record, and real payout-route wiring.
+the gate takes both facts through `resolveCreatorFacts`.
