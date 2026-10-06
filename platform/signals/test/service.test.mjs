@@ -9,7 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  PayoutSignalCheckService, evaluateChecks, REASON_CODES, MONEY_MOMENTS,
+  PayoutSignalCheckService, evaluateChecks as evaluateChecksRaw, REASON_CODES, MONEY_MOMENTS,
   ServiceInputError, MoneyMomentNotAllowedError, PolicyUnavailableError, ReplayMismatchError,
   CheckNotRecordedError,
 } from '../payout-signal-check.mjs';
@@ -23,11 +23,22 @@ import { StubCommercialAdapter, VENDOR_FIELD_NAMES } from './stub-commercial-ada
 const here = path.dirname(fileURLToPath(import.meta.url));
 const STRICT = { mandatoryChecks: ['proxy', 'vpn'], positiveOutcome: 'needs_review' };
 
+// the mandatory-check tests in this file predate the territory check and do not
+// exercise it, so they run against an empty review-trigger list. the territory
+// behavior has its own file, territory.test.mjs.
+const NO_TERRITORIES = { embargoedTerritories: new Set() };
+const evaluateChecks = (policy, dev, network, territories = NO_TERRITORIES) =>
+  evaluateChecksRaw(policy, dev, network, territories);
+const emptyTerritoryStore = { async getEmbargoList() { return NO_TERRITORIES; } };
+
 // ------------------------------------------------------------ test doubles
 
 /** a valid port result built from compact per-flag states. */
 function net(states = {}) {
-  const result = { adapterVersion: 'test-1', ipVersion: 4, coverage: {}, availability: {}, flags: {}, sources: [] };
+  const result = {
+    adapterVersion: 'test-1', ipVersion: 4, coverage: {}, availability: {}, flags: {}, sources: [],
+    geo: { countryCode: null, subdivisionCode: null, coverage: 'none', source: null },
+  };
   for (const name of FLAG_NAMES) {
     const s = { value: false, coverage: 'full', availability: 'ok', ...(states[name] ?? {}) };
     result.coverage[name] = s.coverage;
@@ -81,7 +92,8 @@ function makeService(overrides = {}) {
   const policyStore = overrides.policyStore ?? memoryPolicyStore();
   const ipAdapter = overrides.ipAdapter ?? new FreeIpIntelligenceAdapter({ sources });
   const telemetry = overrides.telemetry ?? null;
-  const service = new PayoutSignalCheckService({ ipAdapter, keyRing: makeKeyRing(), policyStore, recorder, telemetry });
+  const territoryListStore = overrides.territoryListStore ?? emptyTerritoryStore;
+  const service = new PayoutSignalCheckService({ ipAdapter, keyRing: makeKeyRing(), policyStore, territoryListStore, recorder, telemetry });
   return { service, recorder, policyStore, ipAdapter, cleanup: feeds.cleanup };
 }
 
@@ -553,7 +565,10 @@ test('negative: the recorded row has hashes and flags but no address, payload or
     const row = [...recorder.rows.values()][0];
     assert.match(row.deviceHash, /^[0-9a-f]{64}$/);
     assert.match(row.ipDigest, /^[0-9a-f]{64}$/);
-    assert.ok(!Object.keys(row).some((k) => /market|country|geo|corridor|ip$|payload/i.test(k)), Object.keys(row).join(','));
+    // geoEvidence is the one reviewed exception (batch 8): attributed decision evidence.
+    assert.ok(!Object.keys(row).filter((k) => k !== 'geoEvidence').some((k) => /market|country|geo|corridor|ip$|payload/i.test(k)), Object.keys(row).join(','));
+    assert.deepEqual(Object.keys(row.geoEvidence).sort(), ['country_code', 'coverage', 'dataset_version', 'source_id']);
+    assert.ok(!JSON.stringify(row.geoEvidence).includes(IPS.vpn), 'the geo evidence holds no plaintext address');
     const text = JSON.stringify(row);
     for (const trace of [IPS.vpn, RAW_MARKER, 'Chrome/120', 'PK']) assert.ok(!text.includes(trace), trace);
     assert.deepEqual(Object.keys(raw), [], 'the raw payload object was cleared after processing');
@@ -609,13 +624,20 @@ test('positive: the same service decides with the free adapter and with a commer
   } finally { free.cleanup(); commercial.cleanup(); }
 });
 
-test('negative: the service names no vendor field, imports no stub, touches no trust table and reads no geo', () => {
+test('negative: the service names no vendor field, imports no stub, touches no trust table and never persists a raw country', () => {
   const source = fs.readFileSync(path.join(here, '..', 'payout-signal-check.mjs'), 'utf8');
   const code = source.split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
   for (const field of VENDOR_FIELD_NAMES) assert.ok(!code.includes(field), `names ${field}`);
   assert.ok(!code.includes('stub-commercial-adapter') && !code.includes('maxmind') && !code.includes('ipinfo'));
   assert.ok(!/creator_trust|buyer_trust|trust_level|trustLevel/.test(code), 'no code path reaches a trust record');
-  assert.ok(!/\.geo\b|countryCode|subdivisionCode|country_code/.test(code), 'geo is never read');
+  // the service reads geo only inside evaluateChecks (to test membership of the
+  // review-trigger list) and stores it only through toStoredGeoEvidence, which
+  // emits an attributed object. it never builds a country field of its own, and
+  // never returns one to a caller.
+  const geoReads = code.split('\n').filter((l) => /\.geo\b|countryCode|subdivisionCode/.test(l));
+  assert.ok(geoReads.length > 0 && geoReads.length <= 4, `geo is read in a few reviewed places: ${geoReads.length}`);
+  assert.ok(!/return\s*\{[^}]*(countryCode|country_code)/.test(code), 'no result object carries a country');
+  assert.ok(!/subdivision/.test(code.replace(/subdivisionCode/g, '')), 'no subdivision handling beyond the port');
   for (const net of ['fetch(', 'http.request', 'https.request', 'child_process']) assert.ok(!code.includes(net), net);
 });
 

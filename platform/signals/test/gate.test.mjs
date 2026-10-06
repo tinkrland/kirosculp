@@ -53,6 +53,7 @@ function makeGate(world = {}, { ipAdapter, service: serviceOverride } = {}) {
   const seen = { markets: [], checks: [] };
   const service = serviceOverride ?? new PayoutSignalCheckService({
     ipAdapter: ipAdapter ?? new FreeIpIntelligenceAdapter({ sources }),
+    territoryListStore: { async getEmbargoList() { return { embargoedTerritories: new Set() }; } },
     keyRing: makeKeyRing(),
     policyStore: { async getPolicy(_v, market) { seen.markets.push(market); return policies[market] ?? policies.DEFAULT; } },
     recorder,
@@ -403,6 +404,7 @@ test('positive: telemetry carries ids and outcomes only, and a throwing hook can
     const { sources } = loadFeeds({ dir: feeds.dir });
     const service = new PayoutSignalCheckService({
       ipAdapter: new FreeIpIntelligenceAdapter({ sources }), keyRing: makeKeyRing(), recorder: memoryRecorder(),
+      territoryListStore: { async getEmbargoList() { return { embargoedTerritories: new Set() }; } },
       policyStore: { getPolicy: async () => policies.DEFAULT },
     });
     const gate2 = createPayoutSignalGate({

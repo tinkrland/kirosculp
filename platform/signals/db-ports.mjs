@@ -14,6 +14,12 @@ const POLICY_SQL = `
     from sculptura_private.payout_signal_policy
    where policy_version = $1 and enabled and market in ($2, 'DEFAULT')`;
 
+/** every enabled territory code on a review-trigger list version. batch 8. */
+const EMBARGO_LIST_SQL = `
+  select territory_code
+    from sculptura_private.embargoed_territory_review_list
+   where list_version = $1 and enabled`;
+
 const FIND_SQL = `
   select d.creator_profile_id, d.moment, d.outcome, d.reason_codes, d.policy_version,
          d.selected_checks, e.device_hash, e.ip_digest
@@ -23,7 +29,7 @@ const FIND_SQL = `
 
 const RECORD_SQL = `
   select public.record_payout_signal_check(
-    $1::uuid, $2, $3::uuid, $4, $5, $6, $7, $8::jsonb, $9, $10, $11::jsonb, $12, $13::jsonb, $14::jsonb, $15
+    $1::uuid, $2, $3::uuid, $4, $5, $6, $7, $8::jsonb, $9, $10, $11::jsonb, $12, $13::jsonb, $14::jsonb, $15, $16::jsonb
   ) as r`;
 
 /** @param {(sql: string, params?: any[]) => Promise<{ rows: any[] }>} query */
@@ -43,6 +49,22 @@ export function createDbPolicyStore(query) {
 }
 
 /** @param {(sql: string, params?: any[]) => Promise<{ rows: any[] }>} query */
+export function createDbTerritoryListStore(query) {
+  return {
+    async getEmbargoList(listVersion) {
+      const { rows } = await query(EMBARGO_LIST_SQL, [listVersion]);
+      // an empty, enabled list is a valid (if unusual) configuration, not an
+      // error: it is distinct from no rows at all meaning the version itself
+      // does not exist, but this store cannot tell those apart from a plain
+      // select, so an empty result still returns a usable, empty set rather
+      // than null. a caller wanting "does this version exist" needs a
+      // separate query; the service only needs the set of codes to check.
+      return { embargoedTerritories: new Set(rows.map((r) => r.territory_code)) };
+    },
+  };
+}
+
+/** @param {(sql: string, params?: any[]) => Promise<{ rows: any[] }>} query */
 export function createDbRecorder(query) {
   return {
     async record(row) {
@@ -51,6 +73,7 @@ export function createDbRecorder(query) {
         row.hashKeyId, row.collectionStatus, JSON.stringify(row.deviceFeatures),
         row.processorVersion, row.policyVersion, JSON.stringify(row.selectedChecks), row.outcome,
         JSON.stringify(row.reasonCodes), JSON.stringify(row.networkFlags), row.adapterVersion,
+        JSON.stringify(row.geoEvidence),
       ]);
       return rows[0].r;
     },

@@ -1,8 +1,8 @@
 # signals-and-ip-intel results
 
 **implementation period:** october 6, 2026
-**branch:** security (origin/security, pushed through commit 2aab55d)
-**status:** all seven batches implemented and verified locally; no live
+**branch:** security (batches 1-7 on origin/security through commit 2615d29; batch 8 is the section below)
+**status:** all eight batches implemented and verified locally; no live
 provider, no live supabase mutation, no real payout.
 
 ## objective
@@ -67,8 +67,10 @@ resolved).
 | 4 | 3e58bc7 | `ip-intelligence.mjs`, `feeds.mjs`, `import-feeds.mjs`, `scripts/import-ip-feeds.mjs` |
 | 5 | ab960fa | `payout-signal-check.mjs`, `db-ports.mjs` |
 | 6 | 2aab55d | `payout-gate.mjs` |
+| 7 | 2615d29 | verification, results document, prose and hygiene checks |
+| 8 | see below | embargoed-territory review hold, geolite2 reader, migration 0012 |
 
-all six are on `origin/security` as of this writing (verified by
+batches 1 to 6 are on `origin/security` as of this writing (verified by
 `git ls-remote origin security` matching local `HEAD`).
 
 ### private schema (migration 0011)
@@ -155,7 +157,97 @@ address from a trusted-proxy-hop rule (never the leftmost, client-controlled
 `x-forwarded-for` entry). it tells the browser only `continue` or `review`,
 never a reason, flag, source or market.
 
+## batch 8: embargoed-territory review hold (owner addendum)
+
+the owner addendum asked for one geography-aware rule and bounded it tightly.
+what was built, and the decisions that shaped it:
+
+- **the rule.** us rail, cu ip, everything else clean gives `needs_review` with
+  reason `ip_geo_embargoed_territory` and the geo source recorded. it is
+  evaluated inside `evaluateChecks` independent of `policy.mandatoryChecks`, so it
+  runs in non-strict corridors too. it never yields `fail` by itself and never
+  writes a trust record. a real mandatory positive configured as `fail` still can.
+- **the list.** named config in `sculptura_private.embargoed_territory_review_list`,
+  versioned, per-row `enabled`, admin-only. v1 seed: cu, ir, sy, kp. grey-listed
+  markets cannot be added: a trigger rejects np, vn, bo, ve and ke, and
+  `scripts/check-embargo-greylist-disjoint.mjs` reconciles the live list and the
+  trigger against `creator-payout-rails.json`, failing on an empty list. the
+  authority and effective date on each row are provenance, not a legal
+  determination. the seed list is a starting point for the owner to revise.
+- **geo contract change.** the port's geo shape is now
+  `{ countryCode, subdivisionCode, coverage: 'full' | 'none', source }`. the old
+  `available` boolean conflated "evaluated, no match" with "not evaluated" and was
+  removed. `assertIpIntelligenceResult` validates geo, including a two-letter
+  uppercase country code, and rejects a country beside coverage `none`.
+- **missing geo.** a satellite range, an address with no record, a private address,
+  an unreadable database or no geo source adds no reason and changes no outcome. a
+  test asserts a clean rail and clean flags pass, and that the no-match result is
+  recorded with attribution. the geo reader reads only `country`, not
+  `registered_country`: a first draft fell back to registered country, which
+  contradicts the ruling that a satellite range is no geo, and it was corrected
+  before this commit.
+- **pattern, not score.** `embargoed_territory_pattern` is a view with read-time
+  counts. nothing is stored, so a one-off cannot permanently flag anyone. tests
+  show a single hit and six months of hits are clearly different, that a new row
+  shows up immediately, and that a hit older than any window leaves no trace in
+  the next decision.
+- **review outcomes.** `review-outcomes.mjs` allows `release` and
+  `stranded_funds_hold`. every account action is rejected. no timer, expiry or
+  clock exists in the service, gate, ports or outcomes, checked by a test, so a
+  hold cannot become a fail by backlog.
+- **dependency.** `maxmind@5.0.7`, pinned exact, mit, with mmdb-lib 3.0.3 (mit) and
+  tiny-lru 13.0.0 (bsd-3-clause). ledger entry src-0026. no real `.mmdb` is used in
+  any test; `open` is injected.
+- **migration 0012.** adds the reason code to `valid_signal_reason_codes` (verified
+  that `create or replace` updates existing check constraints), a `valid_geo_evidence`
+  function, the `geo_evidence` column, the list table with admin-only rls, the
+  grey-list trigger, the pattern view and `admin_get_embargo_pattern(uuid)`.
+  `record_payout_signal_check` was dropped and recreated with a sixteenth argument,
+  a deliberate breaking change.
+
+two security findings came out of probing this in pglite, both now covered by tests:
+
+1. a `security definer` function does not inherit the caller's rls, and a direct
+   select on a plain view does not re-apply the base table's rls. the first draft
+   of the pattern view would have been readable by any signed-in user. the view is
+   now revoked from anon and authenticated, granted to service_role only, and the
+   admin function is the only read path. a test proves anon, a non-admin creator and
+   even an admin cannot select the view directly.
+2. the geography invariant needed to permit a country on a decision without
+   loosening it for trust tables. a table-level exemption was rejected. the checker
+   now has an exact column allowlist containing only
+   `payout_signal_decisions.geo_evidence`; emptying it makes the check fail.
+
+batch 8 evidence:
+
+```text
+npm run test:signals-and-ip-intel   -> 247 passed, 0 failed (was 200)
+                                       territory 37, geo-reader 9, ip 28 (one added)
+npm run check:embargo-greylist      -> disjoint: 4 listed, 5 grey-listed markets all rejected by the trigger
+npm run check:trust-geography       -> holds, 6 trust tables + 2 signal evidence tables
+npm run check:signals-hygiene       -> clean
+npm run validate:signal-sources     -> 6 signals entries valid of 26 total
+npm run test:creator-trust          -> 63 passed
+npm run test:buyer-trust            -> 66 passed
+denial matrix via executeDenialMatrix() -> 63/63 with 0012 in the replay chain
+```
+
+batch 8 mutation checks (10 injected, all caught): territory check removed;
+territory check made dependent on strict corridors; territory hold escalated to
+`fail`; missing geo turned into a reason; a country on a coverage-none result still
+matching; grey-list trigger removed; trigger missing ke; pattern view granted to
+authenticated; review-outcome assertion disabled; invariant allowlist emptied. one
+mutation first survived (a country on a coverage-none result), because the adapter
+contract already forbids that shape. a direct test of `evaluateChecks` with the
+malformed shape was added, and the mutation is now caught.
+
+deliberately not built, per the owner: the minor-creator age gate and the
+parked-market hold flow (the faizah case). the owner rulings on both are still open.
+the fixtures exist in `platform/creators/demo-roster.md`.
+
 ## test evidence
+
+figures in this section are the batch 1 to 7 record; batch 8 figures are above.
 
 ```text
 npm run test:signals-and-ip-intel   -> 200 passed, 0 failed
@@ -263,12 +355,18 @@ the committed change.
 
 ## deferred
 
-- **the geolite2 reader.** the port accepts a geo source, but no reader was
-  written: parsing `.mmdb` needs an additional dependency, and nothing in the
-  enforcement path at payout onboarding or payout request uses geo. geo is not
-  persisted in v1 at all (resolution 7 in design.md), which is a stricter
-  reading of the geography invariant than strictly required but was judged
-  the safer default.
+- **the minor-creator age gate and the parked-market hold flow.** owner rulings
+  are open. not built in batch 8.
+- **a real geolite2 database run.** the reader is tested with an injected opener
+  and placeholder files. it has never opened a real `.mmdb`, because that needs a
+  maxmind account. the first real database should be checked with a few known
+  addresses before relying on it.
+- **the embargo list contents.** the v1 seed (cu, ir, sy, kp) is a starting point.
+  the owner should review it, and the list should get a named reviewer and a
+  revisit cadence.
+- **geo reader age limit** (30 days) is an operational default, not an owner ruling.
+- **(superseded by batch 8) the geolite2 reader** was deferred in batches 1 to 7
+  and is now written. geo is persisted only as attribution on a decision.
 - **a commercial feed integration** (maxmind anonymous ip, ipinfo privacy
   detection, or the ip2proxy commercial edition) to close the ipv6 coverage
   gap for vpn, tor and datacenter. the adapter boundary and a contract-tested
@@ -296,7 +394,7 @@ the committed change.
 
 ## deployment and payment state
 
-migrations through 0011 are verified locally against pglite only. no
+migrations through 0012 are verified locally against pglite only. no
 migration in this leg was applied to any live supabase project. no live ip
 provider was called. no real payout, transfer, or payment occurred at any
 point in this implementation or its verification. implementation, local

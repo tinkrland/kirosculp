@@ -45,6 +45,10 @@ export class AdapterContractError extends Error {
 const MAX_V4 = (1n << 32n) - 1n;
 const MAX_V6 = (1n << 128n) - 1n;
 
+function v4ToText(value) {
+  return [24n, 16n, 8n, 0n].map((shift) => String((value >> shift) & 255n)).join('.');
+}
+
 function v4ToBigInt(text) {
   return text.split('.').reduce((acc, octet) => (acc << 8n) | BigInt(Number(octet)), 0n);
 }
@@ -348,13 +352,28 @@ export class FreeIpIntelligenceAdapter {
       }
     }
 
-    let geo = { countryCode: null, subdivisionCode: null, available: false };
+    // geo follows the same attribution shape as the network flags: coverage
+    // `none` means not evaluated (no source configured, source threw, or a
+    // non-public address), never conflated with "evaluated and found nothing".
+    // a source that answers with no match (an anonymous network, a satellite
+    // range) is a normal result, attributed and coverage `full`, countryCode
+    // null. see geo-reader.mjs and the embargoed-territory check for why this
+    // distinction matters: "no geo" must never silently look like "evaluated".
+    let geo = { countryCode: null, subdivisionCode: null, coverage: 'none', source: null };
     if (this.#geo && !nonPublic) {
       try {
-        const g = this.#geo.lookup(ip);
-        geo = { countryCode: g?.countryCode ?? null, subdivisionCode: g?.subdivisionCode ?? null, available: true };
+        // an ipv4 client on a dual-stack socket is looked up as the dotted ipv4
+        // it really is, not in ::ffff: form, so the reader never has to guess.
+        const text = ip.version === 4 ? v4ToText(ip.value) : ipText;
+        const g = this.#geo.lookup({ ...ip, text });
+        geo = {
+          countryCode: g?.countryCode ?? null,
+          subdivisionCode: g?.subdivisionCode ?? null,
+          coverage: 'full',
+          source: { id: this.#geo.id ?? 'geo', datasetVersion: this.#geo.datasetVersion ?? 'unknown' },
+        };
       } catch {
-        geo = { countryCode: null, subdivisionCode: null, available: false };
+        geo = { countryCode: null, subdivisionCode: null, coverage: 'none', source: null };
       }
     }
 
@@ -398,7 +417,38 @@ export function assertIpIntelligenceResult(result) {
       }
     }
   }
+  const geo = result.geo;
+  if (geo === null || typeof geo !== 'object') fail('geo missing');
+  if (!COVERAGE_VALUES.includes(geo.coverage) || geo.coverage === 'partial') fail('geo coverage');
+  if (geo.countryCode !== null && !(typeof geo.countryCode === 'string' && /^[A-Z]{2}$/.test(geo.countryCode))) {
+    fail('geo countryCode must be an upper-case iso 3166-1 alpha-2 code');
+  }
+  if (geo.coverage === 'none' && geo.countryCode !== null) fail('geo has a country but coverage is none');
+  if (geo.coverage === 'full') {
+    const s = geo.source;
+    if (!s || typeof s.id !== 'string' || !s.id || typeof s.datasetVersion !== 'string' || !s.datasetVersion) {
+      fail('geo was evaluated without source attribution');
+    }
+  }
   return result;
+}
+
+/**
+ * converts a valid result's geo field to the jsonb stored on a decision
+ * (migration 0012, valid_geo_evidence). never a plaintext ip, never a trust
+ * field. coverage `none` is a normal condition (no source, non-public address,
+ * or a source that could not answer) and is stored exactly as attribution,
+ * never as a reason the embargoed-territory check can fire on.
+ */
+export function toStoredGeoEvidence(result) {
+  assertIpIntelligenceResult(result);
+  const geo = result.geo;
+  return {
+    country_code: geo.countryCode,
+    coverage: geo.coverage,
+    source_id: geo.source?.id ?? null,
+    dataset_version: geo.source?.datasetVersion ?? null,
+  };
 }
 
 /**

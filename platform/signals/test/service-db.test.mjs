@@ -15,7 +15,7 @@ import { checkGeographyInvariant } from '../../../scripts/check-trust-schema-inv
 import {
   PayoutSignalCheckService, ReplayMismatchError, PolicyUnavailableError, CheckNotRecordedError,
 } from '../payout-signal-check.mjs';
-import { createDbPolicyStore, createDbRecorder } from '../db-ports.mjs';
+import { createDbPolicyStore, createDbRecorder, createDbTerritoryListStore } from '../db-ports.mjs';
 import { FreeIpIntelligenceAdapter } from '../ip-intelligence.mjs';
 import { loadFeeds } from '../feeds.mjs';
 import { RAW_MARKER, makeKeyRing, desktopPayload } from './fixtures.mjs';
@@ -51,6 +51,7 @@ function serviceFor({ role = 'service_role', uid = null, policyVersion = 'v1', i
   return new PayoutSignalCheckService({
     ipAdapter: ipAdapter ?? new FreeIpIntelligenceAdapter({ sources }),
     keyRing,
+    territoryListStore: createDbTerritoryListStore(query),
     policyStore: createDbPolicyStore(query),
     recorder: createDbRecorder(query),
     policyVersion,
@@ -151,7 +152,8 @@ test('positive: a check stores the hashes, key id, features, flags and reasons i
 test('positive: the decision record has no market, country or corridor column, and the invariant still holds', async () => {
   const cols = (await db.query(`select column_name from information_schema.columns
     where table_schema='sculptura_private' and table_name='payout_signal_decisions'`)).rows.map((c) => c.column_name);
-  assert.ok(!cols.some((c) => /market|country|geo|corridor|region/i.test(c)), cols.join(','));
+  // geo_evidence is the one reviewed exception (batch 8): decision evidence, not a creator attribute.
+  assert.ok(!cols.filter((c) => c !== 'geo_evidence').some((c) => /market|country|geo|corridor|region/i.test(c)), cols.join(','));
   assert.equal((await checkGeographyInvariant(db)).ok, true);
 });
 
@@ -281,6 +283,7 @@ test('negative: a recorder with a missing privilege surfaces a storage failure w
   });
   const service = new PayoutSignalCheckService({
     ipAdapter: new FreeIpIntelligenceAdapter({ sources }), keyRing: makeKeyRing(),
+    territoryListStore: createDbTerritoryListStore(policyOnly),
     policyStore: createDbPolicyStore(policyOnly), recorder: noWrite,
   });
   await assert.rejects(() => service.check(req()), (e) => {

@@ -16,10 +16,11 @@ const CLEAN = { is_anonymous_vpn: false, is_hosting_provider: false, is_tor_exit
 export const VENDOR_FIELD_NAMES = Object.freeze(Object.keys(CLEAN));
 
 export class StubCommercialAdapter {
-  /** @param {{ failing?: boolean, coverage?: 'full' | 'none' }} [opts] */
-  constructor({ failing = false, coverage = 'full' } = {}) {
+  /** @param {{ failing?: boolean, coverage?: 'full' | 'none', country?: string | null }} [opts] */
+  constructor({ failing = false, coverage = 'full', country = null } = {}) {
     this.failing = failing;
     this.coverage = coverage;
+    this.country = country;
   }
 
   async lookup(ipText) {
@@ -44,11 +45,16 @@ export class StubCommercialAdapter {
       coverage[name] = covered ? 'full' : 'none'; // a commercial feed covers ipv6 too
       availability[name] = 'ok';
     }
+    // a commercial feed is assumed to cover geo fully too, including ipv6; this
+    // stub never resolves a real country since no test here needs one.
+    const geo = covered
+      ? { countryCode: this.country, subdivisionCode: null, coverage: 'full', source: { id: 'commercial-stub-geo', datasetVersion: 'stub-2026-10' } }
+      : { countryCode: null, subdivisionCode: null, coverage: 'none', source: null };
     return {
       adapterVersion: 'commercial-stub-1',
       ipVersion: ip.version,
       addressKind: nonPublic ? 'non_public' : 'public',
-      geo: { countryCode: null, subdivisionCode: null, available: false },
+      geo,
       coverage,
       availability,
       flags,

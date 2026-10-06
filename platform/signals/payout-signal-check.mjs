@@ -23,7 +23,8 @@
 
 import { processDevicePayload, disposeRawPayload } from './device-processor.mjs';
 import {
-  parseIp, InvalidIpError, assertIpIntelligenceResult, toStoredNetworkFlags, FLAG_NAMES,
+  parseIp, InvalidIpError, assertIpIntelligenceResult, toStoredNetworkFlags, toStoredGeoEvidence,
+  FLAG_NAMES,
 } from './ip-intelligence.mjs';
 
 export const SERVICE_VERSION = 'payout-signal-check-1';
@@ -35,6 +36,7 @@ export const MONEY_MOMENTS = Object.freeze(['payout_onboarding', 'payout_request
 export const REASON_CODES = Object.freeze([
   'proxy_detected', 'vpn_detected', 'tor_detected', 'datacenter_detected',
   'feed_unavailable', 'coverage_unavailable', 'collection_unavailable',
+  'ip_geo_embargoed_territory',
 ]);
 
 const INPUT_KEYS = Object.freeze([
@@ -99,15 +101,31 @@ export class CheckNotRecordedError extends ServiceError {
  * applies a policy to device and network results. pure: no io, no clock, no
  * randomness, so the same inputs always give the same decision.
  *
+ * the embargoed-territory check (batch 8 addendum) is independent of corridor
+ * strictness: it is evaluated whether or not `policy.mandatoryChecks` is
+ * empty, because it targets the ip's resolved territory, not the creator's
+ * payout rail. a us-rail creator (non-strict) with an embargoed-territory ip
+ * gets the same needs_review hold a strict-corridor creator would. it never
+ * produces `fail` on its own, regardless of `policy.positiveOutcome`: an
+ * embargoed-territory hit is always a human-review hold, per the owner
+ * addendum, not an automatic rejection.
+ *
+ * missing or unusable geo (no source configured, a satellite range, a
+ * non-public address) is a normal condition: `geo.coverage === 'none'` adds
+ * no reason code at all. it is attribution recorded alongside the decision,
+ * never a reason the outcome can turn on.
+ *
  * @param {{ mandatoryChecks: string[], positiveOutcome: 'needs_review' | 'fail' }} policy
  * @param {{ collectionStatus: string }} device
  * @param {object | null} network a validated port result, or null when the adapter failed
+ * @param {{ embargoedTerritories: Set<string> }} territoryConfig the active review-trigger list
  * @returns {{ outcome: 'pass' | 'needs_review' | 'fail', reasonCodes: string[], selectedChecks: string[] }}
  */
-export function evaluateChecks(policy, device, network) {
+export function evaluateChecks(policy, device, network, territoryConfig) {
   const selectedChecks = FLAG_NAMES.filter((name) => policy.mandatoryChecks.includes(name));
   const reasons = new Set();
   let positive = false;
+  let territoryHold = false;
 
   for (const name of selectedChecks) {
     if (network === null || network.availability[name] === 'unavailable') {
@@ -122,9 +140,23 @@ export function evaluateChecks(policy, device, network) {
   }
   if (device.collectionStatus === 'unavailable') reasons.add('collection_unavailable');
 
+  // independent of selectedChecks and of policy.mandatoryChecks: this runs
+  // for every money moment, strict corridor or not. a geo result that was not
+  // evaluated (coverage none) is a normal miss, not a reason code.
+  if (network !== null && network.geo.coverage === 'full' && network.geo.countryCode !== null
+      && territoryConfig.embargoedTerritories.has(network.geo.countryCode)) {
+    reasons.add('ip_geo_embargoed_territory');
+    territoryHold = true;
+  }
+
   const reasonCodes = REASON_CODES.filter((code) => reasons.has(code));
   if (reasonCodes.length === 0) return { outcome: 'pass', reasonCodes, selectedChecks };
-  const outcome = positive && policy.positiveOutcome === 'fail' ? 'fail' : 'needs_review';
+  // the embargoed-territory hold is never auto-fail, regardless of the
+  // mandatory-check policy's own positiveOutcome configuration. if a
+  // mandatory check also failed, that outcome still applies; the territory
+  // hold alone never escalates past needs_review.
+  const mandatoryOutcome = positive && policy.positiveOutcome === 'fail' ? 'fail' : 'needs_review';
+  const outcome = territoryHold && !positive ? 'needs_review' : mandatoryOutcome;
   return { outcome, reasonCodes, selectedChecks };
 }
 
@@ -142,6 +174,9 @@ function unevaluatedFlags() {
  * @property {(policyVersion: string, market: string) => Promise<null | {
  *   policyVersion: string, mandatoryChecks: string[], positiveOutcome: 'needs_review' | 'fail' }>} getPolicy
  *
+ * @typedef {object} TerritoryListStore
+ * @property {(listVersion: string) => Promise<null | { embargoedTerritories: Set<string> }>} getEmbargoList
+ *
  * @typedef {object} Recorder
  * @property {(row: object) => Promise<object>} record
  * @property {(submissionId: string) => Promise<null | {
@@ -152,24 +187,32 @@ export class PayoutSignalCheckService {
   #ipAdapter;
   #keyRing;
   #policyStore;
+  #territoryListStore;
   #recorder;
   #policyVersion;
+  #territoryListVersion;
   #telemetry;
 
   /**
    * @param {{ ipAdapter: { lookup: Function }, keyRing: import('./key-ring.mjs').KeyRing,
-   *   policyStore: PolicyStore, recorder: Recorder, policyVersion?: string,
+   *   policyStore: PolicyStore, territoryListStore: TerritoryListStore, recorder: Recorder,
+   *   policyVersion?: string, territoryListVersion?: string,
    *   telemetry?: (event: object) => void }} deps
    */
-  constructor({ ipAdapter, keyRing, policyStore, recorder, policyVersion = 'v1', telemetry = null }) {
-    for (const [name, value] of Object.entries({ ipAdapter, keyRing, policyStore, recorder })) {
+  constructor({
+    ipAdapter, keyRing, policyStore, territoryListStore, recorder,
+    policyVersion = 'v1', territoryListVersion = 'v1', telemetry = null,
+  }) {
+    for (const [name, value] of Object.entries({ ipAdapter, keyRing, policyStore, territoryListStore, recorder })) {
       if (!value) throw new TypeError(`${name} is required`);
     }
     this.#ipAdapter = ipAdapter;
     this.#keyRing = keyRing;
     this.#policyStore = policyStore;
+    this.#territoryListStore = territoryListStore;
     this.#recorder = recorder;
     this.#policyVersion = policyVersion;
+    this.#territoryListVersion = territoryListVersion;
     this.#telemetry = telemetry;
   }
 
@@ -230,6 +273,18 @@ export class PayoutSignalCheckService {
     }
     if (!policy) throw new PolicyUnavailableError();
 
+    // 4b. the embargoed-territory list. loaded independently of the market
+    // policy: this check runs regardless of corridor strictness, so an
+    // unavailable list is treated the same way an unavailable mandatory feed
+    // is, not folded into PolicyUnavailableError (the market policy did load).
+    let territoryConfig = null;
+    try {
+      territoryConfig = await this.#territoryListStore.getEmbargoList(this.#territoryListVersion);
+    } catch {
+      territoryConfig = null;
+    }
+    if (!territoryConfig) throw new PolicyUnavailableError();
+
     // 5. network evidence. an adapter failure is treated as unavailable feeds.
     let network = null;
     let adapterVersion = 'adapter-unavailable';
@@ -244,7 +299,7 @@ export class PayoutSignalCheckService {
     }
 
     // 6. decide, then record atomically.
-    const decision = evaluateChecks(policy, device, network);
+    const decision = evaluateChecks(policy, device, network, territoryConfig);
     const row = {
       creatorProfileId,
       moment: input.moment,
@@ -260,6 +315,9 @@ export class PayoutSignalCheckService {
       outcome: decision.outcome,
       reasonCodes: decision.reasonCodes,
       networkFlags: network ? toStoredNetworkFlags(network) : unevaluatedFlags(),
+      geoEvidence: network
+        ? toStoredGeoEvidence(network)
+        : { country_code: null, coverage: 'none', source_id: null, dataset_version: null },
       adapterVersion,
     };
 

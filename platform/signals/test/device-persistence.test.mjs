@@ -34,13 +34,14 @@ async function store(processed, ip, submission = crypto.randomUUID(), moment = '
   await tx.query('set role service_role');
   try {
     await tx.query(
-      `select public.record_payout_signal_check($1::uuid,$2,$3::uuid,$4,$5,$6,$7,$8::jsonb,$9,$10,$11::jsonb,$12,$13::jsonb,$14::jsonb,$15)`,
+      `select public.record_payout_signal_check($1::uuid,$2,$3::uuid,$4,$5,$6,$7,$8::jsonb,$9,$10,$11::jsonb,$12,$13::jsonb,$14::jsonb,$15,$16::jsonb)`,
       [profile, moment, submission, processed.deviceHash, ring.digest('ip', ip, processed.hashKeyId),
         processed.hashKeyId, processed.collectionStatus, JSON.stringify(processed.features),
         processed.processorVersion, 'v1', '["proxy","vpn"]',
         processed.collectionStatus === 'unavailable' ? 'needs_review' : 'pass',
         processed.collectionStatus === 'unavailable' ? '["collection_unavailable"]' : '[]',
-        JSON.stringify(flags()), 'a1']);
+        JSON.stringify(flags()), 'a1',
+        JSON.stringify({ country_code: null, coverage: 'none', source_id: null, dataset_version: null })]);
   } finally {
     await tx.query('reset role');
   }

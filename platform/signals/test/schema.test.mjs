@@ -62,6 +62,9 @@ const cleanFlags = () => ({
   tor: flag(false, 'tor-bulk-exit'),
   datacenter: flag(false, 'x4bnet-datacenter'),
 });
+// batch 2 fixtures predate the batch 8 geo column; "not evaluated" is accurate
+// here since none of these tests exercise the embargoed-territory check.
+const noGeo = () => ({ country_code: null, coverage: 'none', source_id: null, dataset_version: null });
 
 function args(o = {}) {
   const v = {
@@ -69,16 +72,16 @@ function args(o = {}) {
     deviceHash: hex('a'), ipDigest: hex('b'), keyId: 'k-2026-q4', collection: 'complete',
     features: { schema_version: '1', component_coverage: 0.9, automation_indicators: [], inconsistency_indicators: [] },
     processor: 'p1', policy: 'v1', checks: ['proxy', 'vpn'], outcome: 'pass', reasons: [],
-    flags: cleanFlags(), adapter: 'a1', ...o,
+    flags: cleanFlags(), adapter: 'a1', geo: noGeo(), ...o,
   };
   return [
     v.creator, v.moment, v.submission, v.deviceHash, v.ipDigest, v.keyId, v.collection,
     JSON.stringify(v.features), v.processor, v.policy, JSON.stringify(v.checks), v.outcome,
-    JSON.stringify(v.reasons), JSON.stringify(v.flags), v.adapter,
+    JSON.stringify(v.reasons), JSON.stringify(v.flags), v.adapter, JSON.stringify(v.geo),
   ];
 }
 const RECORD_SQL = `select public.record_payout_signal_check(
-  $1::uuid,$2,$3::uuid,$4,$5,$6,$7,$8::jsonb,$9,$10,$11::jsonb,$12,$13::jsonb,$14::jsonb,$15) as r`;
+  $1::uuid,$2,$3::uuid,$4,$5,$6,$7,$8::jsonb,$9,$10,$11::jsonb,$12,$13::jsonb,$14::jsonb,$15,$16::jsonb) as r`;
 const record = (o, role = 'service_role') => as(role, null, (tx) => tx.query(RECORD_SQL, args(o)));
 const count = async (table) =>
   (await db.query(`select count(*)::int as n from sculptura_private.${table}`)).rows[0].n;

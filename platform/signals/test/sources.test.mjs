@@ -39,7 +39,7 @@ test('positive: the committed ledger has complete signals entries', () => {
   const records = readLedger();
   assert.deepEqual(validateSignalSources(records), []);
   const signals = records.filter((r) => r.topics?.includes('ip_intelligence') || r.topics?.includes('device_signals'));
-  assert.equal(signals.length, 5, 'thumbmarkjs, geolite2, ip2proxy lite, x4bnet, tor list');
+  assert.equal(signals.length, 6, 'thumbmarkjs, geolite2, ip2proxy lite, x4bnet, tor list, maxmind reader');
 });
 
 test('positive: every required topic is covered by the committed ledger', () => {

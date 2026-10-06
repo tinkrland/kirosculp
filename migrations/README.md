@@ -49,3 +49,11 @@ see [the schema contract and access requirements](../admin/creator-trust/README.
   locally tested only; apply after 0010 when deployment is authorized.
   keep sculptura_private out of postgrest exposed schemas. see
   [the signals module](../platform/signals/README.md).
+- [0012_embargoed_territory_review.sql](0012_embargoed_territory_review.sql):
+  the embargoed-territory review hold. adds reason code
+  `ip_geo_embargoed_territory`, a `geo_evidence` column on decisions, an
+  admin-only review-trigger list (seeded cu, ir, sy, kp) with a trigger that
+  rejects fatf grey-listed codes, and a read-time pattern view reachable only
+  through an admin-checked function. `record_payout_signal_check` is dropped and
+  recreated with a sixteenth argument, a deliberate breaking change. locally tested
+  only; apply after 0011 when deployment is authorized.

@@ -8,9 +8,14 @@
 //   its schema.
 //
 // three checks against a built database:
-//   1. trust tables carry no geography-like column.
-//   2. payout signal evidence tables carry no geography-like column. the
-//      policy table is check-selection configuration and is the one exemption.
+//   1. trust tables carry no geography-like column, with no exemption at all.
+//   2. payout signal evidence tables carry no geography-like column, except
+//      an exact (table, column) allowlist (ALLOWED_SIGNAL_GEO_COLUMNS) for
+//      columns that are reviewed decision evidence, the same way network_flags
+//      is reviewed decision evidence: a territory the ip resolved to and acted
+//      on at a money moment, not a durable attribute of the creator. the
+//      policy table (SIGNAL_CONFIG_TABLES) remains the only place a bare,
+//      queryable market code lives.
 //   3. no foreign key links a trust table to a signal table in either direction,
 //      so signal data cannot be joined into trust by constraint.
 //
@@ -36,6 +41,16 @@ export const SIGNAL_EVIDENCE_TABLES = ['creator_signal_events', 'payout_signal_d
 
 /** the one signal table allowed to carry a market code. */
 export const SIGNAL_CONFIG_TABLES = ['payout_signal_policy'];
+
+/**
+ * batch 8 addendum: the embargoed-territory check is explicitly geo-input
+ * decision evidence, the same way network_flags is proxy/vpn/tor/datacenter
+ * decision evidence. an exact (table, column) allowlist, not a table-level
+ * exemption, so a different, unreviewed geography column on the same table
+ * still fails loudly. this does not touch SIGNAL_CONFIG_TABLES, which remains
+ * the only place a bare, queryable market code lives.
+ */
+export const ALLOWED_SIGNAL_GEO_COLUMNS = new Set(['payout_signal_decisions.geo_evidence']);
 
 /** whole-token matches, so `isolation` is not flagged by `iso`. */
 const GEOGRAPHY_TOKENS = new Set([
@@ -89,6 +104,7 @@ export async function checkGeographyInvariant(db) {
 
   const signalViolations = (await columnsOf(SIGNAL_EVIDENCE_TABLES.filter((t) => tables.includes(t))))
     .filter((c) => columnLooksGeographic(c.column_name))
+    .filter((c) => !ALLOWED_SIGNAL_GEO_COLUMNS.has(`${c.table_name}.${c.column_name}`))
     .map((c) => ({ table: c.table_name, column: c.column_name }));
 
   const signalSide = [...SIGNAL_EVIDENCE_TABLES, ...SIGNAL_CONFIG_TABLES];

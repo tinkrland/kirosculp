@@ -260,14 +260,42 @@ test('negative: a malformed ip throws before any source is called', async () => 
 });
 
 test('positive: geo is optional, absent by default, and a failing geo reader does not break the lookup', async () => {
+  const geoSource = { id: 'test-geo', datasetVersion: 'v1' };
   const noGeo = await new FreeIpIntelligenceAdapter({}).lookup('192.0.2.1');
-  assert.deepEqual(noGeo.geo, { countryCode: null, subdivisionCode: null, available: false });
-  const withGeo = await new FreeIpIntelligenceAdapter({ geo: { lookup: () => ({ countryCode: 'ZZ', subdivisionCode: null }) } }).lookup('192.0.2.1');
-  assert.equal(withGeo.geo.available, true);
+  assert.deepEqual(noGeo.geo, { countryCode: null, subdivisionCode: null, coverage: 'none', source: null });
+  const withGeo = await new FreeIpIntelligenceAdapter({
+    geo: { ...geoSource, lookup: () => ({ countryCode: 'ZZ', subdivisionCode: null }) },
+  }).lookup('192.0.2.1');
+  assert.equal(withGeo.geo.coverage, 'full');
+  assert.equal(withGeo.geo.countryCode, 'ZZ');
+  assert.deepEqual(withGeo.geo.source, geoSource);
+  const noMatch = await new FreeIpIntelligenceAdapter({
+    geo: { ...geoSource, lookup: () => null },
+  }).lookup('192.0.2.1');
+  assert.equal(noMatch.geo.coverage, 'full', 'a source that answered with no match is still evaluated');
+  assert.equal(noMatch.geo.countryCode, null, 'but has no country');
+  assert.deepEqual(noMatch.geo.source, geoSource, 'and is still attributed');
   const brokenGeo = await new FreeIpIntelligenceAdapter({ geo: { lookup: () => { throw new Error('mmdb corrupt'); } } }).lookup('192.0.2.1');
-  assert.equal(brokenGeo.geo.available, false);
-  assert.ok(!('geo' in toStoredNetworkFlags(withGeo)), 'geo is not part of what is stored');
+  assert.equal(brokenGeo.geo.coverage, 'none');
+  assert.equal(brokenGeo.geo.source, null);
+  assert.ok(!('geo' in toStoredNetworkFlags(withGeo)), 'geo is not part of what network flags store');
   assert.deepEqual(Object.keys(toStoredNetworkFlags(withGeo)).sort(), ['datacenter', 'proxy', 'tor', 'vpn']);
+});
+
+test('negative: assertIpIntelligenceResult rejects a malformed or unattributed geo field', async () => {
+  const { adapter, feeds } = freshAdapter();
+  try {
+    const good = await adapter.lookup(IPS.residential);
+    assert.doesNotThrow(() => assertIpIntelligenceResult(good));
+    const noGeoField = structuredClone(good); delete noGeoField.geo;
+    assert.throws(() => assertIpIntelligenceResult(noGeoField), AdapterContractError);
+    const badCoverage = structuredClone(good); badCoverage.geo.coverage = 'partial';
+    assert.throws(() => assertIpIntelligenceResult(badCoverage), AdapterContractError, 'geo coverage is full or none, never partial');
+    const unattributed = structuredClone(good); unattributed.geo = { countryCode: 'ZZ', subdivisionCode: null, coverage: 'full', source: null };
+    assert.throws(() => assertIpIntelligenceResult(unattributed), AdapterContractError);
+    const noneWithCountry = structuredClone(good); noneWithCountry.geo = { countryCode: 'ZZ', subdivisionCode: null, coverage: 'none', source: null };
+    assert.throws(() => assertIpIntelligenceResult(noneWithCountry), AdapterContractError, 'coverage none cannot carry a country');
+  } finally { feeds.cleanup(); }
 });
 
 // ------------------------------------------------------------- feed loader

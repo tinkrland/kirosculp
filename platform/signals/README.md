@@ -98,9 +98,10 @@ rules the adapter enforces:
   clean. every flag reports coverage `none`.
 - a malformed address throws before any source is called.
 
-geo is returned by the port and is not persisted. the geolite2 reader is not
-written in v1 because reading its `.mmdb` format needs a parser dependency, and
-nothing in the enforcement path uses geo.
+geo is returned by the port as `{ countryCode, subdivisionCode, coverage, source }`.
+coverage `none` means not evaluated and cannot carry a country. coverage `full` with
+a null country means evaluated with no match. the only consumer is the
+embargoed-territory check below. see [territory review](#embargoed-territory-review).
 
 ### feeds
 
@@ -123,6 +124,64 @@ same loader the service uses, and swaps the directory only if every feed is ok. 
 bad download never replaces a working set. the two ip2proxy lite files need a free
 account and the ip2location lite terms, including the attribution acknowledgment,
 so they are only ever read from disk.
+
+## embargoed-territory review
+
+one geography-aware rule exists, by owner addendum: a payout request or onboarding
+from an ip that resolves to an embargoed or sanctioned territory is held for a
+person. it is a review hold on a network signal, not trust, and it is separate from
+the market-strictness check selection above.
+
+- outcome `needs_review`, reason `ip_geo_embargoed_territory`, with the geo source
+  and dataset version recorded. it never produces `fail` by itself, never writes a
+  trust record, and does not depend on whether the creator's corridor is strict.
+  a us-rail creator with a cu ip and everything else clean is held.
+- the list is named config in `sculptura_private.embargoed_territory_review_list`
+  (`list_version`, `territory_code`, `authority`, `effective_date`, `enabled`),
+  seeded v1 with cu, ir, sy and kp. it is admin-only and revisable by adding a new
+  list version or disabling a row. only embargoed or sanctioned territories belong
+  on it. a trigger rejects the five fatf grey-listed codes (np, vn, bo, ve, ke),
+  and `npm run check:embargo-greylist` reconciles both the live list and the
+  trigger against `operations/country-rollout/creator-payout-rails.json`. it fails
+  on an empty list rather than passing vacuously.
+- missing geo is a normal condition. a satellite range, an address with no record,
+  a private address, an unreadable database, or no geo source at all adds no reason
+  code and changes no outcome. the decision records the geo attribution when a
+  source answered. `geo-reader` only reads the located `country`, never
+  `registered_country`, because a registered network owner is not a location.
+- an unreadable territory list is different: the service throws
+  `PolicyUnavailableError`, which the gate turns into a hold, because passing a
+  possibly embargoed address is the wrong default. an unknown list version reads as
+  an empty list, so configuration must name a real version.
+- severity by pattern is a read, not a stored score. the view
+  `embargoed_territory_pattern` counts embargo hits, distinct moments, first and
+  last hit and total decisions per creator at read time. one hit is a weak signal,
+  a hit at every money moment across six months is a strong one. nothing is written,
+  so a one-off never permanently flags anyone. the view is revoked from anon and
+  authenticated. a security definer function does not inherit the caller's rls, and
+  a plain view does not re-apply base table rls, so `admin_get_embargo_pattern(uuid)`
+  checks the admin role itself and is the only read path.
+- [`review-outcomes.mjs`](review-outcomes.mjs) defines what a review may end in:
+  `release` or `stranded_funds_hold`. `assertReviewOutcome` rejects every account
+  action (ban, suspend, trust downgrade, permanent flag, auto reject, expire to
+  fail). nothing in this module or the service uses a timer, expiry or clock, so a
+  hold waiting in a queue cannot turn into a fail by backlog.
+
+### geolite2 database
+
+[`geo-reader.mjs`](geo-reader.mjs) reads a geolite2 country `.mmdb` with the pinned
+`maxmind@5.0.7` package (mit, ledger entry src-0026). the database needs a free
+maxmind account and the geolite2 eula, so it is read from disk and never downloaded
+by code here. put the file and a `manifest.json` (`buildGeoManifest` writes one:
+schema version, id, file, retrieval date, byte size, sha-256) in a gitignored
+directory. `loadGeoDatabase({ dir, open })` checks the hash, a 100 kb size floor and
+a 30 day maximum age (the eula asks for replacement within 30 days of a new
+release). a missing, corrupt, truncated or stale database loads as an unavailable
+source, which records coverage `none`, which is the normal no-geo path above. tests
+inject `open` and use no real database.
+
+the 30 day age limit is an operational default chosen in this leg, like the feed
+staleness limits, and needs review.
 
 ## payout gate
 
@@ -166,6 +225,7 @@ stored, returned, or passed to a lookup.
 | mandatory feed unavailable or adapter down | `needs_review` | `feed_unavailable` |
 | mandatory check not evaluated (ipv6, private address) | `needs_review` | `coverage_unavailable` |
 | device collection failed or missing, any market | `needs_review` | `collection_unavailable` |
+| ip resolves to an embargoed or sanctioned territory, any market | `needs_review` | `ip_geo_embargoed_territory` |
 | everything evaluated and clean | `pass` | none |
 
 `fail` is produced only where a policy row sets `positive_outcome = 'fail'`, and
@@ -203,8 +263,16 @@ tables in the private `sculptura_private` schema.
 | `payout_signal_decisions` | outcome, reason codes, flags, source attribution | append-only, kept |
 | `payout_signal_policy` | per-market mandatory checks, keyed by iso alpha-2 | reviewed migrations only |
 
-there is no column for a raw fingerprint, a plaintext ip, a country, or a
-corridor on the evidence tables. stored features are a closed shape enforced by
+[migration 0012](../../migrations/0012_embargoed_territory_review.sql) adds the
+territory list table, a `geo_evidence` column on the decision table, the pattern
+view and its admin function. `record_payout_signal_check` gained a sixteenth
+argument for the geo evidence, dropped and recreated, so any caller must pass it.
+
+there is no column for a raw fingerprint, a plaintext ip, or a corridor on the
+evidence tables. the one place a country can appear is
+`payout_signal_decisions.geo_evidence`, as source attribution on a decision, and the
+geography invariant allows exactly that column by name. a trust table gets no
+exemption. stored features are a closed shape enforced by
 a check constraint. the policy table is check-selection configuration, not a
 subject record. `npm run check:trust-geography` fails if a trust table or a
 signal evidence table gains a geography-like column, or if a foreign key links
@@ -221,6 +289,7 @@ and idempotent per submission id. admins read through
 npm run validate:signal-sources     # source ledger has license, terms, boundary
 npm run check:signals-hygiene       # no provider databases, no secret-shaped values
 npm run check:trust-geography       # no geography in trust or signal evidence schema
+npm run check:embargo-greylist      # territory list and trigger disjoint from the fatf grey list
 npm run test:signals-and-ip-intel   # all signals tests, offline, fixtures only
 ```
 
