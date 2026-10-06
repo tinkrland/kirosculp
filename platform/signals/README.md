@@ -41,6 +41,43 @@ clean.
 
 `npm run check:signals-hygiene` fails if either appears in the signals paths.
 
+## device signal
+
+[`collector.mjs`](collector.mjs) is the client contract. it takes the thumbmarkjs
+constructor by injection, so this repo takes no browser dependency and tests never
+load the library. the platform payout client installs
+`@thumbmarkjs/thumbmarkjs@1.12.0` with an exact version when that surface exists.
+
+read from the published 1.12.0 package, and enforced in code:
+
+- telemetry is forced off. by default the library samples runs to
+  `api.thumbmarkjs.com` and may fetch a script from `experimental.thumbmarkjs.com`.
+  the collector sets `logging: false` and `collect_beacon: false` and never sets an
+  `api_key`. the options object is frozen.
+- `permissions` (camera, microphone, geolocation states), `locales` (timezone,
+  language) and `speech` (voice list) are excluded on the client and again on the
+  server. the first is sensor-adjacent and the other two are geography proxies.
+- the server allowlists ten components, ignores the library's own hash and any
+  client-sent trust field, drops any component with a biometric or body-adjacent
+  key, and drops a `webrtc` component that contains an ip address. a reduced
+  chrome user agent such as `Chrome/120.0.0.0` is not mistaken for one.
+- a failed or missing collection is `collection_unavailable`, never a fabricated
+  fingerprint. the payout flow shows a plain-language, non-blocking disclosure.
+
+[`device-processor.mjs`](device-processor.mjs) canonicalizes the allowlisted
+components and hashes them with hmac-sha256 under a server-held key
+([`key-ring.mjs`](key-ring.mjs)). every hash carries a key id, keys rotate
+quarterly, and a retired key stays loaded until the rows it produced have purged.
+no key is committed. configure a server with:
+
+```text
+SIGNALS_HMAC_ACTIVE_KEY_ID=k-2026-q4
+SIGNALS_HMAC_KEYS=k-2026-q3:<base64 32 bytes>,k-2026-q4:<base64 32 bytes>
+```
+
+the raw payload is never stored, logged, or echoed in an error. the processor
+returns counts and fixed reason codes only.
+
 ## storage
 
 [migration 0011](../../migrations/0011_payout_signal_evidence.sql) adds three
