@@ -340,11 +340,18 @@ the committed change.
 - **a real payout.** no payment, transfer, or payout provider call exists in
   this leg. `payout-gate.mjs` is a contract for the leg that owns the actual
   payout surface.
-- **python's `validate` entry point** (`npm run validate`) calls `python3`,
-  which does not exist on this windows installation (only `python`, pointing
-  at 3.11.1, and a separate incompatible `C:\Python27`). the individual
-  python scripts were run directly with `PYTHONUTF8=1` instead; the aggregate
-  `npm run validate` command itself was not exercised end to end.
+- **`python3` on this machine's path.** python 3.11 is installed at
+  `%LOCALAPPDATA%\Programs\Python\Python311`, but that folder is not on `PATH`,
+  and the only `python` and `python3` commands found are the microsoft store
+  stubs in `WindowsApps`. `npm run validate` calls `python3`, so it fails here
+  for an environment reason. this was first recorded as "python3 does not
+  exist", which was imprecise. after batch 8, `npm run validate` was run end to
+  end with a temporary `python3` shim on `PATH` for that one process, and the
+  shim was deleted. the data-contract, offerings, research and jsonl
+  validators passed, and the prose check reported the same 6 baseline
+  violations, which make that command exit non-zero. the environment fix is to
+  put the python 3.11 folder ahead of `WindowsApps` on `PATH` and give it a
+  `python3.exe`.
 - **`scripts/denial-matrix-executor.mjs`'s own cli entry point** does not run
   on this windows node install: its `import.meta.url === file://${process.argv[1]}`
   guard never matches because `process.argv[1]` is not url-encoded the same
