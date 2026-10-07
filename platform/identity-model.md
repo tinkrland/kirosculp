@@ -68,10 +68,17 @@ only display names and handles. the ids are internal join keys for
 support, release records, payout onboarding, dispute evidence and audit
 logs. an opaque number carries no earned trust signal, and a public
 sequential id invites enumeration, so none of the three ids is ever
-rendered on a public page. open question, flagged: whether a support or
-dispute flow should ever quote a truncated id back to a creator ("cin
-1234") for case matching. current standing: no in v1; support threads
-carry their own reference numbers instead.
+rendered on a public page.
+
+the one place an id is shown is the owner's own private dashboard
+settings, discord-style: the creator can read their cin there, but
+nobody else ever sees it, and buyers can read their bin the same way.
+changing a username or display name never changes the id, and it is
+the id, not any handle, that stays associated with payout onboarding
+and every downstream record. support or dispute flows still do not
+quote ids; threads carry their own reference numbers, and a creator
+who needs to reference their account for support can be told to check
+their settings page.
 
 the demo [roster](creators/demo-roster.md) currently captures names and
 handles only; when fixture CIN/SIN/BIN values are minted they belong in
