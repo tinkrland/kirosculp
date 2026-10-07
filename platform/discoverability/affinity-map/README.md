@@ -77,21 +77,43 @@ confusable pointing at a term that does not exist fails the check, and
 drift findings are for the owner to resolve by authoring vocabulary or
 corpus edges.
 
-v0.1 drift findings, as committed:
+v0.1 drift findings, as first committed, and their resolution (2026-10-07):
 
-- celestial -> art_deco: no shared facets at all. celestial's neighbors
-  are symbol-layer terms; the authored edge reflects a merchandising
-  adjacency (geometric starbursts) the structural vocabulary does not
-  carry.
-- celestial -> gothic: only a weak ornate-axis overlap. the authored
-  edge is a mood adjacency ("dark romantic", "witchy" vs "cosmic"),
-  not a structural one.
-- retro -> mid_century_modernist: one weak sphere feature. the authored
-  edge reflects the era adjacency; structurally retro's neighbors are the
-  antique cluster and biker via chunky.
+- celestial -> gothic: fixed, now confirmed (rank 5). the authored edge
+  was dismissed as a mood adjacency ("dark romantic", "witchy" vs
+  "cosmic"), but it is a real sold crossover category ("celestial goth",
+  "witchy celestial jewelry" per etsy and shieldmaidenjewelry: crescent
+  moons rendered in oxidized dark metal). added a shared
+  `dark_celestial_motif` feature to both records, sourced and weighted
+  below each style's dominant features so celestial still reads as
+  star/moon/sun first and gothic still reads as cross/dagger/skull first.
+- celestial -> art_deco: still drift, now on sourced grounds instead of
+  a hunch. "sunburst" and "sun" are the same core motif at different
+  stylization levels (louymagroos and awedeco both sell this literally as
+  "art deco sun jewelry"), so a shared `sun_motif` facet was added to
+  both records. it moved celestial's art_deco score from zero shared
+  facets to rank 12 (0.0517), but celestial's real structural neighbors
+  are still the symbol layer by a wide margin (metal_silver, sign_cancer,
+  metal_gold, sign_leo, all 0.20-0.32 via moon/sun), and gothic's new
+  confirmed edge (0.096) still edges out art_deco for the 5th slot.
+  pushing art_deco past that would mean weighting a secondary motif-echo
+  above celestial's dominant identity, which is padding, not a fix.
+- retro -> mid_century_modernist: still drift, same shape. the authored
+  edge is a real, sourced era adjacency (versani and langantiques both
+  place mid-century jewelry as the direct successor to 1940s retro,
+  "the generation right after wwii"), so a shared `postwar_era` axis was
+  added to both records. it raised the score from one weak sphere
+  feature (0.09) to 0.136, but retro's vocabulary (already flagged
+  weak-evidence, pending its own dedicated dealer/scholarship source) is
+  currently thinner on retro-specific facets than on the shared
+  ornate/antique axes it happens to carry, so georgian, edwardian,
+  victorian, biker and art_nouveau all still outscore mid_century_modernist
+  in retro's ranking. closing this one for real needs the retro
+  vocabulary pass retro's own notes already call for, not another
+  crosswalk nudge.
 
-thin neighborhoods for distinctive styles (art_deco, and the empty
-wear-context rows) are honest, not a bug. nothing is padded.
+thin neighborhoods for distinctive styles (and the empty wear-context
+rows) are honest, not a bug. nothing is padded.
 
 ## determinism record
 

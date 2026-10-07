@@ -13,12 +13,14 @@
     {
       "key": "style-vocabulary",
       "path": "offerings/styles/style-vocabulary.jsonl",
-      "sha256": "216a540df5f5bb292b081d0290ba49a907bfa8627e4bebfdc7200e657a14ba6e",
+      "sha256": "2549b37b4f4aceded7f1efc06c548fadc04e44a9fb97166ba676c94a4f675469",
       "records": 13,
       "versions": {
-        "0.2.0": 2,
-        "0.3.0": 7,
-        "0.3.1": 4
+        "0.2.0": 1,
+        "0.2.1": 2,
+        "0.3.0": 5,
+        "0.3.1": 3,
+        "0.3.2": 2
       }
     },
     {
@@ -42,8 +44,8 @@
   ],
   "determinism": {
     "schema": "affinity-map-determinism-v1",
-    "input_hash": "ec0c6281c919a00d6b082c1ca36f6016ed299b1a238896c0fa14fb7f5bf7a891",
-    "output_hash": "4ce978588d0e02e2d0bae7229464be5cbb491632f21cd1424014fe297b21afc8",
+    "input_hash": "351b9355b4be2ee5041142296a1daa8fb5562b52bbd351c7d6c5871031ff4e0d",
+    "output_hash": "becb87cb2bc0bfbce092f9ce3223ee70660a5031f74c4b4f1588cf8f54767d0e",
     "method": "input hash: sha256 over the engine version, config sha256, and each vocabulary key, path and sha256 in config input order. output hash: sha256 over this table serialized canonically (json, two-space indent, trailing newline) with determinism.output_hash set to null. same inputs and config produce identical output, verified by check-affinity-table.mjs.",
     "corpus": null,
     "corpus_note": "the authored affinity corpus is an open item in the spec. v0.1 is the structural prior from the governed vocabulary alone and blends with real co-occurrence counts deterministically later. decay has no meaning here: the structural prior carries no time component."
@@ -271,12 +273,43 @@
           ]
         },
         {
-          "term": "retro",
+          "term": "egyptian_revival",
           "vocabulary": "style-vocabulary",
-          "score": 0.3486621544,
+          "score": 0.3414121943,
           "norms": [
             1.6941074346,
-            1.7776388835
+            1.7635192089
+          ],
+          "shared_facets": [
+            {
+              "facet": "antique",
+              "left": 1,
+              "right": 0.6,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.6
+            },
+            {
+              "facet": "ornate",
+              "left": 0.7,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.42
+            }
+          ]
+        },
+        {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.3356380283,
+          "norms": [
+            1.6941074346,
+            1.8466185313
           ],
           "shared_facets": [
             {
@@ -308,37 +341,6 @@
               "left_weight": 1,
               "right_weight": 1,
               "contribution": 0.3
-            }
-          ]
-        },
-        {
-          "term": "egyptian_revival",
-          "vocabulary": "style-vocabulary",
-          "score": 0.3414121943,
-          "norms": [
-            1.6941074346,
-            1.7635192089
-          ],
-          "shared_facets": [
-            {
-              "facet": "antique",
-              "left": 1,
-              "right": 0.6,
-              "left_class": "axis",
-              "right_class": "axis",
-              "left_weight": 1,
-              "right_weight": 1,
-              "contribution": 0.6
-            },
-            {
-              "facet": "ornate",
-              "left": 0.7,
-              "right": 0.6,
-              "left_class": "feature",
-              "right_class": "axis",
-              "left_weight": 1,
-              "right_weight": 1,
-              "contribution": 0.42
             }
           ]
         }
@@ -622,10 +624,10 @@
         {
           "term": "retro",
           "vocabulary": "style-vocabulary",
-          "score": 0.2733606252,
+          "score": 0.2631493556,
           "norms": [
             2.0784609691,
-            1.7776388835
+            1.8466185313
           ],
           "shared_facets": [
             {
@@ -944,10 +946,10 @@
         {
           "term": "retro",
           "vocabulary": "style-vocabulary",
-          "score": 0.2100202698,
+          "score": 0.2021750522,
           "norms": [
             2.2231734075,
-            1.7776388835
+            1.8466185313
           ],
           "shared_facets": [
             {
@@ -1144,10 +1146,10 @@
         {
           "term": "retro",
           "vocabulary": "style-vocabulary",
-          "score": 0.3329045238,
+          "score": 0.3204690172,
           "norms": [
             2.0784609691,
-            1.7776388835
+            1.8466185313
           ],
           "shared_facets": [
             {
@@ -1270,9 +1272,9 @@
       "term": "art_deco",
       "name": "art deco style",
       "vocabulary": "style-vocabulary",
-      "version": "0.2.0",
-      "updated": "2026-09-27",
-      "facet_count": 11,
+      "version": "0.2.1",
+      "updated": "2026-10-07",
+      "facet_count": 12,
       "facets": {
         "geometric_step": {
           "raw": 0.9,
@@ -1338,6 +1340,14 @@
             "features"
           ]
         },
+        "sun_motif": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
         "geometric": {
           "raw": 0.9,
           "class": "axis",
@@ -1363,14 +1373,14 @@
           ]
         }
       },
-      "norm": 2.4046829313,
+      "norm": 2.4561148182,
       "neighbors": [
         {
           "term": "egyptian_revival",
           "vocabulary": "style-vocabulary",
-          "score": 0.2758975516,
+          "score": 0.2701201623,
           "norms": [
-            2.4046829313,
+            2.4561148182,
             1.7635192089
           ],
           "shared_facets": [
@@ -1409,9 +1419,9 @@
         {
           "term": "georgian",
           "vocabulary": "style-vocabulary",
-          "score": 0.1472829524,
+          "score": 0.1441987968,
           "norms": [
-            2.4046829313,
+            2.4561148182,
             1.6941074346
           ],
           "shared_facets": [
@@ -1430,10 +1440,10 @@
         {
           "term": "mid_century_modernist",
           "vocabulary": "style-vocabulary",
-          "score": 0.1232526025,
+          "score": 0.116656161,
           "norms": [
-            2.4046829313,
-            1.8894443628
+            2.4561148182,
+            1.9544820286
           ],
           "shared_facets": [
             {
@@ -1451,9 +1461,9 @@
         {
           "term": "victorian",
           "vocabulary": "style-vocabulary",
-          "score": 0.1080423609,
+          "score": 0.1057799168,
           "norms": [
-            2.4046829313,
+            2.4561148182,
             2.0784609691
           ],
           "shared_facets": [
@@ -1472,9 +1482,9 @@
         {
           "term": "edwardian",
           "vocabulary": "style-vocabulary",
-          "score": 0.0960376541,
+          "score": 0.0940265927,
           "norms": [
-            2.4046829313,
+            2.4561148182,
             2.0784609691
           ],
           "shared_facets": [
@@ -1496,9 +1506,9 @@
       "term": "retro",
       "name": "retro style",
       "vocabulary": "style-vocabulary",
-      "version": "0.3.1",
-      "updated": "2026-09-28",
-      "facet_count": 9,
+      "version": "0.3.2",
+      "updated": "2026-10-07",
+      "facet_count": 10,
       "facets": {
         "sphere": {
           "raw": 0.6,
@@ -1571,16 +1581,24 @@
           "sources": [
             "axes"
           ]
+        },
+        "postwar_era": {
+          "raw": 0.5,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
         }
       },
-      "norm": 1.7776388835,
+      "norm": 1.8466185313,
       "neighbors": [
         {
           "term": "georgian",
           "vocabulary": "style-vocabulary",
-          "score": 0.3486621544,
+          "score": 0.3356380283,
           "norms": [
-            1.7776388835,
+            1.8466185313,
             1.6941074346
           ],
           "shared_facets": [
@@ -1619,9 +1637,9 @@
         {
           "term": "edwardian",
           "vocabulary": "style-vocabulary",
-          "score": 0.3329045238,
+          "score": 0.3204690172,
           "norms": [
-            1.7776388835,
+            1.8466185313,
             2.0784609691
           ],
           "shared_facets": [
@@ -1670,9 +1688,9 @@
         {
           "term": "victorian",
           "vocabulary": "style-vocabulary",
-          "score": 0.2733606252,
+          "score": 0.2631493556,
           "norms": [
-            1.7776388835,
+            1.8466185313,
             2.0784609691
           ],
           "shared_facets": [
@@ -1711,9 +1729,9 @@
         {
           "term": "biker",
           "vocabulary": "style-vocabulary",
-          "score": 0.2196592501,
+          "score": 0.2114539725,
           "norms": [
-            1.7776388835,
+            1.8466185313,
             1.8439088915
           ],
           "shared_facets": [
@@ -1732,9 +1750,9 @@
         {
           "term": "art_nouveau",
           "vocabulary": "style-vocabulary",
-          "score": 0.2100202698,
+          "score": 0.2021750522,
           "norms": [
-            1.7776388835,
+            1.8466185313,
             2.2231734075
           ],
           "shared_facets": [
@@ -1776,9 +1794,9 @@
       "term": "mid_century_modernist",
       "name": "mid-century modernist style",
       "vocabulary": "style-vocabulary",
-      "version": "0.3.1",
-      "updated": "2026-09-28",
-      "facet_count": 7,
+      "version": "0.3.2",
+      "updated": "2026-10-07",
+      "facet_count": 8,
       "facets": {
         "abstract_form": {
           "raw": 0.8,
@@ -1835,16 +1853,24 @@
           "sources": [
             "axes"
           ]
+        },
+        "postwar_era": {
+          "raw": 0.5,
+          "class": "axis",
+          "weight": 1,
+          "sources": [
+            "axes"
+          ]
         }
       },
-      "norm": 1.8894443628,
+      "norm": 1.9544820286,
       "neighbors": [
         {
           "term": "organic_modern",
           "vocabulary": "style-vocabulary",
-          "score": 0.4393646244,
+          "score": 0.4247442548,
           "norms": [
-            1.8894443628,
+            1.9544820286,
             1.8309833424
           ],
           "shared_facets": [
@@ -1883,9 +1909,9 @@
         {
           "term": "brutalist",
           "vocabulary": "style-vocabulary",
-          "score": 0.1411349664,
+          "score": 0.136438536,
           "norms": [
-            1.8894443628,
+            1.9544820286,
             2.1
           ],
           "shared_facets": [
@@ -1902,11 +1928,42 @@
           ]
         },
         {
+          "term": "retro",
+          "vocabulary": "style-vocabulary",
+          "score": 0.1357648078,
+          "norms": [
+            1.9544820286,
+            1.8466185313
+          ],
+          "shared_facets": [
+            {
+              "facet": "postwar_era",
+              "left": 0.5,
+              "right": 0.5,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.25
+            },
+            {
+              "facet": "sphere",
+              "left": 0.4,
+              "right": 0.6,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.24
+            }
+          ]
+        },
+        {
           "term": "biker",
           "vocabulary": "style-vocabulary",
-          "score": 0.1377741279,
+          "score": 0.1331895334,
           "norms": [
-            1.8894443628,
+            1.9544820286,
             1.8439088915
           ],
           "shared_facets": [
@@ -1925,10 +1982,10 @@
         {
           "term": "art_deco",
           "vocabulary": "style-vocabulary",
-          "score": 0.1232526025,
+          "score": 0.116656161,
           "norms": [
-            1.8894443628,
-            2.4046829313
+            1.9544820286,
+            2.4561148182
           ],
           "shared_facets": [
             {
@@ -1940,27 +1997,6 @@
               "left_weight": 1,
               "right_weight": 1,
               "contribution": 0.56
-            }
-          ]
-        },
-        {
-          "term": "retro",
-          "vocabulary": "style-vocabulary",
-          "score": 0.0714551594,
-          "norms": [
-            1.8894443628,
-            1.7776388835
-          ],
-          "shared_facets": [
-            {
-              "facet": "sphere",
-              "left": 0.4,
-              "right": 0.6,
-              "left_class": "feature",
-              "right_class": "feature",
-              "left_weight": 1,
-              "right_weight": 1,
-              "contribution": 0.24
             }
           ]
         }
@@ -2087,10 +2123,10 @@
         {
           "term": "retro",
           "vocabulary": "style-vocabulary",
-          "score": 0.1928722116,
+          "score": 0.1856675524,
           "norms": [
             2.1,
-            1.7776388835
+            1.8466185313
           ],
           "shared_facets": [
             {
@@ -2129,10 +2165,10 @@
         {
           "term": "mid_century_modernist",
           "vocabulary": "style-vocabulary",
-          "score": 0.1411349664,
+          "score": 0.136438536,
           "norms": [
             2.1,
-            1.8894443628
+            1.9544820286
           ],
           "shared_facets": [
             {
@@ -2260,10 +2296,10 @@
         {
           "term": "mid_century_modernist",
           "vocabulary": "style-vocabulary",
-          "score": 0.4393646244,
+          "score": 0.4247442548,
           "norms": [
             1.8309833424,
-            1.8894443628
+            1.9544820286
           ],
           "shared_facets": [
             {
@@ -2367,9 +2403,9 @@
       "term": "celestial",
       "name": "celestial style",
       "vocabulary": "style-vocabulary",
-      "version": "0.3.0",
-      "updated": "2026-09-28",
-      "facet_count": 6,
+      "version": "0.3.1",
+      "updated": "2026-10-07",
+      "facet_count": 8,
       "facets": {
         "star": {
           "raw": 1,
@@ -2411,6 +2447,22 @@
             "features"
           ]
         },
+        "sun_motif": {
+          "raw": 0.5,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
+        "dark_celestial_motif": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
         "ornate": {
           "raw": 0.4,
           "class": "axis",
@@ -2420,14 +2472,14 @@
           ]
         }
       },
-      "norm": 1.8601075238,
+      "norm": 1.9672315573,
       "neighbors": [
         {
           "term": "metal_silver",
           "vocabulary": "symbol",
-          "score": 0.3421286646,
+          "score": 0.3234983196,
           "norms": [
-            1.8601075238,
+            1.9672315573,
             1.4142135624
           ],
           "shared_facets": [
@@ -2446,9 +2498,9 @@
         {
           "term": "sign_cancer",
           "vocabulary": "symbol",
-          "score": 0.2793468849,
+          "score": 0.2641352719,
           "norms": [
-            1.8601075238,
+            1.9672315573,
             1.7320508076
           ],
           "shared_facets": [
@@ -2467,9 +2519,9 @@
         {
           "term": "metal_gold",
           "vocabulary": "symbol",
-          "score": 0.2661000724,
+          "score": 0.2516098041,
           "norms": [
-            1.8601075238,
+            1.9672315573,
             1.4142135624
           ],
           "shared_facets": [
@@ -2488,9 +2540,9 @@
         {
           "term": "sign_leo",
           "vocabulary": "symbol",
-          "score": 0.2172697993,
+          "score": 0.2054385448,
           "norms": [
-            1.8601075238,
+            1.9672315573,
             1.7320508076
           ],
           "shared_facets": [
@@ -2507,23 +2559,33 @@
           ]
         },
         {
-          "term": "georgian",
+          "term": "gothic",
           "vocabulary": "style-vocabulary",
-          "score": 0.0888544194,
+          "score": 0.0961724649,
           "norms": [
-            1.8601075238,
-            1.6941074346
+            1.9672315573,
+            2.1142374512
           ],
           "shared_facets": [
             {
               "facet": "ornate",
               "left": 0.4,
-              "right": 0.7,
+              "right": 0.6,
               "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.24
+            },
+            {
+              "facet": "dark_celestial_motif",
+              "left": 0.4,
+              "right": 0.4,
+              "left_class": "feature",
               "right_class": "feature",
               "left_weight": 1,
               "right_weight": 1,
-              "contribution": 0.28
+              "contribution": 0.16
             }
           ]
         }
@@ -2533,9 +2595,9 @@
       "term": "gothic",
       "name": "gothic style",
       "vocabulary": "style-vocabulary",
-      "version": "0.3.0",
-      "updated": "2026-09-28",
-      "facet_count": 9,
+      "version": "0.2.1",
+      "updated": "2026-10-07",
+      "facet_count": 10,
       "facets": {
         "cross": {
           "raw": 0.8,
@@ -2593,6 +2655,14 @@
             "features"
           ]
         },
+        "dark_celestial_motif": {
+          "raw": 0.4,
+          "class": "feature",
+          "weight": 1,
+          "sources": [
+            "features"
+          ]
+        },
         "ornate": {
           "raw": 0.6,
           "class": "axis",
@@ -2610,14 +2680,14 @@
           ]
         }
       },
-      "norm": 2.0760539492,
+      "norm": 2.1142374512,
       "neighbors": [
         {
           "term": "georgian",
           "vocabulary": "style-vocabulary",
-          "score": 0.1194179762,
+          "score": 0.1172612665,
           "norms": [
-            2.0760539492,
+            2.1142374512,
             1.6941074346
           ],
           "shared_facets": [
@@ -2636,9 +2706,9 @@
         {
           "term": "victorian",
           "vocabulary": "style-vocabulary",
-          "score": 0.1112399356,
+          "score": 0.1092309227,
           "norms": [
-            2.0760539492,
+            2.1142374512,
             2.0784609691
           ],
           "shared_facets": [
@@ -2657,9 +2727,9 @@
         {
           "term": "egyptian_revival",
           "vocabulary": "style-vocabulary",
-          "score": 0.0983294639,
+          "score": 0.0965536164,
           "norms": [
-            2.0760539492,
+            2.1142374512,
             1.7635192089
           ],
           "shared_facets": [
@@ -2676,11 +2746,42 @@
           ]
         },
         {
+          "term": "celestial",
+          "vocabulary": "style-vocabulary",
+          "score": 0.0961724649,
+          "norms": [
+            2.1142374512,
+            1.9672315573
+          ],
+          "shared_facets": [
+            {
+              "facet": "ornate",
+              "left": 0.6,
+              "right": 0.4,
+              "left_class": "axis",
+              "right_class": "axis",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.24
+            },
+            {
+              "facet": "dark_celestial_motif",
+              "left": 0.4,
+              "right": 0.4,
+              "left_class": "feature",
+              "right_class": "feature",
+              "left_weight": 1,
+              "right_weight": 1,
+              "contribution": 0.16
+            }
+          ]
+        },
+        {
           "term": "biker",
           "vocabulary": "style-vocabulary",
-          "score": 0.0940425523,
+          "score": 0.0923441272,
           "norms": [
-            2.0760539492,
+            2.1142374512,
             1.8439088915
           ],
           "shared_facets": [
@@ -2690,27 +2791,6 @@
               "right": 0.6,
               "left_class": "feature",
               "right_class": "feature",
-              "left_weight": 1,
-              "right_weight": 1,
-              "contribution": 0.36
-            }
-          ]
-        },
-        {
-          "term": "edwardian",
-          "vocabulary": "style-vocabulary",
-          "score": 0.0834299517,
-          "norms": [
-            2.0760539492,
-            2.0784609691
-          ],
-          "shared_facets": [
-            {
-              "facet": "ornate",
-              "left": 0.6,
-              "right": 0.6,
-              "left_class": "axis",
-              "right_class": "axis",
               "left_weight": 1,
               "right_weight": 1,
               "contribution": 0.36
@@ -2840,10 +2920,10 @@
         {
           "term": "retro",
           "vocabulary": "style-vocabulary",
-          "score": 0.2196592501,
+          "score": 0.2114539725,
           "norms": [
             1.8439088915,
-            1.7776388835
+            1.8466185313
           ],
           "shared_facets": [
             {
@@ -2882,10 +2962,10 @@
         {
           "term": "mid_century_modernist",
           "vocabulary": "style-vocabulary",
-          "score": 0.1377741279,
+          "score": 0.1331895334,
           "norms": [
             1.8439088915,
-            1.8894443628
+            1.9544820286
           ],
           "shared_facets": [
             {
@@ -2903,10 +2983,10 @@
         {
           "term": "gothic",
           "vocabulary": "style-vocabulary",
-          "score": 0.0940425523,
+          "score": 0.0923441272,
           "norms": [
             1.8439088915,
-            2.0760539492
+            2.1142374512
           ],
           "shared_facets": [
             {
@@ -3063,10 +3143,10 @@
         {
           "term": "art_deco",
           "vocabulary": "style-vocabulary",
-          "score": 0.2758975516,
+          "score": 0.2701201623,
           "norms": [
             1.7635192089,
-            2.4046829313
+            2.4561148182
           ],
           "shared_facets": [
             {
@@ -3259,10 +3339,10 @@
         {
           "term": "celestial",
           "vocabulary": "style-vocabulary",
-          "score": 0.2661000724,
+          "score": 0.2516098041,
           "norms": [
             1.4142135624,
-            1.8601075238
+            1.9672315573
           ],
           "shared_facets": [
             {
@@ -3373,10 +3453,10 @@
         {
           "term": "celestial",
           "vocabulary": "style-vocabulary",
-          "score": 0.3421286646,
+          "score": 0.3234983196,
           "norms": [
             1.4142135624,
-            1.8601075238
+            1.9672315573
           ],
           "shared_facets": [
             {
@@ -6170,7 +6250,7 @@
       "term": "art_deco",
       "target": "mid_century_modernist",
       "status": "confirmed",
-      "target_score": 0.1232526025,
+      "target_score": 0.116656161,
       "rank": 3,
       "in_top_k": true
     },
@@ -6178,7 +6258,7 @@
       "term": "art_deco",
       "target": "egyptian_revival",
       "status": "confirmed",
-      "target_score": 0.2758975516,
+      "target_score": 0.2701201623,
       "rank": 1,
       "in_top_k": true
     },
@@ -6186,8 +6266,8 @@
       "term": "retro",
       "target": "mid_century_modernist",
       "status": "drift",
-      "target_score": 0.0714551594,
-      "rank": 9,
+      "target_score": 0.1357648078,
+      "rank": 8,
       "in_top_k": false,
       "computed_neighbors": [
         "georgian",
@@ -6201,7 +6281,7 @@
       "term": "mid_century_modernist",
       "target": "brutalist",
       "status": "confirmed",
-      "target_score": 0.1411349664,
+      "target_score": 0.136438536,
       "rank": 2,
       "in_top_k": true
     },
@@ -6217,7 +6297,7 @@
       "term": "brutalist",
       "target": "mid_century_modernist",
       "status": "confirmed",
-      "target_score": 0.1411349664,
+      "target_score": 0.136438536,
       "rank": 4,
       "in_top_k": true
     },
@@ -6233,37 +6313,30 @@
       "term": "celestial",
       "target": "art_deco",
       "status": "drift",
-      "target_score": 0,
-      "rank": null,
+      "target_score": 0.0517411242,
+      "rank": 12,
       "in_top_k": false,
       "computed_neighbors": [
         "metal_silver",
         "sign_cancer",
         "metal_gold",
         "sign_leo",
-        "georgian"
+        "gothic"
       ]
     },
     {
       "term": "celestial",
       "target": "gothic",
-      "status": "drift",
-      "target_score": 0.062149059,
-      "rank": 8,
-      "in_top_k": false,
-      "computed_neighbors": [
-        "metal_silver",
-        "sign_cancer",
-        "metal_gold",
-        "sign_leo",
-        "georgian"
-      ]
+      "status": "confirmed",
+      "target_score": 0.0961724649,
+      "rank": 5,
+      "in_top_k": true
     },
     {
       "term": "gothic",
       "target": "victorian",
       "status": "confirmed",
-      "target_score": 0.1112399356,
+      "target_score": 0.1092309227,
       "rank": 2,
       "in_top_k": true
     },
@@ -6279,7 +6352,7 @@
       "term": "egyptian_revival",
       "target": "art_deco",
       "status": "confirmed",
-      "target_score": 0.2758975516,
+      "target_score": 0.2701201623,
       "rank": 3,
       "in_top_k": true
     }
@@ -6292,7 +6365,7 @@
       "wear-context": 4
     },
     "neighbor_edge_count": 162,
-    "scored_pair_count": 116,
+    "scored_pair_count": 117,
     "empty_neighborhoods": [
       "metal_platinum",
       "everyday_wear",
@@ -6301,8 +6374,8 @@
       "ceremony_commitment"
     ],
     "confusable_edge_count": 19,
-    "confusable_confirmed": 16,
-    "confusable_drift": 3,
+    "confusable_confirmed": 17,
+    "confusable_drift": 2,
     "confusable_unknown_targets": 0,
     "top_k": 5,
     "min_score": 0
