@@ -23,7 +23,13 @@ what gets created per artist: an auth user (email confirmed, fixture
 metadata), a `creator_profiles` row carrying the cin-bearing profile,
 and a `market_accounts` shop where the roster has a shop handle (5 so
 far). buyers get auth users only; buyer profile tables do not exist
-yet. `seed-report.json` is the run output (not committed).
+yet. the run writes `demo-roster-accounts.json`, the committed
+accounts registry: every account with email, user id, cin (creator
+profile id), sin (shop id) and the owner-ruled metadata columns
+(preferred name, age, pronouns, bank_country, classification,
+notes, phone number). shop slugs follow the handle-8char shape
+from migration 20260504202012, derived from the handle so reruns
+stay stable.
 
 the id model follows [the identity model](../../identity-model.md):
 cin is the creator profile identity, sin the shop row, bin the buyer
