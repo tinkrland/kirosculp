@@ -8,10 +8,10 @@ way real edge-case users would.
 
 status: 52 artist names and 6 buyer names captured across four sheet
 pastes (oct 6-7 2026). the oct 7 paste corrected several residence
-cities that earlier pastes had only at country level, and added a
-buyers table for the first time. columns not visible in the sheet
-stay tbd. the oct 7 sheet is color-coded by row; the color groups
-are not yet interpreted in this doc (see "open question" below).
+cities that earlier pastes had only at country level, added a buyers
+table for the first time, and color-codes rows by region (owner-
+confirmed; see "region color key" below). columns not visible in the
+sheet stay tbd.
 
 | artist | shop handle | residence | passport / rail note | age | pronouns | description | fixture intent |
 |---|---|---|---|---|---|---|---|
@@ -135,17 +135,29 @@ only names and notes exist so far.
   mackenzie ziegler, isobel langford, jade miller mcdougle) are
   intentional plain baselines with no distinguishing attributes.
 
-## open question: what the row colors mean
+## region color key
 
-the oct 7 2026 sheet paste color-codes rows (a blue pair, an orange
-block, a purple/green/pink/tan patchwork, and a plain-white remainder).
-the blue pair is exactly the phoebe/lucie sibling pair, which fits an
-existing fixture category, but the rest of the color groups do not
-map cleanly onto any single documented category (shared household,
-corridor mismatch, region, or launch-vs-new): each color mixes several
-of those. holding off on reading meaning into the colors here until
-confirmed; this doc should be updated once it's clear whether they mark
-fixture categories, paste batches, review status, or something else.
+owner-confirmed oct 7 2026: the sheet's row colors are a region tag,
+independent of the fixture-intent column (a colored row can still be a
+sibling, mismatch, or baseline). verified each group's actual
+geography before writing it down; one grouping choice is informal
+(south korea reads as east asia but sits in the "southeast asia"
+color here) and is kept as the owner coded it.
+
+- green, south asia: aisha ahmad, palak kapoor, jiaa khurana
+- pink, southeast asia (and south korea): fiona oberoi, maria mendoza,
+  carmen castillo, anwesha rahman, lee jin-woo, kim seo-yeon
+- blue, apac: janice o'hara, delilah musgrave, gabriel dubois, zoya
+  naqvvi, patricia everett
+- light orange, west asia / mena: yasmin yazici, avi-ben malachi,
+  faizah aisler, fatima karim
+- purple, latam: daniela hernandez, natalia devora, amelie ramos,
+  valeria torres, stella conklin, naomi da'silva, denise da'silva,
+  alesia romero
+- brown, other africa: jana rasheed, mackenzie ziegler
+- uncolored: everyone else (north america and europe fall outside the
+  six region buckets, so they stay plain white, same as the baseline
+  entries with no distinguishing fields)
 
 ## source
 
