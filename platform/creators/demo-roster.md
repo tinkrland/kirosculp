@@ -6,22 +6,25 @@ and none of their attributes should be read as creator policy. they
 exist to stress the admission, payout corridor, and review designs the
 way real edge-case users would.
 
-status: 52 artist names and 6 buyer names captured across four sheet
+status: 58 artist names and 6 buyer names captured across five sheet
 pastes (oct 6-7 2026). the oct 7 paste corrected several residence
-cities that earlier pastes had only at country level, added a buyers
-table for the first time, and color-codes rows by region (owner-
-confirmed; see "region color key" below). columns not visible in the
-sheet stay tbd.
+cities that earlier pastes had only at country level and added a buyers
+table for the first time; a later oct 7 paste (juliettecavanaugh7 pdf)
+added 4 artists (siona chun, dana sanchez, jessica ponton, naomi
+patterson), filled juliette's residence (france) and adriana's
+(paterna, valencia, spain), and introduced the improved region color
+coding where europe is now yellow too (owner-confirmed; see "region
+color key" below). columns not visible in the sheet stay tbd.
 
 | artist | shop handle | residence | passport / rail note | age | pronouns | description | fixture intent |
 |---|---|---|---|---|---|---|---|
 | mahika jaiswal | @divajewels | piscataway, nj | in passport, nj bank | 20 | - | economics student @ rutgers | launch creator. passport/rail mismatch |
-| juliette cavanaugh | @jewelsbyjules | tbd | - | - | - | - | launch-roster addition |
+| juliette cavanaugh | @jewelsbyjules | france | - | - | - | - | launch-roster addition |
 | gemma | @gemsbygemma | tbd | - | - | - | - | fields not yet captured |
 | saskia crevillo | tbd | hannover, germany, eu | - | 24 | - | - | fields not yet captured |
 | fiona oberoi | @daintydiva | singapore | - | - | - | - | fields not yet captured |
 | juliana gorgova | @ringstackbarbie | northern macedonia | - | 22 | - | - | launch-roster addition |
-| adriana phelps | tbd | valencia, spain | - | - | - | - | fields not yet captured |
+| adriana phelps | tbd | paterna, valencia, spain | - | - | - | - | fields not yet captured |
 | madison monroe | tbd | - | - | - | - | - | baseline, no distinguishing fields |
 | janice o'hara | tbd | perth, australia | - | - | - | - | fields not yet captured |
 | phoebe kemper | tbd | glasgow, scotland, uk | - | 21 | - | sibling (older) | shared-household fixture, pair with lucie |
@@ -137,33 +140,41 @@ only names and notes exist so far.
 
 ## region color key
 
-owner-confirmed oct 7 2026: the sheet's row colors are a region tag,
-independent of the fixture-intent column (a colored row can still be a
-sibling, mismatch, or baseline). verified each group's actual
-geography before writing it down; one grouping choice is informal
-(south korea reads as east asia but sits in the "southeast asia"
-color here) and is kept as the owner coded it.
+owner-updated oct 7 2026 (juliettecavanaugh7 pdf): the improved scheme
+gives every region its own row color, europe included. verified per row
+against the rendered sheet, so the groupings below are the actual
+visible colors, not inferred. region tags are independent of the
+fixture-intent column (a colored row can still be a sibling, mismatch,
+or baseline). the asia group keeps the owner's earlier informal choice:
+south korea sits with the asia color, not in a separate east asia bucket.
 
-- green, south asia: aisha ahmad, palak kapoor, jiaa khurana
-- pink, southeast asia (and south korea): fiona oberoi, maria mendoza,
-  carmen castillo, anwesha rahman, lee jin-woo, kim seo-yeon
-- blue, apac: janice o'hara, delilah musgrave, gabriel dubois, zoya
-  naqvvi, patricia everett
+- yellow, europe: juliette cavanaugh, saskia crevillo, juliana gorgova,
+  adriana phelps, madison monroe, phoebe kemper, lucie kemper,
+  dominic fletcher, kacey hayes, dasha melnyk, darragh cromwell,
+  lola kincaid
+- pink, asia: fiona oberoi, maria mendoza, carmen castillo,
+  anwesha rahman, lee jin-woo, kim seo-yeon, siona chun
+- blue, oceania (the sheet's "apac"): janice o'hara, delilah musgrave,
+  gabriel dubois, zoya naqvvi, patricia everett, naomi patterson
 - light orange, west asia / mena: yasmin yazici, avi-ben malachi,
   faizah aisler, fatima karim
 - purple, latam: daniela hernandez, natalia devora, amelie ramos,
   valeria torres, stella conklin, naomi da'silva, denise da'silva,
-  alesia romero
-- brown, other africa: jana rasheed, mackenzie ziegler
-- uncolored: everyone else (north america and europe fall outside the
-  six region buckets, so they stay plain white, same as the baseline
-  entries with no distinguishing fields)
+  alesia romero, dana sanchez
+- green, south asia: aisha ahmad, palak kapoor, jiaa khurana
+- brown, africa: jana rasheed, mackenzie ziegler
+- uncolored, north america: mahika jaiswal, dianne collier,
+  patrick miller, celia witherspoon, jeremiah brown jr., maya mason,
+  rhea patel, rachel shaw, melanie harris, isobel langford,
+  jade miller mcdougle, bronwyn flynn, stephanie estella rojas,
+  jessica ponton. gemma stays uncolored until her residence is filled.
 
 ## source
 
-populated by the owner across four pasted sheets, oct 6-7 2026 (29
+populated by the owner across five pasted sheets, oct 6-7 2026 (29
 names, then +6, then +12, then a corrected/expanded paste on oct 7
-adding 5 artists and the first 6 buyers = 52 artists, 6 buyers total).
-artist names and the columns shown above are authoritative where
-filled; remaining cells stay tbd until the matching sheet columns are
-pasted. more names may still be added.
+adding 5 artists and the first 6 buyers, then the juliettecavanaugh7
+pdf adding 4 artists = 58 artists, 6 buyers total). artist names and
+the columns shown above are authoritative where filled; remaining
+cells stay tbd until the matching sheet columns are pasted. more names
+may still be added.
