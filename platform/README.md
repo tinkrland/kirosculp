@@ -21,6 +21,8 @@ platform is the offering surface. it turns an accepted design release into somet
 ## creator access and telemetry
 
 [human creator admission](creator-access.md) is invitation-based. the
+[identity model](identity-model.md) defines the account ids (cin, sin,
+bin) and their separation from handles and display names. the
 [creator-integrity problem](creator-integrity/problem.md) and
 [solution](creator-integrity/solution.md) distinguish autonomous account farming
 from tessa's normal built-in role. storefront publication requires a verified phone

@@ -20,7 +20,8 @@ independent namespaces on two different surfaces: changing one never
 changes the other, and neither is derived from the immutable backend
 ids. the artist account and the shop are separate objects, currently
 connected; see
-[creator access](../creator-access.md).
+[creator access](../creator-access.md) and the
+[identity model](../identity-model.md).
 
 ## publication and analytics policy
 
