@@ -46,7 +46,7 @@ color key" below). columns not visible in the sheet stay tbd.
 | aisha ahmad | tbd | dhaka, bangladesh | - | - | - | - | launch creator, south asia strict-corridor |
 | palak kapoor | tbd | new delhi, india | - | - | - | - | south asia strict-corridor fixture |
 | jiaa khurana | tbd | uttarakhand, india | - | - | - | - | south asia strict-corridor fixture |
-| jeremiah brown jr. | tbd | baltimore, maryland | us rail | 17 | - | - | minor creator, payout holds until 18 (parked, ruled oct 6) |
+| jeremiah brown jr. | tbd | baltimore, maryland | us rail | 17 | - | "hey whatup guys, im not 18 yet but im still selling. no biggie, when i turn 18 in a few months, i'll do the kyc to take the $ and till then, y'all just hold it for me pls" | minor creator, payout holds until 18 (parked, ruled oct 6); quote owner-confirmed oct 7 |
 | maya mason | tbd | arizona, united states | - | - | - | - | baseline us fixture |
 | natalia devora | tbd | sao paulo, brazil | - | - | - | - | latam fixture |
 | rhea patel | tbd | austin, texas | bailiwick of guernsey passport, us bank | - | - | - | crown-dependency passport/rail mismatch |
