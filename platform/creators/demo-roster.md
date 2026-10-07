@@ -18,14 +18,14 @@ color key" below). columns not visible in the sheet stay tbd.
 
 | artist | shop handle | residence | passport / rail note | age | pronouns | description | fixture intent |
 |---|---|---|---|---|---|---|---|
-| mahika jaiswal | @divajewels | piscataway, nj | in passport, nj bank | 20 | - | economics student @ rutgers | launch creator. passport/rail mismatch |
+| mahika jaiswal | @divajewels | piscataway, new jersey | in passport, nj bank | 20 | - | economics student @ rutgers | launch creator. passport/rail mismatch |
 | juliette cavanaugh | @jewelsbyjules | france | - | - | - | - | launch-roster addition |
 | gemma | @gemsbygemma | tbd | - | - | - | - | fields not yet captured |
-| saskia crevillo | tbd | hannover, germany, eu | - | 24 | - | - | fields not yet captured |
+| saskia crevillo | tbd | hannover, germany | - | 24 | - | - | fields not yet captured |
 | fiona oberoi | @daintydiva | singapore | - | - | - | - | fields not yet captured |
 | juliana gorgova | @ringstackbarbie | northern macedonia | - | 22 | - | - | launch-roster addition |
 | adriana phelps | tbd | paterna, valencia, spain | - | - | - | - | fields not yet captured |
-| madison monroe | tbd | - | - | - | - | - | baseline, no distinguishing fields |
+| madison monroe | tbd | palermo, italy | - | - | - | - | baseline, no distinguishing fields |
 | janice o'hara | tbd | perth, australia | - | - | - | - | fields not yet captured |
 | phoebe kemper | tbd | glasgow, scotland, uk | - | 21 | - | sibling (older) | shared-household fixture, pair with lucie |
 | lucie kemper | tbd | glasgow, scotland, uk | - | 19 | - | sibling (younger) | shared-household fixture, pair with phoebe |
@@ -70,6 +70,12 @@ color key" below). columns not visible in the sheet stay tbd.
 | mackenzie ziegler | tbd | franschhoek, south africa | - | - | - | - | baseline, no distinguishing fields |
 | isobel langford | tbd | eugene, oregon, usa | - | - | - | - | baseline, no distinguishing fields |
 | jade miller mcdougle | tbd | montpelier, vermont, usa | - | - | - | - | baseline, no distinguishing fields |
+| bronwyn flynn | tbd | louiseville, quebec, canada | - | - | - | - | baseline, no distinguishing fields |
+| stephanie estella rojas | tbd | miami, florida, united states | - | - | - | - | baseline, no distinguishing fields |
+| siona chun | tbd | seoul, south korea | - | - | - | - | baseline, no distinguishing fields |
+| dana sanchez | tbd | puerto rico, united states | - | - | - | - | baseline, no distinguishing fields |
+| jessica ponton | tbd | kansas, united states | - | - | - | - | baseline, no distinguishing fields |
+| naomi patterson | tbd | brisbane, australia | - | - | - | - | baseline, no distinguishing fields |
 
 ## buyers
 

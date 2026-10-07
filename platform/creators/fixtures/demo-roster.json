@@ -1,5 +1,5 @@
 {
-  "comment": "demo roster accounts, derived from platform/creators/demo-roster.md (58 artists, 6 buyers, oct 7 2026 sheet). columns follow the owner rulings (oct 7 2026): artist name is the legal name; preferred_name defaults to it unless authored. three location axes, all ISO 3166-1 alpha-2: residence is where they live (city-level from the roster sheet where stated; six pdf-added artists are country-level only; madison's row shows '-' in the sheet, palermo/italy comes from the oct 7 fixtures data); idv_country is the id-verification nationality (passport), defaulting to the residence market unless the roster states a passport (mahika IN, dasha UA, gabriel FR, rhea GG); bank_country is the payout rail destination, defaulting to the residence market unless specified otherwise. mismatches between the axes are common and legitimate, never auto-fail inputs. phone_number stays tbd: phone capture and voip classification are a separate addsculp add-on (themailtell-style), not fixture-seeded. cin/sin are assigned at seed time and recorded in demo-roster-accounts.json, with membership ids for shop links. usernames are generated fixture values; shop handles are the owner's sheet values.",
+  "comment": "demo roster accounts, derived from platform/creators/demo-roster.md (58 artists, 6 buyers, oct 7 2026 sheet). columns follow the owner rulings (oct 7 2026): artist name is the legal name; preferred_name defaults to it unless authored. three location axes, all ISO 3166-1 alpha-2: residence is where they live, city-level from the oct 7 roster sheet (juliettecavanaugh8.pdf), with the sheet's obvious typos normalized (galway, colombia, sao paulo, philippines, rosario); idv_country is the id-verification nationality (passport), defaulting to the residence market unless the roster states a passport (mahika IN, dasha UA, gabriel FR, rhea GG); bank_country is the payout rail destination, defaulting to the residence market unless specified otherwise. mismatches between the axes are common and legitimate, never auto-fail inputs. phone_number stays tbd: phone capture and voip classification are a separate addsculp add-on (themailtell-style), not fixture-seeded. cin/sin are assigned at seed time and recorded in demo-roster-accounts.json, with membership ids for shop links. usernames are generated fixture values; shop handles are the owner's sheet values.",
   "domain": "fixtures.sculptura.dev",
   "artists": [
     {
@@ -20,7 +20,7 @@
       "phone_number": null,
       "email": "mahika.jaiswal@fixtures.sculptura.dev",
       "idv_country": "IN",
-      "residence": "piscataway, nj"
+      "residence": "piscataway, new jersey"
     },
     {
       "name": "juliette cavanaugh",
@@ -74,7 +74,7 @@
       "phone_number": null,
       "email": "saskia.crevillo@fixtures.sculptura.dev",
       "idv_country": "DE",
-      "residence": "hannover, germany, eu"
+      "residence": "hannover, germany"
     },
     {
       "name": "fiona oberoi",
@@ -236,7 +236,7 @@
       "phone_number": null,
       "email": "dianne.collier@fixtures.sculptura.dev",
       "idv_country": "CA",
-      "residence": "toronto, ontario, ca"
+      "residence": "toronto, ontario, canada"
     },
     {
       "name": "dominic fletcher",
@@ -274,7 +274,7 @@
       "phone_number": null,
       "email": "patrick.miller@fixtures.sculptura.dev",
       "idv_country": "US",
-      "residence": "hoboken, nj"
+      "residence": "hoboken, new jersey"
     },
     {
       "name": "kacey hayes",
@@ -958,7 +958,7 @@
       "phone_number": null,
       "email": "bronwyn.flynn@fixtures.sculptura.dev",
       "idv_country": "CA",
-      "residence": "canada"
+      "residence": "louiseville, quebec, canada"
     },
     {
       "name": "stephanie estella rojas",
@@ -976,7 +976,7 @@
       "phone_number": null,
       "email": "stephanie.estella.rojas@fixtures.sculptura.dev",
       "idv_country": "US",
-      "residence": "united states"
+      "residence": "miami, florida, united states"
     },
     {
       "name": "siona chun",
@@ -994,7 +994,7 @@
       "phone_number": null,
       "email": "siona.chun@fixtures.sculptura.dev",
       "idv_country": "KR",
-      "residence": "south korea"
+      "residence": "seoul, south korea"
     },
     {
       "name": "dana sanchez",
@@ -1012,7 +1012,7 @@
       "phone_number": null,
       "email": "dana.sanchez@fixtures.sculptura.dev",
       "idv_country": "PR",
-      "residence": "puerto rico"
+      "residence": "puerto rico, united states"
     },
     {
       "name": "jessica ponton",
@@ -1030,7 +1030,7 @@
       "phone_number": null,
       "email": "jessica.ponton@fixtures.sculptura.dev",
       "idv_country": "US",
-      "residence": "united states"
+      "residence": "kansas, united states"
     },
     {
       "name": "naomi patterson",
@@ -1048,7 +1048,7 @@
       "phone_number": null,
       "email": "naomi.patterson@fixtures.sculptura.dev",
       "idv_country": "AU",
-      "residence": "australia"
+      "residence": "brisbane, australia"
     }
   ],
   "buyers": [
