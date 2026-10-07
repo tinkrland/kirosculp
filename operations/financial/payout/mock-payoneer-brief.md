@@ -145,11 +145,15 @@ signature scheme and say so in the readme, rather than inventing parity.
 
 ## 6. repo placement and workflow
 
-- work in tinkrland/kirosculp (the drafting workspace), on a dedicated branch
-  (suggested name: `mockpayoneer`). one leg per branch: do not mix payout
-  policy edits, security-leg files, or unrelated docs into this branch.
-  promotion into tinkrland/sculptura happens only when final, by the owner's
-  process.
+- superseded placement (oct 7 2026): this add-on now lives in its own repo,
+  tinkrland/addsculp, on orphan branch `localpayoneer`, per the decoupled
+  add-ons ruling (one orphan branch per standalone add-on; themailtell and
+  retelldb are the other reserved branches). the initial build was done on
+  tinkrland/kirosculp branch `mockpayoneer` (63f4d6b) and ported unchanged
+  to addsculp/localpayoneer (0e78e50); the kirosculp branch is superseded and
+  further work on the emulator happens only in addsculp.
+- all other constraints below (gate files, commit style, prose) still apply
+  inside addsculp.
 - commit messages: lowercase subject of about 50 chars stating the one idea;
   supporting detail and verification notes in the body.
 - all prose in the repo: lowercase (code, schemas, identifiers and external
