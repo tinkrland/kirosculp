@@ -32,7 +32,7 @@ color key" below). columns not visible in the sheet stay tbd.
 | yasmin yazici | tbd | istanbul, turkey | - | 23 | - | - | west asia bloc fixture |
 | dianne collier | tbd | toronto, ontario, ca | - | 20 | - | - | fields not yet captured |
 | dominic fletcher | tbd | malmo, sweden | - | 26 | he/him | - | fields not yet captured |
-| patrick miller | tbd | hoboken, nj | - | 22 | he/they | nyc fit alum -> nyu tisch grad student | fields not yet captured |
+| patrick miller | tbd | hoboken, new jersey | - | 22 | he/they | nyc fit alum -> nyu tisch grad student | fields not yet captured |
 | kacey hayes | tbd | northern ireland, uk | - | 24 | - | - | fields not yet captured |
 | delilah musgrave | tbd | canberra, australia | - | 18 | - | - | at-majority boundary case |
 | dasha melnyk | tbd | frankfurt, germany | ua passport, de bank | 26 | - | - | passport/rail mismatch |
@@ -46,7 +46,7 @@ color key" below). columns not visible in the sheet stay tbd.
 | aisha ahmad | tbd | dhaka, bangladesh | - | - | - | - | launch creator, south asia strict-corridor |
 | palak kapoor | tbd | new delhi, india | - | - | - | - | south asia strict-corridor fixture |
 | jiaa khurana | tbd | uttarakhand, india | - | - | - | - | south asia strict-corridor fixture |
-| jeremiah brown jr. | tbd | baltimore, maryland | us rail | 17 | - | "asks ... till then y'all just hold it for me pls" | minor creator, open ruling on kyc evasion request |
+| jeremiah brown jr. | tbd | baltimore, maryland | us rail | 17 | - | - | minor creator, payout holds until 18 (parked, ruled oct 6) |
 | maya mason | tbd | arizona, united states | - | - | - | - | baseline us fixture |
 | natalia devora | tbd | sao paulo, brazil | - | - | - | - | latam fixture |
 | rhea patel | tbd | austin, texas | bailiwick of guernsey passport, us bank | - | - | - | crown-dependency passport/rail mismatch |
