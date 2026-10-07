@@ -1,5 +1,5 @@
 {
-  "comment": "demo roster accounts, derived from platform/creators/demo-roster.md (58 artists, 6 buyers, oct 7 2026 sheet). columns follow the owner rulings (oct 7 2026): artist name is the legal name; preferred_name defaults to it unless authored. residence is where they live; bank_country is the payout rail destination, defaulting to the residence market (ISO 3166-1 alpha-2) unless specified otherwise; idv (id nationality) may differ from both. phone_number stays tbd: phone capture and voip classification are a separate addsculp add-on (themailtell-style), not fixture-seeded. cin/sin are assigned at seed time and recorded in demo-roster-accounts.json. usernames are generated fixture values; shop handles are the owner's sheet values.",
+  "comment": "demo roster accounts, derived from platform/creators/demo-roster.md (58 artists, 6 buyers, oct 7 2026 sheet). columns follow the owner rulings (oct 7 2026): artist name is the legal name; preferred_name defaults to it unless authored. three location axes, all ISO 3166-1 alpha-2: residence is where they live (in the roster text); idv_country is the id-verification nationality (passport), defaulting to the residence market unless the roster states a passport (mahika IN, dasha UA, gabriel FR, rhea GG); bank_country is the payout rail destination, defaulting to the residence market unless specified otherwise. mismatches between the axes are common and legitimate, never auto-fail inputs. phone_number stays tbd: phone capture and voip classification are a separate addsculp add-on (themailtell-style), not fixture-seeded. cin/sin are assigned at seed time and recorded in demo-roster-accounts.json, with membership ids for shop links. usernames are generated fixture values; shop handles are the owner's sheet values.",
   "domain": "fixtures.sculptura.dev",
   "artists": [
     {
@@ -18,7 +18,8 @@
       ],
       "notes": "economics student @ rutgers",
       "phone_number": null,
-      "email": "mahika.jaiswal@fixtures.sculptura.dev"
+      "email": "mahika.jaiswal@fixtures.sculptura.dev",
+      "idv_country": "IN"
     },
     {
       "name": "juliette cavanaugh",
@@ -34,7 +35,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "juliette.cavanaugh@fixtures.sculptura.dev"
+      "email": "juliette.cavanaugh@fixtures.sculptura.dev",
+      "idv_country": "FR"
     },
     {
       "name": "gemma",
@@ -50,7 +52,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "gemma@fixtures.sculptura.dev"
+      "email": "gemma@fixtures.sculptura.dev",
+      "idv_country": null
     },
     {
       "name": "saskia crevillo",
@@ -66,7 +69,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "saskia.crevillo@fixtures.sculptura.dev"
+      "email": "saskia.crevillo@fixtures.sculptura.dev",
+      "idv_country": "DE"
     },
     {
       "name": "fiona oberoi",
@@ -82,7 +86,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "fiona.oberoi@fixtures.sculptura.dev"
+      "email": "fiona.oberoi@fixtures.sculptura.dev",
+      "idv_country": "SG"
     },
     {
       "name": "juliana gorgova",
@@ -98,7 +103,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "juliana.gorgova@fixtures.sculptura.dev"
+      "email": "juliana.gorgova@fixtures.sculptura.dev",
+      "idv_country": "MK"
     },
     {
       "name": "adriana phelps",
@@ -114,7 +120,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "adriana.phelps@fixtures.sculptura.dev"
+      "email": "adriana.phelps@fixtures.sculptura.dev",
+      "idv_country": "ES"
     },
     {
       "name": "madison monroe",
@@ -130,7 +137,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "madison.monroe@fixtures.sculptura.dev"
+      "email": "madison.monroe@fixtures.sculptura.dev",
+      "idv_country": "IT"
     },
     {
       "name": "janice o'hara",
@@ -146,7 +154,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "janice.ohara@fixtures.sculptura.dev"
+      "email": "janice.ohara@fixtures.sculptura.dev",
+      "idv_country": "AU"
     },
     {
       "name": "phoebe kemper",
@@ -162,7 +171,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "phoebe.kemper@fixtures.sculptura.dev"
+      "email": "phoebe.kemper@fixtures.sculptura.dev",
+      "idv_country": "GB"
     },
     {
       "name": "lucie kemper",
@@ -178,7 +188,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "lucie.kemper@fixtures.sculptura.dev"
+      "email": "lucie.kemper@fixtures.sculptura.dev",
+      "idv_country": "GB"
     },
     {
       "name": "yasmin yazici",
@@ -194,7 +205,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "yasmin.yazici@fixtures.sculptura.dev"
+      "email": "yasmin.yazici@fixtures.sculptura.dev",
+      "idv_country": "TR"
     },
     {
       "name": "dianne collier",
@@ -210,7 +222,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "dianne.collier@fixtures.sculptura.dev"
+      "email": "dianne.collier@fixtures.sculptura.dev",
+      "idv_country": "CA"
     },
     {
       "name": "dominic fletcher",
@@ -226,7 +239,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "dominic.fletcher@fixtures.sculptura.dev"
+      "email": "dominic.fletcher@fixtures.sculptura.dev",
+      "idv_country": "SE"
     },
     {
       "name": "patrick miller",
@@ -244,7 +258,8 @@
       ],
       "notes": "nyc fit alum -> nyu tisch grad student",
       "phone_number": null,
-      "email": "patrick.miller@fixtures.sculptura.dev"
+      "email": "patrick.miller@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "kacey hayes",
@@ -260,7 +275,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "kacey.hayes@fixtures.sculptura.dev"
+      "email": "kacey.hayes@fixtures.sculptura.dev",
+      "idv_country": "GB"
     },
     {
       "name": "delilah musgrave",
@@ -276,7 +292,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "delilah.musgrave@fixtures.sculptura.dev"
+      "email": "delilah.musgrave@fixtures.sculptura.dev",
+      "idv_country": "AU"
     },
     {
       "name": "dasha melnyk",
@@ -292,7 +309,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "dasha.melnyk@fixtures.sculptura.dev"
+      "email": "dasha.melnyk@fixtures.sculptura.dev",
+      "idv_country": "UA"
     },
     {
       "name": "avi-ben malachi",
@@ -308,7 +326,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "avi-ben.malachi@fixtures.sculptura.dev"
+      "email": "avi-ben.malachi@fixtures.sculptura.dev",
+      "idv_country": "IL"
     },
     {
       "name": "darragh cromwell",
@@ -324,7 +343,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "darragh.cromwell@fixtures.sculptura.dev"
+      "email": "darragh.cromwell@fixtures.sculptura.dev",
+      "idv_country": "IE"
     },
     {
       "name": "gabriel dubois",
@@ -340,7 +360,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "gabriel.dubois@fixtures.sculptura.dev"
+      "email": "gabriel.dubois@fixtures.sculptura.dev",
+      "idv_country": "FR"
     },
     {
       "name": "faizah aisler",
@@ -356,7 +377,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "faizah.aisler@fixtures.sculptura.dev"
+      "email": "faizah.aisler@fixtures.sculptura.dev",
+      "idv_country": "SA"
     },
     {
       "name": "zoya naqvvi",
@@ -372,7 +394,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "zoya.naqvvi@fixtures.sculptura.dev"
+      "email": "zoya.naqvvi@fixtures.sculptura.dev",
+      "idv_country": "AU"
     },
     {
       "name": "daniela hernandez",
@@ -388,7 +411,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "daniela.hernandez@fixtures.sculptura.dev"
+      "email": "daniela.hernandez@fixtures.sculptura.dev",
+      "idv_country": "CO"
     },
     {
       "name": "celia witherspoon",
@@ -404,7 +428,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "celia.witherspoon@fixtures.sculptura.dev"
+      "email": "celia.witherspoon@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "aisha ahmad",
@@ -420,7 +445,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "aisha.ahmad@fixtures.sculptura.dev"
+      "email": "aisha.ahmad@fixtures.sculptura.dev",
+      "idv_country": "BD"
     },
     {
       "name": "palak kapoor",
@@ -436,7 +462,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "palak.kapoor@fixtures.sculptura.dev"
+      "email": "palak.kapoor@fixtures.sculptura.dev",
+      "idv_country": "IN"
     },
     {
       "name": "jiaa khurana",
@@ -452,7 +479,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "jiaa.khurana@fixtures.sculptura.dev"
+      "email": "jiaa.khurana@fixtures.sculptura.dev",
+      "idv_country": "IN"
     },
     {
       "name": "jeremiah brown jr.",
@@ -468,7 +496,8 @@
       "classification": [],
       "notes": "asks to hold payout till 18: 'till then y'all just hold it for me pls'",
       "phone_number": null,
-      "email": "jeremiah.brown.jr.@fixtures.sculptura.dev"
+      "email": "jeremiah.brown.jr.@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "maya mason",
@@ -484,7 +513,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "maya.mason@fixtures.sculptura.dev"
+      "email": "maya.mason@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "natalia devora",
@@ -500,7 +530,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "natalia.devora@fixtures.sculptura.dev"
+      "email": "natalia.devora@fixtures.sculptura.dev",
+      "idv_country": "BR"
     },
     {
       "name": "rhea patel",
@@ -516,7 +547,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "rhea.patel@fixtures.sculptura.dev"
+      "email": "rhea.patel@fixtures.sculptura.dev",
+      "idv_country": "GG"
     },
     {
       "name": "maria mendoza",
@@ -532,7 +564,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "maria.mendoza@fixtures.sculptura.dev"
+      "email": "maria.mendoza@fixtures.sculptura.dev",
+      "idv_country": "PH"
     },
     {
       "name": "carmen castillo",
@@ -548,7 +581,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "carmen.castillo@fixtures.sculptura.dev"
+      "email": "carmen.castillo@fixtures.sculptura.dev",
+      "idv_country": "PH"
     },
     {
       "name": "anwesha rahman",
@@ -564,7 +598,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "anwesha.rahman@fixtures.sculptura.dev"
+      "email": "anwesha.rahman@fixtures.sculptura.dev",
+      "idv_country": "ID"
     },
     {
       "name": "rachel shaw",
@@ -580,7 +615,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "rachel.shaw@fixtures.sculptura.dev"
+      "email": "rachel.shaw@fixtures.sculptura.dev",
+      "idv_country": "CA"
     },
     {
       "name": "patricia everett",
@@ -596,7 +632,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "patricia.everett@fixtures.sculptura.dev"
+      "email": "patricia.everett@fixtures.sculptura.dev",
+      "idv_country": "NZ"
     },
     {
       "name": "melanie harris",
@@ -612,7 +649,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "melanie.harris@fixtures.sculptura.dev"
+      "email": "melanie.harris@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "lee jin-woo",
@@ -628,7 +666,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "lee.jin-woo@fixtures.sculptura.dev"
+      "email": "lee.jin-woo@fixtures.sculptura.dev",
+      "idv_country": "KR"
     },
     {
       "name": "kim seo-yeon",
@@ -644,7 +683,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "kim.seo-yeon@fixtures.sculptura.dev"
+      "email": "kim.seo-yeon@fixtures.sculptura.dev",
+      "idv_country": "KR"
     },
     {
       "name": "fatima karim",
@@ -660,7 +700,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "fatima.karim@fixtures.sculptura.dev"
+      "email": "fatima.karim@fixtures.sculptura.dev",
+      "idv_country": "EG"
     },
     {
       "name": "jana rasheed",
@@ -676,7 +717,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "jana.rasheed@fixtures.sculptura.dev"
+      "email": "jana.rasheed@fixtures.sculptura.dev",
+      "idv_country": "NG"
     },
     {
       "name": "amelie ramos",
@@ -692,7 +734,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "amelie.ramos@fixtures.sculptura.dev"
+      "email": "amelie.ramos@fixtures.sculptura.dev",
+      "idv_country": "MX"
     },
     {
       "name": "valeria torres",
@@ -708,7 +751,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "valeria.torres@fixtures.sculptura.dev"
+      "email": "valeria.torres@fixtures.sculptura.dev",
+      "idv_country": "CO"
     },
     {
       "name": "stella conklin",
@@ -724,7 +768,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "stella.conklin@fixtures.sculptura.dev"
+      "email": "stella.conklin@fixtures.sculptura.dev",
+      "idv_country": "BR"
     },
     {
       "name": "naomi da'silva",
@@ -740,7 +785,8 @@
       "classification": [],
       "notes": "mother of denise",
       "phone_number": null,
-      "email": "naomi.dasilva@fixtures.sculptura.dev"
+      "email": "naomi.dasilva@fixtures.sculptura.dev",
+      "idv_country": "AR"
     },
     {
       "name": "denise da'silva",
@@ -756,7 +802,8 @@
       "classification": [],
       "notes": "daughter of naomi",
       "phone_number": null,
-      "email": "denise.dasilva@fixtures.sculptura.dev"
+      "email": "denise.dasilva@fixtures.sculptura.dev",
+      "idv_country": "AR"
     },
     {
       "name": "alesia romero",
@@ -772,7 +819,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "alesia.romero@fixtures.sculptura.dev"
+      "email": "alesia.romero@fixtures.sculptura.dev",
+      "idv_country": "AR"
     },
     {
       "name": "lola kincaid",
@@ -788,7 +836,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "lola.kincaid@fixtures.sculptura.dev"
+      "email": "lola.kincaid@fixtures.sculptura.dev",
+      "idv_country": "CH"
     },
     {
       "name": "mackenzie ziegler",
@@ -804,7 +853,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "mackenzie.ziegler@fixtures.sculptura.dev"
+      "email": "mackenzie.ziegler@fixtures.sculptura.dev",
+      "idv_country": "ZA"
     },
     {
       "name": "isobel langford",
@@ -820,7 +870,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "isobel.langford@fixtures.sculptura.dev"
+      "email": "isobel.langford@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "jade miller mcdougle",
@@ -836,7 +887,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "jade.miller.mcdougle@fixtures.sculptura.dev"
+      "email": "jade.miller.mcdougle@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "bronwyn flynn",
@@ -852,7 +904,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "bronwyn.flynn@fixtures.sculptura.dev"
+      "email": "bronwyn.flynn@fixtures.sculptura.dev",
+      "idv_country": "CA"
     },
     {
       "name": "stephanie estella rojas",
@@ -868,7 +921,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "stephanie.estella.rojas@fixtures.sculptura.dev"
+      "email": "stephanie.estella.rojas@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "siona chun",
@@ -884,7 +938,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "siona.chun@fixtures.sculptura.dev"
+      "email": "siona.chun@fixtures.sculptura.dev",
+      "idv_country": "KR"
     },
     {
       "name": "dana sanchez",
@@ -900,7 +955,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "dana.sanchez@fixtures.sculptura.dev"
+      "email": "dana.sanchez@fixtures.sculptura.dev",
+      "idv_country": "PR"
     },
     {
       "name": "jessica ponton",
@@ -916,7 +972,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "jessica.ponton@fixtures.sculptura.dev"
+      "email": "jessica.ponton@fixtures.sculptura.dev",
+      "idv_country": "US"
     },
     {
       "name": "naomi patterson",
@@ -932,7 +989,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "naomi.patterson@fixtures.sculptura.dev"
+      "email": "naomi.patterson@fixtures.sculptura.dev",
+      "idv_country": "AU"
     }
   ],
   "buyers": [
@@ -949,7 +1007,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "mina.davenport@fixtures.sculptura.dev"
+      "email": "mina.davenport@fixtures.sculptura.dev",
+      "idv_country": null
     },
     {
       "name": "amelia davenport",
@@ -964,7 +1023,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "amelia.davenport@fixtures.sculptura.dev"
+      "email": "amelia.davenport@fixtures.sculptura.dev",
+      "idv_country": null
     },
     {
       "name": "hannah mallard",
@@ -979,7 +1039,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "hannah.mallard@fixtures.sculptura.dev"
+      "email": "hannah.mallard@fixtures.sculptura.dev",
+      "idv_country": null
     },
     {
       "name": "luella hathaway",
@@ -994,7 +1055,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "luella.hathaway@fixtures.sculptura.dev"
+      "email": "luella.hathaway@fixtures.sculptura.dev",
+      "idv_country": null
     },
     {
       "name": "francessa belmont",
@@ -1009,7 +1071,8 @@
       "classification": [],
       "notes": null,
       "phone_number": null,
-      "email": "francessa.belmont@fixtures.sculptura.dev"
+      "email": "francessa.belmont@fixtures.sculptura.dev",
+      "idv_country": null
     },
     {
       "name": "pierre",
@@ -1024,7 +1087,8 @@
       "classification": [],
       "notes": "buying for his gf / soon-to-be fiancee",
       "phone_number": null,
-      "email": "pierre@fixtures.sculptura.dev"
+      "email": "pierre@fixtures.sculptura.dev",
+      "idv_country": null
     }
   ]
 }
