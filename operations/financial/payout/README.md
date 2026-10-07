@@ -25,3 +25,8 @@ see `stripe-vs-paddle.md` for the provider decision.
 - add verification gates, ledger balances, holds, transfers, failures, and reconciliation.
 
 see the [complete source audit](../../../docs/current-state-audit.md) for cross-domain findings and build order.
+
+see [dpms-provider-research.md](dpms-provider-research.md) for how stripe,
+payoneer and paypal each classify the dpms category (restricted, pre-approval,
+and checkout-prohibited respectively), the demo-mode story per provider, and
+the spec outline for the mock payoneer service.
