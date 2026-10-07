@@ -1,4 +1,4 @@
-// auto-generated from tinkrland/kirosculp demo-roster-accounts.json (46cf62e)
+// auto-generated from tinkrland/kirosculp demo-roster-accounts.json (e72a9a8)
 // coordinates assigned from residence notes; same-city siblings are slightly offset.
 //
 // pins: artist = cherry rose, buyer = thistle. accounts with region "tbd"
@@ -453,7 +453,7 @@ export const ACCOUNTS: Account[] = [
     bank_country: "US",
     idv_country: "US",
     classification: [],
-    notes: null,
+    notes: "hey whatup guys, im not 18 yet but im still selling. no biggie, when i turn 18 in a few months, i'll do the kyc to take the $ and till then, y'all just hold it for me pls",
     shop_handle: null,
     age: 17,
   },
