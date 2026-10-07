@@ -30,3 +30,5 @@ see [dpms-provider-research.md](dpms-provider-research.md) for how stripe,
 payoneer and paypal each classify the dpms category (restricted, pre-approval,
 and checkout-prohibited respectively), the demo-mode story per provider, and
 the spec outline for the mock payoneer service.
+
+see [mock-payoneer-brief.md](mock-payoneer-brief.md) for the handoff brief: a localstripe-style mock of payoneer mass payout v4 for demo-mode payout development.

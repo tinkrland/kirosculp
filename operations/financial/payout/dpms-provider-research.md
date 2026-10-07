@@ -152,3 +152,5 @@ scripts in the consolidated repo, never sandbox-only.
 
 none of these block demo-mode work; all three block live money and should be
 resolved in the order the rails matrix assigns each provider a real corridor.
+
+see [mock-payoneer-brief.md](mock-payoneer-brief.md) for the full handoff brief for the implementing agent, with localstripe as the architecture precedent.
