@@ -1,0 +1,344 @@
+/* ── rose theme — "cherry & thistle", ported from fabnet ──
+ * Palette: cherry-blossom #edafb8 · cotton-rose #f2c8c8 · powder-petal #f7e1d7
+ *          dust-grey #dedbd2 · thistle #dec8e8
+ * Map tinting: CartoDB Voyager nolabels (warm beige land)
+ * hue+298° → land=333° dusty-rose, parks=28° amber
+ */
+
+:root {
+  --background: 0 38% 96%;
+  --foreground: 280 22% 22%;
+  --muted: 46 10% 91%;
+  --muted-foreground: 340 8% 48%;
+  --popover: 18 50% 97%;
+  --popover-foreground: 280 22% 22%;
+  --border: 340 12% 82%;
+  --input: 340 12% 82%;
+  --card: 18 50% 97%;
+  --card-foreground: 280 22% 22%;
+  --primary: 351 38% 54%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 46 10% 91%;
+  --secondary-foreground: 280 22% 22%;
+  --accent: 283 35% 84%;
+  --accent-foreground: 280 22% 22%;
+  --destructive: 0 60% 48%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 351 38% 65%;
+
+  /* chart swatches */
+  --chart-1: 351 52% 74%;
+  --chart-2: 283 36% 78%;
+  --chart-3: 351 40% 86%;
+  --chart-4: 0 45% 82%;
+  --chart-5: 283 28% 86%;
+
+  /* map pin colors — artists = make (dusty cherry), buyers = lib (muted thistle) */
+  --lib-color: 283 28% 68%;
+  --make-color: 351 40% 60%;
+  --uni-color: 20 55% 65%;
+
+  --font-sans: 'Work Sans', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.10);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.16);
+}
+
+* { border-color: hsl(var(--border)); }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+#root { height: 100vh; }
+
+.atlas { position: fixed; inset: 0; background: hsl(var(--background)); overflow: hidden; }
+
+/* ── map tile tinting (dusty rose) ── */
+.leaflet-tile-pane {
+  filter: hue-rotate(298deg) saturate(1.6) brightness(0.98) contrast(0.90);
+}
+
+/* ── leaflet fixes ── */
+.leaflet-container { width: 100%; height: 100%; z-index: 0; }
+.leaflet-container,
+.leaflet-control,
+.leaflet-tooltip,
+.leaflet-popup-content-wrapper { font-family: var(--font-sans); }
+.leaflet-control-zoom { display: none !important; }
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  opacity: 0.38;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── area name labels (wandery style) ── */
+.at-continent-label,
+.at-country-label {
+  pointer-events: none;
+  background: transparent !important;
+  border: none !important;
+}
+.at-continent-label span {
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground) / 0.42);
+  text-shadow: 0 0 8px hsl(var(--background)), 0 0 16px hsl(var(--background));
+  white-space: nowrap;
+}
+.at-country-label span {
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground) / 0.62);
+  text-shadow: 0 0 4px hsl(var(--background)), 0 0 8px hsl(var(--background));
+  white-space: nowrap;
+}
+
+/* ── pin hover tooltip ── */
+.fab-hover-tooltip {
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-md) !important;
+  padding: 8px 13px !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+.fab-hover-tooltip::before { border-top-color: hsl(var(--card)) !important; }
+.leaflet-tooltip-top.fab-hover-tooltip { margin-bottom: 6px; }
+.fab-tt-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: hsl(var(--foreground)) !important;
+  line-height: 1.3;
+}
+.fab-tt-type {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: hsl(var(--muted-foreground)) !important;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* ── vignette ── */
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255,245,240,0) 55%, rgba(80,50,70,0.10) 100%),
+    radial-gradient(80% 60% at 50% 100%, rgba(255,245,240,0) 60%, rgba(80,50,70,0.10) 100%);
+}
+
+/* ── top brand ── */
+.top-brand {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground) / 0.85);
+}
+
+/* ── top-left meta ── */
+.top-meta {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 30;
+  max-width: 240px;
+}
+.top-meta-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: hsl(var(--muted-foreground) / 0.8);
+}
+.top-meta-blurb {
+  margin-top: 3px;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.45;
+  color: hsl(var(--muted-foreground));
+}
+.top-meta-count {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground) / 0.9);
+}
+
+/* ── left area rail ── */
+.area-rail {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.area-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border) / 0.6);
+  background: hsl(var(--card) / 0.7);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: hsl(var(--muted-foreground));
+  text-align: left;
+}
+.area-chip:hover { color: hsl(var(--foreground)); }
+.area-chip.on {
+  background: hsl(333 45% 78% / 0.35);
+  border-color: transparent;
+  color: hsl(var(--foreground));
+  box-shadow: 0 0 0 1px hsl(351 38% 65% / 0.45), 0 4px 18px hsl(351 38% 60% / 0.18);
+}
+.area-chip-count {
+  font-size: 9px;
+  opacity: 0.72;
+}
+
+/* ── account card ── */
+.account-card {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  z-index: 40;
+  width: 280px;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 18px 20px;
+  animation: cardIn 0.22s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+@keyframes cardIn {
+  from { transform: translateY(-50%) translateX(12px); opacity: 0; }
+  to   { transform: translateY(-50%) translateX(0);    opacity: 1; }
+}
+.account-card-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: hsl(var(--muted-foreground));
+}
+.account-card-close:hover { color: hsl(var(--foreground)); }
+.account-card-kind {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: hsl(var(--primary) / 0.85);
+}
+.account-card-name {
+  margin: 4px 0 2px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.account-card-shop {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+}
+.account-card-facts {
+  margin: 14px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.account-card-facts > div { display: flex; flex-direction: column; gap: 1px; }
+.account-card-facts dt {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: hsl(var(--muted-foreground) / 0.75);
+}
+.account-card-facts dd {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+/* ── legend ── */
+.legend {
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+}
+.legend { justify-content: flex-end; }
+.legend-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: -1px;
+}
+
+@media (max-width: 720px) {
+  .area-rail {
+    top: auto;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    max-width: 94vw;
+    overflow-x: auto;
+    padding: 4px;
+  }
+  .account-card { top: auto; bottom: 70px; right: 12px; left: 12px; width: auto; }
+}
