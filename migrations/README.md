@@ -37,3 +37,13 @@ see [the schema contract and access requirements](../admin/creator-trust/README.
 - [0010_private_buyer_trust.sql](0010_private_buyer_trust.sql): the separate
   registered-buyer model, using 0009 evidence validation and admin-only
   authorization. locally tested only; apply after 0009 when deployment is authorized.
+
+- [0011_market_account_members.sql](0011_market_account_members.sql):
+  cin-to-sin membership model. cin and sin stay separate identities by
+  design (the owner kept the cardinality open: shared storefronts with
+  adjusted margins, or one creator running several workspaces under the
+  same payout kyc). the link is market_account_members (role, margin_pct),
+  with the v1 one-sin-per-cin rule expressed as a droppable index rather
+  than a structural constraint. rewrites 0005's intake policy, which
+  coupled shop handle to artist username, to the membership rule. apply
+  after 0010; safe whether or not the superseded column-link draft ran.

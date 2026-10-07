@@ -149,6 +149,13 @@ async function seedArtist(artist) {
         slug: `${artist.shop_handle}-${crypto.createHash('sha256').update(artist.shop_handle).digest('hex').slice(0, 8)}`,
         status: 'active',
       });
+      // cin-to-sin membership (migration 0011): the owner row claims the
+      // shop. co_runner rows would be authored data, never seeded defaults.
+      record.membership_id = await upsert('market_account_members', 'creator_profile_id,market_account_id', {
+        creator_profile_id: record.cin,
+        market_account_id: record.sin,
+        role: 'owner',
+      });
     } else {
       record.shop_handle = null;
       record.sin = null;
