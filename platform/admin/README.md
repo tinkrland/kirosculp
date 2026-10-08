@@ -8,8 +8,12 @@ levels and internal classifications still holds inside it: admins see
 operational data because their job requires it, and none of it is
 ever rendered back to creators or buyers.
 
-this is a planning doc. the role split below is proposed, not
-ratified; today a solo owner holds all duties by default.
+the role split is ratified. sculptura has one human today, and the
+owner deliberately holds both roles as different logins with different
+views: same person, two hats, and the audit log always records which
+role acted. the separate views are a feature, not an overhead: routine
+operations happen in the admin view, and escalating to the superadmin
+login is the human version of least privilege.
 
 ## roles: admin is not one blob
 
@@ -25,11 +29,10 @@ flavor:
   grants, gate and threshold parameter changes, embargo-list review
   sign-off (owner duty today), break-glass actions.
 
-when there is more than one human, the split is load-bearing: a staff
-admin must not be able to promote themselves, so role grants are
-superadmin-only and no role can grant itself. in the solo phase the
-same person holds both; the boundary is recorded now so staff
-onboarding later is a grant, not a redesign.
+no role grants itself: role grants are superadmin-only, so a staff
+admin can never promote themselves. when staff join later, onboarding
+is a grant into the existing admin role, never a share of the
+superadmin login.
 
 ## capabilities inventory
 
