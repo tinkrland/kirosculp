@@ -11,6 +11,19 @@ manual review. issuer eligibility and application/review mechanics
 remain open. no invitation automatically grants publication, discovery
 or commission availability.
 
+invite codes are five alphanumeric characters, randomly generated and
+single-use, redeemable by exactly one artist. the code itself encodes
+nothing about the issuer or the redeemer: admission lineage (who was
+authorized to issue each invite, who redeemed it, whom the admitted
+creator goes on to invite) lives in the issuance record server-side,
+never in the code. internal meaning, proposed and not yet ratified:
+one cohort character encoding the issuance year-quarter (at-a-glance
+vintage and stale-code spotting), three random characters from a
+confusable-free alphabet (no 0/o, 1/i/l), and one trailing checksum
+character over the first four, so a mistyped code fails before it
+touches the redemption store and the endpoint can rate-limit on
+checksum validity rather than database hits.
+
 ## the artist account and its scope
 
 artist signup requires more than the buyer flow: an invite code, plus

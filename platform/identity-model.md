@@ -41,6 +41,28 @@ independent of every trust, corridor and market concept.
   buyer opts in, per the engagement and wishlist redaction rules
   ([engagement](buyers/engagement.md)).
 
+## id formats
+
+all three ids share one shape: a three-letter type prefix plus nine
+alphanumeric characters.
+
+- cin: `ART` followed by 9 alphanumeric characters
+- sin: `STR` followed by 9 alphanumeric characters
+- bin: `BUY` followed by 9 alphanumeric characters
+
+the nine characters are minted random and unguessable, collision-
+checked at mint, and never sequential: a sequential id invites
+enumeration and the prefix does not soften that. ids are minted
+uppercase and stored uppercase; lookups normalize case before
+matching, since an id quoted over support channels may arrive in any
+case. the prefix is the point of the format: the namespace is
+self-describing, so a reader of any internal record sees which object
+a number belongs to without a lookup, and a number pasted into the
+wrong lookup verb fails on its face instead of silently resolving.
+the nine characters carry no meaning at all: no issuance order, no
+market, no cohort, no trust, corridor or verification signal ever
+rides on an id.
+
 ## names versus handles versus ids
 
 three different layers, never collapsed:
@@ -89,7 +111,7 @@ current handles, never handle to id, and never name to anything.
 `lookup cin <number>`:
 
 ```
-lookup cin 12345678
+lookup cin ARTQ7X2K4M9
 
 username:    @artistusername
 storefront:  @storefrontname
@@ -103,10 +125,10 @@ handle: chaining `lookup cin` on the returned cin is the one path to
 handles, so no lookup output ever mixes the two namespaces.
 
 ```
-lookup sin 87654321
+lookup sin STRH3N8W5C2
 
 storefront:  @storefrontname
-owner_cin:   12345678
+owner_cin:   ARTQ7X2K4M9
 ```
 
 `lookup bin <number>` starts from a buyer-side record (an order, a
@@ -117,7 +139,7 @@ buyer trust level and review state are never lookup fields: they
 surface only in their own review queue, keyed by bin.
 
 ```
-lookup bin 24681357
+lookup bin BUYD6R1T8V4
 
 display_name: mina davenport
 account:      buyer, no public surface
