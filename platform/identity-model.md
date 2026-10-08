@@ -82,8 +82,11 @@ their settings page.
 
 ## admin lookup
 
-the admin panel exposes a cli-style lookup keyed by id. `lookup cin
-<number>` returns the account's join keys in a fixed shape:
+the admin panel exposes a cli-style lookup keyed by id, one verb per
+id, each returning a fixed shape. lookup resolves id to join keys and
+current handles, never handle to id, and never name to anything.
+
+`lookup cin <number>`:
 
 ```
 lookup cin 12345678
@@ -91,6 +94,33 @@ lookup cin 12345678
 username:    @artistusername
 storefront:  @storefrontname
 idv_complete: true
+```
+
+`lookup sin <number>` resolves a shop record when an admin starts from
+a storefront-side record (a shop report, a payout batch row). it
+returns the storefront handle and the owner's cin, not the owner's
+handle: chaining `lookup cin` on the returned cin is the one path to
+handles, so no lookup output ever mixes the two namespaces.
+
+```
+lookup sin 87654321
+
+storefront:  @storefrontname
+owner_cin:   12345678
+```
+
+`lookup bin <number>` starts from a buyer-side record (an order, a
+checkout anomaly, a buyer-trust queue entry). buyers have no public
+handle or profile in v1, so there is no handle to return; the line
+carries the display name and the fact of the account, nothing else.
+buyer trust level and review state are never lookup fields: they
+surface only in their own review queue, keyed by bin.
+
+```
+lookup bin 24681357
+
+display_name: mina davenport
+account:      buyer, no public surface
 ```
 
 admin-only: it exists because the ids are the join keys, so an admin

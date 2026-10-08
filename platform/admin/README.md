@@ -34,12 +34,37 @@ admin can never promote themselves. when staff join later, onboarding
 is a grant into the existing admin role, never a share of the
 superadmin login.
 
+## the two views
+
+the roles are two different logins, and the views are deliberately
+not nested: the superadmin view is not the admin view plus buttons.
+each screen exists in exactly one view, so the login itself is the
+privilege boundary and there is no role switch mid-session.
+
+- **admin view (staff login).** lookup cli (all three verbs: cin,
+  sin, bin), admission review queue, needs_review escalation queue,
+  parked queues (minor-creator age park, parked-market funds), the
+  invite tree as read-only lineage, embargo-list state as read-only,
+  and the actor's own audit slice. no issuer controls, no gate
+  parameters, no role screens, no credential custody.
+- **superadmin view (owner login).** the policy screens: invite-issuer
+  authorization and quotas, gate and threshold parameters, embargo-list
+  review sign-off, role grants, break-glass overrides, and the full
+  append-only audit log with break-glass entries pinned at the top.
+  queue triage and routine lookups stay in the admin view; the owner
+  logs in as staff for routine work and escalates by switching
+  logins, which is the human version of least privilege in practice.
+
 ## capabilities inventory
 
-- **lookup cli.** `lookup cin <number>` resolving username,
-  storefront and idv_complete, per [identity model](../identity-model.md).
-  lookup by id, never by name: admin resolution runs id to handle,
-  the reverse is not offered.
+- **lookup cli.** one verb per id, per [identity model](../identity-model.md):
+  `lookup cin <number>` resolving username, storefront and
+  idv_complete; `lookup sin <number>` resolving storefront and the
+  owner's cin; `lookup bin <number>` resolving the buyer's display
+  name, since buyers carry no public handle. lookup by id, never by
+  name: admin resolution runs id to join keys and handles, the reverse
+  is not offered, and sin output chains to cin for handles rather than
+  mixing namespaces.
 - **invite tree.** vgen-style admission lineage, not referral codes:
   which authorized issuer issued each invite, which creator redeemed
   it, whom those admitted creators later invite when separately
