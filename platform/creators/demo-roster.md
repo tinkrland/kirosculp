@@ -6,7 +6,8 @@ and none of their attributes should be read as creator policy. they
 exist to stress the admission, payout corridor, and review designs the
 way real edge-case users would.
 
-status: 58 artist names and 6 buyer names captured across five sheet
+buyers now live in their own registry at ../buyers/demo-buyers.md (split
+oct 8 2026). status: 58 artist names and 6 buyer names captured across five sheet
 pastes (oct 6-7 2026). the oct 7 paste corrected several residence
 cities that earlier pastes had only at country level and added a buyers
 table for the first time; a later oct 7 paste (juliettecavanaugh7 pdf)

@@ -98,6 +98,7 @@ resolving an account to its current handles goes through the id, not
 the other way around. creators and buyers never see this surface;
 creators read their own cin in dashboard settings as ruled above.
 
-the demo [roster](creators/demo-roster.md) currently captures names and
-handles only; when fixture CIN/SIN/BIN values are minted they belong in
-that table, not in the id definitions here.
+the demo [roster](creators/demo-roster.md) and [buyers registry](buyers/demo-buyers.md)
+capture names and handles only; when fixture CIN/SIN values are minted they
+belong in the roster table, BIN values in the buyers registry table, not in
+the id definitions here.

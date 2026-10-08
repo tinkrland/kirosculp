@@ -2,8 +2,9 @@
 // seed the demo roster accounts into a supabase project.
 // reads platform/creators/fixtures/demo-roster.json and creates, per artist:
 // an auth user, a creator_profiles row (the cin-bearing profile), and a
-// market_accounts shop where a shop handle exists. buyers get auth users
-// only; buyer-side profile tables do not exist yet.
+// market_accounts shop where a shop handle exists. buyers are seeded from
+// platform/buyers/fixtures/demo-buyers.json: an auth user plus a
+// buyer_profiles row (the bin-bearing profile, migration 0012).
 //
 // usage:
 //   SUPABASE_URL=https://<ref>.supabase.co \
@@ -27,6 +28,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const fixturesDir = path.join(here, '..', 'platform', 'creators', 'fixtures');
 const fixturesPath = path.join(fixturesDir, 'demo-roster.json');
 const accountsPath = path.join(fixturesDir, 'demo-roster-accounts.json');
+const buyerFixturesDir = path.join(here, '..', 'platform', 'buyers', 'fixtures');
+const buyerFixturesPath = path.join(buyerFixturesDir, 'demo-buyers.json');
+const buyerAccountsPath = path.join(buyerFixturesDir, 'demo-buyer-accounts.json');
 
 const url = process.env.SUPABASE_URL;
 const adminKey = process.env.SUPABASE_ADMIN_KEY;
@@ -36,6 +40,7 @@ if (!url || !adminKey) {
 }
 
 const fixtures = JSON.parse(fs.readFileSync(fixturesPath, 'utf8'));
+const buyerFixtures = JSON.parse(fs.readFileSync(buyerFixturesPath, 'utf8'));
 
 const authHeaders = { apikey: adminKey, Authorization: `Bearer ${adminKey}`, 'Content-Type': 'application/json' };
 const upsertHeaders = { ...authHeaders, Prefer: 'resolution=merge-duplicates,return=representation' };
@@ -168,6 +173,13 @@ async function seedArtist(artist) {
 
 async function seedBuyer(buyer) {
   const userId = await ensureUser(buyer);
+  const bin = userId
+    ? await upsert('buyer_profiles', 'user_email', {
+        user_email: buyer.email,
+        display_name: buyer.name,
+        user_id: userId,
+      })
+    : null;
   return {
     kind: 'buyer',
     name: buyer.name,
@@ -185,7 +197,8 @@ async function seedBuyer(buyer) {
     classification: buyer.classification,
     notes: buyer.notes,
     user_id: userId,
-    cin: null, // buyers carry no creator profile; bin is the auth user id
+    bin, // buyer_profiles row id (migration 0012); buyers carry no creator profile
+    cin: null,
     sin: null,
   };
 }
@@ -194,16 +207,19 @@ process.stdout.write('seeding artists... ');
 const artistRecords = await mapLimit(fixtures.artists, 8, seedArtist);
 console.log('done');
 process.stdout.write('seeding buyers... ');
-const buyerRecords = await mapLimit(fixtures.buyers, 8, seedBuyer);
+const buyerRecords = await mapLimit(buyerFixtures.buyers, 8, seedBuyer);
 console.log('done');
-const accounts = [...artistRecords, ...buyerRecords];
 
 fs.writeFileSync(accountsPath, JSON.stringify({
   seeded_from: 'demo-roster.json',
   supabase_url: url,
-  accounts,
+  accounts: artistRecords,
+}, null, 2));
+fs.writeFileSync(buyerAccountsPath, JSON.stringify({
+  seeded_from: 'demo-buyers.json',
+  supabase_url: url,
+  accounts: buyerRecords,
 }, null, 2));
 
-const artists = accounts.filter(a => a.kind === 'artist');
-console.log(`seeded: ${artists.length} artists (${artists.filter(a => a.sin).length} shops), ${accounts.filter(a => a.kind === 'buyer').length} buyers. users created: ${created}, reused: ${reused}, skipped: ${skipped}.`);
-console.log(`accounts registry written to ${accountsPath}`);
+console.log(`seeded: ${artistRecords.length} artists (${artistRecords.filter(a => a.sin).length} shops), ${buyerRecords.length} buyers (${buyerRecords.filter(a => a.bin).length} with bins). users created: ${created}, reused: ${reused}, skipped: ${skipped}.`);
+console.log(`registries written to ${accountsPath} and ${buyerAccountsPath}`);
