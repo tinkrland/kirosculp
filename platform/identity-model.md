@@ -44,24 +44,52 @@ independent of every trust, corridor and market concept.
 ## id formats
 
 all three ids share one shape: a three-letter type prefix plus nine
-alphanumeric characters.
+alphanumeric characters, grouped behind the scenes into three blocks
+of three (`ART XXX-XXX-XXX`). outwardly an id is the plain run
+(`ARTXXXXXXXXX`): only internal tooling renders the separators, and
+the block structure is a convenience for the people operating the
+system, never a promise to anyone reading a number off a screen.
 
-- cin: `ART` followed by 9 alphanumeric characters
-- sin: `STR` followed by 9 alphanumeric characters
-- bin: `BUY` followed by 9 alphanumeric characters
+- cin: `ART` + 9 alphanumeric characters
+- sin: `STR` + 9 alphanumeric characters
+- bin: `BUY` + 9 alphanumeric characters
 
-the nine characters are minted random and unguessable, collision-
-checked at mint, and never sequential: a sequential id invites
-enumeration and the prefix does not soften that. ids are minted
-uppercase and stored uppercase; lookups normalize case before
-matching, since an id quoted over support channels may arrive in any
-case. the prefix is the point of the format: the namespace is
-self-describing, so a reader of any internal record sees which object
-a number belongs to without a lookup, and a number pasted into the
-wrong lookup verb fails on its face instead of silently resolving.
-the nine characters carry no meaning at all: no issuance order, no
-market, no cohort, no trust, corridor or verification signal ever
-rides on an id.
+block semantics, one meaning per block:
+
+- **block 1, the epoch (chars 1-3):** when the id was minted, as a
+  base-36 count of weeks since the platform epoch. it gives
+  at-a-glance vintage in any internal record and keeps ids from
+  colliding across time without a global counter.
+- **block 2, the provenance (chars 4-6):** the administrative class
+  of the mint event, from a per-id-type registry of mnemonic
+  three-letter codes:
+  - cin: `inv` (invite-redeemed admission), `rev` (manual-review
+    admission), remaining codes reserved for future paths
+  - sin: `std` (the standard one-to-one shop), remaining codes
+    reserved for future shop classes
+  - bin: `dir` (direct signup), `gcx` (guest-checkout conversion),
+    `cmp` (commission-flow signup), remaining codes reserved
+- **block 3, the serial (chars 7-9):** two random characters plus one
+  checksum character computed over the preceding eight (epoch +
+  provenance + the two serial characters, prefix excluded), all over
+  the shared 36-character alphabet. the serial is what makes the id
+  unique within its epoch and provenance, minted collision-checked
+  and random rather than sequential, and the checksum makes a
+  mistyped or transposed id fail before it touches any store.
+
+ids are minted uppercase and stored uppercase; lookups normalize
+case before matching. the prefix keeps the namespace
+self-describing, so a number pasted into the wrong lookup verb fails
+on its face instead of silently resolving.
+
+the meaning budget stops at the administrative. the blocks never
+carry issuance order (the serial is random, not a sequence), market,
+geography, trust, corridor or verification state, and if a
+provenance code ever becomes a trust proxy in practice, the fix is to
+stop minting that code, never to start trusting it. the structure is
+not a security boundary: it is not published, but it is not secret
+either, and the ids' guarantees (uniqueness, checksum integrity, no
+enumeration value) hold whether or not the scheme is known.
 
 ## names versus handles versus ids
 
@@ -111,7 +139,7 @@ current handles, never handle to id, and never name to anything.
 `lookup cin <number>`:
 
 ```
-lookup cin ARTQ7X2K4M9
+lookup cin ART02XINVR8Y
 
 username:    @artistusername
 storefront:  @storefrontname
@@ -125,10 +153,10 @@ handle: chaining `lookup cin` on the returned cin is the one path to
 handles, so no lookup output ever mixes the two namespaces.
 
 ```
-lookup sin STRH3N8W5C2
+lookup sin STR02XSTDM2L
 
 storefront:  @storefrontname
-owner_cin:   ARTQ7X2K4M9
+owner_cin:   ART02XINVR8Y
 ```
 
 `lookup bin <number>` starts from a buyer-side record (an order, a
@@ -139,7 +167,7 @@ buyer trust level and review state are never lookup fields: they
 surface only in their own review queue, keyed by bin.
 
 ```
-lookup bin BUYD6R1T8V4
+lookup bin BUY02XGCXT5M
 
 display_name: mina davenport
 account:      buyer, no public surface
