@@ -59,6 +59,16 @@ voip use is legitimate privacy behavior. unknown: the declaration
 stands as a declaration; the verification itself (otp) is the gate's
 own step and stays the consumer's job.
 
+the 1.1.0 line_existence axis is adapter-only: the numbering plan says
+what a range is for, never whether a specific number has a subscriber,
+so the offline core always reports unknown and only a carrier adapter
+moves it. the gate's reading: a disconfirmed line is a correction
+question (the number cannot receive the otp anyway), and a stale
+existence report is skipped with its limitation, never trusted; number
+reassignment means no permanent verdicts. existence is an earlier-
+friction signal, not a second gate, because otp delivery is itself the
+check.
+
 ### thelocaletell: checkout address gate
 
 the dpms aml ruling bans three address-shape classes from buyer
@@ -70,6 +80,60 @@ not in the banned classes. the full rule lives in
 [operations/shipping](../../operations/shipping/README.md). address
 classes are not markets: this gate is destination-independent and
 feeds no market or corridor decision.
+
+the 0.3.0 address_existence axis is adapter-only: no local pattern
+engine has a delivery-point registry, so existence is a distinct
+finding from format validity and from every shape class, and the
+offline core always reports unknown. the gate's reading: a delivery
+point the validation source does not recognize (the unit-f case:
+format-valid, shape-clean, disconfirmed) blocks at submit time on
+deliverability and evidence-chain grounds, not aml suspicion, with
+the finding's staleness and coverage limitations carried on the
+record. unknown stays unknown: no adapter means existence was never
+checked, never a street-address confirmation. the usps dpv cmra
+indicator, when wired, is the strongest counter to street-style cmra
+addresses, which local patterns provably cannot catch; until then the
+honest non-coverage line in the shipping rules stands.
+
+## adapters to build
+
+the existence axes and the cmra counter are why adapters get built at
+all. the tells' own contracts set the constraint: external
+intelligence declares its data exposure, and adapters wanting more
+than the minimum do not get wired in. themailtell is domain_only,
+thephonetell is number_only, thelocaletell is address_only: no
+recipient names, no usage history, no full addresses shipped to third
+parties beyond the validation call itself.
+
+- **themailtell: no paid adapter for v1.** mx resolution is
+  dns-over-https (cloudflare, keyless), disposable and relay lists
+  are community or published data, and the two-route eligibility rule
+  does not need mailbox pings. full-address mailbox-existence
+  checkers exist but leak the entire address and stay out.
+- **thephonetell carrier adapter.** twilio lookup v2 line type
+  intelligence (docs verified by the tell, 2026-10-08): line types
+  including fixed and non-fixed voip, number-only exposure, feeding
+  the declared-comparison and the line-type signals. the
+  line_existence axis needs a live/in-service check (an hlr-class
+  product): verify the chosen provider's exact product at wiring
+  time, and treat numverify/numlookup free tiers as research aids,
+  never production adapters. keys: one carrier-lookup credential,
+  per-lookup priced.
+- **thelocaletell delivery-point adapter, per-market rollout.** us
+  first: a cass-certified chain with dpv confirmation, the dpv cmra
+  indicator and the business/residential indicator (smarty, melissa
+  and lob are candidates; smarty has a usable free tier). google
+  address validation covers many markets unit-level and is the
+  global fallback. national postal apis (royal mail paf, canada
+  post address complete, australia post, postnl, swiss post) join as
+  their markets go live per the shipping locale cohorts. keys: a us
+  validation credential, a google maps platform key, postal api keys
+  as markets activate.
+- **dev and demo mode runs adapterless.** every gate accepts the
+  honest unknowns: missing adapters degrade to unknown, never to
+  pretend coverage, and gate behavior on unknown is specified above.
+  production wiring is a market-by-market decision, not a launch
+  blocker.
 
 ## maturity line
 
