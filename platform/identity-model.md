@@ -52,9 +52,9 @@ three different layers, never collapsed:
   leads with it.
 - **the artist username** is the unique, rate-limited public handle
   (existing rule: 2 changes per 30 days, 5 lifetime) that lives at
-  `artists.sculptura.dev/@artistname`.
+  `creators.sculptura.tld/@artistname`.
 - **the shop handle** is a separate unique namespace living at
-  `sculptura.dev/@shopname`. the two handle namespaces are
+  `sculptura.tld/@shopname`. the two handle namespaces are
   independent: changing one never changes the other.
 - **the ids (cin, sin, bin) are none of the above.** no handle is
   derived from any id and no id is derived from any handle, so handle
@@ -79,6 +79,24 @@ and every downstream record. support or dispute flows still do not
 quote ids; threads carry their own reference numbers, and a creator
 who needs to reference their account for support can be told to check
 their settings page.
+
+## admin lookup
+
+the admin panel exposes a cli-style lookup keyed by id. `lookup cin
+<number>` returns the account's join keys in a fixed shape:
+
+```
+lookup cin 12345678
+
+username:    @artistusername
+storefront:  @storefrontname
+idv_complete: true
+```
+
+admin-only: it exists because the ids are the join keys, so an admin
+resolving an account to its current handles goes through the id, not
+the other way around. creators and buyers never see this surface;
+creators read their own cin in dashboard settings as ruled above.
 
 the demo [roster](creators/demo-roster.md) currently captures names and
 handles only; when fixture CIN/SIN/BIN values are minted they belong in

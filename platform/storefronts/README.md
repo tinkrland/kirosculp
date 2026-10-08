@@ -4,16 +4,16 @@ sculptura-hosted and white-label storefront presentation, including collections,
 
 ## public surfaces and the placeholder domain
 
-sculptura does not have its final tld yet. `sculptura.dev` is the
+sculptura does not have its final tld yet. `sculptura.tld` is the
 placeholder used across docs for whichever tld is acquired; every
-`*.sculptura.dev` subdomain below inherits that placeholder.
+`*.sculptura.tld` subdomain below inherits that placeholder.
 
 | surface | lives at | belongs to |
 |---|---|---|
-| storefront | `sculptura.dev/@shopname` | the shop handle (e.g. mahika's shop is `@divajewels`) |
-| artist profile | `artists.sculptura.dev/@artistname` | the artist's name handle (e.g. `artists.sculptura.dev/@mahika`) |
-| artist login | `artists.sculptura.dev/login` | the artist account |
-| buyer surface | `customer.sculptura.dev` | the buyer account |
+| storefront | `sculptura.tld/@shopname` | the shop handle (e.g. mahika's shop is `@divajewels`) |
+| artist profile | `creators.sculptura.tld/@artistname` | the artist's name handle (e.g. `creators.sculptura.tld/@mahika`) |
+| artist login | `creators.sculptura.tld/login` | the artist account |
+| buyer surface | `customer.sculptura.tld` | the buyer account |
 
 the artist name and the shop handle are two different handles in two
 independent namespaces on two different surfaces: changing one never
@@ -53,11 +53,11 @@ remain to be specified.
 
 ### existing source evidence
 
-- [`sculptura.dev/src/pages/ShopProfile.jsx`](../../what-exists/lovable/src/pages/ShopProfile.jsx)
+- [`sculptura.tld/src/pages/ShopProfile.jsx`](../../what-exists/lovable/src/pages/ShopProfile.jsx)
 - [`ShopArtifactBySlug.jsx`](../../what-exists/lovable/src/pages/ShopArtifactBySlug.jsx)
-- [`sculptura.dev/src/components/shop/*`](../../what-exists/lovable/src/components/shop)
-- [`sculptura.dev/src/components/market/mystore/*`](../../what-exists/lovable/src/components/market/mystore)
-- [`sculptura.dev/src/components/market/sections/CollectionsSection.jsx`](../../what-exists/lovable/src/components/market/sections/CollectionsSection.jsx)
+- [`sculptura.tld/src/components/shop/*`](../../what-exists/lovable/src/components/shop)
+- [`sculptura.tld/src/components/market/mystore/*`](../../what-exists/lovable/src/components/market/mystore)
+- [`sculptura.tld/src/components/market/sections/CollectionsSection.jsx`](../../what-exists/lovable/src/components/market/sections/CollectionsSection.jsx)
 
 ### what exists now
 
