@@ -110,15 +110,16 @@ parties beyond the validation call itself.
   are community or published data, and the two-route eligibility rule
   does not need mailbox pings. full-address mailbox-existence
   checkers exist but leak the entire address and stay out.
-- **thephonetell carrier adapter.** twilio lookup v2 line type
-  intelligence (docs verified by the tell, 2026-10-08): line types
-  including fixed and non-fixed voip, number-only exposure, feeding
-  the declared-comparison and the line-type signals. the
-  line_existence axis needs a live/in-service check (an hlr-class
-  product): verify the chosen provider's exact product at wiring
-  time, and treat numverify/numlookup free tiers as research aids,
-  never production adapters. keys: one carrier-lookup credential,
-  per-lookup priced.
+- **thephonetell carrier adapter: deferred.** twilio lookup v2 line
+  type intelligence was the verified candidate, but owner ruling
+  (2026-10-08): no provider whose onboarding requires uploading
+  identity documents for api access gets wired in, and twilio asks
+  for exactly that. the carrier adapter waits for a candidate meeting
+  both number_only exposure and document-free signup;
+  numverify/numlookup free tiers stay research aids, never production
+  adapters. until then the phone gate runs adapterless: the
+  declared-voip comparison reads offline numbering-plan evidence,
+  line_existence stays unknown, and otp delivery remains the gate.
 - **thelocaletell delivery-point adapter, per-market rollout.** us
   first: a cass-certified chain with dpv confirmation, the dpv cmra
   indicator and the business/residential indicator (smarty, melissa
