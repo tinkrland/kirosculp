@@ -729,3 +729,32 @@ in utc, with a feb-29 birth recorded as mar 1 so the park never ends early.
 still not built, because no product code for it exists in the repo: age-attestation
 capture at publication, residence lookup from a creator record, and real payout-route
 wiring. the gate takes both facts through a `resolveCreatorFacts` dependency.
+
+## feed provisioning scripts (2026-10-11, owner authorized)
+
+non-requirement 1 ("no live calls to maxmind, ipinfo, ip2proxy, or any api
+during this leg; fixture datasets only") is narrowed, not reversed: the leg's
+tests still use fixtures and no product code calls a provider, but
+out-of-band provisioning of the feed files now has authorized tooling,
+landed on `security` at commits `a615288` and `362e026`.
+
+- `scripts/fetch-provider-feeds.mjs` downloads the two credential-backed
+  sources with credentials from the environment only: ip2proxy lite px2 as
+  two zips, one per address family (`PX2LITE` ipv4, `PX2LITE.IPV6` ipv6), and
+  geolite2 country as the mmdb tarball, staged, hash-manifested, opened with
+  the pinned reader, smoke-looked-up, then swapped in with the replaced
+  directory destroyed per the eula obligation. the ip feed set is refreshed
+  whole, public lists included, because the importer refuses a partial set.
+- the first live import found a real defect in `feeds.mjs`: parsed ranges were
+  appended with `push(...ranges)`, which exceeds the call argument limit near
+  200k entries and surfaced as `corrupt` on the real 2.95m-row csvs. the
+  append is a loop now, held by a quarter-million-range regression test.
+- the hygiene check's repo scan now flags provider files and secrets only
+  where git can see them (tracked or untracked but not ignored), because the
+  gitignored data directories hold sanctioned provisioning output and made the
+  whole-tree scan fail against its own data.
+- 295 signals tests pass, up from 285. one authorized live provisioning run
+  completed on 2026-10-11: all four feeds load ok and the geolite2 country
+  database installed; end-to-end lookups answer with source attribution. the
+  checks themselves still have no live consumer (no payout surface exists),
+  so the leg's three-claims posture is unchanged.
