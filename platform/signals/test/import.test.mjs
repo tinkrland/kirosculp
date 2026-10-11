@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { importFeeds, FeedImportError, FEED_FILES } from '../import-feeds.mjs';
-import { loadFeeds, MANIFEST_NAME } from '../feeds.mjs';
+import { loadFeeds, buildManifest, MANIFEST_NAME } from '../feeds.mjs';
 import {
   FreeIpIntelligenceAdapter, assertIpIntelligenceResult, toStoredNetworkFlags, FLAG_NAMES,
 } from '../ip-intelligence.mjs';
@@ -105,6 +105,47 @@ test('negative: a first partial import is refused because the feed set would be 
     const out = path.join(base, 'data');
     await assert.rejects(() => importFeeds({ outDir: out, inputs: [inputFor('tor-bulk-exit', 4)] }), /x4bnet-vpn is missing/);
     assert.equal(fs.existsSync(out), false, 'nothing half-built is left in place');
+  } finally { fs.rmSync(base, { recursive: true, force: true }); }
+});
+
+test('positive: a real-size feed loads (a quarter million ranges)', () => {
+  // regression (2026-10-11): loadFeeds appended parsed ranges with
+  // `push(...ranges)`. spreading a real feed's ranges as call arguments
+  // exceeds the argument limit near 200k entries and surfaced as `corrupt`
+  // on the first live px2 provisioning. the append is a loop now; this test
+  // keeps it that way.
+  const base = tmp();
+  try {
+    const out = path.join(base, 'data');
+    fs.mkdirSync(out, { recursive: true });
+    const v4Rows = [];
+    for (let i = 0; i < 250_000; i++) {
+      const from = 16782178 + i;
+      v4Rows.push(`"${from}","${from}","PUB","JP","Japan"`);
+    }
+    const v6Rows = [];
+    for (let i = 0; i < 150; i++) {
+      const from = 281470698525538 + i;
+      v6Rows.push(`"${from}","${from}","PUB","JP","Japan"`);
+    }
+    fs.writeFileSync(path.join(out, 'ip2proxy-lite-px2-ipv4.csv'), v4Rows.join('\n') + '\n');
+    fs.writeFileSync(path.join(out, 'ip2proxy-lite-px2-ipv6.csv'), v6Rows.join('\n') + '\n');
+    const items = [4, 6].map((family) => ({
+      id: 'ip2proxy-lite-px2',
+      family,
+      file: `ip2proxy-lite-px2-ipv${family}.csv`,
+      datasetVersion: '2026-10-11',
+      retrievedAt: new Date().toISOString(),
+    }));
+    fs.writeFileSync(path.join(out, MANIFEST_NAME), JSON.stringify(buildManifest(items, out), null, 2));
+
+    const { report, sources } = loadFeeds({ dir: out });
+    const proxy = report.find((r) => r.id === 'ip2proxy-lite-px2');
+    assert.equal(proxy.status, 'ok');
+    assert.ok(proxy.detail.startsWith('250150'), 'both families counted');
+    assert.equal(sources.proxy.length, 1);
+    assert.ok(sources.proxy[0].contains({ version: 4, value: 16782178n }));
+    assert.equal(sources.proxy[0].contains({ version: 4, value: 42782178n }), false, 'outside the generated ranges');
   } finally { fs.rmSync(base, { recursive: true, force: true }); }
 });
 

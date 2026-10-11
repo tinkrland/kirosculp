@@ -121,7 +121,11 @@ export function loadFeeds({ dir, now = new Date() }) {
           throw Object.assign(new Error('invalid'), { reason: 'corrupt' });
         }
         if (parsed.entries < config.minEntries) throw Object.assign(new Error('small'), { reason: 'too_small' });
-        (entry.family === 4 ? v4 : v6).push(...parsed.ranges);
+        // append by loop: a real feed holds millions of ranges, and a spread
+        // call (`push(...ranges)`) exceeds the argument limit near 200k
+        // entries (found when provisioning the real px2 csv on 2026-10-11).
+        const target = entry.family === 4 ? v4 : v6;
+        for (const range of parsed.ranges) target.push(range);
       } catch (error) {
         problem = problem ?? error.reason ?? 'corrupt';
       }
