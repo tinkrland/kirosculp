@@ -2,6 +2,7 @@
 node_modules/
 manufacturing/research/raw/
 platform/signals/data/
+platform/signals/data-geo/
 *.mmdb
 IP2PROXY-*
 GeoLite2-*

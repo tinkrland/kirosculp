@@ -36,10 +36,13 @@ clean.
 ## what is never committed
 
 - provider databases (`*.mmdb`, `IP2PROXY-*`, `GeoLite2-*`) and refreshed feed
-  data under `platform/signals/data/`. all are gitignored.
+  data under `platform/signals/data/` and `platform/signals/data-geo/`. all
+  are gitignored.
 - api keys, hmac keys, or any secret-shaped value.
 
-`npm run check:signals-hygiene` fails if either appears in the signals paths.
+`npm run check:signals-hygiene` fails if either appears where git can see
+it (tracked or untracked but not ignored). the gitignored data directories are
+exempt, because provisioning puts real provider data there on purpose.
 
 ## device signal
 
@@ -119,13 +122,30 @@ exists, and that revisit is planned, not optional.
 ```text
 node scripts/import-ip-feeds.mjs --fetch                 # public lists only, needs no key
 node scripts/import-ip-feeds.mjs --from-dir <dir>        # local files, including ip2proxy lite
+node scripts/fetch-provider-feeds.mjs                    # credential-backed feeds (below)
 ```
+
+the two credential-backed sources are provisioned by
+[`scripts/fetch-provider-feeds.mjs`](../../scripts/fetch-provider-feeds.mjs),
+added with owner authorization on 2026-10-11. it downloads the two ip2proxy
+lite px2 zips, one per address family (`PX2LITE` and `PX2LITE.IPV6`), with the
+ip2location account download token (`IP2LOCATION_TOKEN`, environment only),
+and refreshes the whole ip feed set in one validated import, public lists
+included, because the importer refuses a partial set. it downloads the geolite2
+country tarball with the maxmind license key (`MAXMIND_LICENSE_KEY`,
+environment only) and installs it as described under the geolite2 section.
+credentials never appear in args, files or the repo, and the hygiene check
+covers the script.
 
 [`import-feeds.mjs`](import-feeds.mjs) stages new files, validates them with the
 same loader the service uses, and swaps the directory only if every feed is ok. a
-bad download never replaces a working set. the two ip2proxy lite files need a free
-account and the ip2location lite terms, including the attribution acknowledgment,
-so they are only ever read from disk.
+bad download never replaces a working set. the two ip2proxy lite files need a free account at
+lite.ip2location.com and the ip2location lite terms, including the attribution
+acknowledgment. accepting those terms is an account-level prerequisite: the
+download token only exists after it. `--from-dir` reads the files from disk,
+and the provisioning script downloads them with the account token. px2
+carries proxy ranges only, which is the spec boundary: proxy flag and nothing
+else.
 
 ## embargoed-territory review
 
@@ -173,10 +193,13 @@ the market-strictness check selection above.
 
 [`geo-reader.mjs`](geo-reader.mjs) reads a geolite2 country `.mmdb` with the pinned
 `maxmind@5.0.7` package (mit, ledger entry src-0026). the database needs a free
-maxmind account and the geolite2 eula, so it is read from disk and never downloaded
-by code here. put the file and a `manifest.json` (`buildGeoManifest` writes one:
-schema version, id, file, retrieval date, byte size, sha-256) in a gitignored
-directory. `loadGeoDatabase({ dir, open })` checks the hash, a 100 kb size floor and
+maxmind account and the geolite2 eula. `scripts/fetch-provider-feeds.mjs`
+downloads it into `platform/signals/data-geo/` (gitignored) with the license
+key from the environment, stages the file plus a `manifest.json`
+(`buildGeoManifest` writes one: schema version, id, file, retrieval date, byte
+size, sha-256), validates it with the same loader the service uses, smoke-tests
+one lookup, and only then swaps it in. the replaced database directory is
+destroyed on success, per the eula's destroy-old-versions obligation. `loadGeoDatabase({ dir, open })` checks the hash, a 100 kb size floor and
 a 30 day maximum age (the eula asks for replacement within 30 days of a new
 release). a missing, corrupt, truncated or stale database loads as an unavailable
 source, which records coverage `none`, which is the normal no-geo path above. tests

@@ -11,6 +11,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -76,11 +77,33 @@ export const SIGNALS_TARGETS = [
   'scripts/check-signals-hygiene.mjs',
   'scripts/check-trust-schema-invariant.mjs',
   'scripts/import-ip-feeds.mjs',
+  'scripts/fetch-provider-feeds.mjs',
   'scripts/check-embargo-greylist-disjoint.mjs',
   'scripts/check-parked-hold-policy.mjs',
   'migrations',
   'security',
 ];
+
+/**
+ * files git can see: tracked, or untracked and not ignored. the gitignored
+ * feed directories (platform/signals/data/, platform/signals/data-geo/) are
+ * where provisioning puts real provider data on purpose, so they are exempt.
+ * anything git could actually commit is flagged.
+ *
+ * @returns {Set<string> | null} null when git is unavailable, meaning "scan
+ *   everything" (the pre-provisioning behavior).
+ */
+function gitVisibleFiles(repoRoot) {
+  const out = spawnSync(
+    'git',
+    ['-C', repoRoot, 'ls-files', '--cached', '--others', '--exclude-standard', '-z'],
+    { encoding: 'utf8' },
+  );
+  if (out.status !== 0) return null;
+  const visible = new Set();
+  for (const piece of out.stdout.split('\0')) if (piece) visible.add(piece);
+  return visible;
+}
 
 export function scanRepo(repoRoot = root) {
   const merged = { providerFiles: [], secrets: [] };
@@ -92,6 +115,15 @@ export function scanRepo(repoRoot = root) {
   // provider databases must not sit anywhere in the repo, not just the targets.
   const whole = scanTreeProviderOnly(repoRoot);
   for (const f of whole) if (!merged.providerFiles.includes(f)) merged.providerFiles.push(f);
+
+  // ignore what git ignores: the data directories are provisioned on purpose
+  // (found the hard way on 2026-10-11, when the first live import made this
+  // check fail against its own sanctioned output).
+  const visible = gitVisibleFiles(repoRoot);
+  if (visible) {
+    merged.providerFiles = merged.providerFiles.filter((f) => visible.has(f));
+    merged.secrets = merged.secrets.filter((s) => visible.has(s.file));
+  }
   return merged;
 }
 

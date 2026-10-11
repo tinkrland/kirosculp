@@ -363,6 +363,44 @@ failed at 3.0 to 3.1 seconds under load, three times in about eighteen runs, wit
 the bounds are now 20 and 15 seconds, enough to catch a quadratic parse. after the
 change the full suite passed 8 of 8 serial runs.
 
+## feed provisioning scripts (2026-10-11)
+
+`scripts/fetch-provider-feeds.mjs` provisions the two credential-backed feeds,
+added with owner authorization. the free adapter reads feed files from disk;
+this is the out-of-band step that produces them.
+
+- ip2proxy lite px2: two zips from the ip2location account download token
+  (`IP2LOCATION_TOKEN`, environment only), one per address family (`PX2LITE`
+  and `PX2LITE.IPV6`, each holding one csv). the ip feed set is refreshed
+  whole, public lists included, because the importer refuses a partial set.
+- geolite2 country: the maxmind license key (`MAXMIND_LICENSE_KEY`,
+  environment only) downloads the country tarball. the mmdb is staged with
+  its manifest, opened with the pinned reader, smoke-looked-up, and swapped
+  in, destroying the replaced directory per the eula obligation.
+- credentials never appear in args, files or the repo; the hygiene check now
+  scans the script. `platform/signals/data-geo/` is gitignored like
+  `platform/signals/data/`.
+- the hygiene check's repo scan learned git visibility: it flags provider
+  files and secrets only where git can see them (tracked or untracked but
+  not ignored), because the sanctioned data directories made the old
+  whole-tree scan fail against its own provisioning output.
+
+verified locally: 295 signals tests pass (285 before this change: 12 new for
+the fetch script, one regression test for a loader defect the first live
+import exposed). parsed ranges were appended with `push(...ranges)`, which
+exceeds the call argument limit near 200k entries and surfaced as `corrupt`
+on the real 2.95m-row px2 csvs. the append is a loop now, and a
+quarter-million-range regression test holds it.
+
+live provisioning ran once on 2026-10-11 with owner authorization: all four
+feeds load ok (x4bnet vpn 11039 ranges, datacenter 44444, tor 1200, ip2proxy
+5,908,388 across both families) and the geolite2 country database installed
+(3.4 mb, hash-validated, smoke lookup ok). end-to-end lookups through the
+provisioned set answer with source attribution: a tor exit flagged from the
+tor list, a vpn range flagged from x4bnet, an ipv6 proxy row flagged from the
+ipv6 px2 csv, geo from the real mmdb, and a clean ipv6 with no flags and a
+null country.
+
 ## test evidence
 
 figures in this section are the batch 1 to 7 record; batch 8 figures are above.
@@ -530,8 +568,10 @@ the committed change.
 ## deployment and payment state
 
 migrations through 0012 (batch 9 added none) are verified locally against pglite only. no
-migration in this leg was applied to any live supabase project. no live ip
-provider was called. no real payout, transfer, or payment occurred at any
-point in this implementation or its verification. implementation, local
-verification, and live operation remain three separate claims, and only the
-first two are made here.
+migration in this leg was applied to any live supabase project. the only live
+provider contact is the authorized feed provisioning of 2026-10-11 (downloads
+to disk, described above); no per-lookup provider api is called by product
+code, and no check has run against a real creator. no real payout, transfer,
+or payment occurred at any point in this implementation or its verification.
+implementation, local verification, and live operation remain three separate
+claims, and the third is still not made here.
