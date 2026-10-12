@@ -37,12 +37,15 @@ what the repos actually pin down, cited:
 - **ruling 2026-10-12: studio and platform are integrated.** there is
   ONE paid creator subscription covering both the studio side and
   the platform side - not separate studio and platform tiers. the
-  free tier stands. studio credits (compiles) and platform
-  allowances (listings) stay separate meters on their respective
-  sides of the boundary inside the one subscription. price and
-  fee-discount rate of the integrated tier are not yet ruled; the
-  old two-tier table (studio ~$15 / platform ~$39) in fee-policy.md
-  section 5 is superseded.
+  integration's checkout expression (owner clarification): **free
+  creators pay the higher sculptura fee percentage at checkout;
+  subscribers pay the lower one.** the subscription's core benefit
+  is that fee split, plus the two meters - studio credits (compiles)
+  and platform allowances (listings) staying separate on their
+  respective sides of the boundary inside the one subscription.
+  price and fee-discount rate of the integrated tier are not yet
+  ruled; the old two-tier table (studio ~$15 / platform ~$39) in
+  fee-policy.md section 5 is superseded.
 - **trust levels are never tiers** (admin/creator-trust/README.md):
   private, in-house, never creator-facing, never fee-bearing; the
   subscription tiers above are the only creator-facing levels.
