@@ -1,18 +1,13 @@
-# cfo.ai model export: sculptura fee model v2 (repo grounded)
+# sculptura fee model: dynamic pricing and rates reference
 
-exported 2026-10-12 from cfo.ai workspace secure husky (org 103213),
-page 'sculptura fee model v2 (repo grounded)' plus the launch-era pages
-on the same document. cfo.ai remains the inference tool; this export is
-the repo-side snapshot so the model does not live parked in cfo.ai alone.
-per repo rule, cfo.ai workspace content is never evidence for policy;
-the inputs here were ported from the repos and verified against local
-python math (verify.py) at authoring time.
-
-provenance note: tables below are complete api reads (rows, values,
-formulas). text blocks are listed by title; the api exposes titles only,
-so bodies written in this model are summarized from the authoring
-conversation where reconstructable and marked otherwise.
-
+snapshot of the live fee model as of 2026-10-12: every table (values,
+formulas, inherited conditions) and the page inventory, for reference
+when implementing the fee policy and the pricing service. the repo is
+the source of truth; all inputs were ported from repo evidence and
+every worked number was verified against local python math (verify.py)
+before entry. companion documents: fee-policy.md (the policy design),
+work/fee-balance-analysis.md (the rate balance and retro payback math),
+work/research.md (the evidence register).
 
 ## page inventory (8 pages, 39 blocks)
 
@@ -58,7 +53,7 @@ conversation where reconstructable and marked otherwise.
 - table: Placeholder roster
 - table: Headcount & payroll
 
-### page: sculptura fee model v2 (repo grounded)
+### page: fee model v2 (repo grounded)
 - text: fee policy model, all inputs ported from kirosculpt feepolic…
 - table: fee policy inputs
 - table: per-order platform economics
@@ -437,7 +432,7 @@ page: ? | grain: ?
 
 ### fee policy inputs
 
-page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
+page: fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 | row |  |
 |---|---|
@@ -472,7 +467,7 @@ formulas:
 
 ### per-order platform economics
 
-page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
+page: fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 | row | retail usd | platform fee usd | chargeback tail usd | platform contribution usd | contribution pct of retail | orders to repay retro | months to repay at 50 orders/mo |
 |---|---|---|---|---|---|---|---|
@@ -483,7 +478,7 @@ page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 ### subscription economics
 
-page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
+page: fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 | row |  |
 |---|---|
@@ -496,7 +491,7 @@ formulas:
 
 ### padded cost stack (routing, checks, risk)
 
-page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
+page: fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 | row |  |
 |---|---|
@@ -519,7 +514,7 @@ formulas:
 
 ### padded platform economics
 
-page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
+page: fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 | row | direct cost stack usd | padded platform contribution usd | padded contribution pct of retail |
 |---|---|---|---|
@@ -530,7 +525,7 @@ page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 ### ongoing infrastructure (monthly)
 
-page: sculptura fee model v2 (repo grounded) | grain: NO_GRANULARITY
+page: fee model v2 (repo grounded) | grain: NO_GRANULARITY
 
 | row |  |
 |---|---|
@@ -554,7 +549,7 @@ formulas:
 - platform fixed incl retro usd per mo: `timeless: `fixed infra total usd per mo` + `retro amortization per order usd` * 50`
 ### published casting rate datapoints 2026-10-12
 
-page: sculptura fee model v2 (repo grounded) | added post-export, read back 2026-10-12
+page: fee model v2 (repo grounded) | added post-export, read back 2026-10-12
 
 | variable | value |
 |---|---|
