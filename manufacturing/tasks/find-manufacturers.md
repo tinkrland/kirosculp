@@ -44,6 +44,31 @@ the full verification pass, including whether they do jewelry casting at all.
 | rio grande | us jewelry supply + casting services | likely no public api, verify |
 | xometry | general manufacturing marketplace, has a public api | almost certainly no precious-metal lost-wax casting -- check process fit first, may fail step 0 outright |
 
+| castimize | lost-wax casting platform, instant automated quotes on upload, live etsy integration, 1000+ orders | network across us/eu/ca/in; per-order origin facts required; no developer api verified |
+| weston beamor | uk one-stop: casting, settings, 3d print, cad, finishing, hallmarking, client portal; rjc member | portal not yet shown to be an api; assay adjacency to cite |
+| carrera casting | us caster: gold, silver, platinum, palladium, brass, bronze; quoting via digifabster | digifabster is a saas quoting front-end, not an api; location to pin |
+| dnv casting | brooklyn caster: 10k/14k/18k, platinum, silver; industrial 3d printers; next-day print+cast | upload-form automation only |
+| jewelry lukas | los angeles lost-wax: gold 10k-24k, silver, 950 platinum (ru/ir), brass; per-metal rate pages | rates need capture and date-stamping |
+| 925craft | silver 925 + gold 585 component casting, rubber moulds; silvexcraft-linked | alloy ceiling; facility market (uk vs pl) to pin |
+| altmann casting ag | swiss caster, rjc member, in-house alloy development (green-gold, champagne-gold) | process detail on german pages; hallmarking adjacency unverified |
+| apecs | au investment castings, cad service, alloy casting calendar (scheduled casting days) | alloy availability is schedule-driven: temporal route predicate |
+| gopercast | es microfusion + resin prototyping, jewelry listed | step 0 unverified: may be general am bureau |
+| e. van ranst | be custom gold/silver work with scheduled casting weeks | batch-scheduled capacity, boutique scale |
+| schultheiss gmbh | de gold and silver casting listing | sparse process detail; german-page pass needed |
+| empire casting house | 14k/18k, platinum, silver; vacuum-assisted; finishing package | **location unverified before outreach** |
+| jewelcast | birmingham uk: lost-wax gold/silver, cad, 3d print, moulds, finishing; assay adjacency in imagery | explicit hallmarking citation needed |
+| casting house | us: 40+ precious metals, platinum/gold/silver, cad/cam, qa | minimums unknown |
+| intl mfg co | philadelphia: cad-cam, casting, molds, finishing, stone setting | thin site; alloy coverage pass |
+| jcco enterprises | us contract caster to the trade with published per-metal price pages | dated site; capture rate pages with dates |
+| hoover and strong | us refiner/metals (harmony recycled), gemstones; casting services historically | verify current casting offer vs refining focus |
+| pallion group | au precious metals group services (abc refinery) | services breadth vs jewelry casting focus to verify |
+| legor group | it precious metal alloys for jewelry (voxelmatters listed) | verify casting services vs alloy supply role |
+| fine casting jewellery | ca casting site surfaced in search | thin site, manual look needed |
+| zero porosity casting | us casting house from directory data | site scrape blocked; manual look needed |
+| merrell casting | uk british jewellery manufacturing | second uk hallmark-axis datapoint; scrape blocked |
+| nowart jewelry | low-moq jewelry manufacturer | likely cn oem; must clear dpms compliance weight first |
+| branvas | jewelry dropship api/csv, print-ready, worldwide | platform-shaped; verify precious-metal casting vs print/plate goods |
+
 add to this table as research turns up more names. do not remove a row just
 because it looks unlikely -- record the negative finding (`supports_precious_metal_lost_wax_casting: false`)
 with its source instead of silently dropping the candidate. a documented "no"
