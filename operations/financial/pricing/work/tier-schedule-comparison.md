@@ -34,20 +34,26 @@ what the repos actually pin down, cited:
   purchasable from the creator wallet with no double transaction fees;
   wallet spend and samples are new entries in the same append-only
   ledger.
-- **studio $15/mo and platform $39/mo, 7% and 5%** are hypotheses from
-  fee-policy.md section 5, cross-referenced in fee-model-snapshot.md
-  (platform tier price 39, discount rate 0.05, fee-savings break-even
-  gmv $780: price / discount = 39 / 0.05). allowance counts (10/30/
-  unlimited listings) are owner-tentative only.
+- **ruling 2026-10-12: studio and platform are integrated.** there is
+  ONE paid creator subscription covering both the studio side and
+  the platform side - not separate studio and platform tiers. the
+  free tier stands. studio credits (compiles) and platform
+  allowances (listings) stay separate meters on their respective
+  sides of the boundary inside the one subscription. price and
+  fee-discount rate of the integrated tier are not yet ruled; the
+  old two-tier table (studio ~$15 / platform ~$39) in fee-policy.md
+  section 5 is superseded.
 - **trust levels are never tiers** (admin/creator-trust/README.md):
   private, in-house, never creator-facing, never fee-bearing; the
   subscription tiers above are the only creator-facing levels.
 
 ## inputs (hypotheses)
 
-- tiers: free 10% + $0.50, studio 7% + $0.50 at $15/mo, platform
-  5% + $0.50 at $39/mo; floor $2.00; fee on fee_base.
-- orders per subscriber per month: studio 2, platform 4.
+- structure (ruled): free tier + ONE integrated studio+platform
+  subscription; candidate price/rate cells modeled as alternatives:
+  $15 at 7%, $25 at 7%, $25 at 5%, $39 at 5% (all + $0.50 fixed,
+  $2 floor, fee on fee_base).
+- orders per subscriber per month: 2. subscriber order share: 15%.
 - byok share 30%, wallet recovery 50% (checkout-rate-buildup.md).
 - launch tier mix: 80% free / 15% studio / 5% platform.
 - blended launch mix aov ~$205; requirement = ex-retro buildup
@@ -79,19 +85,21 @@ money per order and the sub must be justified by capacity economics
 direction that low-volume creators subscribe for capacity, not fee
 savings.
 
-## result 2: the launch waterfall (80/15/5 mix)
+## result 2: the launch waterfall per candidate cell (85/15 mix)
 
-| orders/mo | surplus/mo | retro $21,200 cleared |
-|---|---|---|
-| 50 | $264 | 80 months (6.7y) |
-| 100 | $729 | 29 months (2.4y) |
-| 200 | $1,657 | 13 months (1.1y) |
+retro $21,200 cleared, at 50 / 100 / 200 orders/mo:
 
-at 50 orders/mo the platform is waterfall-positive from day one but
-the retro is a long-haul repayment; profit (the 200 bps block)
-actually starts only after the retro clears. the honest launch story:
-50/mo is sustainable and slow, 100/mo clears the retro inside 2.5
-years, 200/mo inside a year.
+| cell | 50/mo | 100/mo | 200/mo |
+|---|---|---|---|
+| $15 7% | 79 mo (6.6y) | 29 mo (2.4y) | 13 mo (1.1y) |
+| $25 7% | 69 mo (5.8y) | 26 mo (2.2y) | 12 mo (1.0y) |
+| $25 5% | 78 mo (6.5y) | 29 mo (2.4y) | 13 mo (1.0y) |
+| $39 5% | 65 mo (5.4y) | 25 mo (2.1y) | 11 mo (0.9y) |
+
+every cell keeps the platform waterfall-positive from day one; the
+cells differ by only a few months of retro horizon. the honest
+launch story: 50/mo is sustainable and slow, 100/mo clears the retro
+inside ~2.5 years at any cell, 200/mo inside about a year.
 
 ## result 3: where each rate is underwater without sub revenue
 
@@ -105,29 +113,30 @@ requirement vs fee alone, 100 orders/mo:
 | $250 | $16.42 | ok | ok | under |
 | $650 | $27.30 | ok | ok | ok |
 
-rough coverage thresholds at launch volume: 10% needs ~$150+ aov,
-7% needs ~$250+, 5% needs ~$500+ (without sub revenue). below
+rough coverage thresholds at launch volume (without sub revenue):
+free 10% needs ~$150+ aov, 7% needs ~$250+, 5% needs ~$500+. below
 $150 aov every tier is underwater ex-retro and the floor/refusal
 economics own the problem - the same cheap-order finding as
 fee-balance-analysis.md, now per-tier.
 
 ## findings
 
-1. the schedule is internally consistent: no tier destroys the
-   waterfall once sub revenue is counted, at any launch volume.
-2. the platform tier's 5% is only safe because of its $39 price;
-   it should never be offered as a standalone rate.
-3. the studio tier prices almost exactly at fee break-even
-   (2.2 orders/mo); its real margin is capacity economics above
-   break-even volume.
-4. retro payback: 1.1-6.8 years across 50-200 orders/mo. the
-   waterfall absorbs this without touching the published rates.
+1. every candidate cell keeps the waterfall positive at any launch
+   volume; the integration ruling removes the two-tier risk entirely.
+2. the deepest discount (5%) is safe on the integrated tier because
+   the price carries it; it should never exist as a standalone rate.
+3. $25 at 5% is the balanced cell: same 2.2 orders/sub/mo fee
+   break-even as $15 at 7%, deeper creator-facing discount, +$1.00
+   order surplus over $15 7% at 100/mo. $39 5% maximizes waterfall
+   but is the hardest sell pre-launch.
+4. retro payback: 0.9-6.6 years across cells and 50-200 orders/mo.
 5. cheap orders (<$150 aov) remain structurally subsidized at every
    tier; the floor and refusal economics stay the instrument there.
 
 ## to measure before freezing
 
-1. real tier mix and orders-per-subscriber (moves break-even line).
+1. which price/rate cell to freeze (owner ruling).
+2. real subscriber share and orders-per-subscriber (moves break-even line).
 2. real aov (moves every threshold).
 3. support cost per order (moves the requirement itself).
 4. subscriber conversion (fee-policy.md section 11 item 10).

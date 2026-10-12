@@ -13,15 +13,21 @@ from buildup import (stack, inference_alloc, mfg_alloc, retro_alloc,
                      fee_base, RETRO)
 
 # ---------------------------------------------------------------- params
+# ruling 2026-10-12: studio and platform are INTEGRATED - one paid
+# subscription covering both sides. candidate price/rate cells below
+# are hypotheses pending the owner's pick; meters stay split (compile
+# credits on the studio side, listing allowances on the platform side).
 TIERS = {                      # bps, fixed, monthly sub price (hypothesis)
-    "free 10%":     (1000, 0.50, 0.0),
-    "studio 7%":    (700,  0.50, 15.0),
-    "platform 5%":  (500,  0.50, 39.0),
+    "free 10%":          (1000, 0.50, 0.0),
+    "integrated $15 7%": (700,  0.50, 15.0),
+    "integrated $25 7%": (700,  0.50, 25.0),
+    "integrated $25 5%": (500,  0.50, 25.0),
+    "integrated $39 5%": (500,  0.50, 39.0),
 }
 FLOOR = 2.00
 PROFIT_BPS = 200
-ORDERS_PER_SUB = {"studio 7%": 2.0, "platform 5%": 4.0}  # hypothesis
-TIER_SHARES = {"free 10%": 0.80, "studio 7%": 0.15, "platform 5%": 0.05}
+ORDERS_PER_SUB = {k: 2.0 for k in TIERS if k != "free 10%"}  # hypothesis
+SUB_SHARE = 0.15            # hypothesis: share of orders from subscribers
 BLEND = {200: 60, 650: 15, 95: 25}   # launch metal mix
 VOLUMES = [50, 100, 200]
 
@@ -56,26 +62,22 @@ if __name__ == "__main__":
             f = blend_avg(lambda r: fee(tier, r))
             s = sub_rev_per_order(tier)
             net = f + s - req
-            print(f"  {tier:12} fee ${f:5.2f} + sub ${s:4.2f} -> "
+            print(f"  {tier:18} fee ${f:5.2f} + sub ${s:4.2f} -> "
                   f"waterfall {'+' if net >= 0 else ''}${net:.2f}/order")
 
-    print("\n=== the launch waterfall: 80/15/5 tier mix, retro $21,200 ===")
-    for v in VOLUMES:
-        tot = sum(BLEND.values())
-        monthly_surplus = 0.0
-        for tier, share in TIER_SHARES.items():
-            orders = share * v
-            for r, n in BLEND.items():
-                monthly_surplus += (share * v) * (n / tot) * (
-                    fee(tier, r) + sub_rev_per_order(tier) - exretro_req(r, v))
-        if monthly_surplus > 0:
-            months = RETRO / monthly_surplus
-            print(f"{v:>3}/mo: surplus ${monthly_surplus:6.2f}/mo -> retro "
-                  f"cleared in {months:4.0f} months ({months/12:.1f}y); "
-                  f"profit starts after")
-        else:
-            print(f"{v:>3}/mo: surplus ${monthly_surplus:6.2f}/mo -> retro "
-                  f"grows; platform is cash-negative until volume rises")
+    print("\n=== launch waterfall per candidate cell (85/15 free/sub mix) ===")
+    for cell in [k for k in TIERS if k != "free 10%"]:
+        print(f"\n  {cell}:")
+        for v in VOLUMES:
+            tot = sum(BLEND.values())
+            monthly_surplus = 0.0
+            for tier, share in (("free 10%", 1 - SUB_SHARE), (cell, SUB_SHARE)):
+                for r, n in BLEND.items():
+                    monthly_surplus += (share * v) * (n / tot) * (
+                        fee(tier, r) + sub_rev_per_order(tier) - exretro_req(r, v))
+            months = RETRO / monthly_surplus if monthly_surplus > 0 else float("inf")
+            print(f"    {v:>3}/mo: surplus ${monthly_surplus:6.2f}/mo -> retro "
+                  f"cleared in {months:4.0f} months ({months/12:.1f}y)")
 
     print("\n=== where the discounts go underwater without sub revenue ===")
     print("(fee alone vs ex-retro requirement, per aov, 100 orders/mo)")
@@ -85,15 +87,15 @@ if __name__ == "__main__":
         for tier in TIERS:
             f = fee(tier, r)
             mark = "ok" if f >= req else "under"
-            cells.append(f"{tier.split()[1]} ${f:5.2f} {mark}")
+            cells.append(f"{tier.replace('integrated ','')} ${f:5.2f} {mark}")
         print(f"  ${r:>4} req ${req:5.2f} | " + " | ".join(cells))
 
-    print("\n=== subscriber break-even: does the discount pay for itself ===")
-    print("(order surplus a studio sub creates vs its $15/mo price)")
-    for v in VOLUMES:
-        gap = blend_avg(lambda r: (fee("free 10%", r) - fee("studio 7%", r)))
-        per_order_sub_rev = sub_rev_per_order("studio 7%")
-        need = 15.0 / gap if gap else float("inf")
-        print(f"  {v:>3}/mo: discount costs creator ${gap:.2f}/order; "
-              f"platform recovers it via sub ${per_order_sub_rev:.2f}/order "
-              f"(break-even at {need:.1f} orders/subscriber/month)")
+    print("\n=== subscriber break-even per candidate cell (2 orders/sub/mo) ===")
+    for tier in TIERS:
+        if tier == "free 10%": continue
+        gap = blend_avg(lambda r: (fee("free 10%", r) - fee(tier, r)))
+        price = TIERS[tier][2]
+        need = price / gap if gap else float("inf")
+        print(f"  {tier:18} discount ${gap:.2f}/order, price ${price:.0f}/mo "
+              f"-> fee-only break-even {need:.1f} orders/sub/mo "
+              f"{'(capacity carries below)' if need > 2 else '(fee-positive at 2)'}")

@@ -72,16 +72,23 @@ net        = retail - manufacturing - shipping - insurance - tax - fee - payment
 - **(b) larger allowances**: preferred owner direction; near-zero marginal cost; drives adoption among low-volume creators who subscribe for capacity, not fee savings. keep studio credits (compiles) and platform allowances (listings) as separate meters on separate sides of the studio/platform boundary.
 - **(c) printify-style manufacturing discount**: rejected for now. sculptura does not control the quote; the discount would be either a lie about a partner price or a subsidy from platform margin, which is just (a) done less transparently. revisit when real volume discounts are negotiated with casting partners.
 
-tentative tier structure (all numbers hypotheses, nothing finalized):
+integrated subscription structure (owner ruling 2026-10-12: studio
+and platform are integrated - one paid subscription covering both
+sides, not separate tiers; all numbers below remain hypotheses):
 
-| | free | studio ~$15/mo | platform ~$39/mo |
-|---|---|---|---|
-| fee rate | 10% + $0.50 | 7% + $0.50 | 5% + $0.50 |
-| new listings/month | 10 (owner-tentative) | 30 | unlimited |
+| | free | integrated sub |
+|---|---|---|
+| fee rate | 10% + $0.50 | candidate cells: $15/7%, $25/7%, $25/5%, $39/5% (all + $0.50) |
+| meters | - | compile credits (studio side) + listing allowances (platform side) |
+
+the two meters stay separate per the boundary rule: studio credits
+price compiles, platform allowances price listings, both inside the
+one subscription. the price/rate cell is not yet ruled; see
+work/tier-schedule-comparison.md for the per-cell waterfall math.
 | commission slots | 3 | 10 | unlimited |
 | channels | native | +2 | all |
 
-break-even (subscriber's view): studio pays for itself at ~$500/month gmv (3 points on ~$120 aov = 4-5 orders); platform tier at ~$780/month. below that, allowances must carry the value. the negative-net block includes the discounted fee, and the $2 floor still binds: subscribers cannot discount below the floor.
+break-even (subscriber's view, integrated sub at 2 orders/month): a 7% cell pays for itself at ~$500/month gmv; a 5% cell at ~$780/month. below that, allowances must carry the value. the negative-net block includes the discounted fee, and the $2 floor still binds: subscribers cannot discount below the floor.
 
 note on paddle: consider dropping it even for subscription billing. running paddle for subscriptions plus stripe for jewelry means two billing systems, two tax surfaces, two refund flows. stripe billing does subscriptions fine. the repo itself (operations/financial/payout/stripe-vs-paddle.md) already rejected paddle for the money path.
 
