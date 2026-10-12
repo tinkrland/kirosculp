@@ -130,26 +130,28 @@ corpus replacement valuation:
   have needed to produce the same artifact. this is the replacement
   cost and the platform's build-value moat.
 
-## owner ruling (2026-10-12): retro v2 = 1000h at $28/hr = $28,000
+## owner ruling (2026-10-12, revised): retro = 300h at $28 + 600h at $20 + $800 tools = $21,200
 
-the owner ruled the retro directly: 1000 hours at $28/hr, $28,000
-total. the number sits deliberately between the two readings - well
-above the proven wall-clock floor (~111h), well below the corpus
-human-equivalent (~6,200h) - and the rate is held at a modest band
-rather than silicon-valley rates. this supersedes both the ruled $5,600
-retro and the market-band restatement options; tools/incorporation
-costs are considered inside the $28,000.
+the owner ruled the retro in two tiers: 300 hours at $28/hr plus 600
+hours at $20/hr, plus the $800 tooling. total: $8,400 + $12,000 +
+$800 = **$21,200**. the two-tier structure prices the work mix
+explicitly (the higher rate on the rarer-skill slice, the lower on the
+bulk) and the rates stay in a modest band, not silicon-valley rates.
+the number sits between the two audit readings - above the proven
+wall-clock floor (~111h), below the corpus human-equivalent (~6,200h).
+this supersedes the $5,600 ruled retro, the market-band restatement
+options, and the earlier single-tier $28,000 sketch.
 
 payback at 10% + $0.50 (launch metal mix):
 
 | orders/mo | aov $200 | aov $250 |
 |---|---|---|
-| 50 | 51 months | 36 months |
-| 100 | 25 months | 18 months |
-| 200 | 13 months | 9 months |
+| 50 | 38 months | 27 months |
+| 100 | 19 months | 14 months |
+| 200 | 10 months | 7 months |
 
 the retro target never enters the fee rate (see fee-policy.md); it
-only sets the payback horizon the plan carries: roughly 1.5-4 years at
+only sets the payback horizon the plan carries: roughly 1-3 years at
 plausible launch volumes. corpus amortization and the fee's value story
 are unchanged by this ruling.
 

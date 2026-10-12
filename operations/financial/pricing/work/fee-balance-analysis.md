@@ -135,10 +135,11 @@ includes infra $60/mo and 20 active creators at $10.50/mo:
 | 100 | 54 months | 7 months | 4.4 months |
 | 200 | 12 months | 2.9 months | 2 months |
 
-reading (retro v2 ruled 2026-10-12): the owner ruled the retro at
-1000h x $28/hr = $28,000. payback at the launch metal mix: ~18-51
-months across 50-200 orders/mo (aov $200-250). the retro target never
-enters the fee rate; it sets the payback horizon the plan carries. payback is bound by
+reading (retro ruled 2026-10-12): the owner ruled the retro at
+300h x $28 + 600h x $20 + $800 tools = $21,200. payback at the
+launch metal mix: ~7-38 months across 50-200 orders/mo (aov $200-250).
+the retro target never enters the fee rate; it sets the payback
+horizon the plan carries. payback is bound by
 volume and aov, not by the headline rate: moving 10% -> 12% shortens
 payback by a third or more (20 -> 11 months at $200 aov, 50 orders/mo)
 while pushing the fee outside the fair band (section 4). the retro is a
@@ -204,7 +205,7 @@ retro into the rate (it is a one-time cost; a permanent rate increase to
 cover it is exactly the hidden-margin pattern the policy rejects). the
 creation-stack story belongs in the pricing page, not the rate: creators
 should see what the fee funds (the engine, the routing, the compliance) and
-what the same toolchain costs to buy outright. retro v2 is ruled: 1000h at
-$28/hr = $28,000 (hours-audit.md); it changes the payback horizon the
-plan carries, not the fee. revisit the rate only with
+what the same toolchain costs to buy outright. the retro is ruled: 300h at $28 + 600h at $20 + $800 tools = $21,200
+(hours-audit.md); it sets the payback horizon the plan carries, not
+the fee. revisit the rate only with
 the first 100 real orders, per fee-policy.md section 11.
