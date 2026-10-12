@@ -54,18 +54,36 @@ ladder's band; $24.69 is the one rung that breaks the pattern.
 
 the earlier fairness analysis (8-10% "fair band") was framed as an
 across-the-board toll. the owner correction: sculptura is not just
-etsy. the fee pays for the free design studio (admitted artists get
-the studio at no cost - the creation stack is free to start), the
-storefront, routing and compliance. the replacement-stack comparison
-is the honest benchmark: matrixgold $5,995 + rhino ~$995, or ai-cad
-saas $125-179/mo, PLUS etsy-effective ~13.5% on top if they still
-want a marketplace. against that, free 20% and paid 10-16% all read
-as cheap: the stack is included, not billed separately. the paid
-ladder never dips below 10% - the floor of the old fair band - so
-committed creators buy down to fair-band pricing at most, never
-into toll territory. pricing pages must lead with what the fee
-pays for (studio + storefront + manufacturing compliance), not the
-headline rate.
+etsy. the main thing creators pay for is **tessa + paracraft** - the
+core of the value stack:
+
+- **no design software**: the studio is free to start; there is no
+  matrixgold ($5,995) or rhino (~$995) or ai-cad saas ($125-179/mo)
+  to buy. the fee is the only price of admission.
+- **no learning curve**: creators do not learn to design. tessa
+  turns their references and description into constrained parameter
+  proposals; paracraft compiles. the skill being sold is the
+  engine's, not the creator's.
+- **no manufacturer wrangling**: no contacting casting houses, no
+  quotes, no chasing shops. sculptura routes the order per its
+  manufacturing-route policy; the creator never talks to a caster.
+- **no uncastable risk**: paracraft validates castability before
+  any release exists (server-side recompile, physical rule set).
+  a design that passes cannot arrive at the caster uncastable; that
+  risk is the platform's, priced into the fee, not the creator's.
+- **dpms insurance and compliance handled**: as a dealer in
+  precious metals and stones, sculptura carries the aml program
+  (address-shape bans, sanctions gates), hallmarking and vienna
+  convention/ccm routing, insurance per order, and the regulatory
+  stack. the creator never touches any of it.
+
+against that stack, free 20% and paid 10-16% all read as cheap: the
+stack is included, not billed separately. the paid ladder never dips
+below 10% - the floor of the old fair band - so committed creators
+buy down to fair-band pricing at most, never into toll territory.
+pricing pages must lead with this stack (tessa + paracraft, no
+software, no learning curve, no manufacturer contact, no castability
+risk, compliance handled), not the headline rate.
 
 ## result 1: every tier clears the requirement, widely
 
