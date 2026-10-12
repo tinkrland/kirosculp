@@ -24,3 +24,5 @@ one reversible equation supports both creator choices: lock net earnings and sol
 - return a signed or integrity-bound snapshot for checkout.
 
 see the [complete source audit](../../../docs/current-state-audit.md) for cross-domain findings and build order.
+
+see [fee-policy.md](fee-policy.md) for the draft dynamic fee policy design: the versioned fee_policy object, vary/never-vary rulings, subscription levers, floor economics, reserve treatment, volatility handling, and governance.
