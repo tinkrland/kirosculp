@@ -23,9 +23,16 @@ TELLS = 0.01            # tell-adapter checks (email/phone/address)
 PAYOUT_COORD = 0.50     # payout coordination per order
 TAIL_BPS = 75           # chargeback tail, value-scaled (0.75% of retail)
 
-# inference allocation (hypothesis)
-COST_PER_DESIGN = 0.05  # deterministic parametric generation per design
+# inference allocation (grounded structure, hypothesis values)
+# byok.md: tessa turns run on the platform key only for non-byok
+# creators; byok turns bill the creator's provider and never fall
+# back. compiles + paracraft validation are always platform compute,
+# metered via studio credits / wallet (partially recovered directly).
+COST_PER_DESIGN = 0.05   # tessa turns per design (platform-key creators)
 DESIGNS_PER_SOLD_ORDER = 10  # attach rate 10%: 90% of designs never sell
+BYOK_SHARE = 0.30        # hypothesis: share of creators on their own key
+COMPILE_COST = 0.01      # platform compute per design cycle (compile+validate)
+WALLET_RECOVERY = 0.50   # hypothesis: share of metered compute paid via wallet
 
 # manufacturer integration (hypothesis, pending partner quotes)
 MFG_PER_ORDER = 0.50    # per-order integration fee: that order's cost, direct
@@ -58,8 +65,16 @@ def stack(retail):
 
 
 def inference_alloc():
-    """all design-generation spend recovered from sold orders only."""
-    return COST_PER_DESIGN * DESIGNS_PER_SOLD_ORDER
+    """platform-borne design spend recovered from sold orders only.
+
+    per byok.md: tessa cost only accrues for non-byok creators;
+    compiles always accrue but are partially wallet-recovered.
+    unsold designs are included by construction (DESIGNS_PER_SOLD_ORDER
+    counts every design generated per sold order).
+    """
+    tessa = (1 - BYOK_SHARE) * COST_PER_DESIGN * DESIGNS_PER_SOLD_ORDER
+    compiles = COMPILE_COST * DESIGNS_PER_SOLD_ORDER * (1 - WALLET_RECOVERY)
+    return tessa + compiles
 
 
 def mfg_alloc(monthly_orders):
@@ -97,7 +112,7 @@ if __name__ == "__main__":
     inf, mfg50, mfg100, mfg200 = (inference_alloc(),
                                   mfg_alloc(50), mfg_alloc(100), mfg_alloc(200))
     print("=== per-order allocations (dollars) ===")
-    print(f"inference (all designs, 10% attach): ${inf:.2f}")
+    print(f"platform-borne design spend (byok 30%, wallet 50%): ${inf:.2f}")
     print(f"mfg integration at 50/100/200 orders/mo: "
           f"${mfg50:.2f} / ${mfg100:.2f} / ${mfg200:.2f}")
     for v in VOLUMES:

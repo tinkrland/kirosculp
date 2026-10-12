@@ -23,12 +23,17 @@ required fee per order = direct service cost recovery
 
 1. **inference is pooled, not order-attached.** api/inference spend on
    designs that never sell still needs recovery; counting only calls
-   attached to successful orders understates costs. so per-order
-   inference recovery = (designs generated per sold order, including
-   unsold) x cost per design. hypothesis: 10 designs per sold order
-   (10% attach) x $0.05 per deterministic parametric generation =
-   **$0.50/order**. sensitivity: 4-30 designs/order and $0.02-$0.10 per
-   design give $0.08-$3.00.
+   attached to successful orders understates costs. per-order
+   recovery = (designs generated per sold order, including unsold) x
+   platform-borne cost per design. grounded structure per
+   studio/design-agent/byok.md: tessa turns on platform keys accrue
+   only for non-byok creators (byok share hypothesis 30%; byok turns
+   bill the creator's provider, never falling back to platform
+   inference); compiles + paracraft validation are always platform
+   compute but partially recovered via studio credits / wallet
+   (hypothesis 50%). values: 10 designs per sold order x
+   (0.70 x $0.05 + 0.50 x $0.01) = **$0.40/order**. sensitivity:
+   4-30 designs/order, byok 10-60%, wallet 30-70%.
 2. **manufacturer integration splits by shape.** a per-order
    integration fee belongs to that order's cost directly; a monthly
    integration charge is allocated across the month's orders, never
@@ -49,14 +54,14 @@ amortized over 24 months (profit 200 bps, fixed $0.50):
 
 | retail | 50/mo | 100/mo | 200/mo |
 |---|---|---|---|
-| $60 | $31.02 (60%) | $20.18 | $14.77 |
-| $120 | $32.65 (29%) | $21.82 | $16.40 |
-| $200 | $34.83 (18%) | $23.99 | $18.58 |
-| $250 | $36.19 (15%) | $25.35 | $19.94 |
-| $650 | $47.07 (7%) | $36.23 | $30.82 |
+| $60 | $30.92 (60%) | $20.08 | $14.67 |
+| $120 | $32.55 (29%) | $21.72 | $16.30 |
+| $200 | $34.73 (18%) | $23.89 | $18.48 |
+| $250 | $36.09 (15%) | $25.25 | $19.84 |
+| $650 | $46.97 (7%) | $36.13 | $30.72 |
 
 the retro allocation dominates: $17.67/order at 50/mo, $8.83 at
-100/mo, $4.42 at 200/mo. embedding it per-order implies an 18.3% rate
+100/mo, $4.42 at 200/mo. embedding it per-order implies an 18.2% rate
 at 50 orders/mo (blended mix) and 12.4% at 100/mo. that is a rate a
 fairness-first platform cannot charge, and it would push the rate
 exactly where the fee policy forbids going.
@@ -68,17 +73,17 @@ per-order (profit 200 bps of fee_base, fixed $0.50):
 
 | retail | 50/mo | 100/mo | 200/mo |
 |---|---|---|---|
-| $60 | 25.2% | 21.3% | 19.3% |
-| $120 | 13.1% | 11.3% | 10.4% |
-| $200 | 8.8% | 7.8% | 7.2% |
-| $250 | 7.6% | 6.7% | 6.3% |
-| $650 | 4.6% | 4.3% | 4.1% |
+| $60 | 25.0% | 21.1% | 19.1% |
+| $120 | 13.1% | 11.2% | 10.3% |
+| $200 | 8.8% | 7.7% | 7.2% |
+| $250 | 7.5% | 6.7% | 6.3% |
+| $650 | 4.6% | 4.2% | 4.1% |
 
 at the blended launch mix (~$205 aov): **~8.8% at 50/mo, ~7.8% at
 100/mo**. the current policy 10% + $0.50 (floor $2) covers direct +
 inference + integration + a modest profit target at launch volumes,
 with surplus left for retro paydown. at 200/mo the blended fee runs
-+$3.76/order over the full requirement including retro.
++$3.86/order over the full requirement including retro.
 
 the $60 row stays structurally underwater even ex-retro (19-25%):
 that is the cheap-order problem again, and it stays solved by the
