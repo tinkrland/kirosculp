@@ -72,21 +72,24 @@ net        = retail - manufacturing - shipping - insurance - tax - fee - payment
 - **(b) larger allowances**: preferred owner direction; near-zero marginal cost; drives adoption among low-volume creators who subscribe for capacity, not fee savings. keep studio credits (compiles) and platform allowances (listings) as separate meters on separate sides of the studio/platform boundary.
 - **(c) printify-style manufacturing discount**: rejected for now. sculptura does not control the quote; the discount would be either a lie about a partner price or a subsidy from platform margin, which is just (a) done less transparently. revisit when real volume discounts are negotiated with casting partners.
 
-owner ladder 2026-10-12: four tiers, each an integrated
-studio+platform subscription (one sub covers both sides; the
-integration expresses at checkout as the fee percentage - free
-creators pay the higher rate, subscribers lower):
+owner ladder 2026-10-12 (revised): five tiers, each an integrated
+studio+platform subscription (one sub covers both sides; the fee
+percentage is the checkout expression - free creators pay the higher
+rate, subscribers lower). allowances cap distinct active listings,
+never sales volume.
 
-| | free | starter | standard | pro |
-|---|---|---|---|---|
-| price/mo | $0 | $12.99 | $19.99 | $27.49 |
-| listings/mo | 5 | 10 | 20 | (open, hypothesis 40) |
-| fee rate | 10% + $0.50 | open (hypothesis 8%) | open (hypothesis 7%) | open (hypothesis 5%) |
+| | free | starter | lite | standard | pro |
+|---|---|---|---|---|---|
+| price/mo | $0 | $12.99 | $19.99 | $24.69 (24.99 recommended) | $29.99 |
+| listings/mo | 5 (ruled) | 10 (hyp) | 20 (hyp) | 30 (hyp) | 40 (hyp) |
+| fee rate | 20% + $0.50 (ruled) | open (hyp 15%) | open (hyp 12%) | open (hyp 10%) | open (hyp 8%) |
 
 the two meters stay separate per the boundary rule: compile credits
 price compiles (studio side), listing allowances price listings
-(platform side), both inside each subscription. per-tier waterfall
-math: work/tier-schedule-comparison.md.
+(platform side), both inside each subscription. the hypothesis fee
+ladder 15/12/10/8 is the constant-$250 break-even ladder (each tier
+pays for itself at ~$250/mo gmv). per-tier waterfall math:
+work/tier-schedule-comparison.md.
 | commission slots | 3 | 10 | unlimited |
 | channels | native | +2 | all |
 
