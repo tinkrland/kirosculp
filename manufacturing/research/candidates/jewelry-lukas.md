@@ -21,6 +21,19 @@ rates are published on individual service pages.
 ## sources
 
 - [lost wax casting](https://jewelrylukas.com/lost-wax-casting/): process, alloy coverage, la location. (retrieved 2026-10-12)
+- [gold casting rates](https://jewelrylukas.com/gold-casting/): per-gram labor, loss fees, karat options. (retrieved 2026-10-12)
+- [platinum casting rates](https://jewelrylukas.com/platinum-casting/): per-gram labor, 950 ru/ir, polishing minimums. (retrieved 2026-10-12)
+
+
+## captured rate model (2026-10-12)
+
+gold casting labor: regular $3.50 per gram plus metal and a 2% gold loss
+fee; advanced $8 per gram plus metal and a 3% loss fee. advanced is not
+final hand polishing; polishing, stone setting and finishing quoted
+separately. platinum 950 (ruthenium or iridium): regular $6.50 per gram,
+advanced $13 per gram, metal charged separately, no metal loss fee, a
+platinum-iridium surcharge applies. production polishing requires at
+least six pieces per model; individual hand polishing has no minimum.
 
 ## how this enters the engine
 

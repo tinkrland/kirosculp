@@ -62,9 +62,9 @@ the full verification pass, including whether they do jewelry casting at all.
 | jcco enterprises | us contract caster to the trade with published per-metal price pages | dated site; capture rate pages with dates |
 | hoover and strong | us refiner/metals (harmony recycled), gemstones; casting services historically | verify current casting offer vs refining focus |
 | pallion group | au precious metals group services (abc refinery) | services breadth vs jewelry casting focus to verify |
-| legor group | it precious metal alloys for jewelry (voxelmatters listed) | verify casting services vs alloy supply role |
+| legor group | it precious metal alloys, powders and plating solutions for jewelry (voxelmatters listed) | **alloy supplier, not a caster**: role is materials layer, not route manufacturer |
 | fine casting jewellery | ca casting site surfaced in search | thin site, manual look needed |
-| zero porosity casting | us casting house from directory data | site scrape blocked; manual look needed |
+| zero porosity casting | us caster of natural wax and castable resins, liquaCast molds, orders via piro portal, mjsa member | portal-driven order path; alloy coverage pass needed |
 | merrell casting | uk british jewellery manufacturing | second uk hallmark-axis datapoint; scrape blocked |
 | nowart jewelry | low-moq jewelry manufacturer | likely cn oem; must clear dpms compliance weight first |
 | branvas | jewelry dropship api/csv, print-ready, worldwide | platform-shaped; verify precious-metal casting vs print/plate goods |
