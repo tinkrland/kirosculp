@@ -74,16 +74,17 @@ reading was the wrong frame: same headline number, materially more
 product. that is the "runway": the fee carries the engine, not just the
 order.
 
-the break-even target question: the repo hours audit
-(work/hours-audit.md, 2026-10-12) counted the committed work across
-sculptura, kirosculp, addsculp, jewelfinity and studiogram after
-dropping duplicates: 333 commits, **88 hours** (67-110 range). at the
-established $24/hr + $800 tools that is **~$2,917** ($2,401-$3,441).
-the ruled retro ($5,600) already exceeds this, so it stands, not as an
-inflation but as the valuation of broader founder time (direction,
-review, research, setup) beyond commit-visible work: repo work covers
-about half of it. no restatement is needed; only an internal-rate
-change would rescale it, and that is an owner ruling.
+the break-even target question: the repo hours audit (work/hours-audit.md,
+rev 2, 2026-10-12) counted the committed work across the five current
+repos plus the deprecated kqrla prototype repos after dropping
+duplicates: 631 commits, **111 hours** (85-140 range). at the ruled
+$24/hr + $800 tools that is **~$3,472**; at defensible market rates
+($30-50/hr replacement-cost band, anchored in the audit) it is
+$4,140-$6,367. the ruled retro ($5,600) sits inside that band, so it
+stands as the valuation of committed work plus the founder time the
+repos cannot show (direction, review, research, setup). no restatement
+needed; an internal-rate change is an owner ruling, and the audit's
+rate table prices the options.
 
 ## 1. cost recovery: the fee's honest floor
 
@@ -130,7 +131,7 @@ includes infra $60/mo and 20 active creators at $10.50/mo:
 
 reading: at the launch metal mix (blended aov ~$205), the ruled
 retro is repaid roughly at 50-100 orders/month within 7-20 months.
-the audit-based floor ($2,917) would be repaid roughly half as fast;
+the audit floor ($3,472 at $24/hr) would be repaid somewhat faster;
 the ruled $5,600 is the correct target since it prices the founder
 time the repos cannot show. payback is bound by
 volume and aov, not by the headline rate: moving 10% -> 12% shortens
