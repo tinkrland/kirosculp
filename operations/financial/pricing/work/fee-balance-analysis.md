@@ -20,6 +20,52 @@ fee-policy.md section 11 still governs what stays fiction.
 - launch metal mix (model): sterling 60% at $140, 14k 15% at $650,
   bronze 25% at $95 -> blended aov $205.
 
+
+## 1a. what the fee actually funds: the creation stack (the framing that matters)
+
+the comparable-band framing in section 4 understates the product.
+vgen/etsy require the creator to bring the artifact: finished artwork,
+ready to list. sculptura requires an idea. that is the whole
+difference. etsy, redbubble and the pod marketplaces charge for a
+listing surface and distribute work that already exists; sculptura's
+fee funds the entire creation stack that turns the idea into the
+artifact:
+
+- **paracraft**: the geometry compiler and deterministic validation
+  engine. creators do not bring manufacturable files; the platform does
+  the engineering (openscad compilation, castability validation,
+  manufacturing-route parameters).
+- **tessa**: the studio assistant that turns a person with ideas into
+  someone who can produce a sellable object.
+- the artist-to-creator progression itself: admission, studio,
+  listing publication, buyer portal, manufacturing routing and
+  hallmark compliance.
+
+the fee is not a marketplace toll on someone else's finished product;
+it is the only revenue line for the machine that makes the product
+possible. what that stack would cost a creator to buy instead
+(retrieved 2026-10-12):
+
+- matrixgold (jewelry cad standard): $5,995 license from may 2026, on
+  top of a required rhino license (~$995), or a subscription around
+  $200-300/month.
+- ruby kinglet studio (the newest ai-jewelry-cad saas comparable):
+  $179/month, $125/month billed annually.
+- sculptura's studio tier: $15/month ($180/yr); the free tier: $0.
+
+so at 10% + $0.50, sculptura prices the full creation-plus-compliance
+stack at marketplace-toll level. the earlier "we match etsy effective"
+reading was the wrong frame: same headline number, materially more
+product. that is the "runway": the fee carries the engine, not just the
+order.
+
+this also means the break-even target is not just the ruled $5,600
+retro. the audit's full sunk founder time is 800+ hours; at the
+established internal rate ($24/hr, the same rate behind the $4,800
+line) the engine-inclusive target is ~$19,200 labor + $800 tools =
+**~$20,000**. this is a candidate retro v2, pending owner ruling; the
+ruled retro remains $5,600. the payback tables below show both.
+
 ## 1. cost recovery: the fee's honest floor
 
 what rate just covers the per-order stack (no retro, no infra, no profit):
@@ -63,8 +109,23 @@ includes infra $60/mo and 20 active creators at $10.50/mo:
 | 100 | 54 months | 7 months | 4.4 months |
 | 200 | 12 months | 2.9 months | 2 months |
 
-reading: at the launch metal mix (blended aov ~$205), the retro is repaid
-roughly at 50-100 orders/month within 7-20 months. payback is bound by
+engine-inclusive (retro v2 candidate, ~$20,000) at the same rate:
+
+| orders/mo | aov $200 | aov $250 |
+|---|---|---|
+| 50 | 71 months | 39 months |
+| 100 | 24 months | 16 months |
+| 200 | 10 months | 7 months |
+
+the $14,400 engine delta amortized per order: $14.40 over the first
+1,000 orders, $4.80 over 3,000, $2.40 over 6,000. even the harshest
+reading (all engine cost on the first thousand orders) adds ~1.4 points
+to the cost-recovery rate at $120 aov: the engine is not what makes
+cheap orders underwater, support time is.
+
+reading: at the launch metal mix (blended aov ~$205), the ruled retro
+is repaid roughly at 50-100 orders/month within 7-20 months; the full
+engine-inclusive target needs ~2-3.5 years at the same volumes. payback is bound by
 volume and aov, not by the headline rate: moving 10% -> 12% shortens
 payback by a third or more (20 -> 11 months at $200 aov, 50 orders/mo)
 while pushing the fee outside the fair band (section 4). the retro is a
@@ -81,17 +142,22 @@ anchors (fee-policy.md section 2 comparables):
   offsite-ads surcharge can push 15%+.
 
 sculptura's total buyer-side friction at 10% + $0.50 fee plus payment
-pass-through is ~13.2-13.5%, matching etsy's effective level while adding
-manufacturing routing, hallmark compliance and two-way pricing transparency
-etsy does not offer. verdict:
+pass-through is ~13.2-13.5%, matching etsy's effective level while
+adding the creation stack (section 1a): the engine that makes the
+creator, manufacturing routing, hallmark compliance and two-way
+pricing transparency etsy does not offer. verdict:
 
 - **below ~6.5% at launch aov mix**: below cost recovery; the platform pays
   to serve orders. not generous, just underwater.
 - **8-10% + $0.50**: the fair band. covers the stack with modest margin,
   matches the comparable set, funds the risk pool.
-- **12%**: exits the band. above every creator-comparable in the set except
-  etsy's offsite-ads worst case. defensible only with a visible cost story
-  (channel surcharges, which are pass-throughs, not rate).
+- **12%**: above every creator-comparable in the set except etsy's
+  offsite-ads worst case. the creation-stack argument gives it more
+  headroom than a pure marketplace would have (the fee funds a
+  $2-7k-replacement toolchain), so it is defensible later with a visible
+  value story, but not at launch: a platform that charges creators for
+  the engine before the engine has public proof is selling software on
+  spec. channel surcharges stay pass-throughs, not rate.
 - **15%**: exorbitant for a pro-artist positioning; this is the number the
   placeholder launch-era P&L used as a take rate and it should be retired
   from every document.
@@ -120,8 +186,12 @@ trust/volume/geography levers.
 
 ## 6. recommendation (still a hypothesis until measure-first completes)
 
-hold 10% + $0.50 with the $2 floor as policy v1. do not amortize the retro
-into the rate (it is a one-time cost; a permanent rate increase to cover it
-is exactly the hidden-margin pattern the policy rejects). show creators the
-cost stack and the fee side by side. revisit the rate only with the first
-100 real orders, per fee-policy.md section 11.
+hold 10% + $0.50 with the $2 floor as policy v1. do not amortize either
+retro into the rate (they are one-time costs; a permanent rate increase to
+cover them is exactly the hidden-margin pattern the policy rejects). the
+creation-stack story belongs in the pricing page, not the rate: creators
+should see what the fee funds (the engine, the routing, the compliance) and
+what the same toolchain costs to buy outright. rule retro v2 (engine-
+inclusive ~$20,000 vs ruled $5,600) explicitly, since it changes the
+payback horizon the plan carries, not the fee. revisit the rate only with
+the first 100 real orders, per fee-policy.md section 11.
