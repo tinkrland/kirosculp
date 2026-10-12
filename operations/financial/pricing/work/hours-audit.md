@@ -1,9 +1,10 @@
-# hours audit: founder work in the repos (2026-10-12, rev 2)
+# hours audit: founder work in the repos (2026-10-12, rev 3)
 
-status: audit, rev 2 adds the deprecated pre-tinkrland repos
-(kqrla/sculptura, kqrla/sculptura.dev) to the original five. counts the
-work put into the repos, excluding duplicated parts, to ground the
-retro (repayment) calculation in verifiable data instead of estimates.
+status: audit, rev 3. rev 2 added the deprecated kqrla repos; rev 3
+adds the content audit: instead of clustering commit timestamps, the
+hours are estimated from what was actually built (the corpus), priced
+at human production rates. both methods are reported because they
+measure different true things.
 
 ## method
 
@@ -90,3 +91,56 @@ would be underpricing by any market anchor.
 supersedes: the ~$20,000 engine-inclusive candidate sketched in
 fee-balance-analysis.md before this audit (the 800+ hour reading did
 not survive the git data).
+
+## rev 3: content audit (look at the code, not the commits)
+
+the timestamp method measures when work happened; it cannot see how
+much. the content audit measures the artifact corpus directly: every
+unique blob across all branches of all seven repos, deduped by content
+hash (identical imports across repos count once), with generated
+app scaffolding, vendor code, lockfiles, binary assets and scraped
+datasets excluded:
+
+| category | volume | production rate (base) |
+|---|---|---|
+| authored prose (md: specs, research, policy) | 778,082 words | 400 w/h |
+| generated app code (.dev prototype + base44/lovable exports) | 103,661 LOC | 200 LOC/h |
+| authored engine/tooling code (scad, py, sql, cypher, scripts) | 114,436 LOC | 50 LOC/h |
+| researched data (country-rollout, payout policy json) | 39,067 lines | 30 lines/h |
+| generated data (corpora, configs, evidence probes) | 67,710 lines | 400 lines/h |
+
+human-equivalent hours (what professionals would need to produce this
+corpus): **base ~6,200h** (tight ~4,300h, loose ~9,300h).
+
+corpus replacement valuation:
+
+| rate/hr | tight | base | loose |
+|---|---|---|---|
+| $24 (ruled) | $102,796 | **$149,370** | $222,678 |
+| $40 | $171,326 | $248,950 | $371,131 |
+| $50 | $214,158 | $311,187 | $463,913 |
+
+## the two readings and what each is for
+
+- **founder wall-clock (~111h proven, ruled 200h)**: the time the
+  founder actually spent directing production. ai-assisted production
+  is the point: the corpus is thousands of human-equivalent hours
+  produced in ~a hundred directed hours.
+- **corpus human-equivalent (~6,200h base)**: what a hired team would
+  have needed to produce the same artifact. this is the replacement
+  cost and the platform's build-value moat.
+
+the retro (repayment) belongs to the first reading: keep it wall-clock
+based ($5,600 ruled; restating at $30-50/hr market-band rates gives
+$4,140-$6,367 incl tools, bracketing the ruled number). setting the
+retro to the corpus valuation would be unpayable at a fair fee (the
+$149k base at $281/mo contribution is ~44 years) and would push the
+rate exactly where the fairness analysis says not to go.
+
+the corpus valuation belongs in the fee story instead: the 10% + $0.50
+fee amortizes a ~$150k-to-reproduce platform (at the most conservative
+rate) across the platform's life, ~$1,245/mo over ten years. at launch
+volumes that amortization exceeds fee revenue, which is the honest
+statement of the runway: early orders are subsidized by the already-
+built corpus, and the subscriptions (not a rate hike) are the lever
+that closes the gap.

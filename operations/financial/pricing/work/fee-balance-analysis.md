@@ -84,7 +84,13 @@ $4,140-$6,367. the ruled retro ($5,600) sits inside that band, so it
 stands as the valuation of committed work plus the founder time the
 repos cannot show (direction, review, research, setup). no restatement
 needed; an internal-rate change is an owner ruling, and the audit's
-rate table prices the options.
+rate table prices the options. separately, the rev-3 content audit
+values the built corpus (778k words of prose, 218k LOC, 107k data
+lines, content-deduped) at ~6,200 human-equivalent hours: ~$149k
+replacement cost at the ruled $24/hr, $250k-$311k at market rates.
+that valuation is not the retro target; it is the fee's value basis:
+the fee amortizes a six-figure-to-reproduce platform across the
+platform's life.
 
 ## 1. cost recovery: the fee's honest floor
 
