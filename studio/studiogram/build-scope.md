@@ -1,6 +1,6 @@
 # studiogram: standalone build scope
 
-this is a single, self-contained specification for studiogram. it assumes the reader has no access to any repository and no prior context: everything needed to understand, evaluate, or begin scoping the work is in this file. studiogram is planned, not built; this document is the scope of record for its first pass.
+this is a single, self-contained specification for studiogram. it assumes the reader has no access to any repository and no prior context: everything needed to understand, evaluate, or begin scoping the work is in this file. this document is the scope of record for studiogram's first pass. a first-pass implementation is now under way in the separate `tinkrland/studiogram` repository (rigged-hand build, deterministic artifact, ingestion gate, capture set); this scope stays the specification it builds from, and that repo carries its own working brief (`instructions.md`) with current state and next-pass priorities.
 
 provenance is tagged inline where it matters: (repo) means it comes from recovered internal guides and audited source snapshots, (ruling) means it comes from recorded owner decisions. items with no tag follow directly from the tagged material.
 
@@ -52,7 +52,7 @@ studiogram is a deterministic 3d scene system, not image generation. the framing
 
 ## 3. what exists today (repo)
 
-- no engine, no scene state model, no backend. nothing of studiogram is built.
+- a first-pass build now exists in the separate `tinkrland/studiogram` repository: one deterministic html artifact with the rigged hand, surface layer, posing, procedural jewelry behind a verified ingestion gate, camera modes, lighting rig, backdrops, and the capture set. its known gaps against this scope are recorded there: the scene rebuilds geometry procedurally from the release mesh_spec instead of consuming the release's compiled mesh (the top next-pass priority), and the hand model's cc by-sa license needs review before production use.
 - what exists is recovered product explanation from an earlier public site build: an overview page plus guides (why, how it works, hand, jewelry, scene, capture, behind the scenes), and an older single-page version that carried a scene graph and a movement step the newer guides dropped. that explanatory build was content pages only, clearly labeled upcoming.
 - the legacy studio navigation (build, templates, styles, presets, materials, print, code pages) is a set of alternative or earlier paths, not one coherent lifecycle. studiogram absorbs these as its scene-system surface. the required consolidation: one project model, educational previews kept distinct from production validation, every page connected to revision and release state instead of copied local state.
 - a reference service exists in the wild for comparison: ijewel.design, an upload-to-showcase 3d jewelry platform with material configurators and a shareable live viewer. studiogram's core difference is that it never accepts uploads: it photographs the canonical compiled artifact, not a separate copy. listed for design context only; no partnership or integration.
