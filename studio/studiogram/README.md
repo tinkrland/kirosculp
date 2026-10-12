@@ -39,3 +39,5 @@ studiogram is the virtual product studio itself: the scene system lives in [scen
 ## status
 
 **planned, not built.** recovered as product explanation from sculptura.dev. no engine, scene state model, or backend work exists in this repository. build decisions wait for the studio leg to consolidate its project model and release flow first.
+
+the decoupled, standalone build scope for handing to an agent outside this repo lives in [build-scope.md](build-scope.md): self-contained context, invariants, scene model, and the later phases (props, movement, wearables) parked out of the first pass.
