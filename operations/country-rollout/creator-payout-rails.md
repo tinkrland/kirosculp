@@ -77,22 +77,22 @@ rails side; the right side (fatf, tier) is the aml side.
 
 | market | stripe connect | paypal payouts | payoneer | primary rail | fatf 2026-06 | aml tier |
 |---|---|---|---|---|---|---|
-| US | available | available | available | stripe connect | off | standard |
-| CA | available | available | available | stripe connect | off | standard |
-| GB | available | available | available | stripe connect | off | standard |
-| IE | available | constrained | available | stripe connect | off | standard |
-| DE | available | available | available | stripe connect | off | standard |
-| AT | available | available | available | stripe connect | off | standard |
-| CH | available | available | available | stripe connect | off | standard |
-| FR | available | available | available | stripe connect | off | standard |
-| BE | available | available | available | stripe connect | off | standard |
-| NL | available | available | available | stripe connect | off | standard |
-| IT | available | available | available | stripe connect | off | standard |
-| PT | available | available | available | stripe connect | off | standard |
-| ES | available | available | available | stripe connect | off | standard |
-| AU | available | available | available | stripe connect | off | standard |
-| NZ | available | available | available | stripe connect | off | standard |
-| CY | available | constrained | available | stripe connect | off | standard |
+| `US` | available | available | available | stripe connect | off | standard |
+| `CA` | available | available | available | stripe connect | off | standard |
+| `GB` | available | available | available | stripe connect | off | standard |
+| `IE` | available | constrained | available | stripe connect | off | standard |
+| `DE` | available | available | available | stripe connect | off | standard |
+| `AT` | available | available | available | stripe connect | off | standard |
+| `CH` | available | available | available | stripe connect | off | standard |
+| `FR` | available | available | available | stripe connect | off | standard |
+| `BE` | available | available | available | stripe connect | off | standard |
+| `NL` | available | available | available | stripe connect | off | standard |
+| `IT` | available | available | available | stripe connect | off | standard |
+| `PT` | available | available | available | stripe connect | off | standard |
+| `ES` | available | available | available | stripe connect | off | standard |
+| `AU` | available | available | available | stripe connect | off | standard |
+| `NZ` | available | available | available | stripe connect | off | standard |
+| `CY` | available | constrained | available | stripe connect | off | standard |
 
 stripe connect primary across the cohort, payoneer fallback
 everywhere. cy is routed here rather than west asia: it is an eu
@@ -107,23 +107,23 @@ that most of the region is parked or ineligible.
 
 | market | stripe connect | paypal payouts | payoneer | primary rail | fatf 2026-06 | aml tier |
 |---|---|---|---|---|---|---|
-| TR | unavailable | unavailable (stale-doc conflict) | available | payoneer | off | standard |
-| IL | unavailable | available | available | payoneer | off | enhanced |
-| JO | unavailable | available | available | payoneer | off | standard |
-| EG | unavailable | unavailable | available | payoneer | off | standard |
-| MA | unavailable | available | available | payoneer | off | standard |
+| `TR` | unavailable | unavailable (stale-doc conflict) | available | payoneer | off | standard |
+| `IL` | unavailable | available | available | payoneer | off | enhanced |
+| `JO` | unavailable | available | available | payoneer | off | standard |
+| `EG` | unavailable | unavailable | available | payoneer | off | standard |
+| `MA` | unavailable | available | available | payoneer | off | standard |
 
-- **TR**: payoneer-only, confirmed. see the per-market notes below.
-- **IL**: the sleeper. paypal fully localized, payoneer fine, off the
+- **`TR`**: payoneer-only, confirmed. see the per-market notes below.
+- **`IL`**: the sleeper. paypal fully localized, payoneer fine, off the
   grey list since late 2022. enhanced (not hold) because il is a global
   diamond-trade hub, so dpms-typology scrutiny is unusually present
   there; individual creators are fine, it earns a watch.
-- **JO**: clean rails, small scene, a maybe-tier market.
-- **EG**: "if permits" is the right framing: payoneer is the default
+- **`JO`**: clean rails, small scene, a maybe-tier market.
+- **`EG`**: "if permits" is the right framing: payoneer is the default
   receive rail for egyptian freelancers, and the central bank fx rules
   hit outbound card spending, not inbound receipts. the cost is egp
   conversion spread.
-- **MA**: quietly the cleanest market in the mediterranean rim. off the
+- **`MA`**: quietly the cleanest market in the mediterranean rim. off the
   grey list since february 2023, paypal send/receive/withdraw supported,
   payoneer available, deep silversmithing tradition. it sits in this
   bloc via its strong european market ties: it is the exact market the
@@ -133,10 +133,10 @@ that most of the region is parked or ineligible.
 
 | market | stripe connect | paypal payouts | payoneer | primary rail | fatf 2026-06 | aml tier |
 |---|---|---|---|---|---|---|
-| IN | preview | constrained | available | payoneer | off | standard |
-| PK | unavailable | unavailable | available | payoneer | off | standard |
-| BD | unavailable | unavailable | available | payoneer | off | standard |
-| NP | not researched | unavailable | not researched | not assigned | grey | grey_hold |
+| `IN` | preview | constrained | available | payoneer | off | standard |
+| `PK` | unavailable | unavailable | available | payoneer | off | standard |
+| `BD` | unavailable | unavailable | available | payoneer | off | standard |
+| `NP` | not researched | unavailable | not researched | not assigned | grey | grey_hold |
 
 np is grey-listed: held under the dpms stance. lk and mv are not yet
 examined; they sit in this bloc for a later pass.
@@ -145,10 +145,10 @@ examined; they sit in this bloc for a later pass.
 
 | market | stripe connect | paypal payouts | payoneer | primary rail | fatf 2026-06 | aml tier |
 |---|---|---|---|---|---|---|
-| MY | available | constrained | available | stripe connect | off | standard |
-| ID | preview | available | available | payoneer | off | standard |
-| PH | unavailable | constrained | available | payoneer | off | standard |
-| VN | unavailable | available | available | not assigned | grey | grey_hold |
+| `MY` | available | constrained | available | stripe connect | off | standard |
+| `ID` | preview | available | available | payoneer | off | standard |
+| `PH` | unavailable | constrained | available | payoneer | off | standard |
+| `VN` | unavailable | available | available | not assigned | grey | grey_hold |
 
 my is the one full-stripe market in the bloc, riding the standard
 stripe connect flow. id mirrors in: stripe preview, payoneer primary.
@@ -161,17 +161,17 @@ assignment.
 
 | market | stripe connect | paypal payouts | payoneer | primary rail | fatf 2026-06 | aml tier |
 |---|---|---|---|---|---|---|
-| MX | available | constrained | available | stripe connect | off | standard |
-| BR | available | constrained | available | stripe connect | off | standard |
-| AR | unavailable | available | available | payoneer | off | enhanced |
-| CL | unavailable | available | available | payoneer | off | standard |
-| CO | unavailable | constrained | available | payoneer | off | standard |
-| PE | unavailable | unavailable | available | payoneer | off | standard |
-| BO | unavailable | unavailable | available | not assigned | grey since 2023-10 | grey_hold |
-| VE | unavailable | unavailable | available | not assigned | grey | sanctions_conditional |
+| `MX` | available | constrained | available | stripe connect | off | standard |
+| `BR` | available | constrained | available | stripe connect | off | standard |
+| `AR` | unavailable | available | available | payoneer | off | enhanced |
+| `CL` | unavailable | available | available | payoneer | off | standard |
+| `CO` | unavailable | constrained | available | payoneer | off | standard |
+| `PE` | unavailable | unavailable | available | payoneer | off | standard |
+| `BO` | unavailable | unavailable | available | not assigned | grey since 2023-10 | grey_hold |
+| `VE` | unavailable | unavailable | available | not assigned | grey | sanctions_conditional |
 
 latam gets no hard admission exclusion. bo and ve are held under the
-dpms stance; ve additionally carries the live, thawing OFAC regime,
+dpms stance; ve additionally carries the live, thawing ofac regime,
 rechecked quarterly. ar is enhanced only: the cepo cambiario lifted in
 april 2025, payouts work, but conversion spread, payout fee and limit
 noise, and the card-fraud environment (mostly a buyer-side concern)
@@ -185,21 +185,21 @@ is small on purpose: za, ng, gh, with ke held.
 
 | market | stripe connect | paypal payouts | payoneer | primary rail | fatf 2026-06 | aml tier |
 |---|---|---|---|---|---|---|
-| ZA | unavailable | available | available | payoneer | off (delisted 2025-10) | standard |
-| NG | extended network only | unavailable | available | payoneer | off (delisted 2025-10) | standard |
-| GH | unavailable | unavailable | available | payoneer | off | standard |
-| KE | unavailable | available | available | not assigned | grey | grey_hold |
+| `ZA` | unavailable | available | available | payoneer | off (delisted 2025-10) | standard |
+| `NG` | extended network only | unavailable | available | payoneer | off (delisted 2025-10) | standard |
+| `GH` | unavailable | unavailable | available | payoneer | off | standard |
+| `KE` | unavailable | available | available | not assigned | grey | grey_hold |
 
-- **ZA**: removed from the grey list at the october 2025 plenary;
+- **`ZA`**: removed from the grey list at the october 2025 plenary;
   the region's biggest formal creative economy. payoneer primary,
   paypal fallback.
-- **NG**: also delisted october 2025, and arguably the strongest
+- **`NG`**: also delisted october 2025, and arguably the strongest
   creator-side market in the region: payoneer is the default receive
   rail for nigerian freelancers. stripe serves ng only through
   paystack, its extended network, which is not connect.
-- **KE**: still grey-listed as of the june 2026 plenary, so it holds
+- **`KE`**: still grey-listed as of the june 2026 plenary, so it holds
   despite full rails (paypal and payoneer both work).
-- **GH**: payoneer-only, standard, kept on the roster as a regional
+- **`GH`**: payoneer-only, standard, kept on the roster as a regional
   maybe.
 
 the rest of the continent (tn, sn, tz, ug, bw, et, mz, na, cm, ci)
@@ -211,7 +211,7 @@ validated by [`creator-payout-rails.schema.json`](creator-payout-rails.schema.js
 
 ## per-market notes
 
-### TR: payoneer-only, confirmed
+### `TR`: payoneer-only, confirmed
 
 turkish law 6493 (payment and securities settlement systems, payment
 services and electronic money institutions) restricts cross-border
@@ -223,12 +223,12 @@ for tr. commercial income requires the creator to hold an appropriate
 business registration (sole proprietorship or entity).
 
 doc-conflict flag: paypal's developer payouts supported-features table
-currently lists TR as "fully localized". every independent source
+currently lists `TR` as "fully localized". every independent source
 confirms paypal does not process payments in tr. the stale row is
 treated as a documentation error and tr is deny-by-default for paypal
 until paypal itself states otherwise.
 
-### IN and ID: same shape, same answer
+### `IN` and `ID`: same shape, same answer
 
 both are stripe preview (contact sales) markets with no self-serve
 express account creation. paypal payouts lists in as receive-and-
@@ -236,7 +236,7 @@ withdraw (marketplace feasibility unverified); id is supported.
 payoneer is assigned primary in both. stripe global payouts or a sales
 conversation are the upgrade paths.
 
-### MY: stripe country
+### `MY`: stripe country
 
 malaysia is the one new-market addition with full stripe support, so
 it joins the stripe connect cohort rather than the payoneer gap-fill
@@ -247,22 +247,22 @@ group. the paypal myr constraint is recorded for the fallback adapter.
 not blanket-opened; each parked market carries its one-line reason in
 the json. current parked set:
 
-- v2 candidates: CR (paypal supported, payoneer accepted, real
-  freelancer and creative scene), UY (paypal supported, payoneer
-  coverage unverified), AE (gcc, full stripe support), SA (gcc,
+- v2 candidates: `CR` (paypal supported, payoneer accepted, real
+  freelancer and creative scene), `UY` (paypal supported, payoneer
+  coverage unverified), `AE` (gcc, full stripe support), `SA` (gcc,
   paypal supported)
-- rails unresolved or unverified: TN (no source-verified rail, no
+- rails unresolved or unverified: `TN` (no source-verified rail, no
   visible creator-market signal yet; later-version candidate if
-  payoneer coverage verifies), SN (paypal yes, payoneer unverified),
-  PY, ET (rails not yet researched)
-- no creator-cohort signal yet despite workable rails: TZ, UG, BW
-- recently delisted, rails not yet researched: MZ (october 2025), NA
+  payoneer coverage verifies), `SN` (paypal yes, payoneer unverified),
+  `PY`, `ET` (rails not yet researched)
+- no creator-cohort signal yet despite workable rails: `TZ`, `UG`, `BW`
+- recently delisted, rails not yet researched: `MZ` (october 2025), `NA`
   (june 2026)
-- grey-listed, held, no signal: CM, CI
-- gcc parked, no v2 plan: QA, KW (also grey-listed), BH, OM
-- out of scope, sanctions: IR, SY
-- out of scope, fatf grey list: IQ, LB (since october 2024), YE
-- out of scope, no viable payout rail: PS
+- grey-listed, held, no signal: `CM`, `CI`
+- gcc parked, no v2 plan: `QA`, `KW` (also grey-listed), `BH`, `OM`
+- out of scope, sanctions: `IR`, `SY`
+- out of scope, fatf grey list: `IQ`, `LB` (since october 2024), `YE`
+- out of scope, no viable payout rail: `PS`
 
 ## open questions
 
