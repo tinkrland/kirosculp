@@ -82,13 +82,15 @@ never sales volume.
 |---|---|---|---|---|---|
 | price/mo | $0 | $12.99 | $19.99 | $24.69 (24.99 recommended) | $29.99 |
 | listings/mo | 5 (ruled) | 10 (hyp) | 20 (hyp) | 30 (hyp) | 40 (hyp) |
-| fee rate | 20% + $0.50 (ruled) | open (hyp 15%) | open (hyp 12%) | open (hyp 10%) | open (hyp 8%) |
+| fee rate | 20% + $0.50 (ruled) | open (hyp 16%) | open (hyp 14%) | open (hyp 12%) | open (hyp 10%) |
 
 the two meters stay separate per the boundary rule: compile credits
 price compiles (studio side), listing allowances price listings
 (platform side), both inside each subscription. the hypothesis fee
-ladder 15/12/10/8 is the constant-$250 break-even ladder (each tier
-pays for itself at ~$250/mo gmv). per-tier waterfall math:
+ladder 16/14/12/10 is stack-value-anchored (the fee pays for the
+free studio, storefront, routing and compliance - sculptura is not
+just etsy, so the ladder never dips below 10%) and forms a near-
+constant break-even ladder (~$300-330/mo gmv). per-tier waterfall math:
 work/tier-schedule-comparison.md.
 | commission slots | 3 | 10 | unlimited |
 | channels | native | +2 | all |
