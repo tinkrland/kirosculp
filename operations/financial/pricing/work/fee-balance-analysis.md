@@ -41,6 +41,21 @@ artifact:
   listing publication, buyer portal, manufacturing routing and
   hallmark compliance.
 
+two differentiators sharpen the runway further:
+
+- **parametric, not diffusion.** the engine is not an outsourced
+  image-to-mesh diffusion service (tripo-class): outputs are
+  deterministic, parametric openscad that is castable and validated
+  against manufacturing routes. a diffusion mesh is a picture of
+  jewelry; a parametric model is jewelry that can be manufactured,
+  resized, re-alloyed and hallmarked. this is the platform's core
+  determinism ruling expressed as a product moat: no competitor gets
+  castable-parametric for free.
+- **free inference and listings.** the free tier already includes a
+  monthly inference allowance plus listing publication. the paid
+  comparables charge for cad seats and listing slots separately;
+  sculptura bundles them into the fee instead of the subscription.
+
 the fee is not a marketplace toll on someone else's finished product;
 it is the only revenue line for the machine that makes the product
 possible. what that stack would cost a creator to buy instead
@@ -59,12 +74,16 @@ reading was the wrong frame: same headline number, materially more
 product. that is the "runway": the fee carries the engine, not just the
 order.
 
-this also means the break-even target is not just the ruled $5,600
-retro. the audit's full sunk founder time is 800+ hours; at the
-established internal rate ($24/hr, the same rate behind the $4,800
-line) the engine-inclusive target is ~$19,200 labor + $800 tools =
-**~$20,000**. this is a candidate retro v2, pending owner ruling; the
-ruled retro remains $5,600. the payback tables below show both.
+the break-even target question: the repo hours audit
+(work/hours-audit.md, 2026-10-12) counted the committed work across
+sculptura, kirosculp, addsculp, jewelfinity and studiogram after
+dropping duplicates: 333 commits, **88 hours** (67-110 range). at the
+established $24/hr + $800 tools that is **~$2,917** ($2,401-$3,441).
+the ruled retro ($5,600) already exceeds this, so it stands, not as an
+inflation but as the valuation of broader founder time (direction,
+review, research, setup) beyond commit-visible work: repo work covers
+about half of it. no restatement is needed; only an internal-rate
+change would rescale it, and that is an owner ruling.
 
 ## 1. cost recovery: the fee's honest floor
 
@@ -109,23 +128,11 @@ includes infra $60/mo and 20 active creators at $10.50/mo:
 | 100 | 54 months | 7 months | 4.4 months |
 | 200 | 12 months | 2.9 months | 2 months |
 
-engine-inclusive (retro v2 candidate, ~$20,000) at the same rate:
-
-| orders/mo | aov $200 | aov $250 |
-|---|---|---|
-| 50 | 71 months | 39 months |
-| 100 | 24 months | 16 months |
-| 200 | 10 months | 7 months |
-
-the $14,400 engine delta amortized per order: $14.40 over the first
-1,000 orders, $4.80 over 3,000, $2.40 over 6,000. even the harshest
-reading (all engine cost on the first thousand orders) adds ~1.4 points
-to the cost-recovery rate at $120 aov: the engine is not what makes
-cheap orders underwater, support time is.
-
-reading: at the launch metal mix (blended aov ~$205), the ruled retro
-is repaid roughly at 50-100 orders/month within 7-20 months; the full
-engine-inclusive target needs ~2-3.5 years at the same volumes. payback is bound by
+reading: at the launch metal mix (blended aov ~$205), the ruled
+retro is repaid roughly at 50-100 orders/month within 7-20 months.
+the audit-based floor ($2,917) would be repaid roughly half as fast;
+the ruled $5,600 is the correct target since it prices the founder
+time the repos cannot show. payback is bound by
 volume and aov, not by the headline rate: moving 10% -> 12% shortens
 payback by a third or more (20 -> 11 months at $200 aov, 50 orders/mo)
 while pushing the fee outside the fair band (section 4). the retro is a
