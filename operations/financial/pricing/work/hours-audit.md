@@ -130,12 +130,28 @@ corpus replacement valuation:
   have needed to produce the same artifact. this is the replacement
   cost and the platform's build-value moat.
 
-the retro (repayment) belongs to the first reading: keep it wall-clock
-based ($5,600 ruled; restating at $30-50/hr market-band rates gives
-$4,140-$6,367 incl tools, bracketing the ruled number). setting the
-retro to the corpus valuation would be unpayable at a fair fee (the
-$149k base at $281/mo contribution is ~44 years) and would push the
-rate exactly where the fairness analysis says not to go.
+## owner ruling (2026-10-12): retro v2 = 1000h at $28/hr = $28,000
+
+the owner ruled the retro directly: 1000 hours at $28/hr, $28,000
+total. the number sits deliberately between the two readings - well
+above the proven wall-clock floor (~111h), well below the corpus
+human-equivalent (~6,200h) - and the rate is held at a modest band
+rather than silicon-valley rates. this supersedes both the ruled $5,600
+retro and the market-band restatement options; tools/incorporation
+costs are considered inside the $28,000.
+
+payback at 10% + $0.50 (launch metal mix):
+
+| orders/mo | aov $200 | aov $250 |
+|---|---|---|
+| 50 | 51 months | 36 months |
+| 100 | 25 months | 18 months |
+| 200 | 13 months | 9 months |
+
+the retro target never enters the fee rate (see fee-policy.md); it
+only sets the payback horizon the plan carries: roughly 1.5-4 years at
+plausible launch volumes. corpus amortization and the fee's value story
+are unchanged by this ruling.
 
 the corpus valuation belongs in the fee story instead: the 10% + $0.50
 fee amortizes a ~$150k-to-reproduce platform (at the most conservative

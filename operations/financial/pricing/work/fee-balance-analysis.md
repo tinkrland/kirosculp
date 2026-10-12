@@ -135,11 +135,10 @@ includes infra $60/mo and 20 active creators at $10.50/mo:
 | 100 | 54 months | 7 months | 4.4 months |
 | 200 | 12 months | 2.9 months | 2 months |
 
-reading: at the launch metal mix (blended aov ~$205), the ruled
-retro is repaid roughly at 50-100 orders/month within 7-20 months.
-the audit floor ($3,472 at $24/hr) would be repaid somewhat faster;
-the ruled $5,600 is the correct target since it prices the founder
-time the repos cannot show. payback is bound by
+reading (retro v2 ruled 2026-10-12): the owner ruled the retro at
+1000h x $28/hr = $28,000. payback at the launch metal mix: ~18-51
+months across 50-200 orders/mo (aov $200-250). the retro target never
+enters the fee rate; it sets the payback horizon the plan carries. payback is bound by
 volume and aov, not by the headline rate: moving 10% -> 12% shortens
 payback by a third or more (20 -> 11 months at $200 aov, 50 orders/mo)
 while pushing the fee outside the fair band (section 4). the retro is a
@@ -200,12 +199,12 @@ trust/volume/geography levers.
 
 ## 6. recommendation (still a hypothesis until measure-first completes)
 
-hold 10% + $0.50 with the $2 floor as policy v1. do not amortize either
-retro into the rate (they are one-time costs; a permanent rate increase to
-cover them is exactly the hidden-margin pattern the policy rejects). the
+hold 10% + $0.50 with the $2 floor as policy v1. do not amortize the
+retro into the rate (it is a one-time cost; a permanent rate increase to
+cover it is exactly the hidden-margin pattern the policy rejects). the
 creation-stack story belongs in the pricing page, not the rate: creators
 should see what the fee funds (the engine, the routing, the compliance) and
-what the same toolchain costs to buy outright. rule retro v2 (engine-
-inclusive ~$20,000 vs ruled $5,600) explicitly, since it changes the
-payback horizon the plan carries, not the fee. revisit the rate only with
+what the same toolchain costs to buy outright. retro v2 is ruled: 1000h at
+$28/hr = $28,000 (hours-audit.md); it changes the payback horizon the
+plan carries, not the fee. revisit the rate only with
 the first 100 real orders, per fee-policy.md section 11.
