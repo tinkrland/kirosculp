@@ -39,7 +39,10 @@ no per-creator judgment enters the meter, same rule as the fee.
      clean for capacity planning). paid tiers reset on the
      subscription's own anniversary day - anchored to when the
      subscription started, so a mid-month subscriber never waits
-     until month-end for their first refill
+     until month-end for their first refill. the reset lands at
+     11:59 utc on the anniversary day - the day is theirs, the clock
+     is the platform's; the exact minute they subscribed is never
+     carried over
 2. **general credits** (any usage, burned after grants, nearest
    expiry first):
    - monthly plan credits, per tier, expire 2 months after issue
