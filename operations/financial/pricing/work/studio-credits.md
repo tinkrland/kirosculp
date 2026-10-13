@@ -50,9 +50,49 @@ no per-creator judgment enters the meter, same rule as the fee.
    - top-up packs bought from the creator wallet, 12-month expiry
    - auto top-up setting on paid tiers, pausable like lovable's
 
-hypothesis allowance ladder (general credits/mo): free 0, starter
-300, standard 600, pro 1200. monthly grants (hypothesis): free 30
-tessa + 30 compiles/mo; paid tiers larger.
+## the per-tier rate limit matrix (ideated, hypothesis)
+
+lovable-style: each usage type gets its own monthly allowance per
+tier, plus a general credit pool that covers any usage after grants.
+every clock is monthly (ruling); free resets month-end, paid on the
+anniversary day, both at 11:59 utc.
+
+| tier | tessa turns/mo | compiles/mo | releases/mo | renders/mo | general credits/mo |
+|---|---|---|---|---|---|
+| free | 30 | 50 | 8 | 20 | 0 |
+| starter | 100 | 150 | 20 | 50 | 300 |
+| lite | 200 | 300 | 40 | 100 | 600 |
+| standard | 350 | 500 | 75 | 175 | 1000 |
+| pro | 600 | 900 | 150 | 300 | 1800 |
+
+presentation as cfo.ai-style multipliers: starter is the 1x
+baseline; lite 2x, standard 3.5x, pro 6x compute.
+
+burn order per ruling: usage-type allowances first (each covers only
+its own action), then general credits (nearest-expiry first), then
+wallet top-ups. overage is a soft stop showing the honest paths:
+wait for the reset, or (tessa only) byok - which bills the creator's
+provider but never lifts the turn cap, per the free-tier ruling: the
+cap counts turns because server-side parsing and integration happen
+either way.
+
+worst-case platform exposure if every allowance is consumed
+(direct-cost basis, general credits at a blended $0.03/credit):
+
+| tier | worst-case cost/mo | price/mo |
+|---|---|---|
+| free | $2.44 | $0 |
+| starter | $16.60 | $12.99 |
+| lite | $33.20 | $19.99 |
+| standard | $56.50 | $24.90 |
+| pro | $100.50 | $29.99 |
+
+every paid tier is loss-making only at 100% allowance burn, which is
+the standard saas bet: allowances are sized for typical usage, and
+the design goals are (a) free creators can complete several designs
+end to end, (b) paid tiers have visibly roomy capacity, (c) the
+platform's per-tier downside is bounded. typical consumption is
+expected in the 10-30% band of allowances.
 
 ## byok interaction (ruled: zero markup, acceptable everywhere)
 
