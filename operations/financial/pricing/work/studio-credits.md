@@ -29,11 +29,17 @@ no per-creator judgment enters the meter, same rule as the fee.
 ## where credits come from (lovable's division, adopted)
 
 1. **usage-specific grants** (burn first, restricted to one usage
-   type, reset monthly for every tier - ruled 2026-10-13, no daily
-   clocks anywhere):
+   type, monthly for every tier - ruled 2026-10-13, no daily clocks
+   anywhere):
    - monthly tessa allowance, every creator
    - monthly compile allowance, every creator
    - paid tiers carry larger monthly grants
+   - **reset clocks (ruled 2026-10-13)**: the free tier resets on the
+     last day of the month at 11:59 utc (one platform-wide boundary,
+     clean for capacity planning). paid tiers reset on the
+     subscription's own anniversary day - anchored to when the
+     subscription started, so a mid-month subscriber never waits
+     until month-end for their first refill
 2. **general credits** (any usage, burned after grants, nearest
    expiry first):
    - monthly plan credits, per tier, expire 2 months after issue
