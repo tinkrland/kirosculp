@@ -226,9 +226,23 @@ not scheduled; recorded so the model stays coherent when they build.
 - **spree prototype path:** spree's native store credit stands in for
   gift cards (code issuance, checkout redemption) until the ledger
   version replaces it.
-- **the creator wallet is a ledger view, not a separate system:** held
-  (escrow) -> available -> paid out, all append-only entries over the
-  same accounts. wallet-as-spendable-store-credit is a later decision.
+- **the creator wallet and the buyer wallet are separate objects,
+  never merged** (ruled 2026-10-13): the creator wallet is the
+  payout-side ledger view - held (escrow) -> available -> paid out,
+  plus wallet-funded studio service purchases (credit top-ups) -
+  all append-only entries. the buyer wallet is the payment-side
+  credit object: dissolved gift card balances live there, pay at
+  checkout, and receive refunds. no transfer between the two ever;
+  same append-only ledger discipline, different account families.
+  wallet-as-spendable-store-credit is a later decision for the
+  creator side only.
+- **wallet credit expiry: one year to eighteen months from issuance**
+  (ruled 2026-10-13): buyer wallet credit from dissolved gift cards
+  expires inside the 12-18 month window. the exact point inside the
+  window gets pinned at build time (jurisdiction escheat rules may
+  force per-market variation, already an open question above).
+  expired balances post back to the gift card liability account and
+  follow the same liability treatment as unredeemed cards.
 - open questions when scheduled: cross-currency redemption, expiry
   rules per jurisdiction, and payout-provider constraints on
   stored-value balances.
