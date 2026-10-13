@@ -80,7 +80,7 @@ never sales volume.
 
 | | free | starter | lite | standard | pro |
 |---|---|---|---|---|---|
-| price/mo | $0 | $12.99 | $19.99 | $24.69 (24.99 recommended) | $29.99 |
+| price/mo | $0 | $12.99 | $19.99 | $24.90 (24.99 recommended) | $29.99 |
 | listings/mo | 5 (ruled) | 10 (hyp) | 20 (hyp) | 30 (hyp) | 40 (hyp) |
 | fee rate | 20% + $0.50 (ruled) | open (hyp 16%) | open (hyp 14%) | open (hyp 12%) | open (hyp 10%) |
 

@@ -29,10 +29,11 @@ no per-creator judgment enters the meter, same rule as the fee.
 ## where credits come from (lovable's division, adopted)
 
 1. **usage-specific grants** (burn first, restricted to one usage
-   type, reset on their own clock):
-   - daily tessa allowance, every creator, resets 00:00 utc
-   - daily compile allowance, every creator, resets 00:00 utc
-   - monthly tessa grant on paid tiers (hypothesis: 30/mo each)
+   type, reset monthly for every tier - ruled 2026-10-13, no daily
+   clocks anywhere):
+   - monthly tessa allowance, every creator
+   - monthly compile allowance, every creator
+   - paid tiers carry larger monthly grants
 2. **general credits** (any usage, burned after grants, nearest
    expiry first):
    - monthly plan credits, per tier, expire 2 months after issue
@@ -41,8 +42,8 @@ no per-creator judgment enters the meter, same rule as the fee.
    - auto top-up setting on paid tiers, pausable like lovable's
 
 hypothesis allowance ladder (general credits/mo): free 0, starter
-300, standard 600, pro 1200. daily grants (hypothesis): free 3
-tessa + 3 compiles/day; paid 5 + 5/day.
+300, standard 600, pro 1200. monthly grants (hypothesis): free 30
+tessa + 30 compiles/mo; paid tiers larger.
 
 ## byok interaction (ruled: zero markup, acceptable everywhere)
 
@@ -60,6 +61,17 @@ are always platform compute and always metered, byok or not. so:
   key, or slow down. buying top-up tessa credits as a free creator
   is deliberately NOT the first prompt - byok is.
 - paid tiers hitting grants burn general credits, then top-ups.
+
+## byok never buys allowances, and free-tier limits stand (ruled
+2026-10-13)
+
+byok changes who pays the provider, never the envelope: it does not
+increase the listing count, does not raise grants, and does not lift
+the tessa turn rate limit. on the free tier the rate limit stands
+even with a key attached, because every turn - byok or not - still
+parses, validates and integrates server-side: the cap protects
+platform capacity, not the inference bill. paid tiers carry higher
+limits; same principle.
 
 ## overage behavior
 

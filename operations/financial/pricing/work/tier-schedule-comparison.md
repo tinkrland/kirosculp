@@ -19,7 +19,7 @@ sale. there is no sales cap at any tier.
 | free | $0 | 5 (ruled) | 20% + $0.50 (ruled) |
 | starter | $12.99 (ruled) | 10 (hyp) | 16% + $0.50 (hyp) |
 | lite | $19.99 (ruled) | 20 (hyp) | 14% + $0.50 (hyp) |
-| standard | $24.69 (ruled; 24.99 recommended, see below) | 30 (hyp) | 12% + $0.50 (hyp) |
+| standard | $24.90 (ruled; 24.99 recommended, see below) | 30 (hyp) | 12% + $0.50 (hyp) |
 | pro | $29.99 (ruled) | 40 (hyp) | 10% + $0.50 (hyp) |
 
 open rulings: fee % per paid tier, listing counts for paid tiers,
@@ -38,7 +38,7 @@ the same monthly gmv:
 |---|---|---|
 | starter | 4 pts | $324.75 |
 | lite | 6 pts | $333.17 |
-| standard | 8 pts | $308.62 (at $24.69) |
+| standard | 8 pts | $308.62 (at $24.90) |
 | pro | 10 pts | $299.90 |
 
 the subscription story stays clean: "once your designs sell about
@@ -46,9 +46,9 @@ $300/month, any tier pays for itself; pick by catalog size." the
 stack-value anchoring moves the constant break-even up from ~$250 to
 ~$300-330, which is also the more honest number given the sub buys
 studio capacity plus storefront, not just a fee discount.
-**$24.99 beats $24.69**: it completes the .99 charm pattern, and at
+**$24.99 beats $24.90**: it completes the .99 charm pattern, and at
 a 12% standard rate the break-even lands at $312.38, right in the
-ladder's band; $24.69 is the one rung that breaks the pattern.
+ladder's band; $24.90 is the one rung that breaks the pattern.
 
 ## the 20% free tier: positioning check
 
@@ -117,6 +117,17 @@ starter 16%, lite 14% and standard 12% cover $120+ aov; pro 10%
 covers $200+. at $60 aov every tier including free 22% is underwater
 ($10.70 fee vs $11.25 requirement) - the cheap-order problem stays
 owned by the floor and refusal economics (fee-balance-analysis.md).
+
+## discretionary listing bump (ruled 2026-10-13)
+
+the allowance ladder is firm, with one platform-side grace valve:
+when a free creator shows sustained sales quality (sometimes artists
+arrive with their own fanbases), the platform may grant a one-time
+listing bump for that month, delivered by email. it is an allowance
+exception, never a fee change, never a trust tier, never automatic,
+and never recurring: one month, one bump, discretionary, with the
+email as the record. listing counts stay ruled at 5/10/20/30/40
+outside it.
 
 ## the catalog-cap rule (ruling)
 
