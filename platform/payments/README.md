@@ -236,13 +236,17 @@ not scheduled; recorded so the model stays coherent when they build.
   same append-only ledger discipline, different account families.
   wallet-as-spendable-store-credit is a later decision for the
   creator side only.
-- **wallet credit expiry: one year to eighteen months from issuance**
-  (ruled 2026-10-13): buyer wallet credit from dissolved gift cards
-  expires inside the 12-18 month window. the exact point inside the
-  window gets pinned at build time (jurisdiction escheat rules may
-  force per-market variation, already an open question above).
-  expired balances post back to the gift card liability account and
-  follow the same liability treatment as unredeemed cards.
+- **wallet credit expiry: one year from issuance by default**
+  (ruled 2026-10-13; the earlier 12-18 month window collapses to a
+  12-month default). jurisdiction escheat rules may force per-market
+  variation (already an open question above). expired balances post
+  back to the gift card liability account and follow the same
+  liability treatment as unredeemed cards.
+- **spend order: expiry-first, always (ruled 2026-10-13).** wallet
+  credit burns oldest-expiry first, base44/lovable credit pattern:
+  the batch expiring soonest pays before newer batches, so a buyer
+  never loses credit that could have been spent. checkout shows
+  which batch is drawn.
 - open questions when scheduled: cross-currency redemption, expiry
   rules per jurisdiction, and payout-provider constraints on
   stored-value balances.
