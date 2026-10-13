@@ -44,12 +44,17 @@ hypothesis allowance ladder (general credits/mo): free 0, starter
 300, standard 600, pro 1200. daily grants (hypothesis): free 3
 tessa + 3 compiles/day; paid 5 + 5/day.
 
-## byok interaction (already ruled)
+## byok interaction (ruled: zero markup, acceptable everywhere)
 
 byok moves the tessa-turn cost to the creator's own key: a byok turn
 costs 0 platform credits, bills their provider, never silently falls
-back (byok.md). compiles and release recompiles are always platform
-compute and always metered, byok or not. so:
+back (byok.md). **the markup is zero**: the litellm gateway passes the
+creator's provider rate through untouched - no platform margin, no
+credit surcharge, no rounding in our favor. and byok is acceptable on
+every tier including free: it is a first-class lane, not a hack. the
+capability-probe gate stands (a key must prove it serves the models
+tessa uses before it is accepted). compiles and release recompiles
+are always platform compute and always metered, byok or not. so:
 
 - free tier hitting the tessa grant has two honest paths: bring a
   key, or slow down. buying top-up tessa credits as a free creator

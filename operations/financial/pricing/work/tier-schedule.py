@@ -27,7 +27,7 @@ from buildup import (stack, inference_alloc, mfg_alloc, retro_alloc,
 # ---------------------------------------------------------------- params
 # bps, fixed, monthly price, listings/mo (catalog cap, never sales cap)
 TIERS = {
-    "free 20%":     (2000, 0.50, 0.0,   5),
+    "free 22%":     (2200, 0.50, 0.0,   5),
     "starter 16%":  (1600, 0.50, 12.99, 10),
     "lite 14%":     (1400, 0.50, 19.99, 20),
     "standard 12%": (1200, 0.50, 24.69, 30),
@@ -36,7 +36,7 @@ TIERS = {
 FLOOR = 2.00
 PROFIT_BPS = 200
 ORDERS_PER_SUB = 2.0      # hypothesis
-TIER_SHARES = {"free 20%": 0.75, "starter 16%": 0.12,
+TIER_SHARES = {"free 22%": 0.75, "starter 16%": 0.12,
                "lite 14%": 0.08, "standard 12%": 0.03,
                "pro 8%": 0.02}   # hypothesis
 BLEND = {200: 60, 650: 15, 95: 25}   # launch metal mix

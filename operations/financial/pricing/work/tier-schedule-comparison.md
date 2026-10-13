@@ -77,7 +77,7 @@ core of the value stack:
   convention/ccm routing, insurance per order, and the regulatory
   stack. the creator never touches any of it.
 
-against that stack, free 20% and paid 10-16% all read as cheap: the
+against that stack, free 22% and paid 10-16% all read as cheap: the
 stack is included, not billed separately. the paid ladder never dips
 below 10% - the floor of the old fair band - so committed creators
 buy down to fair-band pricing at most, never into toll territory.
@@ -92,7 +92,7 @@ mix aov $205, profit 200 bps):
 
 | tier | fee | sub rev/order | waterfall surplus |
 |---|---|---|---|
-| free 20% | $46.43 | - | +$30.24 |
+| free 22% | $46.43 | - | +$30.24 |
 | starter 16% | $37.24 | $6.50 | +$27.55 |
 | lite 14% | $32.65 | $9.99 | +$26.46 |
 | standard 12% | $28.06 | $12.35 | +$24.22 |
@@ -112,9 +112,9 @@ bps embedded target) quickly at any launch volume.
 
 ## result 3: coverage thresholds without sub revenue
 
-at 100 orders/mo, fee alone vs ex-retro requirement: free 20%,
+at 100 orders/mo, fee alone vs ex-retro requirement: free 22%,
 starter 16%, lite 14% and standard 12% cover $120+ aov; pro 10%
-covers $200+. at $60 aov every tier including free 20% is underwater
+covers $200+. at $60 aov every tier including free 22% is underwater
 ($10.70 fee vs $11.25 requirement) - the cheap-order problem stays
 owned by the floor and refusal economics (fee-balance-analysis.md).
 
