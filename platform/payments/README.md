@@ -199,10 +199,30 @@ not scheduled; recorded so the model stays coherent when they build.
   purchase captures funds like any order and posts an append-only
   entry to a gift card liability account in the supabase ledger
   (formance remains the double-entry engine candidate if adopted).
-  redemption is a payment method that draws that account down through
-  normal order pricing, so creator net, platform fee, and escrow
-  splits are unchanged. refunds post back to the account, never to a
-  card. no third-party gift card saas in the prototype.
+  no third-party gift card saas in the prototype.
+- **the card is a two-part secret that dissolves on redemption**
+  (ruled 2026-10-13, etsy-style): issuance mints a 16-letter
+  redemption code rendered as four letter groups
+  (XXXX-XXXX-XXXX-XXXX) plus a separate 5-character alphanumeric
+  pin. redemption requires both; a correct pair is single-use - the
+  code and pin are dissolved and the full balance moves into the
+  buyer's sculptura wallet in one atomic ledger entry. a dissolved
+  code can never redeem again; a partially-spent balance lives on
+  in the wallet, never on a reusable code.
+- **the buyer wallet is the payment instrument, not the code.**
+  after dissolution the balance is buyer wallet credit: it pays at
+  checkout like any payment method through normal order pricing, so
+  creator net, platform fee, and escrow splits are unchanged.
+  refunds post back to the buyer wallet, never to a card. wallet
+  credit is platform liability until spent (same account family as
+  the gift card liability it came from).
+- **redemption hygiene:** both fields required, single dissolve
+  attempt recorded, redemption rate-limited per account and per
+  code family, dissolved pairs never reused, and pin brute-force
+  bounded by the code space (26^16 codes x 36^5 pins, both required).
+  codes carry no market, tier, trust, or corridor meaning - they
+  are random secrets only, same alphabet discipline as the
+  identity model's serial blocks.
 - **spree prototype path:** spree's native store credit stands in for
   gift cards (code issuance, checkout redemption) until the ledger
   version replaces it.
