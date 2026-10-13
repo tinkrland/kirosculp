@@ -31,7 +31,7 @@ the fee ladder is anchored to full-stack value, not to marketplace
 tolls (owner direction: sculptura is not just etsy - the fee pays for
 the free design studio, the storefront, routing, compliance; deep
 discount cells like 5-8% undersell the stack). at the hypothesis
-ladder (16/14/12/10), each subscription pays for itself at almost
+ladder (16/14/12/8), each subscription pays for itself at almost
 the same monthly gmv:
 
 | tier | discount vs free | break-even gmv/mo |
@@ -129,7 +129,7 @@ which is exactly where the platform's value sits.
 
 ## to measure / rule before freezing
 
-1. the fee % per paid tier (hypothesis 16/14/12/10, the
+1. the fee % per paid tier (hypothesis 16/14/12/8, the
    stack-value-anchored constant ~$300 ladder; never below 10%).
 2. standard's price: 24.99 recommended over 24.69.
 3. listing counts for paid tiers (hypothesis 10/20/30/40).

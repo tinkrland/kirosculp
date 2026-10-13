@@ -11,7 +11,7 @@ free's 5 listings, and the CATALOG-CAP RULE: allowances cap distinct
 active listings, never sales volume. a free creator's 5 listings can
 each sell unlimited units; the fee applies to every sale.
 
-open (owner): fee % per paid tier (hypothesis ladder 16/14/12/10,
+open (owner): fee % per paid tier (hypothesis ladder 16/14/12/8 (pro 8% ruled 2026-10-13),
 anchored to full-stack value: the fee pays for the free design
 studio, storefront, routing and compliance - sculptura is not just
 etsy, so deep-discount cells like 5-8% undersell the stack),
@@ -31,14 +31,14 @@ TIERS = {
     "starter 16%":  (1600, 0.50, 12.99, 10),
     "lite 14%":     (1400, 0.50, 19.99, 20),
     "standard 12%": (1200, 0.50, 24.69, 30),
-    "pro 10%":      (1000, 0.50, 29.99, 40),
+    "pro 8%":       (800,  0.50, 29.99, 40),
 }
 FLOOR = 2.00
 PROFIT_BPS = 200
 ORDERS_PER_SUB = 2.0      # hypothesis
 TIER_SHARES = {"free 20%": 0.75, "starter 16%": 0.12,
                "lite 14%": 0.08, "standard 12%": 0.03,
-               "pro 10%": 0.02}   # hypothesis
+               "pro 8%": 0.02}   # hypothesis
 BLEND = {200: 60, 650: 15, 95: 25}   # launch metal mix
 VOLUMES = [50, 100, 200]
 

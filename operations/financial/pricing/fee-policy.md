@@ -87,7 +87,7 @@ never sales volume.
 the two meters stay separate per the boundary rule: compile credits
 price compiles (studio side), listing allowances price listings
 (platform side), both inside each subscription. the hypothesis fee
-ladder 16/14/12/10 is stack-value-anchored (the fee pays for the
+ladder 16/14/12/8 is stack-value-anchored (the fee pays for the
 free studio, storefront, routing and compliance - sculptura is not
 just etsy, so the ladder never dips below 10%) and forms a near-
 constant break-even ladder (~$300-330/mo gmv). per-tier waterfall math:
