@@ -21,6 +21,14 @@ ROUTING = 0.02          # route compute checks
 FAILED_PAY = 0.10       # failed-payment retry blend
 TELLS = 0.01            # tell-adapter checks (email/phone/address)
 PAYOUT_COORD = 0.50     # payout coordination per order
+
+# payout-side economics (the take breakup, hypothesis values)
+PAYOUT_FEE = 0.25       # stripe per-payout fee, monthly per selling creator
+IDV = 1.50              # stripe identity/kyc verification, one-time per creator
+IDV_MONTHS = 12         # amortized over expected active life, months
+HOLD_BPS_MO = 50        # cost of holding escrowed funds, bps of balance per mo
+HELD_SHARE = 0.50       # share of retail held as creator escrow before payout
+HOLD_MONTHS = 0.5       # avg months held before the 15th-of-month payout
 TAIL_BPS = 75           # chargeback tail, value-scaled (0.75% of retail)
 
 # inference allocation (grounded structure, hypothesis values)
@@ -62,6 +70,19 @@ def stack(retail):
     """direct service cost per order, dollars."""
     return (TAIL_BPS / 10000) * retail + SUPPORT + QUOTE_API + ROUTING \
         + FAILED_PAY + TELLS + PAYOUT_COORD
+
+
+def payout_side(retail):
+    """payout-side per order: stripe payout fee, idv amortization,
+    escrow holding cost. simple on purpose: real software accounting
+    comes later; this is the honest take breakup for now."""
+    per_order = PAYOUT_FEE / ORDERS_PER_SELLING_CREATOR
+    idv = (IDV / IDV_MONTHS) / ORDERS_PER_SELLING_CREATOR
+    holding = retail * HELD_SHARE * HOLD_BPS_MO / 10000 * HOLD_MONTHS
+    return per_order + idv + holding
+
+
+ORDERS_PER_SELLING_CREATOR = 4  # hypothesis: monthly orders per selling creator
 
 
 def inference_alloc():

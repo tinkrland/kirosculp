@@ -22,7 +22,7 @@ deterministic and reproducible: python3 tier-schedule.py
 """
 
 from buildup import (stack, inference_alloc, mfg_alloc, retro_alloc,
-                     fee_base, RETRO)
+                     fee_base, payout_side, RETRO)
 
 # ---------------------------------------------------------------- params
 # bps, fixed, monthly price, listings/mo (catalog cap, never sales cap)
@@ -68,6 +68,20 @@ if __name__ == "__main__":
     for tier, (bps, fixed, price, listings) in TIERS.items():
         print(f"  {tier:12} ${price:>5.2f}/mo, {listings:>2} listings/mo, "
               f"fee {bps/100:.0f}% + ${fixed:.2f}")
+
+    print("\n=== the take breakup: where the fee goes (blend, 100/mo) ===")
+    cost_rec = blend_avg(lambda r: stack(r)) + inference_alloc() + mfg_alloc(100)
+    pside = blend_avg(lambda r: payout_side(r))
+    target = blend_avg(lambda r: PROFIT_BPS/10000 * fee_base(r))
+    retro_m = retro_alloc(100)
+    for tier in TIERS:
+        f = blend_avg(lambda r: fee(tier, r))
+        surplus = f - cost_rec - pside
+        after_retro = surplus - retro_m
+        print(f"  {tier:12} fee ${f:6.2f} | cost ${cost_rec:5.2f} + payout side ${pside:.2f}"
+              f" | profit target ${target:.2f} | retro ${retro_m:.2f}"
+              f" -> true profit/order ${after_retro:+.2f} "
+              f"({after_retro/f*100:+.0f}% of take)")
 
     print("\n=== per-tier fee vs ex-retro requirement (blended mix aov $205) ===")
     for v in VOLUMES:
