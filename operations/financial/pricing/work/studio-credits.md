@@ -94,6 +94,31 @@ end to end, (b) paid tiers have visibly roomy capacity, (c) the
 platform's per-tier downside is bounded. typical consumption is
 expected in the 10-30% band of allowances.
 
+## platform-served inference per tier (open ruling)
+
+byok.md pins the creator-side surface completely: the probe is the
+only gate, and the tested-against lanes are openai flagship
+multimodal + mini (legacy gpt-4.1), anthropic sonnet/haiku, google
+gemini pro/flash (flash named the budget lane), deepseek chat,
+mistral flagship/pixtral, and self-hosted qwen-vl/llama vision. what
+the repo does NOT pin is which lane the platform itself serves to
+non-byok creators. hypothesis, in the spirit of that table:
+
+- free tier platform inference runs a **budget lane** (gemini flash or
+  openai mini class): ~$0.01-0.05/turn, matching the buildup's $0.05
+  cost basis and the 30-turn free allowance (~$1.50 worst case)
+- paid tiers may serve the recommendation lane (flagship multimodal)
+  as a quality differentiator, or stay on the budget lane uniformly
+- the envelope makes any choice safe (paracraft consumes typed
+  parameter state, never model output); the choice is quality and
+  cost, not safety
+- a mixed serving lane (free = budget, paid = flagship) must never
+  change credit costs or rate limits - it changes only which model
+  answers
+
+which exact lane each tier serves is an open ruling; this section
+exists so it gets made deliberately instead of by accident.
+
 ## byok interaction (ruled: zero markup, acceptable everywhere)
 
 byok moves the tessa-turn cost to the creator's own key: a byok turn
