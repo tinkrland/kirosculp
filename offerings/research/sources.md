@@ -107,3 +107,22 @@ terminology and pattern claims only, not product approval:
 | [openship docs: order routing](https://docs.openship.org/docs/openship/ecommerce) | openship is a real open-source order-routing oms (shops as sources, channels as fulfillment destinations, links, item matches); repo ships shopify and openfront adapters; docs state credential handling and non-durable callback paths require hardening before production orders | project documentation of an early-stage oss project; adapter coverage is thin, so wix/amazon/weebly/bigcartel/bigcommerce support is not present out of the box |
 | [openlinker.io](https://openlinker.io/en/) and [integrations page](https://openlinker.io/en/integrations/) | correction: real open-source (apache 2.0, v0.12.0 alpha) self-hosted integration platform; port/adapter architecture, resumable cursor-based ingestion, bidirectional inventory sync, listing wizard; live integrations are poland-market (allegro, erli, ksef, polish invoicing) with prestashop/woocommerce destinations | an earlier search pass failed to surface it and wrongly called it confabulated, corrected 2026-09-29; alpha software, no shopify/wix/amazon adapters live, so reference implementation only |
 | [headless commerce comparisons (vendure, contracollective, pkgpulse)](https://vendure.io/blog/best-headless-commerce-platforms) | medusa v2 and saleor are real, self-hostable headless commerce engines (node vs python, permissive licenses, storefront sdks) | vendor-comparison content; confirms category (commerce engines, not channel connectors), not fitness for our stack |
+
+## ring sizing reality pass (2026-10-15)
+
+sources for [ring sizing reality](../rings/sizing-reality.md), supporting
+fit anchors, proposal-buyer behavior and return-cost patterns only, not
+product approval or validated sizing flows:
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [serendipity diamonds: most common ring sizes](https://www.serendipitydiamonds.com/blog/most-common-engagement-ring-size) | us women avg 6.5, men avg 10, uk l / t 1/2, buy-large strategy, seasonal variation | dealer's own sales records, one retailer |
+| [bluenile: secretly getting ring size](https://www.bluenile.com/blog/love-brilliant/how-to-secretly-get-ring-size) | us women avg 6 (range 5-7), men avg 10 (8-12); resizing ease by metal; sleep-sizer folk practice | retailer guidance content |
+| [ootbjewelry: average pinky ring size](https://www.ootbjewelry.com/pinky-ring-size) | women pinky 3-5 (4 most common), men pinky 6-8 (7 avg), pinky = ring finger minus 2-3 sizes, 6mm band rule, signet rotation | seo guide; per-size circumference rows match verified formula |
+| [martin jewelers: ring size chart](https://martinjewelers.com/blogs/news/mens-and-women-s-ring-size-chart) | smallest common adult size 3 (44.2mm) | retail chart |
+| [ringsizes.co](http://www.ringsizes.co) | us/uk/eu/jp/in system mappings | aggregator chart, varies between brands |
+| [jewelove.in size guide](https://www.jewelove.in/pages/find-my-ring-size-international-ring-size-chart) | in-market charting practice alongside us sizes | retailer page |
+| [jeweltrendpro retelling of jewelers of america 2023 retail pulse](https://jeweltrendpro.com/engagement-wedding/how-to-get-an-engagement-ring-without-knowing-her-size) | nearly half of men guess engagement size; 1 in 3 couples resize before first photo shoot | secondary retelling; primary report not fetched |
+| [aitaca: ring size returns](https://aitaca.io/ring-size-returns) | 17.2% -> 6.1% monthly ring return reduction in one deployment; fit as primary fashion return driver; printable chart failures | vendor-reported, single deployment, commercial interest in the number |
+| [loopreturns: jewelry return policies](https://www.loopreturns.com/blog/return-policy-strategies-for-jewelry-brands) | jewelry ecommerce return average around 8% | returns vendor benchmark |
+| [weddingwire forum threads](https://www.weddingwire.com/wedding-forums/presenting-with-the-wrong-ring-size/0555eeab5ec) | wrong-size proposal color | forum anecdotes, not data |
