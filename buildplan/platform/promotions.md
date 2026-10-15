@@ -60,10 +60,11 @@ order decomposes deterministically:
   the ledger says so.
 
 per-order cap: a platform draw on an order is bounded by that order's
-realized surplus (fee minus cost-recovery at that order's fee cell);
-at the blended launch mix, cost recovery is about $11.59/order, so the
-cap is roughly $34.84 (free 20%), $25.65 (starter), $21.06 (lite),
-$16.47 (standard), $7.28 (pro) per order - computed from
+realized surplus: fee minus cost recovery minus the payout side
+(stripe payout fee, idv amortization, escrow holding - about $0.40 at
+the blended mix). cost recovery is about $11.59/order, so the cap is
+roughly $39.03 (free 22%), $25.25 (starter 16%), $20.66 (lite 14%),
+$16.07 (standard 12%), $6.88 (pro 8%) per order - computed from
 [buildup.py](../../operations/financial/pricing/work/buildup.py) and
 [tier-schedule.py](../../operations/financial/pricing/work/tier-schedule.py),
 not asserted. aggregate cap: cumulative platform draws never exceed

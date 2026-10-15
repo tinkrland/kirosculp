@@ -85,6 +85,29 @@ pricing pages must lead with this stack (tessa + paracraft, no
 software, no learning curve, no manufacturer contact, no castability
 risk, compliance handled), not the headline rate.
 
+## result 0: the take breakup (where the fee goes, 100/mo)
+
+the payout side is small but real: stripe payout fee $0.06/order
+(monthly payout, ~4 orders per selling creator), idv amortization
+$0.03/order ($1.50 once per creator over 12 months), escrow holding
+$0.26/order (0.5%/mo on the held creator share, ~2 weeks to the
+15th). total ~$0.40 at the blend - simple on purpose; real software
+accounting comes later.
+
+| tier | take | cost rec | payout side | profit target (200bps) | retro alloc | true profit/order | % of take |
+|---|---|---|---|---|---|---|---|
+| free 22% | $51.02 | $11.59 | $0.40 | $4.59 | $8.83 | +$30.20 | 59% |
+| starter 16% | $37.24 | $11.59 | $0.40 | $4.59 | $8.83 | +$16.42 | 44% |
+| lite 14% | $32.65 | $11.59 | $0.40 | $4.59 | $8.83 | +$11.83 | 36% |
+| standard 12% | $28.06 | $11.59 | $0.40 | $4.59 | $8.83 | +$7.24 | 26% |
+| pro 8% | $18.87 | $11.59 | $0.40 | $4.59 | $8.83 | -$1.95 | -10% |
+
+pro's negative line is the allocation view, not cash: pro still
+contributes +$2.29/order to the shared retro pool, just less than
+the uniform per-order allocation at 100/mo. the whale in the cost
+column is support ($6.00) - the measure-first line stays support,
+not stripe.
+
 ## result 1: every tier clears the requirement, widely
 
 at 100 orders/mo the ex-retro requirement is $16.18/order (blended
