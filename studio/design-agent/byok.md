@@ -87,6 +87,8 @@ recommend:
 | anthropic | claude sonnet + haoku lanes | tool-calling native; vision capable |
 | google | gemini pro + flash lanes | flash is the budget lane |
 | deepseek | deepseek-chat lane + deepseek-reasoner lane | chat is the recommendation; reasoner runs under the reasoning rules |
+| groq | open-model fast lane (llama vision class) | **free-forever tier**: no-cost key with per-model rate limits as the natural throttle; a primary backtier byok lane alongside google's free tier - the backtier landscape includes genuinely free provider tiers, so a creator's byok bill can be zero indefinitely |
+| cloudflare workers ai | open-model lane at the edge | free daily allocation; same probe, same rules |
 | mistral | flagship lane + pixtral (vision) lane | text-only mistral models fail the vision probe |
 | open models (ollama/vllm) | qwen-vl family, llama vision family | the self-hosted lane; small variants will fail the probe, which is fine and honest |
 
