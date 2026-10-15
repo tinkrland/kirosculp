@@ -119,6 +119,19 @@ non-byok creators. hypothesis, in the spirit of that table:
 which exact lane each tier serves is an open ruling; this section
 exists so it gets made deliberately instead of by accident.
 
+the deeper thesis (owner, 2026-10-15): the platform is only as
+strong as how well the engine works with **backtier models** - the
+opposite of frontier; the cheap/budget/free lanes. this is not a cost
+compromise, it is the architecture: tessa emits a typed, bounded
+parameter proposal parsed against the envelope before a creator ever
+sees it, and paracraft consumes typed parameter state only. a weak
+model can propose worse values, never unsafe ones. so the engine
+must be tuned, tested and regression-run against backtier lanes as
+the primary target, with frontier lanes as upside - the reverse of
+most agent products, which lean on frontier intelligence and treat
+budget models as degradation. sculptura's intelligence budget lives
+in paracraft's deterministic rules, not in the model.
+
 ## byok interaction (ruled: zero markup, acceptable everywhere)
 
 byok moves the tessa-turn cost to the creator's own key: a byok turn

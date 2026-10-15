@@ -61,7 +61,14 @@ not a mystery 401.
 
 quality above the floor is the creator's tradeoff: a passing small
 model will be a worse tessa, and that is their bill and their
-experience; the envelope keeps geometry safe either way. we publish a
+experience; the envelope keeps geometry safe either way. this
+includes **free-tier provider keys** (e.g. a no-cost gemini api
+key): if it passes the probe, it serves. there is no paid-key
+requirement and no spend floor, deliberately - the platform does not
+want to burn frontier model prices on studio iteration, and a
+creator iterating on a free-tier key costs us nothing while their
+experience stays safe. rate limits on the provider side are the
+creator's tradeoff too. we publish a
 **tested-against** list (models we regression-test tessa prompts on)
 as a recommendation; it is never a gate.
 
