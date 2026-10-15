@@ -7,15 +7,25 @@ studio compute creators consume. question: how many creators at
 what free:paid mix does subscription revenue need?
 
 grounding: infra and the $10/mo per-creator fixed come from
-fee-balance-analysis.md (its assumption); the lean marginal reading
+fee-balance-analysis.md (its assumption - but that line is support
+overhead for SELLING creators, and this scenario has none). the
+lights-on reading: no stripe, no manufacturer api, no support load;
+only hosting, storage, db, bandwidth and allowance compute
 ($1/mo for a non-selling creator: storage + account admin, support
 being order-driven) is the sensitivity case. studio compute from the
 rate-limit matrix in studio-credits.md at hypothesis utilization.
 """
 
-INFRA = 60.00          # usd/mo, fee-balance-analysis.md
+INFRA = 60
+# lights-on marginal per creator (hypothesis, decomposed):
+#   storage $0.05 (parametric states kb-scale; meshes+renders
+#     ~100-500 mb per active creator at object-storage rates)
+#   db rows $0.05 (account, designs, ledger lines)
+#   bandwidth $0.15 (studio webgl sessions, previews)
+#   admin/tooling amortization $0.25
+#   = $0.50/mo, plus allowance consumption at utilization.00          # usd/mo, fee-balance-analysis.md
 FIXED_CONSERVATIVE = 10.00  # the analysis's per-creator fixed, usd/mo
-FIXED_LEAN = 1.00      # marginal non-selling creator, usd/mo
+FIXED_LIGHTS_ON = 0.50      # marginal non-selling creator, usd/mo
 UTIL = 0.20            # hypothesis: typical allowance consumption
 
 # worst-case monthly studio cost per tier (from the rate-limit matrix)
@@ -55,4 +65,4 @@ def scenario(fixed, label):
 
 if __name__ == "__main__":
     scenario(FIXED_CONSERVATIVE, "conservative: analysis's $10/creator fixed")
-    scenario(FIXED_LEAN, "lean: $1/mo marginal non-selling creator")
+    scenario(FIXED_LIGHTS_ON, "lights-on: hosting/storage/db/bandwidth only")
