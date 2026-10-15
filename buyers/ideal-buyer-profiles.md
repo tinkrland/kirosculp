@@ -1,8 +1,9 @@
 # ideal sculptura buyers: profiles
 
 hypothesis profiles built from oct 2026 external research. each profile lists
-what they know, what confuses them, and what the size/occasion research says
-sculptura must handle for them. nothing here is a ruled product decision.
+what they know, what confuses them, and what sculptura must handle for them.
+nothing here is a ruled product decision. sizing behavior evidence and
+sources live on the `sizing` branch (offerings/rings/sizing-reality.md).
 
 ## profile 1: the self-purchaser (primary)
 

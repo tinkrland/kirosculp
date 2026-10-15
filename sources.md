@@ -1,46 +1,8 @@
 # sources
 
-external research collected oct 15 2026 via tavily search and firecrawl
-scrapes. ring-size math verified by calculation against the standard us
-formula (dia mm = 11.63 + 0.8128 x size) and cross-checked with the cited
-charts.
-
-## sizing facts
-
-- serendipity diamonds, "the most common ring size for men & women" (us 6.5
-  women avg, us 10 men avg, uk l / t 1/2, buy-large strategy, seasonal size
-  variation): https://www.serendipitydiamonds.com/blog/most-common-engagement-ring-size
-- bluenile, "how to secretly get ring size" (us women avg 6, range 5-7; men
-  avg 10 range 8-12; resizing by metal; sleep-sizer folk practice):
-  https://www.bluenile.com/blog/love-brilliant/how-to-secretly-get-ring-size
-- ootbjewelry, "average pinky ring size guide" (women pinky 3-5 with 4 most
-  common, men pinky 6-8 with 7 average, pinky = ring finger minus 2-3 sizes,
-  6mm band width rule, signet rotation):
-  https://www.ootbjewelry.com/pinky-ring-size
-- martin jewelers ring size chart (smallest common adult size 3 = 44.2mm):
-  https://martinjewelers.com/blogs/news/mens-and-women-s-ring-size-chart
-- ringsizes.co, international conversion chart (us/uk/eu/jp/in systems):
-  http://www.ringsizes.co
-- jewelove.in, international size guide (in-market chart practice):
-  https://www.jewelove.in/pages/find-my-ring-size-international-ring-size-chart
-
-## proposal / gift buying
-
-- jewelers of america 2023 retail pulse (via jeweltrendpro): nearly half of
-  men guess engagement ring size; 1 in 3 couples resize before first photo
-  shoot: https://jeweltrendpro.com/engagement-wedding/how-to-get-an-engagement-ring-without-knowing-her-size
-- weddingwire forum threads on proposing with wrong size (folk practice
-  color): https://www.weddingwire.com/wedding-forums/presenting-with-the-wrong-ring-size/0555eeab5ec
-
-## returns / cost of bad sizing
-
-- aitaca, "how to reduce ring size returns" (17.2% -> 6.1% monthly ring
-  return reduction, size as primary return driver, no-single-correct-size,
-  printable chart failures, deliberate multi-size orders):
-  https://aitaca.io/ring-size-returns
-- nrf / happy returns via aitaca (19.3% ecommerce return average 2025)
-- loopreturns, jewelry return policy strategies (jewelry ~8% average):
-  https://www.loopreturns.com/blog/return-policy-strategies-for-jewelry-brands
+external research collected oct 15 2026 via tavily search. sources for the
+colloquial ring-sizing research live on the `sizing` branch in
+offerings/research/sources.md.
 
 ## self-purchase and custom buyer demographics
 
@@ -77,6 +39,5 @@ charts.
 
 caveats: several demographic stats circulate through seo blog posts with
 unclear primary sourcing (the 45%/35% split, the 80% self-purchase figure).
-treat them as directional. the aitaca numbers are vendor-reported from one
-deployment. the jewelers of america figures come via secondary retellings of
-the 2023 retail pulse report; the primary was not fetched.
+treat them as directional. the aitaca and jewelers of america figures cited
+in the buyer profiles are sourced on the sizing branch.
