@@ -15,7 +15,22 @@ here is reproducible: python3 buildup.py
 
 # ---------------------------------------------------------------- params
 # direct per-order service stack (fee-balance-analysis.md, grounded)
-SUPPORT = 6.00          # $/order, biggest assumption, measure first
+SUPPORT = 6.00          # $/order, biggest assumption, measure first.
+                        # grounded in sculpextra (tinkrland/sculpextra):
+                        # deflection-first, so this line is the human
+                        # TAIL, not the front door. most demand hits
+                        # onboarding packets, creator docs, the
+                        # knowledgebase, sculptura academy, or
+                        # retelldb (the lookup layer trained on all
+                        # of them plus customer-side content) before
+                        # any human. humans sit in queues: buyer
+                        # (purchased), buyer-to-be (ordering issues),
+                        # creator support vs creator question. so the
+                        # real structure is
+                        #   per-order support = ticket_rate x cost_per_ticket
+                        # and $6.00 is the conservative placeholder
+                        # assuming a fat tail; measure ticket rates
+                        # per queue from day one and replace this.
 QUOTE_API = 0.25        # live price-quote revalidation per order
 ROUTING = 0.02          # route compute checks
 FAILED_PAY = 0.10       # failed-payment retry blend

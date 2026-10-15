@@ -106,7 +106,14 @@ pro's negative line is the allocation view, not cash: pro still
 contributes +$2.29/order to the shared retro pool, just less than
 the uniform per-order allocation at 100/mo. the whale in the cost
 column is support ($6.00) - the measure-first line stays support,
-not stripe.
+not stripe. sculpextra (tinkrland/sculpextra) grounds that line as
+the human tail only: onboarding packets, creator docs, the
+knowledgebase, sculptura academy and retelldb deflect most demand
+before any human, and humans sit in queues (buyer / buyer-to-be /
+creator support vs question). the $6.00 placeholder therefore
+carries a fat-tail assumption; the thing to measure from day one
+is ticket rate per queue x cost per ticket, which should land this
+line lower.
 
 ## result 1: every tier clears the requirement, widely
 
