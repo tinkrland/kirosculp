@@ -109,6 +109,56 @@ named length tiers (retail-standard, in inches with cm):
   preference; errors are not comfort issues but health issues. the repo
   correctly holds the whole family at research-stage, not for sale
 
+## measurement conventions by market (not just rings differ)
+
+the same market fragmentation as ring labels applies to lengths and
+diameters. us retail expresses everything in inches; most other markets
+express the same objects in cm/mm. the underlying measurement is the same;
+the labels are not:
+
+| item | us/ca | uk/eu | in | cn/hk (jade bangle practice) | jp |
+|---|---|---|---|---|---|
+| necklace length | inches (16/18/20/24) | cm (40/45/50) | cm (40/45/50 common) | cm | cm |
+| bracelet length | inches (6.5-7 women, 7.5-9 men) | cm wrist charts with letter sizes xs-xxl (women 12.7-19 cm) | cm wrist | cm | cm wrist |
+| bangle | s/m/l with inch diameters | cm or mm diameter | the 2.x bangle number (see below) | inner diameter in mm (52-62 typical, xs-xxl) | mm |
+| hoop earring | mm | mm | mm | mm | mm |
+
+anchors: eu/asia necklace ladder 40/45/50 cm maps almost exactly to the us
+16/18/20 in ladder (45 cm = 17.7 in), and 45 cm is the most common women's
+length outside the us, matching 18 in inside it. average wrist: women
+15-16 cm, men 18-20 cm (source spread noted below).
+
+### the in bangle notation: a parsing trap
+
+indian bangle sizes are written as 2.2, 2.4, 2.6, 2.8, 2.10, 2.12. the digit
+after the dot is sixteenths of an inch, not a decimal:
+
+- 2.2 = 2 + 2/16 in = 2.125 in = 54 mm
+- 2.4 = 2 + 4/16 in = 2.25 in = 57 mm
+- 2.6 = 2 + 6/16 in = 2.375 in = 60 mm (the most common in women's size)
+- 2.8 = 2 + 8/16 in = 2.5 in = 63.5 mm
+- 2.10 = 2 + 10/16 in = 2.625 in = 66.7 mm (ten sixteenths, not 2.1)
+
+schema rule this forces: "2.10" must never be stored or parsed as a decimal
+number (it silently becomes 2.1, a size that does not exist in the notation
+between 2.2 and nothing). store the mm diameter as ground truth; the 2.x
+label is a derived display view for the in market, rendered from
+sixteenths. the same mm-first rule as rings, for the same reason.
+
+### cn/hk jade bangle practice
+
+jade bangle sizing measures the hand, not the wrist: circumference across
+the knuckles divided by pi gives the inner diameter; typical adult range
+52-62 mm, charted xs through xxl in mm. this is the same hand-over-knuckle
+rule as western bangles, expressed directly in mm with no unit conversion.
+
+### what does not fragment
+
+hoop and stud dimensions, piercing gauges, and chain link dimensions are
+mm/gauge everywhere; no market re-labels them. the fragmentation problem is
+specifically: ring size labels, bracelet/bangle labels, and inch-vs-cm
+length ladders.
+
 ## ring types: what buyers name, and what each implies for size
 
 the repo's geometry families ([rings](rings/README.md): bands, barrel,

@@ -173,3 +173,22 @@ common us-market conventions, not standards. gauge values are consistent
 across sources and with the repo's placement table. thumb-ring and
 statement-ring size ranges are inferred from finger averages, not measured
 survey data.
+
+## measurement conventions by market (2026-10-15)
+
+sources for the market table and the in bangle notation in [sizes beyond
+rings](../sizes-beyond-rings.md):
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [silberuh bangle size chart (in)](https://www.silberuh.com/pages/bangle-size-chart) | in bangle ladder: 2.2 = 2.125in/54mm, 2.4 = 2.25in/57mm, 2.6 = 2.375in/60mm, 2.8 = 2.5in/63.5mm, 2.10 = 2.625in/66.7mm; 2.6 most common; hand-over-knuckle method | retailer chart, india-market; sixteenths notation verified by calculation (2 + n/16 inch) |
+| [caratlane bangle size guide](https://www.caratlane.com/blog/bangle-size-chart-guide) | same 2.x ladder and hand-measurement method, in-market corroboration | retailer blog |
+| [segaljewelry necklace cm guide](https://segaljewelry.com/blogs/segal-jewelry-blog/necklace-length-guide-45cm) | eu/asia ladder 40/45/50 cm; 45 cm most common; conversions to inches | retailer blog |
+| [missoma bracelet size guide](https://www.missoma.com/pages/bracelet-size-guide) and [linasnara](https://www.linasnara.com/pages/size-guide) | uk/eu wrist cm charts with letter sizes; women 12.7-19 cm xs-xxl | retailer charts, uk-market |
+| [tinyjade jade bangle sizing](https://tinyjade.com/how-to-measure-jade-bangle-size-for-perfect-fit) and [cuijuanjadeite](https://cuijuanjadeite.com/blogs/jadeite-buying-guide/jadeite-bangle-size-guide) | cn/hk jade practice: knuckle circumference / pi = inner diameter; 52-62 mm typical, xs-xxl mm charts | jade retailers; fit preferences vary (looser for daily wear) |
+| [orska jewelry sizes](https://orskastore.com/Jewelry-sizes), [the jewellery room](https://thejewelleryroom.com/en-us/pages/size-size-bracelets), [grise nyc](https://www.grise-nyc.com/blogs/blog/average-wrist-size-for-bracelets) | average wrist: women 15-16 cm, men 18-20 cm (sources spread: 15-17.5 women, 18-20 men) | retailer/seo figures, directional; no single measured benchmark |
+| [nutritioneering wrist statistics](https://www.bodybuildingmealplan.com/average-wrist-size) | us army survey: men 16.5-18.3 cm, women 14.6-15.7 cm | secondary retelling of a military anthropometry survey; us population |
+
+verified here by calculation: the in 2.x notation reproduces as 2 + n/16
+inches (2.6 = 60.3 mm against the chart's 60 mm; 2.10 = 66.7 mm exactly).
+the "2.10 parses as decimal 2.1" trap is why the doc requires mm storage.
