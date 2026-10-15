@@ -168,3 +168,10 @@ open questions:
 - whether occasion tagging feeds or duplicates the affinity layer
 - how releases bind fit descriptors without asserting unvalidated
   combinations (the release schema's size array is data, not proof)
+- cn scale: not verified in this pass; needs its own chart source before any
+  cn display view
+- half sizes: us quarter/half steps exist in us/uk but not in iso (whole
+  mm), jp or in whole-size systems. whether sculptura offers half sizes at
+  all (and how they display to iso/jp/in buyers) is undecided
+- quarter steps: the us formula supports them; gia chart anchor rows only
+  cover whole sizes
