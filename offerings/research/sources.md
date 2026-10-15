@@ -147,3 +147,29 @@ the gia-derived anchor rows (us 3 = 44.15, us 6 = 51.80, us 10 = 62.00);
 uk full-letter step ~1.28mm from a = 37.8 to f = 44.2; ch = circ - 40
 (us 7 -> 14.4). cn scale and exact half-size rounding rules remain
 unverified; flagged in the doc's open questions.
+
+## sizes-beyond-rings pass (2026-10-15)
+
+sources for [sizes beyond rings](../sizes-beyond-rings.md), supporting retail
+tier conventions and placement vocabulary only, not product approval:
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [elaramuse necklace length guide](https://elaramuse.com/ar/blogs/journal/necklace-length-guide-2026-princess-matinee-opera) | named tiers: collar 12-14in, choker 14-16, princess 17-19, matinee 20-24, opera 28-36, rope 36+ | retailer blog; tier bounds vary slightly between retailers |
+| [bluenile men's chain length](https://www.bluenile.com/blog/diamonds-jewelry/chain-length-men) | men's ladder: 18 base of neck, 20 most common, 22 layering, 24 mid-chest | retailer guidance |
+| [jaxxon bracelet size guide](https://jaxxon.com/journal/bracelet-size-guide) | wrist-bone measurement plus 0.5 in standard / 1 in loose ease; women 6.5-7 (7 common), men 7.5-9 (8 common) | retailer guidance |
+| [greenwich jewelers bracelet fit](https://www.greenwichjewelers.com/blogs/journal/bracelet-size-fit-guide) | bangle sized over knuckles; s/m/l diameters; hinged 60-63.7 mm; open cuff charts 153-195 mm | retailer chart, us-market inches |
+| [the jewellery room bangle chart](https://thejewelleryroom.com/en-us/pages/size-guide-bangles) | wrist 5-5.5 in maps to bangle 5.7-6.1 in circumference, etc. | seo chart, single source |
+| [ajluxe anklet size guide](https://ajluxe.com/blogs/jewelry-guide/anklet-size-guide) | anklets 9-11 in, 9-10 standard, +0.5 snug to +1 loose | seo guide |
+| [musemond piercing size guide](https://musemond.com/pages/size-guide) | standard stud post 20g, 6 mm length; huggies 5-11 mm inner diameter | retailer guide |
+| [diagaa hoop measurement guide](https://diagaa.com/blogs/guide/how-to-measure-hoop-earrings-a-complete-size-guide) | hoop tiers: small 10-20 mm, medium 20-40 mm, large 45+ | seo guide; tiers vary by retailer |
+| [tribupiercings gauge chart](https://tribupiercings.com/blogs/understanding-body-jewelry-gauge-sizes-for-titanium-) | gauge to mm: 22g 0.6, 20g 0.8, 18g 1.0, 16g 1.2, 14g 1.6; inverse numbering | piercing retailer; consistent with the repo placement table |
+| [ajluxe midi rings](https://ajluxe.com/blogs/jewelry-guide/midi-rings) | midi worn above knuckle, half to one size smaller, slim 1-2 mm band, women 1-5 | seo guide |
+| [chapmanjewelry toe ring guide](https://chapmanjewelry.com/blogs/news/toe-ring-anklet-ear-cuff-sizing-guide) | women's toe rings 3-4, midi 1-5, ear cuffs sizeless | small-retailer guide |
+| [ajluxe ring styles](https://ajluxe.com/blogs/jewelry-guide/types-of-rings) and [ritani eternity vs band](https://www.ritani.com/blogs/education/eternity-ring-vs-wedding-band-vs-anniversary-r) | consumer occasion naming: engagement, wedding, eternity, promise, cocktail, signet, thumb, pinky, midi, toe | retailer education content; naming, not sizing evidence |
+
+caveats: length tiers and hoop tiers vary by retailer; the tables record
+common us-market conventions, not standards. gauge values are consistent
+across sources and with the repo's placement table. thumb-ring and
+statement-ring size ranges are inferred from finger averages, not measured
+survey data.
