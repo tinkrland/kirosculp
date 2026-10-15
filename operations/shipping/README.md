@@ -2,6 +2,15 @@
 
 serviceability, labels, tracking, delivery events, returns, customs documents, address rules, and delivery exceptions. a carrier advertising worldwide coverage does not make every destination supported.
 
+## cancellation and refunds
+
+see [cancellation-and-refunds.md](cancellation-and-refunds.md): the
+terminology split (a cancellation voids an order that never produced
+anything; a refund reverses money for something produced), the
+cancellation ladder (full void before accept; payment minus processing
+fees before production starts; none after the recorded manufacturer
+intake event), and the damage-only refund ruling.
+
 ## address rules
 
 - buyer delivery addresses must be physical street addresses. three address-shape classes are banned from checkout delivery, rejected at submit time with machine-readable reason codes keyed to the classes reported by thelocaletell (see the [tell adapter boundary](../../platform/tell-adapters.md) for how the signals are consumed):
