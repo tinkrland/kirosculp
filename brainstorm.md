@@ -72,28 +72,38 @@ profile too: buys releases to flip).
 
 ## creator side: ranked bets
 
-1. **the artist with a fanbase who cannot scale commissions (primary)**.
-   the dm-economy artist: demand exists, process is chaos. sculptura
-   converts his backlog into parameterized releases. matches the ruled
-   discretionary listing-bump target exactly (own fanbase, sustained
-   sales). admission fits vgen-style invitation lineage. the bet:
-   paracraft/creator-authored bases plus tessa assistance mean he does
-   not need cad skills, only taste and the willingness to define
-   constrained parameters. if that is true, the cad-free creator is the
-   real unlock; if it is false, sculptura is only for profile 2
-2. **the parametric-native designer (highest production quality)**.
+1. **the pinner, the idea-haver (primary identity)**. scrolls pinterest,
+   saves jewelry, thinks "god this would look good if it did this and in
+   this", and leaves it at that. sees the idea in their head even though
+   they cannot draw. this is not a lesser artist: the ruled account model
+   says the artist is the person with the ideas, so this profile is the
+   exact person the artist-to-creator progression was built for. the
+   whole unlock is making-it-free, not just cad-free: no drawing, no
+   cad, no bench, taste plus a mental image as the only inputs. the inspo
+   collection (ruled artist-side feature) is this person's behavior loop
+   already: scroll, save, imagine the modification. sculptura gives the
+   last step somewhere to land. risks: no admission artifacts (taste
+   must be read from studio use, not portfolios), and idea-havers
+   without iteration stamina (the publication gate filters this)
+2. **the artist with a fanbase who cannot scale commissions (growth
+   engine)**. the dm-economy artist: demand exists, process is chaos.
+   converts backlog into parameterized releases; each admitted creator
+   imports a demand pool, so the invite lineage doubles as the growth
+   graph. this profile proves the marketplace; the pinner proves the
+   studio
+3. **the parametric-native designer (first cohort, not the identity)**.
    grasshopper/cad person already making printable jewelry. smallest
-   population, strongest fit, best early proof that the release
-   pipeline works. likely the first invited cohort: they validate
-   paracraft before the cad-free onboarding story is proven
-3. **the etsy-refugee handmade jeweler (largest population, ambiguous
+   population, strongest fit, best early proof that the release pipeline
+   works. they validate paracraft first because their work is verifiable,
+   but the platform is not for them; they are the shakedown crew
+4. **the etsy-refugee handmade jeweler (largest population, ambiguous
    fit)**. chafing at fees, has a following, but hand-carves or casts
    static designs. sculptura's fees beat etsy only if her volume
    transfers; parametric tools may not help her at all. she is a
    storefront-and-payout win without a studio win. risk: onboarding her
    exposes whether sculptura is a marketplace with a design engine or a
    design engine with a marketplace attached
-4. **the fine jewelry studio (later, unchanged)**. still gated on
+5. **the fine jewelry studio (later, unchanged)**. still gated on
    hallmarking/route legs, unchanged from the research profile
 
 anti-creators (ruled out by existing policy, collected here): dropshippers
@@ -131,9 +141,14 @@ geographic wage arbitrage to be visible (withheld by design, ruled).
 
 ## open questions this brainstorm surfaces
 
-- is the cad-free creator real? the entire primary creator bet rests on
-  paracraft + tessa making a non-cad artist productive. needs a
-  prototype test before the invite-first cohorts are chosen
+- is the make-it-free pinner real? the entire primary creator bet rests
+  on tessa + paracraft taking "this would look good if it did this and in
+  this" - a vibe, no drawing, no vocabulary for parameters - to a
+  validated release. cad-free was the easy half; this is the real test,
+  and it needs a prototype run before the invite-first cohorts are chosen
+- what does admission evidence look like for a pinner with no artifacts?
+  taste has to be read from inspo/studio use, which means admission
+  review needs studio telemetry before the first public cohort
 - does the alternative-proposal buyer need a dedicated checkout path, or
   just fit-layer copy and a recompile guarantee?
 - which market is market zero? the sizing and bangle research keeps
