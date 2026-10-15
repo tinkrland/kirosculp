@@ -113,6 +113,27 @@ reason), passive upload-and-leave sellers with no human operation
 sanctioned-market artists (admission gates, ruled), anyone expecting
 geographic wage arbitrage to be visible (withheld by design, ruled).
 
+## the icp is a persona list, not a single persona
+
+confirmed in review (oct 2026): the pinner and the fanbase artist are
+different personas among the icp list, and the list must stay a list.
+never flatten the creator side into one composite "sculptura creator":
+each persona has a different entry funnel, different admission evidence,
+different tier needs, and proves a different half of the platform:
+
+| persona | proves | admission evidence | tier need |
+|---|---|---|---|
+| pinner | the studio | none; studio/inspo telemetry instead | room to try before paying |
+| fanbase artist | the marketplace | existing demand, invite lineage | listing headroom day one |
+| parametric-native | the pipeline | portfolio, verifiable params | standard |
+| etsy refugee | storefront + payout | sales history | volume-dependent |
+
+same on the buyer side: the stacker-builder, commission buyer,
+alternative-proposal buyer and gift buyer are separate personas; they
+share the checkout but not the funnel. product work should name which
+persona a feature serves; a feature that serves "everyone" usually serves
+the gift buyer by accident and the stacker-builder by coincidence.
+
 ## cross-cutting tensions worth naming
 
 - **cold-start sequencing**: buyers need listings, creators need buyers.
