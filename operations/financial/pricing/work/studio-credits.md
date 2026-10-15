@@ -104,9 +104,18 @@ mistral flagship/pixtral, and self-hosted qwen-vl/llama vision. what
 the repo does NOT pin is which lane the platform itself serves to
 non-byok creators. hypothesis, in the spirit of that table:
 
-- free tier platform inference runs a **budget lane** (gemini flash or
-  openai mini class): ~$0.01-0.05/turn, matching the buildup's $0.05
-  cost basis and the 30-turn free allowance (~$1.50 worst case)
+- backtier means nano-class models: gpt-5-nano, gemini flash and
+  peers - the chatgpt product pattern, where tier one and two get
+  free metered access to the small models and bigger models are the
+  paid perk. sculptura follows that gating shape but on monthly
+  clocks (ruled), never daily:
+  - free + starter: nano/flash class served (gpt-5-nano, gemini
+    flash), ~$0.01-0.05/turn, matching the buildup's $0.05 cost basis
+  - lite + standard: mini class served as the quiet perk
+  - pro: mini or standard class, tuned with the same regression
+    harness as the backtier lanes
+  ~$1.50/mo worst case per free creator; exact serving model per
+  tier stays an open ruling, gated by the regression harness
 - paid tiers may serve the recommendation lane (flagship multimodal)
   as a quality differentiator, or stay on the budget lane uniformly
 - the envelope makes any choice safe (paracraft consumes typed
