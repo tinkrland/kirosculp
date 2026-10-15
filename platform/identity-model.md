@@ -103,6 +103,14 @@ three different layers, never collapsed:
 - **the artist username** is the unique, rate-limited public handle
   (existing rule: 2 changes per 30 days, 5 lifetime) that lives at
   `creators.sculptura.tld/@artistname`.
+
+domain ruling (oct 2026): `sculptura.com` is taken (not chased);
+`sculptura.ltd` is acquired and is the live placeholder;
+`sculptura.dev` is planned later. the `.tld` placeholder in this
+document and across the platform docs reads as `.ltd` until `.dev`
+is acquired, then one find-and-replace promotes it. the subdomain
+structure (`creators.`, `customer.`, the bare storefront host) is
+domain-independent and does not change with the tld.
 - **the shop handle** is a separate unique namespace living at
   `sculptura.tld/@shopname`. the two handle namespaces are
   independent: changing one never changes the other.
