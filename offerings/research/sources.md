@@ -126,3 +126,24 @@ product approval or validated sizing flows:
 | [aitaca: ring size returns](https://aitaca.io/ring-size-returns) | 17.2% -> 6.1% monthly ring return reduction in one deployment; fit as primary fashion return driver; printable chart failures | vendor-reported, single deployment, commercial interest in the number |
 | [loopreturns: jewelry return policies](https://www.loopreturns.com/blog/return-policy-strategies-for-jewelry-brands) | jewelry ecommerce return average around 8% | returns vendor benchmark |
 | [weddingwire forum threads](https://www.weddingwire.com/wedding-forums/presenting-with-the-wrong-ring-size/0555eeab5ec) | wrong-size proposal color | forum anecdotes, not data |
+
+## non-us size systems pass (2026-10-15)
+
+sources for the size systems inventory and mechanics table in [ring sizing
+reality](../rings/sizing-reality.md):
+
+| source | what it actually supports | boundary |
+|---|---|---|
+| [wikipedia: ring size](https://en.wikipedia.org/wiki/Ring_size) | iso 8653:2016 definition (inner circumference mm, 49-72); official us relationship (iso circ = 2.55 x us size + 36.5); uk/ie/au letters; de/nl diameter-mm system; it/es/ch circumference-minus-40 system; in/jp/cn nonlinearity note; full conversion table incl. jp 4 = us 3, jp 14 = us 7, in 14 = us 7 | tertiary summary citing iso and trade sources; per-row values verified against the formula here |
+| [iso 8653:2016 record](https://www.iso.org/standard/65408.html) | existence and scope of the iso standard | paywalled text; mechanics taken from secondary summaries |
+| [queensmith uk ring size guide](https://www.queensmith.co.uk/ring-guides/ring-size) | uk letter anchor values (e 1/2 = 43.6mm, f = 44.3mm), half-letter practice | uk retailer chart |
+| [gem-logic japan ring size calculator](https://www.gem-logic.com/japan-ring-size-conversion-calculator) | jp 12 = us 6, jp 14 = us 7, jp 21 = us 10 | tool page, single source for jp steps |
+| [myringsizer indian to us converter](https://myringsizer.app/tools/indian-to-us-ring-size-converter.html) | in 12 = us 6, in 14 = us 7, in 16 = us 8 (58mm) | seo tool page; directional |
+| [caratlane size guide (in market)](https://www.caratlane.us/media/size-guide/rings.pdf) | in-market retail charting practice alongside us sizes | retailer pdf |
+| [ringsizes.co](http://www.ringsizes.co) | aggregator cross-system chart | scrape returned a shell page; used via earlier search snippets only |
+
+verified here by calculation: iso circ = 2.55 x us size + 36.5 reproduces
+the gia-derived anchor rows (us 3 = 44.15, us 6 = 51.80, us 10 = 62.00);
+uk full-letter step ~1.28mm from a = 37.8 to f = 44.2; ch = circ - 40
+(us 7 -> 14.4). cn scale and exact half-size rounding rules remain
+unverified; flagged in the doc's open questions.
