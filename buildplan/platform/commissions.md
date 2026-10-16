@@ -115,3 +115,8 @@ email.
 - commissions reference design releases and listings; escrow and
   release actions are ledger entries, and the payments readme's model
   holds unchanged.
+
+the money mechanics are planned separately in
+[commissions-escrow.md](commissions-escrow.md): funding models,
+milestone releases, fee lock at acceptance, the cancellation
+ladder, and the chargeback buffer.
