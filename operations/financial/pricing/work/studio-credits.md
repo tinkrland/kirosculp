@@ -46,9 +46,30 @@ no per-creator judgment enters the meter, same rule as the fee.
 2. **general credits** (any usage, burned after grants, nearest
    expiry first):
    - monthly plan credits, per tier, expire 2 months after issue
-     (lovable-style soft rollover)
-   - top-up packs bought from the creator wallet, 12-month expiry
+     (lovable-style soft rollover) while the creator stays on a
+     paid plan
+   - **downgrade rules (ruled 2026-10-16)**: the runway is clipped
+     by the tier change, never extended:
+     - stay paid: 2 months from issue
+     - downgrade to a lesser paid plan: outstanding plan credits
+       expire 1 month from the downgrade date
+     - downgrade to free: outstanding plan credits expire 15 days
+       from the downgrade date
+     - free tier: use-it-or-lose-it. free grants never roll; the
+       month-end reset (last day, 11:59 utc) already wipes them
+   - top-up packs bought from the creator wallet, 12-month expiry,
+     unaffected by tier changes (they were paid for in cash, not
+     granted)
    - auto top-up setting on paid tiers, pausable like lovable's
+
+   two invariants make the ladder safe: expiry attaches to the
+   credit (issue-based), so a tier change only ever clips the
+   runway of outstanding credits, never upgrades old credits to new
+   terms; and rate caps stay per current tier, so a downgrader
+   burning 15-day runway credits still cannot burst past the free
+   tier's caps - same principle as the byok ruling. burn order
+   unchanged: grants first, then general credits nearest-expiry
+   first, then wallet top-ups.
 
 ## the per-tier rate limit matrix (ideated, hypothesis)
 
