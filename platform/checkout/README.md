@@ -10,6 +10,34 @@ configure the allowed method list on the server and at the provider; hiding
 buttons alone is not enforcement. this does not change commission escrow or
 creator payout scheduling, which are separate financial concerns.
 
+## allowed buyer payment methods (ruled 2026-10-16)
+
+- **card** (stripe; link enabled for fast checkout)
+- **paypal**, **venmo**, **cash app pay** (all via stripe)
+- **apple pay** (stripe)
+- **google pay** (stripe)
+- **buyer wallet credit** (gift cards dissolve into the wallet at
+  redemption; wallet balances pay at checkout, expiry-first)
+
+architectural constraint: the multi-store escrow model is one
+charge now, then per-creator-segment transfers held in the stripe
+balance until the 15th payout. every buyer payment method must
+therefore settle into the **stripe balance**. all methods above do,
+because they are stripe payment methods at checkout. **amazon pay
+does not**: it settles to the bank account outside stripe, which
+would break the escrow-per-segment flow (the platform would have
+to fund escrow from its own reserves, adding float risk and
+mismatched refund mechanics). amazon pay is out unless that changes;
+it is also a separate integration with declining usage, so it fails
+the cost test too.
+
+explicitly out, in addition to bnpl: crypto (escrow/refund/
+compliance mismatch, mercury-adjacent risk stance), buyer-side ach
+transfer (slow returns risk for high-aov orders), and
+international wallets (ideal, sepa, bancontact, alipay) until the
+market expansion makes them relevant. click-to-pay arrives free
+with the card rails.
+
 ## audited implementation reference
 
 **status: partial**
